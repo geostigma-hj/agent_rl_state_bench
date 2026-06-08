@@ -80,3 +80,4 @@ debug/
 .old/
 third_party/
 _RESULTS.md
+.dump/
