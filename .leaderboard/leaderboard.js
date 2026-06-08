@@ -109,7 +109,7 @@ const entries = [
   {
     id: "memory-01",
     track: "memory",
-    model: "GPT 5.1 + Foundry Memory 2.0",
+    model: "GPT 5.1 + Foundry Memory",
     agent: "",
     organization: "Microsoft Foundry",
     submissionDate: "2026-06-08",
@@ -165,6 +165,17 @@ const tabs = Array.from(document.querySelectorAll(".track-tab"));
 const scoreViewInputs = Array.from(document.querySelectorAll('input[name="score-view"]'));
 const sortButtons = Array.from(document.querySelectorAll(".sort-button"));
 const primaryScoreSort = document.querySelector("#primary-score-sort");
+
+const trackUrlSlugs = {
+  main: "main",
+  memory: "agent-learning",
+};
+
+const trackUrlAliases = {
+  main: "main",
+  memory: "memory",
+  "agent-learning": "memory",
+};
 
 const scoreLabels = {
   overall: "pass@1 (%)",
@@ -231,6 +242,19 @@ function statusLabel(status) {
   return status.replace("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
+function trackFromUrl() {
+  const track = new URLSearchParams(window.location.search).get("track");
+  return trackUrlAliases[track] || "main";
+}
+
+function setTrackUrl(track) {
+  const url = new URL(window.location.href);
+  url.searchParams.set("track", trackUrlSlugs[track]);
+  window.history.replaceState({}, "", url);
+}
+
+state.track = trackFromUrl();
+
 function render() {
   const ranked = sortedEntries();
   const visible = state.showAll ? ranked : ranked.slice(0, 10);
@@ -285,9 +309,11 @@ function render() {
 }
 
 tabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
+  tab.addEventListener("click", (event) => {
+    event.preventDefault();
     state.track = tab.dataset.track;
     state.showAll = false;
+    setTrackUrl(state.track);
     render();
   });
 });

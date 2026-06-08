@@ -163,9 +163,11 @@ a {
   border-bottom: 3px solid transparent;
   color: var(--muted);
   cursor: pointer;
+  display: inline-flex;
   padding: 17px 18px 14px;
   font-size: 15px;
   font-weight: 600;
+  text-decoration: none;
 }
 
 .track-tab:hover {
