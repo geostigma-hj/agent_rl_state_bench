@@ -113,6 +113,7 @@ const entries = [
     agent: "",
     organization: "Microsoft Foundry",
     submissionDate: "2026-06-08",
+    benchmarkVersion: "0.4.4",
     verificationStatus: "verified",
     metrics: {
       overallPassAt1: 58.3,
@@ -135,6 +136,7 @@ const entries = [
     agent: "",
     organization: "OpenAI",
     submissionDate: "2026-06-08",
+    benchmarkVersion: "0.4.4",
     verificationStatus: "verified",
     metrics: {
       overallPassAt1: 53.3,
@@ -201,20 +203,84 @@ function metricValue(entry, key) {
   return entry.metrics[key];
 }
 
-function sortedEntries() {
-  return entries
-    .filter((entry) => entry.track === state.track)
-    .sort((a, b) => {
-      const aValue = metricValue(a, state.sortKey);
-      const bValue = metricValue(b, state.sortKey);
+function compareMetric(a, b) {
+  const aValue = metricValue(a, state.sortKey);
+  const bValue = metricValue(b, state.sortKey);
 
-      if (aValue == null && bValue == null) return 0;
-      if (aValue == null) return 1;
-      if (bValue == null) return -1;
+  if (aValue == null && bValue == null) return 0;
+  if (aValue == null) return 1;
+  if (bValue == null) return -1;
 
-      const direction = state.sortDirection === "asc" ? 1 : -1;
-      return aValue > bValue ? direction : aValue < bValue ? -direction : 0;
-    });
+  const direction = state.sortDirection === "asc" ? 1 : -1;
+  return aValue > bValue ? direction : aValue < bValue ? -direction : 0;
+}
+
+function compareVersions(a, b) {
+  return b.localeCompare(a, undefined, { numeric: true, sensitivity: "base" });
+}
+
+function trackEntries() {
+  return entries.filter((entry) => entry.track === state.track);
+}
+
+function groupedEntries(trackEntries) {
+  const unversioned = trackEntries.some((entry) => !entry.benchmarkVersion);
+  if (unversioned) return [{ version: null, entries: trackEntries.sort(compareMetric) }];
+
+  const groups = new Map();
+  trackEntries.forEach((entry) => {
+    const group = groups.get(entry.benchmarkVersion) || [];
+    group.push(entry);
+    groups.set(entry.benchmarkVersion, group);
+  });
+
+  return Array.from(groups.entries())
+    .sort(([a], [b]) => compareVersions(a, b))
+    .map(([version, group]) => ({ version, entries: group.sort(compareMetric) }));
+}
+
+function visibleGroups(groups) {
+  if (state.showAll) return groups;
+  return groups.map((group) => ({ ...group, entries: group.entries.slice(0, 10) }));
+}
+
+function totalEntryCount(groups) {
+  return groups.reduce((total, group) => total + group.entries.length, 0);
+}
+
+function renderEntryRow(entry, rank) {
+  const metrics = selectedMetrics(entry);
+  return `
+    <tr>
+      <td class="rank-cell"><span class="rank-pill ${rank <= 3 ? "top" : ""}">${rank}</span></td>
+      <td>
+        <span class="model-name">${entry.model}${entry.reasoningLabel ? ` <span class="model-variant">(${entry.reasoningLabel})</span>` : ""}</span>
+      </td>
+      <td>${entry.organization}</td>
+      <td class="metric">${formatPassAt1(entry)}</td>
+      <td class="metric">${formatPercent(metrics.passAt5)}</td>
+      <td class="metric">${formatUx(metrics.meanUxScore)}</td>
+      <td class="metric">${formatCost(metrics.costPerTask)}</td>
+      <td>${entry.submissionDate}</td>
+      <td><span class="status-badge status-${entry.verificationStatus}">${statusLabel(entry.verificationStatus)}</span></td>
+    </tr>
+  `;
+}
+
+function renderGroupedRows(groups) {
+  return groups
+    .map((group) => {
+      const rows = group.entries.map((entry, index) => renderEntryRow(entry, index + 1)).join("");
+      if (!group.version) return rows;
+
+      return `
+        <tr class="version-row">
+          <td colspan="9">Benchmark Version: ${group.version}</td>
+        </tr>
+        ${rows}
+      `;
+    })
+    .join("");
 }
 
 function formatPercent(value) {
@@ -256,39 +322,20 @@ function setTrackUrl(track) {
 state.track = trackFromUrl();
 
 function render() {
-  const ranked = sortedEntries();
-  const visible = state.showAll ? ranked : ranked.slice(0, 10);
+  const groups = groupedEntries(trackEntries());
+  const visible = visibleGroups(groups);
+  const totalEntries = totalEntryCount(groups);
 
   primaryScoreSort.textContent = scoreLabels[state.scoreView];
 
-  body.innerHTML = visible
-    .map((entry) => {
-      const rank = ranked.indexOf(entry) + 1;
-      const metrics = selectedMetrics(entry);
-      return `
-        <tr>
-          <td class="rank-cell"><span class="rank-pill ${rank <= 3 ? "top" : ""}">${rank}</span></td>
-          <td>
-            <span class="model-name">${entry.model}${entry.reasoningLabel ? ` <span class="model-variant">(${entry.reasoningLabel})</span>` : ""}</span>
-          </td>
-          <td>${entry.organization}</td>
-          <td class="metric">${formatPassAt1(entry)}</td>
-          <td class="metric">${formatPercent(metrics.passAt5)}</td>
-          <td class="metric">${formatUx(metrics.meanUxScore)}</td>
-          <td class="metric">${formatCost(metrics.costPerTask)}</td>
-          <td>${entry.submissionDate}</td>
-          <td><span class="status-badge status-${entry.verificationStatus}">${statusLabel(entry.verificationStatus)}</span></td>
-        </tr>
-      `;
-    })
-    .join("");
+  body.innerHTML = renderGroupedRows(visible);
 
-  if (!visible.length) {
+  if (!totalEntries) {
     body.innerHTML = '<tr><td class="empty-state" colspan="9">No submitted results for this track yet.</td></tr>';
   }
 
-  toggleRows.hidden = ranked.length <= 10;
-  toggleRows.textContent = state.showAll ? "Show top 10" : `Show all ${ranked.length}`;
+  toggleRows.hidden = groups.every((group) => group.entries.length <= 10);
+  toggleRows.textContent = state.showAll ? "Show top 10 per version" : `Show all ${totalEntries}`;
 
   tabs.forEach((tab) => {
     const active = tab.dataset.track === state.track;
