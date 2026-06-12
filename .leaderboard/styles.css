@@ -327,6 +327,20 @@ a {
   background: #fcfdff;
 }
 
+.leaderboard-table .version-row td {
+  background: #f4f8fc;
+  border-bottom: 1px solid var(--border);
+  color: var(--brand-navy);
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: 0;
+  padding: 18px 10px 12px;
+}
+
+.leaderboard-table tbody .version-row:hover {
+  background: transparent;
+}
+
 .rank-col,
 .rank-cell {
   width: 64px;
