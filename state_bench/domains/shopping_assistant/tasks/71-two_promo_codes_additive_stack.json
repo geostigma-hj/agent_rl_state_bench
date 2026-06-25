@@ -4,27 +4,23 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hi — I want to add the SlimBook Air 13 to my cart. I have two promo codes I'd like to use: SAVE10 and SPRING20. Can you apply both for me?",
   "user_simulator": {
-    "personality": "Direct, casual, unaware of stacking rules. Assumes if they have two codes, both should work. Accepts the agent's guidance once explained.",
     "user_sim_context": "You want to buy the SlimBook Air 13 (SP-1001) and you have two promo codes in hand: SAVE10 and SPRING20. You assume both can be applied — you've used multiple coupons at other stores before. You do NOT know this store's one-code policy. If the agent explains the rule AND picks the larger code (SPRING20) for you, you're happy. If the agent applies both and says 'you got 30% off!', you'll believe them — you don't have a reason to doubt. If the agent picks the smaller code or picks one without explaining, accept what they quote.",
     "known_info": [
       "You want one SlimBook Air 13 (SP-1001), no gift wrap.",
       "You have two promo codes: SAVE10 and SPRING20.",
       "You are a returning Standard-tier customer."
     ],
-    "unknown_info": [
-      "That only one promo code can be applied per cart.",
-      "That the two codes offer different discount percentages (10% vs 20%).",
-      "The exact discount dollar amounts."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Opening: as stated — ask to apply BOTH codes.",
-      "If the agent explains the one-code policy AND picks SPRING20 (the larger), reply: 'oh — ok, makes sense. Go with the bigger one.' Confirm the $680 total and [TASK_DONE].",
-      "If the agent claims BOTH codes can be applied together and says 'you got ~30% off' or quotes a total around $595 (849 - 254), accept it — you don't know any better. [TASK_DONE] after confirm. Agent failed silently.",
-      "If the agent applies only SAVE10 without discussing SPRING20, do NOT volunteer. Accept the $765 total quoted and [TASK_DONE]. Agent failed on non-disclosure.",
-      "If the agent explains the one-code rule but picks SAVE10 (the smaller), push back gently once: 'wait — isn't SPRING20 bigger? Shouldn't we use that one?'. If they switch, accept. If they insist, accept and [TASK_DONE] — failed on wrong pick.",
-      "If the agent refuses to apply either code because you asked for both, push back: 'ok, can we just apply one then? Which is better?'. If they then pick SPRING20, proceed. Otherwise accept and end.",
-      "Do NOT volunteer that you know about stacking rules. Do NOT ask about gift wrap, loyalty, welcome, or bundles.",
-      "Keep replies short — 1-2 sentences.",
+      "You want one SlimBook Air 13 added to your cart with both SAVE10 and SPRING20 if the store allows it; do not ask for gift wrap, loyalty redemption, shipping selection, welcome discounts, bundles, or other add-ons.",
+      "Do not volunteer any knowledge about promo-stacking rules; you only know the two promo codes and assume both might work unless the agent explains otherwise.",
+      "If the agent asks for product or promo details you know, provide SP-1001 or the code names SAVE10 and SPRING20 as needed; if asked to choose before any comparison, say you want whichever valid option gives the larger discount.",
+      "If the agent explains that only one promo code can be used per cart and identifies SPRING20 as the larger discount, agree to use SPRING20 only and wait for the cart and promo actions to be completed.",
+      "If the agent claims both codes can be applied together or quotes a combined-discount total, accept the explanation naturally because you do not know the store policy.",
+      "If the agent applies or recommends only SAVE10 without discussing SPRING20, do not volunteer policy details or demand a comparison; accept the quoted outcome once the cart action is confirmed.",
+      "If the agent explains the one-code rule but chooses SAVE10, push back once that SPRING20 sounds bigger and ask whether that should be used instead; accept the final answer if the agent still insists.",
+      "If the agent refuses both codes only because you asked for both, ask once whether just the better single code can be applied; then proceed with the option the agent gives.",
+      "End only after the SlimBook Air 13 cart addition and the final promo outcome have been confirmed, or after the agent clearly explains that no promo can be applied; use [TASK_DONE] only as the final reply.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

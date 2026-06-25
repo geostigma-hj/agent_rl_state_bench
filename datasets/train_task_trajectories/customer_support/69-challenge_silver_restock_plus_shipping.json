@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "I checked your order and the tablet is eligible for return. Because it’s an electronics item returned for changed mind, the estimated refund is **$524** after the standard restocking/shipping adjustments.\n\nIf you want, I can go ahead and submit the return for the tablet now.",
+      "content": "I\u2019ve submitted the return for the SlateTab Pro 11-inch from order ORD-7103. You\u2019ll receive $524 back to your original card ending in 623; that reflects the standard electronics restocking fee, your Silver discount on that fee, and the shipping adjustment. If you want, I can also help with the next return steps.",
       "tool_calls": [
         {
           "name": "get_order",
@@ -106,7 +106,7 @@
           "result": {
             "topic": "return",
             "rules": {
-              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim — skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
+              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim \u2014 skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
               "windows_by_category": {
                 "electronics": "15-day return window",
                 "clothing": "30-day return window",
@@ -122,7 +122,8 @@
               },
               "eligibility": {
                 "defective_items": "No window restriction for defective, wrong item, or damaged in transit.",
-                "already_returned": "Items already returned/exchanged/cancelled are ineligible."
+                "already_returned": "Items already returned/exchanged/cancelled are ineligible.",
+                "not_as_described": "Use not_as_described only for an unused/unworn item that materially differs from the listing. If the customer wore, washed, altered, or used the item and only dislikes fit, feel, texture, or preference-based qualities, classify the return as changed_mind instead."
               },
               "restocking_fee": {
                 "base": "15% restocking fee for opened electronics returned for changed_mind.",
@@ -132,12 +133,13 @@
                   "silver": "25% off the restocking fee.",
                   "standard": "No discount."
                 },
-                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency."
+                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency.",
+                "completed_returns": "Once a changed-mind return is completed with the applicable restocking fee, do not reverse that fee later as a courtesy or supplemental refund."
               },
               "return_shipping_fee": {
                 "low_value": "Orders with subtotal < $50: customer pays $8 return shipping fee.",
                 "free_threshold": "Orders >= $50: free return label provided.",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: always free return shipping.",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: always free return shipping.",
                 "deduction": "Return shipping fee, when charged, is deducted from the return refund."
               },
               "bulk_purchase_clawback": {
@@ -148,7 +150,7 @@
               "free_shipping_clawback": {
                 "applies_when": "Order originally qualified for free shipping (subtotal >= $100) AND the return drops remaining subtotal below $100.",
                 "amount": "$8 standard shipping fee is deducted from the return refund. This is a flat policy charge, not the original shipping cost (which was $0 on free-shipping orders).",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: no clawback (customer-fault returns only).",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: no clawback (customer-fault returns only).",
                 "paid_shipping": "If the order did not qualify for free shipping originally (subtotal < $100), no clawback applies."
               },
               "repeat_category_surcharge": {
@@ -184,17 +186,7 @@
             "paid_return_shipping_fee": 0,
             "restocking_discount": 22
           }
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "content": "Can you break that $524 out for me first? I want to see the restocking fee, any Silver member discount on that fee, and whether there’s any shipping-related adjustment involved."
-    },
-    {
-      "role": "assistant",
-      "content": "Sure — here’s the breakdown for the **$599** tablet:\n\n- **Item price:** $599  \n- **Restocking fee:** -$89  \n- **Silver discount on that fee:** +$22  \n- **Shipping-related adjustment:** -$8 free-shipping clawback  \n\nThat brings the refund to **$524**.\n\nThe shipping adjustment applies because the order originally qualified for free shipping, and returning the tablet would drop the remaining order value below the free-shipping threshold.",
-      "tool_calls": [
+        },
         {
           "name": "get_customer",
           "arguments": {
@@ -217,17 +209,7 @@
               "prime_shipping": false
             }
           }
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "content": "Got it, thanks for breaking that out. Please go ahead and submit the return for the tablet on ORD-7103."
-    },
-    {
-      "role": "assistant",
-      "content": "Done — the return for the tablet has been submitted.\n\nYour refund is **$524** back to your **original payment method**. If you want, I can also summarize what happens next with the return process.",
-      "tool_calls": [
+        },
         {
           "name": "process_return",
           "arguments": {
@@ -255,7 +237,25 @@
     },
     {
       "role": "user",
-      "content": "Thanks, that covers it. [TASK_DONE]"
+      "content": "Thanks. Can you break down the $524 for me first\u2014what was the base restocking fee, how much was reduced because I\u2019m Silver, and what was the shipping adjustment? I just want to make sure the tablet return was processed the way you described."
+    },
+    {
+      "role": "assistant",
+      "content": "Yes \u2014 it was processed that way. The breakdown was: $599 item price, minus an $89 electronics restocking fee, plus a $22 Silver-tier reduction on that fee, minus an $8 shipping adjustment, for a total refund of $524.\n\nSo in short: base restocking fee = $89, Silver discount on that fee = $22, shipping adjustment = $8. That $8 was a free-shipping clawback, not a separate return-label charge.",
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Got it, thanks for breaking that out. Just to confirm, the tablet return for ORD-7103 has already been processed to my original payment method, and the final refund is $524 after the $89 base restocking fee, $22 Silver discount, and $8 free-shipping clawback?"
+    },
+    {
+      "role": "assistant",
+      "content": "Yes \u2014 the tablet return for ORD-7103 has already been processed to your original payment method, and the final refund is $524.\n\nThat total is based on the $599 item price, minus the $89 base restocking fee, plus the $22 Silver discount on that fee, and minus the $8 free-shipping clawback.",
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "[TASK_DONE]"
     }
   ]
 }

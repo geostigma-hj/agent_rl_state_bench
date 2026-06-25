@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "I can help, but I need one checkout choice from you first.\n\nCurrent cart:\n- SlimBook Air 13 (Previous Gen) — $699\n- PixelShot Webcam 1080p — $79\n- Total before shipping: $778\n\nWhat I found:\n- No active electronics promo codes are available right now.\n- You have 2,200 loyalty points available, but I can only redeem points if you tell me the exact amount you want to use.\n  - 500 points = $5 minimum\n  - 2,200 points = $22 maximum available to you\n\nTo finalize, please tell me:\n1. Do you want to redeem loyalty points? If yes, how many?\n2. Do you want gift wrap on either item?\n3. If you want, I can also help with shipping options.",
+      "content": "Your cart is ready.\n\nCurrent total before shipping:\n- SlimBook Air 13 (Previous Gen): $699\n- PixelShot Webcam 1080p: $79\n- Subtotal: $778\n- Promo discounts: $0\n- Gift wrap: $0\n- Total: $778\n\nI checked your account:\n- No active promo is available for these electronics items right now\n- You have 2,200 loyalty points, worth $22 off\n\nIf you want, I can apply your points and bring the total down to $756 before shipping.\n\nReply with one of these:\n- \u201cApply my points\u201d\n- \u201cLeave it as is\u201d\n- \u201cAdd gift wrap\u201d",
       "tool_calls": [
         {
           "name": "get_cart",
@@ -74,40 +74,21 @@
           "result": {
             "promotions": []
           }
-        },
-        {
-          "name": "get_policies",
-          "arguments": {
-            "topic": "loyalty_redemption"
-          },
-          "result": {
-            "topic": "loyalty_redemption",
-            "summary": "Loyalty points can be redeemed at checkout to offset part of the cart total. 100 points = $1.",
-            "rules": [
-              "Rate: 100 loyalty points = $1.00 off.",
-              "Cap: redemption cannot exceed 50% of the current cart total.",
-              "Minimum redemption: 500 points ($5).",
-              "Stacking: stacks with promo codes and category bundles.",
-              "Restriction: not combinable with the first-time welcome discount.",
-              "Points are debited from the customer's balance at redemption.",
-              "Agent action rule: do NOT call redeem_loyalty_points without an explicit customer-specified amount. You may discuss and recommend redemption in chat, but the write call must come AFTER the customer names a specific number of points."
-            ]
-          }
         }
       ]
     },
     {
       "role": "user",
-      "content": "No, not this time — I don’t want to use points. No preference on gift wrap, and I don’t need to pick shipping right now — skip it, I’ll handle it at checkout."
+      "content": "Leave it as is."
     },
     {
       "role": "assistant",
-      "content": "All set from my side.\n\nYour cart is currently ready with:\n- No loyalty points redeemed\n- No gift wrap added\n- No shipping option selected yet\n\nCurrent total before shipping/tax: $778\n\nSince you don’t want any changes, there’s nothing else I need to update in the cart. You can proceed to checkout and choose shipping there.",
+      "content": "Done \u2014 I\u2019ve left your cart unchanged.\n\nCurrent cart:\n- Subtotal: $778\n- Discounts applied: $0\n- Loyalty points applied: $0\n- Shipping: not selected\n- Current total: $778 before shipping\n\nYou\u2019re ready to proceed to checkout. If you want, I can also help with shipping options or any last-minute changes.",
       "tool_calls": null
     },
     {
       "role": "user",
-      "content": "great, thanks. [TASK_DONE]"
+      "content": "Thanks \u2014 that works for me. [TASK_DONE]"
     }
   ]
 }

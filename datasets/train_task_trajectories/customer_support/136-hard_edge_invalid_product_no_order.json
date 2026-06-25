@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "I can help with that, but I need to identify which brewer order you mean before I can refund anything. If you can share any of these, I can narrow it down fast: approximate purchase date, brand/model, or the email/last 4 digits of the payment card used.",
+      "content": "I can help with that, but I do need the order number to pull up the brewer and process the refund. If you check your email for the order confirmation or your account\u2019s order history, send me the order ID and I\u2019ll take it from there.",
       "tool_calls": [
         {
           "name": "get_customer",
@@ -39,20 +39,29 @@
     },
     {
       "role": "user",
-      "content": "Can’t you just refund the brewer without all that first? If you need the order details to look it up, I do have them."
+      "content": "You should be able to look it up from my account. I'm Sarah Williams, gold member, customer ID cust_003."
     },
     {
       "role": "assistant",
-      "content": "Yes — if you send the order details, I can look it up and check refund options right away. Please send the order number, and if there were multiple items in the order, mention which brewer it was.",
+      "content": "I can confirm your account, but I still can\u2019t access your full order history without an order ID in this system. If you send the order number from your email receipt or account order page, I can check the brewer and tell you your refund options right away.",
       "tool_calls": null
     },
     {
       "role": "user",
-      "content": "Sure — the order number is **ORD-7244**. It was the coffee maker in that order."
+      "content": "Can you look it up another way? I just need a refund for the defective brewer, and I\u2019d rather not dig through emails if you can check my account."
     },
     {
       "role": "assistant",
-      "content": "I found it. Since it was delivered yesterday, I can help, but I can’t issue a refund with only “junk” as the reason — I need the return reason to determine the refund path.\n\nWhich best fits?\n- defective / not working\n- damaged in transit\n- wrong item\n- not as described\n- changed my mind\n\nOnce you pick one, I can tell you exactly what refund you’d get and proceed.",
+      "content": "I checked your account details, but in this system I still can\u2019t pull a specific order from the customer ID alone. To process a refund, I need the order ID. If you want, send me the brewer model and an approximate purchase date, and I can help you narrow down which order to grab from your order history.",
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "I really just want a refund for the defective brewer, but if you need the order context, it\u2019s ORD-7244. Can you please look that up and tell me the refund options?"
+    },
+    {
+      "role": "assistant",
+      "content": "I looked up ORD-7244, and your BrewPerfect Coffee Maker is eligible for a full defective-item return. That would be a $149 refund back to your original payment method, and the return shipping is free. If you want, I can start the return for you now.",
       "tool_calls": [
         {
           "name": "get_order",
@@ -125,7 +134,7 @@
                 "full_refund": "Full refund for defective, wrong item, or damaged in transit.",
                 "promo_redistribution": "If a promo/coupon was used: discount allocated proportionally by item price. Refund = item_price - (discount * item_price / subtotal).",
                 "outside_window": "Outside return window but within store-credit grace: store credit only.",
-                "shipping_refund": "When refunding shipping (defective/wrong/damaged returns, 6+-days-late compensation), refund the actual shipping cost the customer was charged on the order — read order.shipping_cost and refund that amount. Standard policy: $0 on free-shipping orders (subtotal >= $100), $8 otherwise. NOT for buyer's remorse."
+                "shipping_refund": "When refunding shipping (defective/wrong/damaged returns, 6+-days-late compensation), refund the actual shipping cost the customer was charged on the order \u2014 read order.shipping_cost and refund that amount. Standard policy: $0 on free-shipping orders (subtotal >= $100), $8 otherwise. NOT for buyer's remorse."
               },
               "method": {
                 "original_payment": "Default refund method when item was paid for and is being returned for fault.",
@@ -145,7 +154,7 @@
           "result": {
             "topic": "return",
             "rules": {
-              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim — skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
+              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim \u2014 skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
               "windows_by_category": {
                 "electronics": "15-day return window",
                 "clothing": "30-day return window",
@@ -161,7 +170,8 @@
               },
               "eligibility": {
                 "defective_items": "No window restriction for defective, wrong item, or damaged in transit.",
-                "already_returned": "Items already returned/exchanged/cancelled are ineligible."
+                "already_returned": "Items already returned/exchanged/cancelled are ineligible.",
+                "not_as_described": "Use not_as_described only for an unused/unworn item that materially differs from the listing. If the customer wore, washed, altered, or used the item and only dislikes fit, feel, texture, or preference-based qualities, classify the return as changed_mind instead."
               },
               "restocking_fee": {
                 "base": "15% restocking fee for opened electronics returned for changed_mind.",
@@ -171,12 +181,13 @@
                   "silver": "25% off the restocking fee.",
                   "standard": "No discount."
                 },
-                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency."
+                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency.",
+                "completed_returns": "Once a changed-mind return is completed with the applicable restocking fee, do not reverse that fee later as a courtesy or supplemental refund."
               },
               "return_shipping_fee": {
                 "low_value": "Orders with subtotal < $50: customer pays $8 return shipping fee.",
                 "free_threshold": "Orders >= $50: free return label provided.",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: always free return shipping.",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: always free return shipping.",
                 "deduction": "Return shipping fee, when charged, is deducted from the return refund."
               },
               "bulk_purchase_clawback": {
@@ -187,7 +198,7 @@
               "free_shipping_clawback": {
                 "applies_when": "Order originally qualified for free shipping (subtotal >= $100) AND the return drops remaining subtotal below $100.",
                 "amount": "$8 standard shipping fee is deducted from the return refund. This is a flat policy charge, not the original shipping cost (which was $0 on free-shipping orders).",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: no clawback (customer-fault returns only).",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: no clawback (customer-fault returns only).",
                 "paid_shipping": "If the order did not qualify for free shipping originally (subtotal < $100), no clawback applies."
               },
               "repeat_category_surcharge": {
@@ -197,17 +208,28 @@
               }
             }
           }
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "content": "It’s **defective / not working** — the coffee maker isn’t working properly. What refund path would that be?"
-    },
-    {
-      "role": "assistant",
-      "content": "Because it’s defective, this goes through as a fault-based return: full refund to your original payment method, no restocking fee, and a free return label. For your brewer, that would be $149 back.\n\nIf you want, I can submit the return now.",
-      "tool_calls": [
+        },
+        {
+          "name": "get_policies",
+          "arguments": {
+            "topic": "warranty"
+          },
+          "result": {
+            "topic": "warranty",
+            "rules": {
+              "active": "Active warranty: eligible for claim.",
+              "active_item_required": "Warranty claims require an active order item. Items already returned, exchanged, or cancelled are ineligible for a new warranty claim even if a warranty record still exists.",
+              "expired_recent": "Expired <30 days: 50% off repair.",
+              "expired_old": "Expired >30 days: full-price repair or 25% off replacement.",
+              "claim_limit": "Max claims reached: paid repair only (40% of item price).",
+              "repair_vs_replace": "Items <$100: replacement. Items >=$100: repair first.",
+              "recurring_defect": "2+ prior claims for same issue: automatic replacement.",
+              "manufacturer": "Manufacturer warranty covers first 12 months.",
+              "extended": "Extended warranty covers after manufacturer period.",
+              "void_exclusions": "Liquid, accidental, or user-caused physical damage (e.g. spills, drops, cracked screens from misuse) is NOT covered and voids the claim, even while the warranty is otherwise active. The eligibility check is date/claim-count based only and does not detect damage cause, so when the customer describes liquid/accidental/user damage, deny the claim on this exclusion and do not file it."
+            }
+          }
+        },
         {
           "name": "process_return",
           "arguments": {
@@ -238,11 +260,20 @@
     },
     {
       "role": "user",
-      "content": "That works for me — please go ahead and submit the defective return for the coffee maker. Thanks."
+      "content": "Before I confirm, can you show me the full return preview? I need the refund amount, refund method, confirmation there\u2019s no restocking fee, and the return-label details."
     },
     {
       "role": "assistant",
-      "content": "Done — I’ve submitted the defective return for the coffee maker.\n\nYou’ll receive $149 back to your original payment method, and a return label has been issued.",
+      "content": "Yes \u2014 here\u2019s the return preview for the brewer:\n\n- Return eligible: **Yes**\n- Reason: **Defective**\n- Refund amount: **$149**\n- Refund method: **Original payment method**\n- Restocking fee: **$0**\n- Return label: **Free prepaid return label**; no return-shipping charge\n\nIf you want, I can go ahead and submit the return next.",
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "That looks right for the defective coffee maker. Please go ahead and submit the return, and make sure the prepaid return label is issued."
+    },
+    {
+      "role": "assistant",
+      "content": "Done \u2014 the return has been submitted.\n\n- Refund: **$149**\n- Method: **Original payment**\n- Restocking fee: **$0**\n- Prepaid return label: **Issued**\n\nYou should receive the label and return instructions shortly.",
       "tool_calls": [
         {
           "name": "process_return",
@@ -271,7 +302,7 @@
     },
     {
       "role": "user",
-      "content": "Thanks so much — that sounds good. [TASK_DONE]"
+      "content": "[TASK_DONE]"
     }
   ]
 }

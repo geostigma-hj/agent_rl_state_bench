@@ -95,31 +95,33 @@ class StateDiff:
 class UserSimulatorConfig:
     """Configuration for the user simulator in a task."""
 
-    personality: str  # Tone and information-sharing style
     user_sim_context: str
     known_info: list[str] = field(default_factory=list)  # Facts the user knows
     unknown_info: list[str] = field(default_factory=list)  # Things the user doesn't know
     task_rules: list[str] = field(default_factory=list)  # Task-specific IF/THEN rules
+    personality: str = ""  # Deprecated; retained for older generated tasks.
 
     def __post_init__(self) -> None:
         if not self.user_sim_context or not self.user_sim_context.strip():
             raise ValueError("user_simulator.user_sim_context is required and must be non-empty")
 
     def to_dict(self) -> dict[str, Any]:
-        return {
-            "personality": self.personality,
+        data = {
             "user_sim_context": self.user_sim_context,
             "known_info": self.known_info,
             "unknown_info": self.unknown_info,
             "task_rules": self.task_rules,
         }
+        if self.personality:
+            data["personality"] = self.personality
+        return data
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> UserSimulatorConfig:
         if "user_sim_context" not in data:
             raise ValueError("user_simulator.user_sim_context is required")
         return cls(
-            personality=data["personality"],
+            personality=data.get("personality", ""),
             user_sim_context=data["user_sim_context"],
             known_info=data.get("known_info", []),
             unknown_info=data.get("unknown_info", []),
@@ -140,9 +142,11 @@ class TaskDefinition:
 
     task_type: str | None = None
 
-    # Supports two requirement shapes:
+    # Supports deterministic state requirement shapes documented in
+    # docs/eval/state-requirements.md:
     # 1. direct field assertion: {entity_type, record_key, field, expected_value}
     # 2. created-record matcher: {entity_type, match_fields, expected_fields}
+    # 3. relational assertion: {entity_type, record_key, field, expected_value_from_match}
     state_requirements: list[dict[str, Any]] = field(default_factory=list)
     task_env_path: str | None = None
     task_requirements: list[dict[str, Any]] = field(default_factory=list)
@@ -311,6 +315,8 @@ class UXQualityResult:
     intent_alignment: int
     reasoning: str
     score: float | None = None
+    user_effort: int | None = None
+    response_density: int | None = None
 
     @property
     def ux_score(self) -> float:
@@ -325,7 +331,7 @@ class UXQualityResult:
         ) / 5
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        result = {
             "ux_user_control": self.user_control,
             "ux_friction": self.friction,
             "ux_situational_awareness": self.situational_awareness,
@@ -334,6 +340,11 @@ class UXQualityResult:
             "ux_score": round(self.ux_score, 2),
             "ux_reasoning": self.reasoning,
         }
+        if self.user_effort is not None:
+            result["ux_user_effort"] = self.user_effort
+        if self.response_density is not None:
+            result["ux_response_density"] = self.response_density
+        return result
 
 
 @dataclass
@@ -400,7 +411,8 @@ class Trajectory:
             result["output_tokens"] = self.token_usage.output_tokens
             result["reasoning_output_tokens"] = self.token_usage.reasoning_output_tokens
             result["total_tokens"] = self.token_usage.total_tokens
-            result["cost_usd"] = self.token_usage.total_cost_usd
+            if self.token_usage.total_cost_usd:
+                result["cost_usd"] = self.token_usage.total_cost_usd
         if self.state_diff:
             result["state_diff"] = self.state_diff.to_dict()
         if self.error:

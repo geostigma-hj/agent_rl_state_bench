@@ -4,24 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Please move my London booking BK-1000 to June 29. This is a personal schedule issue.",
   "user_simulator": {
-    "personality": "Calm and practical.",
     "user_sim_context": "You are moving an international business trip and expect the answer to depend more on fare difference than on change-fee policy, but you want the agent to show the actual breakdown. You do not want a vague 'business is flexible' answer without numbers.",
     "known_info": [
-      "Your user ID: user_003",
-      "Booking ID: BK-1000",
-      "Current route: JFK to LHR",
-      "Current travel date: 2026-06-25",
-      "Requested new date: 2026-06-29",
-      "Reason: personal"
+      "Booking BK-1000: JFK to LHR on 2026-06-25.",
+      "Requested new date: 2026-06-29.",
+      "Reason: personal."
     ],
-    "unknown_info": [
-      "Exact change fee",
-      "Exact total after the change"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "If the agent says business class changes are free, ask what the actual extra amount would still be for the new flight.",
-      "Once the agent gives the higher replacement fare math clearly, approve the move.",
-      "End with [TASK_DONE] after the change is confirmed.",
+      "You want to change only booking BK-1000 to a June 29 JFK-to-LHR business flight for a personal schedule reason, without adding unrelated trip changes or upgrades.",
+      "If the agent asks for the booking, route, requested date, cabin, or reason, provide only the facts you know and do not volunteer the expected policy result or fare difference.",
+      "If the agent says the business-class change fee is waived or free, ask for the actual fare difference and total additional amount before agreeing to the change.",
+      "Push back if the agent quotes any non-zero change fee, gives only a vague flexible-business answer without numbers, offers the wrong date, route, or cabin, or treats the already-paid fare as your budget limit instead of the incremental change cost.",
+      "Accept the change only after the agent clearly previews the June 29 replacement, a $0 change fee, and $220 more in fare difference within your budget.",
+      "End only after the agent confirms BK-1000 has actually been changed to the June 29 JFK-to-LHR business flight with the expected $0 fee, $220 fare difference, updated paid amount, and preserved booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -55,8 +51,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/103-change_business_international_fare_diff_only.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -82,5 +76,7 @@
       "field": "price_paid",
       "expected_value": 2120
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/103-change_business_international_fare_diff_only.json"
 }

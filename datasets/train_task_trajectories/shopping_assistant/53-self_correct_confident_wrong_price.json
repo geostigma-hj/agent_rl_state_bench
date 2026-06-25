@@ -6,11 +6,11 @@
     },
     {
       "role": "user",
-      "content": "Hey — quick question. Isn't the SlimBook Air 13 (SP-1001) $749? That's the price I remember from last time I looked."
+      "content": "Hey \u2014 quick question. Isn't the SlimBook Air 13 (SP-1001) $749? That's the price I remember from last time I looked."
     },
     {
       "role": "assistant",
-      "content": "Right now, the SlimBook Air 13 (SP-1001) is listed at $849, not $749.\n\nI checked the current product details, and there’s no previous-price field showing a recent drop from $749. If you want, I can also check whether there’s an active promo that could bring it closer to that price.",
+      "content": "Right now, the SlimBook Air 13 (SP-1001) is listed at **$849**, not $749.\n\nI don\u2019t see a recorded prior price on the product details, so if you saw $749 before, it may have been a past promo or a different listing. If you want, I can also check whether there\u2019s a current promotion that could bring it closer to that price.",
       "tool_calls": [
         {
           "name": "get_product_details",
@@ -49,20 +49,20 @@
     },
     {
       "role": "user",
-      "content": "oh really? I could have sworn it was $749. Ok, add it anyway."
+      "content": "Got it \u2014 thanks for checking. Please go ahead and add the SlimBook Air 13 to my cart at $849."
     },
     {
       "role": "assistant",
-      "content": "I can add it, but I need one quick preference first: do you want gift wrap on it? It’s available for this item and adds $5 per unit.",
+      "content": "Sure \u2014 before I add it, do you want **gift wrap** for the SlimBook Air 13?\n\nIt\u2019s available for this item. If you don\u2019t want it, I\u2019ll add it as a standard item.",
       "tool_calls": null
     },
     {
       "role": "user",
-      "content": "No preference, use the default."
+      "content": "No gift wrap, please \u2014 just add the SlimBook Air 13 as a standard item."
     },
     {
       "role": "assistant",
-      "content": "Done — I added 1 × SlimBook Air 13 to your cart at $849.\n\nCart total so far: $849\n\nIf you want, I can also check for any promo codes or discounts you might qualify for.",
+      "content": "Done \u2014 the **SlimBook Air 13** has been added to your cart.\n\n- Quantity: **1**\n- Gift wrap: **No**\n- Unit price: **$849**\n- Cart total: **$849**\n\nIf you want, I can also check whether you have any promos or discounts that might apply.",
       "tool_calls": [
         {
           "name": "add_to_cart",

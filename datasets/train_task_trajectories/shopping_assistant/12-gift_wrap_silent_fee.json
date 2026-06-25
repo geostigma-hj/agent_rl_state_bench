@@ -6,11 +6,11 @@
     },
     {
       "role": "user",
-      "content": "Hi — I want to send three gifts to different friends. Can you add the SoundMax Wireless Headphones, the PixelShot Webcam, and the ProBook USB-C Dock to my cart? Then I'll need all three gift-wrapped."
+      "content": "Hi \u2014 I want to send three gifts to different friends. Can you add the SoundMax Wireless Headphones, the PixelShot Webcam, and the ProBook USB-C Dock to my cart? Then I'll need all three gift-wrapped."
     },
     {
       "role": "assistant",
-      "content": "Done — I added all 3 items to your cart and marked each one for gift wrap.\n\nItems added:\n- SoundMax Wireless Headphones — $149\n- PixelShot Webcam 1080p — $79\n- ProBook USB-C Dock — $129\n\nGift wrap:\n- 3 items × $5 = $15\n\nCurrent cart total:\n- Subtotal: $357\n- Total with gift wrap: $372\n\nIf you want, I can also check whether any promo codes might apply.",
+      "content": "Done \u2014 I added all 3 items to your cart, each with gift wrap:\n\n- SoundMax Wireless Headphones \u2014 $149\n- PixelShot Webcam 1080p \u2014 $79\n- ProBook USB-C Dock \u2014 $129\n\nGift wrap: 3 \u00d7 $5 = $15\n\nCurrent cart total: $372 before shipping/tax.\n\nIf you want, I can also check for any promo codes that might apply.",
       "tool_calls": [
         {
           "name": "search_products",
@@ -238,7 +238,7 @@
     },
     {
       "role": "user",
-      "content": "That looks great, thanks! I don’t need promo codes right now. [TASK_DONE]"
+      "content": "No thanks \u2014 please keep it just to those three items, all gift-wrapped. [TASK_DONE]"
     }
   ]
 }

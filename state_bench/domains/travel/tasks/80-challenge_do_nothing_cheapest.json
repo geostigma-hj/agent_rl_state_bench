@@ -4,21 +4,19 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I found a flight on the same route for $270 instead of the $300 I paid. Can you switch my booking BK-1000 to save me $30? My user ID is user_002.",
   "user_simulator": {
-    "personality": "Frugal. Thinks switching to cheaper flight always saves money.",
     "known_info": [
-      "Your user ID: user_002",
-      "Booking: BK-1000 (ORD to DEN, $300, June 24)",
-      "Found $270 flight on same route and date"
+      "Booking BK-1000: ORD to DEN on June 24, paid $300.",
+      "Found same-route, same-date flight for $270."
     ],
-    "unknown_info": [
-      "Change and cancel fees",
-      "That the $30 savings is eaten by fees"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: found $270 flight, want to switch from BK-1000.",
-      "If agent switches without mentioning costs exceed savings, say: 'Wait, did that actually save me money?'",
-      "If agent says keeping is cheapest, say: 'Oh, I did not realize the fees would wipe out the savings. I will keep my current booking then.' End with [TASK_DONE].",
-      "If agent changes the booking anyway, say: 'That made it more expensive than keeping my current booking. I did not want a more expensive outcome.' Do not end with [TASK_DONE]."
+      "You want to know whether switching BK-1000 to the $270 same-route, same-date flight would actually save money; do not authorize any change unless the total cost comparison shows it is cheaper than keeping the current booking.",
+      "If the agent asks for known booking details, provide the booking ID, route, date, paid amount, user ID, and the cheaper-flight price; do not provide fee math unless the agent has looked it up or asks you to sanity-check the comparison.",
+      "If the agent only compares the ticket prices or says the $270 flight saves $30, ask them to include all change fees, cancellation fees, refunds, and rebooking costs before deciding.",
+      "If the agent compares changing, canceling and rebooking, and keeping the current booking, accept keeping the current booking only after it is clear that both switching paths cost more overall.",
+      "If the agent asks to confirm a change, cancellation, or rebooking before showing the full comparison, decline for now and ask whether the action would actually save money after fees.",
+      "If the agent performs a change or rebooking anyway, push back that you wanted the cheapest outcome and ask whether the original booking can be kept or restored; do not treat the task as resolved while the final outcome is a more expensive change.",
+      "End only after the agent clearly recommends taking no action, explains why keeping the original booking is cheapest, and confirms that the current booking remains unchanged."
     ],
     "user_sim_context": "You spotted a slightly cheaper flight and instinctively think switching should save money. You are asking the agent to sanity-check that instinct before you do anything. If the answer is counterintuitive, you want it explained clearly."
   },
@@ -43,7 +41,7 @@
       "evidence": "conversation_or_tool_calls"
     }
   ],
+  "state_requirements": [],
   "task_type": "adversarial_or_reasoning_trap",
-  "task_env_path": "state_bench/domains/travel/task_envs/80-challenge_do_nothing_cheapest.json",
-  "state_requirements": []
+  "task_env_path": "state_bench/domains/travel/task_envs/80-challenge_do_nothing_cheapest.json"
 }

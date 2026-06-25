@@ -6,11 +6,11 @@
     },
     {
       "role": "user",
-      "content": "Hey — I need to order 5 of the SoundMax Wireless Headphones. They're gifts for my study group. Can you add them to my cart?"
+      "content": "Hey \u2014 I need to order 5 of the SoundMax Wireless Headphones. They're gifts for my study group. Can you add them to my cart?"
     },
     {
       "role": "assistant",
-      "content": "I can’t add 5 of that item to one cart because the store has a hard limit of 3 units per product per cart.\n\nI did confirm:\n- SoundMax Wireless Headphones — $149 each\n- In stock: yes\n- Gift wrap available: yes\n\nIf you want, I can add up to 3 now. Since these are gifts, tell me whether you want gift wrap:\n- 3 without gift wrap\n- 3 with gift wrap\n\nIf you need all 5, you’d likely need a second order/cart.",
+      "content": "I found them: SoundMax Wireless Headphones at $149 each, and there aren\u2019t any variants to choose from.\n\nSince these are gifts, do you want gift wrap added for the 5 headphones? It\u2019s $5 per item.",
       "tool_calls": [
         {
           "name": "search_products",
@@ -41,30 +41,39 @@
           }
         },
         {
-          "name": "get_product_details",
+          "name": "get_variants",
           "arguments": {
             "product_id": "SP-2003"
           },
           "result": {
             "product_id": "SP-2003",
-            "name": "SoundMax Wireless Headphones",
-            "category": "electronics",
-            "subcategory": "headphones",
-            "brand": "SoundMax",
-            "price": 149,
-            "rating": 4.4,
-            "review_count": 4100,
-            "description": "Mid-range wireless headphones with 20-hour battery.",
-            "specs": {},
-            "compatible_with": [],
-            "in_stock": true,
-            "stock_quantity": 50,
-            "shipping_days": 3,
-            "gift_wrap_available": true,
-            "backorder_available": false,
-            "previous_price": null,
-            "variants": null,
-            "shipping_estimate": "3 business days (standard)"
+            "product_name": "SoundMax Wireless Headphones",
+            "base_price": 149,
+            "variants": [],
+            "note": "This product has no variants; no variant_id is needed for add_to_cart."
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "No thanks, please skip gift wrap. Just add the 5 SoundMax Wireless Headphones to my cart."
+    },
+    {
+      "role": "assistant",
+      "content": "I couldn\u2019t add 5 because the store has a hard limit of 3 units of the same product per cart, with no exceptions.\n\nIf you want, I can:\n- add 3 SoundMax Wireless Headphones now, or\n- help find 2 similar headphones for the remaining gifts.",
+      "tool_calls": [
+        {
+          "name": "add_to_cart",
+          "arguments": {
+            "customer_id": "shop_004",
+            "product_id": "SP-2003",
+            "quantity": 5,
+            "gift_wrap": false,
+            "variant_id": ""
+          },
+          "result": {
+            "error": "Maximum 3 of the same product per cart. You already have 0."
           }
         },
         {
@@ -86,20 +95,11 @@
     },
     {
       "role": "user",
-      "content": "ok that's fine, go ahead with 3."
+      "content": "Okay, please add 3 of the SoundMax Wireless Headphones to my cart."
     },
     {
       "role": "assistant",
-      "content": "Since these are gifts, do you want gift wrap on them? It’s a per-item choice, so I need your preference before adding them.\n\nReply with one of:\n- “3 without gift wrap”\n- “3 with gift wrap”",
-      "tool_calls": null
-    },
-    {
-      "role": "user",
-      "content": "No preference, use the default."
-    },
-    {
-      "role": "assistant",
-      "content": "Done — I added 3 SoundMax Wireless Headphones to your cart without gift wrap.\n\nCart total so far: $447.",
+      "content": "Done \u2014 3 SoundMax Wireless Headphones have been added to your cart.\n\nCart subtotal: $447.",
       "tool_calls": [
         {
           "name": "add_to_cart",

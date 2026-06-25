@@ -4,25 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to move my flight BK-1000 to June 22. I'm hoping to find something cheaper — what are my options? My user ID is user_002.",
   "user_simulator": {
-    "personality": "Budget-conscious but flexible on times. Wants the cheapest total option. Would accept a red-eye if it saves money.",
     "known_info": [
-      "Your user ID: user_002",
-      "Booking: BK-1000 (ORD→LAX, economy, June 18, $600)",
-      "Wants June 22 instead",
-      "Budget is tight (max $800 for this trip)"
+      "Booking BK-1000: ORD→LAX on June 18; wants to move it to June 22.",
+      "Budget is tight, with a max of $800 for this trip."
     ],
-    "unknown_info": [
-      "June 22 flight prices",
-      "Change fee amount",
-      "Whether change or cancel+rebook is cheaper after the $480 red-eye appears"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: want to move BK-1000 to June 22, hoping for cheaper.",
-      "If the agent says they will cancel first before comparing the June 22 options, say you do not approve any cancellation yet and want to understand the total cost before deciding.",
-      "If agent shows flight options and they're expensive ($650+), say 'Those are more than I paid originally! Is there anything cheaper, even late at night?'",
-      "If agent mentions the $480 red-eye option, ask 'What's the total cost if I change vs cancel and rebook?'",
-      "If agent recommends cancel+rebook as cheaper after the comparison, agree: 'OK, the red-eye works. Go ahead and cancel and rebook it.'",
-      "After the original booking is cancelled and the red-eye is rebooked, end with [TASK_DONE].",
+      "Your intent is to move BK-1000 to June 22 by the cheapest valid path within your $800 budget, without approving cancellation before the June 22 options and total costs are compared.",
+      "If the agent asks for booking details, provide the booking ID and target date, but do not volunteer a cancellation decision or replacement-flight preference before options are reviewed.",
+      "If the agent proposes canceling first or asks for cancellation approval before comparing June 22 change and rebooking costs, do not approve and ask to understand the total cost of each path first.",
+      "If the agent only surfaces June 22 options at $650 or more, ask once whether there is a cheaper option, including late-night or red-eye flights.",
+      "When the $480 red-eye is surfaced, ask for a side-by-side total-cost comparison of changing to it versus canceling and rebooking it, including the change fee, cancellation fee, refund, new fare, and effective total.",
+      "Accept the $480 red-eye only through the cancel-and-rebook path after the agent explains that it is cheaper than a direct change, within budget, and will use your profile booking preferences.",
+      "Push back if the agent recommends the direct change path, omits the refund or fee math, exceeds your budget, or tries to book with booking preferences that do not match your profile.",
+      "End only after the original booking is confirmed cancelled and the replacement red-eye booking is confirmed with the expected cost and booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -57,8 +52,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/59-challenge_premature_cancel_commitment.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -119,5 +112,7 @@
         "user_id": "user_002"
       }
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/59-challenge_premature_cancel_commitment.json"
 }

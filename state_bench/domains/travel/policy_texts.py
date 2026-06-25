@@ -66,9 +66,9 @@ def get_policy_text(params: dict[str, Any]) -> dict[str, Any]:
                 "economy_international_personal": (
                     "International change fee: $100 if departure >7 days, $200 if ≤7 days. Fare difference also applies."
                 ),
-                "economy_medical": "Medical changes: 50% discount on standard fee (requires change_reason='medical')",
+                "economy_medical": "Medical changes: 50% discount on standard fee, rounded down to the nearest dollar (requires change_reason='medical')",
                 "economy_bereavement": (
-                    "Bereavement changes: 75% discount on standard fee (requires change_reason='bereavement')"
+                    "Bereavement changes: 75% discount on standard fee, rounded down to the nearest dollar (requires change_reason='bereavement')"
                 ),
                 "jury_duty": "Jury duty: free change (change_reason='jury_duty')",
                 "military": "Military deployment: free change (change_reason='military')",
@@ -91,9 +91,9 @@ def get_policy_text(params: dict[str, Any]) -> dict[str, Any]:
         return {
             "topic": "delay_compensation",
             "rules": {
-                "under_2_hours": "No compensation",
-                "2_to_4_hours": "$25 meal voucher",
-                "over_4_hours": "Rebooking + $25 meal voucher + hotel (if overnight)",
+                "under_120_min": "No compensation (delay under 120 minutes / 2 hours)",
+                "120_to_239_min": "$25 meal voucher (delay from 120 up to but not including 240 minutes)",
+                "240_min_or_more": "Rebooking + $25 meal voucher + hotel if overnight (delay of 240 minutes / 4 hours or more)",
                 "overnight_delay": "If delay causes overnight stay, hotel voucher + $50 incidentals provided",
             },
         }

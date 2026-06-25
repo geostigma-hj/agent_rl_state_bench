@@ -6,12 +6,25 @@
     },
     {
       "role": "user",
-      "content": "Hi, I have a family emergency — a bereavement situation. I need to cancel my flight BK-1000 to Paris. My user ID is user_005."
+      "content": "Hi, I have a family emergency \u2014 a bereavement situation. I need to cancel my flight BK-1000 to Paris. My user ID is user_005."
     },
     {
       "role": "assistant",
-      "content": "I’m sorry about your family emergency.\n\nI checked booking **BK-1000** for **user_005** and reviewed the cancellation terms.\n\n**Cancellation preview**\n- Route: **JFK → Paris (CDG)**\n- Departure: **2026-06-19 5:30 PM**\n- Fare: **Economy**\n- Refund: **$640**\n- Cancellation fee: **$160**\n\nIf you want, I can **cancel it now** and process that refund.  \nJust reply with **“Confirm cancellation”**.",
+      "content": "I\u2019m very sorry for your loss.\n\nI checked booking **BK-1000** for **user_005**. If we cancel it now, the current terms are:\n\n- **Flight:** JFK \u2192 Paris (CDG)\n- **Departure:** 2026-06-19 5:30 PM\n- **Cancellation fee:** **$160**\n- **Refund:** **$640** back to your original payment method\n\nI haven\u2019t finalized the cancellation yet. If you want, reply **\u201cconfirm cancellation\u201d** and I\u2019ll complete it right away.",
       "tool_calls": [
+        {
+          "name": "get_user_details",
+          "arguments": {
+            "user_id": "user_005"
+          },
+          "result": {
+            "user_id": "user_005",
+            "name": "Ava Garcia",
+            "email": "ava.garcia@example.com",
+            "loyalty_tier": "basic",
+            "loyalty_points": 12000
+          }
+        },
         {
           "name": "get_booking",
           "arguments": {
@@ -63,11 +76,11 @@
     },
     {
       "role": "user",
-      "content": "I assumed cancelling was the way to go, but sure, check the change option too. I still need to go to Paris, just on June 28 instead."
+      "content": "Before I confirm a cancellation, could you check whether changing the trip under the bereavement policy would be cheaper? I still need to get to Paris on June 28, so I\u2019d like to compare that against canceling first."
     },
     {
       "role": "assistant",
-      "content": "I checked the change option for **June 28**.\n\nBecause this is an **international economy** ticket and your reason is **bereavement**, the normal change fee is discounted by **75%**:\n- Standard fee within 7 days of departure: **$200**\n- Bereavement discount: **75% off**\n- Estimated change fee: **$50**\n- Plus any **fare difference**\n\nYour current ticket was **$800**.\n\nAvailable options on **2026-06-28**:\n1. **DL101** — JFK → CDG  \n   - Departs **5:45 PM**\n   - **Nonstop**\n   - Economy fare: **$820**\n   - Estimated fare difference: **$20**\n   - **Estimated total to change: $70** ($50 fee + $20 fare difference)\n\n2. **B6100** — JFK → CDG  \n   - Departs **8:15 PM**\n   - **Nonstop**\n   - Economy fare: **$880**\n   - Estimated fare difference: **$80**\n   - **Estimated total to change: $130** ($50 fee + $80 fare difference)\n\nCompared with cancelling:\n- Cancel refund would be **$640**\n- Cancellation fee would be **$160**\n\nSo if you still need to travel, **changing is likely much better than cancelling**.\n\nIf you want, I can change **BK-1000** to either:\n- **DL101**, or\n- **B6100**\n\nJust tell me which flight you want, and I’ll take care of it.",
+      "content": "Yes \u2014 **changing is cheaper than canceling first**.\n\nHere\u2019s the comparison for June 28 JFK \u2192 Paris (CDG), using the **bereavement change policy** on your current booking **BK-1000**:\n\n### Cheapest options on June 28\n| Option | Flight | Departure | If you change BK-1000 | If you cancel first, then book new |\n|---|---|---:|---:|---:|\n| Best price | **DL101** | 5:45 PM | **$70 more today** = $50 change fee + $20 fare difference | **$180 more net** = $820 new ticket - $640 refund |\n| Option 2 | **B6100** | 8:15 PM | **$130 more today** = $50 + $80 | **$240 more net** = $880 - $640 |\n| Option 3 | **DL102** | 7:30 AM | **$160 more today** = $50 + $110 | **$270 more net** = $910 - $640 |\n\n### What this means\n- Your current cancellation preview is:\n  - **Cancellation fee:** $160\n  - **Refund:** $640\n- Under the bereavement change policy, your **change fee is only $50**\n- So **changing saves you $110 versus canceling and rebooking**, for the same replacement flight\n\n### Best choice\nThe cheapest option is:\n\n- **DL101**\n- **June 28 at 5:45 PM**\n- **Total additional cost to change:** **$70**\n\nI haven\u2019t changed or canceled anything yet.\n\nIf you want, reply with one of these:\n- **\u201cChange to DL101\u201d**\n- **\u201cChange to B6100\u201d**\n- **\u201cChange to DL102\u201d**\n- **\u201cCancel BK-1000\u201d**",
       "tool_calls": [
         {
           "name": "get_policies",
@@ -82,10 +95,10 @@
             "rules": {
               "free_change_window": "Free changes within 24 hours (domestic) or 48 hours (international) of booking",
               "basic_economy": "Not changeable after free window",
-              "economy_domestic_personal": "Domestic change fee: $75 if departure >7 days, $150 if ≤7 days. Fare difference also applies.",
-              "economy_international_personal": "International change fee: $100 if departure >7 days, $200 if ≤7 days. Fare difference also applies.",
-              "economy_medical": "Medical changes: 50% discount on standard fee (requires change_reason='medical')",
-              "economy_bereavement": "Bereavement changes: 75% discount on standard fee (requires change_reason='bereavement')",
+              "economy_domestic_personal": "Domestic change fee: $75 if departure >7 days, $150 if \u22647 days. Fare difference also applies.",
+              "economy_international_personal": "International change fee: $100 if departure >7 days, $200 if \u22647 days. Fare difference also applies.",
+              "economy_medical": "Medical changes: 50% discount on standard fee, rounded down to the nearest dollar (requires change_reason='medical')",
+              "economy_bereavement": "Bereavement changes: 75% discount on standard fee, rounded down to the nearest dollar (requires change_reason='bereavement')",
               "jury_duty": "Jury duty: free change (change_reason='jury_duty')",
               "military": "Military deployment: free change (change_reason='military')",
               "schedule_change": "Airline schedule changes: free, no fee (change_reason='schedule_change')",
@@ -106,7 +119,39 @@
             "destination": "CDG",
             "date": "2026-06-28",
             "airline": "",
-            "time_range": "afternoon",
+            "time_range": "early_morning",
+            "max_stops": 2,
+            "max_price": -1
+          },
+          "result": {
+            "flights": [
+              {
+                "flight_id": "DL102",
+                "airline_code": "DL",
+                "origin": "JFK",
+                "destination": "CDG",
+                "departure_time": "2026-06-28T07:30:00",
+                "arrival_time": "2026-06-28T10:03:00",
+                "duration_minutes": 153,
+                "stops": 0,
+                "cabin_prices": {
+                  "economy": 910,
+                  "business": 2275
+                },
+                "status": "scheduled",
+                "route_type": "international"
+              }
+            ]
+          }
+        },
+        {
+          "name": "search_flights",
+          "arguments": {
+            "origin": "JFK",
+            "destination": "CDG",
+            "date": "2026-06-28",
+            "airline": "",
+            "time_range": "morning",
             "max_stops": 2,
             "max_price": -1
           },
@@ -122,7 +167,7 @@
             "destination": "CDG",
             "date": "2026-06-28",
             "airline": "",
-            "time_range": "morning",
+            "time_range": "afternoon",
             "max_stops": 2,
             "max_price": -1
           },
@@ -178,34 +223,116 @@
               }
             ]
           }
+        },
+        {
+          "name": "search_flights",
+          "arguments": {
+            "origin": "JFK",
+            "destination": "CDG",
+            "date": "2026-06-28",
+            "airline": "",
+            "time_range": "red_eye",
+            "max_stops": 2,
+            "max_price": -1
+          },
+          "result": {
+            "flights": [],
+            "message": "No flights found matching your criteria."
+          }
+        },
+        {
+          "name": "update_booking",
+          "arguments": {
+            "booking_id": "BK-1000",
+            "flight_id": "DL101",
+            "change_reason": "bereavement",
+            "cabin_class": "economy",
+            "seat_type": "aisle",
+            "meal_preference": "vegan",
+            "add_wifi": true,
+            "add_extra_legroom": false,
+            "add_insurance": false,
+            "delay_compensation": "none",
+            "paid_checked_bags": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "booking_id": "BK-1000",
+            "flight_id": "DL101",
+            "change_fee": 50,
+            "fare_difference": 20,
+            "price_paid": 870
+          }
+        },
+        {
+          "name": "update_booking",
+          "arguments": {
+            "booking_id": "BK-1000",
+            "flight_id": "B6100",
+            "change_reason": "bereavement",
+            "cabin_class": "economy",
+            "seat_type": "aisle",
+            "meal_preference": "vegan",
+            "add_wifi": true,
+            "add_extra_legroom": false,
+            "add_insurance": false,
+            "delay_compensation": "none",
+            "paid_checked_bags": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "booking_id": "BK-1000",
+            "flight_id": "B6100",
+            "change_fee": 50,
+            "fare_difference": 80,
+            "price_paid": 930
+          }
+        },
+        {
+          "name": "update_booking",
+          "arguments": {
+            "booking_id": "BK-1000",
+            "flight_id": "DL102",
+            "change_reason": "bereavement",
+            "cabin_class": "economy",
+            "seat_type": "aisle",
+            "meal_preference": "vegan",
+            "add_wifi": true,
+            "add_extra_legroom": false,
+            "add_insurance": false,
+            "delay_compensation": "none",
+            "paid_checked_bags": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "booking_id": "BK-1000",
+            "flight_id": "DL102",
+            "change_fee": 50,
+            "fare_difference": 110,
+            "price_paid": 960
+          }
         }
       ]
     },
     {
       "role": "user",
-      "content": "Really? That’s surprising. Tell me the exact numbers."
+      "content": "Thanks \u2014 if we do the change, I want to avoid canceling and rebooking.\n\nBefore you make any change, can you give me a clear preview confirming **BK-1000 will be changed to the June 28 Paris flight for $70 total extra** with **no cancellation/rebooking**, and also confirm the **airline, time range, and number of stops** for that option?"
     },
     {
       "role": "assistant",
-      "content": "Here are the exact numbers based on the policy and the fares I found:\n\n**Your current booking**\n- Booking: **BK-1000**\n- Current fare paid: **$800**\n- Cabin: **Economy**\n- Route: **International**\n- Departure: **2026-06-19**\n\n**If you cancel**\n- Cancellation fee: **$160**\n- Refund: **$640**\n\n**If you change due to bereavement**\nPolicy says:\n- International economy change fee within 7 days: **$200**\n- Bereavement discount: **75% off**\n- Discount amount: **$150**\n- **Change fee after discount: $50**\n\nThen add fare difference:\n\n### Option 1: DL101 on 2026-06-28\n- New fare: **$820**\n- Old fare: **$800**\n- Fare difference: **$20**\n- Change fee: **$50**\n- **Total additional amount due: $70**\n\n### Option 2: B6100 on 2026-06-28\n- New fare: **$880**\n- Old fare: **$800**\n- Fare difference: **$80**\n- Change fee: **$50**\n- **Total additional amount due: $130**\n\n**Side-by-side**\n- **Cancel:** receive **$640 back**\n- **Change to DL101:** pay **$70**\n- **Change to B6100:** pay **$130**\n\nSo yes — if you still need to go to Paris, changing is financially much better than cancelling and rebooking from scratch.\n\nIf you want, I can change it now.",
+      "content": "Absolutely \u2014 here\u2019s the **clear change preview** for **BK-1000**:\n\n## Change preview for BK-1000\n- **Action:** Change your **existing booking BK-1000**\n- **No cancellation:** **Yes**\n- **No rebooking as a new ticket:** **Yes**\n- **New flight:** **DL101**\n- **Route:** JFK \u2192 Paris (CDG)\n- **Date:** **June 28, 2026**\n- **Departure time:** **5:45 PM**\n- **Time range:** **Evening**\n- **Airline:** **DL (Delta)**\n- **Stops:** **0** (**nonstop**)\n\n## Cost preview\n- **Current ticket paid:** **$800**\n- **Bereavement change fee:** **$50**\n- **Fare difference:** **$20**\n- **Total extra due now:** **$70**\n- **New total ticket cost after change:** **$870**\n\n## Important confirmation\nThis preview is for a **same-booking flight change** on **BK-1000** only:\n- **No cancellation fee**\n- **No refund/rebook flow**\n- **No new standalone ticket purchase**\n\nNothing has been changed yet.\n\nIf you want me to proceed, reply:\n**\u201cConfirm change to DL101\u201d**",
       "tool_calls": null
     },
     {
       "role": "user",
-      "content": "Wow, that’s a big difference. Let’s go with the change then. Before you do it, can you confirm the airline, departure time range, and number of stops for the option you’ll switch me to?"
+      "content": "Confirm change to DL101, please \u2014 as long as it\u2019s a change to my existing booking BK-1000 on June 28 for the $70 additional cost you outlined, with no cancellation or rebooking."
     },
     {
       "role": "assistant",
-      "content": "Absolutely.\n\nThe lower-cost change option I’d switch you to is **DL101**:\n- **Airline:** **Delta (DL)**\n- **Departure time:** **5:45 PM**\n- **Time range:** **evening**\n- **Stops:** **0** (**nonstop**)\n\nIf you want me to proceed, I can change **BK-1000** to **DL101** under **bereavement**.",
-      "tool_calls": null
-    },
-    {
-      "role": "user",
-      "content": "Yes, please go ahead and change it to **DL101**. Please keep the existing booking preferences the same."
-    },
-    {
-      "role": "assistant",
-      "content": "Done — **BK-1000** has been changed to **DL101**.\n\n**Updated trip**\n- Route: **JFK → CDG**\n- Flight: **DL101**\n- Airline: **Delta (DL)**\n- Departure: **2026-06-28 5:45 PM**\n- Stops: **Nonstop**\n- Cabin: **Economy**\n\n**Preferences kept the same**\n- Seat: **Aisle**\n- Meal: **Vegan**\n- Wi‑Fi: **Yes**\n- Extra legroom: **No**\n- Insurance: **No**\n- Extra checked bags: **0**\n\n**Charges**\n- Change fee: **$50**\n- Fare difference: **$20**\n- **Total additional amount: $70**\n\nYour updated total paid is **$870**.\n\nIf you want, I can also help with a hotel or car in Paris.",
+      "content": "Done \u2014 **BK-1000 has been changed**, not canceled.\n\n### Confirmed update\n- **Booking:** BK-1000\n- **New flight:** **DL101**\n- **Date:** **June 28, 2026**\n- **Route:** JFK \u2192 Paris (CDG)\n- **Airline:** **DL (Delta)**\n- **Time range:** **Evening**\n- **Stops:** **0 (nonstop)**\n\n### Cost\n- **Change fee:** **$50**\n- **Fare difference:** **$20**\n- **Additional amount charged:** **$70**\n- **Updated total paid:** **$870**\n\nYour original booking remains active as the same reservation, now updated to the new flight.",
       "tool_calls": [
         {
           "name": "update_booking",
@@ -220,22 +347,15 @@
             "add_extra_legroom": false,
             "add_insurance": false,
             "delay_compensation": "none",
-            "paid_checked_bags": 0
+            "paid_checked_bags": 0,
+            "confirm": true
           },
           "result": {
             "status": "updated",
             "booking_id": "BK-1000",
             "changes_applied": [
               "flight_id",
-              "change_reason",
-              "cabin_class",
-              "seat_type",
-              "meal_preference",
-              "add_wifi",
-              "add_extra_legroom",
-              "add_insurance",
-              "delay_compensation",
-              "paid_checked_bags"
+              "change_reason"
             ],
             "price_paid": 870,
             "change_fee": 50,
@@ -246,7 +366,50 @@
     },
     {
       "role": "user",
-      "content": "Thank you for suggesting the better option. [TASK_DONE]"
+      "content": "Can you also confirm the booking-stage preferences were preserved correctly on the updated reservation, especially **cabin class, seat type, meal preference, Wi\u2011Fi, extra legroom, and insurance**?"
+    },
+    {
+      "role": "assistant",
+      "content": "Yes \u2014 I checked the updated reservation, and the booking-stage preferences were preserved on **BK-1000**.\n\n### Updated booking BK-1000\n- **Flight:** DL101 on **2026-06-28**\n- **Status:** Confirmed\n\n### Preserved preferences\n- **Cabin class:** **economy**\n- **Seat type:** **aisle**\n- **Meal preference:** **vegan**\n- **Wi\u2011Fi:** **yes**\n- **Extra legroom:** **no**\n- **Insurance:** **no**\n\nEverything matches what was on your original booking, with only the flight/date changed.",
+      "tool_calls": [
+        {
+          "name": "get_booking",
+          "arguments": {
+            "booking_id": "BK-1000"
+          },
+          "result": {
+            "booking_id": "BK-1000",
+            "user_id": "user_005",
+            "flight_id": "DL101",
+            "status": "confirmed",
+            "cabin_class": "economy",
+            "seat_type": "aisle",
+            "meal_preference": "vegan",
+            "add_wifi": true,
+            "add_extra_legroom": false,
+            "add_insurance": false,
+            "price_paid": 870,
+            "payment_method": "credit_card",
+            "points_used": 0,
+            "cash_amount": 0,
+            "booked_at": "2026-06-05T10:00:00",
+            "cancellation_fee": null,
+            "refund_amount": null,
+            "change_fee": 50,
+            "fare_difference": 20,
+            "delay_compensation": null,
+            "paid_checked_bags": 0,
+            "origin": "JFK",
+            "destination": "CDG",
+            "departure_time": "2026-06-28T17:45:00",
+            "route_type": "international"
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "[TASK_DONE]"
     }
   ]
 }

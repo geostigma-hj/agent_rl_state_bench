@@ -138,7 +138,7 @@ Use these values:
 
 | Argument | Value |
 | --- | --- |
-| `--domain` | `travel`, `customer_support`, or `shopping_assistant` |
+| `--domain` | Required. `travel`, `customer_support`, or `shopping_assistant` |
 | `--agent-class` | Your learning-enabled agent class under repo-root `agents/` |
 | `--agent-client-class` | Required only for a custom client + agent |
 | `--agent-model-name` | The model name to report in trajectories and metrics, such as `gpt-5.1` or `claude-sonnet-4.5` |
@@ -161,15 +161,7 @@ For the full CLI reference and worker guidance, see [run_batch](eval/run-batch.m
 
 ## 6. Report Cost Per Task
 
-Cost reporting is optional but strongly encouraged. Add pricing flags to `run_batch` so STATE-Bench can compute average cost per task:
-
-```bash
-  --agent-input-cost-per-1m <input-price> \
-  --agent-output-cost-per-1m <output-price> \
-  --agent-cached-input-cost-per-1m <cached-input-price>
-```
-
-The cached-input flag is optional. Embedding or offline artifact-building costs are not included in the official public metrics. Details: [Reporting Avg. Cost Per Task](eval/cost-reporting.md).
+Cost reporting is optional but strongly encouraged. Custom agents should compute provider-specific cost themselves and call `self.add_cost_usd(...)`; STATE-Bench aggregates the reported dollars without interpreting token buckets. Embedding or offline artifact-building costs are not included in the official public metrics unless your agent reports them during the benchmark run. Details: [Reporting Avg. Cost Per Task](eval/cost-reporting.md).
 
 ## 7. Compute Metrics
 

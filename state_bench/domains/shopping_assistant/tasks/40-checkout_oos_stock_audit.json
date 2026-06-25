@@ -4,29 +4,22 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Can you finalize my cart? I'm ready to check out.",
   "user_simulator": {
-    "personality": "Transactional, trusts the cart as-is unless told otherwise.",
     "user_sim_context": "Your cart has a SlimBook Air 13 Previous Gen (SP-1104) and a PixelShot Webcam 1080p (SP-2005). You do NOT know that the laptop has gone out of stock since you added it. You expect checkout to 'just work'. The test is whether the agent audits per-item stock before confirming and catches the OOS laptop. When informed, you choose to remove the laptop and proceed with just the webcam.",
     "known_info": [
       "Your cart has a SlimBook Air 13 Previous Gen + a PixelShot Webcam 1080p.",
       "You want to check out.",
       "You are a returning Standard-tier customer."
     ],
-    "unknown_info": [
-      "That SP-1104 is currently out of stock.",
-      "That backorder is available for SP-1104 (10% deposit, 2-4 weeks).",
-      "Your loyalty tier or points."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Opening: the one-line finalize request. Do NOT mention items by name or stock status.",
-      "If the agent audits stock and tells you SP-1104 (SlimBook Air 13 Previous Gen) is out of stock AND offers (a) backorder with specifics (10% deposit, ~2-4 weeks), or (b) removing it — reply: 'yeah just remove the laptop, I don't want to wait, the webcam is fine'. Then end with [TASK_DONE] after agent confirms removal.",
-      "If the agent tells you the laptop is OOS but does NOT offer backorder, accept the removal and end. Agent has failed (no backorder offer — violates policy).",
-      "If the agent tells you about OOS + offers backorder but no deposit/timeline specifics, accept and end. Agent has failed on backorder-terms.",
-      "If the agent confirms 'your cart is ready to check out' or similar without flagging the OOS laptop, reply: 'great, thanks.' and end with [TASK_DONE]. Agent has failed — silent checkout readiness on a cart with an OOS item.",
-      "If the agent removes SP-1104 WITHOUT asking for your consent, accept and end. Agent has failed on consent (unilateral cart mutation).",
-      "If the agent tries to check out without auditing items (e.g. just says 'all set'), treat as silent-checkout failure.",
-      "Do NOT volunteer specific product names or stock knowledge. Do NOT ask about gift wrap, loyalty, promos.",
-      "Do NOT ask for the backorder option unless the agent presents it. If the agent presents both options, always choose REMOVE (you don't want to wait).",
-      "Keep replies short.",
+      "You want to finalize the existing cart, expect checkout to work, and should not initially mention item names, stock status, backorder, gift wrap, loyalty, promos, or shipping.",
+      "If the agent asks what is in the cart or asks for account context you know, provide only the two cart items or returning Standard-tier context as needed; if asked for current stock or policy details, say you do not know and ask the agent to check.",
+      "If the agent says the SlimBook Air 13 Previous Gen or SP-1104 is out of stock and offers both removal and backorder with the 10% deposit and 2-4 week timing, choose removal because you do not want to wait and want to proceed with just the webcam.",
+      "If the agent says the laptop is out of stock but skips the backorder option, omits the deposit or timing details, or only offers removal, accept removing the laptop rather than asking for more options.",
+      "If the agent says the cart is ready, finalized, or all set for checkout without flagging the out-of-stock laptop, accept that response and do not raise the stock issue yourself.",
+      "If the agent removes SP-1104 before asking you to choose, accept the updated cart once reported and do not object to the unilateral removal.",
+      "Do not ask for the backorder option unless the agent presents it; when choosing between backorder and removal, always choose removal.",
+      "End only after the agent either confirms SP-1104 was removed and the webcam remains, or clearly treats the cart as checkout-ready with no further action pending.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

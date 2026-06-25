@@ -4,24 +4,21 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to move booking BK-1000 to July 5 for personal reasons. Which ends up cheaper: changing it or canceling and rebooking?",
   "user_simulator": {
-    "personality": "Practical and cost-aware.",
     "user_sim_context": "Toronto feels close, but you want the agent to respect the benchmark's international fee logic while comparing the two strategies honestly.",
     "known_info": [
-      "Your user ID: user_003",
-      "Booking ID: BK-1000",
-      "Current trip: SFO to YYZ on 2026-06-30",
-      "Requested new date: 2026-07-05",
-      "Reason: personal"
+      "Booking BK-1000: SFO to YYZ on 2026-06-30.",
+      "Requested new date: 2026-07-05.",
+      "Reason: personal."
     ],
-    "unknown_info": [
-      "Which strategy is cheaper overall",
-      "Exact fees on each path"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Ask the agent to compare direct change versus cancel-and-rebook before taking action.",
-      "If the agent identifies direct change as the cheaper valid path, approve it.",
-      "If the agent recommends cancel and rebook instead, challenge that recommendation and ask them to compare the fees again.",
-      "End with [TASK_DONE] once the cheaper valid path has been executed and summarized.",
+      "Keep the request focused on moving BK-1000 to July 5 by whichever valid strategy is cheaper, comparing direct change against cancel-and-rebook before any booking action.",
+      "If the agent asks for booking details or the reason, provide BK-1000, the July 5 target date, and the personal reason; do not volunteer prices, refund math, replacement fares, or policy mechanics.",
+      "If the agent tries to change, cancel, or rebook before comparing both strategies, say you do not approve any action yet and ask for the side-by-side cost comparison first.",
+      "Push back if the agent treats the Toronto itinerary as domestic, omits the ordinary international personal-change fee, compares only one path, or recommends cancel-and-rebook as cheaper; ask them to recheck the full cost of both valid paths.",
+      "Approve the direct-change path only after the agent recaps both strategies, explains that the SFO-to-YYZ route is international for fee purposes, confirms the direct-change fee, fare difference, and total cost fit within your $2,000 budget, and asks for a final go-ahead.",
+      "For this existing-booking change, preserve the booking-stage preferences already on BK-1000 and decline unrelated upgrades, add-ons, itinerary changes, or actions outside moving BK-1000 to July 5 by the approved direct-change path.",
+      "End only after BK-1000 has been changed to July 5 and the agent summarizes the direct-change cost, flight details, and preserved booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Booking-stage persisted preferences to verify on the final booking are: meal_preference, cabin_class, seat_type, add_wifi, add_extra_legroom, and add_insurance.",
@@ -65,8 +62,6 @@
       "evidence": "conversation_or_tool_calls"
     }
   ],
-  "task_type": "strategy_compare_paths",
-  "task_env_path": "state_bench/domains/travel/task_envs/142-strategy_personal_international_change_cheaper_far_out.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -86,5 +81,7 @@
       "field": "flight_id",
       "expected_value": "UA101"
     }
-  ]
+  ],
+  "task_type": "strategy_compare_paths",
+  "task_env_path": "state_bench/domains/travel/task_envs/142-strategy_personal_international_change_cheaper_far_out.json"
 }

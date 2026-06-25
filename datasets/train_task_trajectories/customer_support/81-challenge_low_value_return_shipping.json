@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "I checked your order and the phone case is eligible for return. Since it’s a changed-mind return on an order under $50, the return shipping fee is $8, so your refund would be $27 back to your original payment method.\n\nIf you want, I can go ahead and process the return now.",
+      "content": "I\u2019ve processed the return for the phone case from order ORD-7114. Your refund will be $27 back to your original payment method, which reflects the standard $8 return-shipping deduction for orders under $50. If you want, I can also help with the return mailing steps.",
       "tool_calls": [
         {
           "name": "get_order",
@@ -79,7 +79,7 @@
           "result": {
             "topic": "return",
             "rules": {
-              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim — skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
+              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim \u2014 skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
               "windows_by_category": {
                 "electronics": "15-day return window",
                 "clothing": "30-day return window",
@@ -95,7 +95,8 @@
               },
               "eligibility": {
                 "defective_items": "No window restriction for defective, wrong item, or damaged in transit.",
-                "already_returned": "Items already returned/exchanged/cancelled are ineligible."
+                "already_returned": "Items already returned/exchanged/cancelled are ineligible.",
+                "not_as_described": "Use not_as_described only for an unused/unworn item that materially differs from the listing. If the customer wore, washed, altered, or used the item and only dislikes fit, feel, texture, or preference-based qualities, classify the return as changed_mind instead."
               },
               "restocking_fee": {
                 "base": "15% restocking fee for opened electronics returned for changed_mind.",
@@ -105,12 +106,13 @@
                   "silver": "25% off the restocking fee.",
                   "standard": "No discount."
                 },
-                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency."
+                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency.",
+                "completed_returns": "Once a changed-mind return is completed with the applicable restocking fee, do not reverse that fee later as a courtesy or supplemental refund."
               },
               "return_shipping_fee": {
                 "low_value": "Orders with subtotal < $50: customer pays $8 return shipping fee.",
                 "free_threshold": "Orders >= $50: free return label provided.",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: always free return shipping.",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: always free return shipping.",
                 "deduction": "Return shipping fee, when charged, is deducted from the return refund."
               },
               "bulk_purchase_clawback": {
@@ -121,7 +123,7 @@
               "free_shipping_clawback": {
                 "applies_when": "Order originally qualified for free shipping (subtotal >= $100) AND the return drops remaining subtotal below $100.",
                 "amount": "$8 standard shipping fee is deducted from the return refund. This is a flat policy charge, not the original shipping cost (which was $0 on free-shipping orders).",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: no clawback (customer-fault returns only).",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: no clawback (customer-fault returns only).",
                 "paid_shipping": "If the order did not qualify for free shipping originally (subtotal < $100), no clawback applies."
               },
               "repeat_category_surcharge": {
@@ -157,17 +159,7 @@
             "paid_return_shipping_fee": 8,
             "restocking_discount": 0
           }
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "content": "Okay, that makes sense. An $8 fee and $27 refund sounds right, so please go ahead and process the return."
-    },
-    {
-      "role": "assistant",
-      "content": "Done — the return has been processed, and $27 will be refunded to your original payment method.\n\nBecause the $8 return shipping fee was deducted from the refund, no prepaid label was issued. If you need help with next steps for sending it back, I can help with that too.",
-      "tool_calls": [
+        },
         {
           "name": "process_return",
           "arguments": {
@@ -195,7 +187,7 @@
     },
     {
       "role": "user",
-      "content": "Thanks, got it. I appreciate the clear explanation. [TASK_DONE]"
+      "content": "Thanks for explaining that clearly. A $27 refund to the original payment method for the phone case, after the $8 return-shipping deduction, is what I needed to confirm. [TASK_DONE]"
     }
   ]
 }

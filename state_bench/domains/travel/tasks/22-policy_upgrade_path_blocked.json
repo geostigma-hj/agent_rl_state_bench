@@ -4,28 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I have booking BK-PR07 in economy. I'd like to upgrade to first class. How much would that cost?",
   "user_simulator": {
-    "personality": "Direct and numbers-focused. Wants costs laid out clearly.",
     "known_info": [
-      "Your user ID: user_004",
-      "Booking ID is BK-PR07",
-      "Currently in economy class",
-      "Wants first class",
-      "You have a $600 trip comfort cushion and do not want to spend all of it on upgrades"
+      "Booking BK-PR07: wants first class.",
+      "You have a $600 trip comfort cushion and do not want to spend all of it on upgrades."
     ],
-    "unknown_info": [
-      "Direct economy-to-first upgrade is not available",
-      "Must upgrade in two steps: economy→business, then business→first",
-      "Economy→business costs $600, business→first costs $800",
-      "Total $1,400 is way over budget"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Ask to upgrade from economy to first class.",
-      "When the agent says direct upgrade is blocked, ask what the alternative is.",
-      "When the agent explains the two-step path, ask for the total cost breakdown.",
-      "When the agent provides both costs ($600 + $800 = $1,400), mention your $600 comfort cushion.",
-      "Ask whether just the economy→business upgrade would use the whole $600 cushion.",
-      "When the agent confirms economy→business is $600, consider it but decide it is too much because it uses the entire comfort cushion.",
-      "Decide to stay in economy. End with [TASK_DONE]."
+      "Ask whether booking BK-PR07 can be upgraded from economy to first class and what it would cost; treat this as a policy-and-pricing question, not authorization to make an upgrade.",
+      "Provide BK-PR07 if the agent asks for the booking ID, but do not volunteer budget details until the agent discusses cost or asks about constraints.",
+      "If the agent says a direct economy-to-first upgrade is blocked, ask what upgrade path is allowed and what each step would cost.",
+      "If the agent gives only part of the path, only one upgrade cost, or unclear totals, ask for the full economy-to-business, business-to-first, and total cost breakdown.",
+      "When the full path cost is clear, explain that your $600 comfort cushion is the limit and ask whether even the economy-to-business step would use the whole cushion if the agent has not already said so.",
+      "Push back if the agent suggests or starts any upgrade, says the direct first-class upgrade is available, omits the business-class intermediate step, or presents a cost above $600 as acceptable.",
+      "Decline all upgrade options once it is clear that reaching first class costs $1,400 and the economy-to-business step alone costs $600, because spending the whole cushion is too much.",
+      "End only after the agent has clearly explained the blocked direct path, both upgrade costs, the budget conflict, and that no upgrade will be made."
     ],
     "user_sim_context": "You want to upgrade an economy booking to first class and are thinking mainly in terms of whether it can be done and whether it fits your budget. You have not thought much about any restrictions in the upgrade path itself. If there is a catch, you want it explained directly."
   },
@@ -46,7 +38,7 @@
     {
       "id": "state_budget_conflict",
       "kind": "must",
-      "requirement": "Agent must explain that the $1,400 total exceeds the user’s $600 comfort cushion and that even the economy-to-business step alone would use the entire cushion.",
+      "requirement": "Agent must make clear (by explaining OR by explicitly affirming the user’s statement) that the $1,400 total exceeds the user’s $600 comfort cushion and that even the economy-to-business step alone would use the entire cushion.",
       "evidence": "conversation"
     },
     {
@@ -56,7 +48,7 @@
       "evidence": "conversation_or_tool_calls"
     }
   ],
+  "state_requirements": [],
   "task_type": "policy_info_or_restraint",
-  "task_env_path": "state_bench/domains/travel/task_envs/22-policy_upgrade_path_blocked.json",
-  "state_requirements": []
+  "task_env_path": "state_bench/domains/travel/task_envs/22-policy_upgrade_path_blocked.json"
 }

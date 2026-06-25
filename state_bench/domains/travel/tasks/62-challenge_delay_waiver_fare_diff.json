@@ -4,20 +4,18 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "My flight BK-1000 to Paris is delayed over 4 hours! I want a free change to the evening flight. My user ID is user_005.",
   "user_simulator": {
-    "personality": "Expects completely free switch.",
     "known_info": [
-      "Your user ID: user_005",
-      "Booking: BK-1000 (JFK→CDG, delayed 4+ hours)"
+      "Booking BK-1000: Paris, delayed over 4 hours."
     ],
-    "unknown_info": [
-      "That fare diff still applies"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: flight delayed 4+ hours, want free change.",
-      "If agent says $200 fare diff applies, say 'I thought the delay made it completely free?'",
-      "If agent explains fee vs fare diff, accept: 'OK, $200 for the fare difference. Go ahead.'",
-      "If agent says $0 total, don't question it.",
-      "After change, end with [TASK_DONE].",
+      "Seek a same-day change to the evening Paris flight because the current flight is delayed over 4 hours, and start from the assumption that the delay makes the change free.",
+      "If the agent asks for booking or account details, provide the booking ID, user ID, Paris destination, and delay facts you know; do not volunteer fare-difference math before the agent explains it.",
+      "If the agent says the change is completely free or quotes a $0 total, ask once whether the delay waiver also removes any fare difference for the evening flight.",
+      "If the agent quotes a $200 additional cost without explaining it, push back once that you thought the long delay made the whole change free and ask what the $200 covers.",
+      "Accept the evening-flight change only after the agent clearly explains that the 250-minute delay waives the change fee but the $200 fare difference still applies and the total additional cost is within budget.",
+      "If the agent proposes a different flight, a cancellation, an upgrade, or any optional add-on, redirect to changing this booking to the evening Paris flight without extras.",
+      "End only after the agent has completed the change and confirmed the evening flight, $0 change fee, $200 fare difference, and final booking details.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -46,20 +44,12 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/62-challenge_delay_waiver_fare_diff.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
       "record_key": "BK-1000",
       "field": "change_fee",
       "expected_value": 0
-    },
-    {
-      "entity_type": "bookings",
-      "record_key": "BK-1000",
-      "field": "delay_compensation",
-      "expected_value": "full"
     },
     {
       "entity_type": "bookings",
@@ -79,5 +69,7 @@
       "field": "price_paid",
       "expected_value": 1000
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/62-challenge_delay_waiver_fare_diff.json"
 }

@@ -4,24 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I'd like to book a flight from New York to Los Angeles on June 22nd.",
   "user_simulator": {
-    "personality": "Cooperative and organized. Shares preferences one at a time when asked.",
     "known_info": [
-      "Your user ID: user_005",
-      "Wants to fly JFK to LAX on June 22nd",
-      "Budget is $700 maximum (non-negotiable)",
-      "Wants economy class",
-      "Prefers B6 airline, afternoon departure, nonstop"
+      "Wants an economy flight from JFK to LAX on June 22nd.",
+      "Prefers B6 airline, afternoon departure, and nonstop."
     ],
-    "unknown_info": [
-      "The B6 nonstop afternoon flight costs $720 (over budget)",
-      "Available alternatives and their trade-offs"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "When the agent says the ideal B6 nonstop afternoon flight is over budget, express disappointment.",
-      "Ask the agent what alternatives are available within $700.",
-      "When the agent presents options, ask which search preference each one trades off.",
-      "If the ideal B6 afternoon nonstop is over budget, choose the B6 morning nonstop flight — keeping airline and nonstop is more important than time.",
-      "End with [TASK_DONE] when the booking is confirmed on the agreed flight.",
+      "You want an economy JFK to LAX flight on June 22 under a hard $700 budget; prefer B6, an afternoon departure, and nonstop, but do not volunteer every preference unless asked or needed to compare options.",
+      "If asked about flight preferences, provide economy class, B6, afternoon departure, nonstop, and the $700 maximum.",
+      "If the agent claims the B6 nonstop afternoon option fits your budget or skips explaining the budget conflict, push back and ask them to verify the price against your $700 limit.",
+      "When the agent explains that the B6 nonstop afternoon option is over budget, express disappointment and ask for alternatives within $700.",
+      "When the agent presents alternatives, ask what each option trades off if the airline, departure time, stops, and price are not clear.",
+      "Choose the B6 morning nonstop option only after the agent makes clear that it is within budget and that it gives up the afternoon departure preference; keeping B6 and nonstop matters more than time.",
+      "Before approving the booking, confirm that the selected flight is economy, B6, nonstop, JFK to LAX on June 22, within budget, and uses your profile booking preferences: aisle seat, vegan meal, WiFi, no extra legroom, no insurance, and credit card payment.",
+      "End with [TASK_DONE] only after the booking is confirmed on the agreed within-budget B6 morning nonstop flight with those booking preferences.",
       "When asked about flight preferences, say economy class, B6 airline, afternoon departure, nonstop.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
@@ -57,8 +53,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "new_booking",
-  "task_env_path": "state_bench/domains/travel/task_envs/7-book_simple_domestic.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -101,5 +95,7 @@
         "user_id": "user_005"
       }
     }
-  ]
+  ],
+  "task_type": "new_booking",
+  "task_env_path": "state_bench/domains/travel/task_envs/7-book_simple_domestic.json"
 }

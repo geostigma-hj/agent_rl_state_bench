@@ -5,7 +5,7 @@
       "name": "PowerBlend Pro Blender",
       "category": "kitchen",
       "subcategory": "blender",
-      "price": 89,
+      "price": 119,
       "warranty_months": 6,
       "return_window_days": 30,
       "restocking_fee_pct": 0,
@@ -23,7 +23,7 @@
       "status": "delivered",
       "shipping_status": "damaged",
       "shipping_method": "standard",
-      "shipping_cost": 8,
+      "shipping_cost": 0,
       "tracking_number": "TRK87228103",
       "delivery_date": "2026-07-02T14:00:00",
       "delivery_promised_date": "2026-07-02T18:00:00",
@@ -31,12 +31,12 @@
       "signature_on_file": null,
       "payment_method": "credit_card",
       "payment_details": {
-        "credit_card": 97
+        "credit_card": 119
       },
-      "subtotal": 89,
+      "subtotal": 119,
       "discount_code": null,
       "discount_amount": 0,
-      "total_paid": 97,
+      "total_paid": 119,
       "is_gift": false,
       "gift_sender": null
     }
@@ -47,7 +47,7 @@
       "order_id": "ORD-7003",
       "product_id": "PROD-3003",
       "quantity": 1,
-      "unit_price": 89,
+      "unit_price": 119,
       "item_status": "delivered",
       "return_reason": null,
       "refund_amount": null,

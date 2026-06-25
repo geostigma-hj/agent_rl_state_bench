@@ -1,15 +1,5 @@
 {
   "task_id": "7-return_restocking_waived",
-  "task_summary": "**Task:** A Platinum customer wants to return opened headphones for changed mind. The correct handling is to process the return on the normal refund path while waiving the electronics restocking fee because Platinum status overrides that deduction.\n\n**Challenge:** The agent has to notice that membership changes the economics without changing the rest of the workflow. Weak agents charge the ordinary restocking fee anyway or fail to tie the waiver back to the customer's tier.",
-  "task_type": "return_item",
-  "task_requirements": [
-    {
-      "evidence": "conversation_or_tool_calls",
-      "id": "7_return_restocking_waived_agent_must_check_customer_tier",
-      "kind": "must",
-      "requirement": "Agent must verify the customer is Platinum, either by calling get_customer for cust_001 or by explicitly stating the Platinum tier before confirming the return."
-    }
-  ],
   "user_id": "cust_001",
   "now": "2026-06-12T10:00:00",
   "opening_message": "I'd like to return my headphones from order ORD-6011. I've opened them but they don't fit my ears well.",
@@ -19,20 +9,27 @@
       "item: headphones",
       "opened: yes"
     ],
-    "personality": "direct",
     "task_rules": [
-      "Give the order ID when asked.",
-      "Mention you've opened the product.",
-      "If a restocking fee is mentioned, ask if your platinum membership helps.",
-      "If the preview does not mention whether your Platinum tier affects restocking, ask once whether your membership changes any fee before confirming.",
-      "Accept after the agent previews the return with no restocking fee and, if discussed, ties the waiver to Platinum membership."
+      "Keep the request scoped to returning the opened headphones from ORD-6011 because they do not fit comfortably; do not ask for an exchange, replacement, or unrelated order change.",
+      "Provide the order ID, item, opened condition, and fit issue when asked, but do not volunteer refund amounts, policy details, or restocking calculations; ask the agent to check those records.",
+      "If the agent mentions a restocking fee, or previews the return without explaining whether Platinum membership affects any fee, ask once whether your membership changes the restocking charge before confirming.",
+      "Push back if the agent charges a restocking fee, uses the wrong item or return reason, offers a non-return path, or says the opened headphones are ineligible without checking the applicable policy and membership tier.",
+      "If the agent asks to process the return before giving the refund, refund method, and restocking-fee preview, ask for those details first.",
+      "Accept only after the agent previews a return of the headphones for the fit issue with refund to the original payment method, no restocking fee, and the fee waiver or no-fee outcome tied to Platinum membership.",
+      "End only after the agent confirms the return has been processed with the headphones returned, refund going to the original payment method, and no restocking fee charged."
     ],
-    "unknown_info": [
-      "restocking fee waiver for platinum",
-      "refund amount"
-    ],
+    "unknown_info": [],
     "user_sim_context": "You want to return your headphones because they were not comfortable after opening them. You assume your membership status may matter, but you are not leading with policy language or calculations. You want the agent to explain what the return would cost, if anything."
   },
+  "task_summary": "**Task:** A Platinum customer wants to return opened headphones for changed mind. The correct handling is to process the return on the normal refund path while waiving the electronics restocking fee because Platinum status overrides that deduction.\n\n**Challenge:** The agent has to notice that membership changes the economics without changing the rest of the workflow. Weak agents charge the ordinary restocking fee anyway or fail to tie the waiver back to the customer's tier.",
+  "task_requirements": [
+    {
+      "evidence": "conversation_or_tool_calls",
+      "id": "7_return_restocking_waived_agent_must_check_customer_tier",
+      "kind": "must",
+      "requirement": "Agent must verify the customer is Platinum, either by calling get_customer for cust_001 or by explicitly stating the Platinum tier before confirming the return."
+    }
+  ],
   "state_requirements": [
     {
       "entity_type": "order_items",
@@ -71,5 +68,6 @@
       "expected_value": "fully_returned"
     }
   ],
+  "task_type": "return_item",
   "task_env_path": "state_bench/domains/customer_support/task_envs/7-return_restocking_waived.json"
 }

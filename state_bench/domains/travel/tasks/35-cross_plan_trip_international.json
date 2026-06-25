@@ -4,35 +4,25 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I'm planning a round-trip to Toronto. Flying from JFK on June 21, returning June 24. I need flights both ways, a hotel, and a rental car. My total budget is $700.",
   "user_simulator": {
-    "personality": "Enthusiastic but budget-aware. Wants good value. Won't book until everything is selected.",
     "known_info": [
-      "Your user ID: user_005",
-      "Round-trip JFK ↔ YYZ (Toronto)",
-      "Dates: June 21-24 (3 nights)",
-      "Total budget: $700 for outbound flight + return flight + hotel + car",
-      "Prefers economy class, B6 airline if available",
-      "Standard hotel room is fine",
-      "Economy car is fine"
+      "Round-trip JFK ↔ YYZ (Toronto), June 21-24 (3 nights).",
+      "Total budget: $700 for outbound flight, return flight, hotel, and car.",
+      "Flight preference: economy class, B6 if available.",
+      "Hotel preference: standard room is fine.",
+      "Car preference: economy is fine."
     ],
-    "unknown_info": [
-      "Available flight prices for outbound and return",
-      "Hotel and car rental rates in Toronto",
-      "Whether the total will fit under $700"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Start by asking to plan a round-trip to Toronto: outbound flight, return flight, hotel, and car.",
-      "Mention the $700 total budget upfront.",
-      "Focus first on selecting the outbound flight, return flight, hotel, and car within budget. Final flight booking preferences can be confirmed at booking time if needed.",
-      "When outbound flight options are shown, say 'I like the B6 nonstop in the afternoon.'",
-      "When return flight options are shown, say 'The morning B6 nonstop looks good.'",
-      "When hotel options are shown, say 'The cheapest standard room works for me.'",
-      "When car options are shown, say 'Economy is fine.'",
-      "IF the agent tries to book anything before all 4 components are selected, say 'Let's pick everything first and review the total before booking anything.'",
-      "After all 4 components are selected, ask 'Can you give me the total? I want to make sure it's under $700.'",
-      "IF the total is under $700, say 'Great, please go ahead and book everything.'",
-      "IF the total exceeds $700, ask the agent to recompute from the selected base prices for the two B6 flights, the standard hotel, and the economy car before changing the itinerary.",
-      "If the agent adds optional taxes or extras that push the total over budget, say you only want the selected base-price bundle and ask them not to add optional extras or drop any trip component.",
-      "When both flights are booked and hotel/car selections confirmed, end with [TASK_DONE].",
+      "Plan the whole Toronto package as one trip: outbound JFK to YYZ on June 21, return YYZ to JFK on June 24, three hotel nights, and a rental car, all within the strict $700 total budget.",
+      "Do not volunteer booking-stage flight preferences until the agent asks for them or is ready to book; if asked, use the profile preferences.",
+      "When the agent presents outbound flight options, choose the B6 afternoon nonstop economy option if it is available and within the package budget.",
+      "When the agent presents return flight options, choose the B6 morning nonstop economy option if it is available and within the package budget.",
+      "When the agent presents hotels and cars, choose the cheapest standard hotel room and the economy car; decline cabin/room/car upgrades, optional insurance, or other priced extras that would raise the package cost. This does NOT include your free profile preferences (WiFi, seat type, meal): those are applied at no cost and are never something to decline or drop.",
+      "If the agent tries to book any component before all four components have been selected and reviewed together, push back and ask to pick everything and see the combined total first.",
+      "Accept booking only after the agent has shown the selected outbound flight, return flight, hotel, car, and combined base-price total, and that total is under $700.",
+      "If the agent says the package exceeds $700, asks to drop a trip component, or adds required optional taxes or extras, ask them to recompute from the selected base prices for the two B6 flights, standard hotel, and economy car before changing the itinerary.",
+      "Your WiFi, seat-type, and meal profile preferences are FREE and have no effect on the package price; apply them per your profile on the new bookings. The $700 budget applies only to the priced components (the two flights, the hotel, and the car). Never treat WiFi (or seat/meal) as a budget risk: do not raise its pricing as a blocker, do not condition booking approval on WiFi being free or cheaper, do not ask to drop WiFi, and do not abort or refuse to book over WiFi's cost. If the agent cannot pre-quote a WiFi charge, that is fine because it is free, so tell them to keep WiFi=yes and proceed once the priced components are under $700.",
+      "End only after the agent confirms both flights, the hotel reservation, and the car rental are booked with the selected under-budget package details.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -61,8 +51,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "multi_booking_trip_coordination",
-  "task_env_path": "state_bench/domains/travel/task_envs/35-cross_plan_trip_international.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -202,5 +190,7 @@
         "user_id": "user_005"
       }
     }
-  ]
+  ],
+  "task_type": "multi_booking_trip_coordination",
+  "task_env_path": "state_bench/domains/travel/task_envs/35-cross_plan_trip_international.json"
 }

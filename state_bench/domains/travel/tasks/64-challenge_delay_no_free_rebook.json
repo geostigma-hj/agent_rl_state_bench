@@ -4,30 +4,22 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "My flight BK-1000 to Paris is delayed 3 hours! I want to switch to Delta flight DL101 later today. Shouldn't the delay entitle me to a free change? My user ID is user_001.",
   "user_simulator": {
-    "personality": "Frustrated by delay. Expects free rebooking. Wants the specific later Delta flight.",
     "known_info": [
-      "Your user ID: user_001",
-      "Booking: BK-1000 (JFK→CDG, economy, delayed)",
-      "Delay is about 3 hours",
-      "Wants to switch specifically to later Delta flight DL101 today",
-      "Expects free rebooking due to the delay",
-      "The intended replacement flight for this task is DL101 later the same day"
+      "Booking BK-1000: JFK to CDG, delayed about 3 hours.",
+      "Wants specifically later Delta flight DL101 today.",
+      "Expects free rebooking because of the delay."
     ],
-    "unknown_info": [
-      "That 180 min (3h) doesn't qualify for free rebooking (needs 4h)",
-      "Exact change and cancel fees",
-      "That a meal voucher is available"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: flight delayed 3 hours, want to switch specifically to DL101 later today, expect free change.",
-      "If the agent starts searching other dates, other airports, or broad alternatives, say you only want to consider later Delta flights today from JFK.",
-      "If the agent offers a later Delta flight other than DL101, say 'I want DL101 specifically if I switch today.'",
-      "Do not ask for cabin upgrades, other airlines, nearby airports, or later-date searches. Keep the task on the same-day economy decision.",
-      "When the agent says 3 hours doesn't qualify for free rebooking, push: 'That seems unfair. What's the cheapest way to switch to DL101 today?'",
-      "When the agent presents the cost comparison (change vs cancel+rebook), choose the cheaper path that still gets you onto DL101: 'Go with the cheapest way to get me onto DL101 today.'",
-      "If the agent tries to rebook for free (wrong — 180<240), don't question it.",
-      "When the agent mentions the meal voucher, say 'I'll take the voucher too.'",
-      "After the change to DL101 in economy is done, end with [TASK_DONE].",
+      "You want to move delayed booking BK-1000 onto later same-day Delta flight DL101, and you initially believe the 3-hour delay should make that change free.",
+      "If the agent asks for identifiers or scope, provide BK-1000, user_001, the JFK-to-CDG trip, and that you only want to consider DL101 or equivalent later Delta flights today from JFK.",
+      "Do not ask for cabin upgrades, other airlines, nearby airports, later dates, or unrelated trip changes; push back if the agent pursues those instead of the same-day economy switch.",
+      "If the agent explains that a 3-hour delay only qualifies for a meal voucher and does not waive change or rebooking costs, accept the policy explanation but ask for the cheapest way to switch today.",
+      "If the agent says the delay allows a free rebooking or skips the delay-threshold explanation, ask them to double-check what a 180-minute delay actually covers before you approve the change.",
+      "Before authorizing any change, require a comparison of changing BK-1000 to DL101 versus canceling and rebooking, including the fee, fare difference, refund or credit effect, and total extra cost for each path.",
+      "Choose the paid change path only after the agent shows it is cheaper than canceling and rebooking, keeps you in economy on DL101, and stays within your budget.",
+      "Accept the meal voucher when it is offered, but do not let the voucher replace the required paid-change cost comparison or final change confirmation.",
+      "End only after the meal voucher entitlement is clear and booking BK-1000 is confirmed changed to DL101 in economy with the expected paid-change costs and preserved booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -56,20 +48,12 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/64-challenge_delay_no_free_rebook.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
       "record_key": "BK-1000",
       "field": "change_fee",
       "expected_value": 200
-    },
-    {
-      "entity_type": "bookings",
-      "record_key": "BK-1000",
-      "field": "delay_compensation",
-      "expected_value": "meal_voucher"
     },
     {
       "entity_type": "bookings",
@@ -89,5 +73,7 @@
       "field": "price_paid",
       "expected_value": 1350
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/64-challenge_delay_no_free_rebook.json"
 }

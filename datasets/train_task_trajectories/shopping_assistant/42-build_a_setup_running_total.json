@@ -10,34 +10,53 @@
     },
     {
       "role": "assistant",
-      "content": "Sounds good — we can build it step by step and keep the running total under your $1200 budget.\n\nAs you tell me each item, I can help with:\n- finding options\n- comparing tradeoffs\n- checking stock\n- adding items to your cart\n- tracking your remaining budget\n\nCurrent total budget: $1200  \nSpent so far: $0  \nRemaining: $1200\n\nTell me the first thing you need for your home office.",
+      "content": "Sounds good \u2014 I can help you build it out and keep a running total against your $1200 budget.\n\nWe\u2019ll treat that as your product budget subtotal unless you want me to factor in shipping too.\n\nWhat\u2019s the first item you want to shop for?  \nFor example: desk, chair, monitor, lamp, keyboard, storage, etc.\n\nIf you already have preferences, include any of these:\n- max price for that item\n- size/dimensions\n- style/color\n- must-have features\n- brand preferences",
       "tool_calls": null
     },
     {
       "role": "user",
-      "content": "Let’s start with a chair."
+      "content": "First, I need a chair. I don\u2019t have a strong preference, so feel free to suggest a good option."
     },
     {
       "role": "assistant",
-      "content": "Great place to start. Before I narrow it down, what matters most for the chair?\n\nA few quick preferences:\n- Max budget for the chair?\n- Ergonomic/task chair or something more executive/plush?\n- Any must-haves: lumbar support, headrest, mesh back, adjustable arms, color?\n- Do you want me to prioritize lowest price, best value, or highest-rated?",
-      "tool_calls": null
-    },
-    {
-      "role": "user",
-      "content": "No specific preference — just a good office chair is fine. Please use the default and add a solid option from this store."
-    },
-    {
-      "role": "assistant",
-      "content": "I added a solid default option:\n\n- ErgoDesk Mesh Chair — $329\n  - Mesh back\n  - Lumbar support\n  - Rating: 4.4/5\n  - In stock\n\nBudget update:\n- Total budget: $1200\n- Spent so far: $329\n- Remaining: $871\n\nWhat would you like to add next?",
+      "content": "A solid pick from the catalog is:\n\n**ErgoDesk Mesh Chair** \u2014 **$329**  \n- **4.4/5** rating from **1,220 reviews**\n- Mesh back\n- Built-in lumbar support\n- In stock\n- Standard delivery estimate: about **3 business days**\n\nFor a general home office setup, this looks like a good balanced choice: ergonomic-focused, well-reviewed, and not so expensive that it eats too much of your $1200 budget.\n\n**Budget check**\n- Chair: **$329**\n- Remaining budget if you choose it: **$871**\n\nIf you want, I can **add this chair to your cart**, or we can move on to the next item and keep building your setup.",
       "tool_calls": [
         {
           "name": "search_products",
           "arguments": {
-            "query": "office chair ergonomic",
+            "query": "ergonomic chair",
             "category": "home_office",
             "min_price": 0,
             "max_price": 1200,
             "min_rating": 4,
+            "in_stock_only": true,
+            "sort_by": "relevance"
+          },
+          "result": {
+            "products": [
+              {
+                "product_id": "SP-3004",
+                "name": "ErgoDesk Mesh Chair",
+                "brand": "ErgoDesk",
+                "category": "home_office",
+                "subcategory": "chair",
+                "price": 329,
+                "rating": 4.4,
+                "review_count": 1220,
+                "in_stock": true
+              }
+            ],
+            "total_found": 1
+          }
+        },
+        {
+          "name": "search_products",
+          "arguments": {
+            "query": "office chair",
+            "category": "home_office",
+            "min_price": 0,
+            "max_price": 1200,
+            "min_rating": 0,
             "in_stock_only": true,
             "sort_by": "relevance"
           },
@@ -86,6 +105,38 @@
           }
         },
         {
+          "name": "get_variants",
+          "arguments": {
+            "product_id": "SP-3004"
+          },
+          "result": {
+            "product_id": "SP-3004",
+            "product_name": "ErgoDesk Mesh Chair",
+            "base_price": 329,
+            "variants": [],
+            "note": "This product has no variants; no variant_id is needed for add_to_cart."
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Yes, please add that chair to my cart."
+    },
+    {
+      "role": "assistant",
+      "content": "Sure \u2014 before I add it, do you want **gift wrap** on the chair?\n\nIt\u2019s optional; if not, I\u2019ll add it without gift wrap.",
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "No gift wrap, please \u2014 just the chair."
+    },
+    {
+      "role": "assistant",
+      "content": "Done \u2014 the **ErgoDesk Mesh Chair** has been added to your cart.\n\n**Cart total so far:** $329  \n**Remaining budget:** $871\n\nWhat\u2019s the next piece you want for your home office?",
+      "tool_calls": [
+        {
           "name": "add_to_cart",
           "arguments": {
             "customer_id": "shop_004",
@@ -111,62 +162,12 @@
     },
     {
       "role": "user",
-      "content": "Now I need a desk. Nothing fancy, just a basic standing or fixed-height desk, whatever ErgoDesk has."
+      "content": "Next I need a desk \u2014 specifically the **ErgoDesk Standing Desk SP-3003**."
     },
     {
       "role": "assistant",
-      "content": "Added:\n\n- ErgoDesk Standing Desk — $449\n  - Motorized sit/stand desk\n  - Rating: 4.5/5\n  - In stock\n\nBudget update:\n- Total budget: $1200\n- Spent so far: $778\n- Remaining: $422\n\nWhat’s next for your home office setup?",
+      "content": "Absolutely \u2014 I found **ErgoDesk Standing Desk (SP-3003)**.\n\n**Price:** $449  \n**In stock:** Yes  \n**Rating:** 4.5/5 from 960 reviews\n\nIf you add it:\n- **New subtotal:** $778\n- **Remaining budget:** $422\n\nBefore I add it, do you want **gift wrap** on the desk?",
       "tool_calls": [
-        {
-          "name": "search_products",
-          "arguments": {
-            "query": "ErgoDesk desk standing fixed-height",
-            "category": "home_office",
-            "min_price": 0,
-            "max_price": 871,
-            "min_rating": 4,
-            "in_stock_only": true,
-            "sort_by": "relevance"
-          },
-          "result": {
-            "products": [
-              {
-                "product_id": "SP-3003",
-                "name": "ErgoDesk Standing Desk",
-                "brand": "ErgoDesk",
-                "category": "home_office",
-                "subcategory": "desk",
-                "price": 449,
-                "rating": 4.5,
-                "review_count": 960,
-                "in_stock": true
-              },
-              {
-                "product_id": "SP-3004",
-                "name": "ErgoDesk Mesh Chair",
-                "brand": "ErgoDesk",
-                "category": "home_office",
-                "subcategory": "chair",
-                "price": 329,
-                "rating": 4.4,
-                "review_count": 1220,
-                "in_stock": true
-              },
-              {
-                "product_id": "SP-4001",
-                "name": "ErgoDesk 27-inch Monitor",
-                "brand": "ErgoDesk",
-                "category": "home_office",
-                "subcategory": "monitor",
-                "price": 279,
-                "rating": 4.4,
-                "review_count": 720,
-                "in_stock": true
-              }
-            ],
-            "total_found": 3
-          }
-        },
         {
           "name": "get_product_details",
           "arguments": {
@@ -195,6 +196,29 @@
           }
         },
         {
+          "name": "get_variants",
+          "arguments": {
+            "product_id": "SP-3003"
+          },
+          "result": {
+            "product_id": "SP-3003",
+            "product_name": "ErgoDesk Standing Desk",
+            "base_price": 449,
+            "variants": [],
+            "note": "This product has no variants; no variant_id is needed for add_to_cart."
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "No gift wrap \u2014 just add the desk, please."
+    },
+    {
+      "role": "assistant",
+      "content": "Done \u2014 the **ErgoDesk Standing Desk** has been added to your cart.\n\n**Cart total so far:** $778  \n**Remaining budget:** $422\n\nWhat would you like to add next for your home office?",
+      "tool_calls": [
+        {
           "name": "add_to_cart",
           "arguments": {
             "customer_id": "shop_004",
@@ -220,20 +244,65 @@
     },
     {
       "role": "user",
-      "content": "Now a 27-inch monitor."
+      "content": "Next I need a 27-inch monitor."
     },
     {
       "role": "assistant",
-      "content": "Added:\n\n- ErgoDesk 27-inch Monitor — $279\n  - 27-inch display\n  - Rating: 4.4/5\n  - In stock\n\nBudget update:\n- Total budget: $1200\n- Spent so far: $1057\n- Remaining: $143\n\nYou’ve got room for one or two smaller accessories if you want. What should we add next?",
+      "content": "A good fit is the **ErgoDesk 27-inch Monitor** \u2014 **$279**.\n\n**Why it looks good**\n- **27-inch QHD** display\n- **Adjustable stand**\n- **USB-C and HDMI** inputs\n- **4.4/5** rating from **720 reviews**\n- In stock\n\n**Budget check if you choose it**\n- Current total: **$778**\n- Monitor: **$279**\n- New total: **$1,057**\n- Remaining budget: **$143**\n\nIf you want, I can **add this monitor to your cart**.",
       "tool_calls": [
         {
           "name": "search_products",
           "arguments": {
-            "query": "27-inch monitor",
+            "query": "27 inch monitor",
+            "category": "electronics",
+            "min_price": 0,
+            "max_price": 422,
+            "min_rating": 0,
+            "in_stock_only": true,
+            "sort_by": "relevance"
+          },
+          "result": {
+            "products": [
+              {
+                "product_id": "SP-1106",
+                "name": "ProBook Chromebook 11",
+                "brand": "ProBook",
+                "category": "electronics",
+                "subcategory": "laptop",
+                "price": 329,
+                "rating": 3.9,
+                "review_count": 530,
+                "in_stock": true
+              }
+            ],
+            "total_found": 1
+          }
+        },
+        {
+          "name": "search_products",
+          "arguments": {
+            "query": "monitor",
+            "category": "electronics",
+            "min_price": 0,
+            "max_price": 422,
+            "min_rating": 0,
+            "in_stock_only": true,
+            "sort_by": "relevance"
+          },
+          "result": {
+            "products": [],
+            "total_found": 0,
+            "note": "No products match the query 'monitor'. Try broader or different keywords."
+          }
+        },
+        {
+          "name": "search_products",
+          "arguments": {
+            "query": "monitor display screen",
             "category": "home_office",
             "min_price": 0,
             "max_price": 422,
-            "min_rating": 4,
+            "min_rating": 0,
             "in_stock_only": true,
             "sort_by": "relevance"
           },
@@ -254,6 +323,65 @@
             "total_found": 1
           }
         },
+        {
+          "name": "get_product_details",
+          "arguments": {
+            "product_id": "SP-4001"
+          },
+          "result": {
+            "product_id": "SP-4001",
+            "name": "ErgoDesk 27-inch Monitor",
+            "category": "home_office",
+            "subcategory": "monitor",
+            "brand": "ErgoDesk",
+            "price": 279,
+            "rating": 4.4,
+            "review_count": 720,
+            "description": "27-inch QHD monitor with adjustable stand. USB-C and HDMI inputs.",
+            "specs": {},
+            "compatible_with": [],
+            "in_stock": true,
+            "stock_quantity": 30,
+            "shipping_days": 4,
+            "gift_wrap_available": true,
+            "backorder_available": false,
+            "previous_price": null,
+            "variants": null,
+            "shipping_estimate": "4 business days (standard)"
+          }
+        },
+        {
+          "name": "get_variants",
+          "arguments": {
+            "product_id": "SP-4001"
+          },
+          "result": {
+            "product_id": "SP-4001",
+            "product_name": "ErgoDesk 27-inch Monitor",
+            "base_price": 279,
+            "variants": [],
+            "note": "This product has no variants; no variant_id is needed for add_to_cart."
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Yes, please add that monitor to my cart."
+    },
+    {
+      "role": "assistant",
+      "content": "Sure \u2014 do you want **gift wrap** on the monitor?\n\nIf not, I\u2019ll add it **without gift wrap**.",
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "No gift wrap \u2014 just add the monitor, please."
+    },
+    {
+      "role": "assistant",
+      "content": "Done \u2014 the **ErgoDesk 27-inch Monitor** has been added to your cart.\n\n**Cart total so far:** $1,057  \n**Remaining budget:** $143\n\nWhat would you like to add next?",
+      "tool_calls": [
         {
           "name": "add_to_cart",
           "arguments": {
@@ -280,20 +408,20 @@
     },
     {
       "role": "user",
-      "content": "And headphones for calls."
+      "content": "Next I need headphones for calls."
     },
     {
       "role": "assistant",
-      "content": "I couldn’t find any in-stock headphones/headsets in the store catalog under your remaining $143 budget.\n\nCurrent budget status:\n- Total budget: $1200\n- Spent so far: $1057\n- Remaining: $143\n\nClosest relevant item I found was:\n- PixelShot Webcam 1080p — $79\n\nIf you want, I can:\n- look for earbuds instead\n- search more broadly for audio gear\n- help you swap one of your current items to free up more budget",
+      "content": "I found one good match in the current catalog:\n\n**SoundMax Wireless Headphones** \u2014 **$149**  \n- **4.4/5** rating from **4,100 reviews**\n- Wireless\n- **20-hour battery**\n- In stock\n\n**Budget check**\n- Current cart: **$1,057**\n- Headphones: **$149**\n- New total: **$1,206**\n- That\u2019s **$6 over** your $1,200 budget\n\nOne helpful note: you have **2,200 loyalty points**, so if you want, we could later redeem points to offset that overage.\n\nIf you want, I can **add these headphones to your cart**. If so, do you want **gift wrap** or **no gift wrap**?",
       "tool_calls": [
         {
           "name": "search_products",
           "arguments": {
-            "query": "headphones calls headset microphone",
+            "query": "headphones microphone calls",
             "category": "electronics",
             "min_price": 0,
             "max_price": 143,
-            "min_rating": 4,
+            "min_rating": 0,
             "in_stock_only": true,
             "sort_by": "relevance"
           },
@@ -313,25 +441,49 @@
             ],
             "total_found": 1
           }
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "content": "Please look again — I’d like everything from one place. Search more broadly for headphones for calls from this store."
-    },
-    {
-      "role": "assistant",
-      "content": "I found a solid store option:\n\n- SoundMax Wireless Headphones — $149\n  - Wireless\n  - 20-hour battery\n  - Rating: 4.4/5\n  - 4,100 reviews\n  - In stock\n\nBudget check:\n- Current remaining budget: $143\n- These headphones are $6 over budget\n\nSo I haven’t added them yet.\n\nYour options:\n1. Add them anyway and go to $1206 total\n2. Swap one current item for something cheaper if available\n3. Skip headphones for now\n4. Let me check whether there’s a promotion that could bring the total back under budget",
-      "tool_calls": [
+        },
         {
           "name": "search_products",
           "arguments": {
-            "query": "headphones headset earbuds microphone calls audio",
+            "query": "headphones",
             "category": "electronics",
             "min_price": 0,
-            "max_price": 500,
-            "min_rating": 3.5,
+            "max_price": 143,
+            "min_rating": 0,
+            "in_stock_only": true,
+            "sort_by": "relevance"
+          },
+          "result": {
+            "products": [],
+            "total_found": 0,
+            "note": "No products match the query 'headphones'. Try broader or different keywords."
+          }
+        },
+        {
+          "name": "search_products",
+          "arguments": {
+            "query": "headphones headset earbuds audio",
+            "category": "accessories",
+            "min_price": 0,
+            "max_price": 143,
+            "min_rating": 0,
+            "in_stock_only": true,
+            "sort_by": "relevance"
+          },
+          "result": {
+            "products": [],
+            "total_found": 0,
+            "note": "No products match the hard filters (category / price / rating / stock). Try relaxing them and search again."
+          }
+        },
+        {
+          "name": "search_products",
+          "arguments": {
+            "query": "headset headphones earbuds audio microphone calls",
+            "category": "electronics",
+            "min_price": 0,
+            "max_price": 1200,
+            "min_rating": 0,
             "in_stock_only": true,
             "sort_by": "relevance"
           },
@@ -389,21 +541,58 @@
             "variants": null,
             "shipping_estimate": "3 business days (standard)"
           }
+        },
+        {
+          "name": "get_variants",
+          "arguments": {
+            "product_id": "SP-2003"
+          },
+          "result": {
+            "product_id": "SP-2003",
+            "product_name": "SoundMax Wireless Headphones",
+            "base_price": 149,
+            "variants": [],
+            "note": "This product has no variants; no variant_id is needed for add_to_cart."
+          }
+        },
+        {
+          "name": "get_promotions",
+          "arguments": {
+            "category": "electronics"
+          },
+          "result": {
+            "promotions": []
+          }
+        },
+        {
+          "name": "get_customer_account",
+          "arguments": {
+            "customer_id": "shop_004"
+          },
+          "result": {
+            "customer_id": "shop_004",
+            "name": "Taylor Kim",
+            "email": "taylor.kim@example.com",
+            "tier": "standard",
+            "is_first_time": false,
+            "loyalty_points": 2200,
+            "purchase_history": []
+          }
         }
       ]
     },
     {
       "role": "user",
-      "content": "ok skip the headphones, three items is fine"
+      "content": "No, not this time \u2014 I\u2019ll skip the headphones since that would put me over budget. And no, not this time \u2014 I don't want to use points."
     },
     {
       "role": "assistant",
-      "content": "Sounds good — we’ll keep the setup to these three items:\n\n- ErgoDesk Mesh Chair — $329\n- ErgoDesk Standing Desk — $449\n- ErgoDesk 27-inch Monitor — $279\n\nTotal: $1057  \nRemaining budget: $143\n\nYou’re all set with the core home office setup. If you want, I can also:\n- check your cart total\n- look for any eligible promotions\n- help you add shipping if you need delivery timing",
+      "content": "No problem \u2014 we\u2019ll **skip the headphones** and **not use loyalty points**.\n\n**Current cart**\n- ErgoDesk Mesh Chair \u2014 **$329**\n- ErgoDesk Standing Desk \u2014 **$449**\n- ErgoDesk 27-inch Monitor \u2014 **$279**\n\n**Current total:** **$1,057**  \n**Remaining budget:** **$143**\n\nWhat\u2019s the next item you want for your home office?",
       "tool_calls": null
     },
     {
       "role": "user",
-      "content": "thanks, that works. [TASK_DONE]"
+      "content": "[TASK_DONE]"
     }
   ]
 }

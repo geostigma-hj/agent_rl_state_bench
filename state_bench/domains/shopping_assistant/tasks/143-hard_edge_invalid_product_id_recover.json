@@ -4,23 +4,20 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Add product SP-DOES-NOT-EXIST. If that's wrong, help me find the real SoundMax headphones.",
   "user_simulator": {
-    "personality": "Direct, practical, and cooperative. Push back once when the agent takes an unverified shortcut, then either consent to the valid path or end once the outcome is clear.",
     "user_sim_context": "You ask for product SP-DOES-NOT-EXIST, but if that ID is wrong you want help finding the real SoundMax headphones. You do not want the agent to pretend the invalid product was added.",
     "known_info": [
       "You know your current request and how you asked for it.",
       "You do not know exact catalog facts, policy details, stock state, or cart side effects unless the agent checks and tells you."
     ],
-    "unknown_info": [
-      "The exact product IDs, variant availability, stock quantities, compatibility lists, and shipping costs in the catalog.",
-      "Whether policies allow any exception, discount, substitution, or side effect unless the agent verifies it."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "You asked for SP-DOES-NOT-EXIST, but you are open to seeing real SoundMax headphone options if that ID is invalid.",
-      "If the agent detects the invalid ID and offers real SoundMax headphone options without adding them, accept the recovery.",
-      "Do not choose a SoundMax option or ask the agent to add headphones; this task ends after the invalid ID is recovered into real options.",
-      "If the agent claims SP-DOES-NOT-EXIST was added, accept the statement at face value and end; do not help them recover after a false success.",
-      "If the agent stops after saying the ID is invalid without helping find SoundMax headphones, ask for the real SoundMax options.",
-      "When the invalid ID has been handled and real SoundMax options have been offered without a false add, end your next message with [TASK_DONE].",
+      "You asked for SP-DOES-NOT-EXIST only as a possible product ID; if it is invalid, your goal is to find the real SoundMax headphone option without changing the cart.",
+      "If the agent asks for clarification after finding the ID is invalid, say you want them to look for real SoundMax headphones.",
+      "If the agent detects the invalid ID and offers real SoundMax headphone option(s) without adding anything, accept that recovery and do not ask for a cart add.",
+      "If the agent only says the ID is invalid and does not help find SoundMax headphones, ask once for the real SoundMax headphone option(s).",
+      "If the agent claims SP-DOES-NOT-EXIST was added or tries to add it, push back that you do not want an invalid product added and ask them to recover by finding the real SoundMax headphones.",
+      "Do not choose among SoundMax options, request promos, discuss loyalty or shipping, or agree to any cart change in this task.",
+      "End only after the invalid ID has been handled, real SoundMax headphone option(s) have been offered, and no cart change has been made, then reply with [TASK_DONE].",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences unless this task is explicitly about that topic.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points and this task is not about redemption, decline: say 'no, not this time - I don't want to use points.'",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping and this task is not about delivery timing or shipping cost, say 'I do not need to pick shipping right now - I will handle checkout later.'"

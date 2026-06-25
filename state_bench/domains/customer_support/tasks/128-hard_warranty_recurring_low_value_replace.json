@@ -1,7 +1,28 @@
 {
   "task_id": "128-hard_warranty_recurring_low_value_replace",
+  "user_id": "cust_002",
+  "now": "2026-07-08T10:00:00",
+  "opening_message": "The USB hub in ORD-7233 failed for the third time. Please don't make me troubleshoot it again.",
+  "user_simulator": {
+    "known_info": [
+      "order_id: ORD-7233",
+      "item: 7-Port USB-C Hub",
+      "warranty_id: WRT-4103"
+    ],
+    "task_rules": [
+      "Keep the request scoped to resolving the third failure of the 7-Port USB-C Hub from ORD-7233 without another troubleshooting or repair loop.",
+      "Provide the order ID, item, warranty ID, and third-failure context only when asked or when needed to correct the agent's path.",
+      "If the agent has not addressed the repeated-defect history, ask whether the prior claims change the warranty outcome before agreeing to a resolution.",
+      "Push back once if the agent asks for more troubleshooting or routes the claim to repair or paid repair instead of the recurring-defect replacement path.",
+      "Accept only a warranty preview that says this is a full replacement under the recurring-defect or repeat-defect path, with no refund, goodwill credit, paid repair, or extra troubleshooting.",
+      "If the preview is unclear, ask whether the claim is being handled under the repeat-defect replacement path and whether anything is needed for the defective hub.",
+      "If the agent offers to add an unsupported product-quality or account note, decline the extra note unless it is only part of the normal warranty-claim record.",
+      "End only after the replacement warranty claim has been filed and the agent confirms the hub replacement, updated warranty claim count, and no extra note or credit."
+    ],
+    "unknown_info": [],
+    "user_sim_context": "You are contacting support about order ORD-7233. USB hub has two prior warranty claims. Recurring defect policy triggers automatic replacement, not another repair explanation. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation."
+  },
   "task_summary": "USB hub has two prior warranty claims. Recurring defect policy triggers automatic replacement, not another repair explanation.",
-  "task_type": "warranty_claim",
   "task_requirements": [
     {
       "evidence": "conversation_or_tool_calls",
@@ -28,39 +49,21 @@
       "requirement": "Agent must not claim to add, create, document, or submit an unsupported account or product-quality note after the warranty replacement; no such write tool is available."
     }
   ],
-  "user_id": "cust_002",
-  "now": "2026-07-08T10:00:00",
-  "opening_message": "The USB hub in ORD-7233 failed for the third time. Please don't make me troubleshoot it again.",
-  "user_simulator": {
-    "known_info": [
-      "order_id: ORD-7233",
-      "item: 7-Port USB-C Hub",
-      "warranty_id: WRT-4103"
-    ],
-    "personality": "polite",
-    "task_rules": [
-      "Give the order ID.",
-      "Mention this is the third failure.",
-      "Ask whether repeated defects change the outcome.",
-      "Accept the warranty preview only if it is a full replacement under the recurring-defect/repeat-defect path, not repair, paid repair, or more troubleshooting.",
-      "Push once against more troubleshooting unless the agent names the recurring-defect replacement rule.",
-      "Ask whether this consumes another warranty claim or is handled under the repeat-defect replacement path.",
-      "If the replacement preview does not mention what happens to the defective hub, ask whether you need to return it and whether a return label is included.",
-      "Do not ask the agent to add a product-quality or account note after the replacement is processed.",
-      "If the agent offers to add a product-quality or account note, say no extra note is needed unless it is only part of the supported warranty-claim record."
-    ],
-    "unknown_info": [
-      "warranty eligibility",
-      "resolution"
-    ],
-    "user_sim_context": "You are contacting support about order ORD-7233. USB hub has two prior warranty claims. Recurring defect policy triggers automatic replacement, not another repair explanation. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation."
-  },
   "state_requirements": [
     {
       "entity_type": "order_items",
       "record_key": "ITEM-10233",
       "field": "replacement_item_id",
-      "expected_value": "ITEM-10234"
+      "expected_value_from_match": {
+        "entity_type": "order_items",
+        "match_fields": {
+          "order_id": "ORD-7233",
+          "product_id": "PROD-4243",
+          "quantity": 1,
+          "unit_price": 45,
+          "item_status": "confirmed"
+        }
+      }
     },
     {
       "entity_type": "warranties",
@@ -82,94 +85,31 @@
     },
     {
       "entity_type": "order_items",
-      "record_key": "ITEM-10234",
-      "field": "goodwill_credit",
-      "expected_value": 0
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10234",
-      "field": "goodwill_credit_method",
-      "expected_value": null
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10234",
-      "field": "item_id",
-      "expected_value": "ITEM-10234"
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10234",
-      "field": "item_status",
-      "expected_value": "confirmed"
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10234",
-      "field": "order_id",
-      "expected_value": "ORD-7233"
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10234",
-      "field": "product_id",
-      "expected_value": "PROD-4243"
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10234",
-      "field": "quantity",
-      "expected_value": 1
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10234",
-      "field": "refund_amount",
-      "expected_value": null
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10234",
-      "field": "refund_method",
-      "expected_value": null
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10234",
-      "field": "replacement_item_id",
-      "expected_value": null
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10234",
-      "field": "restocking_fee",
-      "expected_value": null
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10234",
-      "field": "return_label_issued",
-      "expected_value": false
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10234",
-      "field": "return_reason",
-      "expected_value": null
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10234",
-      "field": "store_credit_only",
-      "expected_value": false
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10234",
-      "field": "unit_price",
-      "expected_value": 45
+      "match_fields": {
+        "order_id": "ORD-7233",
+        "product_id": "PROD-4243",
+        "quantity": 1,
+        "unit_price": 45,
+        "item_status": "confirmed"
+      },
+      "expected_fields": {
+        "goodwill_credit": 0,
+        "goodwill_credit_method": null,
+        "item_status": "confirmed",
+        "order_id": "ORD-7233",
+        "product_id": "PROD-4243",
+        "quantity": 1,
+        "refund_amount": null,
+        "refund_method": null,
+        "replacement_item_id": null,
+        "restocking_fee": null,
+        "return_label_issued": false,
+        "return_reason": null,
+        "store_credit_only": false,
+        "unit_price": 45
+      }
     }
   ],
+  "task_type": "warranty_claim",
   "task_env_path": "state_bench/domains/customer_support/task_envs/128-hard_warranty_recurring_low_value_replace.json"
 }

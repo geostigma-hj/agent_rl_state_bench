@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "I checked your order and warranty status: the coffee maker’s warranty expired 24 days ago, so you’re not out of luck. Because it expired less than 30 days ago, you’re eligible for a repair at 50% off under our policy.\n\nIf you want, I can help you start that claim—I’d just need a short description of what broke or what it’s doing.",
+      "content": "You\u2019re not out of luck \u2014 I checked, and your BrewPerfect Coffee Maker\u2019s warranty expired 24 days ago, which still qualifies for post-warranty help. We can set up a discounted repair for $29. If the break was caused by a spill, drop, or other accidental damage, that wouldn\u2019t be covered, but for a normal failure I can help start the repair.",
       "tool_calls": [
         {
           "name": "get_order",
@@ -104,41 +104,24 @@
             "topic": "warranty",
             "rules": {
               "active": "Active warranty: eligible for claim.",
+              "active_item_required": "Warranty claims require an active order item. Items already returned, exchanged, or cancelled are ineligible for a new warranty claim even if a warranty record still exists.",
               "expired_recent": "Expired <30 days: 50% off repair.",
               "expired_old": "Expired >30 days: full-price repair or 25% off replacement.",
               "claim_limit": "Max claims reached: paid repair only (40% of item price).",
               "repair_vs_replace": "Items <$100: replacement. Items >=$100: repair first.",
               "recurring_defect": "2+ prior claims for same issue: automatic replacement.",
               "manufacturer": "Manufacturer warranty covers first 12 months.",
-              "extended": "Extended warranty covers after manufacturer period."
+              "extended": "Extended warranty covers after manufacturer period.",
+              "void_exclusions": "Liquid, accidental, or user-caused physical damage (e.g. spills, drops, cracked screens from misuse) is NOT covered and voids the claim, even while the warranty is otherwise active. The eligibility check is date/claim-count based only and does not detect damage cause, so when the customer describes liquid/accidental/user damage, deny the claim on this exclusion and do not file it."
             }
           }
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "content": "Is there any free option here first, or is the only policy-supported path the 50% discounted paid repair? Also, just to confirm, this wouldn’t be a warranty replacement or a refund, right?"
-    },
-    {
-      "role": "assistant",
-      "content": "Correct — based on the policy, the only supported option for a warranty that expired less than 30 days ago is a 50%-off repair. There isn’t a free repair, replacement, or refund path once the warranty has ended.\n\nAnd yes, to confirm: this would not be a warranty replacement or a refund under the current policy.",
-      "tool_calls": null
-    },
-    {
-      "role": "user",
-      "content": "Understood, thanks for confirming. The issue is that it stopped brewing and won’t power on, so if you can show me the paid discounted repair preview before filing it, I’ll review and confirm."
-    },
-    {
-      "role": "assistant",
-      "content": "Here’s the preview: your item is eligible for a discounted repair, and the repair cost would be $29.\n\nIf you’d like, I can go ahead and file the repair claim now.",
-      "tool_calls": [
+        },
         {
           "name": "process_warranty_claim",
           "arguments": {
             "warranty_id": "WRT-4102",
             "item_id": "ITEM-10232",
-            "issue_description": "Stopped brewing and won't power on.",
+            "issue_description": "Coffee maker stopped working just after the warranty ended.",
             "confirm": false
           },
           "result": {
@@ -148,25 +131,34 @@
             "eligible": true,
             "resolution": "discounted_repair",
             "cost": 29,
-            "reason": "Warranty expired 24 days ago — discounted repair available"
+            "reason": "Warranty expired 24 days ago \u2014 discounted repair available"
           }
         }
       ]
     },
     {
       "role": "user",
-      "content": "That looks right to me. Please go ahead and file the paid discounted repair claim for the coffee maker."
+      "content": "Is there any free option available, or is the policy-supported path the discounted paid repair? If it\u2019s the discounted repair and I\u2019m responsible for the $29 cost, please show me the preview before I confirm."
     },
     {
       "role": "assistant",
-      "content": "Done — I’ve filed the discounted repair claim for your coffee maker.\n\nThe approved resolution is a paid repair at $29. If you want, I can also help summarize what to expect next from the repair process.",
+      "content": "The policy-supported option here is the discounted paid repair; I don\u2019t see a free warranty remedy because coverage ended 24 days ago. Preview: eligible = yes, resolution = discounted repair, your cost = $29, reason = \u201cwarranty expired 24 days ago \u2014 discounted repair available.\u201d If you want, I can submit that repair claim next.",
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Thanks. Just to confirm, this is a discounted paid repair claim for the BrewPerfect Coffee Maker from ORD-7232, and not a free repair, replacement, refund, goodwill, or exception path, right? If so, please go ahead and file it."
+    },
+    {
+      "role": "assistant",
+      "content": "Yes \u2014 this has been filed as a discounted paid repair claim for the BrewPerfect Coffee Maker from ORD-7232. It is not a free repair, replacement, refund, goodwill credit, or exception path. Your claim is now submitted, and the repair cost is $29.",
       "tool_calls": [
         {
           "name": "process_warranty_claim",
           "arguments": {
             "warranty_id": "WRT-4102",
             "item_id": "ITEM-10232",
-            "issue_description": "Stopped brewing and won't power on.",
+            "issue_description": "Coffee maker stopped working just after the warranty ended.",
             "confirm": true
           },
           "result": {
@@ -183,7 +175,7 @@
     },
     {
       "role": "user",
-      "content": "Thanks, that resolves it. I appreciate the help. [TASK_DONE]"
+      "content": "[TASK_DONE]"
     }
   ]
 }

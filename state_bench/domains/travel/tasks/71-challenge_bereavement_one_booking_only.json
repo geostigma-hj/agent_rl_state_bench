@@ -4,24 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I have a family bereavement and need to postpone my trip. Please change BK-1000 (Paris flight) to June 24 — that is the bereavement-related one. Also change BK-1001 (San Francisco) to June 28 — that one is just personal scheduling. My user ID is user_001.",
   "user_simulator": {
-    "personality": "Clear communicator. Distinguishes reasons for each booking. Wants exact costs.",
     "known_info": [
-      "Your user ID: user_001",
-      "Booking A: BK-1000 (JFK to CDG, June 19) - bereavement reason",
-      "Booking B: BK-1001 (ORD to SFO, June 25) - personal reason",
-      "Bereavement only applies to the Paris trip"
+      "BK-1000: Paris flight on June 19; change reason is bereavement.",
+      "BK-1001: San Francisco flight on June 25; change reason is personal scheduling.",
+      "Bereavement applies only to the Paris trip."
     ],
-    "unknown_info": [
-      "Exact fee formulas",
-      "That bereavement gives 75% discount",
-      "That personal has no discount"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: bereavement for BK-1000, personal for BK-1001. Clearly state different reasons.",
-      "When agent quotes fees, ask: 'What is the total for both changes combined?'",
-      "If agent applies bereavement discount to both, say: 'Wait, the San Francisco change is personal, not bereavement. Does that affect the fee?'",
-      "If agent correctly charges different fees, agree: 'Go ahead with both changes.'",
-      "After both changes done, end with [TASK_DONE].",
+      "Your goal is to change BK-1000 to June 24 for bereavement reasons and BK-1001 to June 28 for personal scheduling; keep those reasons separate throughout the conversation.",
+      "If the agent asks for booking details or reasons, provide BK-1000 as the Paris bereavement booking and BK-1001 as the San Francisco personal-scheduling booking without adding unrelated travel needs.",
+      "When the agent presents change options or fees, ask for a per-booking breakdown and the combined additional total before approving either change.",
+      "Push back if the agent applies the bereavement discount to the San Francisco booking, blends the two fee paths, or otherwise treats both bookings as having the same reason.",
+      "Accept only after the agent makes clear that the Paris change receives the bereavement-discounted fee, the San Francisco change uses the ordinary personal-change fee, and the combined additional total fits within your budget.",
+      "For these flight changes, keep the existing booking preferences unless the agent asks about a specific preference; do not request upgrades, add-ons, or a new booking.",
+      "End only after both booking changes have been executed and the agent confirms the new dates, separate fee treatment, and final cost details for both bookings.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -50,8 +46,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "adversarial_or_reasoning_trap",
-  "task_env_path": "state_bench/domains/travel/task_envs/71-challenge_bereavement_one_booking_only.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -101,5 +95,7 @@
       "field": "price_paid",
       "expected_value": 495
     }
-  ]
+  ],
+  "task_type": "adversarial_or_reasoning_trap",
+  "task_env_path": "state_bench/domains/travel/task_envs/71-challenge_bereavement_one_booking_only.json"
 }

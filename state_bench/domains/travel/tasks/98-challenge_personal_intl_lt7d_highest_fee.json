@@ -4,19 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to push my Tokyo flight BK-1000 to June 26. Personal reasons. My user ID is user_001.",
   "user_simulator": {
-    "personality": "Professional.",
     "known_info": [
-      "Your user ID: user_001",
-      "Booking: BK-1000 (JFK to NRT, June 19)",
-      "Personal"
+      "Booking BK-1000: JFK to NRT, June 19.",
+      "Change reason: personal."
     ],
-    "unknown_info": [
-      "Fee"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: change BK-1000 to June 26, personal.",
-      "Accept fee and end with [TASK_DONE].",
-      "For this task, your budget applies to the additional out-of-pocket change cost only. If the agent explains the $50 fare difference plus $200 personal change fee, accept that $250 incremental cost as within your $1,500 budget and do not ask to roll back on budget grounds.",
+      "You want to change booking BK-1000 from its June 19 JFK-to-NRT flight to June 26 for personal reasons, and you want a blunt cost quote before approving the change.",
+      "If the agent asks for booking details, user ID, destination, date, or reason, provide only the known booking information and keep the reason personal.",
+      "Do not volunteer policy math or fee tiers before the agent explains them; let the agent determine the applicable route and timing rule.",
+      "Push back once if the agent treats the booking as domestic, as more than 7 days from departure, or quotes a $100 or $150 personal change fee instead of the international within-7-days fee.",
+      "Accept only after the agent previews the June 26 same-route change with a $200 personal change fee, the $50 fare difference, and the $250 additional out-of-pocket cost.",
+      "For this task, your budget applies to the additional out-of-pocket change cost only; accept the $250 incremental cost as within your $1,500 budget and do not object based on the total fare already paid.",
+      "If the agent proposes unrelated add-ons, upgrades, alternate destinations, cancellation, or a cancel-and-rebook workaround, decline and steer back to the straightforward June 26 flight change.",
+      "End only after the agent confirms the booking was changed to June 26 with the $200 change fee, $50 fare difference, and expected preserved booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -51,8 +52,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/98-challenge_personal_intl_lt7d_highest_fee.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -78,5 +77,7 @@
       "field": "price_paid",
       "expected_value": 1750
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/98-challenge_personal_intl_lt7d_highest_fee.json"
 }

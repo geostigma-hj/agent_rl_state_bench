@@ -49,7 +49,7 @@ Minimal checklist:
 1. Create `clients/<your_client>.py` with a `BaseLLMClient` subclass and `from_env()`.
 2. Create `agents/<your_agent>.py` with a `BaseAgent` subclass and `generate_next_turn()`.
 3. Convert STATE-Bench tool schemas and tool-call responses to your provider's format.
-4. Call `self.add_token_usage(...)` after each provider call if token counts are available.
+4. Call `self.add_cost_usd(...)` after each provider call if cost is available, and optionally call `self.add_token_usage(...)` for token telemetry.
 5. Return to your track guide and run with `--agent-class` and `--agent-client-class`.
 
 ### Canonical Conversation
@@ -147,7 +147,7 @@ What each argument is for:
 - `system_prompt` — the benchmark system prompt for the selected domain. Pass to your provider.
 - `tools` — the tool schema list described above. Convert and pass to your provider.
 - `tool_handlers` — a dict mapping tool name → Python callable for the domain tools. Custom `generate_next_turn()` agents should ignore this argument: STATE-Bench already holds the same handlers and executes the tools you request itself. The argument is part of the constructor signature only so the built-in agent (which self-executes tools) and custom agents can share one calling convention. If your agent needs to expose **additional** tools (e.g., a memory-retrieval tool the model can call), do not stuff them into `tool_handlers` — override `memory_tool_schemas()` and `memory_tool_handlers()` on `BaseAgent` and the harness will merge them in.
-- `runtime_context` — an `AgentRuntimeContext` carrying task metadata (`task_id`, `user_id`, `domain`, `now`, optional `agent_pricing`, etc.). Forward to `super().__init__(runtime_context=runtime_context)`. Store on `self` only if you need task metadata inside your agent.
+- `runtime_context` — an `AgentRuntimeContext` carrying task metadata (`task_id`, `user_id`, `domain`, `now`, etc.). Forward to `super().__init__(runtime_context=runtime_context)`. Store on `self` only if you need task metadata inside your agent.
 
 ## Provider Environment Variables
 
@@ -164,7 +164,7 @@ MY_PROVIDER_MODEL="<your model name>"
 
 Subclass `BaseLLMClient` and implement `from_env()`. The base class intentionally does not require a specific request method — your agent decides what to call, with whatever signature suits your provider. The `generate()` method shown below is one reasonable shape for stateless replay.
 
-`model_name` is useful provider metadata. Submitted model metadata and cost reporting come from the required `--agent-model-name` flag and optional pricing flags in your run command.
+`model_name` is useful provider metadata. Submitted model metadata comes from the required `--agent-model-name` flag in your run command; cost reporting comes from your agent calling `self.add_cost_usd(...)`.
 
 ```python
 # clients/my_client.py
@@ -248,7 +248,7 @@ AgentTurnResponse(
 
 A plain dict with the same keys is also accepted.
 
-The harness validates that each `name` is an allowed tool, executes it with `arguments`, appends the result to the working conversation, and calls `generate_next_turn()` again until no more tool calls are returned. See [Token Usage And Cost](#token-usage-and-cost) below for the `add_token_usage` call used in every example.
+The harness validates that each `name` is an allowed tool, executes it with `arguments`, appends the result to the working conversation, and calls `generate_next_turn()` again until no more tool calls are returned. See [Token Usage And Cost](#token-usage-and-cost) below for the optional cost and token reporting calls.
 
 Convert STATE-Bench's working conversation → provider shape every turn. No state on `self`.
 
@@ -286,6 +286,8 @@ class MyStatelessAgent(BaseAgent):
             conversation=self._to_provider_messages(conversation),
             tools=tools,
         )
+        if getattr(response, "cost_usd", None) is not None:
+            self.add_cost_usd(response.cost_usd)
         self.add_token_usage(
             input_tokens=getattr(response.usage, "input_tokens", None),
             output_tokens=getattr(response.usage, "output_tokens", None),
@@ -304,7 +306,21 @@ For server-side stateful providers or framework-native history, use the same con
 
 ## Token Usage And Cost
 
-Cost reporting is strongly encouraged. Custom agents should call `self.add_token_usage(...)` after each provider LLM call returns:
+Cost reporting is strongly encouraged. Providers report token buckets differently, so custom agents should compute cost using their own provider-specific logic and report dollars directly:
+
+```python
+self.add_cost_usd(cost_usd)
+```
+
+Use categories if you want a cost breakdown:
+
+```python
+self.add_cost_usd(agent_call_cost_usd, category="agent_turn")
+self.add_cost_usd(memory_build_cost_usd, category="memory_ingestion")
+self.add_cost_usd(memory_lookup_cost_usd, category="memory_retrieval")
+```
+
+Token reporting is optional telemetry. If your provider reports useful token counts, call `self.add_token_usage(...)` after each provider LLM call returns:
 
 ```python
 self.add_token_usage(
@@ -314,9 +330,9 @@ self.add_token_usage(
 )
 ```
 
-`input_tokens` and `output_tokens` are required for usage and cost to be recorded — pass `None` if your provider didn't report them, and the call is skipped silently. `cached_input_tokens` is optional and treated as 0 when missing.
+`input_tokens` and `output_tokens` are required for usage telemetry to be recorded — pass `None` if your provider didn't report them, and the call is skipped silently. `cached_input_tokens` is optional and treated as 0 when missing. Token counts do not affect cost.
 
-Your track guide explains the pricing flags to pass at run time. Full details: [Reporting Avg. Cost Per Task](eval/cost-reporting.md).
+Full details: [Reporting Avg. Cost Per Task](eval/cost-reporting.md).
 
 ## Return To Your Track
 

@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "Done — I processed both.\n\n- Shirt return: accepted for a $59 refund to your original card.\n- Book cancellation: completed, with a $14 refund to your card after the in-transit intercept fee.\n\nIf you want, I can also summarize the updated order status.",
+      "content": "Done \u2014 I processed the shirt return and cancelled the book on order ORD-6047. The shirt return is set for a $59 refund to your original payment method, and the book cancellation came to a $14 refund after the $10 in-transit intercept fee. Total refund: $73.",
       "tool_calls": [
         {
           "name": "get_order",
@@ -106,7 +106,7 @@
           "result": {
             "topic": "return",
             "rules": {
-              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim — skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
+              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim \u2014 skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
               "windows_by_category": {
                 "electronics": "15-day return window",
                 "clothing": "30-day return window",
@@ -122,7 +122,8 @@
               },
               "eligibility": {
                 "defective_items": "No window restriction for defective, wrong item, or damaged in transit.",
-                "already_returned": "Items already returned/exchanged/cancelled are ineligible."
+                "already_returned": "Items already returned/exchanged/cancelled are ineligible.",
+                "not_as_described": "Use not_as_described only for an unused/unworn item that materially differs from the listing. If the customer wore, washed, altered, or used the item and only dislikes fit, feel, texture, or preference-based qualities, classify the return as changed_mind instead."
               },
               "restocking_fee": {
                 "base": "15% restocking fee for opened electronics returned for changed_mind.",
@@ -132,12 +133,13 @@
                   "silver": "25% off the restocking fee.",
                   "standard": "No discount."
                 },
-                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency."
+                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency.",
+                "completed_returns": "Once a changed-mind return is completed with the applicable restocking fee, do not reverse that fee later as a courtesy or supplemental refund."
               },
               "return_shipping_fee": {
                 "low_value": "Orders with subtotal < $50: customer pays $8 return shipping fee.",
                 "free_threshold": "Orders >= $50: free return label provided.",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: always free return shipping.",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: always free return shipping.",
                 "deduction": "Return shipping fee, when charged, is deducted from the return refund."
               },
               "bulk_purchase_clawback": {
@@ -148,7 +150,7 @@
               "free_shipping_clawback": {
                 "applies_when": "Order originally qualified for free shipping (subtotal >= $100) AND the return drops remaining subtotal below $100.",
                 "amount": "$8 standard shipping fee is deducted from the return refund. This is a flat policy charge, not the original shipping cost (which was $0 on free-shipping orders).",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: no clawback (customer-fault returns only).",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: no clawback (customer-fault returns only).",
                 "paid_shipping": "If the order did not qualify for free shipping originally (subtotal < $100), no clawback applies."
               },
               "repeat_category_surcharge": {
@@ -169,7 +171,7 @@
             "rules": {
               "pre_shipment": "Free cancellation before shipment (pending/processing status).",
               "in_transit": "$10 intercept fee per item for in-transit orders.",
-              "delivered": "Cannot cancel delivered orders — must use the return process instead.",
+              "delivered": "Cannot cancel delivered orders \u2014 must use the return process instead.",
               "partial": "Partial cancellation allowed if items not yet delivered.",
               "split_payment": "Refund distributed proportionally to original payment methods.",
               "already_cancelled": "Already cancelled orders cannot be cancelled again."
@@ -219,7 +221,7 @@
             ],
             "cancellation_fee": 10,
             "refund_amount": 14,
-            "reason": "In-transit cancellation — $10 intercept fee per item"
+            "reason": "In-transit cancellation \u2014 $10 intercept fee per item"
           }
         },
         {
@@ -269,16 +271,16 @@
     },
     {
       "role": "user",
-      "content": "Sorry, I’m confused about the book part — you said it hadn’t shipped, so why is there an in-transit intercept fee? If the shirt return and book cancellation are both finalized, can you clarify that fee?"
+      "content": "Thanks, but I need these kept separate rather than as one total. Please confirm the shirt return is processed as a return with its own $59 refund to the original payment method, and the book cancellation is processed separately with its own $14 refund to the original payment method."
     },
     {
       "role": "assistant",
-      "content": "You’re right to question that — I misspoke when I said the book hadn’t shipped. The order itself was already in transit, and the book item was no longer in a pre-shipment state, so cancelling it triggered the $10 intercept fee. That’s why the $24 book refund became $14.\n\nThe shirt return and the book cancellation are both already finalized.",
+      "content": "Yes \u2014 they were processed separately.\n\n- Shirt: processed as a return, with its own $59 refund to your original payment method.\n- Book: processed as a separate cancellation, with its own $14 refund to your original payment method.\n\nSince your original payment method on this order was your credit card, both refunds will go back there as separate refund transactions.",
       "tool_calls": null
     },
     {
       "role": "user",
-      "content": "Okay, thanks for clarifying. If both are finalized that’s fine, though I’m still a little concerned because I’d understood the book itself hadn’t shipped. [TASK_DONE]"
+      "content": "[TASK_DONE]"
     }
   ]
 }

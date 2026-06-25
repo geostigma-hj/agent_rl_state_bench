@@ -4,27 +4,22 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Hi, I need to change my flight BK-1000 to June 24 for personal reasons. My user ID is user_002.",
   "user_simulator": {
-    "personality": "Initially guarded about reasons. Opens up after the change is done. Hopeful that the fee can be adjusted.",
     "known_info": [
-      "Your user ID: user_002",
-      "Booking: BK-1000 (JFK→LHR, economy, June 20)",
-      "Wants to change to June 24",
-      "The real reason is bereavement but you initially said personal",
-      "You're hoping the fee can be reduced retroactively"
+      "Booking BK-1000: JFK→LHR on June 20; wants to change to June 24.",
+      "The real reason is bereavement, but you initially said personal.",
+      "You're hoping the fee can be reconsidered after the initial change."
     ],
-    "unknown_info": [
-      "That bereavement gets a 75% fee discount",
-      "Whether the reason can be changed after the flight change",
-      "Exact fee amounts"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: change flight BK-1000 to June 24, say 'personal reasons'.",
-      "If the agent quotes the personal-change cost and asks for approval, approve the initial change.",
-      "After the agent executes the change, say: 'Actually, I should tell you — the real reason is a family bereavement. I said personal because I wasn't sure if it mattered. Is there any way to adjust the fee?'",
-      "If the agent says they can update the reason and reduce the fee, say 'Yes please, go ahead.'",
-      "If the agent says it's already processed and can't be changed, push: 'Can you at least try updating the reason on the booking? Maybe the system allows it.'",
-      "After the fee is adjusted, say 'Thank you, that really helps.' and end with [TASK_DONE].",
-      "If the agent refuses to try at all, end with [TASK_DONE].",
+      "You want to change booking BK-1000 from June 20 to June 24, initially framing the reason as personal, and then ask whether the fee can be reconsidered after you reveal the real bereavement reason.",
+      "Do not reveal the bereavement reason before the initial personal-reason flight change has been completed; if asked for a reason before then, continue to say it is personal.",
+      "If the agent asks for booking details or change constraints you know, provide the booking ID, the JFK to LHR route, the June 24 target date, and that the additional cost must stay within your budget.",
+      "If the agent offers June 24 options, choose the matching JFK to LHR option that preserves the existing booking preferences and keeps the added cost within budget; push back on wrong dates, routes, or over-budget added costs.",
+      "Approve the initial personal-reason change only after the agent previews the selected flight, fare difference, personal-change fee, and total added cost.",
+      "After the initial change is confirmed, reveal that the real reason was a family bereavement and ask whether the already-processed change fee can still be adjusted.",
+      "If the agent says the original personal reason is locked in, ask once whether they can try updating the change reason on the existing booking instead of treating the first reason as permanent.",
+      "Accept the retroactive update only after the agent explains that applying bereavement reduces the change fee from $200 to $50 or otherwise clearly accounts for the $150 savings.",
+      "End only after the agent confirms the booking has been updated for the bereavement reason with the reduced fee, or after one pushback the agent still clearly refuses to attempt any retroactive adjustment.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -53,8 +48,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/56-challenge_retroactive_reason.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -80,5 +73,7 @@
       "field": "price_paid",
       "expected_value": 830
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/56-challenge_retroactive_reason.json"
 }

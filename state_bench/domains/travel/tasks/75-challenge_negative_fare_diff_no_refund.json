@@ -4,24 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I want to switch my flight BK-1000 to June 28. I noticed flights are cheaper that week so hopefully I will save some money! My user ID is user_005.",
   "user_simulator": {
-    "personality": "Optimistic about saving money. Expects the cheaper flight to reduce total cost.",
     "known_info": [
-      "Your user ID: user_005",
-      "Booking: BK-1000 (ORD to SFO, economy, $500, June 22)",
-      "Wants June 28 instead",
-      "Expects to save money with cheaper flight"
+      "Booking BK-1000: ORD to SFO, departs June 20; wants June 28 instead.",
+      "Expects to save money with a cheaper flight."
     ],
-    "unknown_info": [
-      "That negative fare diffs on changes are not paid out as separate refunds",
-      "The change fee amount",
-      "That cancel+rebook could be cheaper"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: switch BK-1000 to June 28, expect savings.",
-      "If agent just changes without comparing to cancel+rebook, ask: 'Wait, if the new flight is $120 cheaper, why did my total go UP?'",
-      "If agent explains the fee and recommends cancel+rebook, say: 'That makes sense. Do the cancel and rebook.'",
-      "If agent says you will save money by changing, do NOT correct them.",
-      "After the action is done, end with [TASK_DONE].",
+      "Start by asking to switch BK-1000 to June 28 because you expect the cheaper flight to save money; keep the scope to resolving that flight change versus cheaper alternative.",
+      "If the agent asks for booking details or your reason, provide BK-1000, the June 28 target date, and that you noticed cheaper flights; do not supply prices, fees, or policy math yourself.",
+      "If the agent only offers or performs a direct change without comparing cancel-and-rebook, ask how the cheaper replacement affects the total and whether canceling and booking fresh would be cheaper.",
+      "Push back once if the agent says the direct change creates cash savings or a separate refund from the negative fare difference; ask for the change fee, fare difference, direct-change total, cancellation fee, refund, replacement fare, and effective cancel-and-rebook cost.",
+      "Accept only the cheaper cancel-and-rebook path after the agent explains that the direct change still totals $530 after the $150 fee while canceling and rebooking is cheaper.",
+      "Before approving the replacement booking, verify that it is the June 28 ORD-to-SFO economy flight within your $700 budget and that the booking uses your profile preferences.",
+      "Reject unrelated upgrades, add-ons, alternate destinations, or any option above your budget; for a direct change, only proceed if the agent has shown it is cheaper than canceling and rebooking.",
+      "End only after the original booking is cancelled, the June 28 replacement booking is confirmed, and the final summary includes the cancellation fee, refund, replacement fare, and profile booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -56,8 +52,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "adversarial_or_reasoning_trap",
-  "task_env_path": "state_bench/domains/travel/task_envs/75-challenge_negative_fare_diff_no_refund.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -118,5 +112,7 @@
         "user_id": "user_005"
       }
     }
-  ]
+  ],
+  "task_type": "adversarial_or_reasoning_trap",
+  "task_env_path": "state_bench/domains/travel/task_envs/75-challenge_negative_fare_diff_no_refund.json"
 }

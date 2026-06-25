@@ -4,19 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Medical procedure. Need to change BK-1000 to June 27. I saw the later flights are cheaper. My user ID is user_001.",
   "user_simulator": {
-    "personality": "Hopeful about savings.",
     "known_info": [
-      "Your user ID: user_001",
-      "Booking: BK-1000 (JFK to LHR, June 20)",
-      "Medical reason"
+      "Booking BK-1000: JFK to LHR, June 20.",
+      "Change reason: medical."
     ],
-    "unknown_info": [
-      "That cheaper flight doesn't save money",
-      "Fee formula"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: medical, change BK-1000 to June 27, mention cheaper flights.",
-      "Accept fee. End with [TASK_DONE].",
+      "Seek a medical-reason change for BK-1000 from June 20 to June 27, expecting the cheaper later flight may reduce the total cost.",
+      "If the agent asks for booking details, provide BK-1000, the JFK to LHR route, the June 20 original date, the June 27 target date, and the medical reason as needed.",
+      "Do not volunteer exact prices, fee tiers, fare-difference math, or the replacement flight ID; ask the agent to look those up and explain the cost.",
+      "If the agent presents June 27 options, prefer the same-route economy option that fits the requested date and preserves the existing booking preferences; ask for airline, time range, and stop count if those details are missing.",
+      "Push back if the agent treats the cheaper replacement fare as a cash refund, claims the medical reason waives the fee entirely, or says the change creates net savings without explaining the fee and fare-difference rules.",
+      "Accept the change only after the agent clearly explains the international within-7-days $200 base fee, the medical reduction to a $100 fee, the $80 negative fare difference with no refund, and the final $1020 total.",
+      "If the agent asks for confirmation before giving the fee, fare-difference, selected flight details, and final total, ask for those details before approving the change.",
+      "End only after the change to June 27 is completed and the final booking confirms the selected flight, $100 change fee, -$80 fare difference, $1020 price paid, and preserved booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -45,8 +46,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/61-challenge_medical_cheaper_flight_no_savings.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -72,5 +71,7 @@
       "field": "price_paid",
       "expected_value": 1020
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/61-challenge_medical_cheaper_flight_no_savings.json"
 }

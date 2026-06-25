@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "For booking **BK-I06**, you’re currently in **economy** on **UA100**.\n\nYour upgrade options are:\n\n- **Economy → Business:** **$420**\n  - Business fare: **$700**\n  - Amount already paid: **$280**\n  - Upgrade cost = **$700 - $280 = $420**\n\n- **Economy → First:** **Not available directly**\n  - Policy says economy bookings must upgrade to **business first**\n  - So you **cannot go straight from economy to first** on this booking\n\nIf you want, I can also help you **process the upgrade to business**.",
+      "content": "For BK-I06, you\u2019re currently in **economy**, so you **are eligible for upgrades**.\n\nYour options:\n\n- **Upgrade to Business:** **Yes**\n  - Current economy fare paid: **$280**\n  - Current business fare: **$700**\n  - **Upgrade cost: $420**\n\n- **Upgrade to First:** **Not directly**\n  - Policy says **economy \u2192 first is not available directly**\n  - You would need to **upgrade to business first**\n  - Current first fare on this flight is **$1,260**\n\nSo in short:\n\n- **Business:** available now for **+$420**\n- **First:** **not available as a direct upgrade** from your current economy booking\n\nIf you want, I can also help you with the **business upgrade process**.",
       "tool_calls": [
         {
           "name": "get_booking",
@@ -43,6 +43,19 @@
             "destination": "SFO",
             "departure_time": "2026-06-20T12:45:00",
             "route_type": "domestic"
+          }
+        },
+        {
+          "name": "get_user_details",
+          "arguments": {
+            "user_id": "user_002"
+          },
+          "result": {
+            "user_id": "user_002",
+            "name": "Liam Johnson",
+            "email": "liam.johnson@example.com",
+            "loyalty_tier": "basic",
+            "loyalty_points": 5000
           }
         },
         {
@@ -101,16 +114,16 @@
     },
     {
       "role": "user",
-      "content": "Thanks, that helps. If first class isn’t available directly, what would the next step be for first class?"
+      "content": "Thanks, that helps. Just to confirm, if first isn\u2019t available directly from economy, can it still be reached via business, and what would that cost\u2014either the extra amount from business or the total from my current booking?"
     },
     {
       "role": "assistant",
-      "content": "The next step would be:\n\n1. **Upgrade from economy to business first** for **$420**\n2. Then request a **business → first** upgrade\n\nBased on the current fare for this flight:\n\n- **First class fare:** **$1,260**\n- **Amount already paid after moving to business:** effectively **$700**\n- So the **business → first** step would be **$560**\n\nThat means the total additional cost from your current economy ticket to first, via the required path, would be:\n\n- **$420** to business\n- **$560** to first\n- **Total: $980 extra**\n\nIf you want, I can help upgrade you to **business now**.",
+      "content": "Yes \u2014 **first can be reached via business**, but **not in one direct economy \u2192 first upgrade**.\n\nUsing your current flight\u2019s listed prices:\n\n- **Economy paid:** $280\n- **Business fare:** $700\n- **First fare:** $1,260\n\nCosts:\n\n- **Economy \u2192 Business:** **+$420**\n- **Business \u2192 First:** **+$560**\n- **Total extra from your current booking to end up in First:** **+$980**\n\nSo the two ways to think about it are:\n\n- **Extra from business to first:** **$560**\n- **Total extra from your current economy booking to first (via business):** **$980**\n\nIn effect, that\u2019s:\n- $420 first step, then\n- $560 second step\n\nIf you want, I can also help you check whether moving to **business now** makes sense, since that\u2019s the first required step.",
       "tool_calls": null
     },
     {
       "role": "user",
-      "content": "Got it, thanks for laying that out. Since the total to reach first would be $980, that’s over my budget, so I’m not looking to proceed—I just wanted the pricing and upgrade rules. [TASK_DONE]"
+      "content": "Got it, thanks \u2014 that\u2019s clear. So business is **$420**, and first would only be possible **via business**, with **$560 more from business** or **$980 total**, which is over my **$800** budget, so I won\u2019t make any changes. [TASK_DONE]"
     }
   ]
 }

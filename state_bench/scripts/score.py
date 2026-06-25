@@ -6,6 +6,8 @@ and updates the same trajectory files in place by default. Does not re-run agent
 Usage:
     uv run python -m state_bench.scripts.score --domain travel --num-runs 5 --results-dir outputs/travel
     uv run python -m state_bench.scripts.score --domain travel --num-runs 5 --results-dir outputs/travel --reasoning-effort high
+    uv run python -m state_bench.scripts.score --domain travel --num-runs 5 --results-dir outputs/travel --no-ux-score
+    uv run python -m state_bench.scripts.score --domain travel --num-runs 5 --results-dir outputs/travel --no-score
 """
 
 import argparse
@@ -20,14 +22,74 @@ from dotenv import load_dotenv
 from state_bench.client import build_locked_judge_client
 from state_bench.domain import get_domain_config
 from state_bench.paths import domain_tasks_dir
-from state_bench.protocol import load_default_protocol
+from state_bench.protocol import format_domain_not_in_protocol_error, load_default_protocol, load_split_task_ids
 from state_bench.schemas import StateDiff, TaskDefinition
 from state_bench.scoring import (
     TaskRequirementsJudge,
     UXQualityJudge,
     combine_task_completion,
+    compute_ux_resource_penalty,
     evaluate_state_requirements,
 )
+
+UX_PROMPT_VERSION = "v27"
+UX_SCORE_FORMULA = "0.5_user_control_0.3_user_effort_0.2_response_density"
+
+
+def _save_ux_result(traj: dict, ux_result, conversation: list[dict], tool_calls: list[dict]) -> None:
+    for key in [
+        "ux_consent",
+        "ux_ease",
+        "ux_discovery",
+        "ux_information_quality",
+        "ux_disambiguation",
+        "ux_friction",
+        "ux_situational_awareness",
+        "ux_communication_quality",
+        "ux_intent_alignment",
+        "ux_user_effort",
+        "ux_response_density",
+        "ux_base_score",
+        "ux_resource_penalty",
+        "ux_resource_penalty_scheme",
+        "ux_assistant_turn_count",
+        "ux_tool_call_count",
+        "ux_tool_error_count",
+        "ux_repeated_identical_tool_call_count",
+        "ux_assistant_turn_threshold",
+        "ux_tool_call_threshold",
+        "ux_excess_assistant_turn_count",
+        "ux_excess_tool_call_count",
+        "ux_score_formula",
+        "ux_prompt_version",
+    ]:
+        traj.pop(key, None)
+
+    if ux_result.user_effort is None or ux_result.response_density is None:
+        raise ValueError("UX judge response is missing user_effort or response_density")
+
+    base_score = 0.5 * ux_result.user_control + 0.3 * ux_result.user_effort + 0.2 * ux_result.response_density
+    resource = compute_ux_resource_penalty(conversation, tool_calls)
+    final_score = max(1.0, base_score - float(resource["resource_penalty"]))
+
+    traj["ux_prompt_version"] = UX_PROMPT_VERSION
+    traj["ux_user_control"] = ux_result.user_control
+    traj["ux_user_effort"] = ux_result.user_effort
+    traj["ux_response_density"] = ux_result.response_density
+    traj["ux_base_score"] = round(base_score, 2)
+    traj["ux_score_formula"] = UX_SCORE_FORMULA
+    traj["ux_resource_penalty"] = resource["resource_penalty"]
+    traj["ux_resource_penalty_scheme"] = resource["resource_penalty_scheme"]
+    traj["ux_assistant_turn_count"] = resource["assistant_turn_count"]
+    traj["ux_tool_call_count"] = resource["tool_call_count"]
+    traj["ux_tool_error_count"] = resource["tool_error_count"]
+    traj["ux_repeated_identical_tool_call_count"] = resource["repeated_identical_tool_call_count"]
+    traj["ux_assistant_turn_threshold"] = resource["assistant_turn_threshold"]
+    traj["ux_tool_call_threshold"] = resource["tool_call_threshold"]
+    traj["ux_excess_assistant_turn_count"] = resource["excess_assistant_turn_count"]
+    traj["ux_excess_tool_call_count"] = resource["excess_tool_call_count"]
+    traj["ux_score"] = round(final_score, 2)
+    traj["ux_reasoning"] = ux_result.reasoning
 
 
 def _enrich_task_requirement_details(task: TaskDefinition, details: list[dict]) -> list[dict]:
@@ -62,6 +124,7 @@ def score_one(
     output_path: Path,
     protocol=None,
     domain_name: str | None = None,
+    run_task_requirements: bool = True,
 ) -> dict:
     """Score a single trajectory using the official metric judges."""
     traj = json.loads(traj_path.read_text())
@@ -73,26 +136,25 @@ def score_one(
         return {"task_id": tid, "status": "ERR", "error": "task file not found"}
     task = TaskDefinition.load(task_file)
 
-    # Reconstruct state_diff from trajectory
-    sd_raw = traj.get("state_diff")
-    if sd_raw is None:
-        state_diff = StateDiff(created={}, modified={}, deleted={})
-    elif isinstance(sd_raw, dict) and {"created", "modified", "deleted"}.issubset(sd_raw):
-        state_diff = StateDiff(
-            created=sd_raw.get("created", {}),
-            modified=sd_raw.get("modified", {}),
-            deleted=sd_raw.get("deleted", {}),
-        )
-    else:
-        return {"task_id": tid, "status": "ERR", "error": "malformed state_diff in trajectory"}
-
     # Reconstruct tool_calls from conversation
     tool_calls = []
     for msg in traj.get("conversation", []):
         if msg.get("tool_calls"):
             tool_calls.extend(msg["tool_calls"])
 
-    if task_requirements_judge is not None:
+    if run_task_requirements and task_requirements_judge is not None:
+        sd_raw = traj.get("state_diff")
+        if sd_raw is None:
+            state_diff = StateDiff(created={}, modified={}, deleted={})
+        elif isinstance(sd_raw, dict) and {"created", "modified", "deleted"}.issubset(sd_raw):
+            state_diff = StateDiff(
+                created=sd_raw.get("created", {}),
+                modified=sd_raw.get("modified", {}),
+                deleted=sd_raw.get("deleted", {}),
+            )
+        else:
+            return {"task_id": tid, "status": "ERR", "error": "malformed state_diff in trajectory"}
+
         state_result = evaluate_state_requirements(task, state_diff)
         task_result = task_requirements_judge.evaluate(task, traj["conversation"], tool_calls, state_diff)
 
@@ -112,21 +174,10 @@ def score_one(
         ux_result = ux_judge.evaluate(task, traj["conversation"], tool_calls)
         if ux_result is None:
             return {"task_id": tid, "status": "ERR", "error": "ux judge returned None"}
-        for key in [
-            "ux_consent",
-            "ux_ease",
-            "ux_discovery",
-            "ux_information_quality",
-            "ux_disambiguation",
-        ]:
-            traj.pop(key, None)
-        traj["ux_user_control"] = ux_result.user_control
-        traj["ux_friction"] = ux_result.friction
-        traj["ux_situational_awareness"] = ux_result.situational_awareness
-        traj["ux_communication_quality"] = ux_result.communication_quality
-        traj["ux_intent_alignment"] = ux_result.intent_alignment
-        traj["ux_score"] = round(ux_result.ux_score, 2)
-        traj["ux_reasoning"] = ux_result.reasoning
+        try:
+            _save_ux_result(traj, ux_result, traj["conversation"], tool_calls)
+        except ValueError as exc:
+            return {"task_id": tid, "status": "ERR", "error": str(exc)}
 
     if protocol is not None:
         traj.update(protocol.judge_metadata(domain_name or ""))
@@ -158,15 +209,41 @@ def main() -> None:
         required=True,
         help="Results dir containing run1/, run2/, ... Trajectories are scored in place.",
     )
+    parser.add_argument(
+        "--split",
+        type=str,
+        default="all",
+        choices=["all", "train", "test"],
+        help="Task split to score against (default: all)",
+    )
     parser.add_argument("--reasoning-effort", type=str, default=None, choices=["low", "medium", "high"])
-    parser.add_argument("--workers", type=int, default=25)
+    parser.add_argument("--num-workers", dest="workers", type=int, default=25)
+    parser.add_argument(
+        "--no-ux-score",
+        action="store_true",
+        help="Run task/state scoring but skip UX judge calls.",
+    )
+    parser.add_argument(
+        "--only-ux-score",
+        action="store_true",
+        help="Run only UX scoring on existing trajectories; preserve task/state scores.",
+    )
+    parser.add_argument(
+        "--no-score",
+        action="store_true",
+        help="Disable all judge scoring; only refresh protocol judge metadata on trajectories.",
+    )
     args = parser.parse_args()
     if args.num_runs < 1:
         parser.error("--num-runs must be >= 1")
     if args.num_runs_idx_start < 1:
         parser.error("--num-runs-idx-start must be >= 1")
     if args.workers < 1:
-        parser.error("--workers must be >= 1")
+        parser.error("--num-workers must be >= 1")
+    if args.no_score and args.no_ux_score:
+        parser.error("--no-score and --no-ux-score are mutually exclusive")
+    if args.only_ux_score and (args.no_score or args.no_ux_score):
+        parser.error("--only-ux-score cannot be combined with --no-score or --no-ux-score")
 
     domain = get_domain_config(args.domain)
     protocol = load_default_protocol()
@@ -174,7 +251,7 @@ def main() -> None:
     if protocol_errors:
         parser.error("Protocol prompt validation failed:\n" + "\n".join(protocol_errors))
     if args.domain not in protocol.domains:
-        parser.error(f"Domain {args.domain!r} is not part of protocol {protocol.protocol_id}")
+        parser.error(format_domain_not_in_protocol_error(args.domain, protocol))
     if args.num_runs != protocol.num_runs:
         print(
             f"WARNING: Protocol {protocol.protocol_id} expects --num-runs {protocol.num_runs}; "
@@ -183,24 +260,31 @@ def main() -> None:
         )
     tasks_dir = domain_tasks_dir(args.domain)
     results_dir = Path(args.results_dir)
+    split_task_ids = None
+    if args.split != "all":
+        split_task_ids = set(load_split_task_ids(args.domain, args.split, protocol.split_version))
 
-    judge_client = build_locked_judge_client()
+    judge_client = None if args.no_score else build_locked_judge_client()
 
     # Default reasoning effort for shared judge traffic
     reasoning_effort = args.reasoning_effort or protocol.judge_reasoning_effort
 
-    task_requirements_judge = TaskRequirementsJudge(
-        client=judge_client,
-        prompts_dir=domain.prompts_dir,
-        system_prompt=domain.judge_system_prompt,
-        reasoning_effort=reasoning_effort,
-    )
-    ux_judge = UXQualityJudge(
-        client=judge_client,
-        prompts_dir=domain.prompts_dir,
-        system_prompt=domain.judge_system_prompt,
-        reasoning_effort=reasoning_effort,
-    )
+    task_requirements_judge = None
+    if not args.no_score and not args.only_ux_score:
+        task_requirements_judge = TaskRequirementsJudge(
+            client=judge_client,
+            prompts_dir=domain.prompts_dir,
+            system_prompt=domain.judge_system_prompt,
+            reasoning_effort=reasoning_effort,
+        )
+    ux_judge = None
+    if not args.no_score and not args.no_ux_score:
+        ux_judge = UXQualityJudge(
+            client=judge_client,
+            prompts_dir=domain.prompts_dir,
+            system_prompt=domain.judge_system_prompt,
+            reasoning_effort=reasoning_effort,
+        )
 
     total_start = time.time()
     run_indices = list(range(args.num_runs_idx_start, args.num_runs_idx_start + args.num_runs))
@@ -211,7 +295,14 @@ def main() -> None:
             continue
 
         traj_files = sorted(run_dir.glob("*.json"))
-        print(f"\nRun {run_idx}: scoring {len(traj_files)} trajectories...")
+        if split_task_ids is not None:
+            traj_files = [tf for tf in traj_files if tf.stem in split_task_ids]
+        mode = (
+            "metadata only"
+            if args.no_score
+            else ("UX only" if args.only_ux_score else ("task/state only" if args.no_ux_score else "task/state + UX"))
+        )
+        print(f"\nRun {run_idx}: scoring {len(traj_files)} trajectories ({mode})...")
 
         results = []
         with ThreadPoolExecutor(max_workers=args.workers) as executor:
@@ -225,6 +316,7 @@ def main() -> None:
                     run_dir / tf.name,
                     protocol,
                     domain.name,
+                    not args.only_ux_score,
                 ): tf
                 for tf in traj_files
             }
@@ -255,6 +347,7 @@ def main() -> None:
     print(
         f"Run: uv run python -m state_bench.scripts.compute_metrics --results-dir {results_dir} "
         f"--num-runs {args.num_runs} --num-runs-idx-start {args.num_runs_idx_start} "
+        f"--split {args.split} "
         f"--save-filepath {results_dir / 'metrics.json'}"
     )
 

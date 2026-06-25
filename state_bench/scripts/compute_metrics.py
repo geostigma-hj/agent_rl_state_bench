@@ -51,74 +51,13 @@ def _validate_agent_model(traj: dict, path: Path) -> dict | None:
     return {"model_name": model_name, "reasoning_level": reasoning_level}
 
 
-def _validate_agent_pricing(traj: dict, path: Path) -> dict | None:
+def _legacy_agent_pricing(traj: dict, path: Path) -> dict | None:
     pricing = traj.get("agent_pricing")
     if pricing is None:
         return None
     if not isinstance(pricing, dict):
         raise ValueError(f"{path}: agent_pricing metadata must be an object when present")
-
-    required = ["model_name", "input_cost_per_1m_tokens", "output_cost_per_1m_tokens", "currency", "source"]
-    missing = [field for field in required if field not in pricing]
-    if missing:
-        raise ValueError(f"{path}: incomplete agent_pricing metadata; missing {', '.join(missing)}")
-    if not str(pricing["model_name"]).strip():
-        raise ValueError(f"{path}: agent_pricing.model_name must be non-empty")
-    for field in ["input_cost_per_1m_tokens", "output_cost_per_1m_tokens"]:
-        value = pricing[field]
-        if not isinstance(value, int | float) or value < 0:
-            raise ValueError(f"{path}: agent_pricing.{field} must be a non-negative number")
-
-    cached_price = pricing.get("cached_input_cost_per_1m_tokens")
-    cached_provided = bool(pricing.get("cached_input_pricing_provided", cached_price is not None))
-    if cached_price is not None and (not isinstance(cached_price, int | float) or cached_price < 0):
-        raise ValueError(f"{path}: agent_pricing.cached_input_cost_per_1m_tokens must be null or a non-negative number")
-
-    return {
-        "model_name": pricing["model_name"],
-        "input_cost_per_1m_tokens": pricing["input_cost_per_1m_tokens"],
-        "output_cost_per_1m_tokens": pricing["output_cost_per_1m_tokens"],
-        "cached_input_cost_per_1m_tokens": cached_price,
-        "cached_input_pricing_provided": cached_provided,
-        "currency": pricing["currency"],
-        "source": pricing["source"],
-        "cost_accounting_version": pricing.get("cost_accounting_version", "agent-pricing-v1"),
-        "cost_includes": pricing.get("cost_includes", []),
-    }
-
-
-def _cost_fields_from_pricing(traj: dict, pricing: dict, path: Path) -> dict[str, float]:
-    usage = traj.get("token_usage")
-    if not isinstance(usage, dict):
-        raise ValueError(f"{path}: missing token_usage; cannot compute cost")
-
-    input_tokens = int(_num(usage.get("input_tokens")))
-    cached_input_tokens = int(_num(usage.get("cached_input_tokens")))
-    output_tokens = int(_num(usage.get("output_tokens")))
-
-    if input_tokens == 0 and output_tokens == 0:
-        raise ValueError(
-            f"{path}: trajectory has zero tokens recorded but pricing is set. "
-            "This usually means a custom BaseAgent's generate_next_turn() did not "
-            "call self.add_token_usage(...) after each provider call. "
-            "See USE_CUSTOM_CLIENT.md §'Token usage and cost'."
-        )
-
-    non_cached_input_tokens = max(0, input_tokens - cached_input_tokens)
-    input_cost = non_cached_input_tokens * pricing["input_cost_per_1m_tokens"] / 1_000_000
-    cached_input_cost = 0.0
-    if cached_input_tokens:
-        cached_input_rate = pricing["cached_input_cost_per_1m_tokens"] or pricing["input_cost_per_1m_tokens"]
-        cached_input_cost = cached_input_tokens * cached_input_rate / 1_000_000
-    output_cost = output_tokens * pricing["output_cost_per_1m_tokens"] / 1_000_000
-    total_cost = input_cost + cached_input_cost + output_cost
-
-    return {
-        "input_cost_usd": input_cost,
-        "cached_input_cost_usd": cached_input_cost,
-        "output_cost_usd": output_cost,
-        "total_cost_usd": total_cost,
-    }
+    return pricing
 
 
 def _num(value: object, *, default: float = 0.0) -> float:
@@ -149,29 +88,6 @@ def _task_requirements_reasoning(traj: dict) -> str:
     return "; ".join(failed)
 
 
-def _validate_cost_from_pricing(traj: dict, pricing: dict, path: Path) -> None:
-    usage = traj.get("token_usage")
-    checks = _cost_fields_from_pricing(traj, pricing, path)
-
-    checks = {
-        "input_cost_usd": checks["input_cost_usd"],
-        "cached_input_cost_usd": checks["cached_input_cost_usd"],
-        "output_cost_usd": checks["output_cost_usd"],
-        "total_cost_usd": checks["total_cost_usd"],
-    }
-    tolerance = 1e-9
-    for field, expected in checks.items():
-        actual = _num(usage.get(field))
-        if abs(actual - expected) > tolerance:
-            raise ValueError(
-                f"{path}: token_usage.{field}={actual:.12f} does not match declared pricing expected {expected:.12f}"
-            )
-
-    top_level_cost = traj.get("cost_usd")
-    if top_level_cost is not None and abs(_num(top_level_cost) - checks["total_cost_usd"]) > tolerance:
-        raise ValueError(f"{path}: cost_usd does not match declared pricing and token_usage")
-
-
 def _pricing_key(pricing: dict) -> str:
     return json.dumps(pricing, sort_keys=True, separators=(",", ":"))
 
@@ -182,6 +98,8 @@ UX_DIMENSIONS = {
     "ux_situational_awareness": "mean_ux_situational_awareness",
     "ux_communication_quality": "mean_ux_communication_quality",
     "ux_intent_alignment": "mean_ux_intent_alignment",
+    "ux_user_effort": "mean_ux_user_effort",
+    "ux_response_density": "mean_ux_response_density",
 }
 
 LEGACY_UX_FIELD_MAP = {
@@ -194,7 +112,10 @@ LEGACY_UX_FIELD_MAP = {
 
 
 def _ux_value(traj: dict, field: str) -> object:
-    return traj.get(field, traj.get(LEGACY_UX_FIELD_MAP[field]))
+    legacy_field = LEGACY_UX_FIELD_MAP.get(field)
+    if legacy_field is None:
+        return traj.get(field)
+    return traj.get(field, traj.get(legacy_field))
 
 
 def load_run(run_dir: Path) -> tuple[dict[str, dict], dict[str, object]]:
@@ -220,10 +141,7 @@ def load_run(run_dir: Path) -> tuple[dict[str, dict], dict[str, object]]:
             continue
 
         agent_model = _validate_agent_model(traj, f)
-        agent_pricing = _validate_agent_pricing(traj, f)
-        if agent_pricing is not None:
-            _validate_cost_from_pricing(traj, agent_pricing, f)
-        cost_fields = None
+        agent_pricing = _legacy_agent_pricing(traj, f)
         eff = traj.get("efficiency", {})
         token_usage = traj.get("token_usage", {})
         results[tid] = {
@@ -238,6 +156,8 @@ def load_run(run_dir: Path) -> tuple[dict[str, dict], dict[str, object]]:
             "ux_situational_awareness": _ux_value(traj, "ux_situational_awareness"),
             "ux_communication_quality": _ux_value(traj, "ux_communication_quality"),
             "ux_intent_alignment": _ux_value(traj, "ux_intent_alignment"),
+            "ux_user_effort": _ux_value(traj, "ux_user_effort"),
+            "ux_response_density": _ux_value(traj, "ux_response_density"),
             "state_requirements_met": traj.get("state_requirements_met"),
             "task_requirements_met": traj.get("task_requirements_met"),
             "task_completion_pass": task_completion,
@@ -252,10 +172,8 @@ def load_run(run_dir: Path) -> tuple[dict[str, dict], dict[str, object]]:
             "reasoning_output_tokens": traj.get("reasoning_output_tokens")
             or traj.get("token_usage", {}).get("reasoning_output_tokens"),
             "total_tokens": traj.get("total_tokens") or traj.get("token_usage", {}).get("total_tokens"),
-            "cost_usd": (cost_fields or {}).get("total_cost_usd")
-            or traj.get("cost_usd")
-            or token_usage.get("total_cost_usd"),
-            "agent_turn_cost_usd": (cost_fields or {}).get("total_cost_usd") or token_usage.get("agent_turn_cost_usd"),
+            "cost_usd": traj.get("cost_usd") or token_usage.get("total_cost_usd"),
+            "agent_turn_cost_usd": token_usage.get("agent_turn_cost_usd"),
             "memory_ingestion_cost_usd": traj.get("token_usage", {}).get("memory_ingestion_cost_usd"),
             "memory_retrieval_cost_usd": traj.get("token_usage", {}).get("memory_retrieval_cost_usd"),
             "agent_model": agent_model,
@@ -612,6 +530,8 @@ def compute_summary(m: dict, run_meta: list[dict[str, object]] | None = None) ->
             round(r, 4) for r in per_run_ux_dim_scores["ux_communication_quality"]
         ],
         "per_run_ux_intent_alignment_scores": [round(r, 4) for r in per_run_ux_dim_scores["ux_intent_alignment"]],
+        "per_run_ux_user_effort_scores": [round(r, 4) for r in per_run_ux_dim_scores["ux_user_effort"]],
+        "per_run_ux_response_density_scores": [round(r, 4) for r in per_run_ux_dim_scores["ux_response_density"]],
         "per_run_scored_counts": per_run_scored_counts,
         "per_run_state_pass_counts": per_run_state_counts,
         "per_run_task_requirements_pass_counts": per_run_task_counts,
@@ -681,6 +601,8 @@ def print_summary(s: dict, verbose: bool = False) -> None:
         print(f"{'Mean UX awareness':<30s} {s['mean_ux_situational_awareness']:.2f}/5")
         print(f"{'Mean UX communication':<30s} {s['mean_ux_communication_quality']:.2f}/5")
         print(f"{'Mean UX intent alignment':<30s} {s['mean_ux_intent_alignment']:.2f}/5")
+        print(f"{'Mean UX user effort':<30s} {s['mean_ux_user_effort']:.2f}/5")
+        print(f"{'Mean UX response density':<30s} {s['mean_ux_response_density']:.2f}/5")
         print(f"{'Per-run UX control':<30s} {', '.join(f'{r:.2f}' for r in s['per_run_ux_user_control_scores'])}")
         print(f"{'Per-run UX friction':<30s} {', '.join(f'{r:.2f}' for r in s['per_run_ux_friction_scores'])}")
         print(
@@ -690,6 +612,8 @@ def print_summary(s: dict, verbose: bool = False) -> None:
             f"{'Per-run UX communication':<30s} {', '.join(f'{r:.2f}' for r in s['per_run_ux_communication_quality_scores'])}"
         )
         print(f"{'Per-run UX intent':<30s} {', '.join(f'{r:.2f}' for r in s['per_run_ux_intent_alignment_scores'])}")
+        print(f"{'Per-run UX effort':<30s} {', '.join(f'{r:.2f}' for r in s['per_run_ux_user_effort_scores'])}")
+        print(f"{'Per-run UX density':<30s} {', '.join(f'{r:.2f}' for r in s['per_run_ux_response_density_scores'])}")
         print(f"{'Mean turns (pass only)':<30s} {s['mean_turns_pass']:.1f}")
         print(f"{'Mean tool calls (pass only)':<30s} {s['mean_tool_calls_pass']:.1f}")
         print(f"{'Mean input tokens':<30s} {s['mean_input_tokens']:.1f}")
@@ -723,6 +647,8 @@ def save_metrics(s: dict, results_dir: Path, *, skip_path: Path | None = None) -
         "mean_ux_situational_awareness": s["mean_ux_situational_awareness"],
         "mean_ux_communication_quality": s["mean_ux_communication_quality"],
         "mean_ux_intent_alignment": s["mean_ux_intent_alignment"],
+        "mean_ux_user_effort": s["mean_ux_user_effort"],
+        "mean_ux_response_density": s["mean_ux_response_density"],
         "mean_turns": s["mean_turns"],
         "mean_turns_pass": s["mean_turns_pass"],
         "mean_tool_calls": s["mean_tool_calls"],
@@ -750,6 +676,8 @@ def save_metrics(s: dict, results_dir: Path, *, skip_path: Path | None = None) -
         "per_run_ux_situational_awareness_scores": s["per_run_ux_situational_awareness_scores"],
         "per_run_ux_communication_quality_scores": s["per_run_ux_communication_quality_scores"],
         "per_run_ux_intent_alignment_scores": s["per_run_ux_intent_alignment_scores"],
+        "per_run_ux_user_effort_scores": s["per_run_ux_user_effort_scores"],
+        "per_run_ux_response_density_scores": s["per_run_ux_response_density_scores"],
         "comparable_task_count": s["comparable_task_count"],
         "partial": s["partial"],
         "agent_model": s.get("agent_model"),
@@ -852,6 +780,8 @@ def save_per_task(m: dict, results_dir: Path) -> None:
     ux_situational_awareness_m = m["ux_situational_awareness"]
     ux_communication_quality_m = m["ux_communication_quality"]
     ux_intent_alignment_m = m["ux_intent_alignment"]
+    ux_user_effort_m = m["ux_user_effort"]
+    ux_response_density_m = m["ux_response_density"]
 
     analysis_dir = results_dir / "per_task_metrics"
     analysis_dir.mkdir(parents=True, exist_ok=True)
@@ -870,6 +800,8 @@ def save_per_task(m: dict, results_dir: Path) -> None:
                     "ux_situational_awareness": ux_situational_awareness_m[tid][i],
                     "ux_communication_quality": ux_communication_quality_m[tid][i],
                     "ux_intent_alignment": ux_intent_alignment_m[tid][i],
+                    "ux_user_effort": ux_user_effort_m[tid][i],
+                    "ux_response_density": ux_response_density_m[tid][i],
                     "state_requirements_met": state_m[tid][i],
                     "task_requirements_met": task_m[tid][i],
                     "task_completion_pass": completion_m[tid][i],
@@ -900,6 +832,8 @@ def save_per_task(m: dict, results_dir: Path) -> None:
                 _avg([v for v in ux_communication_quality_m[tid] if v is not None]), 2
             ),
             "avg_ux_intent_alignment": round(_avg([v for v in ux_intent_alignment_m[tid] if v is not None]), 2),
+            "avg_ux_user_effort": round(_avg([v for v in ux_user_effort_m[tid] if v is not None]), 2),
+            "avg_ux_response_density": round(_avg([v for v in ux_response_density_m[tid] if v is not None]), 2),
             "avg_turns": round(_avg([v for v in turns_m[tid] if v is not None]), 2),
             "avg_tool_calls": round(_avg([v for v in tools_m[tid] if v is not None]), 2),
             "avg_input_tokens": round(_avg([v for v in input_tokens_m[tid] if v is not None]), 2),
@@ -967,6 +901,12 @@ def print_comparison(
             f"{'Mean UX intent':<35} {base_s['mean_ux_intent_alignment']:>10.2f} {comp_s['mean_ux_intent_alignment']:>10.2f} {comp_s['mean_ux_intent_alignment'] - base_s['mean_ux_intent_alignment']:>+10.2f}"
         )
         print(
+            f"{'Mean UX user effort':<35} {base_s['mean_ux_user_effort']:>10.2f} {comp_s['mean_ux_user_effort']:>10.2f} {comp_s['mean_ux_user_effort'] - base_s['mean_ux_user_effort']:>+10.2f}"
+        )
+        print(
+            f"{'Mean UX response density':<35} {base_s['mean_ux_response_density']:>10.2f} {comp_s['mean_ux_response_density']:>10.2f} {comp_s['mean_ux_response_density'] - base_s['mean_ux_response_density']:>+10.2f}"
+        )
+        print(
             f"{'Mean turns (pass only)':<35} {base_s['mean_turns_pass']:>10.1f} {comp_s['mean_turns_pass']:>10.1f} {comp_s['mean_turns_pass'] - base_s['mean_turns_pass']:>+10.1f}"
         )
         print(
@@ -1031,7 +971,7 @@ def main():
         "--split",
         type=str,
         default="all",
-        choices=["all", "test"],
+        choices=["all", "train", "test"],
         help="Task split to score against (default: all)",
     )
     parser.add_argument(

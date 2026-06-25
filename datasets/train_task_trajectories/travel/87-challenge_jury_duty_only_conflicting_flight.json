@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "Done — both trips have been moved for jury duty.\n\nUpdated bookings:\n- BK-1058: changed from ORD → MIA on June 19 to flight AA101 on June 26\n  - Departure: 2026-06-26 11:00\n  - Arrival: 2026-06-26 14:38\n  - Change fee: $0\n  - Fare difference: $20\n\n- BK-1000: changed from JFK → LHR on June 25 to flight BA101 on July 2\n  - Departure: 2026-07-02 19:30\n  - Arrival: 2026-07-03 00:58\n  - Change fee: $0\n  - Fare difference: $30\n\nYour existing preferences were kept on both bookings:\n- Economy\n- Aisle seat\n- Kosher meal\n- Wi‑Fi: yes\n- Extra legroom: yes\n- Insurance: no\n\nTotal additional fare difference: $50\n\nIf you want, I can also help you review any hotel or car reservations tied to these trips.",
+      "content": "I found replacement flights for both bookings and previewed the changes.\n\n- BK-1058, ORD \u2192 MIA: move from Jun 19 to Jun 26 on AA101 at 11:00 AM  \n  - Change fee: $0\n  - Fare difference: $20\n\n- BK-1000, JFK \u2192 LHR: move from Jun 25 to Jul 2 on BA101 at 7:30 PM  \n  - Change fee: $0\n  - Fare difference: $30\n\nYour current preferences would stay the same on both bookings:\n- Economy\n- Aisle seat\n- Kosher meal\n- Wi\u2011Fi: yes\n- Extra legroom: yes\n- Insurance: no\n\nTotal additional cost to finalize both changes: $50.\n\nIf you want, I can go ahead and complete both changes now.",
       "tool_calls": [
         {
           "name": "get_booking",
@@ -97,7 +97,7 @@
             "origin": "ORD",
             "destination": "MIA",
             "date": "2026-06-26",
-            "airline": "",
+            "airline": "AA",
             "time_range": "morning",
             "max_stops": 1,
             "max_price": -1
@@ -129,7 +129,7 @@
             "origin": "JFK",
             "destination": "LHR",
             "date": "2026-07-02",
-            "airline": "",
+            "airline": "BA",
             "time_range": "evening",
             "max_stops": 1,
             "max_price": -1
@@ -156,66 +156,6 @@
           }
         },
         {
-          "name": "get_policies",
-          "arguments": {
-            "topic": "change",
-            "cabin_class": "economy",
-            "loyalty_tier": "gold",
-            "route_type": "domestic"
-          },
-          "result": {
-            "topic": "change",
-            "rules": {
-              "free_change_window": "Free changes within 24 hours (domestic) or 48 hours (international) of booking",
-              "basic_economy": "Not changeable after free window",
-              "economy_domestic_personal": "Domestic change fee: $75 if departure >7 days, $150 if ≤7 days. Fare difference also applies.",
-              "economy_international_personal": "International change fee: $100 if departure >7 days, $200 if ≤7 days. Fare difference also applies.",
-              "economy_medical": "Medical changes: 50% discount on standard fee (requires change_reason='medical')",
-              "economy_bereavement": "Bereavement changes: 75% discount on standard fee (requires change_reason='bereavement')",
-              "jury_duty": "Jury duty: free change (change_reason='jury_duty')",
-              "military": "Military deployment: free change (change_reason='military')",
-              "schedule_change": "Airline schedule changes: free, no fee (change_reason='schedule_change')",
-              "weather": "Weather-related changes: free, no fee (change_reason='weather')",
-              "business": "Free changes (fare difference still applies)",
-              "first": "Free changes (fare difference still applies)",
-              "change_reason_required": "Pass change_reason parameter: 'personal', 'medical', 'bereavement', 'jury_duty', 'military', 'schedule_change', or 'weather'",
-              "route_type_matters": "Fees differ by route type. Check flight route_type."
-            },
-            "applicable_cabin_class": "economy",
-            "applicable_route_type": "domestic"
-          }
-        },
-        {
-          "name": "get_policies",
-          "arguments": {
-            "topic": "change",
-            "cabin_class": "economy",
-            "loyalty_tier": "gold",
-            "route_type": "international"
-          },
-          "result": {
-            "topic": "change",
-            "rules": {
-              "free_change_window": "Free changes within 24 hours (domestic) or 48 hours (international) of booking",
-              "basic_economy": "Not changeable after free window",
-              "economy_domestic_personal": "Domestic change fee: $75 if departure >7 days, $150 if ≤7 days. Fare difference also applies.",
-              "economy_international_personal": "International change fee: $100 if departure >7 days, $200 if ≤7 days. Fare difference also applies.",
-              "economy_medical": "Medical changes: 50% discount on standard fee (requires change_reason='medical')",
-              "economy_bereavement": "Bereavement changes: 75% discount on standard fee (requires change_reason='bereavement')",
-              "jury_duty": "Jury duty: free change (change_reason='jury_duty')",
-              "military": "Military deployment: free change (change_reason='military')",
-              "schedule_change": "Airline schedule changes: free, no fee (change_reason='schedule_change')",
-              "weather": "Weather-related changes: free, no fee (change_reason='weather')",
-              "business": "Free changes (fare difference still applies)",
-              "first": "Free changes (fare difference still applies)",
-              "change_reason_required": "Pass change_reason parameter: 'personal', 'medical', 'bereavement', 'jury_duty', 'military', 'schedule_change', or 'weather'",
-              "route_type_matters": "Fees differ by route type. Check flight route_type."
-            },
-            "applicable_cabin_class": "economy",
-            "applicable_route_type": "international"
-          }
-        },
-        {
           "name": "update_booking",
           "arguments": {
             "booking_id": "BK-1058",
@@ -228,26 +168,16 @@
             "add_extra_legroom": true,
             "add_insurance": false,
             "delay_compensation": "none",
-            "paid_checked_bags": 0
+            "paid_checked_bags": 0,
+            "confirm": false
           },
           "result": {
-            "status": "updated",
+            "status": "preview",
             "booking_id": "BK-1058",
-            "changes_applied": [
-              "flight_id",
-              "change_reason",
-              "cabin_class",
-              "seat_type",
-              "meal_preference",
-              "add_wifi",
-              "add_extra_legroom",
-              "add_insurance",
-              "delay_compensation",
-              "paid_checked_bags"
-            ],
-            "price_paid": 420,
+            "flight_id": "AA101",
             "change_fee": 0,
-            "fare_difference": 20
+            "fare_difference": 20,
+            "price_paid": 420
           }
         },
         {
@@ -263,25 +193,116 @@
             "add_extra_legroom": true,
             "add_insurance": false,
             "delay_compensation": "none",
-            "paid_checked_bags": 0
+            "paid_checked_bags": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "booking_id": "BK-1000",
+            "flight_id": "BA101",
+            "change_fee": 0,
+            "fare_difference": 30,
+            "price_paid": 1030
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Thanks, but I need to correct one thing: only BK-1058 directly conflicts with jury duty. BK-1000 is just being moved to fit the revised schedule, so that one should have the normal personal change treatment, not jury duty.\n\nBefore I approve, can you confirm the selected June 26 Miami option and July 2 London option with airline, time range, max stops, and the correct separate fees? I also need the combined additional total to be $150 and within my budget."
+    },
+    {
+      "role": "assistant",
+      "content": "Absolutely \u2014 with the corrected change reason, here\u2019s the confirmation.\n\n### Selected replacement flights\n\n**BK-1058 \u2014 Miami**\n- Route: ORD \u2192 MIA\n- New date: **2026-06-26**\n- Selected flight: **AA101**\n- Airline filter: **AA**\n- Time range filter: **morning**\n- Max stops filter: **1**\n- Actual itinerary: **11:00 AM departure**, **nonstop**\n\n**BK-1000 \u2014 London**\n- Route: JFK \u2192 LHR\n- New date: **2026-07-02**\n- Selected flight: **BA101**\n- Airline filter: **BA**\n- Time range filter: **evening**\n- Max stops filter: **1**\n- Actual itinerary: **7:30 PM departure**, **nonstop**\n\n### Correct separate change costs\n\n**BK-1058**  \nReason: **jury duty**\n- Change fee: **$0**\n- Fare difference: **$20**\n- Additional total: **$20**\n\n**BK-1000**  \nReason: **personal**\n- Change fee: **$100**\n- Fare difference: **$30**\n- Additional total: **$130**\n\n### Combined additional total\n- **$150 total**\n\nSo yes \u2014 with the corrected treatment, the combined additional cost is **exactly $150**, which is **within your stated budget** if your cap is $150.\n\nIf you want, I can now finalize both changes with:\n- **BK-1058 \u2192 AA101 on June 26**\n- **BK-1000 \u2192 BA101 on July 2**",
+      "tool_calls": [
+        {
+          "name": "update_booking",
+          "arguments": {
+            "booking_id": "BK-1000",
+            "flight_id": "BA101",
+            "change_reason": "personal",
+            "cabin_class": "economy",
+            "seat_type": "aisle",
+            "meal_preference": "kosher",
+            "add_wifi": true,
+            "add_extra_legroom": true,
+            "add_insurance": false,
+            "delay_compensation": "none",
+            "paid_checked_bags": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "booking_id": "BK-1000",
+            "flight_id": "BA101",
+            "change_fee": 100,
+            "fare_difference": 30,
+            "price_paid": 1130
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Yes, please go ahead and finalize both changes with those selected options. Just to confirm, BK-1058 should be processed under the jury duty waiver and BK-1000 under the normal personal change policy, for a combined additional total of $150."
+    },
+    {
+      "role": "assistant",
+      "content": "Done \u2014 both changes have been finalized.\n\n- **BK-1058** \u2192 changed to **AA101** on **2026-06-26**\n  - Processed under **jury duty**\n  - Change fee: **$0**\n  - Fare difference: **$20**\n  - New total paid: **$420**\n\n- **BK-1000** \u2192 changed to **BA101** on **2026-07-02**\n  - Processed under **personal change policy**\n  - Change fee: **$100**\n  - Fare difference: **$30**\n  - New total paid: **$1,130**\n\n**Combined additional total: $150**\n\nYour seat, meal, Wi\u2011Fi, and extra legroom preferences were preserved on both bookings.",
+      "tool_calls": [
+        {
+          "name": "update_booking",
+          "arguments": {
+            "booking_id": "BK-1058",
+            "flight_id": "AA101",
+            "change_reason": "jury_duty",
+            "cabin_class": "economy",
+            "seat_type": "aisle",
+            "meal_preference": "kosher",
+            "add_wifi": true,
+            "add_extra_legroom": true,
+            "add_insurance": false,
+            "delay_compensation": "none",
+            "paid_checked_bags": 0,
+            "confirm": true
+          },
+          "result": {
+            "status": "updated",
+            "booking_id": "BK-1058",
+            "changes_applied": [
+              "flight_id",
+              "change_reason"
+            ],
+            "price_paid": 420,
+            "change_fee": 0,
+            "fare_difference": 20
+          }
+        },
+        {
+          "name": "update_booking",
+          "arguments": {
+            "booking_id": "BK-1000",
+            "flight_id": "BA101",
+            "change_reason": "personal",
+            "cabin_class": "economy",
+            "seat_type": "aisle",
+            "meal_preference": "kosher",
+            "add_wifi": true,
+            "add_extra_legroom": true,
+            "add_insurance": false,
+            "delay_compensation": "none",
+            "paid_checked_bags": 0,
+            "confirm": true
           },
           "result": {
             "status": "updated",
             "booking_id": "BK-1000",
             "changes_applied": [
               "flight_id",
-              "change_reason",
-              "cabin_class",
-              "seat_type",
-              "meal_preference",
-              "add_wifi",
-              "add_extra_legroom",
-              "add_insurance",
-              "delay_compensation",
-              "paid_checked_bags"
+              "change_reason"
             ],
-            "price_paid": 1030,
-            "change_fee": 0,
+            "price_paid": 1130,
+            "change_fee": 100,
             "fare_difference": 30
           }
         }
@@ -289,7 +310,7 @@
     },
     {
       "role": "user",
-      "content": "Thanks. Just to note, BK-1058 is the one that directly overlaps with jury duty; BK-1000 was moved to accommodate the new schedule. The changes and $50 total fare difference look fine. [TASK_DONE]"
+      "content": "Thanks \u2014 just to verify before we wrap up: both bookings were changed to the requested dates, BK-1058 used the jury duty waiver, BK-1000 used the normal personal change policy, and the combined additional total was $150. If that\u2019s all correct, then I\u2019m all set. [TASK_DONE]"
     }
   ]
 }

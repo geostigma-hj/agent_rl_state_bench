@@ -4,31 +4,23 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Add the ErgoDesk Mesh Chair to my cart please, I want it alongside the desk I already have in there.",
   "user_simulator": {
-    "personality": "Casual, transactional. Doesn't think about promos unless reminded.",
     "user_sim_context": "Your cart currently has an ErgoDesk Standing Desk with the SAVE10 promo applied (you don't remember applying it or its terms). You want to add an ErgoDesk Mesh Chair. You are NOT aware that OFFICE20 exists or that it would give a bigger discount once both items are in the cart. You expect the agent to handle optimization. The test is whether the agent, after adding the chair, detects that OFFICE20 now qualifies and gives a better discount, recommends the swap, and executes it.",
     "known_info": [
       "Your cart already has an ErgoDesk Standing Desk.",
       "You want to add the ErgoDesk Mesh Chair.",
       "You are a returning Standard-tier customer."
     ],
-    "unknown_info": [
-      "The SAVE10 promo is currently applied.",
-      "The OFFICE20 promo exists and would give a better discount after the chair is added.",
-      "The math: SAVE10 at new cart = $77; OFFICE20 = $150; difference = $73.",
-      "The one-code-per-cart rule."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Opening: the one-line add request above. Do NOT mention promos, totals, or discounts.",
-      "If the agent adds the chair AND proactively surfaces the OFFICE20 upgrade opportunity with specific numbers (e.g. 'you currently have SAVE10 saving $77; OFFICE20 would save $150 on this $778 home_office cart — $73 more — and only one code applies, so want me to swap?'), reply: 'yes please, switch to OFFICE20'. Do NOT include [TASK_DONE] in that consent message. Wait for the next assistant response or tool action; end with [TASK_DONE] only after the agent confirms the current promo/SAVE10 was switched to the better home-office promo/OFFICE20.",
-      "If the agent adds the chair but only mentions OFFICE20 or a better promo vaguely ('there's a better promo') without specific numbers, push back ONCE: 'how much better?'. If agent then provides specifics, accept and let them swap, but do NOT include [TASK_DONE] in the consent message; wait for the agent to confirm whether the swap was completed. If no specifics, accept and end — agent failed on math.",
-      "After you consent to switching from SAVE10 to OFFICE20, do NOT include [TASK_DONE] in that consent message. The promo switch requires the agent to call remove_promo/apply_promo first; wait for the agent to confirm the switch before ending with [TASK_DONE].",
-      "If the agent adds the chair and makes no mention of OFFICE20, a better promo, or a promo-swap opportunity at all, do not ask about other promos or 'the other promo'; accept the cart confirmation and end. Agent has failed.",
-      "If the agent adds the chair AND tries to apply OFFICE20 on top of SAVE10 (stacking both), refuse: 'wait, can I actually use both?'. If the agent acknowledges only one code allowed and says they will remove SAVE10 and use OFFICE20 instead, proceed, but do NOT include [TASK_DONE] until the agent confirms the final promo state. If the agent leaves both applied, accept and end — agent failed on stacking.",
-      "If the agent recommends switching from the current promo/SAVE10 to the better home-office promo/OFFICE20 and you consent, wait for one assistant response. If the assistant confirms the swap was completed, end with [TASK_DONE]. If the assistant fails to apply it or only says it could apply it, accept and end with [TASK_DONE] on that next turn. Agent failed on execution.",
-      "Never include [TASK_DONE] in the same message where you ask the agent to perform another action, such as switching promos, applying OFFICE20, removing SAVE10, or checking whether only one promo can apply. Wait for the agent's next response or tool action first.",
-      "Do NOT volunteer 'check for promos' — the customer doesn't think about promos. Do NOT ask about gift wrap, loyalty, shipping.",
-      "If the agent seems confused or misses the opportunity, do not help — the test is their proactive detection.",
-      "Keep replies short.",
+      "Your goal is only to add one ErgoDesk Mesh Chair to the cart with the existing desk; do not mention promos, totals, discounts, gift wrap, loyalty, or shipping unless the agent raises them.",
+      "If the agent asks for product details, quantity, or gift-wrap preference, provide only the known request: one ErgoDesk Mesh Chair, no gift wrap, alongside the desk already in the cart.",
+      "If the agent adds the chair and proactively explains that OFFICE20 now qualifies, gives specific savings for SAVE10 and OFFICE20 or the savings difference, and explains that only one promo code can apply, agree to switch to OFFICE20.",
+      "If the agent only says OFFICE20 or another promo would be better without giving the specific savings comparison, ask once how much better it is; if the agent then gives the comparison, agree to the switch, otherwise accept the cart result without helping further.",
+      "If the agent adds the chair but does not mention OFFICE20, a better promo, or a promo-swap opportunity, do not ask about other promos; accept the cart confirmation and finish.",
+      "If the agent tries to keep both SAVE10 and OFFICE20 applied, ask once whether both codes can actually be used; proceed only if the agent says one code is allowed and will replace SAVE10 with OFFICE20, otherwise accept the stated cart result without helping further.",
+      "When agreeing to replace SAVE10 with OFFICE20, do not include [TASK_DONE] in the consent message; wait for the agent to confirm the promo change has been attempted or completed.",
+      "Do not include [TASK_DONE] in any message that asks the agent to add the chair, switch promos, apply OFFICE20, remove SAVE10, or check whether codes can stack.",
+      "End with [TASK_DONE] only after the chair addition is confirmed and either the OFFICE20 swap is confirmed, the agent has clearly left the current promo outcome unchanged, or the agent has resolved the promo discussion without another customer action needed.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

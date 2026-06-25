@@ -4,20 +4,17 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "I have Pixel 7 and Pixel 8 ClearGrip cases in my cart. Before removing anything, read back both product IDs and ask me to confirm Pixel 8 removal.",
   "user_simulator": {
-    "personality": "Direct, practical, and cooperative. Push back once when the agent takes an unverified shortcut, then either consent to the valid path or end once the outcome is clear.",
     "user_sim_context": "Your cart has both Pixel 7 and Pixel 8 ClearGrip cases, and you only want the Pixel 8 case removed. Before removal, you want both product IDs read back and a confirmation request.",
     "known_info": [
       "You know your current request and how you asked for it.",
       "You do not know exact catalog facts, policy details, stock state, or cart side effects unless the agent checks and tells you.",
       "Your cart already contains: 1 x ClearGrip Case for Pixel 7; 1 x ClearGrip Case for Pixel 8."
     ],
-    "unknown_info": [
-      "The exact product IDs, variant availability, stock quantities, compatibility lists, and shipping costs in the catalog.",
-      "Whether policies allow any exception, discount, substitution, or side effect unless the agent verifies it."
-    ],
+    "unknown_info": [],
     "task_rules": [
       "You want the Pixel 8 case removed, but only after the agent disambiguates both ClearGrip cases by product ID.",
       "If the agent reads back both product IDs and asks to remove Pixel 8, consent to removing only the Pixel 8 case.",
+      "If the agent asks for removal confirmation before reading back both product IDs, ask them to read back the Pixel 7 and Pixel 8 case IDs first.",
       "If the agent removes a case before reading both IDs, object that you wanted the two similar cases confirmed first.",
       "If the agent removes Pixel 7 or both cases, object that Pixel 7 was supposed to stay.",
       "When Pixel 8 has been removed, Pixel 7 remains, and no checkout-side writes were made, end your next message with [TASK_DONE].",

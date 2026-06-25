@@ -1,7 +1,27 @@
 {
   "task_id": "113-hard_exchange_gift_size_no_refund",
+  "user_id": "cust_003",
+  "now": "2026-07-08T10:00:00",
+  "opening_message": "I received the shirt from ORD-7215 as a gift. I only need a larger size; please don't refund the person who bought it.",
+  "user_simulator": {
+    "known_info": [
+      "order_id: ORD-7215",
+      "current_item: Premium Cotton Shirt",
+      "requested_item: Premium Cotton Shirt (Large)"
+    ],
+    "task_rules": [
+      "Keep the request scoped to exchanging the gifted Premium Cotton Shirt from ORD-7215 for the same shirt in Large, with no refund or credit to you or the gift sender.",
+      "If the agent asks for identifying details, provide the order ID and the current and requested item details; mention that it was a gift only when relevant or asked.",
+      "If the agent needs eligibility, stock, refund, policy, or internal order facts, ask them to check the records rather than guessing.",
+      "If the agent suggests a return, store credit, refund to anyone, or return-and-reorder path, push back once and restate that you only want a size exchange with no refund or credit.",
+      "Push back if the proposed replacement is not Premium Cotton Shirt (Large) or if the agent has not resolved the requested replacement product before asking for approval.",
+      "Accept only after a preview confirms the current Premium Cotton Shirt will be exchanged for Premium Cotton Shirt (Large) with no refund, store credit, or gift-sender refund.",
+      "End only after the agent confirms the exchange has been processed for Premium Cotton Shirt (Large) and no refund or credit was issued."
+    ],
+    "unknown_info": [],
+    "user_sim_context": "You are contacting support about order ORD-7215. Gift recipient wants a shirt size exchange and explicitly does not want the buyer refunded. Agent must process a same-variant exchange, not a gift return. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation."
+  },
   "task_summary": "Gift recipient wants a shirt size exchange and explicitly does not want the buyer refunded. Agent must process a same-variant exchange, not a gift return.",
-  "task_type": "exchange_item",
   "task_requirements": [
     {
       "evidence": "conversation_or_tool_calls",
@@ -22,29 +42,6 @@
       "requirement": "Agent must acknowledge or honor that the customer wants a gift size exchange only and must not tell the customer that the gift sender/buyer will be refunded."
     }
   ],
-  "user_id": "cust_003",
-  "now": "2026-07-08T10:00:00",
-  "opening_message": "I received the shirt from ORD-7215 as a gift. I only need a larger size; please don't refund the person who bought it.",
-  "user_simulator": {
-    "known_info": [
-      "order_id: ORD-7215",
-      "current_item: Premium Cotton Shirt",
-      "requested_item: Premium Cotton Shirt (Large)"
-    ],
-    "personality": "friendly",
-    "task_rules": [
-      "Give the order ID.",
-      "Say it was a gift if asked.",
-      "If the agent suggests a return, store credit, refund to anyone, or return-and-reorder path, say you do not want any refund or credit and only want the shirt exchanged for the Large size.",
-      "Confirm only a preview that exchanges the current Premium Cotton Shirt for Premium Cotton Shirt (Large) with no refund or store credit."
-    ],
-    "unknown_info": [
-      "replacement product ID",
-      "exchange eligibility",
-      "price difference"
-    ],
-    "user_sim_context": "You are contacting support about order ORD-7215. Gift recipient wants a shirt size exchange and explicitly does not want the buyer refunded. Agent must process a same-variant exchange, not a gift return. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation."
-  },
   "state_requirements": [
     {
       "entity_type": "order_items",
@@ -56,98 +53,44 @@
       "entity_type": "order_items",
       "record_key": "ITEM-10215",
       "field": "replacement_item_id",
-      "expected_value": "ITEM-10216"
+      "expected_value_from_match": {
+        "entity_type": "order_items",
+        "match_fields": {
+          "order_id": "ORD-7215",
+          "product_id": "PROD-4220",
+          "quantity": 1,
+          "unit_price": 59,
+          "item_status": "confirmed"
+        }
+      }
     },
     {
       "entity_type": "order_items",
-      "record_key": "ITEM-10216",
-      "field": "goodwill_credit",
-      "expected_value": 0
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10216",
-      "field": "goodwill_credit_method",
-      "expected_value": null
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10216",
-      "field": "item_id",
-      "expected_value": "ITEM-10216"
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10216",
-      "field": "item_status",
-      "expected_value": "confirmed"
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10216",
-      "field": "order_id",
-      "expected_value": "ORD-7215"
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10216",
-      "field": "product_id",
-      "expected_value": "PROD-4220"
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10216",
-      "field": "quantity",
-      "expected_value": 1
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10216",
-      "field": "refund_amount",
-      "expected_value": null
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10216",
-      "field": "refund_method",
-      "expected_value": null
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10216",
-      "field": "replacement_item_id",
-      "expected_value": null
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10216",
-      "field": "restocking_fee",
-      "expected_value": null
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10216",
-      "field": "return_label_issued",
-      "expected_value": false
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10216",
-      "field": "return_reason",
-      "expected_value": null
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10216",
-      "field": "store_credit_only",
-      "expected_value": false
-    },
-    {
-      "entity_type": "order_items",
-      "record_key": "ITEM-10216",
-      "field": "unit_price",
-      "expected_value": 59
+      "match_fields": {
+        "order_id": "ORD-7215",
+        "product_id": "PROD-4220",
+        "quantity": 1,
+        "unit_price": 59,
+        "item_status": "confirmed"
+      },
+      "expected_fields": {
+        "goodwill_credit": 0,
+        "goodwill_credit_method": null,
+        "item_status": "confirmed",
+        "order_id": "ORD-7215",
+        "product_id": "PROD-4220",
+        "quantity": 1,
+        "refund_amount": null,
+        "refund_method": null,
+        "replacement_item_id": null,
+        "restocking_fee": null,
+        "return_label_issued": false,
+        "return_reason": null,
+        "store_credit_only": false,
+        "unit_price": 59
+      }
     }
   ],
+  "task_type": "exchange_item",
   "task_env_path": "state_bench/domains/customer_support/task_envs/113-hard_exchange_gift_size_no_refund.json"
 }

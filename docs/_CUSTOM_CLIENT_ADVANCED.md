@@ -54,6 +54,8 @@ class MyStatefulAgent(BaseAgent):
         )
         self._previous_response_id = response.id
 
+        if getattr(response, "cost_usd", None) is not None:
+            self.add_cost_usd(response.cost_usd)
         self.add_token_usage(
             input_tokens=getattr(response.usage, "input_tokens", None),
             output_tokens=getattr(response.usage, "output_tokens", None),
@@ -99,6 +101,8 @@ class MyFrameworkAgent(BaseAgent):
         result = self.framework_agent.run(messages=self._native_history)
         self._native_history = result.messages  # framework's updated native history
 
+        if getattr(result, "cost_usd", None) is not None:
+            self.add_cost_usd(result.cost_usd)
         self.add_token_usage(
             input_tokens=getattr(result.usage, "input_tokens", None),
             output_tokens=getattr(result.usage, "output_tokens", None),

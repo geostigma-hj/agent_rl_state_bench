@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "Done — I added the SlimBook Air 13 to your cart for $849.",
+      "content": "I found **SlimBook Air 13** for **$849**.\n\nBefore I add it: **do you want gift wrap?** It\u2019s **$5** per item.  \nIf you don\u2019t, I\u2019ll add **1** with no gift wrap.",
       "tool_calls": [
         {
           "name": "search_products",
@@ -63,7 +63,17 @@
             "variants": [],
             "note": "This product has no variants; no variant_id is needed for add_to_cart."
           }
-        },
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "No gift wrap, please \u2014 just one is fine."
+    },
+    {
+      "role": "assistant",
+      "content": "Done \u2014 **1\u00d7 SlimBook Air 13** has been added to your cart.\n\n**Cart total:** **$849**",
+      "tool_calls": [
         {
           "name": "add_to_cart",
           "arguments": {
@@ -90,7 +100,7 @@
     },
     {
       "role": "user",
-      "content": "Cool, thanks. [TASK_DONE]"
+      "content": "[TASK_DONE]"
     }
   ]
 }

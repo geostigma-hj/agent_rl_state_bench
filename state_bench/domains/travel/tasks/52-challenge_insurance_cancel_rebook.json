@@ -4,33 +4,23 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Hi, I need to change my flight BK-1000 to June 23 instead. I have about $100 to work with for any fees or price differences.",
   "user_simulator": {
-    "personality": "Practical and budget-conscious. Doesn't know airline policies well. Trusts the agent to find solutions.",
     "known_info": [
-      "Your user ID: user_004",
-      "Booking ID: BK-1000 (LAX→DFW, June 20)",
-      "Wants to move the flight to June 23",
-      "Has about $100 cash budget for this change",
-      "Has travel insurance on this booking (but doesn't think of it as relevant to changing)"
+      "Booking BK-1000: LAX to DFW, June 20.",
+      "Move the flight to June 23.",
+      "About $100 cash budget for the change."
     ],
-    "unknown_info": [
-      "That the booking is basic economy",
-      "That basic economy can't be changed",
-      "That insurance can override cancellation restrictions",
-      "The cancel+rebook workaround",
-      "Points redemption rates",
-      "Exact flight prices on June 23"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: you want to change flight BK-1000 to June 23, mention $100 budget.",
-      "When the agent says basic economy can't be changed, say 'That's really frustrating. Is there ANY other option to get me on a June 23 flight?'",
-      "Do NOT mention insurance, cancellation, or points proactively. Let the agent discover these paths.",
-      "If the agent asks whether you have insurance, confirm: 'Yes, I added travel insurance when I booked.'",
-      "If the agent proposes cancel+rebook, say 'That could work — what would it actually cost me?'",
-      "If the agent asks about using loyalty points, say 'Sure, I'm open to using points if it helps.'",
-      "When presented with flight options, say you'd prefer the nonstop option.",
-      "If the agent explains the nonstop is over your cash budget but the 1-stop fits, accept the 1-stop: 'Okay, the 1-stop works if it fits my budget.'",
-      "After the booking is confirmed, say 'Great, thanks for figuring that out!' and end with [TASK_DONE].",
-      "If the agent says there's nothing they can do (gives up), say 'Are you sure? I really need to get on a June 23 flight.' Give them one more chance. If they still can't find a solution, end with [TASK_DONE].",
+      "You want to move flight BK-1000 from June 20 to June 23 while keeping any cash cost at or below $100; you care more about the cheapest valid June 23 path than preserving the original booking.",
+      "Do not volunteer travel insurance, cancellation, or loyalty-points possibilities before the agent discovers or asks about them.",
+      "If the agent says the basic-economy ticket cannot be changed, ask once whether there is another way to get onto a June 23 flight instead of accepting the dead end.",
+      "If the agent asks about insurance or points, confirm that you bought insurance and are open to using your loyalty points if that helps keep the cash cost within budget.",
+      "If the agent proposes cancelling and rebooking, ask for the cancellation fee, refund or credit effect, replacement-flight cost, points use, and remaining cash amount before agreeing.",
+      "When the agent presents June 23 replacement options, prefer a nonstop only if the cash amount after points stays within your $100 budget; otherwise accept the one-stop option that fits the budget.",
+      "Push back if the agent recommends an option over the $100 cash budget, skips the points-plus-cash math, ignores the insurance-backed cancellation path, or treats the request as solved without a valid June 23 booking plan.",
+      "Before authorizing the cancellation and new booking, require a clear preview that BK-1000 will be cancelled with no cancellation fee, that 15,000 points plus no more than $100 cash will buy the replacement, and that the replacement uses your profile booking preferences.",
+      "If the agent says there is nothing they can do, ask once more for any June 23 workaround; if they still cannot find one, accept the no-solution explanation and end.",
+      "End only after BK-1000 is confirmed cancelled and the June 23 one-stop points-plus-cash replacement booking is confirmed with the expected cash amount and booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -65,8 +55,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/52-challenge_insurance_cancel_rebook.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -133,5 +121,7 @@
         "user_id": "user_004"
       }
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/52-challenge_insurance_cancel_rebook.json"
 }

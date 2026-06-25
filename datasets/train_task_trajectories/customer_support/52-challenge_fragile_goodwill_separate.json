@@ -6,11 +6,11 @@
     },
     {
       "role": "user",
-      "content": "My blender from order ORD-7003 arrived completely smashed — the box was torn up and the glass pitcher is broken. I need this resolved."
+      "content": "My blender from order ORD-7003 arrived completely smashed \u2014 the box was torn up and the glass pitcher is broken. I need this resolved."
     },
     {
       "role": "assistant",
-      "content": "I’m sorry that arrived like that. I checked your order and this qualifies as damage in transit, so I can process a full refund of $89 to your original payment method at no cost to you.\n\nIf you want, I can submit that return/refund now.",
+      "content": "I\u2019m sorry about that \u2014 I checked your order, and because it arrived damaged, it qualifies for a full $119 refund to your original payment method at no cost to you. If you want, I can process that return/refund for you now.",
       "tool_calls": [
         {
           "name": "get_order",
@@ -24,7 +24,7 @@
             "status": "delivered",
             "shipping_status": "damaged",
             "shipping_method": "standard",
-            "shipping_cost": 8,
+            "shipping_cost": 0,
             "tracking_number": "TRK87228103",
             "delivery_date": "2026-07-02T14:00:00",
             "delivery_promised_date": "2026-07-02T18:00:00",
@@ -32,12 +32,12 @@
             "signature_on_file": null,
             "payment_method": "credit_card",
             "payment_details": {
-              "credit_card": 97
+              "credit_card": 119
             },
-            "subtotal": 89,
+            "subtotal": 119,
             "discount_code": null,
             "discount_amount": 0,
-            "total_paid": 97,
+            "total_paid": 119,
             "is_gift": false,
             "gift_sender": null,
             "items": [
@@ -46,7 +46,7 @@
                 "order_id": "ORD-7003",
                 "product_id": "PROD-3003",
                 "quantity": 1,
-                "unit_price": 89,
+                "unit_price": 119,
                 "item_status": "delivered",
                 "return_reason": null,
                 "refund_amount": null,
@@ -61,7 +61,7 @@
                   "product_id": "PROD-3003",
                   "name": "PowerBlend Pro Blender",
                   "category": "kitchen",
-                  "price": 89,
+                  "price": 119,
                   "current_price": null,
                   "return_window_days": 30,
                   "warranty_months": 6,
@@ -71,103 +71,6 @@
             ]
           }
         },
-        {
-          "name": "get_policies",
-          "arguments": {
-            "topic": "return"
-          },
-          "result": {
-            "topic": "return",
-            "rules": {
-              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim — skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
-              "windows_by_category": {
-                "electronics": "15-day return window",
-                "clothing": "30-day return window",
-                "kitchen": "30-day return window",
-                "books": "14-day return window",
-                "accessories": "30-day return window"
-              },
-              "window_extensions": {
-                "membership": "Gold/Platinum members get +15 days",
-                "prime": "Prime shipping members get +15 additional days",
-                "seasonal": "Orders placed in November or December extend through January 31 of the following year. Seasonal extension applies if it gives more time than tier/prime extensions.",
-                "store_credit_grace": "Up to 15 days past the return window: store credit only."
-              },
-              "eligibility": {
-                "defective_items": "No window restriction for defective, wrong item, or damaged in transit.",
-                "already_returned": "Items already returned/exchanged/cancelled are ineligible."
-              },
-              "restocking_fee": {
-                "base": "15% restocking fee for opened electronics returned for changed_mind.",
-                "tier_discount": {
-                  "platinum": "Restocking fee fully waived.",
-                  "gold": "50% off the restocking fee.",
-                  "silver": "25% off the restocking fee.",
-                  "standard": "No discount."
-                },
-                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency."
-              },
-              "return_shipping_fee": {
-                "low_value": "Orders with subtotal < $50: customer pays $8 return shipping fee.",
-                "free_threshold": "Orders >= $50: free return label provided.",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: always free return shipping.",
-                "deduction": "Return shipping fee, when charged, is deducted from the return refund."
-              },
-              "bulk_purchase_clawback": {
-                "applies_when": "Order originally qualified for a bulk discount (3+ items with a discount code) AND the return drops remaining count below 3.",
-                "amount": "$5 per remaining item, deducted from the return refund.",
-                "no_discount_code": "If order had no discount code, no clawback applies."
-              },
-              "free_shipping_clawback": {
-                "applies_when": "Order originally qualified for free shipping (subtotal >= $100) AND the return drops remaining subtotal below $100.",
-                "amount": "$8 standard shipping fee is deducted from the return refund. This is a flat policy charge, not the original shipping cost (which was $0 on free-shipping orders).",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: no clawback (customer-fault returns only).",
-                "paid_shipping": "If the order did not qualify for free shipping originally (subtotal < $100), no clawback applies."
-              },
-              "repeat_category_surcharge": {
-                "rule": "Returning 2+ items from the same product category in one order: $5 surcharge per additional return (first return in each category is free).",
-                "different_categories": "Returns from different categories do not trigger the surcharge.",
-                "deduction": "Surcharge is deducted from the return refund."
-              }
-            }
-          }
-        },
-        {
-          "name": "process_return",
-          "arguments": {
-            "item_id": "ITEM-10003",
-            "reason": "damaged_in_transit",
-            "amount": 0,
-            "confirm": false
-          },
-          "result": {
-            "status": "preview",
-            "item_id": "ITEM-10003",
-            "return_eligible": true,
-            "reason": "damaged_in_transit",
-            "refund_amount": 89,
-            "refund_method": "original_payment",
-            "restocking_fee": 0,
-            "discount_adjustment": 0,
-            "free_return_shipping": true,
-            "shipping_refund": true,
-            "shipping_clawback": 0,
-            "bulk_clawback": 0,
-            "repeat_surcharge": 0,
-            "paid_return_shipping_fee": 0,
-            "restocking_discount": 0
-          }
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "content": "Is there any additional compensation for the inconvenience? This was a fragile item, and please put any credit back on my card."
-    },
-    {
-      "role": "assistant",
-      "content": "Yes — I can request the refund back to your card, and that’s already the default for this order.\n\nFor additional compensation, I can note the shipping damage and inconvenience, but I don’t see an automatic extra credit tied to this case. I can still process the full $89 refund to your original card now if you’d like.",
-      "tool_calls": [
         {
           "name": "get_customer",
           "arguments": {
@@ -190,26 +93,88 @@
               "prime_shipping": false
             }
           }
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "content": "I want to make sure this is handled fully, not just the base refund. Since it arrived obviously damaged in transit, is there a separate fragile-item or goodwill credit that can be added, with any credit also going back to my card?"
-    },
-    {
-      "role": "assistant",
-      "content": "I checked what applies here: for damage in transit, we can fully refund the item to your original card, and there isn’t a separate fragile-item payout or automatic goodwill amount attached to this order. Any extra courtesy credit, when available, is typically issued as store credit rather than back to a card.\n\nI can go ahead and process the full $89 refund to your card now.",
-      "tool_calls": null
-    },
-    {
-      "role": "user",
-      "content": "Thanks for clarifying. If there isn’t a separate fragile-item or goodwill credit available back to my card, then please go ahead and process the full $89 refund to my original payment method."
-    },
-    {
-      "role": "assistant",
-      "content": "Done — I’ve processed the full $89 refund to your original payment method.\n\nThere wasn’t any additional goodwill amount applied on this case, so the total refunded is $89.",
-      "tool_calls": [
+        },
+        {
+          "name": "get_policies",
+          "arguments": {
+            "topic": "return"
+          },
+          "result": {
+            "topic": "return",
+            "rules": {
+              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim \u2014 skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
+              "windows_by_category": {
+                "electronics": "15-day return window",
+                "clothing": "30-day return window",
+                "kitchen": "30-day return window",
+                "books": "14-day return window",
+                "accessories": "30-day return window"
+              },
+              "window_extensions": {
+                "membership": "Gold/Platinum members get +15 days",
+                "prime": "Prime shipping members get +15 additional days",
+                "seasonal": "Orders placed in November or December extend through January 31 of the following year. Seasonal extension applies if it gives more time than tier/prime extensions.",
+                "store_credit_grace": "Up to 15 days past the return window: store credit only."
+              },
+              "eligibility": {
+                "defective_items": "No window restriction for defective, wrong item, or damaged in transit.",
+                "already_returned": "Items already returned/exchanged/cancelled are ineligible.",
+                "not_as_described": "Use not_as_described only for an unused/unworn item that materially differs from the listing. If the customer wore, washed, altered, or used the item and only dislikes fit, feel, texture, or preference-based qualities, classify the return as changed_mind instead."
+              },
+              "restocking_fee": {
+                "base": "15% restocking fee for opened electronics returned for changed_mind.",
+                "tier_discount": {
+                  "platinum": "Restocking fee fully waived.",
+                  "gold": "50% off the restocking fee.",
+                  "silver": "25% off the restocking fee.",
+                  "standard": "No discount."
+                },
+                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency.",
+                "completed_returns": "Once a changed-mind return is completed with the applicable restocking fee, do not reverse that fee later as a courtesy or supplemental refund."
+              },
+              "return_shipping_fee": {
+                "low_value": "Orders with subtotal < $50: customer pays $8 return shipping fee.",
+                "free_threshold": "Orders >= $50: free return label provided.",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: always free return shipping.",
+                "deduction": "Return shipping fee, when charged, is deducted from the return refund."
+              },
+              "bulk_purchase_clawback": {
+                "applies_when": "Order originally qualified for a bulk discount (3+ items with a discount code) AND the return drops remaining count below 3.",
+                "amount": "$5 per remaining item, deducted from the return refund.",
+                "no_discount_code": "If order had no discount code, no clawback applies."
+              },
+              "free_shipping_clawback": {
+                "applies_when": "Order originally qualified for free shipping (subtotal >= $100) AND the return drops remaining subtotal below $100.",
+                "amount": "$8 standard shipping fee is deducted from the return refund. This is a flat policy charge, not the original shipping cost (which was $0 on free-shipping orders).",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: no clawback (customer-fault returns only).",
+                "paid_shipping": "If the order did not qualify for free shipping originally (subtotal < $100), no clawback applies."
+              },
+              "repeat_category_surcharge": {
+                "rule": "Returning 2+ items from the same product category in one order: $5 surcharge per additional return (first return in each category is free).",
+                "different_categories": "Returns from different categories do not trigger the surcharge.",
+                "deduction": "Surcharge is deducted from the return refund."
+              }
+            }
+          }
+        },
+        {
+          "name": "get_policies",
+          "arguments": {
+            "topic": "exchange"
+          },
+          "result": {
+            "topic": "exchange",
+            "rules": {
+              "must_be_different_product": "Exchanges must specify a different product than the original item. Self-swap (exchanging an item for the same product) is not allowed \u2014 use process_return for a refund instead.",
+              "same_price": "Exchange for a same-price product: no charge, no refund.",
+              "more_expensive": "Exchange for more expensive item: customer pays price difference.",
+              "cheaper": "Exchange for cheaper item: difference refunded as store credit (not original payment).",
+              "out_of_stock": "If requested item is out of stock: issue store credit for the original item; do not complete the exchange.",
+              "return_window": "Must be within return window (same rules as returns).",
+              "no_price_protection": "No price protection on exchanges (item price at time of purchase applies)."
+            }
+          }
+        },
         {
           "name": "get_policies",
           "arguments": {
@@ -222,7 +187,7 @@
                 "full_refund": "Full refund for defective, wrong item, or damaged in transit.",
                 "promo_redistribution": "If a promo/coupon was used: discount allocated proportionally by item price. Refund = item_price - (discount * item_price / subtotal).",
                 "outside_window": "Outside return window but within store-credit grace: store credit only.",
-                "shipping_refund": "When refunding shipping (defective/wrong/damaged returns, 6+-days-late compensation), refund the actual shipping cost the customer was charged on the order — read order.shipping_cost and refund that amount. Standard policy: $0 on free-shipping orders (subtotal >= $100), $8 otherwise. NOT for buyer's remorse."
+                "shipping_refund": "When refunding shipping (defective/wrong/damaged returns, 6+-days-late compensation), refund the actual shipping cost the customer was charged on the order \u2014 read order.shipping_cost and refund that amount. Standard policy: $0 on free-shipping orders (subtotal >= $100), $8 otherwise. NOT for buyer's remorse."
               },
               "method": {
                 "original_payment": "Default refund method when item was paid for and is being returned for fault.",
@@ -235,17 +200,253 @@
           }
         },
         {
-          "name": "process_refund",
+          "name": "process_return",
           "arguments": {
             "item_id": "ITEM-10003",
-            "refund_method": "original_payment",
-            "amount": 89,
+            "reason": "damaged_in_transit",
+            "amount": 0,
             "confirm": false
           },
           "result": {
             "status": "preview",
             "item_id": "ITEM-10003",
-            "refund_amount": 89,
+            "return_eligible": true,
+            "reason": "damaged_in_transit",
+            "refund_amount": 119,
+            "refund_method": "original_payment",
+            "restocking_fee": 0,
+            "discount_adjustment": 0,
+            "free_return_shipping": true,
+            "shipping_refund": true,
+            "shipping_clawback": 0,
+            "bulk_clawback": 0,
+            "repeat_surcharge": 0,
+            "paid_return_shipping_fee": 0,
+            "restocking_discount": 0
+          }
+        },
+        {
+          "name": "get_policies",
+          "arguments": {
+            "topic": "warranty"
+          },
+          "result": {
+            "topic": "warranty",
+            "rules": {
+              "active": "Active warranty: eligible for claim.",
+              "active_item_required": "Warranty claims require an active order item. Items already returned, exchanged, or cancelled are ineligible for a new warranty claim even if a warranty record still exists.",
+              "expired_recent": "Expired <30 days: 50% off repair.",
+              "expired_old": "Expired >30 days: full-price repair or 25% off replacement.",
+              "claim_limit": "Max claims reached: paid repair only (40% of item price).",
+              "repair_vs_replace": "Items <$100: replacement. Items >=$100: repair first.",
+              "recurring_defect": "2+ prior claims for same issue: automatic replacement.",
+              "manufacturer": "Manufacturer warranty covers first 12 months.",
+              "extended": "Extended warranty covers after manufacturer period.",
+              "void_exclusions": "Liquid, accidental, or user-caused physical damage (e.g. spills, drops, cracked screens from misuse) is NOT covered and voids the claim, even while the warranty is otherwise active. The eligibility check is date/claim-count based only and does not detect damage cause, so when the customer describes liquid/accidental/user damage, deny the claim on this exclusion and do not file it."
+            }
+          }
+        },
+        {
+          "name": "get_warranty_status",
+          "arguments": {
+            "item_id": "ITEM-10003"
+          },
+          "result": {
+            "item_id": "ITEM-10003",
+            "has_warranty": false,
+            "message": "No warranty found for this item."
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Thanks. Before I confirm, will you also be including a return label with no restocking fee? And given how badly the package was torn up, is there any additional compensation for the inconvenience \u2014 if so, I\u2019d want that sent back to the original payment method too."
+    },
+    {
+      "role": "assistant",
+      "content": "Yes \u2014 the damaged-in-transit return would include a prepaid return label, and there\u2019s no restocking fee. Since this blender counts as a fragile item and arrived damaged, it also qualifies for an additional $10 goodwill refund for the inconvenience. If you\u2019d like, I can process the $119 return refund plus the extra $10 goodwill refund back to your original payment method.",
+      "tool_calls": [
+        {
+          "name": "get_policies",
+          "arguments": {
+            "topic": "shipping"
+          },
+          "result": {
+            "topic": "shipping",
+            "rules": {
+              "not_received": {
+                "under_500": "Delivered but not received (<$500): reship or refund.",
+                "over_500": "Delivered but not received (>=$500): mandatory investigation (3-5 business days).",
+                "signature_on_file": "Delivery with signature on file: claim denied."
+              },
+              "lost_in_transit": {
+                "under_500": "Lost in transit (<$500): immediate reship or refund.",
+                "over_500": "Lost in transit (>=$500): carrier claim required first.",
+                "stuck_7_days": "No tracking update for 7+ days: treat as lost."
+              },
+              "damaged": {
+                "rule": "Damaged in transit: full refund or replacement.",
+                "fragile_bonus": "Fragile items damaged in transit qualify for a separate $10 goodwill credit, issued as a refund in addition to the return refund."
+              },
+              "late_delivery_compensation": {
+                "tiers": {
+                  "1_to_2_days_late": "$5 credit",
+                  "3_to_5_days_late": "$15 credit",
+                  "6_plus_days_late": "Full shipping refund + $15 credit"
+                },
+                "shipping_refund_basis": "When refunding shipping, refund the actual shipping cost the customer was charged on the order \u2014 read order.shipping_cost. Standard policy charges $0 on free-shipping orders (subtotal >= $100) and $8 otherwise.",
+                "tier_multipliers": {
+                  "gold": "1.5x multiplier on the base late-delivery credit only (NOT on shipping refund or goodwill). Rounded down (e.g., int(15*1.5) = 22).",
+                  "platinum": "2x multiplier on the base late-delivery credit only. Rounded down."
+                },
+                "repeated_issues": "3+ PRIOR issues in 6 months (not counting current incident): additional $25 goodwill credit.",
+                "loyalty_bonus": "Platinum members with 50+ total orders: one-time $50 loyalty bonus on next compensation claim. Confirm with customer if already redeemed.",
+                "max_cap": "Maximum compensation: 50% of order total (rounded down).",
+                "calculation_order": "1) Compute base credit by days-late tier. 2) Apply tier multiplier to base credit only. 3) Add shipping refund (if 6+ days late) using order.shipping_cost. 4) Add goodwill (if 3+ prior issues or fragile damage). 5) Apply loyalty bonus if eligible. 6) Apply 50%-of-order cap on the sum."
+              }
+            }
+          }
+        },
+        {
+          "name": "get_product_details",
+          "arguments": {
+            "product_id": "PROD-3003"
+          },
+          "result": {
+            "product_id": "PROD-3003",
+            "name": "PowerBlend Pro Blender",
+            "category": "kitchen",
+            "subcategory": "blender",
+            "price": 119,
+            "warranty_months": 6,
+            "return_window_days": 30,
+            "restocking_fee_pct": 0,
+            "weight_lbs": 5.0,
+            "is_fragile": true,
+            "in_stock": true,
+            "current_price": null
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Yes, please process both: the $119 return refund to my original payment method with the prepaid return label and no restocking fee, plus the separate $10 goodwill refund back to the original payment method as well."
+    },
+    {
+      "role": "assistant",
+      "content": "Done \u2014 I\u2019ve processed the full $119 return refund to your original payment method with no restocking fee, and the prepaid return label has been issued. I also processed the separate $10 goodwill refund back to the same payment method. You may see the two refunds as separate credits, for a total of $129.",
+      "tool_calls": [
+        {
+          "name": "process_return",
+          "arguments": {
+            "item_id": "ITEM-10003",
+            "reason": "damaged_in_transit",
+            "amount": 119,
+            "confirm": true
+          },
+          "result": {
+            "status": "returned",
+            "item_id": "ITEM-10003",
+            "refund_amount": 119,
+            "policy_computed_amount": 119,
+            "refund_method": "original_payment",
+            "restocking_fee": 0,
+            "return_label_issued": true,
+            "shipping_clawback": 0,
+            "bulk_clawback": 0,
+            "repeat_surcharge": 0,
+            "paid_return_shipping_fee": 0,
+            "restocking_discount": 0
+          }
+        },
+        {
+          "name": "process_refund",
+          "arguments": {
+            "item_id": "ITEM-10003",
+            "refund_method": "original_payment",
+            "amount": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "item_id": "ITEM-10003",
+            "refund_amount": 0,
+            "refund_method": "original_payment"
+          }
+        },
+        {
+          "name": "get_order",
+          "arguments": {
+            "order_id": "ORD-7003"
+          },
+          "result": {
+            "order_id": "ORD-7003",
+            "customer_id": "cust_004",
+            "order_date": "2026-06-20T10:00:00",
+            "status": "fully_returned",
+            "shipping_status": "damaged",
+            "shipping_method": "standard",
+            "shipping_cost": 0,
+            "tracking_number": "TRK87228103",
+            "delivery_date": "2026-07-02T14:00:00",
+            "delivery_promised_date": "2026-07-02T18:00:00",
+            "signature_required": false,
+            "signature_on_file": null,
+            "payment_method": "credit_card",
+            "payment_details": {
+              "credit_card": 119
+            },
+            "subtotal": 119,
+            "discount_code": null,
+            "discount_amount": 0,
+            "total_paid": 119,
+            "is_gift": false,
+            "gift_sender": null,
+            "items": [
+              {
+                "item_id": "ITEM-10003",
+                "order_id": "ORD-7003",
+                "product_id": "PROD-3003",
+                "quantity": 1,
+                "unit_price": 119,
+                "item_status": "returned",
+                "return_reason": "damaged_in_transit",
+                "refund_amount": 119,
+                "refund_method": "original_payment",
+                "restocking_fee": 0,
+                "return_label_issued": true,
+                "replacement_item_id": null,
+                "goodwill_credit": 0,
+                "goodwill_credit_method": null,
+                "store_credit_only": false,
+                "product": {
+                  "product_id": "PROD-3003",
+                  "name": "PowerBlend Pro Blender",
+                  "category": "kitchen",
+                  "price": 119,
+                  "current_price": null,
+                  "return_window_days": 30,
+                  "warranty_months": 6,
+                  "in_stock": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "process_refund",
+          "arguments": {
+            "item_id": "ITEM-10003",
+            "refund_method": "original_payment",
+            "amount": 10,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "item_id": "ITEM-10003",
+            "refund_amount": 10,
             "refund_method": "original_payment"
           }
         },
@@ -254,23 +455,23 @@
           "arguments": {
             "item_id": "ITEM-10003",
             "refund_method": "original_payment",
-            "amount": 89,
+            "amount": 10,
             "confirm": true
           },
           "result": {
             "status": "refunded",
             "item_id": "ITEM-10003",
-            "mode": "refund",
-            "refund_amount": 89,
+            "mode": "supplemental_refund",
+            "refund_amount": 10,
             "refund_method": "original_payment",
-            "total_goodwill_credit": 0
+            "total_goodwill_credit": 10
           }
         }
       ]
     },
     {
       "role": "user",
-      "content": "Thanks for processing the refund and for confirming the final amount. [TASK_DONE]"
+      "content": "Just to confirm, the $119 return refund has been completed to my original payment method, the prepaid return label is issued with no restocking fee, and the separate $10 goodwill refund was also completed to the original payment method, correct? [TASK_DONE]"
     }
   ]
 }

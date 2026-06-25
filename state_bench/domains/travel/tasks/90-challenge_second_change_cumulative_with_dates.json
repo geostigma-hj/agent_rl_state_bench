@@ -4,23 +4,19 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I already changed my flight BK-1000 once before. Now I need to change it again to June 28.  What will the fee be for this second change? My user ID is user_001.",
   "user_simulator": {
-    "personality": "Apologetic about changing again. Wants to know cumulative cost.",
     "known_info": [
-      "Your user ID: user_001",
-      "Booking: BK-1000 (ORD to DEN, already changed once)",
-      "Wants June 28 now",
-      "Already paid $150 in change fees previously"
+      "Booking BK-1000: ORD to DEN, already changed once; now wants June 28."
     ],
-    "unknown_info": [
-      "Second change fee amount",
-      "Whether fees are cumulative",
-      "Which departure date determines the rate"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: already changed BK-1000 once, need to change again to June 28.",
-      "When agent quotes fee, ask: 'So counting the first change, how much have I paid in fees total?'",
-      "If agent says cumulative is $225, say: 'That's steep. Go ahead anyway.'",
-      "After change done, end with [TASK_DONE].",
+      "Stay focused on changing BK-1000 to June 28 after one prior change, and on understanding both the new second-change fee and total fees across both changes.",
+      "If the agent asks for booking details or destination/date context, provide the booking ID and say it is the ORD to DEN booking that was already changed once and now needs June 28.",
+      "Do not volunteer the first-change fee, cumulative fee total, or policy timing math before the agent looks up or explains the booking.",
+      "When the agent quotes the second-change fee, ask once for the cumulative change fees across the first and second changes if that total has not already been explained.",
+      "Push back if the agent bases the second-change fee on the older pre-change itinerary date, omits the current departure timing basis, gives a cumulative total other than $225, or treats a cheaper replacement fare as a refund against past fees.",
+      "Accept the June 28 change only after the agent explains that the second-change fee is $75, the cumulative change fees are $225, and the fee is based on the current booked departure timing; budget remains a hard constraint.",
+      "For this existing booking change, keep the booking's existing booking-stage preferences unless the agent asks and then say to preserve them.",
+      "End only after the June 28 change is completed and the final booking details, $75 change fee, fare difference, and preserved preferences are clear.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Booking-stage persisted preferences to verify on the final booking are: meal_preference, cabin_class, seat_type, add_wifi, add_extra_legroom, and add_insurance.",
@@ -53,8 +49,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/90-challenge_second_change_cumulative_with_dates.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -80,5 +74,7 @@
       "field": "price_paid",
       "expected_value": 435
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/90-challenge_second_change_cumulative_with_dates.json"
 }

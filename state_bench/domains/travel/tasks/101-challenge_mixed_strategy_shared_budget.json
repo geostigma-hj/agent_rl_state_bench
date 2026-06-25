@@ -4,31 +4,24 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to move two trips and I only have about $120 cash total to spend. Booking BK-1000 needs to move from June 20 to June 23, and booking BK-1001 needs to move from June 21 to June 24. One of them has insurance, and I also have some points. What's the cheapest valid way to handle both?",
   "user_simulator": {
-    "personality": "Careful with money. Wants the cheapest total valid plan before approving anything.",
     "known_info": [
-      "Your user ID: user_004",
-      "BK-1000: LAX→DFW on June 20, basic economy, has insurance",
-      "BK-1001: SFO→SEA on June 21, business class, no insurance",
-      "Needs June 23 for the Dallas trip and June 24 for the Seattle trip",
-      "Has 15,000 loyalty points and only $120 cash total to spend",
-      "No extra airline, seat, meal, WiFi, legroom, or insurance preferences matter beyond keeping the persisted booking fields consistent",
-      "Keep BK-1001's existing no-insurance setting if that booking is changed rather than cancelled and rebooked; for this existing booking, that overrides your profile insurance preference"
+      "BK-1000: LAX to Dallas on June 20, basic economy with insurance; move it to June 23.",
+      "BK-1001: SFO to Seattle on June 21, business class with no insurance; move it to June 24.",
+      "You have 15,000 loyalty points and only about $120 total cash available for both trips.",
+      "If BK-1001 is changed rather than replaced, keep its existing no-insurance setting."
     ],
-    "unknown_info": [
-      "Which booking should use points",
-      "Whether cancel+rebook or direct change is cheaper for each booking",
-      "Whether the total can be kept within $120"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open by asking for the cheapest valid total plan across both bookings before making any changes.",
-      "Do not proactively mention the policy mechanics. Make the agent discover them.",
-      "If the agent starts executing before you have approved a specific plan, say you do not approve any action yet and need to understand what would happen to each booking.",
-      "If the agent proposes the same strategy for both bookings, ask why that recommendation is the same when one booking has insurance and one is business class.",
-      "If the agent presents June 23 Dallas options, reject the $280 nonstop and accept AS100 only if they explain it is the only option that keeps total cash within $120.",
-      "If the agent presents June 24 Seattle options, accept changing BK-1001 to UA101 once they explain that direct change is cheaper than cancel+rebook.",
-      "If the agent asks about insurance for BK-1001, say to keep that booking's existing no-insurance setting, not your profile insurance preference.",
-      "Once the agent explains the mixed strategy total is $120, say 'That works. Go ahead with the cheapest valid option for each booking.'",
-      "After both actions are completed, end with [TASK_DONE].",
+      "You want the cheapest valid total plan for moving both bookings within the shared $120 cash limit, and you do not want either booking changed until the agent compares both paths.",
+      "Do not volunteer policy mechanics, refund math, fare differences, or which strategy is best for either booking; let the agent discover and explain those details.",
+      "If the agent asks for booking details, dates, insurance status, points, budget, or preferences you know, provide the relevant facts for both bookings while keeping the shared budget constraint clear.",
+      "If the agent proposes changing, cancelling, or rebooking before giving a specific plan for both bookings, say you do not approve any action yet and need to understand what will happen to each booking and the combined cash total.",
+      "If the agent recommends the same strategy for both bookings, ask why that makes sense when one booking has insurance and the other is a business-class booking without insurance.",
+      "For the Dallas booking, accept the cancel-and-rebook path using AS100 only after the agent explains why it beats a direct change or the $280 nonstop and keeps the combined cash spend within $120.",
+      "For the Seattle booking, accept changing BK-1001 to UA101 only after the agent explains that a direct change is cheaper than cancelling and rebooking.",
+      "If the agent asks about insurance or booking preferences for BK-1001's direct change, say to preserve that booking's existing preferences, including no insurance.",
+      "Accept only after the agent previews both approved actions together: the Dallas cancellation and replacement using 15,000 points plus $90 cash, the Seattle direct change with a $30 fare difference, and the $120 combined cash total.",
+      "End only after both actions are completed and the final details show the Dallas replacement, the Seattle changed booking, zero remaining points, and no cash spend above $120.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -69,8 +62,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/101-challenge_mixed_strategy_shared_budget.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -161,5 +152,7 @@
         "user_id": "user_004"
       }
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/101-challenge_mixed_strategy_shared_budget.json"
 }

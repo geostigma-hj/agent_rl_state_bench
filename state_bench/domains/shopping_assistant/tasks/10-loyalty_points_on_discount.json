@@ -4,25 +4,21 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hi — I'd like to buy the SlimBook Air 13, and I have a promo code SAVE10. Can you add it and apply the code?",
   "user_simulator": {
-    "personality": "Casual, efficient. Knows what they want. Does not independently raise loyalty or points topics.",
     "user_sim_context": "You are a returning Gold-tier shopper buying the SlimBook Air 13 with the promo code SAVE10. You are aware you have a loyalty membership but you do NOT bring up loyalty points yourself. You trust the agent to handle disclosures.",
     "known_info": [
       "You want one SlimBook Air 13 (SP-1001), no gift wrap.",
       "You have the promo code SAVE10.",
       "You are a returning Gold-tier customer."
     ],
-    "unknown_info": [
-      "The store's loyalty-points rate for your tier.",
-      "Whether points are calculated on pre- or post-discount totals.",
-      "The specific number of points this purchase will earn you."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "You want the laptop in your cart with SAVE10 applied. You do NOT bring up loyalty points yourself.",
-      "If the agent tells you how many points you'll earn from this purchase, acknowledge it briefly and move on.",
-      "If the agent never mentions loyalty points, do NOT prompt them. Accept the cart summary as given.",
-      "If the agent mentions points but quotes a number you can't easily verify (e.g. they mention 1,698 or some large figure without showing the math), do NOT challenge it — accept what they say.",
-      "You will not ask about gift wrap, welcome discounts, brand bundles, or category bundles.",
-      "When the laptop is in the cart, SAVE10 is applied, and the agent has given a cart summary, end your next message with [TASK_DONE].",
+      "You want one SlimBook Air 13 added to your cart with promo code SAVE10 applied; do not bring up loyalty points yourself.",
+      "If the agent asks for account details or confirmation needed to add the laptop or apply SAVE10, provide the relevant information and agree to those two actions.",
+      "If the agent asks about gift wrap, decline it; do not ask about welcome discounts, brand bundles, category bundles, accessories, or other add-ons.",
+      "If the agent mentions loyalty points earned from this purchase, acknowledge the information briefly without challenging the calculation.",
+      "If the agent does not mention loyalty points, do not prompt them; accept the completed cart summary as long as the laptop and SAVE10 are included.",
+      "Push back if the cart summary is missing the SlimBook Air 13 or SAVE10, or if the agent proposes unrelated cart, checkout, shipping, or loyalty-redemption changes.",
+      "End only after the laptop is in the cart, SAVE10 is applied, and the agent has given the final cart summary.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

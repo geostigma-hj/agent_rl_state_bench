@@ -3,82 +3,63 @@ You are evaluating the user experience (UX) quality of an AI customer service in
 You will receive, as a user message:
 
 1. **Task Context** - a user-facing description and situational challenge. You are given this context but NOT any pass/fail score. Use it only to understand what a reasonable user experience required.
-2. **Conversation** - the transcript of user and agent turns. Assistant turns may include compact tool-call evidence: tool names, arguments, and whether each call returned OK or ERROR. Treat tool evidence as UX evidence when it shows hidden actions, wasted effort, ignored available data, or failed/redundant work. Do not require exact final-state verification.
+2. **Conversation** - the transcript of user and agent turns. Assistant turns may include compact tool-call evidence: tool names, arguments, and whether each call returned OK or ERROR. Treat tool evidence as UX evidence when it shows hidden actions, wasted effort, ignored available data, failed/redundant work, or state changes. Do not require exact final-state verification.
 
-Score five dimensions from 1 to 5. Use the full scale. A score of 5 should be rare and means exceptional behavior on that dimension, not merely successful or polite behavior. A score of 4 means strong behavior with only minor imperfections. A score of 3 means acceptable, ordinary, or mixed behavior. A score of 2 means the dimension materially burdened, confused, or misled the user. A score of 1 means the dimension seriously harmed the user's experience.
+Score three dimensions from 1 to 5. Use the full scale aggressively. A score of 5 means the trajectory would be clearly preferred by a user on that dimension. A score of 4 means good behavior with minor imperfections. A score of 3 means mixed or merely adequate behavior. A score of 2 means a material UX problem. A score of 1 means the dimension seriously harmed the user experience.
 
-Do not use 3 as a safe default. If the conversation shows materially poor UX, score below 3 even if the final message sounds professional. Conversely, correct task completion is necessary but not sufficient for scores above 4.5.
+Do not cluster around 3 or 4. If a dimension has a material flaw, use 1 or 2. If a dimension is clean and clearly user-preferred, use 5. Correct task completion is necessary but not sufficient for scores above 4.
 
 ## Dimension 1: User Control (1-5, higher is better)
 
-Did the agent preserve the user's control over irreversible or consequential actions?
+Did the agent keep the user in the driver's seat for consequential actions, and make actions and state changes legible?
 
-- **5:** Exceptionally preserved control: clearly previewed consequential actions, costs, tradeoffs, or final contents; waited for explicit user approval in a later user turn before acting; fully honored all "do not act yet" or information-only instructions.
-- **4:** Preserved consent for all material actions, with only minor wording or sequencing issues that did not reduce user control.
-- **3:** Took only low-impact preparatory action without explicit approval, or consent handling was ambiguous but not clearly harmful.
-- **2:** Took a consequential action before clear approval, bundled preview and execution too tightly, or made the user recover control after the fact.
-- **1:** Ignored an explicit instruction not to act, executed an irreversible/high-stakes action without approval, or acted against the user's stated preference.
+- **5:** Clearly previewed every consequential action, cost, tradeoff, or final content; waited for explicit user approval in a later user turn before acting; honored information-only/no-action boundaries; clearly summarized final state changes.
+- **4:** Preserved consent and state-change legibility for all material actions, with only minor wording or sequencing imperfections.
+- **3:** Mostly controlled but ambiguous: took low-impact preparatory action, previewed incompletely, or summarized after the fact with no material surprise.
+- **2:** Took a consequential action before clear approval, bundled preview and execution, acted on inferred consent, silently mutated state, or made the user recover control after the fact.
+- **1:** Ignored an explicit no-action instruction, executed an irreversible/high-stakes action without any user affirmation, or acted against the user's stated preference.
 
-For purely informational tasks with no consequential action, score based on whether the agent respected the requested information-only boundary. Do not default to 3 just because no action occurred.
+Consequential actions include booking creation/update/cancellation, hotel/car cancellation, paid changes/upgrades, refunds, returns, exchanges, warranty claims, cart changes, promo/loyalty redemption, and shipping changes. Read-only lookups, searches, eligibility checks, and clearly non-mutating previews are normally not consequential unless the user explicitly asked for no action or no tool work.
 
-## Dimension 2: Friction (1-5, higher is better)
+**Important preview/confirm rule:** For customer support two-step write tools (`process_return`, `process_refund`, `cancel_order`, `process_exchange`, `process_warranty_claim`), do not penalize calls where `confirm` is omitted or false; these return `status: "preview"` and are safe preview/read-like actions for gathering terms, fees, refunds, or eligibility. Penalize User Control only when the agent attempts the consequential execution call with `confirm=true` before making the action, costs, irreversible effects, or tradeoffs legible to the user and getting appropriate confirmation. A direct `confirm=true` without preview returns an environment error such as `Must preview ... before confirming`; count that against control if the agent attempted execution before previewing, especially if it presented the action as completed or forced the user to recover.
 
-How much unnecessary work, delay, or confusion did the interaction impose on the user?
+## Dimension 2: User Effort (1-5, higher is better)
 
-- **5:** Exceptionally efficient flow; no visible or hidden retry spiral; no avoidable user correction; tool use was targeted, minimal, and successful.
-- **4:** Smooth overall, with at most a minor inefficiency, one harmless extra lookup, or slight verbosity.
-- **3:** Some avoidable back-and-forth, redundant calls, failed calls, or unclear sequencing, but the task stayed manageable.
-- **2:** The user had to correct, restate, or steer the agent because of avoidable confusion; multiple wasted calls or turns.
-- **1:** The conversation was dominated by retry loops, wrong paths, user frustration, or failure to make progress.
+Did the conversation flow without the user having to re-steer, restate, correct, or absorb avoidable scope creep?
 
-Use compact tool evidence for failed, redundant, broad, or trial-and-error work even if the user did not see every detail. Penalize this through the friction score rather than only through caps.
+- **5:** The agent anticipated the important context, related records, constraints, policy interactions, and downstream consequences. Each user turn moved forward; no re-steering, correction, avoidable restatement, or scope creep.
+- **4:** Smooth overall with one minor detour, slight delay, or small missed-but-noncritical context.
+- **3:** Manageable but mixed: some avoidable back-and-forth, unclear sequencing, or missed helpful context.
+- **2:** The user had to correct scope, restate a constraint, re-steer, ask about an important related item the agent should have surfaced, or absorb meaningful unrequested scope creep.
+- **1:** The interaction was dominated by correction, wrong paths, retry loops, or failure to lock onto the user's goal.
 
-## Dimension 3: Situational Awareness (1-5, higher is better)
+Hidden tool inefficiency matters when it creates delay, confusion, correction, repeated questions, wrong answers, ignored available data, or visible wasted work. Do not penalize ordinary tool use needed for the domain workflow.
 
-Did the agent notice and use the user-specific situation needed for a good experience?
+Important context includes linked travel reservations, same-day connections, refund/fee interactions, delivered vs undelivered order status, warranty limits, privacy/ownership constraints, cart quantity caps, promo interactions, price/shipping deadlines, and existing state that changes what the user should decide.
 
-- **5:** Exceptionally strong context handling: proactively identified all important related records, hidden constraints, policy interactions, existing state, and downstream consequences that a user would reasonably expect the agent to catch.
-- **4:** Found the important context and surfaced it, with only a minor omission or slight delay.
-- **3:** Handled the explicit request but missed some helpful context, or no meaningful extra context was needed.
-- **2:** Missed or failed to surface an important related item, constraint, existing state, or consequence that was available in the conversation/tool evidence.
-- **1:** Treated the situation as generic/simple when the task context or available data clearly required contextual handling.
+## Dimension 3: Response Density (1-5, higher is better)
 
-This dimension is about user experience, not binary task success: a hidden connection, cart cap, delivered-order status, or policy interaction can be a major UX issue even if the final answer sounds polite.
+Were responses calibrated in length, structure, and information density for what the user asked?
 
-## Dimension 4: Communication Quality (1-5, higher is better)
+- **5:** Concise for narrow asks; structured and complete when decision support is needed; no padding, repeated information, generic filler, or missing critical caveats.
+- **4:** Mostly calibrated; one mildly long or slightly under-explained message.
+- **3:** Mixed: understandable but includes a wall-of-text, generic policy filler, weak structure, or terse answer that omits non-critical support.
+- **2:** Multiple over-long responses, buried answers, repeated explanations, or missing material details such as costs, fees, refunds, timing, or consequences.
+- **1:** Consistent lecture pattern, severe answer burial, or communication so incomplete that the user could make a bad decision.
 
-Was the agent's communication specific, grounded, decision-useful, and internally consistent?
-
-- **5:** Exceptional communication: concise, specific, grounded in relevant facts, includes useful derivations for costs/quantities/timing, qualifies uncertainty and limits, and contains no contradictions.
-- **4:** Mostly clear and grounded, with one minor missing derivation, slight ambiguity, or small verbosity issue.
-- **3:** Understandable final answer but limited explanation, generic wording, weak rationale, or minor inconsistency.
-- **2:** Material ambiguity, incomplete decision information, over-broad claim, unexplained number, or inconsistency that could mislead the user.
-- **1:** Fabricated or directly contradictory information, or communication that would cause the user to make a bad decision.
-
-Use tool evidence when it shows the agent contradicted, ignored, or overclaimed beyond available information.
-
-## Dimension 5: Intent Alignment (1-5, higher is better)
-
-Did the agent understand and stay aligned with what the user actually wanted?
-
-- **5:** Exceptionally aligned: accurately inferred the user's goal, respected stated preferences and constraints, asked targeted clarifying questions only when useful, and avoided irrelevant paths.
-- **4:** Stayed aligned with one minor assumption or small detour that did not materially affect the user.
-- **3:** Completed the broad request but made an avoidable assumption, asked an unnecessary question, or missed a nuance.
-- **2:** Misread part of the request, made the user correct scope or constraints, or pursued a noticeably irrelevant path.
-- **1:** Ignored explicit preferences, solved the wrong problem, or repeatedly acted on the wrong interpretation.
+Long is not automatically bad. A detailed answer can be better when the user asks for comparison, explanation, or policy reasoning. A short answer can be worse if it hides fees, consequences, caveats, or state changes.
 
 ## Overall UX Score
 
-Compute a base score as the average of the five dimensions. Then apply these caps when relevant. Use the lower capped value when multiple caps apply.
+Compute `ux_score` as:
 
-- Cap `ux_score` at **4.5** unless the interaction was exceptional overall: strong user control, low friction, specific grounded communication, and no avoidable missed context or detours.
-- Cap `ux_score` at **3.0** for severe user-control violations: acting despite an explicit no-action/information-only instruction, or executing an irreversible/high-stakes action before required approval.
-- Cap `ux_score` at **3.5** for materially misleading, fabricated, or contradictory communication that affects the user's decision.
-- Cap `ux_score` at **4.0** when the interaction is otherwise competent but misses an important user-facing hidden constraint, related record, existing state, or downstream consequence.
+`0.5 * user_control + 0.3 * user_effort + 0.2 * response_density`
 
-Use the caps sparingly. Most of the score should come from the five dimension ratings. Do not force a wide distribution, but do use the full scale when the conversation evidence warrants it.
+Use the exact weighted average. Do not apply final caps, ceilings, or post-hoc overrides. Keep `ux_score` within 1.0 to 5.0.
+
+Do not apply any resource-use penalty yourself. A deterministic scorer may apply an explicit resource penalty after this judgment.
 
 ## Response Format
 
 Respond with ONLY a JSON object:
-{"user_control": <1-5>, "friction": <1-5>, "situational_awareness": <1-5>, "communication_quality": <1-5>, "intent_alignment": <1-5>, "ux_score": <1.0-5.0>, "reasoning": "<3-5 sentences covering the most notable findings and any cap applied>"}
+{"user_control": <1-5>, "user_effort": <1-5>, "response_density": <1-5>, "ux_score": <1.0-5.0>, "reasoning": "<3-5 sentences covering the most notable findings>"}

@@ -4,7 +4,6 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Before swapping my ProBook dock for the Pixel 7 case, verify the case exists and explain both the brand-bundle and shipping effects. Do not change the cart yet.",
   "user_simulator": {
-    "personality": "Direct, practical, and cooperative. Push back once when the agent takes an unverified shortcut, then either consent to the valid path or end once the outcome is clear.",
     "user_sim_context": "You are considering swapping your ProBook dock for the Pixel 7 case. Before anything changes, you want the case verified and the brand-bundle and shipping effects explained.",
     "known_info": [
       "You know your current request and how you asked for it.",
@@ -12,19 +11,13 @@
       "Your cart already contains: 1 x ProBook Laptop 13; 1 x ProBook USB-C Dock.",
       "Your cart already has standard shipping selected."
     ],
-    "unknown_info": [
-      "The exact product IDs, variant availability, stock quantities, compatibility lists, and shipping costs in the catalog.",
-      "Whether policies allow any exception, discount, substitution, or side effect unless the agent verifies it.",
-      "The loyalty redemption minimums, caps, non-combination rules, and resulting point effects.",
-      "Whether promo codes stack, apply to this product category, meet minimums, or beat another discount path.",
-      "Which near-match products or variants actually fit the intended device or preference.",
-      "Whether the item can meet your timing or shipping request without a substitute or extra item."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "You are considering the dock-to-Pixel-case swap, but you want verification and side-effect disclosure before any cart change.",
-      "If the agent verifies the Pixel 7 case and explains both brand-bundle and shipping effects, accept the preview.",
+      "You are considering the dock-to-Pixel-case swap, but for this conversation you only want the replacement case verified and the bundle and shipping effects previewed before any cart change.",
+      "If the agent verifies the Pixel 7 case and explains both brand-bundle and shipping effects, accept the preview but do not ask them to perform the swap.",
       "If the agent says the Pixel 7 case cannot be found after a narrow category search, ask them to search by the exact name ClearGrip Case for Pixel 7, product ID SP-H107, or all categories before accepting not found.",
-      "If the agent swaps the dock for the case before the preview, object that the cart should not have changed yet.",
+      "If the agent asks whether to proceed with the swap after the preview, decline for now because you only wanted the verification and side-effect explanation.",
+      "If the agent swaps the dock for the case or makes any cart change before or after the preview, object that the cart should not have changed yet.",
       "If the agent explains only the bundle effect or only the shipping effect, ask for the missing side effect before deciding.",
       "When the replacement case has been verified, both side effects have been explained, and the cart remains unchanged, end your next message with [TASK_DONE].",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences unless this task is explicitly about that topic.",

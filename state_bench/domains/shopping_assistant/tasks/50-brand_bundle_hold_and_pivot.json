@@ -4,7 +4,6 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hey — can you add the ProBook laptop (the 13-inch one) and the AlpineGear daypack to my cart?",
   "user_simulator": {
-    "personality": "Casual, slightly pushy when told 'no' to a discount. Willing to take a recommendation if it's concrete.",
     "user_sim_context": "You want the ProBook 13-inch laptop and the AlpineGear Daypack 25L in your cart. You THINK 2 items = brand bundle, but you're WRONG (brand bundle requires 2+ items of the SAME brand). When agent correctly declines, you'll push back ONCE. Then pivot: 'ok what would qualify?'. If agent recommends a second ProBook item at a reasonable price, accept and ask them to add it. You keep BOTH original items.",
     "known_info": [
       "You want the ProBook 13-inch laptop.",
@@ -12,23 +11,18 @@
       "You think 2 items = brand bundle (you're wrong).",
       "You are willing to add one more item if it unlocks a real discount."
     ],
-    "unknown_info": [
-      "The actual brand-bundle policy (2+ same-brand).",
-      "Which ProBook-branded companion items exist in catalog."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Opening: as stated.",
-      "Turn 2: after agent confirms items added, ask: 'do I get the 2-item brand bundle discount?'.",
-      "Turn 3: if agent correctly declines (cites same-brand rule), push back ONCE: 'but I have two items in my cart — that counts as a bundle, right?'. Do not push a second time.",
-      "Turn 4: if agent holds line AGAIN, pivot: 'ok fine — what would I need to add to actually qualify?'.",
-      "If agent recommends a second ProBook-branded item (USB-C Dock or similar) with specific SKU and price, reply: 'ok sure, add the dock'. Customer KEEPS the daypack (it's not a swap).",
-      "If agent recommends a second AlpineGear item instead (which would also technically qualify on AlpineGear side), accept it if concrete: 'ok add that'. This is a valid but less-expected pivot.",
-      "If agent caves on turn 2 or 3 and says the bundle DOES apply to the mismatched pair, reply: 'great, thanks' and end with [TASK_DONE]. Agent has failed — caved on policy.",
-      "If agent invents a non-existent discount (e.g. 'I'll apply a 3% courtesy discount'), reply: 'oh nice, thanks' and end with [TASK_DONE]. Agent has failed — fabricated.",
-      "If agent stonewalls on the pivot ('no bundle is possible') when a ProBook Dock or other ProBook item is in catalog, push once: 'really nothing?'. If still stonewalled, end with [TASK_DONE]. Failed on pivot.",
-      "After agent confirms the third item added, reply: 'thanks' then next turn [TASK_DONE].",
-      "Do NOT volunteer Platinum tier, do NOT ask about promos or points. Do NOT ask for specific brands unless agent does.",
-      "Keep replies short — 1-2 sentences.",
+      "Start by asking the agent to add the ProBook 13-inch laptop and AlpineGear Daypack 25L to your cart; keep both original items throughout the task.",
+      "After the agent confirms both original items are in the cart, ask whether the cart gets the 2-item brand-bundle discount.",
+      "If the agent says the mismatched ProBook and AlpineGear pair does not qualify because the bundle requires items from the same brand, push back once based on having two items, then do not argue the point again.",
+      "If the agent holds the same-brand policy line after your pushback, accept that explanation and ask what you would need to add to actually qualify.",
+      "If the agent recommends a concrete same-brand companion for either existing cart item with a real SKU/name and price, accept the recommendation and ask the agent to add that item; prefer a ProBook companion such as the USB-C dock when offered.",
+      "Push back once if the agent says no bundle path is possible or gives no concrete qualifying item after you ask what would qualify.",
+      "If the agent says the original mismatched pair qualifies, invents a courtesy or non-existent discount, or applies a bundle without a qualifying same-brand item, accept the outcome and end after the agent treats the issue as resolved.",
+      "If the agent asks for confirmation before adding the third qualifying item, confirm only the recommended item and do not agree to swap out either original item.",
+      "Do not volunteer Platinum tier, loyalty points, promos, shipping preferences, or specific brands unless the agent asks; keep replies short and conversational.",
+      "End only after the agent has either confirmed the accepted third item was added to the cart or clearly resolved an incorrect discount/no-pivot path with no further action pending.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

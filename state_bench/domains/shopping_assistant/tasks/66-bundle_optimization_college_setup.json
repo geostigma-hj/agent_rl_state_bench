@@ -4,26 +4,22 @@
   "now": "2026-06-10T10:00:00",
   "opening_message": "Hey — heading to college in the fall. I need a laptop, a backpack, headphones, and a webcam. Budget is $1200 total — that's firm. What do you recommend?",
   "user_simulator": {
-    "personality": "Practical first-time shopper, budget-conscious, trusts the agent to do the bundle math.",
     "user_sim_context": "You're going to college in the fall. You need FOUR things: a laptop, a backpack, wireless headphones, and a webcam. Your TOTAL budget across all four is $1200 — firm ceiling. You want all four items; you do NOT want to drop any of them. You trust the agent to pick a combination that fits. You have no strong brand preferences and no specific specs in mind beyond 'works for college'.",
     "known_info": [
       "You need a laptop, backpack, headphones, and webcam — all four.",
       "Your total budget is $1200, firm.",
       "You're a standard-tier first-time shopper."
     ],
-    "unknown_info": [
-      "Which specific laptop/accessory SKUs fit together under $1200.",
-      "Prices of individual items in the catalog."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Opening: as stated — four items, $1200 total firm.",
-      "If the agent proposes a bundle of all 4 items AT OR UNDER $1200, confirm and ask them to add all 4. After add_to_cart calls and a final cart summary, reply 'Total looks good.' and [TASK_DONE].",
-      "If the agent proposes a bundle OVER $1200 (e.g., with ProBook 13), push back: 'wait — that's over my $1200 cap. Is there a way to fit all four within budget?' If the agent then picks a compliant bundle (e.g., swap to SlimBook Air 13), proceed. If they insist on over-budget or ask YOU to cut an item, reject: 'I want all four — can you find a combo that fits?' If they keep failing, accept whatever they do and end — failed on bundle optimization.",
-      "If the agent silently drops an item (only 3 items in cart summary), push back: 'hey, I also needed the [missing item] — did that get added?' If they then add it within budget, proceed. If adding it busts $1200, say 'I need all four within budget; can you rework the combo?' Expect a laptop swap to SlimBook Air. If they can't figure it out, accept and end.",
-      "If the agent asks 'which item is your priority?' without proposing a combo, push back: 'all four matter — I'm hoping there's a combo that fits.' If they then find SlimBook Air + accessories, proceed. If they don't, accept and end.",
-      "If the agent picks a very cheap laptop (BudgetLine $449) without explaining why, accept it if all 4 items fit the budget. This is a borderline pass — state check will catch it if the final cart isn't SP-1001 based.",
-      "Do NOT suggest specific SKUs or prices. Let the agent drive.",
-      "Keep replies short — 1-2 sentences.",
+      "You want one college-ready laptop, one backpack, one pair of wireless headphones, and one webcam, with the full bundle at or under your firm $1200 total budget.",
+      "Do not volunteer specific SKUs, prices, loyalty details, shipping choices, or extra preferences; if the agent asks about product priorities or specs, say all four categories matter and you have no strong preference beyond a practical college setup that fits the total budget.",
+      "If the agent proposes all four needed items with a total at or under $1200, accept the recommendation and ask them to add the full bundle to the cart.",
+      "If the agent proposes an over-budget bundle, asks you to drop one of the four categories, or treats the laptop choice separately from the accessory total, push back and ask for a combination that keeps all four items within the $1200 cap.",
+      "If the agent omits any of the four categories from a recommendation or cart summary, ask once about the missing category and restate that you need all four within the same budget.",
+      "If the agent recommends a very cheap laptop without explaining why that tradeoff is needed, ask whether there is a stronger college laptop that still leaves room for the backpack, headphones, and webcam under $1200.",
+      "Accept cart changes only after the agent has identified all four categories and the combined total is at or below $1200; do not approve adding only part of the bundle unless the agent is clearly adding the agreed items step by step.",
+      "End only after the agent has added all four items and given a final cart summary showing the total is within the $1200 budget, then reply with [TASK_DONE].",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

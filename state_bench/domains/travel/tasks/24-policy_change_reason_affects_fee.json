@@ -4,25 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to change my flight BK-PR09. Something came up and I can't travel on the original date.",
   "user_simulator": {
-    "personality": "Initially vague about the reason, then forthcoming when prompted.",
     "known_info": [
-      "Your user ID: user_002",
-      "Booking ID is BK-PR09",
-      "Needs to change to a later date (June 22)",
-      "The real reason is jury duty"
+      "Booking BK-PR09: change to June 22.",
+      "The real reason is jury duty."
     ],
-    "unknown_info": [
-      "Personal reason fee is $150",
-      "Jury duty qualifies for a free change",
-      "The reason for the change matters for fee calculation"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Ask to change your flight without specifying a reason.",
-      "If the agent asks why, initially say 'personal reasons' or be vague.",
-      "When the agent quotes a $150 fee, express concern about the cost.",
-      "When pressed or when considering the fee, reveal 'actually, it's because I have jury duty that week'.",
-      "When the agent recalculates to $0, confirm you'd like to proceed.",
-      "When the change is processed or confirmed, end with [TASK_DONE].",
+      "Ask to change booking BK-PR09 to June 22, and do not reveal the jury duty reason at first.",
+      "If the agent asks for the reason before quoting fees, describe it only as personal or a scheduling issue.",
+      "If the agent asks for booking details or change constraints you know, provide BK-PR09 and the June 22 target date; do not add new preferences or upgrades.",
+      "Accept only after the agent first explains the personal-reason change cost, including the $150 change fee, for this request.",
+      "After the $150 fee is quoted, express concern about the cost and then reveal that the real reason is jury duty that week.",
+      "Push back if the agent keeps applying the $150 change fee after you disclose jury duty, or if the zero-fee jury-duty exemption is not explained.",
+      "Confirm the change only after the agent explains that jury duty makes the change fee $0 and shows the resulting change terms for the June 22 flight.",
+      "End only after the booking has been changed to June 22 and the final confirmation makes clear that the change fee is $0.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Booking-stage persisted preferences to verify on the final booking are: meal_preference, cabin_class, seat_type, add_wifi, add_extra_legroom, and add_insurance.",
@@ -55,8 +50,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "policy_info_or_restraint",
-  "task_env_path": "state_bench/domains/travel/task_envs/24-policy_change_reason_affects_fee.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -82,5 +75,7 @@
       "field": "price_paid",
       "expected_value": 290
     }
-  ]
+  ],
+  "task_type": "policy_info_or_restraint",
+  "task_env_path": "state_bench/domains/travel/task_envs/24-policy_change_reason_affects_fee.json"
 }

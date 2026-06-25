@@ -4,22 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Due to a medical procedure, I need to change both BK-1000 (Paris flight) and BK-1001 (Denver flight). Both to the following week. Both for medical reasons. My user ID is user_004.",
   "user_simulator": {
-    "personality": "Organized. Lists both with same reason.",
     "known_info": [
-      "Your user ID: user_004",
       "BK-1000: JFK to CDG, June 19 -> June 26, medical",
       "BK-1001: ORD to DEN, June 20 -> June 27, medical"
     ],
-    "unknown_info": [
-      "That fees differ by route type even with same reason"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: medical reason, change both BK-1000 and BK-1001.",
-      "Ask: 'What is the combined fee for both changes?'",
-      "If agent charges same for both, ask: 'Should the fees differ since one is international and the other domestic?'",
-      "If agent gives different fees but the combined total is unclear, ask for the combined fee before approving.",
-      "If agent explains the $100 international medical fee, the $75 domestic medical fee, and the $175 combined fee, say: 'That makes sense. Go ahead with both.'",
-      "After done, end with [TASK_DONE].",
+      "You want both existing bookings changed to the following week for medical reasons: BK-1000 from JFK to CDG on June 26 and BK-1001 from ORD to DEN on June 27.",
+      "Do not volunteer fee math up front; let the agent look up the bookings and explain how the medical reason applies to each route.",
+      "If the agent asks for booking details, dates, routes, or reason, provide the known facts for both bookings and keep the medical reason attached to both changes.",
+      "If the agent quotes the same medical change fee for both bookings or treats the shared medical reason as overriding route type, ask whether the international Paris booking and domestic Denver booking should have different fees.",
+      "If the agent gives separate fees but omits the combined change-fee total, ask for the combined fee before approving either change.",
+      "Accept only after the agent explains the $100 medical change fee for the Paris booking, the $75 medical change fee for the Denver booking, the $175 combined change-fee total, any fare differences, and that the incremental cost is within budget.",
+      "For each changed booking, keep the existing booking preferences unless the agent asks and a preference from your profile is needed to preserve the booking.",
+      "End only after both bookings have been changed to the following week and the final confirmation includes the separate fee treatment and completed changes.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -60,8 +58,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/99-challenge_same_medical_different_routes.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -111,5 +107,7 @@
       "field": "price_paid",
       "expected_value": 455
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/99-challenge_same_medical_different_routes.json"
 }

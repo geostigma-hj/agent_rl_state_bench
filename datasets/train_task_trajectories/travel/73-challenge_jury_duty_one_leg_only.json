@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "I found matching replacement flights and confirmed jury duty qualifies for a free change fee waiver. The only possible extra cost would be any fare difference.\n\nAvailable replacements:\n- Outbound BK-1000: AA101 on 2026-06-26, ORD → MIA, departs 10:00 AM, economy fare $380\n- Return BK-1001: AA103 on 2026-06-30, MIA → ORD, departs 4:30 PM, economy fare $340\n\nCompared with what you originally paid:\n- BK-1000: $350 → $380, fare difference $30\n- BK-1001: $320 → $340, fare difference $20\n\nBecause the reason is jury duty:\n- Change fee: $0 for both bookings\n- Estimated total additional cost: $50\n\nI can go ahead and update both bookings now, keeping your same preferences:\n- economy\n- window seat\n- standard meal\n- no Wi‑Fi\n- no extra legroom\n- insurance kept on\n- 0 paid checked bags\n\nPlease confirm and I’ll process both changes.I found matching replacement flights and confirmed jury duty qualifies for a free change fee waiver. The only possible extra cost would be any fare difference.\n\nAvailable replacements:\n- Outbound BK-1000: AA101 on 2026-06-26, ORD → MIA, departs 10:00 AM, economy fare $380\n- Return BK-1001: AA103 on 2026-06-30, MIA → ORD, departs 4:30 PM, economy fare $340\n\nCompared with what you originally paid:\n- BK-1000: $350 → $380, fare difference $30\n- BK-1001: $320 → $340, fare difference $20\n\nBecause the reason is jury duty:\n- Change fee: $0 for both bookings\n- Estimated total additional cost: $50\n\nI can go ahead and update both bookings now, keeping your same preferences:\n- economy\n- window seat\n- standard meal\n- no Wi‑Fi\n- no extra legroom\n- insurance kept on\n- 0 paid checked bags\n\nPlease confirm and I’ll process both changes.",
+      "content": "I found matching American flights and previewed both changes.\n\n- BK-1000, ORD \u2192 MIA: move to Jun 26 on AA101, departs 10:00 AM  \n  - Change fee: $0\n  - Fare difference: $30\n\n- BK-1001, MIA \u2192 ORD: move to Jun 30 on AA103, departs 4:30 PM  \n  - Change fee: $0\n  - Fare difference: $20\n\nTotal additional cost: $50\n\nIf you want, I can go ahead and finalize both changes now.",
       "tool_calls": [
         {
           "name": "get_booking",
@@ -79,27 +79,14 @@
           }
         },
         {
-          "name": "get_user_details",
-          "arguments": {
-            "user_id": "user_004"
-          },
-          "result": {
-            "user_id": "user_004",
-            "name": "Noah Brown",
-            "email": "noah.brown@example.com",
-            "loyalty_tier": "silver",
-            "loyalty_points": 15000
-          }
-        },
-        {
           "name": "search_flights",
           "arguments": {
             "origin": "ORD",
             "destination": "MIA",
             "date": "2026-06-26",
-            "airline": "",
+            "airline": "AA",
             "time_range": "morning",
-            "max_stops": 1,
+            "max_stops": 2,
             "max_price": -1
           },
           "result": {
@@ -129,9 +116,9 @@
             "origin": "MIA",
             "destination": "ORD",
             "date": "2026-06-30",
-            "airline": "",
+            "airline": "AA",
             "time_range": "afternoon",
-            "max_stops": 1,
+            "max_stops": 2,
             "max_price": -1
           },
           "result": {
@@ -156,44 +143,73 @@
           }
         },
         {
-          "name": "get_policies",
+          "name": "update_booking",
           "arguments": {
-            "topic": "change",
+            "booking_id": "BK-1000",
+            "flight_id": "AA101",
+            "change_reason": "jury_duty",
             "cabin_class": "economy",
-            "loyalty_tier": "silver",
-            "route_type": "domestic"
+            "seat_type": "window",
+            "meal_preference": "standard",
+            "add_wifi": false,
+            "add_extra_legroom": false,
+            "add_insurance": true,
+            "delay_compensation": "none",
+            "paid_checked_bags": 0,
+            "confirm": false
           },
           "result": {
-            "topic": "change",
-            "rules": {
-              "free_change_window": "Free changes within 24 hours (domestic) or 48 hours (international) of booking",
-              "basic_economy": "Not changeable after free window",
-              "economy_domestic_personal": "Domestic change fee: $75 if departure >7 days, $150 if ≤7 days. Fare difference also applies.",
-              "economy_international_personal": "International change fee: $100 if departure >7 days, $200 if ≤7 days. Fare difference also applies.",
-              "economy_medical": "Medical changes: 50% discount on standard fee (requires change_reason='medical')",
-              "economy_bereavement": "Bereavement changes: 75% discount on standard fee (requires change_reason='bereavement')",
-              "jury_duty": "Jury duty: free change (change_reason='jury_duty')",
-              "military": "Military deployment: free change (change_reason='military')",
-              "schedule_change": "Airline schedule changes: free, no fee (change_reason='schedule_change')",
-              "weather": "Weather-related changes: free, no fee (change_reason='weather')",
-              "business": "Free changes (fare difference still applies)",
-              "first": "Free changes (fare difference still applies)",
-              "change_reason_required": "Pass change_reason parameter: 'personal', 'medical', 'bereavement', 'jury_duty', 'military', 'schedule_change', or 'weather'",
-              "route_type_matters": "Fees differ by route type. Check flight route_type."
-            },
-            "applicable_cabin_class": "economy",
-            "applicable_route_type": "domestic"
+            "status": "preview",
+            "booking_id": "BK-1000",
+            "flight_id": "AA101",
+            "change_fee": 0,
+            "fare_difference": 30,
+            "price_paid": 380
+          }
+        },
+        {
+          "name": "update_booking",
+          "arguments": {
+            "booking_id": "BK-1001",
+            "flight_id": "AA103",
+            "change_reason": "jury_duty",
+            "cabin_class": "economy",
+            "seat_type": "window",
+            "meal_preference": "standard",
+            "add_wifi": false,
+            "add_extra_legroom": false,
+            "add_insurance": true,
+            "delay_compensation": "none",
+            "paid_checked_bags": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "booking_id": "BK-1001",
+            "flight_id": "AA103",
+            "change_fee": 0,
+            "fare_difference": 20,
+            "price_paid": 340
           }
         }
       ]
     },
     {
       "role": "user",
-      "content": "Great, that works. Please go ahead and update both bookings."
+      "content": "Thanks. Before I approve, can you confirm the search details for both flights, specifically the airline, time range, and number of stops? Also, for this change please keep the existing booking preferences."
     },
     {
       "role": "assistant",
-      "content": "Done — both bookings have been updated.\n\nUpdated flights:\n- BK-1000 → AA101 on 2026-06-26, ORD to MIA\n- BK-1001 → AA103 on 2026-06-30, MIA to ORD\n\nCharges:\n- BK-1000 fare difference: $30\n- BK-1001 fare difference: $20\n- Change fees: $0 for both\n- Total additional cost: $50\n\nYour preferences were kept the same on both bookings:\n- Economy\n- Window seat\n- Standard meal\n- No Wi‑Fi\n- No extra legroom\n- Insurance retained\n- 0 extra checked bags\n\nIf you want, I can also help check hotel or car rental dates to match the new trip.",
+      "content": "Yes \u2014 here are the search details I used:\n\nFor BK-1000, ORD \u2192 MIA on June 26\n- Airline filter: AA\n- Time range: morning\n- Stops filter: up to 2 stops\n- Matching flight found: AA101\n  - Departure: 10:00 AM\n  - Stops: 0, nonstop\n\nFor BK-1001, MIA \u2192 ORD on June 30\n- Airline filter: AA\n- Time range: afternoon\n- Stops filter: up to 2 stops\n- Matching flight found: AA103\n  - Departure: 4:30 PM\n  - Stops: 0, nonstop\n\nAnd yes \u2014 I will keep your existing booking preferences exactly the same on both changes:\n- Cabin: economy\n- Seat: window\n- Meal: standard\n- Wi\u2011Fi: no\n- Extra legroom: no\n- Insurance: yes\n- Paid checked bags: 0\n\nThe preview I ran already used those same existing preferences. If you\u2019d like, I can finalize both changes for the same total additional cost of $50.",
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Before I approve, can you give me one more clear preview of the cost treatment for each leg? I want to see both selected flights, the outbound handled under jury duty, the return\u2019s separate fee treatment if applicable, any fare differences, and the total additional cost \u2014 while keeping the existing booking preferences."
+    },
+    {
+      "role": "assistant",
+      "content": "Absolutely \u2014 I reran the preview with your existing booking preferences kept unchanged on both legs.\n\n### Selected replacement flights\n- **Outbound:** BK-1000 \u2192 **AA101**\n  - **ORD \u2192 MIA**\n  - **Jun 26, 2026**\n  - Departure **10:00 AM**\n- **Return:** BK-1001 \u2192 **AA103**\n  - **MIA \u2192 ORD**\n  - **Jun 30, 2026**\n  - Departure **4:30 PM**\n\n### Cost preview by leg\n\n#### 1) Outbound: BK-1000 \u2192 AA101\n- Change reason used: **jury duty**\n- Change fee: **$0**\n- Fare difference: **+$30**\n- New ticket value for that leg: **$380**\n\n#### 2) Return: BK-1001 \u2192 AA103\n- Preview result shows: **$0 change fee**\n- Separate fee treatment: **none applied in the current preview**\n- Fare difference: **+$20**\n- New ticket value for that leg: **$340**\n\n### Existing booking preferences being retained\nFor both changes, I kept:\n- Cabin: **economy**\n- Seat: **window**\n- Meal: **standard**\n- Wi\u2011Fi: **no**\n- Extra legroom: **no**\n- Insurance: **yes**\n- Paid checked bags: **0**\n\n### Total additional cost\n- Outbound fare difference: **$30**\n- Return fare difference: **$20**\n- Total change fees: **$0**\n- **Total additional cost: $50**\n\nIf you\u2019re ready, I can finalize both changes now.",
       "tool_calls": [
         {
           "name": "update_booking",
@@ -208,22 +224,75 @@
             "add_extra_legroom": false,
             "add_insurance": true,
             "delay_compensation": "none",
-            "paid_checked_bags": 0
+            "paid_checked_bags": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "booking_id": "BK-1000",
+            "flight_id": "AA101",
+            "change_fee": 0,
+            "fare_difference": 30,
+            "price_paid": 380
+          }
+        },
+        {
+          "name": "update_booking",
+          "arguments": {
+            "booking_id": "BK-1001",
+            "flight_id": "AA103",
+            "change_reason": "jury_duty",
+            "cabin_class": "economy",
+            "seat_type": "window",
+            "meal_preference": "standard",
+            "add_wifi": false,
+            "add_extra_legroom": false,
+            "add_insurance": true,
+            "delay_compensation": "none",
+            "paid_checked_bags": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "booking_id": "BK-1001",
+            "flight_id": "AA103",
+            "change_fee": 0,
+            "fare_difference": 20,
+            "price_paid": 340
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Thanks, that preview is clear. Please go ahead and finalize both changes to AA101 on June 26 and AA103 on June 30, and keep the existing booking preferences the same on both reservations."
+    },
+    {
+      "role": "assistant",
+      "content": "Both changes are confirmed.\n\n- BK-1000 \u2192 AA101 on Jun 26\n  - New price paid: $380\n  - Change fee: $0\n  - Fare difference: $30\n\n- BK-1001 \u2192 AA103 on Jun 30\n  - New price paid: $340\n  - Change fee: $0\n  - Fare difference: $20\n\nExisting preferences were kept the same on both bookings:\n- Economy\n- Window seat\n- Standard meal\n- No Wi\u2011Fi\n- No extra legroom\n- Insurance retained\n- 0 paid checked bags\n\nTotal additional cost: $50",
+      "tool_calls": [
+        {
+          "name": "update_booking",
+          "arguments": {
+            "booking_id": "BK-1000",
+            "flight_id": "AA101",
+            "change_reason": "jury_duty",
+            "cabin_class": "economy",
+            "seat_type": "window",
+            "meal_preference": "standard",
+            "add_wifi": false,
+            "add_extra_legroom": false,
+            "add_insurance": true,
+            "delay_compensation": "none",
+            "paid_checked_bags": 0,
+            "confirm": true
           },
           "result": {
             "status": "updated",
             "booking_id": "BK-1000",
             "changes_applied": [
               "flight_id",
-              "change_reason",
-              "cabin_class",
-              "seat_type",
-              "meal_preference",
-              "add_wifi",
-              "add_extra_legroom",
-              "add_insurance",
-              "delay_compensation",
-              "paid_checked_bags"
+              "change_reason"
             ],
             "price_paid": 380,
             "change_fee": 0,
@@ -243,22 +312,15 @@
             "add_extra_legroom": false,
             "add_insurance": true,
             "delay_compensation": "none",
-            "paid_checked_bags": 0
+            "paid_checked_bags": 0,
+            "confirm": true
           },
           "result": {
             "status": "updated",
             "booking_id": "BK-1001",
             "changes_applied": [
               "flight_id",
-              "change_reason",
-              "cabin_class",
-              "seat_type",
-              "meal_preference",
-              "add_wifi",
-              "add_extra_legroom",
-              "add_insurance",
-              "delay_compensation",
-              "paid_checked_bags"
+              "change_reason"
             ],
             "price_paid": 340,
             "change_fee": 0,
@@ -269,7 +331,7 @@
     },
     {
       "role": "user",
-      "content": "That looks good, thanks. [TASK_DONE]"
+      "content": "Thanks \u2014 just to confirm, BK-1000 is now on AA101 on June 26 and BK-1001 is now on AA103 on June 30, and the preferences stayed as economy, window, standard meal, no Wi\u2011Fi, no extra legroom, and insurance kept on both, right? [TASK_DONE]"
     }
   ]
 }

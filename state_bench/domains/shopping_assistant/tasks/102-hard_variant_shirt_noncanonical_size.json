@@ -4,24 +4,21 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "I have the medium blue Premium Cotton Shirt in my cart. Do not change it yet; first tell me every blue size variant, stock status, and which one is roomier.",
   "user_simulator": {
-    "personality": "Direct, practical, and cooperative. Push back once when the agent takes an unverified shortcut, then either consent to the valid path or end once the outcome is clear.",
     "user_sim_context": "You already have the medium blue Premium Cotton Shirt in your cart, but you are considering a roomier blue option. You want the agent to inspect the blue size variants and stock before changing anything.",
     "known_info": [
       "You know your current request and how you asked for it.",
       "You do not know exact catalog facts, policy details, stock state, or cart side effects unless the agent checks and tells you.",
       "Your cart already contains: 1 x Premium Cotton Shirt, variant medium_blue."
     ],
-    "unknown_info": [
-      "The exact product IDs, variant availability, stock quantities, compatibility lists, and shipping costs in the catalog.",
-      "Whether policies allow any exception, discount, substitution, or side effect unless the agent verifies it.",
-      "Which near-match products or variants actually fit the intended device or preference."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "You are not asking to replace the shirt yet; you only want to understand the blue size variants and stock.",
-      "If the agent explains that Medium Blue is the current cart item and Large Blue is the roomier in-stock blue option, acknowledge that this answers your question.",
-      "If the agent offers to replace Medium Blue with Large Blue, say not yet; you only wanted the variant audit first.",
-      "If the agent removes, adds, or updates the shirt before you approve a later replacement, object that the cart should not have changed.",
-      "When the agent has listed the blue variants, identified the roomier in-stock option, and left the cart unchanged, end your next message with [TASK_DONE].",
+      "You only want a read-only audit of the Premium Cotton Shirt blue size variants, their stock status, and which blue option is roomier; do not ask to replace the shirt in this task.",
+      "If the agent asks what is already in your cart or which shirt you mean, say it is the medium blue Premium Cotton Shirt already in your cart and ask them to check the blue variants before changing anything.",
+      "If the agent lists only your current medium blue shirt, omits stock status, or does not compare the blue size variants, ask once for every blue size variant with stock status and the roomier option.",
+      "If the agent explains from variant evidence that Medium Blue is your current cart item and Large Blue is the roomier in-stock blue option, acknowledge that this answers your question.",
+      "If the agent offers to replace Medium Blue with Large Blue, decline for now because you only wanted the variant audit first.",
+      "If the agent removes, adds, or updates the shirt before you approve any later replacement, object that the cart should not have changed.",
+      "End only after the agent has listed the blue variants with stock status, identified the roomier in-stock option, and left the cart unchanged.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences unless this task is explicitly about that topic.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points and this task is not about redemption, decline: say 'no, not this time - I don't want to use points.'",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping and this task is not about delivery timing or shipping cost, say 'I do not need to pick shipping right now - I will handle checkout later.'"

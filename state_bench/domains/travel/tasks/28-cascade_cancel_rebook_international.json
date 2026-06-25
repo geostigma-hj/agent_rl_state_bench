@@ -4,29 +4,23 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I'd like to cancel my San Francisco to New York flight — booking BK-MS03 — and rebook a flight to London instead.",
   "user_simulator": {
-    "personality": "Professional and efficient. Expects clear fee breakdowns.",
     "known_info": [
-      "Your user ID: user_001",
-      "Booking ID: BK-MS03",
-      "Current flight is SFO → JFK, business class",
-      "Does NOT have travel insurance",
-      "Wants JFK → LHR on June 24, business class",
-      "Prefers DL and morning flights"
+      "Booking BK-MS03.",
+      "Wants JFK → LHR on June 24 in business class",
+      "Prefers DL, morning, and nonstop flights."
     ],
-    "unknown_info": [
-      "Exact cancellation fee percentage",
-      "Available flights to London",
-      "International flight pricing"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Start by asking to cancel booking BK-MS03.",
-      "When agent mentions a cancellation fee, ask for the exact amount before confirming.",
-      "After confirming the fee amount, proceed with cancellation.",
-      "When cancellation is done, request a new flight JFK → LHR on June 24 in business class.",
-      "When options are shown, select the nonstop DL morning business flight.",
-      "If the agent asks about seat or meal details, answer directly.",
-      "When booking is confirmed, ask for a summary of charges.",
-      "End with [TASK_DONE].",
+      "Keep the conversation focused on canceling booking BK-MS03 first and then booking a replacement JFK to London business-class flight for June 24.",
+      "Do not volunteer the replacement flight details beyond London until the agent asks for preferences or the original booking cancellation is underway.",
+      "If the agent asks for booking details, destination, date, cabin, airline, time, stops, payment, seat, meal, WiFi, extra legroom, or insurance preferences, answer from what you know and your profile.",
+      "Before agreeing to cancel the original booking, require the agent to state the exact cancellation fee and refund amount; push back if the fee is missing, treated as waived by insurance, or not explained as applying to the domestic business booking.",
+      "After the original booking is cancelled, ask the agent to continue with the JFK to LHR business-class replacement if they do not move there on their own.",
+      "When the agent presents London flight options, choose only an option that is DL, morning, nonstop, business class, and within your $1500 budget; push back if any of those details are missing or mismatched.",
+      "Pay for the replacement London booking with your credit card in full; if the agent asks how you want to pay, say credit card (do not ask to use loyalty points or a points-plus-cash split for this booking).",
+      "Before approving the new booking, require a preview that includes the selected flight, total cash cost, payment method, cabin, seat type, meal, WiFi, extra legroom, and no insurance.",
+      "If the agent proposes changing the old booking instead of creating a new replacement booking, clarify that the old San Francisco to New York booking should be cancelled and the London trip should be booked separately.",
+      "End only after the original booking cancellation is confirmed with its fee and refund, and the replacement London booking is confirmed with the expected flight, cost, and profile preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -45,7 +39,13 @@
     {
       "id": "state_domestic_business_cancel_fee",
       "kind": "must",
-      "requirement": "Agent must explain that canceling the original domestic business booking incurs a $45 cancellation fee rather than a free insured cancellation.",
+      "requirement": "Agent must state that canceling BK-MS03 (the domestic business booking) incurs a $45 cancellation fee with an $855 refund.",
+      "evidence": "conversation"
+    },
+    {
+      "id": "must_not_claim_free_or_insured_cancellation",
+      "kind": "must_not",
+      "requirement": "Agent must not claim that canceling BK-MS03 is free or that the cancellation fee is waived by insurance.",
       "evidence": "conversation"
     },
     {
@@ -61,8 +61,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "multi_booking_trip_coordination",
-  "task_env_path": "state_bench/domains/travel/task_envs/28-cascade_cancel_rebook_international.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -123,5 +121,7 @@
         "user_id": "user_001"
       }
     }
-  ]
+  ],
+  "task_type": "multi_booking_trip_coordination",
+  "task_env_path": "state_bench/domains/travel/task_envs/28-cascade_cancel_rebook_international.json"
 }

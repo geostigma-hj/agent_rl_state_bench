@@ -215,6 +215,7 @@ class CustomerSupportEnvironment(BaseEnvironment):
                     "eligibility": {
                         "defective_items": "No window restriction for defective, wrong item, or damaged in transit.",
                         "already_returned": "Items already returned/exchanged/cancelled are ineligible.",
+                        "not_as_described": "Use not_as_described only for an unused/unworn item that materially differs from the listing. If the customer wore, washed, altered, or used the item and only dislikes fit, feel, texture, or preference-based qualities, classify the return as changed_mind instead.",
                     },
                     "restocking_fee": {
                         "base": "15% restocking fee for opened electronics returned for changed_mind.",
@@ -225,11 +226,12 @@ class CustomerSupportEnvironment(BaseEnvironment):
                             "standard": "No discount.",
                         },
                         "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency.",
+                        "completed_returns": "Once a changed-mind return is completed with the applicable restocking fee, do not reverse that fee later as a courtesy or supplemental refund.",
                     },
                     "return_shipping_fee": {
                         "low_value": "Orders with subtotal < $50: customer pays $8 return shipping fee.",
                         "free_threshold": "Orders >= $50: free return label provided.",
-                        "fault_exempt": "Defective, wrong item, damaged in transit, or missing: always free return shipping.",
+                        "fault_exempt": "Defective, wrong item, or damaged in transit: always free return shipping.",
                         "deduction": "Return shipping fee, when charged, is deducted from the return refund.",
                     },
                     "bulk_purchase_clawback": {
@@ -240,7 +242,7 @@ class CustomerSupportEnvironment(BaseEnvironment):
                     "free_shipping_clawback": {
                         "applies_when": "Order originally qualified for free shipping (subtotal >= $100) AND the return drops remaining subtotal below $100.",
                         "amount": "$8 standard shipping fee is deducted from the return refund. This is a flat policy charge, not the original shipping cost (which was $0 on free-shipping orders).",
-                        "fault_exempt": "Defective, wrong item, damaged in transit, or missing: no clawback (customer-fault returns only).",
+                        "fault_exempt": "Defective, wrong item, or damaged in transit: no clawback (customer-fault returns only).",
                         "paid_shipping": "If the order did not qualify for free shipping originally (subtotal < $100), no clawback applies.",
                     },
                     "repeat_category_surcharge": {
@@ -299,6 +301,7 @@ class CustomerSupportEnvironment(BaseEnvironment):
                 "topic": "warranty",
                 "rules": {
                     "active": "Active warranty: eligible for claim.",
+                    "active_item_required": "Warranty claims require an active order item. Items already returned, exchanged, or cancelled are ineligible for a new warranty claim even if a warranty record still exists.",
                     "expired_recent": "Expired <30 days: 50% off repair.",
                     "expired_old": "Expired >30 days: full-price repair or 25% off replacement.",
                     "claim_limit": "Max claims reached: paid repair only (40% of item price).",
@@ -306,6 +309,7 @@ class CustomerSupportEnvironment(BaseEnvironment):
                     "recurring_defect": "2+ prior claims for same issue: automatic replacement.",
                     "manufacturer": "Manufacturer warranty covers first 12 months.",
                     "extended": "Extended warranty covers after manufacturer period.",
+                    "void_exclusions": "Liquid, accidental, or user-caused physical damage (e.g. spills, drops, cracked screens from misuse) is NOT covered and voids the claim, even while the warranty is otherwise active. The eligibility check is date/claim-count based only and does not detect damage cause, so when the customer describes liquid/accidental/user damage, deny the claim on this exclusion and do not file it.",
                 },
             }
         elif topic == "shipping":
@@ -393,6 +397,18 @@ class CustomerSupportEnvironment(BaseEnvironment):
         if "return" not in self._policies_checked:
             return {"error": "Policy review required. Call get_policies(topic='return') first."}
 
+        # A return presupposes the customer physically has the item. An item that was
+        # never received (not in the package / not delivered) cannot be "returned" —
+        # resolve those via process_refund (or a reship), not process_return.
+        if reason == "missing":
+            return {
+                "error": (
+                    "process_return does not handle not-received/missing items — a return requires the "
+                    "customer to have the item. For a missing or never-received item, issue a refund with "
+                    "process_refund (or arrange a reship)."
+                )
+            }
+
         item = self.order_items.get(item_id)
         if not item:
             return {"error": f"Item {item_id} not found."}
@@ -443,7 +459,7 @@ class CustomerSupportEnvironment(BaseEnvironment):
         # with no reason carveout). Shipping clawback skipped on product-fault returns
         # since those already get shipping refunded — clawing back simultaneously is
         # contradictory.
-        is_product_fault = reason in ("defective", "damaged_in_transit", "wrong_item", "missing")
+        is_product_fault = reason in ("defective", "damaged_in_transit", "wrong_item")
 
         # Free-shipping clawback: if this return drops remaining subtotal below the
         # free-shipping threshold, deduct the would-be standard shipping cost from
@@ -661,6 +677,12 @@ class CustomerSupportEnvironment(BaseEnvironment):
         # either reissue that same refund to a different method or add a separate
         # supplemental credit/refund. Supplemental amounts must persist so replay
         # GT can verify every state-mutating monetary action.
+        reverses_completed_restocking_fee = (
+            item.item_status == "returned"
+            and item.return_reason == "changed_mind"
+            and item.restocking_fee is not None
+            and amount == item.restocking_fee
+        )
         if item.refund_amount is not None and amount == item.refund_amount:
             # Policy gate: store-credit-only returns (outside-window grace, gift returns)
             # cannot be silently flipped to original_payment. Reject the override.
@@ -676,11 +698,27 @@ class CustomerSupportEnvironment(BaseEnvironment):
             effective_amount = item.refund_amount
             mode = "refund_method_update"
         elif item.refund_amount is not None and refund_method == item.refund_method:
+            if reverses_completed_restocking_fee:
+                return {
+                    "error": (
+                        "Cannot issue a supplemental refund equal to the completed changed-mind "
+                        "restocking fee. Completed changed-mind restocking fees are not reversed "
+                        "later as courtesy or supplemental refunds."
+                    )
+                }
             item.goodwill_credit = (item.goodwill_credit or 0) + amount
             item.goodwill_credit_method = refund_method
             effective_amount = amount
             mode = "supplemental_refund"
         elif item.refund_amount is not None:
+            if reverses_completed_restocking_fee:
+                return {
+                    "error": (
+                        "Cannot issue a supplemental refund equal to the completed changed-mind "
+                        "restocking fee. Completed changed-mind restocking fees are not reversed "
+                        "later as courtesy or supplemental refunds."
+                    )
+                }
             item.goodwill_credit = (item.goodwill_credit or 0) + amount
             item.goodwill_credit_method = refund_method
             effective_amount = amount
@@ -982,6 +1020,14 @@ class CustomerSupportEnvironment(BaseEnvironment):
         item = self.order_items.get(item_id)
         if not item:
             return {"error": f"Item {item_id} not found."}
+
+        if item.item_status in ("returned", "exchanged", "cancelled"):
+            return {
+                "error": (
+                    f"Cannot file warranty claim on item {item_id} because item_status is "
+                    f"{item.item_status!r}. Warranty claims require an active item."
+                )
+            }
 
         claim = policies.check_warranty_claim(
             warranty_type=warranty.warranty_type,

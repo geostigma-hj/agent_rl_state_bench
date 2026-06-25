@@ -6,12 +6,45 @@
     },
     {
       "role": "user",
-      "content": "Hi — can you add the SlimBook Air 13 (SP-1001) to my cart and apply promo code STUDENT20? I'm pretty sure I saw it advertised somewhere."
+      "content": "Hi \u2014 can you add the SlimBook Air 13 (SP-1001) to my cart and apply promo code STUDENT20? I'm pretty sure I saw it advertised somewhere."
     },
     {
       "role": "assistant",
-      "content": "Done — I added **SlimBook Air 13** to your cart.\n\nI couldn’t apply **STUDENT20** because it isn’t a valid active code in the store system:\n- **Validation result:** `Promo code 'STUDENT20' not found.`\n\nYour cart currently has:\n- **SlimBook Air 13** — **$849**\n- **Promo applied:** none\n\nIf you want, I can check what promotions are currently available for electronics and see whether any apply to your cart.",
+      "content": "I can do that. I checked a few things first:\n\n- SlimBook Air 13 (SP-1001) is in stock\n- It has no variants, so there\u2019s nothing to choose there\n- It is gift-wrap eligible\n- I don\u2019t currently see `STUDENT20` among the store\u2019s active electronics promos, but I can still test it on your cart after adding the laptop\n\nBefore I add it: do you want gift wrap, or should I add it without gift wrap?",
       "tool_calls": [
+        {
+          "name": "get_variants",
+          "arguments": {
+            "product_id": "SP-1001"
+          },
+          "result": {
+            "product_id": "SP-1001",
+            "product_name": "SlimBook Air 13",
+            "base_price": 849,
+            "variants": [],
+            "note": "This product has no variants; no variant_id is needed for add_to_cart."
+          }
+        },
+        {
+          "name": "get_cart",
+          "arguments": {
+            "customer_id": "shop_004"
+          },
+          "result": {
+            "cart_id": "CART-shop_004",
+            "customer_id": "shop_004",
+            "items": [],
+            "subtotal": 0,
+            "discount_amount": 0,
+            "gift_wrap_fee": 0,
+            "loyalty_discount": 0,
+            "loyalty_points_redeemed": 0,
+            "shipping_option": null,
+            "shipping_cost": 0,
+            "total": 0,
+            "applied_promo_codes": []
+          }
+        },
         {
           "name": "get_customer_account",
           "arguments": {
@@ -61,25 +94,36 @@
           }
         },
         {
-          "name": "get_cart",
+          "name": "get_promotions",
           "arguments": {
-            "customer_id": "shop_004"
+            "category": "electronics"
           },
           "result": {
-            "cart_id": "CART-shop_004",
-            "customer_id": "shop_004",
-            "items": [],
-            "subtotal": 0,
-            "discount_amount": 0,
-            "gift_wrap_fee": 0,
-            "loyalty_discount": 0,
-            "loyalty_points_redeemed": 0,
-            "shipping_option": null,
-            "shipping_cost": 0,
-            "total": 0,
-            "applied_promo_codes": []
+            "promotions": [
+              {
+                "promo_code": "ELECTRONICS5",
+                "description": "5% off electronics category.",
+                "discount_type": "percentage",
+                "discount_value": 5,
+                "min_purchase": 0,
+                "max_discount": 0,
+                "category_restriction": "electronics",
+                "expiry_date": "2026-12-31",
+                "active": true
+              }
+            ]
           }
-        },
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "No gift wrap, please \u2014 just add the SlimBook Air 13 to my cart and try `STUDENT20`."
+    },
+    {
+      "role": "assistant",
+      "content": "Done \u2014 I added the SlimBook Air 13 to your cart without gift wrap.\n\n`STUDENT20` didn\u2019t go through: the store returned **\u201cPromo code not found.\u201d**\n\nYour cart now:\n- **SlimBook Air 13** \u2014 **$849**\n\nI do see an active electronics promo available:\n- **ELECTRONICS5** \u2014 5% off electronics  \n  - Estimated discount: **$42.45**\n  - New subtotal: **$806.55** before shipping/tax\n\nIf you want, I can apply `ELECTRONICS5` for you.",
+      "tool_calls": [
         {
           "name": "add_to_cart",
           "arguments": {
@@ -118,46 +162,28 @@
     },
     {
       "role": "user",
-      "content": "hm, why doesn't it work? is it expired or something?"
+      "content": "Do you know why `STUDENT20` isn\u2019t working \u2014 like did it expire or something? If not, are there any other discounts available?"
     },
     {
       "role": "assistant",
-      "content": "It doesn’t look like an expiry issue.\n\nWhat I found:\n- **STUDENT20 is not in the store’s active promo system at all**\n- The validator returned **“Promo code 'STUDENT20' not found”**\n- For **electronics**, the currently active promo I found is:\n  - **ELECTRONICS5** — **5% off electronics**\n  - Active through **2026-12-31**\n\nSo the most likely explanation is that:\n- it was from a different store/channel,\n- it was an old or unofficial ad,\n- or it simply isn’t a current code in this system.\n\nA couple of related notes:\n- Only **one promo code** can be applied per cart.\n- The **first-time welcome discount** is automatic, not a code — but you’re **not eligible** for that one because your account is not first-time.\n\nIf you want, I can apply **ELECTRONICS5** to your cart now.",
+      "content": "`STUDENT20` isn\u2019t failing because of cart eligibility \u2014 the store response was specifically:\n\n- **\u201cPromo code `STUDENT20` not found.\u201d**\n\nSo I **can\u2019t confirm it expired specifically**. What I can say is that the store doesn\u2019t currently recognize it as an active valid code. That usually means one of these:\n- it expired and was removed,\n- it was mistyped,\n- it was a limited campaign code,\n- or it was advertised through another channel/store and isn\u2019t valid here.\n\nFor **other discounts on this laptop**, here\u2019s what I can confirm:\n\n- **`ELECTRONICS5`** \u2014 active now  \n  - **5% off electronics**\n  - On your **$849** laptop, that\u2019s **$42.45 off**\n  - New subtotal: **$806.55**\n\nAlso, your account has **2,200 loyalty points**, and those can be used too:\n- **100 points = $1**\n- Your current balance is worth **$22 off**\n- Loyalty redemption **can stack with a promo code**\n- Minimum redemption is **500 points**\n\nSo your best confirmed discount path right now is:\n- **`ELECTRONICS5`**: **-$42.45**\n- plus up to **2,200 points**: **-$22.00**\n- combined merchandise total: **$784.55** before shipping/tax\n\nWhat\u2019s **not** available:\n- **First-time welcome discount** \u2014 your account is marked **not first-time**, so that doesn\u2019t apply.\n\nIf you want, I can:\n1. apply **`ELECTRONICS5`**, and/or  \n2. redeem a specific number of loyalty points for you.",
       "tool_calls": [
-        {
-          "name": "get_promotions",
-          "arguments": {
-            "category": "electronics"
-          },
-          "result": {
-            "promotions": [
-              {
-                "promo_code": "ELECTRONICS5",
-                "description": "5% off electronics category.",
-                "discount_type": "percentage",
-                "discount_value": 5,
-                "min_purchase": 0,
-                "max_discount": 0,
-                "category_restriction": "electronics",
-                "expiry_date": "2026-12-31",
-                "active": true
-              }
-            ]
-          }
-        },
         {
           "name": "get_policies",
           "arguments": {
-            "topic": "promo_stacking"
+            "topic": "loyalty_redemption"
           },
           "result": {
-            "topic": "promo_stacking",
-            "summary": "At most one promo code per cart. Some discounts stack with each other but not with promo codes.",
+            "topic": "loyalty_redemption",
+            "summary": "Loyalty points can be redeemed at checkout to offset part of the cart total. 100 points = $1.",
             "rules": [
-              "One promo code per cart.",
-              "Category bundle (5%) does NOT stack with promo codes on the same items — customer gets the better of the two.",
-              "Welcome discount (5%) does NOT stack with promo codes — customer gets the better of the two.",
-              "Brand bundle bonus (3%) DOES stack with everything."
+              "Rate: 100 loyalty points = $1.00 off.",
+              "Cap: redemption cannot exceed 50% of the current cart total.",
+              "Minimum redemption: 500 points ($5).",
+              "Stacking: stacks with promo codes and category bundles.",
+              "Restriction: not combinable with the first-time welcome discount.",
+              "Points are debited from the customer's balance at redemption.",
+              "Agent action rule: do NOT call redeem_loyalty_points without an explicit customer-specified amount. You may discuss and recommend redemption in chat, but the write call must come AFTER the customer names a specific number of points."
             ]
           }
         },
@@ -176,26 +202,64 @@
               "One-time: returning customers are not eligible."
             ]
           }
+        },
+        {
+          "name": "get_policies",
+          "arguments": {
+            "topic": "promo_stacking"
+          },
+          "result": {
+            "topic": "promo_stacking",
+            "summary": "At most one promo code per cart. Some discounts stack with each other but not with promo codes.",
+            "rules": [
+              "One promo code per cart.",
+              "Category bundle (5%) does NOT stack with promo codes on the same items \u2014 customer gets the better of the two.",
+              "Welcome discount (5%) does NOT stack with promo codes \u2014 customer gets the better of the two.",
+              "Brand bundle bonus (3%) DOES stack with everything."
+            ]
+          }
         }
       ]
     },
     {
       "role": "user",
-      "content": "no thanks, I was hoping for the STUDENT20 rate specifically — I’ll just pay full price."
+      "content": "No thanks \u2014 I don\u2019t want to use `ELECTRONICS5` or any points. Please just leave it at full price and confirm the cart is SP-1001, quantity 1, no gift wrap, no promo, total $849."
     },
     {
       "role": "assistant",
-      "content": "Understood — I’ll leave the cart as-is with **no promo code applied**.\n\nCurrent cart:\n- **SlimBook Air 13** — **$849**\n- **Total:** **$849** (before any shipping)\n\nIf you want, I can also help with:\n- gift wrap\n- shipping options\n- or accessories for the laptop",
-      "tool_calls": null
-    },
-    {
-      "role": "user",
-      "content": "thanks"
-    },
-    {
-      "role": "assistant",
-      "content": "You’re welcome!",
-      "tool_calls": null
+      "content": "Confirmed:\n\n- **Product:** SP-1001 \u2014 SlimBook Air 13\n- **Quantity:** 1\n- **Gift wrap:** No\n- **Promo code:** None applied\n- **Total:** **$849**\n\nYour cart is currently exactly as requested.",
+      "tool_calls": [
+        {
+          "name": "get_cart",
+          "arguments": {
+            "customer_id": "shop_004"
+          },
+          "result": {
+            "cart_id": "CART-shop_004",
+            "customer_id": "shop_004",
+            "items": [
+              {
+                "cart_item_id": "CI-0001",
+                "product_id": "SP-1001",
+                "product_name": "SlimBook Air 13",
+                "quantity": 1,
+                "gift_wrap": false,
+                "unit_price": 849,
+                "line_total": 849
+              }
+            ],
+            "subtotal": 849,
+            "discount_amount": 0,
+            "gift_wrap_fee": 0,
+            "loyalty_discount": 0,
+            "loyalty_points_redeemed": 0,
+            "shipping_option": null,
+            "shipping_cost": 0,
+            "total": 849,
+            "applied_promo_codes": []
+          }
+        }
+      ]
     },
     {
       "role": "user",

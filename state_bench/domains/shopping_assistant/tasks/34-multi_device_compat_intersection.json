@@ -4,7 +4,6 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "I need new wireless headphones that work well with my ProBook 13.",
   "user_simulator": {
-    "personality": "Practical, spec-minded. Does not mention secondary devices unprompted.",
     "user_sim_context": "You want wireless headphones for your ProBook 13 laptop. You ALSO own a TechPhone Pro 16 phone (it's in your purchase_history) — you would actually use the same headphones with both devices, but you do NOT volunteer this. You assume the agent will just pick something good for the laptop. The test is whether the agent reads your purchase_history, notices the phone, proactively raises the dual-device consideration, and steers you toward SP-2030 which works with both — vs. silently picking a laptop-only option.",
     "known_info": [
       "You want wireless headphones that work with your ProBook 13.",
@@ -12,23 +11,16 @@
       "No gift wrap, no budget cap.",
       "You are a returning customer."
     ],
-    "unknown_info": [
-      "That dual-compatibility across your phone and laptop is a meaningful constraint in the catalog.",
-      "Prices and compatibility lists of the candidates."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Opening: the one-line message above. ONLY mention the ProBook 13. Do NOT mention the TechPhone at all unless the agent brings it up first.",
-      "If the agent proactively asks something like 'I see you also own a TechPhone Pro 16 — do you want headphones that work with both?', reply: 'oh good point, yes, I'd like something that works with both devices'. Then continue and let them recommend SP-2030.",
-      "If the agent recommends a product without asking about the phone, answer based on their suggestion. Do NOT volunteer the phone even if they recommend a phone-incompatible one (SP-2032 DeskMate is the natural laptop-only pick).",
-      "If the agent RECOMMENDS a specific product without adding it, reply with a go-ahead ('sounds good, please add it'). Do NOT include [TASK_DONE] in this message — wait for the agent to actually call add_to_cart.",
-      "Only end with [TASK_DONE] AFTER the agent has confirmed the product is in the cart.",
-      "If the agent adds SP-2030 SonicBeat Studio — that's the correct intersection answer. Accept and end. Agent passed IF they also referenced the TechPhone from purchase_history in their reasoning.",
-      "If the agent adds SP-2032 DeskMate Conference Headset (laptop-only — the obvious pick if ignoring the phone), accept and end. Agent has failed (didn't read purchase_history or didn't surface the dual-device implication).",
-      "If the agent adds SP-2031 AirPhone Buds Pro (phone-only, wrong answer even for the laptop-only ask), accept and end. Agent has failed.",
-      "If the agent adds SP-2033 UniversalPods Max, accept and end. Agent has failed (marketing-vs-data trap).",
-      "Do NOT volunteer specific model names from the catalog. Do NOT ask about gift wrap, loyalty, promos, shipping, bundles.",
-      "Do NOT mention owning the TechPhone unless the agent raises it first.",
-      "Keep replies short.",
+      "Start by asking only for wireless headphones that work well with the ProBook 13; do not mention the TechPhone Pro 16 unless the agent raises it first.",
+      "If the agent asks about preferences beyond laptop compatibility, say you have no budget cap, do not need gift wrap, and otherwise defer to the agent's recommendation.",
+      "If the agent proactively connects your purchase history or owned phone to the headphone choice, confirm that you would like one pair that works with both the ProBook 13 and the TechPhone Pro 16.",
+      "If the agent recommends a headphone without raising the TechPhone or dual-device compatibility first, do not volunteer the phone; respond based on the recommendation as presented.",
+      "Do not volunteer catalog model names, ask for discounts, request bundles, or introduce gift wrap, loyalty, promo, or shipping side paths.",
+      "When the agent recommends a specific headphone as suitable, agree to add that recommended item to the cart, but do not include [TASK_DONE] before the cart action is confirmed.",
+      "If the agent offers SP-2030 after discussing both devices, accept it as the dual-device choice and ask them to add one with no gift wrap.",
+      "End only after the agent confirms that the recommended headphone has been added to the cart; then reply with [TASK_DONE].",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

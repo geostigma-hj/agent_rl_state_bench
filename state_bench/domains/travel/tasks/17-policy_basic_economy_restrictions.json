@@ -4,31 +4,19 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I have booking BK-PR02 and I'd like to either change it to a different date or upgrade to business class. Also, how many bags can I check?",
   "user_simulator": {
-    "personality": "Calm but hopeful. Budget-conscious traveler.",
     "known_info": [
-      "Your user ID: user_002",
-      "Booking ID is BK-PR02",
-      "Booked a cheap fare (basic economy)",
-      "Is a basic tier loyalty member",
-      "Wants to bring 2 checked bags on this trip"
+      "Booking BK-PR02: very cheap fare.",
+      "Wants to bring 2 checked bags on this trip."
     ],
-    "unknown_info": [
-      "Basic economy cannot be changed after 24h",
-      "Basic economy cannot be upgraded",
-      "Basic economy cannot be cancelled after 24h without insurance",
-      "Basic economy gets 0 free checked bags",
-      "Extra bags are $50 each for basic economy"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Ask about changing or upgrading your booking AND about checked bags.",
-      "When the agent says changes are blocked, ask if upgrading is possible instead.",
-      "When the agent says upgrades are also blocked, ask about cancellation as a last resort.",
-      "When the agent explains cancellation is also blocked, ask about checked baggage.",
-      "When the agent says 0 free checked bags, ask how much extra bags cost.",
-      "Express frustration that basic economy has so many restrictions.",
-      "Ask if there is ANY way to get a better deal or more flexibility in general terms only.",
-      "This is an information-only task. If the agent offers to search, book, cancel, or execute anything, say you only wanted the policy explained and do not want any action taken.",
-      "End with [TASK_DONE] once all restrictions and baggage info have been explained."
+      "You want an explanation of what booking BK-PR02 allows for date changes, upgrades, cancellation, and checked bags; keep the conversation informational and do not authorize any action.",
+      "If the agent asks for booking details, provide BK-PR02 and explain that it was a very cheap fare; do not volunteer unrelated preferences or new trip requirements.",
+      "If the agent only addresses part of the request, ask about the missing basic-economy restriction: date changes after the initial 24-hour window, business-class upgrades, cancellation without insurance, or checked-bag allowance and fees.",
+      "When discussing checked bags, say you want to bring 2 checked bags if the agent asks how many; if the agent says there are 0 free checked bags but omits the cost, ask how much each checked bag would cost.",
+      "If the agent offers to search for flights, upgrade, change, cancel, add bags, or book something else, say you only want the policy explained and do not want any action taken.",
+      "If the agent confirms the restrictions are severe, you may express frustration and ask once whether there is any general way to get a better deal or more flexibility without changing the booking.",
+      "End with [TASK_DONE] only after the agent has clearly explained the change restriction, upgrade restriction, cancellation restriction, 0 free checked bags, and the $50 checked-bag fee."
     ],
     "user_sim_context": "You booked a very cheap fare and now want to understand just how boxed in you are. You care about whether you can change, upgrade, cancel, or at least bring bags without nasty surprises. This is an information-seeking conversation, but you are likely to sound frustrated if the answer keeps getting worse."
   },
@@ -65,7 +53,7 @@
       "evidence": "conversation_or_tool_calls"
     }
   ],
+  "state_requirements": [],
   "task_type": "policy_info_or_restraint",
-  "task_env_path": "state_bench/domains/travel/task_envs/17-policy_basic_economy_restrictions.json",
-  "state_requirements": []
+  "task_env_path": "state_bench/domains/travel/task_envs/17-policy_basic_economy_restrictions.json"
 }

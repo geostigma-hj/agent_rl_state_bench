@@ -6,11 +6,11 @@
     },
     {
       "role": "user",
-      "content": "Hi — I'd like to add the SlimBook Touch 15 to my cart please."
+      "content": "Hi \u2014 I'd like to add the SlimBook Touch 15 to my cart please."
     },
     {
       "role": "assistant",
-      "content": "Done — I added 1 × SlimBook Touch 15 to your cart for $1,099.\n\nIf you want, I can also:\n- check your cart total,\n- add gift wrap,\n- look for any eligible promos,\n- or help you pick accessories for it.",
+      "content": "Sure \u2014 the SlimBook Touch 15 is in stock for $1,099, and it doesn\u2019t have any variants.\n\nWould you like me to add 1 to your cart with gift wrap or without gift wrap?",
       "tool_calls": [
         {
           "name": "search_products",
@@ -107,7 +107,17 @@
             "variants": [],
             "note": "This product has no variants; no variant_id is needed for add_to_cart."
           }
-        },
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Without gift wrap, please \u2014 just 1 of the SlimBook Touch 15."
+    },
+    {
+      "role": "assistant",
+      "content": "Done \u2014 I added 1 \u00d7 SlimBook Touch 15 to your cart without gift wrap.\n\nCart total: $1,099\n\nAnything else you'd like to add or check?",
+      "tool_calls": [
         {
           "name": "add_to_cart",
           "arguments": {
@@ -134,7 +144,7 @@
     },
     {
       "role": "user",
-      "content": "Thanks — that works for me. [TASK_DONE]"
+      "content": "[TASK_DONE]"
     }
   ]
 }

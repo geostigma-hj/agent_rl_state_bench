@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "For booking **BK-PR07**, a **direct upgrade from economy to first class isn’t available** under the policy.\n\nYour options are:\n\n- **Economy → Business**: allowed  \n  - Current amount paid: **$400**\n  - Business fare on your flight (**WN100**): **$1,000**\n  - **Upgrade cost: $600**\n\n- **Business → First**: allowed after that  \n  - First fare on your flight: **$1,800**\n  - Additional cost after business: **$800**\n\nSo to reach **first class**, the total additional amount would effectively be **$1,400** beyond what you already paid, but it would need to be done as a two-step upgrade rather than a direct one.\n\nIf you want, I can also help with the **business-class upgrade** now.",
+      "content": "For BK-PR07, a direct upgrade from economy to first class is **not available** under the upgrade policy.\n\nHere\u2019s the pricing on your flight WN100 (LAX \u2192 JFK, June 20):\n\n- **Economy paid:** $400\n- **Business fare:** $1,000\n- **First fare:** $1,800\n\nSo your options are:\n\n- **Upgrade to business now:** **$600**\n- **Then upgrade business to first:** **$800 more**\n\nSo to reach **first class**, it would be **$1,400 additional total**, but it has to be done **in two steps**, not as a single direct economy-to-first upgrade.\n\nIf you want, I can help you upgrade to **business** now.",
       "tool_calls": [
         {
           "name": "get_booking",
@@ -43,6 +43,19 @@
             "destination": "JFK",
             "departure_time": "2026-06-20T11:45:00",
             "route_type": "domestic"
+          }
+        },
+        {
+          "name": "get_user_details",
+          "arguments": {
+            "user_id": "user_004"
+          },
+          "result": {
+            "user_id": "user_004",
+            "name": "Noah Brown",
+            "email": "noah.brown@example.com",
+            "loyalty_tier": "silver",
+            "loyalty_points": 15000
           }
         },
         {
@@ -101,16 +114,16 @@
     },
     {
       "role": "user",
-      "content": "Thanks. Also, my loyalty tier is **silver**, not basic.  \n\nSo the only path is **economy to business for $600**, then **business to first for another $800**, total **$1,400**? I’ve only got a **$600 comfort cushion**—would the economy-to-business step alone use all of it?"
+      "content": "Thanks, that helps. My comfort budget is $600 max, and I don\u2019t want to spend all of it on upgrades, so if business alone is $600 and first would be $1,400 total, that won\u2019t work for me.\n\nJust to confirm: direct economy-to-first isn\u2019t allowed on BK-PR07, the only path is economy \u2192 business for $600, then business \u2192 first for another $800, and no upgrade will be made, right?"
     },
     {
       "role": "assistant",
-      "content": "Yes — based on your flight’s current fares, that’s correct:\n\n- **Economy → Business:** **$600**\n- **Business → First:** **$800**\n- **Total additional cost to reach First:** **$1,400**\n\nAnd yes, if your “comfort cushion” is **$600**, then the **economy-to-business upgrade alone would use all of it**.\n\nYour **silver** tier may help with other benefits, but it does **not change the upgrade pricing rule** here.",
+      "content": "Correct.\n\nFor **BK-PR07**:\n\n- **Direct economy \u2192 first** is **not allowed**\n- The only upgrade path is:\n  - **economy \u2192 business:** **$600**\n  - **business \u2192 first:** **$800 more**\n- Total additional cost to reach **first** would be **$1,400**\n\nAnd **no upgrade has been made** \u2014 your booking is still unchanged in **economy**.",
       "tool_calls": null
     },
     {
       "role": "user",
-      "content": "Got it. That’s too much for me if the business upgrade alone uses the entire $600 cushion, so I’ll just stay in economy. [TASK_DONE]"
+      "content": "[TASK_DONE]"
     }
   ]
 }

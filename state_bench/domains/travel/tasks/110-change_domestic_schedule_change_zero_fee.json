@@ -4,24 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "The airline changed the schedule on booking BK-1000, so I want to move it to June 24. What is the total impact?",
   "user_simulator": {
-    "personality": "Calm and practical.",
     "user_sim_context": "The airline changed the schedule on your booking, so you expect the schedule-change exemption to remove the fee. You still want the agent to calculate the practical impact of moving to the new option instead of stopping at the word 'free'.",
     "known_info": [
-      "Your user ID: user_003",
-      "Booking ID: BK-1000",
-      "Current route: JFK to BOS",
-      "Current travel date: 2026-06-21",
-      "Requested new date: 2026-06-24",
-      "Reason: schedule change"
+      "Booking BK-1000: JFK to BOS on 2026-06-21.",
+      "Requested change: move to 2026-06-24 because of an airline schedule change."
     ],
-    "unknown_info": [
-      "Exact change fee",
-      "Exact total after the change"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "If the agent says the schedule change makes the fee zero, ask whether the new flight itself is still more expensive.",
-      "Approve the change once the agent gives the full total clearly.",
-      "End with [TASK_DONE] after confirmation.",
+      "You want to change only booking BK-1000 to June 24 because of the airline schedule change, keeping the same JFK-to-BOS economy trip scope and existing booking preferences.",
+      "If the agent asks for the booking, requested date, or reason, provide BK-1000, June 24, and the airline schedule change; do not volunteer policy details, prices, or flight IDs.",
+      "If the agent says the schedule change makes the change fee zero, ask whether the replacement flight still changes the amount you pay.",
+      "Push back if the agent quotes a non-zero change fee after recognizing the schedule-change reason, treats the whole change as free without checking the replacement fare, or does not clearly separate the fee from the fare difference.",
+      "Approve only after the agent explains the $0 change fee, the $60 fare difference or additional cost, and that the resulting total remains within your budget.",
+      "If the agent asks about booking-stage preferences for the changed booking, say to keep the existing booking's preferences; do not ask for upgrades, add-ons, or unrelated trip changes.",
+      "End only after the agent confirms BK-1000 has actually been changed to the June 24 JFK-to-BOS economy flight with a $0 change fee, $60 more due to the fare difference, the updated paid amount, and preserved booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -55,8 +51,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/110-change_domestic_schedule_change_zero_fee.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -82,5 +76,7 @@
       "field": "price_paid",
       "expected_value": 300
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/110-change_domestic_schedule_change_zero_fee.json"
 }

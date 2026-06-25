@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "I can handle the phone case price drop right away: it qualifies for a $10 price adjustment, since it dropped from $35 to $25 within 7 days of delivery.\n\nFor the headphones, I checked and there isn’t a warranty record attached to that item, so I can’t file it as a warranty claim. Since they’re defective, I can still help with a return/refund instead. If you want, I can process the $10 refund for the case and start the defective return for the headphones next.",
+      "content": "Done \u2014 I processed the defective headphones as a return for a $249 refund to your original payment method, and a free return label has been issued for them. I also applied a $10 price-drop refund for the phone case to the same payment method.",
       "tool_calls": [
         {
           "name": "get_order",
@@ -124,91 +124,12 @@
         {
           "name": "get_policies",
           "arguments": {
-            "topic": "warranty"
-          },
-          "result": {
-            "topic": "warranty",
-            "rules": {
-              "active": "Active warranty: eligible for claim.",
-              "expired_recent": "Expired <30 days: 50% off repair.",
-              "expired_old": "Expired >30 days: full-price repair or 25% off replacement.",
-              "claim_limit": "Max claims reached: paid repair only (40% of item price).",
-              "repair_vs_replace": "Items <$100: replacement. Items >=$100: repair first.",
-              "recurring_defect": "2+ prior claims for same issue: automatic replacement.",
-              "manufacturer": "Manufacturer warranty covers first 12 months.",
-              "extended": "Extended warranty covers after manufacturer period."
-            }
-          }
-        },
-        {
-          "name": "get_policies",
-          "arguments": {
-            "topic": "refund"
-          },
-          "result": {
-            "topic": "refund",
-            "rules": {
-              "amount": {
-                "full_refund": "Full refund for defective, wrong item, or damaged in transit.",
-                "promo_redistribution": "If a promo/coupon was used: discount allocated proportionally by item price. Refund = item_price - (discount * item_price / subtotal).",
-                "outside_window": "Outside return window but within store-credit grace: store credit only.",
-                "shipping_refund": "When refunding shipping (defective/wrong/damaged returns, 6+-days-late compensation), refund the actual shipping cost the customer was charged on the order — read order.shipping_cost and refund that amount. Standard policy: $0 on free-shipping orders (subtotal >= $100), $8 otherwise. NOT for buyer's remorse."
-              },
-              "method": {
-                "original_payment": "Default refund method when item was paid for and is being returned for fault.",
-                "store_credit": "Required for: gift returns (at current product price), outside-window grace returns, and exchange-cheaper differences.",
-                "store_credit_only_constraint": "When a return is issued under the store-credit-only rule (gift return OR outside-window grace), the refund method cannot be changed back to original_payment afterward. process_refund will reject any attempt to flip the method on those returns."
-              },
-              "price_match": "If product price drops within 7 days of delivery, refund the difference (no return required).",
-              "goodwill_credit": "Goodwill credits (e.g., fragile-item damage bonus) are issued as a refund with the credit amount."
-            }
-          }
-        },
-        {
-          "name": "get_warranty_status",
-          "arguments": {
-            "item_id": "ITEM-10251"
-          },
-          "result": {
-            "item_id": "ITEM-10251",
-            "has_warranty": false,
-            "message": "No warranty found for this item."
-          }
-        },
-        {
-          "name": "process_refund",
-          "arguments": {
-            "item_id": "ITEM-10252",
-            "refund_method": "original_payment",
-            "amount": 10,
-            "confirm": false
-          },
-          "result": {
-            "status": "preview",
-            "item_id": "ITEM-10252",
-            "refund_amount": 10,
-            "refund_method": "original_payment"
-          }
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "content": "Yes please, but as two separate actions: a defective return for the headphones, and the phone case kept with only the $10 price-match refund to the original payment method."
-    },
-    {
-      "role": "assistant",
-      "content": "Done — both were handled separately.\n\n- Headphones: defective return started, prepaid return label issued, and $249 will go back to your original payment method.\n- Phone case: $10 price-match refund processed to your original payment method, and you keep the case.",
-      "tool_calls": [
-        {
-          "name": "get_policies",
-          "arguments": {
             "topic": "return"
           },
           "result": {
             "topic": "return",
             "rules": {
-              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim — skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
+              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim \u2014 skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
               "windows_by_category": {
                 "electronics": "15-day return window",
                 "clothing": "30-day return window",
@@ -224,7 +145,8 @@
               },
               "eligibility": {
                 "defective_items": "No window restriction for defective, wrong item, or damaged in transit.",
-                "already_returned": "Items already returned/exchanged/cancelled are ineligible."
+                "already_returned": "Items already returned/exchanged/cancelled are ineligible.",
+                "not_as_described": "Use not_as_described only for an unused/unworn item that materially differs from the listing. If the customer wore, washed, altered, or used the item and only dislikes fit, feel, texture, or preference-based qualities, classify the return as changed_mind instead."
               },
               "restocking_fee": {
                 "base": "15% restocking fee for opened electronics returned for changed_mind.",
@@ -234,12 +156,13 @@
                   "silver": "25% off the restocking fee.",
                   "standard": "No discount."
                 },
-                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency."
+                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency.",
+                "completed_returns": "Once a changed-mind return is completed with the applicable restocking fee, do not reverse that fee later as a courtesy or supplemental refund."
               },
               "return_shipping_fee": {
                 "low_value": "Orders with subtotal < $50: customer pays $8 return shipping fee.",
                 "free_threshold": "Orders >= $50: free return label provided.",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: always free return shipping.",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: always free return shipping.",
                 "deduction": "Return shipping fee, when charged, is deducted from the return refund."
               },
               "bulk_purchase_clawback": {
@@ -250,7 +173,7 @@
               "free_shipping_clawback": {
                 "applies_when": "Order originally qualified for free shipping (subtotal >= $100) AND the return drops remaining subtotal below $100.",
                 "amount": "$8 standard shipping fee is deducted from the return refund. This is a flat policy charge, not the original shipping cost (which was $0 on free-shipping orders).",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: no clawback (customer-fault returns only).",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: no clawback (customer-fault returns only).",
                 "paid_shipping": "If the order did not qualify for free shipping originally (subtotal < $100), no clawback applies."
               },
               "repeat_category_surcharge": {
@@ -262,20 +185,27 @@
           }
         },
         {
-          "name": "process_refund",
+          "name": "get_policies",
           "arguments": {
-            "item_id": "ITEM-10252",
-            "refund_method": "original_payment",
-            "amount": 10,
-            "confirm": true
+            "topic": "refund"
           },
           "result": {
-            "status": "refunded",
-            "item_id": "ITEM-10252",
-            "mode": "refund",
-            "refund_amount": 10,
-            "refund_method": "original_payment",
-            "total_goodwill_credit": 0
+            "topic": "refund",
+            "rules": {
+              "amount": {
+                "full_refund": "Full refund for defective, wrong item, or damaged in transit.",
+                "promo_redistribution": "If a promo/coupon was used: discount allocated proportionally by item price. Refund = item_price - (discount * item_price / subtotal).",
+                "outside_window": "Outside return window but within store-credit grace: store credit only.",
+                "shipping_refund": "When refunding shipping (defective/wrong/damaged returns, 6+-days-late compensation), refund the actual shipping cost the customer was charged on the order \u2014 read order.shipping_cost and refund that amount. Standard policy: $0 on free-shipping orders (subtotal >= $100), $8 otherwise. NOT for buyer's remorse."
+              },
+              "method": {
+                "original_payment": "Default refund method when item was paid for and is being returned for fault.",
+                "store_credit": "Required for: gift returns (at current product price), outside-window grace returns, and exchange-cheaper differences.",
+                "store_credit_only_constraint": "When a return is issued under the store-credit-only rule (gift return OR outside-window grace), the refund method cannot be changed back to original_payment afterward. process_refund will reject any attempt to flip the method on those returns."
+              },
+              "price_match": "If product price drops within 7 days of delivery, refund the difference (no return required).",
+              "goodwill_credit": "Goodwill credits (e.g., fragile-item damage bonus) are issued as a refund with the credit amount."
+            }
           }
         },
         {
@@ -305,6 +235,21 @@
           }
         },
         {
+          "name": "process_refund",
+          "arguments": {
+            "item_id": "ITEM-10252",
+            "refund_method": "original_payment",
+            "amount": 10,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "item_id": "ITEM-10252",
+            "refund_amount": 10,
+            "refund_method": "original_payment"
+          }
+        },
+        {
           "name": "process_return",
           "arguments": {
             "item_id": "ITEM-10251",
@@ -326,12 +271,29 @@
             "paid_return_shipping_fee": 0,
             "restocking_discount": 0
           }
+        },
+        {
+          "name": "process_refund",
+          "arguments": {
+            "item_id": "ITEM-10252",
+            "refund_method": "original_payment",
+            "amount": 10,
+            "confirm": true
+          },
+          "result": {
+            "status": "refunded",
+            "item_id": "ITEM-10252",
+            "mode": "refund",
+            "refund_amount": 10,
+            "refund_method": "original_payment",
+            "total_goodwill_credit": 0
+          }
         }
       ]
     },
     {
       "role": "user",
-      "content": "That looks right, thank you for handling them separately. [TASK_DONE]"
+      "content": "Thanks, that sounds right \u2014 just to confirm, the headphones return is processed as defective with the $249 refund and return label, and the phone case stays as-is with the separate $10 price-match refund to my original payment. [TASK_DONE]"
     }
   ]
 }

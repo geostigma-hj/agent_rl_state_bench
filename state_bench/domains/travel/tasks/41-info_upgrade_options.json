@@ -4,26 +4,19 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I'm on booking BK-I06 in economy. What are my upgrade options? Can I go to business or first class, and how much would each cost?",
   "user_simulator": {
-    "personality": "Curious but budget-aware. Wants to know all options before deciding.",
     "known_info": [
-      "Your user ID: user_002",
-      "Booking ID is BK-I06",
-      "Currently in economy",
-      "Wants to see all upgrade options"
+      "Booking BK-I06: currently in economy.",
+      "Wants to see all upgrade options."
     ],
-    "unknown_info": [
-      "Economy->business costs $420",
-      "Economy->first is not directly available",
-      "Must go economy->business->first if wants first class",
-      "Total to reach first would be $420 + $560 = $980"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Ask your question about upgrade options from economy.",
-      "When the agent provides economy-to-business cost, ask about first class.",
-      "When the agent explains the two-step requirement, ask for the total cost to reach first.",
-      "Do NOT ask for cheaper upgrade options, special deals, point redemptions, or for the agent to execute any upgrade.",
-      "If the agent asks whether you want to proceed with an upgrade, say you only wanted the pricing and rules.",
-      "When you have complete information, end with [TASK_DONE]."
+      "Keep the request information-only: you want the available upgrade paths from BK-I06's economy booking to business or first class, with the cost for each path.",
+      "If the agent asks for booking details, provide BK-I06 and that the current cabin is economy; do not volunteer unrelated preferences, point redemption, deals, or cheaper alternatives.",
+      "If the agent gives only the business upgrade price or only says first class is not directly available, ask once whether first class can be reached another way and what the extra or total cost would be.",
+      "Accept only an explanation that business costs $420, direct economy-to-first upgrades are not allowed, and reaching first would require business first with either $560 more from business or $980 total from the current booking.",
+      "Push back if the agent says a direct first-class upgrade is available, omits either the business price or first-class path price, or presents an option over your $800 budget as something you should accept.",
+      "If the agent offers to perform an upgrade or asks for confirmation, decline and say you only wanted the pricing and rules.",
+      "End with [TASK_DONE] only after the upgrade availability, business price, first-class path requirement, first-class path cost, and no-action outcome are all clear."
     ],
     "user_sim_context": "You want to understand what upgrade paths are available from your current booking and what each would cost. You are comparing possibilities, not asking the agent to execute anything. A clear side-by-side explanation is what matters most."
   },
@@ -54,7 +47,7 @@
       "evidence": "conversation_or_tool_calls"
     }
   ],
+  "state_requirements": [],
   "task_type": "policy_info_or_restraint",
-  "task_env_path": "state_bench/domains/travel/task_envs/41-info_upgrade_options.json",
-  "state_requirements": []
+  "task_env_path": "state_bench/domains/travel/task_envs/41-info_upgrade_options.json"
 }

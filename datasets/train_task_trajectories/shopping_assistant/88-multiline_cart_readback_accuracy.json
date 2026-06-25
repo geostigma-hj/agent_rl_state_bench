@@ -6,11 +6,11 @@
     },
     {
       "role": "user",
-      "content": "Hey — can you read back my cart for me, item by item? Include the gift wrap and the promo discount so I can double-check the math."
+      "content": "Hey \u2014 can you read back my cart for me, item by item? Include the gift wrap and the promo discount so I can double-check the math."
     },
     {
       "role": "assistant",
-      "content": "Absolutely — here’s your cart item by item:\n\n1. SlimBook Air 13  \n   - Qty: 1  \n   - Unit price: $849  \n   - Gift wrap: No  \n   - Line total: $849\n\n2. SoundMax Wireless Headphones  \n   - Qty: 1  \n   - Unit price: $149  \n   - Gift wrap: Yes  \n   - Line total: $149\n\n3. PixelShot Webcam 1080p  \n   - Qty: 2  \n   - Unit price: $79 each  \n   - Gift wrap: No  \n   - Line total: $158\n\nMath summary:\n- Subtotal: $1,156\n- Promo code: SAVE50\n- Promo discount: -$50\n- Gift wrap fee: +$5\n- Loyalty discount: $0\n- Shipping: $0\n\nTotal:\n- $1,156 - $50 + $5 = $1,111\n\nSo your current total is $1,111.\n\nIf you want, I can also format this as a compact receipt-style breakdown.",
+      "content": "Absolutely \u2014 here\u2019s your cart item by item for **shop_004**:\n\n### Items\n1. **SlimBook Air 13**  \n   - Qty: 1  \n   - Unit price: **$849**  \n   - Gift wrap: **No**  \n   - Line total: **$849**\n\n2. **SoundMax Wireless Headphones**  \n   - Qty: 1  \n   - Unit price: **$149**  \n   - Gift wrap: **Yes**  \n   - Merchandise total: **$149**  \n   - Gift-wrap fee: **$5**  \n   - Effective total for this item: **$154**\n\n3. **PixelShot Webcam 1080p**  \n   - Qty: 2  \n   - Unit price: **$79**  \n   - Gift wrap: **No**  \n   - Line total: **$158**\n\n### Cart math\n- **Merchandise subtotal:** $1,156  \n- **Promo code applied:** `SAVE50`  \n- **Promo discount:** **-$50**  \n- **Gift-wrap fee:** **+$5**  \n- **Shipping:** $0  \n- **Loyalty discount:** $0  \n\n### Total\n**$1,111**\n\nQuick check:\n**$1,156 - $50 + $5 = $1,111**\n\nIf you want, I can also break it out in a cleaner receipt-style format or help you change any gift wrap settings.",
       "tool_calls": [
         {
           "name": "get_cart",
@@ -66,7 +66,7 @@
     },
     {
       "role": "user",
-      "content": "perfect, that matches what I expected. Thanks. [TASK_DONE]"
+      "content": "That looks right \u2014 thanks for reading it back item by item and confirming the $5 gift-wrap fee, the SAVE50 $50 discount, the $1,156 subtotal, and the $1,111 total. [TASK_DONE]"
     }
   ]
 }

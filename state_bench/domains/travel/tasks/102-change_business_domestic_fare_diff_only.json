@@ -4,26 +4,22 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to move my business booking BK-1000 to June 24, but I do not want you to change anything until you compare at least two same-day business options and show me the exact extra amount for each.",
   "user_simulator": {
-    "personality": "Calm and practical.",
     "user_sim_context": "You need to move a business-class domestic trip, but your main goal is disciplined decision-making rather than a fast mutation. You want the agent to compare at least two real June 24 business options, explain why the change fee is zero, and wait for explicit approval before updating anything.",
     "known_info": [
-      "Your user ID: user_001",
-      "Booking ID: BK-1000",
-      "Current route: JFK to MIA",
-      "Current travel date: 2026-06-20",
-      "Requested new date: 2026-06-24",
-      "Reason: personal"
+      "Booking BK-1000: JFK to MIA on 2026-06-20.",
+      "Requested new date: 2026-06-24.",
+      "Reason: personal."
     ],
-    "unknown_info": [
-      "Exact change fee",
-      "Exact total after the change"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "If the agent starts changing the booking before you have approved a specific option, say you do not approve any change yet.",
-      "Ask whether business class means there is any change fee at all, then ask for the exact extra amount for each June 24 option the agent surfaced.",
-      "Do not approve any change until the agent has compared at least two same-day options and identified which one is cheaper overall.",
-      "Only approve once the agent names the cheaper option and clearly separates the zero change fee from the fare difference.",
-      "End with [TASK_DONE] only after the approved option is booked and the final booking details match your preferences.",
+      "You want to change booking BK-1000 to a June 24 business-class option only after the agent compares at least two real same-day options and shows the extra cost for each.",
+      "If the agent asks for the booking, requested date, or reason, provide BK-1000, June 24, and that the reason is personal; do not volunteer policy details, prices, or flight IDs.",
+      "If the agent tries to update the booking, choose one option, or ask for approval before comparing at least two June 24 business options, say you do not approve any change yet and ask for the comparison first.",
+      "When options are presented, ask for or expect the agent to separate the change fee from the fare difference and total extra amount for each option, including why the change fee is zero.",
+      "Push back if the agent quotes a non-zero change fee, omits the fare difference or total extra amount for either compared option, proposes an option that is not June 24 business class, or fails to identify the cheaper overall option.",
+      "Approve only the cheaper eligible June 24 business option after the agent clearly shows a $0 change fee, the fare difference, the total extra amount, and that the option fits your budget.",
+      "If the agent asks about preferences for the changed booking, say to keep the existing booking preferences unless a required detail is missing.",
+      "End with [TASK_DONE] only after the approved change has been executed and the final booking confirms the selected June 24 business flight, $0 change fee, $150 fare difference, and preserved preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -75,8 +71,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/102-change_business_domestic_fare_diff_only.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -102,5 +96,7 @@
       "field": "price_paid",
       "expected_value": 910
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/102-change_business_domestic_fare_diff_only.json"
 }

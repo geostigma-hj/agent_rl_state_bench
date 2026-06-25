@@ -304,7 +304,7 @@ def _priced_trajectory(**overrides):
     return traj
 
 
-def test_load_run_validates_declared_pricing_against_token_usage(tmp_path):
+def test_load_run_uses_reported_cost_without_recomputing_from_tokens(tmp_path):
     run_dir = tmp_path / "run1"
     run_dir.mkdir()
     (run_dir / "t1.json").write_text(json.dumps(_priced_trajectory()))
@@ -331,9 +331,7 @@ def test_load_run_allows_missing_agent_pricing(tmp_path):
     assert meta["agent_pricing_records"] == []
 
 
-def test_load_run_raises_when_pricing_set_but_tokens_are_zero(tmp_path):
-    """If pricing is declared but no tokens were recorded, the run likely forgot
-    to call add_token_usage. Fail loudly so the user fixes their custom agent."""
+def test_load_run_allows_reported_cost_without_token_counts(tmp_path):
     run_dir = tmp_path / "run1"
     run_dir.mkdir()
     traj = _priced_trajectory()
@@ -346,11 +344,12 @@ def test_load_run_raises_when_pricing_set_but_tokens_are_zero(tmp_path):
     traj["token_usage"]["output_cost_usd"] = 0.0
     traj["token_usage"]["agent_turn_cost_usd"] = 0.0
     traj["token_usage"]["total_cost_usd"] = 0.0
-    traj["cost_usd"] = 0.0
+    traj["cost_usd"] = 0.25
     (run_dir / "t1.json").write_text(json.dumps(traj))
 
-    with pytest.raises(ValueError, match="zero tokens recorded but pricing is set"):
-        load_run(run_dir)
+    runs, _meta = load_run(run_dir)
+
+    assert runs["t1"]["cost_usd"] == 0.25
 
 
 def test_load_run_reports_zero_cost_when_pricing_is_absent(tmp_path):
@@ -375,36 +374,33 @@ def test_load_run_reports_zero_cost_when_pricing_is_absent(tmp_path):
     assert meta["agent_pricing_records"] == []
 
 
-def test_load_run_charges_cached_tokens_at_input_rate_without_cached_pricing(tmp_path):
+def test_load_run_preserves_legacy_pricing_metadata_without_validation(tmp_path):
     run_dir = tmp_path / "run1"
     run_dir.mkdir()
     traj = _priced_trajectory()
-    traj["agent_pricing"]["cached_input_cost_per_1m_tokens"] = None
-    traj["agent_pricing"]["cached_input_pricing_provided"] = False
-    traj["token_usage"]["input_cost_usd"] = 0.0009
-    traj["token_usage"]["cached_input_cost_usd"] = 0.0001
-    traj["token_usage"]["agent_turn_cost_usd"] = 0.0015
-    traj["token_usage"]["total_cost_usd"] = 0.0015
+    traj["agent_pricing"] = {"legacy": "shape"}
+    traj["token_usage"]["total_cost_usd"] = 9.0
     traj["cost_usd"] = 0.0015
     (run_dir / "t1.json").write_text(json.dumps(traj))
 
     runs, meta = load_run(run_dir)
 
     assert runs["t1"]["cost_usd"] == pytest.approx(0.0015)
-    assert runs["t1"]["agent_pricing"]["cached_input_cost_per_1m_tokens"] is None
+    assert runs["t1"]["agent_pricing"] == {"legacy": "shape"}
     assert meta["agent_pricing_records"] == [traj["agent_pricing"]]
 
 
-def test_load_run_rejects_cost_that_does_not_match_declared_pricing(tmp_path):
+def test_load_run_uses_token_usage_total_cost_when_top_level_cost_missing(tmp_path):
     run_dir = tmp_path / "run1"
     run_dir.mkdir()
     traj = _priced_trajectory()
     traj["token_usage"]["total_cost_usd"] = 9.0
-    traj["cost_usd"] = 9.0
+    del traj["cost_usd"]
     (run_dir / "t1.json").write_text(json.dumps(traj))
 
-    with pytest.raises(ValueError, match="does not match declared pricing"):
-        load_run(run_dir)
+    runs, _meta = load_run(run_dir)
+
+    assert runs["t1"]["cost_usd"] == 9.0
 
 
 def test_filter_runs_to_split_ignores_non_split_tasks():
@@ -432,7 +428,7 @@ def test_filter_runs_to_split_requires_complete_split():
 
 
 def test_filter_runs_to_split_can_ignore_missing_runs_for_local_analysis():
-    runs = [{"1-cancel_economy_domestic": {"task_id": "1-cancel_economy_domestic"}}]
+    runs = [{"102-change_business_domestic_fare_diff_only": {"task_id": "102-change_business_domestic_fare_diff_only"}}]
     meta = [{"run_dir": "run1", "scored": 1, "files_seen": 1, "unscored": 0, "unscored_task_ids": []}]
 
     filtered, filtered_meta = filter_runs_to_split(
@@ -444,5 +440,5 @@ def test_filter_runs_to_split_can_ignore_missing_runs_for_local_analysis():
         ignore_missing_runs=True,
     )
 
-    assert list(filtered[0]) == ["1-cancel_economy_domestic"]
+    assert list(filtered[0]) == ["102-change_business_domestic_fare_diff_only"]
     assert filtered_meta[0]["missing_split_scored"] == 49

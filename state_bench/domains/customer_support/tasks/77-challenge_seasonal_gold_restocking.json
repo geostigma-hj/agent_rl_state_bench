@@ -1,7 +1,27 @@
 {
   "task_id": "77-challenge_seasonal_gold_restocking",
+  "user_id": "cust_003",
+  "now": "2027-01-10T10:00:00",
+  "opening_message": "Hi, I'd like to return the wireless headphones from my December order ORD-7108. I know it's been over a month — is it still possible?",
+  "user_simulator": {
+    "known_info": [
+      "order_id: ORD-7108",
+      "item: headphones",
+      "reason: changed mind"
+    ],
+    "task_rules": [
+      "Keep the request scoped to returning only the wireless headphones from ORD-7108 for changed mind, and do not ask to return the shirt or make any other order change.",
+      "Provide the order ID, item, and changed-mind reason when asked, but ask the agent to check records or policies for eligibility, refund amounts, fees, and discounts.",
+      "If the agent says the return window is expired or treats the normal window as the only rule, ask them to check whether the holiday or seasonal extension applies to the December order.",
+      "When the agent discusses restocking fees or refund math, ask them to account for Gold membership; push back if they omit the Gold restocking discount or say Gold fully waives the fee.",
+      "Accept only after the preview explains that the seasonal extension keeps the January return eligible and that Gold reduces the normal restocking fee with a discount rather than removing the fee entirely.",
+      "Push back if the preview denies the return, changes the wrong item, omits the restocking-fee discount, removes the fee entirely, or gives a refund path other than original payment.",
+      "End only after the agent has processed the headphones return and confirmed the final refund, original-payment method, restocking fee, and Gold restocking discount outcome."
+    ],
+    "unknown_info": [],
+    "user_sim_context": "You want to return headphones from a holiday-season order and suspect both the extended window and your Gold status matter. You are not coming in with the exact calculation, only the expectation that both should help you. You need the agent to account for both pieces rather than answering from the normal policy alone."
+  },
   "task_summary": "**Task:** A Gold plus Prime customer is returning headphones in January, and the return is valid because the seasonal extension keeps the window open. The correct handling is to process the return, keep the normal restocking deduction in place, and apply the $18 Gold restocking-discount adjustment.\n\n**Challenge:** The case combines eligibility and post-eligibility math. Weak agents deny the return because they miss the seasonal rule, process it without the Gold adjustment, or waive the fee outright instead of applying the proper Gold discount structure.",
-  "task_type": "return_item",
   "task_requirements": [
     {
       "evidence": "conversation_or_tool_calls",
@@ -22,29 +42,6 @@
       "requirement": "Agent must explain that the seasonal extension keeps this return eligible."
     }
   ],
-  "user_id": "cust_003",
-  "now": "2027-01-10T10:00:00",
-  "opening_message": "Hi, I'd like to return the wireless headphones from my December order ORD-7108. I know it's been over a month — is it still possible?",
-  "user_simulator": {
-    "known_info": [
-      "order_id: ORD-7108",
-      "item: headphones",
-      "reason: changed mind"
-    ],
-    "personality": "friendly",
-    "task_rules": [
-      "Give order ID when asked.",
-      "If agent says window expired, mention holiday/seasonal extension.",
-      "If restocking fee mentioned, ask about Gold member discount.",
-      "Accept the return only after the agent explains that the seasonal extension keeps the January return eligible and that Gold gives a restocking discount rather than a full waiver.",
-      "If the preview has no Gold restocking-discount explanation or says Gold fully waives the restocking fee, ask the agent to verify the Gold policy before confirming."
-    ],
-    "unknown_info": [
-      "seasonal extension",
-      "restocking discount"
-    ],
-    "user_sim_context": "You want to return headphones from a holiday-season order and suspect both the extended window and your Gold status matter. You are not coming in with the exact calculation, only the expectation that both should help you. You need the agent to account for both pieces rather than answering from the normal policy alone."
-  },
   "state_requirements": [
     {
       "entity_type": "order_items",
@@ -83,5 +80,6 @@
       "expected_value": "partially_returned"
     }
   ],
+  "task_type": "return_item",
   "task_env_path": "state_bench/domains/customer_support/task_envs/77-challenge_seasonal_gold_restocking.json"
 }

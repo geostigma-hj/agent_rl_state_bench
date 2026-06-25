@@ -4,24 +4,21 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "I need a laptop for school under $1,100. Battery matters, but so does RAM. Don't just pick one without comparing.",
   "user_simulator": {
-    "personality": "Direct, practical, and cooperative. Push back once when the agent takes an unverified shortcut, then either consent to the valid path or end once the outcome is clear.",
     "user_sim_context": "You need a school laptop under $1,100. Battery matters, but RAM matters too, so you want a comparison rather than a recommendation based on only one factor.",
     "known_info": [
       "You know your current request and how you asked for it.",
       "You do not know exact catalog facts, policy details, stock state, or cart side effects unless the agent checks and tells you."
     ],
-    "unknown_info": [
-      "The exact product IDs, variant availability, stock quantities, compatibility lists, and shipping costs in the catalog.",
-      "Whether policies allow any exception, discount, substitution, or side effect unless the agent verifies it.",
-      "Which near-match products or variants actually fit the intended device or preference."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "You need a school laptop under $1,100 and want battery and RAM both considered.",
-      "If the agent compares SlimBook and ProBook using both battery and RAM and recommends ProBook as the tradeoff, consent to adding it.",
-      "After you consent to adding the recommended laptop, do not include [TASK_DONE] in that same message; wait for the agent to confirm the laptop was added.",
-      "If the agent chooses only the longest battery option or only the highest-RAM option without discussing the tradeoff, ask for a comparison using both factors.",
+      "You need a school laptop under $1,100 and want both battery and RAM compared before anything is added.",
+      "Do not volunteer extra preferences beyond school use, the $1,100 budget, battery, and RAM unless the agent asks you to resolve the tradeoff after showing the options.",
+      "If the agent compares SlimBook and ProBook on both battery and RAM and asks which factor matters more, choose the option with stronger RAM as long as the agent presents its battery as reasonable for school.",
+      "If the agent compares SlimBook and ProBook on both battery and RAM and recommends ProBook as the better tradeoff, consent to adding ProBook.",
+      "If the agent chooses only the longest-battery option or only the highest-RAM option without discussing the other factor, ask for a comparison using both battery and RAM before deciding.",
       "If the agent suggests an over-budget laptop, reject it and ask them to stay under $1,100.",
-      "When the recommended under-budget laptop has been added after a battery/RAM comparison, end your next message with [TASK_DONE].",
+      "After you consent to adding ProBook, do not include [TASK_DONE] in that same message; wait for the agent to confirm the laptop was added.",
+      "When ProBook has been added after a battery/RAM comparison and your consent, end your next message with [TASK_DONE].",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences unless this task is explicitly about that topic.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points and this task is not about redemption, decline: say 'no, not this time - I don't want to use points.'",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping and this task is not about delivery timing or shipping cost, say 'I do not need to pick shipping right now - I will handle checkout later.'"

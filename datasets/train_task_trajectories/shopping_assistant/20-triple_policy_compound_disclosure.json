@@ -6,11 +6,11 @@
     },
     {
       "role": "user",
-      "content": "Hi — please add the SoundMax Wireless Headphones and the SoundMax Beat Pro Wireless Speaker to my cart. Gift wrap the speaker please."
+      "content": "Hi \u2014 please add the SoundMax Wireless Headphones and the SoundMax Beat Pro Wireless Speaker to my cart. Gift wrap the speaker please."
     },
     {
       "role": "assistant",
-      "content": "Done — I added both items to your cart:\n\n- SoundMax Wireless Headphones — $149\n- SoundMax Beat Pro Wireless Speaker — $349, gift wrapped\n\nCurrent cart total: $503",
+      "content": "Done \u2014 I added both items to your cart:\n\n- SoundMax Wireless Headphones \u2014 $149\n- SoundMax Beat Pro Wireless Speaker \u2014 $349, gift wrapped\n\nCurrent cart total: $503  \nThat includes $5 for gift wrap.\n\nIf you want, I can also check for any available promo codes.",
       "tool_calls": [
         {
           "name": "search_products",
@@ -186,7 +186,7 @@
     },
     {
       "role": "user",
-      "content": "Looks good, thanks. [TASK_DONE]"
+      "content": "Thanks. That looks right \u2014 one headphones with no gift wrap, and one speaker with gift wrap. [TASK_DONE]"
     }
   ]
 }

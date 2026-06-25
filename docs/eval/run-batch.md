@@ -4,7 +4,7 @@
 
 ## Which flags are required for my path?
 
-The exact required flags depend on your agent path and whether you are running the Agent Learning Track.
+`--domain` and `--agent-model-name` are always required. The remaining required flags depend on your agent path and whether you are running the Agent Learning Track.
 
 | Path | `--agent-class` | `--agent-client-class` | `--retrieve-learnings-top-k` |
 | --- | --- | --- | --- |
@@ -28,11 +28,11 @@ uv run python -m state_bench.scripts.run_batch \
 
 If your agent model uses a reportable reasoning level, add `--agent-model-reasoning-level <reasoning-level>`.
 
-Add `--agent-class`, `--agent-client-class`, and `--retrieve-learnings-top-k` per the matrix above. For cost reporting, also add the pricing flags from [cost-reporting.md](cost-reporting.md).
+Add `--agent-class`, `--agent-client-class`, and `--retrieve-learnings-top-k` per the matrix above. For cost reporting, have your custom agent call `self.add_cost_usd(...)`; see [cost-reporting.md](cost-reporting.md).
 
 ## Arguments
 
-- `--domain` — Benchmark domain to run: `travel`, `customer_support`, or `shopping_assistant`.
+- `--domain` — **Required.** Benchmark domain to run: `travel`, `customer_support`, or `shopping_assistant`.
 - `--agent-class` — Agent class name under repo-root `agents/`. See matrix above.
 - `--agent-client-class` — `BaseLLMClient` subclass name under repo-root `clients/`. See matrix above.
 - `--agent-model-name` — **Required.** Model name reported in trajectories and the submitted `metrics.json` (e.g., `gpt-5.1`, `claude-sonnet-4.5`).

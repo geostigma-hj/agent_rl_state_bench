@@ -4,24 +4,22 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to move booking BK-1000 to June 27 for personal reasons. Compare direct change with cancel-and-rebook and do the cheaper one.",
   "user_simulator": {
-    "personality": "Practical and cost-aware.",
     "user_sim_context": "You want a hard comparison between the two strategies on a long-haul economy trip and do not want the agent to default to whichever action feels more conservative.",
     "known_info": [
-      "Your user ID: user_005",
-      "Booking ID: BK-1000",
-      "Current trip: LAX to NRT on 2026-06-21",
-      "Requested new date: 2026-06-27",
-      "Reason: personal"
+      "Booking BK-1000: LAX to NRT on 2026-06-21.",
+      "Requested new date: 2026-06-27.",
+      "Reason: personal."
     ],
-    "unknown_info": [
-      "Which strategy is cheaper overall",
-      "Exact fees on each path"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Ask the agent to compare direct change versus cancel-and-rebook before taking action.",
-      "If the agent identifies cancel and rebook as the cheaper valid path, approve it.",
-      "If the agent recommends direct change instead, challenge that recommendation and ask them to compare the fees again.",
-      "End with [TASK_DONE] once the cheaper valid path has been executed and summarized.",
+      "Keep the request focused on moving BK-1000 to June 27 by the cheaper valid strategy, comparing direct change against cancel-and-rebook before any booking action.",
+      "If the agent asks for booking details or the reason, provide BK-1000, the June 27 target date, and the personal reason; do not volunteer prices, refund math, replacement fares, or policy mechanics.",
+      "If the agent tries to change, cancel, or rebook before comparing both strategies, say you do not approve any action yet and ask for the side-by-side cost comparison first.",
+      "Push back if the agent compares only one path, treats the long-haul route as a reason to avoid cancel-and-rebook without doing the math, omits the ordinary international personal-change fee, refund, cancellation fee, or replacement fare, or recommends direct change as cheaper; ask them to recheck both valid paths.",
+      "Approve cancel-and-rebook only after the agent recaps both strategies, explains that cancel-and-rebook is cheaper, confirms the cancellation fee, refund, replacement fare, selected replacement flight details, and net-after-refund budget fit, and asks for a final go-ahead.",
+      "Before approving the replacement booking, make sure the agent has surfaced enough option detail to verify airline, time range, and max stops; do not try to verify the raw flight_id.",
+      "For the replacement booking, answer booking-stage preference questions using your profile preferences and decline unrelated upgrades, add-ons, itinerary changes, or actions outside canceling BK-1000 and booking the approved June 27 replacement.",
+      "End only after BK-1000 has been cancelled and the June 27 replacement booking is confirmed with the selected flight, final net cost, and expected booking preferences summarized.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -67,8 +65,6 @@
       "evidence": "conversation_or_tool_calls"
     }
   ],
-  "task_type": "strategy_compare_paths",
-  "task_env_path": "state_bench/domains/travel/task_envs/146-strategy_personal_international_cancel_rebook_higher_change_fee.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -129,5 +125,7 @@
         "user_id": "user_005"
       }
     }
-  ]
+  ],
+  "task_type": "strategy_compare_paths",
+  "task_env_path": "state_bench/domains/travel/task_envs/146-strategy_personal_international_cancel_rebook_higher_change_fee.json"
 }

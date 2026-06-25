@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "Done — I added the ErgoDesk Mesh Chair to your cart.\n\nCart now includes:\n- ErgoDesk Standing Desk\n- ErgoDesk Mesh Chair\n\nChair details:\n- Qty: 1\n- Price: $329\n- Gift wrap: No\n\nYour updated cart subtotal is $778, and the current total is $701.",
+      "content": "I found the ErgoDesk Mesh Chair for $329, and your ErgoDesk Standing Desk is already in the cart.\n\nBefore I add it: do you want gift wrap on the chair? If not, I\u2019ll add it with no gift wrap.",
       "tool_calls": [
         {
           "name": "search_products",
@@ -52,6 +52,38 @@
           }
         },
         {
+          "name": "get_cart",
+          "arguments": {
+            "customer_id": "shop_004"
+          },
+          "result": {
+            "cart_id": "CART-shop_004",
+            "customer_id": "shop_004",
+            "items": [
+              {
+                "cart_item_id": "CI-0001",
+                "product_id": "SP-3003",
+                "product_name": "ErgoDesk Standing Desk",
+                "quantity": 1,
+                "gift_wrap": false,
+                "unit_price": 449,
+                "line_total": 449
+              }
+            ],
+            "subtotal": 449,
+            "discount_amount": 44,
+            "gift_wrap_fee": 0,
+            "loyalty_discount": 0,
+            "loyalty_points_redeemed": 0,
+            "shipping_option": null,
+            "shipping_cost": 0,
+            "total": 405,
+            "applied_promo_codes": [
+              "SAVE10"
+            ]
+          }
+        },
+        {
           "name": "get_variants",
           "arguments": {
             "product_id": "SP-3004"
@@ -63,7 +95,17 @@
             "variants": [],
             "note": "This product has no variants; no variant_id is needed for add_to_cart."
           }
-        },
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "No gift wrap, please \u2014 just add one ErgoDesk Mesh Chair alongside the desk already in my cart."
+    },
+    {
+      "role": "assistant",
+      "content": "Done \u2014 I added 1 ErgoDesk Mesh Chair with no gift wrap.\n\nYour cart now has:\n- ErgoDesk Standing Desk \u00d71\n- ErgoDesk Mesh Chair \u00d71\n\nCart subtotal: $778  \nCurrent total: $701",
+      "tool_calls": [
         {
           "name": "add_to_cart",
           "arguments": {

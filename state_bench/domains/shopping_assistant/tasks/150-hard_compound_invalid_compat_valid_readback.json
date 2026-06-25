@@ -4,7 +4,6 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "If the ProBook dock is not compatible with my CreatorBook, read back my existing cart with product IDs, shipping, promos, loyalty fields, and total. Do not add substitutes or simplify the summary.",
   "user_simulator": {
-    "personality": "Direct, practical, and cooperative. Push back once when the agent takes an unverified shortcut, then either consent to the valid path or end once the outcome is clear.",
     "user_sim_context": "You want to know whether the ProBook dock is compatible with your CreatorBook. If it is not, you want a full readback of your existing cart, including product IDs, shipping, promos, loyalty fields, and total, without substitutions or simplification.",
     "known_info": [
       "You know your current request and how you asked for it.",
@@ -14,17 +13,11 @@
       "Your cart already has standard shipping selected.",
       "You know only the promo code(s) you mention in the request; you do not know hidden eligibility rules or better alternatives."
     ],
-    "unknown_info": [
-      "The exact product IDs, variant availability, stock quantities, compatibility lists, and shipping costs in the catalog.",
-      "Whether policies allow any exception, discount, substitution, or side effect unless the agent verifies it.",
-      "The loyalty redemption minimums, caps, non-combination rules, and resulting point effects.",
-      "Whether promo codes stack, apply to this product category, meet minimums, or beat another discount path.",
-      "Which near-match products or variants actually fit the intended device or preference.",
-      "Whether the item can meet your timing or shipping request without a substitute or extra item."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "You want the ProBook dock compatibility checked for CreatorBook, and if it fails, a full readback of the existing cart without substitutes.",
-      "If the agent declines the ProBook dock for CreatorBook and reads back product IDs, shipping, promos, loyalty fields, and total, accept the summary.",
+      "You want the actual ProBook USB-C Dock compatibility checked for CreatorBook, and if it fails, a full readback of the existing cart without substitutes or cart changes.",
+      "Accept the incompatibility answer only after the agent has identified or looked up the actual ProBook USB-C Dock with product ID SP-H110 and explained that it is not compatible with CreatorBook.",
+      "If the agent gives the compatibility denial and reads back product IDs, shipping, promos, loyalty fields, and total for the existing cart, accept the summary.",
       "If the agent says the dock cannot be found or uses an unknown dock ID, ask them to look up the actual ProBook USB-C Dock with product ID SP-H110 before accepting the compatibility answer.",
       "If the agent suggests or adds a different dock/hub, decline because you asked for a readback if the dock does not work.",
       "If the cart summary omits product IDs, shipping, promos, loyalty fields, or total, ask for the missing fields instead of approving any action.",
@@ -58,7 +51,7 @@
       "id": "no_substitute_or_mutation",
       "kind": "must_not",
       "requirement": "Agent did not add or suggest adding a substitute accessory.",
-      "evidence": "tool_calls_or_conversation"
+      "evidence": "conversation_or_tool_calls"
     }
   ],
   "state_requirements": [],

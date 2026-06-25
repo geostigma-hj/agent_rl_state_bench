@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "I checked the order: the shoes were delivered on July 3, so they’re still within the return window. The exact same shoes are currently in stock, but an exchange has to be for a different product, not the same item again.\n\nIf you want, send me the replacement shoe you’d like instead, and I can check availability. If that replacement isn’t available, I can help you return these shoes instead.",
+      "content": "Yes \u2014 the shoes in ORD-7219 are still within the return window, so I can help with that. If you send me the replacement product you want, I\u2019ll check availability first; if it\u2019s not available, I can set up a return instead. One note: exchanges have to be for a different product, so if you just need the same shoe in another size/color, I\u2019d handle that as a return so you can place a new order.",
       "tool_calls": [
         {
           "name": "get_order",
@@ -79,7 +79,7 @@
           "result": {
             "topic": "exchange",
             "rules": {
-              "must_be_different_product": "Exchanges must specify a different product than the original item. Self-swap (exchanging an item for the same product) is not allowed — use process_return for a refund instead.",
+              "must_be_different_product": "Exchanges must specify a different product than the original item. Self-swap (exchanging an item for the same product) is not allowed \u2014 use process_return for a refund instead.",
               "same_price": "Exchange for a same-price product: no charge, no refund.",
               "more_expensive": "Exchange for more expensive item: customer pays price difference.",
               "cheaper": "Exchange for cheaper item: difference refunded as store credit (not original payment).",
@@ -97,7 +97,7 @@
           "result": {
             "topic": "return",
             "rules": {
-              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim — skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
+              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim \u2014 skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
               "windows_by_category": {
                 "electronics": "15-day return window",
                 "clothing": "30-day return window",
@@ -113,7 +113,8 @@
               },
               "eligibility": {
                 "defective_items": "No window restriction for defective, wrong item, or damaged in transit.",
-                "already_returned": "Items already returned/exchanged/cancelled are ineligible."
+                "already_returned": "Items already returned/exchanged/cancelled are ineligible.",
+                "not_as_described": "Use not_as_described only for an unused/unworn item that materially differs from the listing. If the customer wore, washed, altered, or used the item and only dislikes fit, feel, texture, or preference-based qualities, classify the return as changed_mind instead."
               },
               "restocking_fee": {
                 "base": "15% restocking fee for opened electronics returned for changed_mind.",
@@ -123,12 +124,13 @@
                   "silver": "25% off the restocking fee.",
                   "standard": "No discount."
                 },
-                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency."
+                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency.",
+                "completed_returns": "Once a changed-mind return is completed with the applicable restocking fee, do not reverse that fee later as a courtesy or supplemental refund."
               },
               "return_shipping_fee": {
                 "low_value": "Orders with subtotal < $50: customer pays $8 return shipping fee.",
                 "free_threshold": "Orders >= $50: free return label provided.",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: always free return shipping.",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: always free return shipping.",
                 "deduction": "Return shipping fee, when charged, is deducted from the return refund."
               },
               "bulk_purchase_clawback": {
@@ -139,7 +141,7 @@
               "free_shipping_clawback": {
                 "applies_when": "Order originally qualified for free shipping (subtotal >= $100) AND the return drops remaining subtotal below $100.",
                 "amount": "$8 standard shipping fee is deducted from the return refund. This is a flat policy charge, not the original shipping cost (which was $0 on free-shipping orders).",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: no clawback (customer-fault returns only).",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: no clawback (customer-fault returns only).",
                 "paid_shipping": "If the order did not qualify for free shipping originally (subtotal < $100), no clawback applies."
               },
               "repeat_category_surcharge": {
@@ -151,34 +153,51 @@
           }
         },
         {
-          "name": "get_product_details",
+          "name": "search_products",
           "arguments": {
-            "product_id": "PROD-4228"
+            "query": "SprintMax Running Shoes"
           },
           "result": {
-            "product_id": "PROD-4228",
-            "name": "SprintMax Running Shoes",
-            "category": "clothing",
-            "subcategory": "shoes",
-            "price": 129,
-            "warranty_months": 0,
-            "return_window_days": 30,
-            "restocking_fee_pct": 0,
-            "weight_lbs": 1.5,
-            "is_fragile": false,
-            "in_stock": true,
-            "current_price": null
+            "query": "SprintMax Running Shoes",
+            "results": [
+              {
+                "product_id": "PROD-4228",
+                "name": "SprintMax Running Shoes",
+                "matched_field": "name",
+                "category": "clothing",
+                "subcategory": "shoes",
+                "in_stock": true
+              }
+            ]
           }
         }
       ]
     },
     {
       "role": "user",
-      "content": "Thanks for checking. Since the same replacement I wanted isn’t available as an exchange option, I’d like to pivot to a normal return for the shoes instead."
+      "content": "Thanks. Can you check whether the replacement I want is in stock first? If it isn\u2019t, I want to return the shoes instead."
     },
     {
       "role": "assistant",
-      "content": "Done — I’ve processed the return for the shoes.\n\nYou’ll receive a $121 refund to your original payment method. The difference reflects the $8 shipping clawback because returning this item drops the order below the free-shipping threshold.",
+      "content": "Absolutely \u2014 send me the replacement product name, link, or item number, plus the size/color you want, and I\u2019ll check stock. If it isn\u2019t available, I can help with the return instead.",
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "I don\u2019t have the product details handy. Can you check the replacement stock on your side, and if it\u2019s out of stock, please switch this to a return for ORD-7219 instead?"
+    },
+    {
+      "role": "assistant",
+      "content": "I can, but I need to know which replacement to check \u2014 at least the product name or the size/color you want. If you meant the same SprintMax shoes in a different size or color, I can\u2019t process that as an exchange; I\u2019d need to set it up as a return so you can reorder. If you want, tell me what you\u2019re looking for and I\u2019ll check stock, or I can start the return now.",
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "If you can\u2019t check the replacement, let\u2019s just do the return for ORD-7219 instead. Please make it a return with reason **changed_mind** and refund it to the **original payment method**."
+    },
+    {
+      "role": "assistant",
+      "content": "Done \u2014 I\u2019ve processed the return for the shoes in ORD-7219 under **changed_mind**. Your refund is **$121** back to your **original payment method**; the $8 difference is the standard shipping adjustment that applies when a return drops the order below the free-shipping threshold.",
       "tool_calls": [
         {
           "name": "process_return",
@@ -233,34 +252,16 @@
     },
     {
       "role": "user",
-      "content": "Could you clarify that shipping deduction? I’m just trying to return the shoes, so I’d like to review the return details first before confirming."
+      "content": "Thanks. Just to confirm, the return for the shoes was processed with reason **changed_mind** and the refund is going back to my **original payment method**, right?"
     },
     {
       "role": "assistant",
-      "content": "I’ve already completed the return, so there isn’t a pending preview to review anymore.\n\nThe $8 deduction is a standard policy charge on customer-choice returns when an order originally qualified for free shipping but, after the return, the remaining order value falls below $100. Your order was $129 with free shipping, and returning the shoes brings the remaining subtotal to $0, so that $8 was deducted from the refund.",
+      "content": "Yes \u2014 the return was processed as **changed_mind**, and the **$121 refund** is going back to your **original payment method**.",
       "tool_calls": null
     },
     {
       "role": "user",
-      "content": "I’m actually pivoting to a normal return, but I hadn’t confirmed it yet, so I needed a return preview first. Can you please show me the return details for the shoes as changed_mind with the refund going to my original payment method?"
-    },
-    {
-      "role": "assistant",
-      "content": "I can show you what the return preview would be for a changed-mind return to your original payment method, but I should note the return has already been processed.\n\nPreview details:\n- Item: SprintMax Running Shoes\n- Return reason: changed mind\n- Eligible: yes\n- Refund method: original payment\n- Estimated refund: $121\n- Restocking fee: $0\n- Shipping clawback: $8\n- Other deductions: $0\n\nThat $8 deduction applies because the order originally received free shipping at $129, and returning the item drops the remaining subtotal below $100.",
-      "tool_calls": null
-    },
-    {
-      "role": "user",
-      "content": "Thanks for showing the preview. I’m confirming only the normal return for the shoes as changed_mind with the refund to my original payment method, but I still want to flag that the $8 shipping clawback seems off based on what’s been explained."
-    },
-    {
-      "role": "assistant",
-      "content": "The return is already confirmed and processed to your original payment method for $121.\n\nI’ve noted your concern about the $8 shipping clawback. Based on the policy, that charge applies on changed-mind returns when a free-shipping order falls below the threshold after the return, which is why it was included here.",
-      "tool_calls": null
-    },
-    {
-      "role": "user",
-      "content": "Understood, thanks for noting that. I accept the return as processed to my original payment method, even though I still think the $8 shipping clawback seems questionable. Thanks for your help. [TASK_DONE]"
+      "content": "[TASK_DONE]"
     }
   ]
 }

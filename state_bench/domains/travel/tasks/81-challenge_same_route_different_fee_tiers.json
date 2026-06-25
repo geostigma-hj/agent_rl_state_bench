@@ -4,22 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to change two flights on the same route. BK-1049 (ORD to DEN, June 20) to June 27, and BK-1050 (ORD to DEN, June 28) to July 5. Both personal reasons. What will the total fees be? My user ID is user_002.",
   "user_simulator": {
-    "personality": "Organized. Wants total combined cost.",
     "known_info": [
-      "Your user ID: user_002",
       "BK-1049: ORD to DEN, June 20 -> June 27",
       "BK-1050: ORD to DEN, June 28 -> July 5",
-      "Both personal reasons"
+      "Both changes are for personal reasons."
     ],
-    "unknown_info": [
-      "That fee tiers differ by departure date",
-      "Exact fee formula"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Provide both bookings. Ask total fees.",
-      "If agent charges same fee for both, ask: 'Why are the fees the same if one flight is next week and the other is two weeks away?'",
-      "If agent correctly differentiates, say: 'Go ahead with both.'",
-      "After both done, end with [TASK_DONE].",
+      "Keep the request scoped to changing BK-1049 from June 20 to June 27 and BK-1050 from June 28 to July 5 on ORD to DEN for personal reasons, and ask for the per-booking and combined cost before approving anything.",
+      "If the agent asks for identifying details, booking facts, or the change reason, provide the user ID, both booking IDs, the requested dates, and that both reasons are personal; do not introduce unrelated preferences, upgrades, or add-ons.",
+      "If the agent treats both bookings as the same fee tier or does not explain the timing difference, ask how each original departure date affects the fee window before accepting the quote.",
+      "If the agent gives only change fees, only fare differences, or no combined total, ask for the full additional cost for each booking and the combined total before deciding.",
+      "Accept the changes only after the agent explains that BK-1049 has a $150 change fee plus a $20 fare difference, BK-1050 has a $75 change fee plus a $20 fare difference, and the combined additional cost is $265 within budget.",
+      "Push back if the agent proposes different routes, dates, booking IDs, cancellations, replacement bookings, optional add-ons, or any total above budget.",
+      "End only after both flight changes have been completed and the final response confirms the two changed bookings and their cost details.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Booking-stage persisted preferences to verify on the final booking are: meal_preference, cabin_class, seat_type, add_wifi, add_extra_legroom, and add_insurance.",
@@ -52,8 +50,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/81-challenge_same_route_different_fee_tiers.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -103,5 +99,7 @@
       "field": "price_paid",
       "expected_value": 445
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/81-challenge_same_route_different_fee_tiers.json"
 }

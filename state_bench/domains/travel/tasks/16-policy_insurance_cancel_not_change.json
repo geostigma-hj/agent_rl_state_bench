@@ -4,29 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Hi, I need to change my flight BK-PR01 to a later departure. I have travel insurance so that should cover any fees, right?",
   "user_simulator": {
-    "personality": "Polite and detail-oriented. Expects insurance to cover everything.",
     "known_info": [
-      "Your user ID: user_003",
-      "Booking ID is BK-PR01",
-      "Current booking is economy class",
-      "Has travel insurance on this booking",
-      "Wants an afternoon flight on the same route and date",
-      "This task is about understanding the benchmark policy, not actually changing, cancelling, or rebooking the booking"
+      "Booking BK-PR01 has travel insurance.",
+      "Wants an afternoon flight on the same route and date.",
+      "Wants to understand options before any cancellation, rebooking, or flight change is executed."
     ],
-    "unknown_info": [
-      "In the benchmark policy, insurance fully covers cancellation of this booking even for a personal schedule change",
-      "Insurance does not waive direct change fees",
-      "The cancel+rebook workaround exists because cancellation is fully covered by insurance, while a direct change still has a fee",
-      "Change fee would be $150 for economy domestic (<=7 days)"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Start by asking to change your flight, mentioning insurance should cover it.",
-      "When the agent explains insurance doesn't cover direct changes, express surprise and ask what options you have.",
-      "If the agent suggests cancel+rebook, ask for confirmation that the benchmark policy covers the cancellation fully even though your reason is personal.",
-      "When the agent confirms the workaround, ask if there are afternoon flights available.",
-      "Do not ask the agent to execute a cancellation, rebooking, or flight change. Keep the conversation at the policy/advice level only.",
-      "Do not change cabin class, do not claim the current booking is business, and do not ask for add-ons.",
-      "Once the policy distinction is clear and the workaround is explained, end with [TASK_DONE]."
+      "You want advice about moving insured booking BK-PR01 to a later departure, but you only want to understand the policy and options before any cancellation, rebooking, or flight change is executed.",
+      "If the agent asks what change you want, say you want an afternoon flight on the same route and date; do not introduce cabin changes, add-ons, or unrelated preferences.",
+      "When the agent explains that insurance does not waive direct change fees, express surprise and ask what realistic options you have instead.",
+      "If the agent suggests canceling and rebooking, ask whether this booking's insurance would fully cover the cancellation even though the reason is a personal schedule change.",
+      "If the agent claims insurance waives the direct change fee or tries to proceed without explaining the policy distinction, ask them to clarify whether insurance covers cancellation rather than the change fee.",
+      "Do not authorize or request execution of a cancellation, rebooking, or flight change; keep the conversation at the policy and advice level only.",
+      "End with [TASK_DONE] only after the agent clearly explains that insurance covers cancellation but not direct change fees, describes cancel-and-rebook as the workaround, and no booking action has been taken."
     ],
     "user_sim_context": "You want to change an insured booking and came in assuming the insurance should take care of any fees. You are not asking the agent to act right away; you first want to understand what the policy actually allows. If your assumption is wrong, you want to know what realistic workaround exists."
   },
@@ -49,9 +40,15 @@
       "kind": "must_not",
       "requirement": "Agent must not execute a cancellation, rebooking, or flight change in this policy-only task.",
       "evidence": "conversation_or_tool_calls"
+    },
+    {
+      "id": "no_wrong_change_fee_figure",
+      "kind": "must_not",
+      "requirement": "If the agent states a specific dollar amount for the direct change fee on BK-PR01, it must not state any amount other than $150. This economy domestic personal change has a departure exactly 7 days out, which falls in the within-7-days tier ($150), not the more-than-7-days tier ($75); quoting $75 (or any other figure) is a wrong-number error. The agent may instead leave the exact fee unstated and still satisfy this, but must not assert an incorrect change-fee amount.",
+      "evidence": "conversation"
     }
   ],
+  "state_requirements": [],
   "task_type": "policy_info_or_restraint",
-  "task_env_path": "state_bench/domains/travel/task_envs/16-policy_insurance_cancel_not_change.json",
-  "state_requirements": []
+  "task_env_path": "state_bench/domains/travel/task_envs/16-policy_insurance_cancel_not_change.json"
 }

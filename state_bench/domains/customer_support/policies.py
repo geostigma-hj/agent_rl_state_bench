@@ -117,8 +117,8 @@ def check_return_eligibility(
     if delivery_date is None:
         return {"eligible": False, "reason": "Item not yet delivered — use cancellation instead"}
 
-    # Defective/wrong/damaged/missing — no window restriction
-    if return_reason in ("defective", "wrong_item", "damaged_in_transit", "missing"):
+    # Defective/wrong/damaged — no window restriction
+    if return_reason in ("defective", "wrong_item", "damaged_in_transit"):
         return {
             "eligible": True,
             "reason": f"Return eligible: {return_reason} (no window restriction)",
@@ -961,17 +961,16 @@ def calculate_paid_return_shipping(
     Rules:
     - Orders with subtotal < $50: customer pays $8 return shipping
     - Orders >= $50: free return label
-    - Product-fault returns (defective/wrong_item/damaged_in_transit/missing): always free
+    - Product-fault returns (defective/wrong_item/damaged_in_transit): always free
       regardless of order value — customer was not at fault, so they are not charged for
-      shipping back an item the company shipped wrong (or never delivered, in the case
-      of "missing").
+      shipping back an item the company shipped wrong.
     - Fee is deducted from the return refund
     """
-    if return_reason in ("defective", "wrong_item", "damaged_in_transit", "missing"):
+    if return_reason in ("defective", "wrong_item", "damaged_in_transit"):
         return {
             "applies": False,
             "fee": 0,
-            "reason": "Free return shipping for product-fault returns (defective/wrong/damaged/missing)",
+            "reason": "Free return shipping for product-fault returns (defective/wrong/damaged)",
         }
 
     if order_subtotal >= PAID_RETURN_SHIPPING_THRESHOLD:

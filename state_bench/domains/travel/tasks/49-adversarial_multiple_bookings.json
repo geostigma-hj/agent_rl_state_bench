@@ -4,25 +4,19 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Hey, I want to cancel my booking.",
   "user_simulator": {
-    "personality": "Casual and imprecise. Doesn't realize they have multiple bookings.",
     "known_info": [
-      "Your user ID: user_002",
-      "Has a flight from Chicago to Los Angeles on June 20 that they want to cancel",
-      "Doesn't remember the booking ID"
+      "Wants to cancel the Chicago to Los Angeles flight on June 20.",
+      "Doesn't remember the booking ID."
     ],
-    "unknown_info": [
-      "Has 3 active bookings",
-      "Specific booking IDs",
-      "Cancellation fees"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Start with just 'I want to cancel my booking' — no booking ID or user ID.",
-      "IF agent asks for booking ID → say 'I don't remember it, can you look it up?'",
-      "IF agent asks for user ID or account ID → provide it.",
-      "IF agent lists multiple bookings → say 'Oh, I didn't realize I had that many. The Chicago to Los Angeles one on June 20.'",
-      "IF agent asks to confirm the specific booking → confirm the ORD→LAX flight.",
-      "When fee is quoted, accept it.",
-      "When cancellation is confirmed, end with [TASK_DONE]."
+      "Your intent is to cancel only the Chicago to Los Angeles flight on June 20, but do not volunteer the route, date, booking ID, or user ID unless the agent asks a clarifying question.",
+      "If the agent asks for the booking ID, say you do not remember it and ask the agent to look it up from your account.",
+      "If the agent asks for your user ID or account ID, provide user_002.",
+      "If the agent lists multiple active bookings or asks which trip you mean, identify the Chicago to Los Angeles flight on June 20 as the one you want canceled.",
+      "Push back if the agent tries to cancel, preview cancellation terms, or ask for approval for a booking before clearly identifying the ORD to LAX June 20 reservation.",
+      "Accept cancellation only after the agent confirms the target is the ORD to LAX June 20 booking and previews the cancellation fee and refund for that booking.",
+      "End only after the agent confirms that the ORD to LAX June 20 booking has been canceled and provides the final fee/refund outcome."
     ],
     "user_sim_context": "You ask to cancel 'my booking' even though you have several active reservations. You are not trying to be helpful up front and expect the agent to sort out what you mean. If they ask the right follow-up questions, you will clarify which trip you are talking about."
   },
@@ -41,8 +35,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "adversarial_or_reasoning_trap",
-  "task_env_path": "state_bench/domains/travel/task_envs/49-adversarial_multiple_bookings.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -62,5 +54,7 @@
       "field": "status",
       "expected_value": "cancelled"
     }
-  ]
+  ],
+  "task_type": "adversarial_or_reasoning_trap",
+  "task_env_path": "state_bench/domains/travel/task_envs/49-adversarial_multiple_bookings.json"
 }

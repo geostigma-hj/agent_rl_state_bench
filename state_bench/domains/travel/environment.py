@@ -420,6 +420,24 @@ class TravelEnvironment(BaseEnvironment):
         requested_cabin = params.get("cabin_class")
         flight_changed = bool(params.get("flight_id") and params.get("flight_id") != original_flight_id)
 
+        # Snapshot the values of settable fields BEFORE applying updates, so we can
+        # report only the fields whose value actually changed. Re-supplying a field
+        # with its existing value (often required by the change-preference contract)
+        # must NOT appear in changes_applied — otherwise downstream judges read an
+        # unchanged field as an unauthorized modification (see no_other_booking_change).
+        _change_tracked_attrs = (
+            "flight_id",
+            "cabin_class",
+            "seat_type",
+            "meal_preference",
+            "add_wifi",
+            "add_extra_legroom",
+            "add_insurance",
+            "paid_checked_bags",
+            "delay_compensation",
+        )
+        _before_values = {attr: getattr(booking, attr, None) for attr in _change_tracked_attrs}
+
         # If changing flight, check change policy.
         new_flight_id = params.get("flight_id")
         if flight_changed and new_flight_id:
@@ -471,9 +489,28 @@ class TravelEnvironment(BaseEnvironment):
             new_flight_price = new_flight.cabin_prices[target_cabin]
 
             fare_difference = new_flight_price - baseline_flight_price
+            new_price_paid = new_flight_price + change_fee + current_bag_fee
+
+            # Preview mode (confirm explicitly false): report the exact change fee, fare
+            # difference, and resulting total WITHOUT mutating the booking. This lets the
+            # agent observe figures it cannot otherwise derive from policy text alone —
+            # e.g. a second change is priced off the booking's ORIGINAL departure (stored
+            # in _change_fee_departure), so its fee tier need not match the new flight's
+            # own days-to-departure. Omitting confirm preserves legacy execute-on-call
+            # behavior, so existing replays/ground truth stay byte-identical.
+            if "confirm" in params and not self.parse_bool(params.get("confirm")):
+                return {
+                    "status": "preview",
+                    "booking_id": booking_id,
+                    "flight_id": new_flight_id,
+                    "change_fee": change_fee,
+                    "fare_difference": fare_difference,
+                    "price_paid": new_price_paid,
+                }
+
             booking.flight_id = new_flight_id
             booking.cabin_class = target_cabin
-            booking.price_paid = new_flight_price + change_fee + current_bag_fee
+            booking.price_paid = new_price_paid
             booking.change_fee = change_fee
             booking.fare_difference = fare_difference
             # Store visible changed-trip details for auditing, and separate fee context for retroactive reason changes.
@@ -533,6 +570,22 @@ class TravelEnvironment(BaseEnvironment):
             # Use cabin_prices for upgrade fee: new cabin price - amount already paid
             new_cabin_price = flight.cabin_prices[new_cabin]
             upgrade_fee = new_cabin_price - booking.price_paid
+
+            # Preview mode (confirm explicitly false): report the upgrade fee and resulting
+            # total WITHOUT mutating the booking, symmetric with the flight-change preview
+            # above. This lets the agent price a same-flight cabin upgrade before committing
+            # to it. Omitting confirm preserves legacy execute-on-call behavior, so existing
+            # replays/ground truth stay byte-identical.
+            if "confirm" in params and not self.parse_bool(params.get("confirm")):
+                return {
+                    "status": "preview",
+                    "booking_id": booking_id,
+                    "flight_id": booking.flight_id,
+                    "cabin_class": new_cabin,
+                    "fare_difference": upgrade_fee,
+                    "price_paid": new_cabin_price,
+                }
+
             booking.cabin_class = new_cabin
             booking.fare_difference = upgrade_fee
             booking.price_paid = new_cabin_price
@@ -574,10 +627,22 @@ class TravelEnvironment(BaseEnvironment):
 
         booking.status = "confirmed"
 
+        # Report only fields whose value actually changed (not every key the caller
+        # passed). A re-supplied-but-identical preference is a no-op and is omitted.
+        changes_applied = [
+            attr
+            for attr in _change_tracked_attrs
+            if attr in params and getattr(booking, attr, None) != _before_values[attr]
+        ]
+        # change_reason has no persisted attribute; it only represents a real change
+        # when it drove an actual flight change.
+        if "change_reason" in params and flight_changed:
+            changes_applied.append("change_reason")
+
         result: dict[str, Any] = {
             "status": "updated",
             "booking_id": booking_id,
-            "changes_applied": [k for k in params if k != "booking_id"],
+            "changes_applied": changes_applied,
             "price_paid": booking.price_paid,
         }
         if hasattr(booking, "change_fee") and booking.change_fee is not None:

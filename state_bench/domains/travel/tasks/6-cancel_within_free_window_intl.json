@@ -4,26 +4,21 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to cancel both my upcoming international flights. Can you help?",
   "user_simulator": {
-    "personality": "Cooperative and slightly anxious about whether the free cancellation window still applies.",
     "known_info": [
-      "Your user ID: user_001",
-      "Booking A (SFO→NRT): BK-1007, business class, booked about 46 hours ago, $1400",
-      "Booking B (JFK→LHR): BK-1008, economy class, booked about 50 hours ago, $480",
-      "Different cabin classes on each booking"
+      "Booking A BK-1007: SFO→NRT.",
+      "Booking B BK-1008: JFK→LHR.",
+      "You think both bookings were made around two days ago, but you are not sure of the exact times."
     ],
-    "unknown_info": [
-      "Exact duration of the free cancellation window for international flights",
-      "Which booking is still within the free window",
-      "Fee amount for the one outside the window"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "When the agent asks for booking IDs, provide both.",
+      "You want to cancel both upcoming international flight bookings and get a clear side-by-side explanation of which one can be canceled free and which one cannot.",
+      "When the agent asks for booking IDs, provide both booking IDs.",
       "If asked when you booked them, say you think both were booked around two days ago, but you are not sure of the exact times.",
-      "When the agent says one is outside the window, express surprise and ask how they calculated that.",
-      "If the agent explains the exact booking timestamps, accept the correction.",
-      "If the agent says both are free to cancel and asks for confirmation, say that sounds good and proceed.",
-      "When the agent provides correct fees for both bookings, confirm and proceed.",
-      "When both cancellations are complete with correct fees, end with [TASK_DONE]."
+      "If the agent says one booking is outside the free-cancellation window, express surprise once and ask how they calculated the timing.",
+      "If the agent explains that BK-1007 is still within the 48-hour international cancellation window and BK-1008 is outside it, accept that distinction.",
+      "Push back if the agent says both bookings are free to cancel or treats both bookings as having the same window status; ask them to recheck the exact booking timestamps before you agree.",
+      "Accept cancellation only after the agent previews the fee and refund outcome for each booking, with BK-1007 as the no-fee cancellation and BK-1008 as the paid cancellation.",
+      "End only after both bookings have been canceled and the agent confirms the final fee and refund result for each booking, then reply with [TASK_DONE]."
     ],
     "user_sim_context": "You want to cancel two upcoming international flights and expect the timing of when you booked them to matter. The two bookings feel similar to you, so you are looking for a clear side-by-side explanation. You want to know what can be canceled cleanly and what cannot."
   },
@@ -48,8 +43,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "cancellation",
-  "task_env_path": "state_bench/domains/travel/task_envs/6-cancel_within_free_window_intl.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -87,5 +80,7 @@
       "field": "status",
       "expected_value": "cancelled"
     }
-  ]
+  ],
+  "task_type": "cancellation",
+  "task_env_path": "state_bench/domains/travel/task_envs/6-cancel_within_free_window_intl.json"
 }

@@ -4,27 +4,22 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to reschedule two flights for medical reasons: BK-1000 (London, Jun 22) to Jun 26, and BK-1001 (San Francisco, Jun 25) to Jun 28. One has insurance. What's cheapest? My user ID is user_003.",
   "user_simulator": {
-    "personality": "Analytical.",
     "known_info": [
-      "Your user ID: user_003",
-      "BK-1000: JFK→LHR, insured",
-      "BK-1001: ORD→SFO, no insurance",
-      "Medical for both",
-      "For this task, the intended London replacement is BA101 and the intended San Francisco replacement is UA101",
-      "No extra airline, time, seat, meal, or add-on preferences matter here beyond finding the cheapest valid path for each booking",
-      "Keep BK-1001's existing no-insurance setting if that booking is changed rather than cancelled and rebooked; for this existing booking, that overrides your profile insurance preference"
+      "BK-1000: London trip, insured.",
+      "BK-1001: San Francisco trip, no insurance.",
+      "Medical reason applies to both bookings.",
+      "Goal: cheapest valid path for each booking."
     ],
-    "unknown_info": [
-      "How insurance affects which approach is cheaper"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Mention one has insurance. Ask cheapest per booking.",
-      "If the agent starts executing before you have approved a specific plan, say you do not approve any action yet and need to decide what to do for each booking first.",
-      "If the agent recommends the same approach for both bookings, ask why that recommendation is the same even though one booking has insurance and the other does not.",
-      "Once the agent identifies the cheapest path for each booking, say 'Go ahead with the cheapest option for each one: cancel and rebook BK-1000 onto BA101, and change BK-1001 onto UA101.'",
-      "Do not introduce extra airline, time-of-day, seat, meal, or add-on preferences. Keep the task focused on the cheapest strategy for each booking.",
-      "If the agent asks about insurance for BK-1001, say to keep that booking's existing no-insurance setting, not your profile insurance preference.",
-      "After both actions are completed, end with [TASK_DONE].",
+      "Ask for the cheapest valid reschedule strategy for each booking separately, using the medical reason for both trips and the insurance difference only where it applies.",
+      "Do not volunteer extra airline, time-of-day, seat, meal, or add-on preferences; keep the conversation focused on comparing the cost of changing versus canceling and rebooking each trip.",
+      "If the agent recommends the same strategy for both bookings, ask why the insured London booking and uninsured San Francisco booking would have the same cheapest path.",
+      "If the agent starts canceling, changing, or creating a booking before you have approved a specific plan for both bookings, say you do not approve any action yet and need the per-booking cheapest strategy first.",
+      "Accept only after the agent clearly identifies canceling and rebooking BK-1000 onto BA101 as cheapest for London and changing BK-1001 onto UA101 as cheapest for San Francisco, with the cancellation fee, refund, replacement price, change fee, fare difference, and total additional cost within budget.",
+      "If the agent asks about insurance for the replacement London booking, use your profile preference for insurance; if the agent asks about insurance for BK-1001, keep that booking's existing no-insurance setting.",
+      "Before final approval, make sure the London replacement uses your profile booking preferences and the San Francisco change preserves the existing booking preferences.",
+      "End only after the London booking has been canceled and rebooked, the San Francisco booking has been changed, and the final costs and key booking details for both actions are confirmed.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -53,8 +48,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/69-challenge_insurance_split_strategy.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -139,5 +132,7 @@
         "user_id": "user_003"
       }
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/69-challenge_insurance_split_strategy.json"
 }

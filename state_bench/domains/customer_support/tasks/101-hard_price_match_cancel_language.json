@@ -1,7 +1,27 @@
 {
   "task_id": "101-hard_price_match_cancel_language",
+  "user_id": "cust_003",
+  "now": "2026-07-08T10:00:00",
+  "opening_message": "I want to cancel ORD-7201. The tablet I bought is $50 cheaper today and I shouldn't have to keep this order at the old price.",
+  "user_simulator": {
+    "known_info": [
+      "order_id: ORD-7201",
+      "item: SlateTab Pro 11-inch",
+      "current_price: $549"
+    ],
+    "task_rules": [
+      "Keep the request scoped to getting the $50 price drop honored for ORD-7201 while keeping the SlateTab Pro 11-inch; do not pursue cancellation once a price-match path is offered.",
+      "Provide the order ID, item name, and current $549 price when asked or when needed to clarify the price-match request, but ask the agent to verify order and product records rather than relying only on your statement.",
+      "If the agent follows the cancellation wording, proposes a return, exchange, or return-and-rebuy path, push back and say you want to keep the tablet if the lower price can be honored directly.",
+      "Push back if the agent denies or previews the adjustment without checking the product's current price and the order item first.",
+      "Accept only a preview for a direct $50 price-match refund to the original payment method that leaves the tablet and order active, with no cancellation, return, exchange, or reorder.",
+      "If the agent asks for confirmation before giving the refund amount, method, and no-cancellation effect, ask for those details before agreeing.",
+      "End only after the agent confirms the $50 price-match refund has been processed and the tablet/order remain active."
+    ],
+    "unknown_info": [],
+    "user_sim_context": "You are contacting support about order ORD-7201. Customer says they want to cancel a delivered tablet because its price dropped yesterday. Correct path is a price-match refund, not cancellation or return. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation."
+  },
   "task_summary": "Customer says they want to cancel a delivered tablet because its price dropped yesterday. Correct path is a price-match refund, not cancellation or return.",
-  "task_type": "price_match_refund",
   "task_requirements": [
     {
       "evidence": "conversation",
@@ -34,29 +54,6 @@
       "requirement": "Agent must not recommend or route the customer toward return-and-rebuy as the way to capture an eligible price drop once the delivered item can be price matched."
     }
   ],
-  "user_id": "cust_003",
-  "now": "2026-07-08T10:00:00",
-  "opening_message": "I want to cancel ORD-7201. The tablet I bought is $50 cheaper today and I shouldn't have to keep this order at the old price.",
-  "user_simulator": {
-    "known_info": [
-      "order_id: ORD-7201",
-      "item: SlateTab Pro 11-inch",
-      "current_price: $549"
-    ],
-    "personality": "friendly",
-    "task_rules": [
-      "Give the order ID when asked.",
-      "If the agent tries to cancel or return the item, say you still want to keep it if the lower price can be honored.",
-      "Ask them to verify the product price rather than guessing.",
-      "Accept the price-match refund once previewed.",
-      "Do not accept a return-and-rebuy path; only accept a direct price-match adjustment that keeps the tablet."
-    ],
-    "unknown_info": [
-      "whether cancellation is needed",
-      "price-match amount"
-    ],
-    "user_sim_context": "You are contacting support about order ORD-7201. Customer says they want to cancel a delivered tablet because its price dropped yesterday. Correct path is a price-match refund, not cancellation or return. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation."
-  },
   "state_requirements": [
     {
       "entity_type": "order_items",
@@ -71,5 +68,6 @@
       "expected_value": "original_payment"
     }
   ],
+  "task_type": "price_match_refund",
   "task_env_path": "state_bench/domains/customer_support/task_envs/101-hard_price_match_cancel_language.json"
 }

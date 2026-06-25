@@ -10,52 +10,6 @@ from state_bench.schemas import TokenUsage
 
 
 @dataclass(slots=True)
-class AgentPricing:
-    """User-declared pricing for the agent LLM used in one benchmark run."""
-
-    model_name: str
-    input_cost_per_1m_tokens: float
-    output_cost_per_1m_tokens: float
-    cached_input_cost_per_1m_tokens: float | None = None
-    currency: str = "USD"
-    source: str = "user_provided"
-    cost_accounting_version: str = "agent-pricing-v1"
-
-    @property
-    def cached_input_pricing_provided(self) -> bool:
-        return self.cached_input_cost_per_1m_tokens is not None
-
-    def validate(self) -> None:
-        if not self.model_name.strip():
-            raise ValueError("agent model name is required for cost accounting")
-        if self.input_cost_per_1m_tokens < 0:
-            raise ValueError("agent input cost must be >= 0")
-        if self.output_cost_per_1m_tokens < 0:
-            raise ValueError("agent output cost must be >= 0")
-        if self.cached_input_cost_per_1m_tokens is not None and self.cached_input_cost_per_1m_tokens < 0:
-            raise ValueError("agent cached input cost must be >= 0")
-
-    def to_dict(self) -> dict[str, Any]:
-        return {
-            "model_name": self.model_name,
-            "input_cost_per_1m_tokens": self.input_cost_per_1m_tokens,
-            "output_cost_per_1m_tokens": self.output_cost_per_1m_tokens,
-            "cached_input_cost_per_1m_tokens": self.cached_input_cost_per_1m_tokens,
-            "cached_input_pricing_provided": self.cached_input_pricing_provided,
-            "currency": self.currency,
-            "source": self.source,
-            "cost_accounting_version": self.cost_accounting_version,
-            "cost_includes": [
-                "provider_reported_input_tokens",
-                "provider_reported_cached_input_tokens_when_priced",
-                "provider_reported_output_tokens",
-                "provider_reported_reasoning_output_tokens_as_output_tokens",
-                "provider_reported_tool_call_and_tool_output_context",
-            ],
-        }
-
-
-@dataclass(slots=True)
 class AgentRuntimeContext:
     """Per-run context passed to custom agents at construction time.
 
@@ -73,7 +27,6 @@ class AgentRuntimeContext:
     state_requirements: list[dict[str, Any]] = field(default_factory=list)
     task_requirements: list[dict[str, Any]] = field(default_factory=list)
     config: dict[str, Any] = field(default_factory=dict)
-    agent_pricing: AgentPricing | None = None
 
 
 @dataclass(slots=True)
@@ -110,11 +63,12 @@ class BaseAgent(ABC):
         reasoning_output_tokens: int | None = None,
         category: str = "agent_turn",
     ) -> None:
-        """Accumulate provider-reported token usage and optional cost.
+        """Accumulate provider-reported token usage telemetry.
 
         Custom clients should pass provider-reported token counts here when
-        available. If either input or output tokens are missing, no usage or
-        cost is recorded.
+        available. If either input or output tokens are missing, no usage is
+        recorded. Cost is intentionally reported separately because provider
+        token buckets are not billing-compatible across SDKs.
         """
         if input_tokens is None or output_tokens is None:
             return
@@ -131,31 +85,21 @@ class BaseAgent(ABC):
         self.token_usage.reasoning_output_tokens += reasoning_output_tokens
         self.token_usage.total_tokens += total_tokens
 
-        if self.runtime_context is None or self.runtime_context.agent_pricing is None:
-            return
-
-        pricing = self.runtime_context.agent_pricing
-        pricing.validate()
-        non_cached_input_tokens = max(0, input_tokens - cached_input_tokens)
-        input_cost = non_cached_input_tokens * pricing.input_cost_per_1m_tokens / 1_000_000
-        cached_input_rate = pricing.cached_input_cost_per_1m_tokens or pricing.input_cost_per_1m_tokens
-        cached_input_cost = cached_input_tokens * cached_input_rate / 1_000_000
-        output_cost = output_tokens * pricing.output_cost_per_1m_tokens / 1_000_000
-        total_cost = input_cost + cached_input_cost + output_cost
-
-        self.token_usage.input_cost_usd += input_cost
-        self.token_usage.cached_input_cost_usd += cached_input_cost
-        self.token_usage.output_cost_usd += output_cost
-        self.token_usage.total_cost_usd += total_cost
+    def add_cost_usd(self, amount: float, *, category: str = "agent_turn") -> None:
+        """Accumulate user-reported agent cost for this trajectory."""
+        amount = float(amount)
+        if amount < 0:
+            raise ValueError("cost amount must be >= 0")
 
         if category == "agent_turn":
-            self.token_usage.agent_turn_cost_usd += total_cost
+            self.token_usage.agent_turn_cost_usd += amount
         elif category == "memory_ingestion":
-            self.token_usage.memory_ingestion_cost_usd += total_cost
+            self.token_usage.memory_ingestion_cost_usd += amount
         elif category == "memory_retrieval":
-            self.token_usage.memory_retrieval_cost_usd += total_cost
+            self.token_usage.memory_retrieval_cost_usd += amount
         else:
-            self.token_usage.other_llm_cost_usd += total_cost
+            self.token_usage.other_llm_cost_usd += amount
+        self.token_usage.total_cost_usd += amount
 
     def add_response_usage(self, usage: Any, *, category: str = "other_llm") -> None:
         """Accumulate agent-side Responses API usage for later cost reporting."""

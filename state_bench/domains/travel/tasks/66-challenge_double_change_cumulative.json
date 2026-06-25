@@ -4,26 +4,23 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Hi, I need to change my flight BK-1000 to June 22. My user ID is user_005.",
   "user_simulator": {
-    "personality": "Indecisive but follows a specific rebooking path once options are presented.",
     "known_info": [
-      "Your user ID: user_005",
-      "Booking: BK-1000 (ORD→DEN, Jun 20)",
-      "For June 22, choose UA101",
-      "If cancel+rebook is cheaper for June 25, choose UA102"
+      "Booking BK-1000: ORD to DEN, Jun 20.",
+      "Change path: first move the trip to June 22; after that change, you realize you need June 25 instead.",
+      "For shown replacement options, prefer the United morning option if available."
     ],
-    "unknown_info": [
-      "That a second change fee stacks",
-      "That cancel+rebook might be cheaper"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: change BK-1000 to June 22.",
-      "When options are shown for June 22, choose UA101. Do not ask for JetBlue, other airlines, or a different June 22 flight.",
-      "After the first change is done, say: 'Actually, I just realized I need June 25 instead. Can you change it again?'",
-      "If the agent shows multiple June 25 options, choose UA102 only. Do not choose any other June 25 flight.",
-      "When agent quotes the second change fee, say: 'That's another $150?! Would it be cheaper to just cancel and rebook fresh?'",
-      "If agent says cancel+rebook is cheaper, say 'Do that instead, and book UA102.'",
-      "If agent just processes the second change without comparing, don't question.",
-      "After final booking, end with [TASK_DONE].",
+      "Your initial goal is to change BK-1000 from June 20 to June 22; do not mention the June 25 need until the first change has been completed.",
+      "When the agent presents June 22 replacement options, choose UA101 if it is available and reject unrelated airlines, dates, or flights for that first change.",
+      "Accept the first change only after the selected June 22 flight, change fee, fare difference, total cost, and preserved booking preferences are clear and within budget.",
+      "After the first change is confirmed, reveal that you now need to travel on June 25 instead and ask the agent to help decide the best way to handle the second date change.",
+      "When the agent presents June 25 options, choose UA102 if it is available and reject other June 25 options unless the agent proves it is unavailable.",
+      "If the agent only quotes or tries to process the second change, ask for a comparison against canceling the changed ticket and rebooking fresh before approving anything.",
+      "Approve the second-stage action only after the agent explains that changing again would cost $480, canceling and rebooking would cost $408, and recommends the cheaper cancel-and-rebook path.",
+      "For the cheaper reset path, agree to cancel BK-1000 and create a fresh booking on UA102 only after the cancellation fee, refund, new booking price, payment method, and profile booking preferences are clear.",
+      "Push back if the agent recommends keeping the second change, skips the cancellation-and-rebook comparison, exceeds your budget, or proposes unrelated add-ons or upgrades.",
+      "End only after the original booking is confirmed cancelled and the fresh June 25 booking is confirmed with the expected profile preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -52,8 +49,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/66-challenge_double_change_cumulative.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -138,5 +133,7 @@
         "user_id": "user_005"
       }
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/66-challenge_double_change_cumulative.json"
 }

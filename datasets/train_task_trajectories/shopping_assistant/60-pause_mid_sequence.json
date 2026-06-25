@@ -6,11 +6,11 @@
     },
     {
       "role": "user",
-      "content": "Ok here's what I want — add the ProBook 13 laptop, apply promo code SAVE10, set gift wrap on it, and tell me the total. I'm in a hurry."
+      "content": "Ok here's what I want \u2014 add the ProBook 13 laptop, apply promo code SAVE10, set gift wrap on it, and tell me the total. I'm in a hurry."
     },
     {
       "role": "assistant",
-      "content": "Done — I added the ProBook Laptop 13-inch, turned on gift wrap, and applied SAVE10.\n\nTotal: $905\n\nBreakdown:\n- Laptop: $999\n- Promo discount: -$99\n- Gift wrap: $5\n\nNo shipping selected yet.",
+      "content": "Done \u2014 I added the ProBook Laptop 13-inch, turned on gift wrap, and applied SAVE10.\n\nTotal: $905\n\nBreakdown:\n- Laptop: $999\n- SAVE10 discount: -$99\n- Gift wrap: +$5\n\nNo shipping selected yet.",
       "tool_calls": [
         {
           "name": "search_products",
@@ -140,21 +140,6 @@
           }
         },
         {
-          "name": "get_customer_account",
-          "arguments": {
-            "customer_id": "shop_001"
-          },
-          "result": {
-            "customer_id": "shop_001",
-            "name": "Alex Rivera",
-            "email": "alex.rivera@example.com",
-            "tier": "platinum",
-            "is_first_time": false,
-            "loyalty_points": 52000,
-            "purchase_history": []
-          }
-        },
-        {
           "name": "get_cart",
           "arguments": {
             "customer_id": "shop_001"
@@ -175,6 +160,21 @@
           }
         },
         {
+          "name": "get_customer_account",
+          "arguments": {
+            "customer_id": "shop_001"
+          },
+          "result": {
+            "customer_id": "shop_001",
+            "name": "Alex Rivera",
+            "email": "alex.rivera@example.com",
+            "tier": "platinum",
+            "is_first_time": false,
+            "loyalty_points": 52000,
+            "purchase_history": []
+          }
+        },
+        {
           "name": "get_variants",
           "arguments": {
             "product_id": "SP-1002"
@@ -188,15 +188,24 @@
           }
         },
         {
-          "name": "validate_promo",
+          "name": "get_promotions",
           "arguments": {
-            "customer_id": "shop_001",
-            "promo_code": "SAVE10"
+            "category": "electronics"
           },
           "result": {
-            "valid": true,
-            "reason": "Promo applied: 10% off any order.",
-            "estimated_discount": 0
+            "promotions": [
+              {
+                "promo_code": "SAVE10",
+                "description": "10% off any order.",
+                "discount_type": "percentage",
+                "discount_value": 10,
+                "min_purchase": 0,
+                "max_discount": 0,
+                "category_restriction": null,
+                "expiry_date": "2026-12-31",
+                "active": true
+              }
+            ]
           }
         },
         {
@@ -274,12 +283,27 @@
     },
     {
       "role": "user",
-      "content": "wait — hold on a second. Actually, can you hold off on the extras? I want to just have the laptop for now."
+      "content": "Actually, pause on the extras \u2014 I just want the ProBook 13 in the cart for now. Hold off on the other stuff."
     },
     {
       "role": "assistant",
-      "content": "Done — I removed the gift wrap and promo code, so it’s just the laptop now.\n\nNew total: $999",
+      "content": "Done \u2014 I removed the promo and gift wrap.\n\nYour cart now has:\n- ProBook Laptop 13-inch \u00d71\n\nCurrent total: $999",
       "tool_calls": [
+        {
+          "name": "remove_promo",
+          "arguments": {
+            "customer_id": "shop_001",
+            "promo_code": "SAVE10"
+          },
+          "result": {
+            "status": "removed",
+            "promo_code": "SAVE10",
+            "applied_promo_codes": [],
+            "discount_amount": 0,
+            "cart_subtotal": 999,
+            "cart_total": 1004
+          }
+        },
         {
           "name": "update_cart_item",
           "arguments": {
@@ -298,34 +322,9 @@
             "quantity": 1,
             "gift_wrap": false,
             "cart_subtotal": 999,
-            "cart_total": 900
-          }
-        },
-        {
-          "name": "remove_promo",
-          "arguments": {
-            "customer_id": "shop_001",
-            "promo_code": "SAVE10"
-          },
-          "result": {
-            "status": "removed",
-            "promo_code": "SAVE10",
-            "applied_promo_codes": [],
-            "discount_amount": 0,
-            "cart_subtotal": 999,
             "cart_total": 999
           }
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "content": "what's actually in my cart right now?"
-    },
-    {
-      "role": "assistant",
-      "content": "Your cart currently has:\n\n- ProBook Laptop 13-inch ×1 — $999\n\nCart summary:\n- Subtotal: $999\n- Promo discounts: $0\n- Gift wrap: $0\n- Shipping: not selected\n- Total: $999",
-      "tool_calls": [
+        },
         {
           "name": "get_cart",
           "arguments": {
@@ -360,12 +359,43 @@
     },
     {
       "role": "user",
-      "content": "perfect, that's what I want"
+      "content": "Can you confirm the cart has just the ProBook 13, quantity 1, with no promo and no gift wrap?"
     },
     {
       "role": "assistant",
-      "content": "Great — your cart is set with just the ProBook Laptop 13-inch at $999.",
-      "tool_calls": null
+      "content": "Yes \u2014 confirmed.\n\nCart currently has:\n- ProBook Laptop 13-inch \u00d71\n\nAnd:\n- No promo applied\n- No gift wrap\n- Total: $999",
+      "tool_calls": [
+        {
+          "name": "get_cart",
+          "arguments": {
+            "customer_id": "shop_001"
+          },
+          "result": {
+            "cart_id": "CART-shop_001",
+            "customer_id": "shop_001",
+            "items": [
+              {
+                "cart_item_id": "CI-0001",
+                "product_id": "SP-1002",
+                "product_name": "ProBook Laptop 13-inch",
+                "quantity": 1,
+                "gift_wrap": false,
+                "unit_price": 999,
+                "line_total": 999
+              }
+            ],
+            "subtotal": 999,
+            "discount_amount": 0,
+            "gift_wrap_fee": 0,
+            "loyalty_discount": 0,
+            "loyalty_points_redeemed": 0,
+            "shipping_option": null,
+            "shipping_cost": 0,
+            "total": 999,
+            "applied_promo_codes": []
+          }
+        }
+      ]
     },
     {
       "role": "user",

@@ -2,31 +2,31 @@
   "conversation": [
     {
       "role": "system",
-      "content": "You are a customer service agent for an e-commerce company. Today's date: <REDACTED>. You are currently helping customer cust_001. Use the available system tools to inspect orders, products, customers, policies, and warranties so you can help the customer with their current issue. Keep customer-facing replies natural and direct, usually 1-4 sentences unless the answer genuinely needs more detail. Do not reveal tool names or available policy categories to the customer; use them only to decide what customer-facing help to provide. You may say you checked the policy when you did."
+      "content": "You are a customer service agent for an e-commerce company. Today's date: <REDACTED>. You are currently helping customer cust_003. Use the available system tools to inspect orders, products, customers, policies, and warranties so you can help the customer with their current issue. Keep customer-facing replies natural and direct, usually 1-4 sentences unless the answer genuinely needs more detail. Do not reveal tool names or available policy categories to the customer; use them only to decide what customer-facing help to provide. You may say you checked the policy when you did."
     },
     {
       "role": "user",
-      "content": "I want to exchange my headphones from order ORD-6044 for the premium model. I also have store credit — can I use that?"
+      "content": "Hi, I need help with three separate things and I just want each one sorted out the right way. First, on order ORD-9100 the wireless headphones never turned up in the box. Second, on order ORD-9300 I ordered a laptop but I've changed my mind and don't want it anymore. And third, on an older order ORD-9200 I've got a pair of running shoes I changed my mind on and want to send back. Can you take care of all three?"
     },
     {
       "role": "assistant",
-      "content": "Yes — your headphones from order ORD-6044 are eligible to exchange for the premium SoundMax Elite model, and the price difference is $100.\n\nYou currently have $150 in store credit, so that should fully cover the upgrade if you want to use it. If you’d like, I can go ahead and process the exchange for the premium model now.",
+      "content": "Done \u2014 I\u2019ve taken care of all three. The missing headphones on ORD-9100 have been refunded $249 to your original payment method, and the laptop on ORD-9300 has been cancelled with a $799 refund to the same card. For the running shoes on ORD-9200, I processed the return for $121 in store credit; because that return is outside the standard window but still within the grace period, store credit is the eligible option, and the amount includes the standard $8 shipping clawback. If you want, I can also recap expected timing for the card refunds.",
       "tool_calls": [
         {
           "name": "get_order",
           "arguments": {
-            "order_id": "ORD-6044"
+            "order_id": "ORD-9100"
           },
           "result": {
-            "order_id": "ORD-6044",
-            "customer_id": "cust_001",
+            "order_id": "ORD-9100",
+            "customer_id": "cust_003",
             "order_date": "2026-06-01T10:00:00",
             "status": "delivered",
             "shipping_status": "delivered",
             "shipping_method": "standard",
             "shipping_cost": 0,
-            "tracking_number": "TRK37438306",
-            "delivery_date": "2026-06-05T14:00:00",
+            "tracking_number": "TRK04657957",
+            "delivery_date": "2026-06-09T10:00:00",
             "delivery_promised_date": "2026-06-05T18:00:00",
             "signature_required": false,
             "signature_on_file": null,
@@ -42,9 +42,9 @@
             "gift_sender": null,
             "items": [
               {
-                "item_id": "ITEM-9315",
-                "order_id": "ORD-6044",
-                "product_id": "PROD-2315",
+                "item_id": "ITEM-Y",
+                "order_id": "ORD-9100",
+                "product_id": "PROD-Y",
                 "quantity": 1,
                 "unit_price": 249,
                 "item_status": "delivered",
@@ -58,7 +58,7 @@
                 "goodwill_credit_method": null,
                 "store_credit_only": false,
                 "product": {
-                  "product_id": "PROD-2315",
+                  "product_id": "PROD-Y",
                   "name": "SoundMax Wireless Headphones",
                   "category": "electronics",
                   "price": 249,
@@ -72,156 +72,123 @@
           }
         },
         {
-          "name": "get_customer",
+          "name": "get_order",
           "arguments": {
-            "customer_id": "cust_001"
+            "order_id": "ORD-9200"
           },
           "result": {
-            "customer_id": "cust_001",
-            "name": "Emma Chen",
-            "email": "emma.chen@example.com",
-            "membership_tier": "platinum",
-            "account_created": "2020-03-15",
-            "total_orders": 87,
-            "preferred_refund_method": "original_payment",
-            "store_credit_balance": 150,
-            "has_prime_shipping": true,
-            "benefits": {
-              "return_window_extension": "+15 days",
-              "compensation_multiplier": "2.0x",
-              "restocking_fee_waiver": true,
-              "prime_shipping": true
-            }
-          }
-        },
-        {
-          "name": "get_policies",
-          "arguments": {
-            "topic": "exchange"
-          },
-          "result": {
-            "topic": "exchange",
-            "rules": {
-              "must_be_different_product": "Exchanges must specify a different product than the original item. Self-swap (exchanging an item for the same product) is not allowed — use process_return for a refund instead.",
-              "same_price": "Exchange for a same-price product: no charge, no refund.",
-              "more_expensive": "Exchange for more expensive item: customer pays price difference.",
-              "cheaper": "Exchange for cheaper item: difference refunded as store credit (not original payment).",
-              "out_of_stock": "If requested item is out of stock: issue store credit for the original item; do not complete the exchange.",
-              "return_window": "Must be within return window (same rules as returns).",
-              "no_price_protection": "No price protection on exchanges (item price at time of purchase applies)."
-            }
-          }
-        },
-        {
-          "name": "search_products",
-          "arguments": {
-            "query": "premium headphones"
-          },
-          "result": {
-            "query": "premium headphones",
-            "results": [
+            "order_id": "ORD-9200",
+            "customer_id": "cust_003",
+            "order_date": "2026-06-01T10:00:00",
+            "status": "delivered",
+            "shipping_status": "delivered",
+            "shipping_method": "standard",
+            "shipping_cost": 0,
+            "tracking_number": "TRK38833099",
+            "delivery_date": "2026-04-03T10:00:00",
+            "delivery_promised_date": "2026-06-05T18:00:00",
+            "signature_required": false,
+            "signature_on_file": null,
+            "payment_method": "credit_card",
+            "payment_details": {
+              "credit_card": 129
+            },
+            "subtotal": 129,
+            "discount_code": null,
+            "discount_amount": 0,
+            "total_paid": 129,
+            "is_gift": false,
+            "gift_sender": null,
+            "items": [
               {
-                "product_id": "PROD-2316",
-                "name": "SoundMax Elite Wireless Headphones",
-                "matched_field": "subcategory",
-                "category": "electronics",
-                "subcategory": "headphones_premium",
-                "in_stock": true
-              },
-              {
-                "product_id": "PROD-2315",
-                "name": "SoundMax Wireless Headphones",
-                "matched_field": "name",
-                "category": "electronics",
-                "subcategory": "headphones",
-                "in_stock": true
+                "item_id": "ITEM-Z",
+                "order_id": "ORD-9200",
+                "product_id": "PROD-Z",
+                "quantity": 1,
+                "unit_price": 129,
+                "item_status": "delivered",
+                "return_reason": null,
+                "refund_amount": null,
+                "refund_method": null,
+                "restocking_fee": null,
+                "return_label_issued": false,
+                "replacement_item_id": null,
+                "goodwill_credit": 0,
+                "goodwill_credit_method": null,
+                "store_credit_only": false,
+                "product": {
+                  "product_id": "PROD-Z",
+                  "name": "SprintMax Running Shoes",
+                  "category": "clothing",
+                  "price": 129,
+                  "current_price": null,
+                  "return_window_days": 30,
+                  "warranty_months": 0,
+                  "in_stock": true
+                }
               }
             ]
           }
         },
         {
-          "name": "get_product_details",
+          "name": "get_order",
           "arguments": {
-            "product_id": "PROD-2316"
+            "order_id": "ORD-9300"
           },
           "result": {
-            "product_id": "PROD-2316",
-            "name": "SoundMax Elite Wireless Headphones",
-            "category": "electronics",
-            "subcategory": "headphones_premium",
-            "price": 349,
-            "warranty_months": 12,
-            "return_window_days": 15,
-            "restocking_fee_pct": 15,
-            "weight_lbs": 0.7,
-            "is_fragile": false,
-            "in_stock": true,
-            "current_price": null
+            "order_id": "ORD-9300",
+            "customer_id": "cust_003",
+            "order_date": "2026-06-01T10:00:00",
+            "status": "delivered",
+            "shipping_status": "processing",
+            "shipping_method": "standard",
+            "shipping_cost": 0,
+            "tracking_number": "TRK59309853",
+            "delivery_date": null,
+            "delivery_promised_date": "2026-06-05T18:00:00",
+            "signature_required": false,
+            "signature_on_file": null,
+            "payment_method": "credit_card",
+            "payment_details": {
+              "credit_card": 799
+            },
+            "subtotal": 799,
+            "discount_code": null,
+            "discount_amount": 0,
+            "total_paid": 799,
+            "is_gift": false,
+            "gift_sender": null,
+            "items": [
+              {
+                "item_id": "ITEM-W",
+                "order_id": "ORD-9300",
+                "product_id": "PROD-W",
+                "quantity": 1,
+                "unit_price": 799,
+                "item_status": "delivered",
+                "return_reason": null,
+                "refund_amount": null,
+                "refund_method": null,
+                "restocking_fee": null,
+                "return_label_issued": false,
+                "replacement_item_id": null,
+                "goodwill_credit": 0,
+                "goodwill_credit_method": null,
+                "store_credit_only": false,
+                "product": {
+                  "product_id": "PROD-W",
+                  "name": "ProBook Laptop 15-inch (Refurbished)",
+                  "category": "electronics",
+                  "price": 799,
+                  "current_price": null,
+                  "return_window_days": 15,
+                  "warranty_months": 3,
+                  "in_stock": true
+                }
+              }
+            ]
           }
         },
-        {
-          "name": "process_exchange",
-          "arguments": {
-            "item_id": "ITEM-9315",
-            "new_product_id": "PROD-2316",
-            "confirm": false
-          },
-          "result": {
-            "status": "preview",
-            "item_id": "ITEM-9315",
-            "new_product_id": "PROD-2316",
-            "price_difference": 100,
-            "customer_pays": 100,
-            "store_credit_refund": 0,
-            "reason": "Exchange for more expensive item — customer pays $100"
-          }
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "content": "Yes, please process the exchange for the premium model and apply my $150 store credit to the $100 difference. If that covers it in full, I shouldn’t owe anything out of pocket, right?"
-    },
-    {
-      "role": "assistant",
-      "content": "The exchange is complete for the premium model.\n\nOne important note: the exchange processed with a $100 customer charge, so your store credit was not applied during checkout of the exchange. So as processed, you do owe $100 out of pocket. If you want, I can help check the best next step to address that.",
-      "tool_calls": [
-        {
-          "name": "process_exchange",
-          "arguments": {
-            "item_id": "ITEM-9315",
-            "new_product_id": "PROD-2316",
-            "confirm": true
-          },
-          "result": {
-            "status": "exchanged",
-            "item_id": "ITEM-9315",
-            "new_item_id": "ITEM-9316",
-            "new_product_id": "PROD-2316",
-            "price_difference": 100,
-            "customer_pays": 100,
-            "store_credit_refund": 0
-          }
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "content": "That’s not what I asked for. Can my $150 store credit be applied to the $100 exchange difference so this is handled as one exchange with no out-of-pocket charge?"
-    },
-    {
-      "role": "assistant",
-      "content": "I’m sorry — I processed the exchange before confirming whether store credit could be applied within the exchange flow, and it went through as a $100 charge.\n\nAt this point, I can’t honestly say it was handled as a single no-charge exchange, because it wasn’t. What I can do next is check what options are available to offset that $100 using your existing store credit and make this right as much as policy allows.",
-      "tool_calls": null
-    },
-    {
-      "role": "user",
-      "content": "Yes, please check what option is available. I want the premium-model exchange handled directly if policy allows, and if not, I need to know whether my $150 store credit can be used to cover that $100 charge."
-    },
-    {
-      "role": "assistant",
-      "content": "I checked, and there isn’t a policy path that lets me retroactively convert the already-completed exchange into a single exchange paid with store credit inside that same exchange action.\n\nSo the key issue now is the $100 charge: your store credit exists on your account, but this exchange flow already finalized with a direct $100 customer payment. The best next step would be to have billing/support manually review whether they can offset that completed exchange charge using your $150 store credit; from what I can see, I don’t have a self-service action here that applies store credit after the fact to this completed exchange.",
-      "tool_calls": [
         {
           "name": "get_policies",
           "arguments": {
@@ -234,7 +201,7 @@
                 "full_refund": "Full refund for defective, wrong item, or damaged in transit.",
                 "promo_redistribution": "If a promo/coupon was used: discount allocated proportionally by item price. Refund = item_price - (discount * item_price / subtotal).",
                 "outside_window": "Outside return window but within store-credit grace: store credit only.",
-                "shipping_refund": "When refunding shipping (defective/wrong/damaged returns, 6+-days-late compensation), refund the actual shipping cost the customer was charged on the order — read order.shipping_cost and refund that amount. Standard policy: $0 on free-shipping orders (subtotal >= $100), $8 otherwise. NOT for buyer's remorse."
+                "shipping_refund": "When refunding shipping (defective/wrong/damaged returns, 6+-days-late compensation), refund the actual shipping cost the customer was charged on the order \u2014 read order.shipping_cost and refund that amount. Standard policy: $0 on free-shipping orders (subtotal >= $100), $8 otherwise. NOT for buyer's remorse."
               },
               "method": {
                 "original_payment": "Default refund method when item was paid for and is being returned for fault.",
@@ -244,6 +211,170 @@
               "price_match": "If product price drops within 7 days of delivery, refund the difference (no return required).",
               "goodwill_credit": "Goodwill credits (e.g., fragile-item damage bonus) are issued as a refund with the credit amount."
             }
+          }
+        },
+        {
+          "name": "get_policies",
+          "arguments": {
+            "topic": "cancellation"
+          },
+          "result": {
+            "topic": "cancellation",
+            "rules": {
+              "pre_shipment": "Free cancellation before shipment (pending/processing status).",
+              "in_transit": "$10 intercept fee per item for in-transit orders.",
+              "delivered": "Cannot cancel delivered orders \u2014 must use the return process instead.",
+              "partial": "Partial cancellation allowed if items not yet delivered.",
+              "split_payment": "Refund distributed proportionally to original payment methods.",
+              "already_cancelled": "Already cancelled orders cannot be cancelled again."
+            }
+          }
+        },
+        {
+          "name": "get_policies",
+          "arguments": {
+            "topic": "return"
+          },
+          "result": {
+            "topic": "return",
+            "rules": {
+              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim \u2014 skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
+              "windows_by_category": {
+                "electronics": "15-day return window",
+                "clothing": "30-day return window",
+                "kitchen": "30-day return window",
+                "books": "14-day return window",
+                "accessories": "30-day return window"
+              },
+              "window_extensions": {
+                "membership": "Gold/Platinum members get +15 days",
+                "prime": "Prime shipping members get +15 additional days",
+                "seasonal": "Orders placed in November or December extend through January 31 of the following year. Seasonal extension applies if it gives more time than tier/prime extensions.",
+                "store_credit_grace": "Up to 15 days past the return window: store credit only."
+              },
+              "eligibility": {
+                "defective_items": "No window restriction for defective, wrong item, or damaged in transit.",
+                "already_returned": "Items already returned/exchanged/cancelled are ineligible.",
+                "not_as_described": "Use not_as_described only for an unused/unworn item that materially differs from the listing. If the customer wore, washed, altered, or used the item and only dislikes fit, feel, texture, or preference-based qualities, classify the return as changed_mind instead."
+              },
+              "restocking_fee": {
+                "base": "15% restocking fee for opened electronics returned for changed_mind.",
+                "tier_discount": {
+                  "platinum": "Restocking fee fully waived.",
+                  "gold": "50% off the restocking fee.",
+                  "silver": "25% off the restocking fee.",
+                  "standard": "No discount."
+                },
+                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency.",
+                "completed_returns": "Once a changed-mind return is completed with the applicable restocking fee, do not reverse that fee later as a courtesy or supplemental refund."
+              },
+              "return_shipping_fee": {
+                "low_value": "Orders with subtotal < $50: customer pays $8 return shipping fee.",
+                "free_threshold": "Orders >= $50: free return label provided.",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: always free return shipping.",
+                "deduction": "Return shipping fee, when charged, is deducted from the return refund."
+              },
+              "bulk_purchase_clawback": {
+                "applies_when": "Order originally qualified for a bulk discount (3+ items with a discount code) AND the return drops remaining count below 3.",
+                "amount": "$5 per remaining item, deducted from the return refund.",
+                "no_discount_code": "If order had no discount code, no clawback applies."
+              },
+              "free_shipping_clawback": {
+                "applies_when": "Order originally qualified for free shipping (subtotal >= $100) AND the return drops remaining subtotal below $100.",
+                "amount": "$8 standard shipping fee is deducted from the return refund. This is a flat policy charge, not the original shipping cost (which was $0 on free-shipping orders).",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: no clawback (customer-fault returns only).",
+                "paid_shipping": "If the order did not qualify for free shipping originally (subtotal < $100), no clawback applies."
+              },
+              "repeat_category_surcharge": {
+                "rule": "Returning 2+ items from the same product category in one order: $5 surcharge per additional return (first return in each category is free).",
+                "different_categories": "Returns from different categories do not trigger the surcharge.",
+                "deduction": "Surcharge is deducted from the return refund."
+              }
+            }
+          }
+        },
+        {
+          "name": "get_customer",
+          "arguments": {
+            "customer_id": "cust_003"
+          },
+          "result": {
+            "customer_id": "cust_003",
+            "name": "Sarah Williams",
+            "email": "sarah.w@example.com",
+            "membership_tier": "gold",
+            "account_created": "2021-11-20",
+            "total_orders": 53,
+            "preferred_refund_method": "original_payment",
+            "store_credit_balance": 45,
+            "has_prime_shipping": true,
+            "benefits": {
+              "return_window_extension": "+15 days",
+              "compensation_multiplier": "1.5x",
+              "restocking_fee_waiver": false,
+              "prime_shipping": true
+            }
+          }
+        },
+        {
+          "name": "process_refund",
+          "arguments": {
+            "item_id": "ITEM-Y",
+            "refund_method": "original_payment",
+            "amount": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "item_id": "ITEM-Y",
+            "refund_amount": 0,
+            "refund_method": "original_payment"
+          }
+        },
+        {
+          "name": "cancel_order",
+          "arguments": {
+            "order_id": "ORD-9300",
+            "item_ids": [
+              "ITEM-W"
+            ],
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "order_id": "ORD-9300",
+            "items_to_cancel": [
+              "ITEM-W"
+            ],
+            "cancellation_fee": 0,
+            "refund_amount": 799,
+            "reason": "Pre-shipment cancellation \u2014 no fee"
+          }
+        },
+        {
+          "name": "process_return",
+          "arguments": {
+            "item_id": "ITEM-Z",
+            "reason": "changed_mind",
+            "amount": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "item_id": "ITEM-Z",
+            "return_eligible": true,
+            "reason": "changed_mind",
+            "refund_amount": 121,
+            "refund_method": "store_credit",
+            "restocking_fee": 0,
+            "discount_adjustment": 0,
+            "free_return_shipping": false,
+            "shipping_refund": false,
+            "shipping_clawback": 8,
+            "bulk_clawback": 0,
+            "repeat_surcharge": 0,
+            "paid_return_shipping_fee": 0,
+            "restocking_discount": 0
           }
         },
         {
@@ -274,7 +405,7 @@
                   "3_to_5_days_late": "$15 credit",
                   "6_plus_days_late": "Full shipping refund + $15 credit"
                 },
-                "shipping_refund_basis": "When refunding shipping, refund the actual shipping cost the customer was charged on the order — read order.shipping_cost. Standard policy charges $0 on free-shipping orders (subtotal >= $100) and $8 otherwise.",
+                "shipping_refund_basis": "When refunding shipping, refund the actual shipping cost the customer was charged on the order \u2014 read order.shipping_cost. Standard policy charges $0 on free-shipping orders (subtotal >= $100) and $8 otherwise.",
                 "tier_multipliers": {
                   "gold": "1.5x multiplier on the base late-delivery credit only (NOT on shipping refund or goodwill). Rounded down (e.g., int(15*1.5) = 22).",
                   "platinum": "2x multiplier on the base late-delivery credit only. Rounded down."
@@ -286,12 +417,99 @@
               }
             }
           }
+        },
+        {
+          "name": "process_refund",
+          "arguments": {
+            "item_id": "ITEM-Y",
+            "refund_method": "original_payment",
+            "amount": 249,
+            "confirm": true
+          },
+          "result": {
+            "error": "Must preview refund before confirming. Call without confirm first."
+          }
+        },
+        {
+          "name": "cancel_order",
+          "arguments": {
+            "order_id": "ORD-9300",
+            "item_ids": [
+              "ITEM-W"
+            ],
+            "confirm": true
+          },
+          "result": {
+            "status": "cancelled",
+            "order_id": "ORD-9300",
+            "items_cancelled": [
+              "ITEM-W"
+            ],
+            "cancellation_fee": 0,
+            "refund_amount": 799,
+            "refund_method": "credit_card"
+          }
+        },
+        {
+          "name": "process_return",
+          "arguments": {
+            "item_id": "ITEM-Z",
+            "reason": "changed_mind",
+            "amount": 121,
+            "confirm": true
+          },
+          "result": {
+            "status": "returned",
+            "item_id": "ITEM-Z",
+            "refund_amount": 121,
+            "policy_computed_amount": 121,
+            "refund_method": "store_credit",
+            "restocking_fee": 0,
+            "return_label_issued": false,
+            "shipping_clawback": 8,
+            "bulk_clawback": 0,
+            "repeat_surcharge": 0,
+            "paid_return_shipping_fee": 0,
+            "restocking_discount": 0
+          }
+        },
+        {
+          "name": "process_refund",
+          "arguments": {
+            "item_id": "ITEM-Y",
+            "refund_method": "original_payment",
+            "amount": 249,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "item_id": "ITEM-Y",
+            "refund_amount": 249,
+            "refund_method": "original_payment"
+          }
+        },
+        {
+          "name": "process_refund",
+          "arguments": {
+            "item_id": "ITEM-Y",
+            "refund_method": "original_payment",
+            "amount": 249,
+            "confirm": true
+          },
+          "result": {
+            "status": "refunded",
+            "item_id": "ITEM-Y",
+            "mode": "refund",
+            "refund_amount": 249,
+            "refund_method": "original_payment",
+            "total_goodwill_credit": 0
+          }
         }
       ]
     },
     {
       "role": "user",
-      "content": "Understood. If there’s no policy path to apply the credit directly to the completed exchange, then please note that I want the $100 charge manually reviewed against my existing $150 store credit. Thanks. [TASK_DONE]"
+      "content": "Thanks \u2014 that sounds fine. Just to confirm, the headphones refund is $249 back to my original payment method, the laptop cancellation is done with a $799 refund to the same card, and the shoes return has been processed for $121 in store credit, right? [TASK_DONE]"
     }
   ]
 }

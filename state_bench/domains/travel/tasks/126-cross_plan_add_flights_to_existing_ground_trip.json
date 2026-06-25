@@ -4,24 +4,24 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I already have a Los Angeles hotel and car booked, but now I need to add flights from Chicago ORD to complete the trip. Can you help me build around what I already have?",
   "user_simulator": {
-    "personality": "Organized and constraint-aware.",
     "user_sim_context": "You already have the ground portion of an LA trip and now need ORD-LAX round-trip flights that fit around those existing bookings. You want the agent to treat the hotel and car dates as fixed constraints rather than as suggestions that can be silently changed.",
     "known_info": [
-      "Your user ID: user_002",
-      "Home airport: ORD",
-      "Need round-trip flights ORD-LAX and LAX-ORD",
-      "Hotel reservation: HR-0100",
-      "Car rental: CR-0100",
-      "Any flight budget discussion applies only to the new flights, since the hotel and car are already booked."
+      "Home airport: ORD.",
+      "Need round-trip flights ORD-LAX and LAX-ORD.",
+      "Hotel reservation HR-0100.",
+      "Car rental CR-0100.",
+      "Budget discussion applies only to the new flights; the hotel and car are already booked."
     ],
-    "unknown_info": [
-      "Whether the agent will anchor the flight search to the existing ground-trip dates"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "If the agent suggests flights on different dates than the hotel and car, remind them the ground trip is already fixed.",
-      "If the agent asks where you are flying from, say ORD. Do not invent a different origin airport.",
-      "Approve only flights that align with the existing hotel and car reservation dates.",
-      "End with [TASK_DONE] after both matching flights are booked and summarized.",
+      "You want to add only ORD-LAX and LAX-ORD flights around your already-booked Los Angeles hotel and car reservations; treat those ground-trip dates as fixed and do not ask to rebuild the hotel or car plan.",
+      "If the agent asks for trip references or origin details, provide HR-0100, CR-0100, and ORD as needed; do not volunteer unrelated preferences before they are relevant.",
+      "If the agent proposes flight dates that do not match the hotel check-in/car pickup and hotel check-out/car dropoff dates, push back and remind them the existing ground reservations are fixed constraints.",
+      "If the agent discusses budget, clarify that the $800 cap applies only to the new flight bookings and not to the already-booked hotel or car.",
+      "Approve only a round-trip plan with an outbound ORD-LAX flight on the ground-trip start date and a return LAX-ORD flight on the ground-trip end date, with the total new flight cash cost within budget.",
+      "Before agreeing to book, make sure the agent has summarized both selected flights, dates, directions, cabin, payment amount, and booking preferences; ask for missing details instead of approving early.",
+      "If the agent tries to change, cancel, or replace the existing hotel or car, decline and redirect them to adding matching flights only.",
+      "End only after both matching flights are booked and the final summary confirms the two flight bookings, their dates and directions, total new flight cost, and expected booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -49,8 +49,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "multi_booking_trip_coordination",
-  "task_env_path": "state_bench/domains/travel/task_envs/126-cross_plan_add_flights_to_existing_ground_trip.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -134,5 +132,7 @@
         "user_id": "user_002"
       }
     }
-  ]
+  ],
+  "task_type": "multi_booking_trip_coordination",
+  "task_env_path": "state_bench/domains/travel/task_envs/126-cross_plan_add_flights_to_existing_ground_trip.json"
 }

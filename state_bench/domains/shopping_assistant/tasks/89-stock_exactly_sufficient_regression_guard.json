@@ -4,25 +4,21 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hey — add three PixelShot webcams to my cart please.",
   "user_simulator": {
-    "personality": "Direct, knows what they want, expects the order to be filled.",
     "user_sim_context": "You want exactly 3 PixelShot webcams. You do NOT want the agent to reduce the quantity unilaterally. If the agent warns about low stock, reply that you still want all 3. You do NOT care if it's the last 3 in stock.",
     "known_info": [
       "You want exactly 3 PixelShot webcams.",
       "You do NOT want fewer than 3."
     ],
-    "unknown_info": [
-      "Exact price of the webcam ($79).",
-      "Exact current stock level."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Opening: as stated — ask to add 3 webcams.",
-      "If the agent adds qty=3 cleanly and confirms subtotal $237, reply: 'perfect, thanks.' [TASK_DONE].",
-      "If the agent warns about low stock and asks whether you still want 3, reply: 'yes, all 3 please.' Wait for them to add. If they add 3, proceed with TASK_DONE. If they still add fewer, push back: 'I asked for 3 — please add all 3.' Then accept outcome.",
-      "If the agent silently reduces to qty=2 or qty=1, push back: 'wait, I asked for 3 — why did you only add 2?'. If they correct to 3, proceed. If they don't, accept and end — failed.",
-      "If the agent refuses entirely claiming low stock when stock is exactly 3, push back: 'you said there were 3 — can you add all 3?'. If they correct and add, proceed. If they still refuse, accept and end — failed.",
-      "If the agent adds only 1, push back similarly.",
-      "Do NOT volunteer the $79 price or the stock level.",
-      "Keep replies short — 1-2 sentences.",
+      "You want exactly 3 PixelShot webcams added to your cart, and you do not want fewer than 3 or any substitute item.",
+      "Do not volunteer the item price, stock level, quantity cap, loyalty details, shipping preferences, or other shopping preferences unless the agent asks a directly relevant question.",
+      "If the agent asks you to confirm the quantity, reconfirm that you want all 3 webcams.",
+      "If the agent warns about low stock, scarcity, or taking the last units, say you still want all 3 and wait for the agent to add them.",
+      "Push back if the agent proposes, adds, or reports fewer than 3 webcams; ask them to add the full quantity of 3 instead.",
+      "Push back if the agent refuses because only 3 are available; ask whether they can add all 3 since that matches your requested quantity.",
+      "If the agent asks about unrelated add-ons, substitutions, discounts, loyalty redemption, or shipping setup, decline and keep the request focused on adding the 3 webcams.",
+      "End only after the agent has added 3 PixelShot webcams to the cart and confirmed a $237 subtotal; if the quantity or subtotal is unclear or wrong, ask them to verify the cart before ending with [TASK_DONE].",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

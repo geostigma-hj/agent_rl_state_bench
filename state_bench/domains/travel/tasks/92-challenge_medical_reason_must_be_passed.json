@@ -4,22 +4,17 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I have a medical procedure scheduled and need to change my Sao Paulo flight BK-1000 from June 19 to June 26. The change is medically necessary. My user ID is user_005.",
   "user_simulator": {
-    "personality": "Straightforward. Clearly states medical reason.",
     "known_info": [
-      "Your user ID: user_005",
-      "Booking: BK-1000 (JFK to GRU, June 19)",
-      "Medical procedure - medically necessary change",
-      "Wants June 26"
+      "Booking BK-1000: JFK to GRU on June 19; medical procedure requires changing it to June 26."
     ],
-    "unknown_info": [
-      "Fee amount",
-      "Whether medical gets a discount"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: medical procedure, change BK-1000 to June 26.",
-      "If agent quotes $200 fee (forgot medical), say: 'But I mentioned this is for a medical reason. Is there a medical discount?'",
-      "If agent quotes $100 with medical discount, say: 'Go ahead.'",
-      "After change done, end with [TASK_DONE].",
+      "You need to change BK-1000 from June 19 to June 26 because the change is medically necessary; keep the request scoped to that flight change.",
+      "If the agent asks for the reason, booking details, or target date, provide the medical reason, the booking ID, and June 26 without adding unrelated trip changes.",
+      "If the agent treats the request as a personal change or quotes the full $200 personal-change fee after the medical reason is known, push back once by reminding them that the change is medically necessary and asking whether the medical discount applies.",
+      "Accept only after the agent previews the June 26 replacement, the $100 medical change fee, any fare difference, the total additional cost, and confirms the existing booking preferences will be preserved within budget.",
+      "If the agent proposes a different date, an unrelated cancellation or rebooking path, or a final change that does not carry the medical reason through execution, decline and steer back to the June 26 medical flight change.",
+      "End only after the flight has actually been changed to June 26 and the final details confirm the medical change fee, fare difference, total cost, and preserved booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Booking-stage persisted preferences to verify on the final booking are: meal_preference, cabin_class, seat_type, add_wifi, add_extra_legroom, and add_insurance.",
@@ -52,8 +47,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/92-challenge_medical_reason_must_be_passed.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -79,5 +72,7 @@
       "field": "price_paid",
       "expected_value": 1250
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/92-challenge_medical_reason_must_be_passed.json"
 }

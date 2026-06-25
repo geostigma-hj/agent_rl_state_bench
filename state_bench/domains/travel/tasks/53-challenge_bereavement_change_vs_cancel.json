@@ -4,28 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Hi, I have a family emergency — a bereavement situation. I need to cancel my flight BK-1000 to Paris. My user ID is user_005.",
   "user_simulator": {
-    "personality": "Emotional and stressed due to bereavement. Defaults to wanting to cancel. Open to suggestions if the agent explains a better option.",
     "known_info": [
-      "Your user ID: user_005",
-      "Booking: BK-1000 (JFK→CDG, economy, June 19)",
-      "Has a bereavement situation (genuine family emergency)",
-      "Wants to travel to Paris on June 28 instead",
-      "Does not have travel insurance"
+      "Booking BK-1000: Paris flight; you still need to travel to Paris on June 28.",
+      "Bereavement situation: genuine family emergency."
     ],
-    "unknown_info": [
-      "Exact cancellation fee",
-      "That bereavement gets a 75% discount on change fees",
-      "That changing is cheaper than cancelling",
-      "Fare difference for the later flight"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: family bereavement, need to cancel flight BK-1000.",
-      "When the agent asks about your plans, mention you still need to go to Paris but on June 28 instead.",
-      "If the agent offers to check change fees, say 'I assumed cancelling was the way to go, but sure, check the change option too.'",
-      "If the agent recommends changing over cancelling (because it's cheaper), say 'Really? That's surprising. Tell me the exact numbers.'",
-      "When the agent shows the bereavement change costs $70 and cancel-and-rebook would cost $180 net to keep traveling on June 28, say 'Wow, that's a big difference. Let's go with the change then.'",
-      "If the agent just cancels without mentioning the change option, ask 'Wait — would it have been cheaper to change the flight instead of cancelling?'",
-      "After the change is executed, say 'Thank you for suggesting the better option.' and end with [TASK_DONE].",
+      "You initially want to cancel flight BK-1000 because of a genuine bereavement emergency, but your underlying goal is still to get to Paris if there is a clearly cheaper way to do that.",
+      "Do not volunteer the June 28 travel need at the start; if the agent asks about your plans or alternatives to cancellation, explain that you still need to travel to Paris on June 28.",
+      "If the agent offers to compare cancellation with a bereavement change, agree to that comparison even though you assumed cancellation was the only path.",
+      "If the agent presents only the cancellation path or asks to confirm cancellation before comparing a change option, ask whether changing to June 28 would be cheaper before authorizing any cancellation.",
+      "Accept the change path only after the agent clearly explains that the bereavement change costs $70 total, made up of a $50 discounted change fee plus a $20 fare difference, and that cancel-and-rebook would cost $180 net.",
+      "Push back if the agent recommends cancellation, omits the bereavement discount, gives unclear or contradictory math, or does not recommend the materially cheaper change once both paths are compared.",
+      "Before authorizing the write action, require a clear preview that the booking will be changed to the June 28 Paris flight with $70 additional cost and no cancellation/rebooking.",
+      "End only after the change has been executed and the agent confirms the updated June 28 Paris booking and final $70 additional cost.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -60,8 +52,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/53-challenge_bereavement_change_vs_cancel.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -87,5 +77,7 @@
       "field": "price_paid",
       "expected_value": 870
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/53-challenge_bereavement_change_vs_cancel.json"
 }

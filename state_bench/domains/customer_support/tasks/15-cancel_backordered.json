@@ -1,15 +1,5 @@
 {
   "task_id": "15-cancel_backordered",
-  "task_summary": "**Task:** The customer has a two-item order where the shirt has already shipped and the blender is backordered for more than three weeks. The correct handling is to cancel only the backordered blender and leave the shipped shirt alone, producing the $79 refund for that one item.\n\n**Challenge:** The agent has to separate what is still cancellable from what is already in motion. Weak agents wipe out the full order, target the shipped item by mistake, or miss that the backordered line is the only valid cancellation path.",
-  "task_type": "cancel_order",
-  "task_requirements": [
-    {
-      "evidence": "conversation",
-      "id": "15_cancel_backordered_agent_must_confirm_partial_scope",
-      "kind": "must",
-      "requirement": "Agent must tell the customer that only the blender was cancelled and the shirt remains shipped."
-    }
-  ],
   "user_id": "cust_005",
   "now": "2026-06-12T10:00:00",
   "opening_message": "My order ORD-6018 has a blender that's been backordered for weeks. I want to cancel just the blender.",
@@ -19,19 +9,26 @@
       "cancel_item: blender",
       "keep: shirt"
     ],
-    "personality": "uncertain",
     "task_rules": [
-      "Give the order ID when asked.",
-      "Say you want to cancel only the PowerBlend blender because it has been backordered for weeks.",
-      "If the agent previews cancelling the full order, the shirt, or anything besides the blender, correct them and say the shirt should remain active.",
-      "Accept the cancellation once the preview shows only the blender cancelled and the shirt left alone, with a $79 refund for the blender."
+      "Keep the request scoped to cancelling only the backordered blender from ORD-6018; the shirt is not part of the cancellation request.",
+      "Give the order ID when asked, and if asked which item to cancel, identify the blender that has been backordered for weeks.",
+      "Do not volunteer refund, fee, eligibility, or refund-method details before the agent checks the order; ask the agent to verify those details from the records.",
+      "Push back if the agent proposes cancelling the full order, cancelling the shirt, starting a return for the shipped shirt, or changing anything besides the blender.",
+      "Accept only after the preview shows that the blender will be cancelled, the shirt will remain shipped, and the blender refund will be $79 to the original credit card.",
+      "End only after the agent confirms the blender was cancelled, the shirt was left shipped, and the $79 credit-card refund was recorded."
     ],
-    "unknown_info": [
-      "cancellation process for backordered",
-      "refund amount"
-    ],
+    "unknown_info": [],
     "user_sim_context": "One item in your order has been backordered for a long time, and you only want to cancel that delayed piece. The rest of the order is not the problem. You expect the agent to separate the backordered item from everything else and handle just that part."
   },
+  "task_summary": "**Task:** The customer has a two-item order where the shirt has already shipped and the blender is backordered for more than three weeks. The correct handling is to cancel only the backordered blender and leave the shipped shirt alone, producing the $79 refund for that one item.\n\n**Challenge:** The agent has to separate what is still cancellable from what is already in motion. Weak agents wipe out the full order, target the shipped item by mistake, or miss that the backordered line is the only valid cancellation path.",
+  "task_requirements": [
+    {
+      "evidence": "conversation",
+      "id": "15_cancel_backordered_agent_must_confirm_partial_scope",
+      "kind": "must",
+      "requirement": "Agent must tell the customer that only the blender was cancelled and the shirt remains shipped."
+    }
+  ],
   "state_requirements": [
     {
       "entity_type": "order_items",
@@ -64,5 +61,6 @@
       "expected_value": "shipped"
     }
   ],
+  "task_type": "cancel_order",
   "task_env_path": "state_bench/domains/customer_support/task_envs/15-cancel_backordered.json"
 }

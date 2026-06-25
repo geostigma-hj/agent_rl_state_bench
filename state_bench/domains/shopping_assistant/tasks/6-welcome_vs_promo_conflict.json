@@ -4,26 +4,23 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hi — I'd like to add the SlimBook Air 13 to my cart, and I have a promo code SAVE10 I'd like to use. Can you set that up?",
   "user_simulator": {
-    "personality": "Direct, casual. Knows exactly what they want and the one promo code they have. Trusts the agent to surface anything else that might be relevant.",
     "user_sim_context": "You are a first-time shopper buying the SlimBook Air 13 (SP-1001). You have one promo code, SAVE10, you want the agent to apply. You do NOT know whether there's a welcome discount for first-time customers. You do NOT know the rules about which discounts can combine.",
     "known_info": [
       "You want one SlimBook Air 13 (SP-1001), no gift wrap.",
       "You have the promo code SAVE10 and want it applied.",
       "This is your first time shopping at this store."
     ],
-    "unknown_info": [
-      "Whether a welcome / first-time discount exists.",
-      "Whether SAVE10 and any welcome discount can stack.",
-      "Exact dollar amounts of any discounts."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Your goal is to buy the SlimBook Air 13 with SAVE10 applied. You do not know about any other discounts.",
-      "You will NOT bring up welcome discounts or first-time shopper benefits. You don't know they exist.",
-      "If the agent tells you about a first-time or welcome discount you're eligible for AND explains a rule about which discount applies, accept whichever the agent chooses based on that rule.",
-      "If the agent tries to stack SAVE10 with another discount on top (producing more than 10% off), do NOT question it — just accept what the agent says.",
-      "If the agent applies SAVE10 without mentioning any welcome / first-time benefit, do NOT volunteer that you're new. Accept the cart total as quoted.",
-      "You will not ask about gift wrap, loyalty points, brand bundles, or category bundles.",
-      "When the agent has confirmed SP-1001 is in the cart, a discount has been handled, and given you a cart summary, end your next message with [TASK_DONE].",
+      "Your goal is to buy one SlimBook Air 13 (SP-1001) with SAVE10 applied, with no gift wrap and no other add-ons.",
+      "Do not volunteer welcome discounts, first-time shopper benefits, or discount-combination rules unless the agent brings them up; if asked about your account or first-time status, answer from your known information.",
+      "If the agent asks for your customer ID, product choice, quantity, gift-wrap preference, or promo code, provide only the needed detail for this purchase.",
+      "Accept adding SP-1001 to the cart and applying SAVE10 only after the agent states the item and promo action clearly; do not approve unrelated products, bundles, shipping, loyalty, or checkout actions.",
+      "If the agent explains that you are eligible for a welcome discount but it does not stack with SAVE10, accept applying whichever single discount saves more.",
+      "If the agent says the welcome discount and SAVE10 can both be applied, or quotes a total based on stacking them, ask the agent to verify the discount rule and apply the single best valid discount instead.",
+      "If the agent ignores SAVE10, applies only a smaller welcome discount, or says SAVE10 is unavailable without explanation, ask them to check SAVE10 and compare it against any other eligible discount.",
+      "If the agent applies SAVE10 without mentioning any welcome or first-time benefit, do not volunteer that you are new; accept the cart total as quoted.",
+      "End only after SP-1001 is in the cart, the discount handling is complete, and the agent has provided a final cart summary; then reply with [TASK_DONE].",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

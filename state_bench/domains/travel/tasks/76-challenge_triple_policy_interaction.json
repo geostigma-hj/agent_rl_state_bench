@@ -4,29 +4,23 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "My flight BK-1000 is delayed 3 hours! What can I do? I want to get to Denver as soon as possible, but if there is nothing workable left today I can take the next available flight. My user ID is user_004.",
   "user_simulator": {
-    "personality": "Frustrated by delay. Wants options. Does not know their fare class or policies.",
     "known_info": [
-      "Your user ID: user_004",
-      "Booking: BK-1000 (ORD to DEN, delayed 3 hours)",
-      "Has travel insurance",
-      "Wants to get to Denver ASAP, but will take the next available flight if nothing workable remains today"
+      "Booking BK-1000: ORD to DEN, delayed 3 hours.",
+      "Has travel insurance.",
+      "Wants to get to Denver ASAP, but can take the next available flight if nothing workable remains today."
     ],
-    "unknown_info": [
-      "That the booking is basic_economy",
-      "That basic economy can't be changed",
-      "That 180 min delay doesn't qualify for free rebooking",
-      "That insurance can override the cancel restriction",
-      "Meal voucher eligibility"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: flight BK-1000 delayed 3 hours, what are my options?",
-      "If agent says you cannot change or cancel (stuck), say: 'But I have travel insurance! Does that help?'",
-      "If the agent says there is nothing earlier left today, ask whether insurance lets you cancel and rebook the next available economy flight, even if it is tomorrow.",
-      "If agent says delay qualifies for free rebook, do NOT correct them.",
-      "If agent offers cancel+rebook path, ask: 'Is there any compensation for the delay too?'",
-      "If the agent confirms there is no better option left today but offers the next available economy replacement, say: 'OK, please go ahead with cancel+rebook onto the next available economy flight and include the meal voucher.'",
-      "If the agent only proposes rebooking you onto the same delayed flight, ask whether there is a later or next-day replacement you can switch to after canceling.",
-      "After booking is done, end with [TASK_DONE].",
+      "You want help with delayed flight BK-1000; prioritize getting to Denver as soon as possible, but accept the next available economy flight if no workable same-day option exists.",
+      "Do not volunteer the insurance unless the agent says the basic-economy booking cannot be changed or cancelled, appears stuck, or asks whether you have insurance.",
+      "If the agent treats the 3-hour delay as a direct free-rebooking right, ask them to confirm how that works with basic economy and whether insurance-backed cancellation is the actual path.",
+      "If the agent says there is no better option left today, ask whether insurance lets you cancel and rebook the next available economy flight, including a next-day flight if necessary.",
+      "If the agent offers only a change to the same delayed flight or another direct change of the basic-economy booking, ask whether cancelling first and booking a replacement would get you moving sooner.",
+      "When the agent identifies a cancel-and-rebook path, ask whether the 3-hour delay also provides any compensation such as a meal voucher.",
+      "Before approving cancellation and replacement booking, require the cancellation fee, refund amount, delay compensation, replacement flight timing, cabin, and total out-of-pocket cost to be clear and within your $600 budget.",
+      "Approve only an insurance-backed cancellation plus the next available economy replacement that preserves your profile booking preferences and includes the meal voucher if available.",
+      "Push back if the agent proposes an above-budget option, omits the meal-voucher outcome, skips cancellation before booking the replacement, or tries unrelated upgrades or add-ons.",
+      "End only after the original booking is cancelled, the replacement economy booking is confirmed, and the final details include the refund, meal voucher, and expected booking preferences; then use [TASK_DONE].",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -61,8 +55,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "adversarial_or_reasoning_trap",
-  "task_env_path": "state_bench/domains/travel/task_envs/76-challenge_triple_policy_interaction.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -129,5 +121,7 @@
         "user_id": "user_004"
       }
     }
-  ]
+  ],
+  "task_type": "adversarial_or_reasoning_trap",
+  "task_env_path": "state_bench/domains/travel/task_envs/76-challenge_triple_policy_interaction.json"
 }

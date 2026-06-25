@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "Added TechPhone Lite 15 to your cart.\n\n- Quantity: 1\n- Price: $499\n- Gift wrap: No\n\nCart subtotal: $499",
+      "content": "Done \u2014 I added 1 \u00d7 TechPhone Lite 15 to your cart.\n\nCart total: $499\n\nNeed anything else added or want me to check for any eligible promos?",
       "tool_calls": [
         {
           "name": "search_products",

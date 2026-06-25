@@ -14,7 +14,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from state_bench.agents.base import AgentPricing, BaseAgent
+from state_bench.agents.base import BaseAgent
 from state_bench.agents.loader import load_root_agent_class, load_root_client_class
 from state_bench.agents.state_bench import StateBenchAgent
 from state_bench.client import (
@@ -29,7 +29,7 @@ from state_bench.domain import DomainConfig, get_domain_config
 from state_bench.env_loader import load_task_environment
 from state_bench.orchestrator import run_task
 from state_bench.paths import domain_tasks_dir
-from state_bench.protocol import load_default_protocol, load_split_task_ids
+from state_bench.protocol import format_domain_not_in_protocol_error, load_default_protocol, load_split_task_ids
 from state_bench.schemas import TaskDefinition
 from state_bench.scoring import TaskRequirementsJudge, UXQualityJudge
 from state_bench.scripts.score import score_one
@@ -91,36 +91,6 @@ def _build_agent_model_metadata(args: argparse.Namespace) -> dict[str, str | Non
     return {"model_name": model_name, "reasoning_level": reasoning_level}
 
 
-def _build_agent_pricing(args: argparse.Namespace) -> AgentPricing | None:
-    model_name = (args.agent_model_name or "").strip()
-    pricing_values = [
-        args.agent_input_cost_per_1m,
-        args.agent_output_cost_per_1m,
-        args.agent_cached_input_cost_per_1m,
-    ]
-    if all(value is None for value in pricing_values):
-        return None
-
-    missing = [
-        flag
-        for flag, value in [
-            ("--agent-input-cost-per-1m", args.agent_input_cost_per_1m),
-            ("--agent-output-cost-per-1m", args.agent_output_cost_per_1m),
-        ]
-        if value is None
-    ]
-    if missing:
-        raise ValueError("agent pricing requires " + ", ".join(missing))
-    pricing = AgentPricing(
-        model_name=model_name,
-        input_cost_per_1m_tokens=args.agent_input_cost_per_1m,
-        output_cost_per_1m_tokens=args.agent_output_cost_per_1m,
-        cached_input_cost_per_1m_tokens=args.agent_cached_input_cost_per_1m,
-    )
-    pricing.validate()
-    return pricing
-
-
 def _run_single(
     task_file: Path,
     client: BaseLLMClient | None,
@@ -129,7 +99,6 @@ def _run_single(
     domain: DomainConfig,
     max_attempts: int,
     protocol=None,
-    agent_pricing: AgentPricing | None = None,
     agent_model: dict[str, str | None] | None = None,
     agent_class: type[BaseAgent] | None = None,
     retrieve_learnings_top_k: int = 3,
@@ -153,8 +122,6 @@ def _run_single(
                 metadata["agent_name"] = (agent_class or StateBenchAgent).__name__
                 if agent_model is not None:
                     metadata["agent_model"] = agent_model
-                if agent_pricing is not None:
-                    metadata["agent_pricing"] = agent_pricing.to_dict()
 
             traj = run_task(
                 task,
@@ -166,7 +133,6 @@ def _run_single(
                 env=None,
                 trajectory_metadata=metadata,
                 simulator_client=simulator_client,
-                agent_pricing=agent_pricing,
                 agent_class=agent_class,
                 retrieve_learnings_top_k=retrieve_learnings_top_k,
                 agent_reasoning_effort=agent_reasoning_effort,
@@ -194,7 +160,8 @@ def _run_single(
 
             if traj.token_usage is not None:
                 result["token_usage"] = traj.token_usage.to_dict()
-                result["cost_usd"] = traj.token_usage.total_cost_usd
+                if traj.token_usage.total_cost_usd:
+                    result["cost_usd"] = traj.token_usage.total_cost_usd
             if attempt > 1:
                 result["attempts"] = attempt
             return result
@@ -216,16 +183,14 @@ def main() -> None:
     load_dotenv()
 
     parser = argparse.ArgumentParser(description="Run benchmark tasks")
-    parser.add_argument("--domain", type=str, default="travel", help="Domain name (default: travel)")
-    parser.add_argument(
-        "--num-workers", "--workers", dest="workers", type=int, default=None, help="Number of parallel task workers"
-    )
+    parser.add_argument("--domain", type=str, required=True, help="Domain name")
+    parser.add_argument("--num-workers", dest="workers", type=int, default=None, help="Number of parallel task workers")
     parser.add_argument("--tasks", type=str, default=None, help="Comma-separated task IDs")
     parser.add_argument(
         "--split",
         type=str,
         default="all",
-        choices=["all", "test"],
+        choices=["all", "train", "test"],
         help="Task split to run (default: all)",
     )
     parser.add_argument("--output-dir", type=str, default=None, help="Output directory (default: outputs/<domain>)")
@@ -286,28 +251,14 @@ def main() -> None:
         help="Optional agent model reasoning level reported in trajectories and metrics",
     )
     parser.add_argument(
-        "--agent-input-cost-per-1m",
-        type=float,
-        default=None,
-        help="Override agent input token cost in USD per 1M tokens",
+        "--no-ux-score",
+        action="store_true",
+        help="Score task/state requirements inline but skip UX judge calls.",
     )
     parser.add_argument(
-        "--agent-output-cost-per-1m",
-        type=float,
-        default=None,
-        help="Override agent output token cost in USD per 1M tokens",
-    )
-    parser.add_argument(
-        "--agent-cached-input-cost-per-1m",
-        type=float,
-        default=None,
-        help="Override cached-input token cost in USD per 1M tokens",
-    )
-    parser.add_argument(
-        "--score",
-        action=argparse.BooleanOptionalAction,
-        default=True,
-        help="Score each trajectory inline immediately after generation (default: true). Use --no-score for local unscored runs.",
+        "--no-score",
+        action="store_true",
+        help="Disable all inline judge scoring.",
     )
     parser.add_argument(
         "--score-reasoning-effort",
@@ -327,6 +278,8 @@ def main() -> None:
         parser.error("--retrieve-learnings-top-k must be >= 1")
     if args.tasks and args.split != "all":
         parser.error("--tasks and --split are mutually exclusive")
+    if args.no_score and args.no_ux_score:
+        parser.error("--no-score and --no-ux-score are mutually exclusive")
     try:
         _validate_agent_client_args(args, sys.argv[1:])
     except ValueError as exc:
@@ -335,14 +288,13 @@ def main() -> None:
     protocol = load_default_protocol()
     try:
         agent_model = _build_agent_model_metadata(args)
-        agent_pricing = _build_agent_pricing(args)
     except ValueError as exc:
         parser.error(str(exc))
     protocol_errors = protocol.validate_prompt_hashes()
     if protocol_errors:
         parser.error("Protocol prompt validation failed:\n" + "\n".join(protocol_errors))
     if args.domain not in protocol.domains:
-        parser.error(f"Domain {args.domain!r} is not part of protocol {protocol.protocol_id}")
+        parser.error(format_domain_not_in_protocol_error(args.domain, protocol))
     tasks_dir = domain_tasks_dir(args.domain)
     base_output = Path(args.output_dir) if args.output_dir else Path(f"outputs/{args.domain}")
     agent_class = load_root_agent_class(args.agent_class) if args.agent_class else None
@@ -362,7 +314,7 @@ def main() -> None:
     user_sim_client = build_user_sim_client()
     task_requirements_judge = None
     ux_judge = None
-    if args.score:
+    if not args.no_score:
         judge_client = build_locked_judge_client()
         score_reasoning_effort = args.score_reasoning_effort or protocol.judge_reasoning_effort
         task_requirements_judge = TaskRequirementsJudge(
@@ -371,12 +323,13 @@ def main() -> None:
             system_prompt=domain.judge_system_prompt,
             reasoning_effort=score_reasoning_effort,
         )
-        ux_judge = UXQualityJudge(
-            client=judge_client,
-            prompts_dir=domain.prompts_dir,
-            system_prompt=domain.judge_system_prompt,
-            reasoning_effort=score_reasoning_effort,
-        )
+        if not args.no_ux_score:
+            ux_judge = UXQualityJudge(
+                client=judge_client,
+                prompts_dir=domain.prompts_dir,
+                system_prompt=domain.judge_system_prompt,
+                reasoning_effort=score_reasoning_effort,
+            )
     if args.workers is None:
         args.workers = 1
     if args.tasks:
@@ -396,17 +349,13 @@ def main() -> None:
 
     agent_name = (agent_class or StateBenchAgent).__name__
     print(f"Agent: {agent_name}")
-    if agent_pricing is not None:
+    print("Agent cost: user-reported via BaseAgent.add_cost_usd() when provided")
+    if not args.no_score:
+        score_mode = "task/state only" if args.no_ux_score else "task/state + UX"
         print(
-            f"Agent pricing: {agent_pricing.model_name} "
-            f"input=${agent_pricing.input_cost_per_1m_tokens}/1M "
-            f"output=${agent_pricing.output_cost_per_1m_tokens}/1M "
-            f"source={agent_pricing.source}"
+            f"Scoring: inline {score_mode} "
+            f"(reasoning_effort={args.score_reasoning_effort or protocol.judge_reasoning_effort})"
         )
-    else:
-        print("Agent pricing: not provided (token counts recorded without cost)")
-    if args.score:
-        print(f"Scoring: inline (reasoning_effort={args.score_reasoning_effort or protocol.judge_reasoning_effort})")
     else:
         print("Scoring: off (--no-score set; use state_bench.scripts.score for local scoring)")
 
@@ -423,7 +372,9 @@ def main() -> None:
         f"# Runs {run_indices[0]}..{run_indices[-1]} together — {len(task_files)} tasks/run, "
         f"{len(work_items)} total jobs, {args.workers} workers"
     )
-    print(f"# Scoring: {'inline' if args.score else 'off'}")
+    print(
+        f"# Scoring: {'off' if args.no_score else ('inline task/state only' if args.no_ux_score else 'inline task/state + UX')}"
+    )
     print(f"{'#' * 60}")
 
     start = time.time()
@@ -440,7 +391,6 @@ def main() -> None:
                 domain,
                 args.retry_attempts,
                 protocol,
-                agent_pricing,
                 agent_model,
                 agent_class,
                 args.retrieve_learnings_top_k,
@@ -496,18 +446,20 @@ def main() -> None:
     total_elapsed = time.time() - total_start
     print(f"\nAll runs complete in {total_elapsed:.0f}s (worker wall time {elapsed:.0f}s)")
     print(f"Trajectories in: {base_output}/run*/")
-    if args.score:
+    if not args.no_score:
         print(
             f"Metrics with: uv run python -m state_bench.scripts.compute_metrics --domain {args.domain} "
             f"--results-dir {base_output} "
             f"--num-runs {args.num_runs} --num-runs-idx-start {args.num_runs_idx_start} "
+            f"--split {args.split} "
             f"--save-filepath {base_output / 'metrics.json'}"
         )
     else:
         print(
             f"Score with: uv run python -m state_bench.scripts.score --domain {args.domain} "
             f"--results-dir {base_output} "
-            f"--num-runs {args.num_runs} --num-runs-idx-start {args.num_runs_idx_start}"
+            f"--num-runs {args.num_runs} --num-runs-idx-start {args.num_runs_idx_start} "
+            f"--split {args.split}"
         )
 
 

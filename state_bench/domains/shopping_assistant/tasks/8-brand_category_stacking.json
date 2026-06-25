@@ -4,26 +4,21 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hi — I'm redoing my kitchen and want to grab a few ChefPro appliances today: the Stand Mixer, the Hand Blender, and the 11-Cup Food Processor. Can you add all three to my cart?",
   "user_simulator": {
-    "personality": "Enthusiastic about the kitchen remodel. Knows what they want. Not price-sensitive. Expects the agent to handle any applicable discounts without being asked.",
     "user_sim_context": "You are a returning Platinum-tier shopper redoing your kitchen. You want three specific ChefPro appliances in one cart. You trust the agent to surface any applicable promotions or bonuses. You have no independent knowledge of the store's brand_bundle or category_bundle policies.",
     "known_info": [
       "You want exactly three items: ChefPro Stand Mixer, ChefPro Hand Blender, ChefPro 11-Cup Food Processor.",
       "One of each, no gift wrap.",
       "You are a returning Platinum-tier customer."
     ],
-    "unknown_info": [
-      "Any bundle bonuses (brand, category, or otherwise).",
-      "Exact prices.",
-      "Store policies on bundles and stacking."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "You do NOT know the store has a brand bundle, a category bundle, or any other policy-driven bonus. You will NOT bring up discounts, promos, or bundles on your own.",
-      "If the agent asks clarifying questions about use case, answer briefly.",
-      "You will decline gift wrap if asked.",
-      "If the agent proactively mentions any bundle bonus (brand OR category) and quotes an amount, acknowledge it briefly and continue.",
-      "If the agent summarizes the cart without mentioning any bundle bonus, do NOT volunteer that you know any exist (you don't). Accept the total as quoted.",
-      "You will not ask about loyalty points, gift wrap fees, or welcome discounts.",
-      "When all three items are in the cart and the agent has given a cart summary, end your next message with [TASK_DONE].",
+      "Ask the agent to add exactly one each of the ChefPro Stand Mixer, ChefPro Hand Blender, and ChefPro 11-Cup Food Processor to your cart; do not ask for discounts, promos, bundles, shipping, loyalty redemption, or extra items.",
+      "If the agent asks clarifying questions about your use case or quantities, answer briefly that you are redoing your kitchen and want one of each requested ChefPro item.",
+      "If the agent asks about gift wrap, decline it for all three items.",
+      "If the agent proactively mentions a brand bundle, category bundle, or both and gives a percentage or dollar amount, acknowledge the information briefly and continue with adding the requested items.",
+      "If the agent gives a cart summary without mentioning any bundle bonus, do not ask about discounts or correct the omission; accept the total as quoted.",
+      "Push back if the agent tries to add substitutes, extra products, gift wrap, loyalty redemption, or shipping choices instead of only the three requested cart items.",
+      "End only after all three requested items are in the cart with no gift wrap and the agent has given a cart summary.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

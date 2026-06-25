@@ -4,26 +4,21 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hi — can you tell me about the PowerBlend Pro Blender? I'm thinking of getting one.",
   "user_simulator": {
-    "personality": "Casual, interested buyer. Does due diligence before purchasing but intends to buy. Has a tendency to go on tangents mid-conversation — not to change mind, just because a related question pops up.",
     "user_sim_context": "You want to buy the PowerBlend Pro Blender. You will open by asking about the product (inquiry, not 'add it'). Once the agent gives you details, you'll signal interest. Then — BEFORE the agent closes the loop — you'll digress and ask about the return policy. You still want to buy; you're just curious. The test is whether the agent steers back to the purchase after answering your returns question. If they do, confirm and close. If they don't, you do NOT re-ask — you accept the conversation ending without a purchase.",
     "known_info": [
       "You want to buy one PowerBlend Pro Blender (SP-3001).",
       "You are a returning Standard-tier customer."
     ],
-    "unknown_info": [
-      "The blender's exact price and specs.",
-      "The store's return policy."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Turn 1 (your opening): ask the agent to tell you about the PowerBlend Pro Blender, mention you're thinking of getting one. Do NOT ask to add it yet.",
-      "Turn 2 (after agent describes the product): signal mild interest ('nice, that sounds like what I need') and THEN digress into a returns question in the same message ('actually, real quick — if I end up not liking it, what's your return policy?'). Do NOT explicitly ask to add the blender in this turn.",
-      "CRITICAL STEER-BACK DETECTION (turn 3): after the agent answers the returns question, look at their LAST message for an EXPLICIT question or proposal to add the blender — e.g. 'want me to add the blender to your cart?', 'shall I go ahead and add it?', 'ready to add this to your cart?' Just mentioning the blender's name without proposing the add does NOT count.",
-      "Turn 3 (if agent DID steer back with an explicit add proposal): confirm with 'yes, go ahead' but do NOT include [TASK_DONE] in that same message. Your whole reply should be only the confirmation, because the agent still needs another turn to call add_to_cart.",
-      "After the agent confirms the PowerBlend Pro Blender has been added to your cart, acknowledge briefly and end that next message with [TASK_DONE].",
-      "Never include [TASK_DONE] in the same message where you consent to adding the blender, say 'yes, go ahead', or ask the agent to perform any other action that requires a tool call.",
-      "Turn 3 (if agent did NOT steer back — answered returns and ended on 'let me know if you have other questions' or similar without proposing the add): thank them briefly ('Got it, thanks for explaining the returns policy.') and end with [TASK_DONE]. Do NOT mention the blender by name. Do NOT say 'let's go ahead'. Do NOT say 'I'll take it'. Do NOT restate purchase intent. The trap has fired — accept the conversation ending without a purchase.",
-      "Do NOT change your mind about wanting the blender. You still want it internally — you're just testing whether the agent holds the thread.",
-      "Do not ask about gift wrap, promos, loyalty points, or brand bundles.",
+      "Your goal is to buy exactly one PowerBlend Pro Blender (SP-3001), but start by asking about the product and do not ask to add it yet.",
+      "After the agent describes the blender, signal mild interest and ask a returns-policy question in the same reply before consenting to any cart addition.",
+      "If the agent asks to add the blender before answering the returns question, ask them to explain the return policy first and do not consent yet.",
+      "After the agent answers the returns question, consent to the cart addition only if their latest message explicitly asks or proposes adding the PowerBlend Pro Blender to your cart; a product mention without an add proposal is not enough.",
+      "If the agent answered the returns question but did not explicitly propose adding the blender, thank them for explaining the return policy, do not mention the blender or restate purchase intent, and end with [TASK_DONE].",
+      "When you do consent to adding the blender, keep the confirmation brief, request exactly one with no gift wrap, and do not include [TASK_DONE] in that same message.",
+      "Push back if the agent proposes gift wrap, promos, loyalty use, brand bundles, add-ons, substitutions, or unrelated cart changes.",
+      "End only after the agent confirms the PowerBlend Pro Blender has been added to your cart; then acknowledge briefly and include [TASK_DONE].",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

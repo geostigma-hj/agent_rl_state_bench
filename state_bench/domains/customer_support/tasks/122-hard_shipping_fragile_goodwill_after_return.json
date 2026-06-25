@@ -1,21 +1,5 @@
 {
   "task_id": "122-hard_shipping_fragile_goodwill_after_return",
-  "task_summary": "Fragile blender arrived broken. Agent must process damaged return and issue a separate $10 fragile-item goodwill credit via refund tool.",
-  "task_type": "shipping_claim",
-  "task_requirements": [
-    {
-      "evidence": "conversation",
-      "id": "hard_shipping_fragile_goodwill_after_return_ask_credit_destination",
-      "kind": "must",
-      "requirement": "Agent must ask the customer where to issue any credit (original payment vs. store credit) before issuing it."
-    },
-    {
-      "evidence": "conversation",
-      "id": "hard_shipping_fragile_goodwill_after_return_separate",
-      "kind": "must_not",
-      "requirement": "Agent must not claim the goodwill is already included in the return refund."
-    }
-  ],
   "user_id": "cust_004",
   "now": "2026-07-08T10:00:00",
   "opening_message": "The blender from ORD-7225 arrived with the glass jar shattered. This is a fragile item and I need the refund handled properly.",
@@ -25,20 +9,27 @@
       "issue: shattered fragile blender",
       "preferred_credit_destination: original payment card (only reveal if the agent asks where to put any credit)"
     ],
-    "personality": "detail_oriented",
     "task_rules": [
-      "Give the order ID.",
-      "Mention the glass jar is shattered.",
-      "If the agent does not mention fragile-item goodwill after previewing the damaged return, ask whether fragile-item policy provides a separate credit beyond the refund.",
-      "If the agent says the fragile goodwill is included in the regular refund or that there is no separate credit, ask once whether the separate $10 fragile-item goodwill credit applies.",
-      "If the agent offers any credit (goodwill or otherwise) and asks where to put it, say back to your original payment method. If the preview defaults to store credit or the agent issues store credit without asking, ask whether it can go back to your original payment method before confirming. Do not volunteer this preference unprompted.",
-      "Accept only after both the damaged_in_transit return/refund and the separate $10 goodwill credit are processed to original payment."
+      "Keep the request scoped to resolving the shattered fragile blender from ORD-7225 with a damaged-in-transit return and any separate fragile-item credit the policy allows.",
+      "Provide the order ID and shattered-glass-jar damage details when asked or when needed to keep the agent on the correct item and reason.",
+      "Do not volunteer the original-payment preference unless the agent asks where to issue a credit or previews a credit destination that is not original payment.",
+      "If the agent previews the damaged return but omits fragile-item goodwill, ask whether fragile-item policy provides a separate credit beyond the regular refund.",
+      "Push back once if the agent says the fragile goodwill is included in the regular return refund, denies a separate credit without checking policy, uses store credit, or treats the issue as changed mind, warranty, replacement-only, or ordinary damage.",
+      "Accept only after the preview includes a damaged-in-transit return with an $89 original-payment refund, no restocking fee, a return label, and a separate $10 fragile-item goodwill credit to the original payment method.",
+      "End only after the agent confirms both the return/refund and the separate $10 goodwill credit have been processed to original payment."
     ],
-    "unknown_info": [
-      "goodwill credit"
-    ],
+    "unknown_info": [],
     "user_sim_context": "You are contacting support about order ORD-7225. Fragile blender arrived broken. Agent must process damaged return and issue a separate $10 fragile-item goodwill credit via refund tool. You want any credit back to your original payment method, not store credit — but don't volunteer this preference unprompted; let the agent ask. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation."
   },
+  "task_summary": "Fragile blender arrived broken. Agent must process damaged return and issue a separate $10 fragile-item goodwill credit via refund tool.",
+  "task_requirements": [
+    {
+      "evidence": "conversation",
+      "id": "hard_shipping_fragile_goodwill_after_return_separate",
+      "kind": "must_not",
+      "requirement": "Agent must not claim the goodwill is already included in the return refund."
+    }
+  ],
   "state_requirements": [
     {
       "entity_type": "order_items",
@@ -95,5 +86,6 @@
       "expected_value": "fully_returned"
     }
   ],
+  "task_type": "shipping_claim",
   "task_env_path": "state_bench/domains/customer_support/task_envs/122-hard_shipping_fragile_goodwill_after_return.json"
 }

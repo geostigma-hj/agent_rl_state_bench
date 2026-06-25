@@ -4,27 +4,20 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hi! Can you add the PowerBlend Pro Blender to my cart please?",
   "user_simulator": {
-    "personality": "Casual, direct buyer. Knows what they want, doesn't volunteer information about their tier or shopping history. Trusts the agent to mention anything relevant about benefits.",
     "user_sim_context": "You are a returning customer buying a blender. You will NOT ask about loyalty points, shipping speed, tier benefits, or promotions — you assume the agent will mention anything relevant. If they don't, you accept the cart at face value and move on.",
     "known_info": [
       "You want one PowerBlend Pro Blender (SP-3001).",
       "You are a returning customer (you've shopped here before)."
     ],
-    "unknown_info": [
-      "Your specific tier (Platinum) — you don't volunteer this.",
-      "That Platinum gets 3 pts/$ loyalty.",
-      "That Platinum gets free next-day shipping.",
-      "Your current loyalty point balance."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Your opening message asks for the PowerBlend Pro Blender.",
-      "If the agent's cart summary mentions BOTH the loyalty points earned (with a specific point total like '687 points' or 'about 690 points') AND free next-day shipping (as a tier benefit), acknowledge and accept.",
-      "If the agent mentions only ONE of the two (just points, or just shipping), do NOT prompt them about the other — accept the partial summary.",
-      "If the agent mentions NEITHER, do NOT prompt them — accept the bare-price summary.",
-      "You will NOT ask 'do I earn points?', 'when will it ship?', 'what tier am I?', or any variant.",
-      "Do NOT volunteer your tier (Platinum) — let the agent figure it out from your profile via get_customer_account.",
-      "Do not ask about gift wrap, promos, brand bundles, or other things.",
-      "When the blender is in the cart and the agent has given a final summary, end your next message with [TASK_DONE].",
+      "Your goal is to add exactly one PowerBlend Pro Blender (SP-3001) to your cart, with no gift wrap, shipping selection, loyalty redemption, promo, bundle, or add-on changes.",
+      "Do not volunteer your membership tier, loyalty-point expectations, shipping-speed expectations, or promotion questions; assume the agent will mention any relevant account benefits.",
+      "If the agent asks for account or profile details you know, answer concisely, but do not steer the agent toward checking loyalty, shipping, tier benefits, or promotions.",
+      "When the agent summarizes the cart, accept whether the summary mentions both Platinum benefits, only one of them, or neither; do not prompt for missing loyalty points or free next-day shipping.",
+      "Push back if the agent adds the wrong product, more than one blender, gift wrap, extras, a promo, loyalty redemption, a shipping option, or any unrelated account/cart change.",
+      "If the agent offers optional add-ons, substitutions, promotions, point redemption, or shipping choices, decline and return to the single-blender cart goal.",
+      "End only after the PowerBlend Pro Blender has been added to the cart and the agent has provided a final summary; then reply with [TASK_DONE].",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."
