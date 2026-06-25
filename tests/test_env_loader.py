@@ -28,11 +28,12 @@ def _make_task(*, task_env_path: str | None) -> TaskDefinition:
 
 def test_load_task_environment_uses_declared_task_env_for_customer_support() -> None:
     domain = get_domain_config("customer_support")
-    task = _make_task(task_env_path="state_bench/domains/customer_support/task_envs/1-return_partial_order.json")
+    task_env_path = "state_bench/domains/customer_support/task_envs/1-hard_false_defect_phone_battery_settings.json"
+    task = _make_task(task_env_path=task_env_path)
 
     env_data, env_path = load_task_environment(domain, task)
 
-    assert env_path == Path.cwd() / "state_bench/domains/customer_support/task_envs/1-return_partial_order.json"
+    assert env_path == Path.cwd() / task_env_path
     assert len(env_data.orders) == 1
 
 
@@ -74,7 +75,9 @@ def test_task_definition_normalizes_null_state_requirements_to_empty_list() -> N
 
 
 def test_task_definition_serializes_empty_state_requirements_as_list() -> None:
-    task = _make_task(task_env_path="state_bench/domains/customer_support/task_envs/1-return_partial_order.json")
+    task = _make_task(
+        task_env_path="state_bench/domains/customer_support/task_envs/1-hard_false_defect_phone_battery_settings.json"
+    )
     task.state_requirements = []
 
     payload = task.to_dict()
