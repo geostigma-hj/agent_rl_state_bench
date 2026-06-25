@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "Right now your cart has:\n\n- SlimBook Air 13 — qty 1 — $849\n- SoundMax Wireless Headphones — qty 1 — $149\n\nCart summary:\n- Subtotal: $998\n- Discounts: $0\n- Gift wrap: $0\n- Shipping: not selected\n- Total so far: $998\n\nNo promo code is applied at the moment.\n\nIf you want, I can also:\n- pull full details on either item,\n- check if any promos might fit your cart,\n- or help you compare whether these are worth keeping.",
+      "content": "You currently have 2 items in your cart:\n\n- SlimBook Air 13 \u2014 Qty 1 \u2014 $849\n- SoundMax Wireless Headphones \u2014 Qty 1 \u2014 $149\n\nCart summary:\n- Subtotal: $998\n- Discounts: $0\n- Gift wrap: $0\n- Shipping: not selected\n- Total: $998\n\nNo promo code is applied right now.\n\nIf you want, I can also help you:\n- compare these two items to alternatives,\n- check for any promos you might qualify for,\n- or update/remove anything in the cart.",
       "tool_calls": [
         {
           "name": "get_cart",
@@ -55,7 +55,7 @@
     },
     {
       "role": "user",
-      "content": "great, I'll come back later. Thanks. [TASK_DONE]"
+      "content": "Thanks \u2014 that\u2019s all I needed. I\u2019m just reviewing the cart for now and not buying today. [TASK_DONE]"
     }
   ]
 }

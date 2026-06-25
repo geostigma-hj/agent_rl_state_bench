@@ -10,117 +10,15 @@
     },
     {
       "role": "assistant",
-      "content": "SP-H101 — $849 — 8GB RAM — 12h battery — 2.6 lb — In stock; no backorder caveat — School-fit caveat: best for basic schoolwork, but 8GB RAM may feel limiting for heavier multitasking.\n\nSP-H102 — $999 — 16GB RAM — 10h battery — 3.1 lb — In stock; no backorder caveat — School-fit caveat: strong all-around student fit, but battery life is shorter than the lightest option.\n\nSP-H104 — $1,199 — 16GB RAM — 9h battery — 4.0 lb — In stock; no backorder caveat — School-fit caveat: good if you want a larger screen for school, but the extra weight is less backpack-friendly.\n\nSP-H103 — $1,299 — 32GB RAM — 8h battery — 4.4 lb — In stock; no backorder caveat — School-fit caveat: excellent for demanding coursework, but likely overkill for typical school use and the heaviest to carry.",
+      "content": "1. Product ID: SP-H101 | Price: $849 | RAM: 8 GB | Battery: 12 hours | Weight: 2.6 lb | Stock/backorder caveat: In stock (50); backorder not available if it sells out. | School-fit caveat: Fine for note-taking, web, docs, and light coursework, but 8 GB may feel tight for heavier multitasking or specialized class software.\n\n2. Product ID: SP-H102 | Price: $999 | RAM: 16 GB | Battery: 10 hours | Weight: 3.1 lb | Stock/backorder caveat: In stock (50); backorder not available if it sells out. | School-fit caveat: Strong all-around student pick, though the 10-hour battery is less forgiving than the cheapest option for long days away from an outlet.\n\n3. Product ID: SP-H104 | Price: $1,199 | RAM: 16 GB | Battery: 9 hours | Weight: 4.0 lb | Stock/backorder caveat: In stock (50); backorder not available if it sells out. | School-fit caveat: Better if you want a larger screen for schoolwork, but it is noticeably heavier to carry daily and battery life is more average.\n\n4. Product ID: SP-H103 | Price: $1,299 | RAM: 32 GB | Battery: 8 hours | Weight: 4.4 lb | Stock/backorder caveat: In stock (50); backorder not available if it sells out. | School-fit caveat: Best fit for demanding workloads like creative or technical software, but it is the heaviest option and least campus-friendly for all-day portability.",
       "tool_calls": [
-        {
-          "name": "search_products",
-          "arguments": {
-            "query": "laptop stand ladder",
-            "category": "home_office",
-            "min_price": 0,
-            "max_price": 1000,
-            "min_rating": 0,
-            "in_stock_only": false,
-            "sort_by": "relevance"
-          },
-          "result": {
-            "products": [],
-            "total_found": 0,
-            "note": "No products match the hard filters (category / price / rating / stock). Try relaxing them and search again."
-          }
-        },
-        {
-          "name": "search_products",
-          "arguments": {
-            "query": "laptop ladder",
-            "category": "home_office",
-            "min_price": 0,
-            "max_price": 1000,
-            "min_rating": 0,
-            "in_stock_only": false,
-            "sort_by": "relevance"
-          },
-          "result": {
-            "products": [],
-            "total_found": 0,
-            "note": "No products match the hard filters (category / price / rating / stock). Try relaxing them and search again."
-          }
-        },
-        {
-          "name": "search_products",
-          "arguments": {
-            "query": "laptop stand",
-            "category": "home_office",
-            "min_price": 0,
-            "max_price": 1000,
-            "min_rating": 0,
-            "in_stock_only": false,
-            "sort_by": "relevance"
-          },
-          "result": {
-            "products": [],
-            "total_found": 0,
-            "note": "No products match the hard filters (category / price / rating / stock). Try relaxing them and search again."
-          }
-        },
-        {
-          "name": "search_products",
-          "arguments": {
-            "query": "laptop stand",
-            "category": "accessories",
-            "min_price": 0,
-            "max_price": 1000,
-            "min_rating": 0,
-            "in_stock_only": false,
-            "sort_by": "relevance"
-          },
-          "result": {
-            "products": [],
-            "total_found": 0,
-            "note": "No products match the hard filters (category / price / rating / stock). Try relaxing them and search again."
-          }
-        },
-        {
-          "name": "search_products",
-          "arguments": {
-            "query": "laptop riser",
-            "category": "accessories",
-            "min_price": 0,
-            "max_price": 1000,
-            "min_rating": 0,
-            "in_stock_only": false,
-            "sort_by": "relevance"
-          },
-          "result": {
-            "products": [],
-            "total_found": 0,
-            "note": "No products match the hard filters (category / price / rating / stock). Try relaxing them and search again."
-          }
-        },
-        {
-          "name": "search_products",
-          "arguments": {
-            "query": "laptop desk",
-            "category": "home_office",
-            "min_price": 0,
-            "max_price": 1000,
-            "min_rating": 0,
-            "in_stock_only": false,
-            "sort_by": "relevance"
-          },
-          "result": {
-            "products": [],
-            "total_found": 0,
-            "note": "No products match the hard filters (category / price / rating / stock). Try relaxing them and search again."
-          }
-        },
         {
           "name": "search_products",
           "arguments": {
             "query": "laptop",
             "category": "electronics",
             "min_price": 0,
-            "max_price": 3000,
+            "max_price": 5000,
             "min_rating": 0,
             "in_stock_only": false,
             "sort_by": "price_low"
@@ -173,40 +71,6 @@
               }
             ],
             "total_found": 4
-          }
-        },
-        {
-          "name": "search_products",
-          "arguments": {
-            "query": "laptop",
-            "category": "home_office",
-            "min_price": 0,
-            "max_price": 3000,
-            "min_rating": 0,
-            "in_stock_only": false,
-            "sort_by": "price_low"
-          },
-          "result": {
-            "products": [],
-            "total_found": 0,
-            "note": "No products match the hard filters (category / price / rating / stock). Try relaxing them and search again."
-          }
-        },
-        {
-          "name": "search_products",
-          "arguments": {
-            "query": "laptop",
-            "category": "accessories",
-            "min_price": 0,
-            "max_price": 3000,
-            "min_rating": 0,
-            "in_stock_only": false,
-            "sort_by": "price_low"
-          },
-          "result": {
-            "products": [],
-            "total_found": 0,
-            "note": "No products match the hard filters (category / price / rating / stock). Try relaxing them and search again."
           }
         },
         {
@@ -337,7 +201,7 @@
     },
     {
       "role": "user",
-      "content": "That’s what I needed, thanks. And just to be clear, I only wanted the comparison ladder, not anything added. [TASK_DONE]"
+      "content": "That\u2019s exactly the comparison ladder I needed, and thanks for not adding anything. [TASK_DONE]"
     }
   ]
 }

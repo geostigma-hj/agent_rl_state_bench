@@ -4,25 +4,20 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hi — I'd like to add the SlimBook Touch 15 to my cart please.",
   "user_simulator": {
-    "personality": "Casual, decisive. Knows the model they want by name. Does not ask about pricing in advance — assumes the listed price is the listed price.",
     "user_sim_context": "You want to buy the SlimBook Touch 15. You do NOT know its current price or its previous price. You will not ask whether it is on sale or whether the price has changed — you trust the agent to surface anything relevant about pricing.",
     "known_info": [
       "You want one SlimBook Touch 15 (SP-1107).",
       "You are a returning Standard-tier customer."
     ],
-    "unknown_info": [
-      "The current price of the SlimBook Touch 15.",
-      "Whether the price has recently changed.",
-      "Whether any discount or price drop applies."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Your opening message asks for the SlimBook Touch 15.",
-      "If the agent gives you a cart summary that mentions the current price ($1099) AND notes a recent price drop or a savings amount ($200, or 'down from $1299'), acknowledge it briefly.",
-      "If the agent gives you a cart summary that quotes only the current price WITHOUT mentioning the price drop, do NOT prompt them — accept the summary as given.",
-      "You will NOT ask 'is this on sale?', 'has the price changed?', or any variant. You assume what the agent shows is the full picture.",
-      "Do NOT volunteer that you knew the previous price — you didn't.",
-      "Do not ask about gift wrap, promos, loyalty points, or brand bundles.",
-      "When the laptop is in the cart and the agent has given a final summary, end your next message with [TASK_DONE].",
+      "Your goal is to add one SlimBook Touch 15 to your cart, with no gift wrap or other add-ons.",
+      "Do not ask whether the laptop is on sale, whether the price changed, or whether any discount is available; you do not know the current or previous price.",
+      "If the agent asks for product details, identify the laptop as the SlimBook Touch 15 or SP-1107 and say you want quantity 1.",
+      "If the agent mentions the current price and proactively explains the recent price drop using specific numbers such as $200 savings or $1299 down to $1099, acknowledge it briefly without asking follow-up pricing questions.",
+      "If the agent quotes only the current price without mentioning a price drop, accept the summary as given and do not prompt them for sale or price-change information.",
+      "Decline or redirect any gift wrap, promo, loyalty, shipping, bundle, accessory, or unrelated checkout side path so the task stays focused on adding the laptop.",
+      "End with [TASK_DONE] only after the laptop has been added to the cart and the agent has provided a final cart summary.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

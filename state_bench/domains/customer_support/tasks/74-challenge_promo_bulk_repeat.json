@@ -1,15 +1,5 @@
 {
   "task_id": "74-challenge_promo_bulk_repeat",
-  "task_summary": "**Task:** A Standard customer is returning two clothing items from a four-item order that used the SPRING20 promotion and also qualified for the bulk threshold. The correct handling is to process both returns, preserve the promo-adjusted item values, apply the $10 bulk clawback once the order drops from four items to two, and add the $5 repeat surcharge to the second clothing return.\n\n**Challenge:** The case bundles promo math, order-level clawback, and category-level surcharge into one resolution. Weak agents miss one of the adjustments, treat the two shirts as identical, or stop after processing only one return.",
-  "task_type": "compound",
-  "task_requirements": [
-    {
-      "evidence": "conversation",
-      "id": "74_challenge_promo_bulk_repeat_agent_must_apply_bulk_and_repeat",
-      "kind": "must",
-      "requirement": "Agent must explain that the first shirt refunds $55 after promo allocation, while the second shirt refunds $40 after promo allocation plus a $10 bulk clawback and a $5 same-category repeat-return surcharge."
-    }
-  ],
   "user_id": "cust_002",
   "now": "2026-06-20T10:00:00",
   "opening_message": "Hello, I'd like to return both cotton shirts from order ORD-7105. Neither of them fit properly.",
@@ -19,22 +9,28 @@
       "items: both cotton shirts",
       "reason: wrong sizes"
     ],
-    "personality": "polite",
     "task_rules": [
-      "Give order ID when asked.",
-      "Confirm return of both shirts.",
-      "If both shirt refunds are previewed as identical, ask whether the second shirt has any repeat same-category surcharge.",
-      "If the agent mentions only a bulk clawback or only a repeat surcharge, ask whether the other adjustment also applies after returning both shirts from the promo order.",
-      "Accept fees or surcharges only after the agent explains the promo-adjusted refund values, the $10 bulk clawback, and the $5 repeat clothing surcharge on the second shirt.",
-      "If agent only processes one, ask about the second."
+      "Keep the request scoped to returning both cotton shirts from ORD-7105 because the sizes were wrong; do not ask to return the blender or phone case.",
+      "Provide the order ID, both-shirt scope, and wrong-size reason when asked, but do not volunteer refund math, promo policy, bulk-discount policy, or same-category surcharge details before the agent checks them.",
+      "If the agent previews or processes only one shirt, ask about completing the return for the second cotton shirt too.",
+      "If both shirt refunds are previewed as identical, ask whether the second clothing return has any repeat same-category surcharge.",
+      "If the agent mentions only the bulk clawback or only the repeat clothing surcharge, ask whether the other adjustment also applies after returning both shirts from the promo order.",
+      "Accept the return only after the agent explains the promo-adjusted refund values for each shirt, the $10 bulk clawback from the order dropping to two items, and the $5 repeat clothing surcharge on the second shirt.",
+      "Push back if the agent treats the shirts as one identical refund, omits one of the two returns, or proposes changing unrelated items in the order.",
+      "End only after both shirt returns have been processed and the agent confirms the final refund details include the first shirt at $55, the second shirt at $40, the bulk clawback, and the repeat clothing surcharge."
     ],
-    "unknown_info": [
-      "promo adjustment",
-      "bulk clawback",
-      "repeat surcharge"
-    ],
+    "unknown_info": [],
     "user_sim_context": "You want to return both shirts from a promo order because neither one fits properly. To you this is mainly about those two items not working out. If the promo, the number of remaining items, or the repeated clothing category changes the refund, you need the agent to lay that out clearly instead of assuming you already know."
   },
+  "task_summary": "**Task:** A Standard customer is returning two clothing items from a four-item order that used the SPRING20 promotion and also qualified for the bulk threshold. The correct handling is to process both returns, preserve the promo-adjusted item values, apply the $10 bulk clawback once the order drops from four items to two, and add the $5 repeat surcharge to the second clothing return.\n\n**Challenge:** The case bundles promo math, order-level clawback, and category-level surcharge into one resolution. Weak agents miss one of the adjustments, treat the two shirts as identical, or stop after processing only one return.",
+  "task_requirements": [
+    {
+      "evidence": "conversation",
+      "id": "74_challenge_promo_bulk_repeat_agent_must_apply_bulk_and_repeat",
+      "kind": "must",
+      "requirement": "Agent must explain that the first shirt refunds $55 after promo allocation, while the second shirt refunds $40 after promo allocation plus a $10 bulk clawback and a $5 same-category repeat-return surcharge."
+    }
+  ],
   "state_requirements": [
     {
       "entity_type": "order_items",
@@ -103,5 +99,6 @@
       "expected_value": "partially_returned"
     }
   ],
+  "task_type": "compound",
   "task_env_path": "state_bench/domains/customer_support/task_envs/74-challenge_promo_bulk_repeat.json"
 }

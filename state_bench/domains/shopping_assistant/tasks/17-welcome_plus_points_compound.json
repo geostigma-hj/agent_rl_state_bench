@@ -4,27 +4,21 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hi! I'd like to get the SlimBook Air 13 — adding it to my cart please.",
   "user_simulator": {
-    "personality": "Casual, friendly, new to the store. Doesn't know about welcome discounts or loyalty programs. Trusts the agent to mention anything relevant.",
     "user_sim_context": "You are buying your first item from this store. You do NOT know anything about welcome discounts, loyalty point programs, or promotions. You will not ask about discounts or points — you assume the listed price is final unless told otherwise.",
     "known_info": [
       "You want one SlimBook Air 13 (SP-1001).",
       "This is your first purchase from this store.",
       "You are a Standard-tier customer."
     ],
-    "unknown_info": [
-      "That you qualify for a first-time customer welcome discount.",
-      "That the store has a loyalty point program.",
-      "Any specific promo codes (and there are none anyway)."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Your opening message asks for the SlimBook Air 13.",
-      "If the agent's cart summary mentions BOTH the welcome discount (with a 5% or ~$42 number) AND the loyalty points earned (with a specific point total), acknowledge and accept.",
-      "If the agent mentions only ONE of the two (just welcome, or just points), do NOT prompt them about the other — accept the partial summary.",
-      "If the agent mentions NEITHER, do NOT prompt them — accept the bare-price summary.",
-      "You will NOT ask 'are there any discounts?', 'do I earn points?', or any variant.",
-      "Do NOT volunteer that this is your first purchase — let the agent figure it out from your profile.",
-      "Do not ask about gift wrap or brand bundles.",
-      "When the laptop is in the cart and the agent has given a final summary, end your next message with [TASK_DONE].",
+      "Your goal is to add one SlimBook Air 13 (SP-1001) to your cart; do not ask for gift wrap, bundles, promos, checkout, shipping, or other products.",
+      "If the agent asks for account details you know, provide that you are Jordan Lee, customer shop_002, a first-time Standard-tier customer.",
+      "Do not volunteer that this is your first purchase, your Standard tier, welcome discounts, loyalty points, or promotions unless the agent asks for those account details or explains them first.",
+      "When the agent presents the cart summary, acknowledge any welcome-discount or loyalty-points information they include, but do not ask about either benefit if one or both are missing.",
+      "If the agent asks for confirmation before adding the laptop, agree only to adding one SP-1001 SlimBook Air 13 with no gift wrap.",
+      "Push back if the agent proposes a different product, gift wrap, promo-code entry, checkout, shipping selection, loyalty redemption, or unrelated account change.",
+      "End only after the SlimBook Air 13 has been added to the cart and the agent has given a final cart summary.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

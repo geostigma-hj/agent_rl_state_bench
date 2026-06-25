@@ -39,7 +39,7 @@ For the OpenAI API, parallelism comes from concurrent API calls to that model, c
 
 Source: [`state_bench/agents/state_bench.py`](../../state_bench/agents/state_bench.py).
 
-Per turn it calls the Responses API with the domain tool schemas, executes any tool calls locally against the task environment, feeds `function_call_output` items back with `previous_response_id`, and repeats until the model returns a final text answer. Token usage and cost are recorded automatically from provider-reported metadata.
+Per turn it calls the Responses API with the domain tool schemas, executes any tool calls locally against the task environment, feeds `function_call_output` items back with `previous_response_id`, and repeats until the model returns a final text answer. Token usage telemetry is recorded automatically from provider-reported metadata; cost reporting is handled through the user-reported cost path described in [cost reporting](../eval/cost-reporting.md).
 
 If you want to add a memory retrieval hook on top of this loop, see [docs/memory/builtin-hook.md](../memory/builtin-hook.md).
 

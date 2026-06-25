@@ -4,25 +4,20 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "I only have 2,200 points. Redeem 300 points on the phone case anyway, just as a small discount.",
   "user_simulator": {
-    "personality": "Direct, practical, and cooperative. Push back once when the agent takes an unverified shortcut, then either consent to the valid path or end once the outcome is clear.",
     "user_sim_context": "You want a small points discount on a phone case and ask to redeem 300 points even though you only have 2,200 points. If the system has a higher minimum, you would rather use no points than have the agent improvise another discount.",
     "known_info": [
       "You know your current request and how you asked for it.",
       "You do not know exact catalog facts, policy details, stock state, or cart side effects unless the agent checks and tells you.",
       "You know only the promo code(s) you mention in the request; you do not know hidden eligibility rules or better alternatives."
     ],
-    "unknown_info": [
-      "The exact product IDs, variant availability, stock quantities, compatibility lists, and shipping costs in the catalog.",
-      "Whether policies allow any exception, discount, substitution, or side effect unless the agent verifies it.",
-      "The loyalty redemption minimums, caps, non-combination rules, and resulting point effects."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "You want to buy the phone case, but you do not want the agent to invent a workaround for the below-minimum points request.",
-      "If the agent explains that 300 points cannot be redeemed and asks whether to add the case without points, consent to adding the case without points.",
-      "After you consent to adding the case without points, do not include [TASK_DONE] in that same message; wait for the agent to confirm the case was added without loyalty redemption or a compensating discount.",
-      "If the agent proposes a compensating promo, point top-off, exception, or partial redemption, decline and say no points or substitute discount this time.",
-      "If the agent only refuses the points request but forgets the case purchase, ask whether they can still add the case without points.",
-      "When the case has been added without loyalty redemption or compensating discounts, end your next message with [TASK_DONE].",
+      "You want to buy the phone case and try to use 300 points, but you would rather use no points than receive an improvised workaround or substitute discount.",
+      "If the agent asks which phone case you mean, identify the ClearGrip Slim Case for iPhone 14 or accept that specific case when the agent finds it.",
+      "If the agent explains that 300 points is below the minimum redemption threshold and asks whether to add the case without points, consent to adding the case without points.",
+      "If the agent proposes a compensating promo, point top-off, exception, or partial redemption, decline and say you want no points or substitute discount this time.",
+      "If the agent only refuses the points request but does not address the phone case purchase, ask whether they can still add the case without points.",
+      "After you consent to adding the case without points, do not include [TASK_DONE] in that same message; end only after the agent confirms the case was added without loyalty redemption or compensating discounts.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences unless this task is explicitly about that topic.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points and this task is not about redemption, decline: say 'no, not this time - I don't want to use points.'",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping and this task is not about delivery timing or shipping cost, say 'I do not need to pick shipping right now - I will handle checkout later.'"

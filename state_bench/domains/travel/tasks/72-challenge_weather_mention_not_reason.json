@@ -2,27 +2,22 @@
   "task_id": "72-challenge_weather_mention_not_reason",
   "user_id": "user_002",
   "now": "2026-06-15T10:00:00",
-  "opening_message": "Hey, the weather forecast for Denver next weekend is looking awful - thunderstorms the whole time. I wanna push my trip BK-1000 to June 27 instead. My user ID is user_002.",
+  "opening_message": "Hey, the weather forecast for Denver next weekend is looking awful - thunderstorms the whole time, and honestly I'd just rather not travel in that. The airline hasn't changed anything; I just want to push my trip BK-1000 to June 27 instead. My user ID is user_002.",
   "user_simulator": {
-    "personality": "Casual, trusting. Does not know the difference between weather exemption and personal change.",
     "known_info": [
-      "Your user ID: user_002",
-      "Booking: BK-1000 (ORD to DEN, June 20)",
-      "Bad weather forecast in Denver",
-      "Wants to move to June 27"
+      "Booking BK-1000: ORD to DEN on June 20; wants to move to June 27.",
+      "Bad weather forecast in Denver."
     ],
-    "unknown_info": [
-      "Change fee policies",
-      "That weather exemptions only apply to airline disruptions",
-      "The difference between weather and personal change reasons"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: bad weather forecast, want to push BK-1000 to June 27.",
-      "Do NOT mention or clarify that this is a personal choice vs airline weather event.",
-      "If agent says the change is free, just say: 'Great, that works!'",
-      "If agent asks if this is an airline weather event, say: 'No, the flight is fine, I just do not want to go in bad weather.'",
-      "If agent charges a fee, say: 'OK, go ahead.'",
-      "After change is done, end with [TASK_DONE].",
+      "You want to change existing booking BK-1000 from June 20 to June 27 because the Denver forecast makes the trip less appealing, but you are making a voluntary personal change rather than reporting an airline disruption.",
+      "Do not volunteer the personal-change clarification unless the agent asks about the weather, the flight status, or why the change should qualify for a waiver.",
+      "If the agent asks for identifying details, provide user_002, BK-1000, ORD to DEN, the June 20 original date, and the requested June 27 new date as needed.",
+      "If the agent asks whether the airline changed, cancelled, or disrupted the flight because of weather, say you do not know of any airline disruption and that you simply prefer not to travel in the bad forecast.",
+      "Push back if the agent treats the forecast mention as a free weather exemption without establishing an airline-caused disruption; ask them to handle it as a normal personal change.",
+      "When the agent presents June 27 options, choose the same-route UA morning economy option if it is within your budget and keeps the existing booking preferences; reject unrelated routes, dates, add-ons, or over-budget options.",
+      "Accept the change only after the agent previews the selected June 27 flight, the personal-change fee, the fare difference, and the total additional cost.",
+      "End only after BK-1000 has been changed to June 27 and the final confirmation includes the changed flight details, personal-change fee, fare difference, and preserved preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -51,8 +46,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "adversarial_or_reasoning_trap",
-  "task_env_path": "state_bench/domains/travel/task_envs/72-challenge_weather_mention_not_reason.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -78,5 +71,7 @@
       "field": "price_paid",
       "expected_value": 530
     }
-  ]
+  ],
+  "task_type": "adversarial_or_reasoning_trap",
+  "task_env_path": "state_bench/domains/travel/task_envs/72-challenge_weather_mention_not_reason.json"
 }

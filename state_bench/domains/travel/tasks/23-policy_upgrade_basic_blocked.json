@@ -4,25 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I have two upcoming flights and I'd like to upgrade both to business class. My bookings are BK-PR08a and BK-PR08b.",
   "user_simulator": {
-    "personality": "Friendly and hopeful. Accepts bad news gracefully.",
     "known_info": [
-      "Your user ID: user_005",
-      "Booking BK-PR08a is basic economy (BOS→MIA)",
-      "Booking BK-PR08b is economy (MIA→BOS)",
-      "Budget is $700 maximum"
+      "Booking BK-PR08a: wants to upgrade to business class.",
+      "Booking BK-PR08b: wants to upgrade to business class."
     ],
-    "unknown_info": [
-      "Basic economy fares cannot be upgraded",
-      "Economy can be upgraded to business at 2.5x fare",
-      "Upgrade cost for BK-PR08b"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Ask about upgrading both bookings to business class.",
-      "When the agent says BK-PR08a cannot be upgraded, ask why.",
-      "When the agent explains basic economy restrictions, ask about BK-PR08b.",
-      "When the agent quotes the upgrade cost for BK-PR08b, ask if it's within your $700 budget.",
-      "If the cost is within budget, ask the agent to proceed with upgrading BK-PR08b only.",
-      "When the upgrade is confirmed for BK-PR08b, end with [TASK_DONE]."
+      "Ask to upgrade both BK-PR08a and BK-PR08b to business class, and keep the scope limited to those two bookings.",
+      "If the agent asks for booking details, provide BK-PR08a and BK-PR08b; do not add route, fare-class, or price details unless the agent looks them up or asks you to confirm them.",
+      "If the agent gives one blended answer for both bookings, ask them to compare each booking separately because you want to know whether both are eligible.",
+      "When the agent says BK-PR08a cannot be upgraded, ask why if the basic-economy restriction has not already been explained; accept the no-upgrade outcome only after that reason is clear.",
+      "For BK-PR08b, ask for the business-class upgrade cost and whether it fits within your $700 budget before authorizing any change.",
+      "Push back if the agent says BK-PR08a can be upgraded, treats BK-PR08b as blocked without explanation, quotes a BK-PR08b cost above your budget, or proposes changing both bookings anyway.",
+      "Approve upgrading BK-PR08b only after the agent clearly states that BK-PR08a remains blocked, BK-PR08b is eligible, the fare difference is $420, and the cost fits within your $700 budget.",
+      "End only after the agent confirms BK-PR08b has been upgraded to business and BK-PR08a was left unchanged; then reply with [TASK_DONE]."
     ],
     "user_sim_context": "You want to upgrade two bookings and are treating them as if the same upgrade logic should apply to both. Budget matters, but your bigger question is whether both itineraries are even eligible. You want the agent to compare them clearly instead of giving one blended answer."
   },
@@ -47,8 +42,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "policy_info_or_restraint",
-  "task_env_path": "state_bench/domains/travel/task_envs/23-policy_upgrade_basic_blocked.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -68,5 +61,7 @@
       "field": "price_paid",
       "expected_value": 700
     }
-  ]
+  ],
+  "task_type": "policy_info_or_restraint",
+  "task_env_path": "state_bench/domains/travel/task_envs/23-policy_upgrade_basic_blocked.json"
 }

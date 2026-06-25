@@ -4,36 +4,25 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to plan a weekend trip to Denver. Flying from Chicago on June 20, coming back June 22. I need flights both ways, a hotel, and a rental car. Total budget is $600.",
   "user_simulator": {
-    "personality": "Budget-conscious and practical. Wants the cheapest viable options. Won't book until everything is selected.",
     "known_info": [
-      "Your user ID: user_004",
-      "Round-trip ORD ↔ DEN (Denver)",
-      "Dates: June 20-22 (2 nights)",
-      "Total budget: $600 for outbound flight + return flight + hotel + car",
-      "Prefers economy class",
-      "Standard hotel room is fine",
-      "Economy car is fine"
+      "Round-trip ORD ↔ DEN for Denver, June 20-22 (2 nights)",
+      "Total budget: $600 for outbound flight + return flight + hotel + car.",
+      "Prefers economy class.",
+      "Standard hotel room is fine.",
+      "Economy car is fine."
     ],
-    "unknown_info": [
-      "Available flight prices for outbound and return",
-      "Hotel and car rental rates in Denver",
-      "Whether the total will fit under $600"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Start by asking to plan a round-trip to Denver: outbound flight, return flight, hotel, and car.",
-      "Mention the $600 total budget upfront.",
-      "Focus first on selecting the outbound flight, return flight, hotel, and car within budget. Final flight booking preferences can be confirmed at booking time if needed.",
-      "When outbound flight options are shown, pick the cheapest nonstop economy option.",
-      "When return flight options are shown, pick the cheapest nonstop economy option.",
-      "When hotel options are shown, say 'The cheapest standard room works.'",
-      "When car options are shown, say 'Economy is fine.'",
-      "If the agent asks about optional rental-car insurance or car coverage, say not to add extra rental-car insurance; the base economy car is fine for this task.",
-      "Do not drop the rental car just to add optional car insurance; this task is targeting the base economy car rental that fits the $600 package.",
-      "IF the agent tries to book anything before all 4 components are selected, say 'Hold on — let's pick everything first and review the total before booking anything.'",
-      "After all 4 components are selected, ask 'What's the total? I need to make sure it's under $600.'",
-      "IF the total is under $600, say 'Perfect, go ahead and book everything.'",
-      "IF the total exceeds $600, say 'That's over my budget. Can we find cheaper options?'",
-      "When both flights are booked and hotel/car selections confirmed, end with [TASK_DONE].",
+      "Plan only the Denver weekend package that includes an outbound flight, return flight, hotel, and base economy rental car within the strict $600 total budget.",
+      "Do not volunteer extra preferences beyond economy flights, a standard hotel room, and an economy car unless the agent asks while preparing the booking.",
+      "When the agent presents outbound or return flight options, choose the cheapest nonstop economy option for each direction and reject business, extra-stop, or higher-priced choices that would threaten the total budget.",
+      "When the agent presents hotel options, choose the cheapest standard room and push back on suites, upgraded rooms, or hotel choices that would put the full trip over $600.",
+      "When the agent presents rental-car options, choose the base economy car and decline optional car insurance or car upgrades if asked.",
+      "If the agent tries to book any individual component before all four components are selected and priced together, ask to review the complete package and combined total before booking anything.",
+      "Accept the package only after the agent has selected all four components, shown the combined total, and made clear that the full trip stays under $600.",
+      "If the proposed package exceeds $600 or omits one of the four required components, push back and ask for cheaper complete-package options instead of approving a partial or over-budget plan.",
+      "For the flight bookings, answer booking-preference questions using the profile preferences EXCEPT travel insurance: economy cabin, window seat, standard meal, no WiFi, no extra legroom, and no flight insurance for this trip. If asked about flight insurance, decline it for these bookings.",
+      "End with [TASK_DONE] only after both flights, the standard hotel room, and the base economy car rental are confirmed with the expected under-budget package details.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -47,7 +36,7 @@
     ],
     "user_sim_context": "You are planning a Denver weekend from scratch and need flights, a hotel, and a base economy rental car to fit one total budget. You are not optimizing one component in isolation; you care about whether the whole package works. Optional rental-car insurance is not required for this task; if asked, decline extra car coverage and keep the base economy car. The agent should help you make tradeoffs across the trip, not just sell you the nicest flight."
   },
-  "task_summary": "**Task:** User needs an outbound flight, return flight, hotel, and base economy car rental for a Denver weekend, all under a strict $600 total budget. Correct resolution: The outbound flight, return flight, hotel, and base economy car are selected together before starting bookings, rather than prematurely booking individual components. Optional rental-car insurance is not part of the expected package.\n\n**Challenge:** The agent compares all four components before booking anything, keeps a coherent running total, and explicitly explains that only the cheapest base package stays under budget.",
+  "task_summary": "**Task:** User needs an outbound flight, return flight, hotel, and base economy car rental for a Denver weekend, all under a strict $600 total budget. Correct resolution: The outbound flight, return flight, hotel, and base economy car are selected together before starting bookings, rather than prematurely booking individual components. Optional add-ons (flight insurance and rental-car insurance) are not part of the expected package.\n\n**Challenge:** The agent compares all four components before booking anything, keeps a coherent running total, and explicitly explains that only the cheapest base package stays under budget.",
   "task_requirements": [
     {
       "id": "state_select_everything_before_booking",
@@ -62,8 +51,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "multi_booking_trip_coordination",
-  "task_env_path": "state_bench/domains/travel/task_envs/34-cross_plan_trip_budget.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -79,12 +66,12 @@
         "meal_preference": "standard",
         "add_wifi": false,
         "add_extra_legroom": false,
-        "add_insurance": true,
+        "add_insurance": false,
         "paid_checked_bags": 0
       },
       "expected_fields": {
         "add_extra_legroom": false,
-        "add_insurance": true,
+        "add_insurance": false,
         "add_wifi": false,
         "booked_at": "2026-06-15T10:00:00",
         "booking_id": "BK-0001",
@@ -120,12 +107,12 @@
         "meal_preference": "standard",
         "add_wifi": false,
         "add_extra_legroom": false,
-        "add_insurance": true,
+        "add_insurance": false,
         "paid_checked_bags": 0
       },
       "expected_fields": {
         "add_extra_legroom": false,
-        "add_insurance": true,
+        "add_insurance": false,
         "add_wifi": false,
         "booked_at": "2026-06-15T10:00:00",
         "booking_id": "BK-0002",
@@ -203,5 +190,7 @@
         "user_id": "user_004"
       }
     }
-  ]
+  ],
+  "task_type": "multi_booking_trip_coordination",
+  "task_env_path": "state_bench/domains/travel/task_envs/34-cross_plan_trip_budget.json"
 }

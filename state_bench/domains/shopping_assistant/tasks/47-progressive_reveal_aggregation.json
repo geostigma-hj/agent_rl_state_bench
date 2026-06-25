@@ -4,7 +4,6 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Can you finalize my cart? I'm ready to check out.",
   "user_simulator": {
-    "personality": "Absent-minded — remembers things gradually, one per turn.",
     "user_sim_context": "Your cart has a ProBook Laptop. You want to finalize. Across 3 follow-up turns you'll reveal (one at a time, not volunteered upfront): (1) you have promo code SAVE10, (2) the laptop is a gift for your dad — please wrap it, (3) you're a Platinum-tier loyalty member and want to know about points. You expect the agent to re-aggregate the cart after each reveal and give you an accurate final breakdown that cites the promo discount, wrap fee, AND points earned at the correct Platinum tier rate (3 pts/$ per policy).",
     "known_info": [
       "You have a ProBook in your cart.",
@@ -12,24 +11,18 @@
       "It's a gift for your dad.",
       "You're a Platinum-tier customer (52k existing points)."
     ],
-    "unknown_info": [
-      "Specific prices / math.",
-      "Whether Platinum points are 2 or 3 pts/$ (you trust agent to know)."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Opening: 'can you finalize my cart? I'm ready to check out.'",
-      "Turn 2: after agent confirms cart, reveal promo: 'oh wait — I have a promo code, SAVE10. Can you apply it?'. Do NOT reveal gift or Platinum yet.",
-      "Turn 3: after agent applies promo and gives updated total, reveal gift: 'and actually — it's a gift for my dad. Can you wrap it?'. Do NOT reveal Platinum yet.",
-      "If agent wraps unilaterally without confirming (e.g. adds wrap without asking), that's on the gift context cue so it's fine. If agent ASKS confirmation first, also fine.",
-      "Turn 4: after agent confirms wrap added, reveal loyalty: 'oh, and I'm Platinum — do I earn points on this order?'.",
-      "Turn 5: agent should now give a final breakdown citing: subtotal, SAVE10 discount (-$99), wrap fee (+$5), total ($905), and Platinum points earned (3 pts/$ × $905 ≈ 2700-2715 pts, or comparable formula explicitly stated).",
-      "If the final breakdown includes ALL FOUR pieces (promo discount with amount, wrap fee with amount, final total, Platinum points with specific number), reply: 'perfect, thanks' and next turn [TASK_DONE].",
-      "If the final breakdown OMITS one of the four pieces (e.g. doesn't mention promo was applied, or doesn't mention points), accept and end. Agent failed — missed aggregating the full picture.",
-      "If agent uses WRONG Platinum rate (e.g. says 1 or 2 pts/$), accept and end. Failed — tier rate error.",
-      "If agent applies Platinum rate to PRE-discount amount ($999) instead of post-discount+wrap ($905), accept and end. Failed — applied rate to wrong base.",
-      "If agent uses WRONG discount amount (e.g. says discount is $100 or $99.90), be lenient if within $1 of $99 (integer division of 999*0.10). If off by $10+, push back once: 'that math doesn't look right'.",
-      "Do NOT volunteer the tier rate, the discount math, or the wrap fee amount. Do NOT reveal more than one signal per turn.",
-      "Keep replies short.",
+      "Your goal is to finalize the existing ProBook cart while revealing only one new signal at a time: first the SAVE10 promo, then gift wrap for your dad, then your Platinum points question.",
+      "After the agent identifies or confirms the current cart and is ready to finalize it, disclose the SAVE10 promo code and ask the agent to apply it; do not mention gift wrap or Platinum status yet.",
+      "After the agent confirms SAVE10 has been applied and gives an updated total, disclose that the laptop is a gift for your dad and ask for gift wrap; do not mention Platinum status yet.",
+      "If the agent asks for confirmation before adding gift wrap, agree to the gift wrap; if the agent adds gift wrap based on your gift request, continue without objecting.",
+      "After the agent confirms gift wrap has been added, disclose that you are Platinum and ask how many points this order will earn.",
+      "Do not volunteer the tier rate, discount math, gift-wrap fee amount, or more than one pending signal in the same reply.",
+      "Accept a final breakdown only when it includes specific numbers for the SAVE10 discount, gift-wrap fee, final total, and Platinum points earned on the post-discount-plus-wrap total.",
+      "If the final breakdown omits one of those pieces, uses a non-Platinum points rate, or calculates points from the pre-discount subtotal, do not provide the corrected math; acknowledge the answer briefly and finish.",
+      "If the discount amount is within about $1 of $99, accept it; if it is off by about $10 or more, push back once that the math does not look right.",
+      "On the successful path, end with [TASK_DONE] only after the promo and gift-wrap actions are complete and the final breakdown correctly answers the Platinum points question.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."
@@ -40,7 +33,7 @@
     {
       "id": "applied_save10",
       "kind": "must",
-      "requirement": "Agent called apply_promo for SAVE10 after the customer revealed the code at turn 2. The applied_promo_codes list must contain SAVE10 at the end.",
+      "requirement": "Agent called apply_promo for SAVE10 (whether proactively on the opening turn or after the customer disclosed the code) and the applied_promo_codes list contains SAVE10 at the end. The discount need not be applied at any particular turn; what matters is that SAVE10 was applied via apply_promo and remains applied.",
       "evidence": "tool_calls"
     },
     {
@@ -58,7 +51,7 @@
     {
       "id": "final_breakdown_complete",
       "kind": "must",
-      "requirement": "Agent's final summary (after all 3 reveals) explicitly includes ALL four items with specific numbers: (1) promo discount amount (~$99), (2) gift wrap fee ($5), (3) final total ($905), (4) Platinum points earned (~2715). Missing any of the four fails.",
+      "requirement": "Across the post-reveal turns (after the SAVE10, gift, and Platinum reveals), the agent stated each of the four numbers at least once: (1) the SAVE10 discount amount (~$99), (2) the gift wrap fee ($5), (3) the final total ($905), and (4) the Platinum points earned (~2715). They need not all appear in a single consolidated recap message; it is sufficient that each was communicated to the customer at some point after the corresponding reveal. Failing to ever state any one of the four fails.",
       "evidence": "conversation"
     },
     {

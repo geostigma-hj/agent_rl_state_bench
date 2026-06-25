@@ -4,23 +4,23 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I want to move my flight BK-1000 to June 28. I see cheaper flights available. Should I change my booking or cancel and rebook? Which is cheaper? My user ID is user_004.",
   "user_simulator": {
-    "personality": "Analytical. Wants exact comparison before deciding.",
     "known_info": [
-      "Your user ID: user_004",
-      "Booking: BK-1000 (ORD to SFO, $500, June 19)",
-      "Wants June 28",
-      "Wants cheapest option"
+      "Booking BK-1000: ORD to SFO on June 19.",
+      "Wants to move to June 28.",
+      "Wants the cheapest option."
     ],
-    "unknown_info": [
-      "Exact fees for each path",
-      "Which is cheaper"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: change or cancel+rebook BK-1000? Which is cheaper?",
-      "If agent recommends change without comparing, ask: 'What about cancel and rebook?'",
-      "If agent recommends cancel+rebook with numbers, say: 'Go ahead and rebook the Delta afternoon flight DL100 on June 28.'",
-      "If agent does the change without comparing, do NOT correct. End with [TASK_DONE].",
-      "After action done, end with [TASK_DONE].",
+      "Ask the agent to compare changing BK-1000 to June 28 against canceling and rebooking, and do not commit until both overall costs are explained.",
+      "If the agent asks for identifying details, provide user ID user_004, booking BK-1000, the ORD to SFO route, the June 19 original date, and that you want the cheapest June 28 option.",
+      "Do not volunteer fees, refunds, fare differences, replacement prices, or policy math; ask the agent to look up and compare those details.",
+      "If the agent recommends changing without a cancel-and-rebook comparison, ask for the cancellation fee, refund, replacement fare, and total cost for that path before deciding.",
+      "If the agent presents incomplete, over-budget, or contradictory comparison math, push back once and ask for the full direct-change total and cancel-and-rebook total side by side.",
+      "When the agent explains that direct change totals $600 and canceling plus rebooking totals $525, choose cancel-and-rebook because it is cheaper.",
+      "Before approving any cancellation or replacement booking, require a preview naming the cancellation fee, refund amount, replacement flight DL100 on June 28, rebook price, total current cost, and expected profile booking preferences.",
+      "Reject direct changes, unrelated add-ons, or replacement options above your $600 budget after the comparison is clear.",
+      "Accept only the cancel-and-rebook path for BK-1000 into the Delta afternoon June 28 replacement flight DL100 once the preview is complete and within budget.",
+      "End only after the original booking is confirmed cancelled and the new replacement booking is confirmed with the expected cost and booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -61,8 +61,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/88-challenge_change_vs_cancel_cheaper_flight.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -123,5 +121,7 @@
         "user_id": "user_004"
       }
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/88-challenge_change_vs_cancel_cheaper_flight.json"
 }

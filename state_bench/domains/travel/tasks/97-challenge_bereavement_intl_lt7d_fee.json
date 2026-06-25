@@ -4,19 +4,18 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Family bereavement. Change BK-1000 to June 25 please. My user ID is user_005.",
   "user_simulator": {
-    "personality": "Brief.",
     "known_info": [
-      "Your user ID: user_005",
-      "Booking: BK-1000 (JFK to MEX, June 18)",
-      "Bereavement"
+      "Booking BK-1000: JFK to MEX on June 18; change reason is bereavement."
     ],
-    "unknown_info": [
-      "Fee"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: bereavement, change BK-1000 to June 25.",
-      "Accept fee and end with [TASK_DONE].",
-      "For this task, your budget applies to the additional out-of-pocket change cost only. If the agent explains the $30 fare difference plus $50 bereavement change fee, accept that $80 incremental cost as within your $700 budget and do not ask to revert on budget grounds.",
+      "You want to change BK-1000 from June 18 to June 25 because of a family bereavement; stay focused on this existing booking and do not ask for unrelated trip changes.",
+      "If the agent asks for booking details, provide the booking ID, JFK to MEX route, June 18 current date, June 25 target date, and bereavement reason as needed; do not volunteer policy math before the agent explains it.",
+      "Push back if the agent treats the route as domestic, ignores that the original departure is within 7 days, quotes a $150 or $37 bereavement change fee, or applies the bereavement discount in the wrong direction.",
+      "Accept the change only after the agent explains the international within-7-days $200 base fee, the 75% bereavement discount resulting in a $50 change fee, the $30 fare difference, and the $80 incremental out-of-pocket cost.",
+      "For this task, your budget applies only to the incremental out-of-pocket change cost, so accept the $80 incremental cost as within your $700 budget and do not object based on the final fare already paid into the booking.",
+      "For this flight change, keep the existing booking preferences; if the agent asks about booking-stage preferences, say to keep what is already on the booking unless a change is required to complete the date change.",
+      "End only after the agent confirms the booking has been changed to June 25 with a $50 change fee, $30 fare difference, and preserved existing preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -51,8 +50,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/97-challenge_bereavement_intl_lt7d_fee.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -78,5 +75,7 @@
       "field": "price_paid",
       "expected_value": 780
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/97-challenge_bereavement_intl_lt7d_fee.json"
 }

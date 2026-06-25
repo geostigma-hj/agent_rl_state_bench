@@ -46,7 +46,7 @@ def build_task_requirements_prompt(
     judge_prompt: str = "judge_task_requirements.md",
 ) -> str:
     """Build the prompt for the non-state task requirements judge."""
-    conversation_text = _format_conversation(conversation, tool_calls)
+    conversation_text = _format_full_trajectory_for_judge(conversation, tool_calls)
     requirements = task.task_requirements or []
     requirements_text = json.dumps(requirements, indent=2, ensure_ascii=False)
 
@@ -60,6 +60,19 @@ def build_task_requirements_prompt(
     )
 
 
+def _format_full_trajectory_for_judge(conversation: list[dict[str, Any]], tool_calls: list[dict[str, Any]]) -> str:
+    """Render the complete trajectory evidence for LLM judges."""
+    return json.dumps(
+        {
+            "conversation": conversation,
+            "tool_calls": tool_calls,
+        },
+        indent=2,
+        ensure_ascii=False,
+        default=str,
+    )
+
+
 def build_ux_prompt(
     task: TaskDefinition,
     conversation: list[dict[str, Any]],
@@ -68,7 +81,7 @@ def build_ux_prompt(
     judge_prompt: str = "judge_ux_quality_user.md",
 ) -> str:
     """Build the user-message prompt for the UX quality judge."""
-    conversation_text = _format_conversation(conversation, tool_calls)
+    conversation_text = _format_full_trajectory_for_judge(conversation, tool_calls)
     template = Template((prompts_dir / judge_prompt).read_text())
     return template.substitute(
         conversation=conversation_text,
@@ -97,6 +110,7 @@ def evaluate_state_requirements(task: TaskDefinition, state_diff: StateDiff) -> 
     expected_assertions, unresolved_requirements = _normalize_state_requirements(requirements, final_snapshot)
     observed_assertions = _normalize_snapshot_assertions(final_snapshot, requirements)
     strict_expected_assertions = _normalize_strict_state_requirements(requirements)
+    strict_expected_assertions.update(_normalize_resolved_strict_state_requirements(requirements, final_snapshot))
     strict_observed_assertions = _normalize_strict_state_diff(state_diff, _strict_created_record_keys(requirements))
     strict_observed_assertions = _ignore_semantically_covered_cart_item_ids(
         strict_observed_assertions,
@@ -159,7 +173,14 @@ def _normalize_state_requirements(
             if not record_key or not field:
                 unresolved.append({"requirement": deepcopy(req), "error": "record_key and field are required together"})
                 continue
-            assertions.add((entity_type, record_key, field, _canonicalize_value(req.get("expected_value"))))
+            expected_value = req.get("expected_value")
+            if "expected_value_from_match" in req:
+                resolved_value, error = _resolve_expected_value_from_match(req, final_snapshot)
+                if error is not None:
+                    unresolved.append({"requirement": deepcopy(req), **error})
+                    continue
+                expected_value = resolved_value
+            assertions.add((entity_type, record_key, field, _canonicalize_value(expected_value)))
             continue
 
         if match_fields is not None or expected_fields is not None:
@@ -195,27 +216,104 @@ def _normalize_state_requirements(
     return assertions, unresolved
 
 
+def _resolve_expected_value_from_match(
+    requirement: dict[str, Any],
+    final_snapshot: dict[str, dict[str, dict[str, Any]]],
+) -> tuple[str | None, dict[str, Any] | None]:
+    reference = requirement.get("expected_value_from_match")
+    if not isinstance(reference, dict):
+        return None, {"error": "expected_value_from_match must be an object"}
+
+    entity_type = reference.get("entity_type")
+    match_fields = reference.get("match_fields")
+    if not isinstance(entity_type, str) or not entity_type:
+        return None, {"error": "expected_value_from_match.entity_type must be a non-empty string"}
+    if not isinstance(match_fields, dict) or not match_fields:
+        return None, {"error": "expected_value_from_match.match_fields must be a non-empty object"}
+
+    matches = _find_matching_records(entity_type, match_fields, final_snapshot)
+    if len(matches) != 1:
+        return None, {
+            "error": "expected_value_from_match resolved to zero or multiple records",
+            "match_count": len(matches),
+            "matched_record_keys": sorted(matches),
+        }
+    return matches[0], None
+
+
+# Canonical primary-key field for each entity type, mirroring exactly how each
+# domain's environment keys its records (e.g. customer_support/environment.py:
+# ``self.order_items = {i.item_id: i for i in env_data.order_items}``) and how the
+# generation/replay side files state requirements (replay.py + domains/README.md
+# "the entity's primary-key field"). The scorer MUST key records by the same field
+# the producers used, otherwise a record gets filed under the wrong key (e.g. an
+# order_items record under its parent ``order_id`` instead of its own ``item_id``)
+# and any state_requirement referencing the real primary key becomes unobservable.
+# Source of truth: the ``{<pk>: rec for rec in env_data.<entity>}`` lines in each
+# domain's environment.py. Keep this in sync if a new entity/key is added.
+ENTITY_PRIMARY_KEY: dict[str, str] = {
+    # travel
+    "flights": "flight_id",
+    "bookings": "booking_id",
+    "users": "user_id",
+    "hotel_inventory": "hotel_id",
+    "hotels": "reservation_id",
+    "car_inventory": "car_id",
+    "car_rentals": "rental_id",
+    # customer_support
+    "orders": "order_id",
+    "order_items": "item_id",
+    "warranties": "warranty_id",
+    # shopping_assistant
+    "carts": "cart_id",
+    "cart_items": "cart_item_id",
+    "promotions": "promo_code",
+    # shared
+    "products": "product_id",
+    "customers": "customer_id",
+}
+
+# Fallback field priority for entity types not in ENTITY_PRIMARY_KEY (or records
+# missing their canonical key). Preserves the historical heuristic so unmapped
+# entities behave exactly as before this fix.
+_FALLBACK_IDENTITY_FIELDS = (
+    "cart_item_id",
+    "cart_id",
+    "customer_id",
+    "order_id",
+    "item_id",
+    "booking_id",
+    "reservation_id",
+    "rental_id",
+    "id",
+    "product_id",
+)
+
+
 def _lookup_snapshot_record(
     final_snapshot: dict[str, dict[str, dict[str, Any]]],
     entity_type: str,
     record_key: str,
 ) -> dict[str, Any] | None:
-    return _as_record_mapping(final_snapshot.get(entity_type, {})).get(str(record_key))
+    return _as_record_mapping(final_snapshot.get(entity_type, {}), entity_type).get(str(record_key))
 
 
-def _record_identity(record: dict[str, Any], fallback_index: int | None = None) -> str | None:
-    for key in (
-        "cart_item_id",
-        "cart_id",
-        "customer_id",
-        "order_id",
-        "item_id",
-        "booking_id",
-        "reservation_id",
-        "rental_id",
-        "id",
-        "product_id",
-    ):
+def _record_identity(
+    record: dict[str, Any],
+    entity_type: str | None = None,
+    fallback_index: int | None = None,
+) -> str | None:
+    # Prefer the entity's canonical primary key so the scorer keys records the same
+    # way the environment and the ground-truth generator do.
+    if entity_type is not None:
+        primary_key = ENTITY_PRIMARY_KEY.get(entity_type)
+        if primary_key is not None:
+            value = record.get(primary_key)
+            if value is not None:
+                return str(value)
+    # Fallback: historical global field-priority heuristic (unmapped entity types,
+    # or records lacking their canonical primary key).
+    for key in _FALLBACK_IDENTITY_FIELDS:
         value = record.get(key)
         if value is not None:
             return str(value)
@@ -224,7 +322,7 @@ def _record_identity(record: dict[str, Any], fallback_index: int | None = None) 
     return None
 
 
-def _as_record_mapping(records: Any) -> dict[str, dict[str, Any]]:
+def _as_record_mapping(records: Any, entity_type: str | None = None) -> dict[str, dict[str, Any]]:
     if isinstance(records, dict):
         return {str(key): value for key, value in records.items() if isinstance(value, dict)}
     if isinstance(records, list):
@@ -232,7 +330,7 @@ def _as_record_mapping(records: Any) -> dict[str, dict[str, Any]]:
         for index, record in enumerate(records):
             if not isinstance(record, dict):
                 continue
-            record_key = _record_identity(record, fallback_index=index)
+            record_key = _record_identity(record, entity_type=entity_type, fallback_index=index)
             if record_key is None:
                 continue
             mapping[record_key] = record
@@ -244,7 +342,7 @@ def _normalize_snapshot_structure(snapshot: dict[str, Any]) -> dict[str, Any]:
     normalized: dict[str, Any] = {}
     for entity_type, records in snapshot.items():
         if isinstance(records, (dict, list)):
-            normalized[entity_type] = _as_record_mapping(records)
+            normalized[entity_type] = _as_record_mapping(records, entity_type)
         else:
             normalized[entity_type] = records
     return normalized
@@ -256,7 +354,7 @@ def _find_matching_records(
     final_snapshot: dict[str, dict[str, dict[str, Any]]],
 ) -> list[str]:
     matches: list[str] = []
-    items = _as_record_mapping(final_snapshot.get(entity_type, {})).items()
+    items = _as_record_mapping(final_snapshot.get(entity_type, {}), entity_type).items()
     for record_key, record in items:
         if all(record.get(field) == expected_value for field, expected_value in match_fields.items()):
             matches.append(record_key)
@@ -363,7 +461,29 @@ def _normalize_strict_state_requirements(requirements: list[dict[str, Any]]) -> 
         record_key = req.get("record_key")
         field = req.get("field")
         if entity_type and record_key is not None and field is not None:
+            if "expected_value_from_match" in req:
+                # Relational assertions are validated via expected-vs-observed snapshot
+                # matching. They cannot be represented as a compile-time strict diff
+                # value because the expected record key is resolved from final state.
+                continue
             assertions.add((entity_type, record_key, field, _canonicalize_value(req.get("expected_value"))))
+    return assertions
+
+
+def _normalize_resolved_strict_state_requirements(
+    requirements: list[dict[str, Any]],
+    final_snapshot: dict[str, dict[str, dict[str, Any]]],
+) -> set[tuple[str, str, str, str]]:
+    assertions: set[tuple[str, str, str, str]] = set()
+    for req in requirements:
+        entity_type = req.get("entity_type")
+        record_key = req.get("record_key")
+        field = req.get("field")
+        if not (entity_type and record_key is not None and field is not None and "expected_value_from_match" in req):
+            continue
+        expected_value, error = _resolve_expected_value_from_match(req, final_snapshot)
+        if error is None:
+            assertions.add((entity_type, record_key, field, _canonicalize_value(expected_value)))
     return assertions
 
 
@@ -531,6 +651,70 @@ def compute_efficiency(
     )
 
 
+def count_tool_errors_and_repeated_calls(tool_calls: list[dict[str, Any]]) -> tuple[int, int]:
+    """Count tool errors and repeated identical tool calls for UX post-processing."""
+    errors = sum(1 for tc in tool_calls if "error" in tc.get("result", {}))
+    call_signatures = [(tc.get("name", ""), json.dumps(tc.get("arguments", {}), sort_keys=True)) for tc in tool_calls]
+    signature_counts = Counter(call_signatures)
+    repeated = sum(count - 1 for count in signature_counts.values() if count > 1)
+    return errors, repeated
+
+
+def compute_ux_resource_penalty(
+    conversation: list[dict[str, Any]],
+    tool_calls: list[dict[str, Any]],
+    assistant_turn_threshold: int = 8,
+    tool_call_threshold: int = 12,
+    penalty_scheme: str = "fixed_global_v1",
+) -> dict[str, float | int | str]:
+    """Compute v27's deterministic resource-use UX penalty."""
+    assistant_turns = sum(1 for msg in conversation if msg.get("role") == "assistant")
+    tool_error_count, repeated_identical_tool_call_count = count_tool_errors_and_repeated_calls(tool_calls)
+    excess_assistant_turn_count = max(0, assistant_turns - assistant_turn_threshold)
+    excess_tool_call_count = max(0, len(tool_calls) - tool_call_threshold)
+    penalty = min(
+        0.4,
+        0.05 * tool_error_count
+        + 0.05 * repeated_identical_tool_call_count
+        + 0.03 * excess_assistant_turn_count
+        + 0.01 * excess_tool_call_count,
+    )
+    return {
+        "assistant_turn_count": assistant_turns,
+        "tool_call_count": len(tool_calls),
+        "tool_error_count": tool_error_count,
+        "repeated_identical_tool_call_count": repeated_identical_tool_call_count,
+        "assistant_turn_threshold": assistant_turn_threshold,
+        "tool_call_threshold": tool_call_threshold,
+        "excess_assistant_turn_count": excess_assistant_turn_count,
+        "excess_tool_call_count": excess_tool_call_count,
+        "resource_penalty": round(penalty, 2),
+        "resource_penalty_scheme": penalty_scheme,
+    }
+
+
+def parse_ux_quality_response(response: dict[str, Any]) -> UXQualityResult:
+    """Parse the supported three-dimension UX judge schema."""
+    missing = [key for key in ("user_control", "user_effort", "response_density") if key not in response]
+    if missing:
+        raise ValueError(f"UX judge response is missing required field(s): {', '.join(missing)}")
+    user_control = int(response["user_control"])
+    user_effort = int(response["user_effort"])
+    response_density = int(response["response_density"])
+    score = response.get("ux_score")
+    return UXQualityResult(
+        user_control=user_control,
+        friction=user_effort,
+        situational_awareness=3,
+        communication_quality=response_density,
+        intent_alignment=3,
+        reasoning=str(response.get("reasoning", "")),
+        score=float(score) if isinstance(score, int | float) else None,
+        user_effort=user_effort,
+        response_density=response_density,
+    )
+
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -556,10 +740,10 @@ def _format_conversation(conversation: list[dict[str, Any]], tool_calls: list[di
                 result_summary = ""
                 if tc_index < len(tool_calls):
                     result = tool_calls[tc_index].get("result", {})
-                    if "error" in result:
+                    if isinstance(result, dict) and "error" in result:
                         result_summary = f" → ERROR: {result['error']}"
                     else:
-                        result_summary = " → OK"
+                        result_summary = f" → OK: {_abbreviate_result(result)}"
                     tc_index += 1
                 tc_summaries.append(f"  [{name}({_abbreviate_args(args)}){result_summary}]")
             tool_text = "\n".join(tc_summaries)
@@ -570,6 +754,17 @@ def _format_conversation(conversation: list[dict[str, Any]], tool_calls: list[di
         elif content:
             label = "AGENT" if role == "ASSISTANT" else "USER"
             lines.append(f"{label}: {content}")
+
+    # When the agent invoked no tools at all, the rendered transcript contains no
+    # tool-trace lines — which is indistinguishable from a withheld tool log. For
+    # `evidence: tool_calls` requirements (especially `must_not`s like "did not add
+    # to cart"), the judge would otherwise read this absence as "insufficient
+    # evidence" and fail an agent that correctly did nothing. Emit an explicit marker
+    # so the empty trace is legible as affirmative evidence that no tool was called.
+    # Only fires when the trace is genuinely empty; transcripts with tool calls are
+    # unaffected.
+    if not tool_calls and not any(msg.get("tool_calls") for msg in conversation):
+        lines.append("(no tool calls were made during this conversation)")
 
     return "\n\n".join(lines)
 
@@ -613,6 +808,22 @@ def _abbreviate_args(args: dict) -> str:
             sv = sv[:27] + "..."
         parts.append(f"{k}={sv}")
     return ", ".join(parts)
+
+
+def _abbreviate_result(result: Any) -> str:
+    """Render a full tool-call success payload for judge prompts.
+
+    The task-requirements judge must verify exact values returned by read tools
+    (prices, quantities, totals, fees, names). ``_format_conversation`` previously
+    collapsed every success to ``→ OK``, which hid those values and made any
+    ``evidence: tool_calls`` value check structurally unpassable. Include the full
+    JSON rendering so the judge can also distinguish preview results from confirmed
+    state-changing results.
+    """
+    try:
+        return json.dumps(result, default=str, ensure_ascii=False, sort_keys=True)
+    except (TypeError, ValueError):
+        return str(result)
 
 
 class TaskRequirementsJudge:
@@ -683,14 +894,10 @@ class UXQualityJudge:
         system_prompt: str,
         reasoning_effort: str | None = None,
         judge_prompt: str = "judge_ux_quality_user.md",
-        system_prompt_file: str | None = "judge_ux_quality.md",
     ):
         self.client = client
         self.prompts_dir = prompts_dir
-        if system_prompt_file:
-            self.system_prompt = (prompts_dir / system_prompt_file).read_text()
-        else:
-            self.system_prompt = system_prompt
+        self.system_prompt = (prompts_dir / "judge_ux_quality.md").read_text()
         self.reasoning_effort = reasoning_effort
         self.judge_prompt = judge_prompt
 
@@ -714,16 +921,7 @@ class UXQualityJudge:
                 reasoning_effort=self.reasoning_effort,
                 max_tokens=16384,
             )
-            score = response.get("ux_score")
-            return UXQualityResult(
-                user_control=int(response.get("user_control", 3)),
-                friction=int(response.get("friction", 3)),
-                situational_awareness=int(response.get("situational_awareness", 3)),
-                communication_quality=int(response.get("communication_quality", 3)),
-                intent_alignment=int(response.get("intent_alignment", 3)),
-                reasoning=str(response.get("reasoning", "")),
-                score=float(score) if isinstance(score, int | float) else None,
-            )
+            return parse_ux_quality_response(response)
         except Exception as e:
             logger.warning("UX quality judge failed: %s", e)
             return None

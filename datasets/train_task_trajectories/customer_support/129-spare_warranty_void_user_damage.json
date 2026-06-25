@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "I checked the warranty, and it is active on your tablet. I can file a claim, but I should flag that liquid damage like a coffee spill is often treated as accidental damage, which may not be covered under the standard manufacturer warranty.\n\nIf you want, I can still submit the claim and let the warranty review determine the outcome.",
+      "content": "I checked, and even though your SlateTab Pro\u2019s warranty is active, liquid damage like a coffee spill isn\u2019t covered under the warranty. Because of that, I can\u2019t file this as a warranty claim. If you want, I can still help you look at paid repair or replacement options.",
       "tool_calls": [
         {
           "name": "get_order",
@@ -80,93 +80,32 @@
             "topic": "warranty",
             "rules": {
               "active": "Active warranty: eligible for claim.",
+              "active_item_required": "Warranty claims require an active order item. Items already returned, exchanged, or cancelled are ineligible for a new warranty claim even if a warranty record still exists.",
               "expired_recent": "Expired <30 days: 50% off repair.",
               "expired_old": "Expired >30 days: full-price repair or 25% off replacement.",
               "claim_limit": "Max claims reached: paid repair only (40% of item price).",
               "repair_vs_replace": "Items <$100: replacement. Items >=$100: repair first.",
               "recurring_defect": "2+ prior claims for same issue: automatic replacement.",
               "manufacturer": "Manufacturer warranty covers first 12 months.",
-              "extended": "Extended warranty covers after manufacturer period."
+              "extended": "Extended warranty covers after manufacturer period.",
+              "void_exclusions": "Liquid, accidental, or user-caused physical damage (e.g. spills, drops, cracked screens from misuse) is NOT covered and voids the claim, even while the warranty is otherwise active. The eligibility check is date/claim-count based only and does not detect damage cause, so when the customer describes liquid/accidental/user damage, deny the claim on this exclusion and do not file it."
             }
           }
-        },
-        {
-          "name": "get_warranty_status",
-          "arguments": {
-            "item_id": "ITEM-10277"
-          },
-          "result": {
-            "warranty_id": "WRT-4115",
-            "order_id": "ORD-7275",
-            "item_id": "ITEM-10277",
-            "product_id": "PROD-4287",
-            "warranty_type": "manufacturer",
-            "start_date": "2026-07-03",
-            "end_date": "2027-06-28",
-            "status": "active",
-            "claim_count": 0,
-            "max_claims": 3,
-            "coverage": "repair_or_replace",
-            "resolution": null,
-            "is_active": true,
-            "days_until_expiry": 354,
-            "days_past_expiry": 0,
-            "has_warranty": true
-          }
         }
       ]
     },
     {
       "role": "user",
-      "content": "Since the warranty is active, are you sure it can’t be covered? I just want to make sure before submitting something that’ll be denied."
+      "content": "Why doesn\u2019t the active warranty cover it in this case? And just to confirm, you\u2019re not filing any warranty claim or other order action, right?"
     },
     {
       "role": "assistant",
-      "content": "The warranty is definitely active, but active status alone doesn’t guarantee every type of damage is covered. From what I can confirm here, the warranty allows claims while active, but it doesn’t spell out accidental-damage coverage either way, so I can’t honestly promise a coffee spill would be approved.\n\nIf you want to avoid a likely denial, the safest assumption is that spill damage may fall outside standard manufacturer coverage. If you’d like, I can still file it for review, or we can look at non-warranty options instead.",
+      "content": "Because the warranty covers manufacturing defects and eligible hardware failures, not accidental or user-caused damage. Spills, drops, and similar incidents are specifically excluded, so an otherwise active warranty doesn\u2019t apply in that situation.\n\nAnd yes, to confirm: I have not filed any warranty claim and I have not made any other change to your order.",
       "tool_calls": null
     },
     {
       "role": "user",
-      "content": "I understand, but since the warranty is active, can you double-check whether accidental liquid damage is excluded before filing anything? I just don’t want to submit a claim if coffee spills definitely aren’t covered."
-    },
-    {
-      "role": "assistant",
-      "content": "I double-checked what I can access, and I still don’t see any term that explicitly confirms or excludes accidental liquid damage for this tablet’s manufacturer warranty. So I can verify the warranty is active, but I can’t tell you with certainty that a coffee spill is definitely covered.\n\nGiven that, I wouldn’t want to promise approval before filing. If you prefer, I can hold off on the claim, or submit it with the spill details and let the warranty team make the coverage decision.",
-      "tool_calls": [
-        {
-          "name": "get_product_details",
-          "arguments": {
-            "product_id": "PROD-4287"
-          },
-          "result": {
-            "product_id": "PROD-4287",
-            "name": "SlateTab Pro 11-inch",
-            "category": "electronics",
-            "subcategory": "tablet",
-            "price": 599,
-            "warranty_months": 12,
-            "return_window_days": 15,
-            "restocking_fee_pct": 15,
-            "weight_lbs": 1.1,
-            "is_fragile": true,
-            "in_stock": true,
-            "current_price": null
-          }
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "content": "Since it was a coffee spill, I’d rather not submit a claim if that kind of accidental liquid damage is likely to be denied just because the warranty is active. If you can confirm that spills aren’t covered under the standard warranty, I’m okay not filing anything."
-    },
-    {
-      "role": "assistant",
-      "content": "I can’t confirm that from the information available to me. I can verify your warranty is active, but I don’t have a coverage clause that specifically says coffee spills or other accidental liquid damage are excluded under this standard warranty.\n\nSo the most accurate answer is: I can’t promise it would be covered, and I also can’t definitively tell you it would be denied based on the records I can see. If you want to avoid any risk of a denied claim, not filing is reasonable; if you want a definitive determination, the only way I can help from here is to submit the claim for review.",
-      "tool_calls": null
-    },
-    {
-      "role": "user",
-      "content": "Okay, thanks for checking. Since you can’t confirm spill coverage and it was coffee damage, let’s not file a warranty claim or return for ORD-7275. Thanks for the help. [TASK_DONE]"
+      "content": "Got it, thanks for clarifying. I understand the active warranty doesn\u2019t apply because the coffee spill counts as liquid/user-caused damage, and no warranty claim or other order action is being filed. [TASK_DONE]"
     }
   ]
 }

@@ -140,7 +140,6 @@ PROCESS_RETURN: dict[str, Any] = {
                     "not_as_described",
                     "changed_mind",
                     "damaged_in_transit",
-                    "missing",
                 ],
                 "description": "Reason for the return",
             },
@@ -256,6 +255,7 @@ PROCESS_WARRANTY_CLAIM: dict[str, Any] = {
         "File a warranty claim for a defective item. Two-step operation: "
         "first call without confirm to preview (eligibility, resolution type, cost), "
         "then call with confirm=true to execute. "
+        "Only active items can receive warranty claims; do not call for items already returned, exchanged, or cancelled. "
         "Requires prior call to get_policies(topic='warranty')."
     ),
     "parameters": {

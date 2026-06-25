@@ -1,7 +1,28 @@
 {
   "task_id": "127-hard_warranty_recent_expiry_discounted_repair",
+  "user_id": "cust_004",
+  "now": "2026-07-20T10:00:00",
+  "opening_message": "My coffee maker from ORD-7232 broke just after the warranty ended. Is there any help or am I out of luck?",
+  "user_simulator": {
+    "known_info": [
+      "order_id: ORD-7232",
+      "item: BrewPerfect Coffee Maker",
+      "warranty_id: WRT-4102"
+    ],
+    "task_rules": [
+      "Keep the request scoped to getting help for the BrewPerfect Coffee Maker from ORD-7232 after its warranty recently expired; do not volunteer policy, cost, eligibility, or resolution details unless the agent asks or needs them to proceed.",
+      "Provide the order ID, item, warranty ID, and that the coffee maker broke just after the warranty ended when asked or when needed to keep the claim on track.",
+      "If the agent says no warranty help exists because the warranty expired, ask once whether a recent-expiry discounted paid repair option is available.",
+      "If the agent offers free repair, free replacement, refund, goodwill, escalation, or an exception as the resolution, ask whether the policy-supported path is discounted paid repair instead.",
+      "Before accepting discounted paid repair, ask whether any free option is available and make sure the agent states the customer is responsible for the discounted repair cost.",
+      "Accept only after the agent previews a discounted paid repair claim for confirmation and makes clear it is not a warranty replacement, free repair, refund, goodwill, escalation, or exception path.",
+      "If the agent asks for confirmation before checking warranty status or before previewing the paid repair outcome, ask them to check and preview the details first.",
+      "End only after the discounted_repair warranty claim has been filed and the agent confirms it is complete."
+    ],
+    "unknown_info": [],
+    "user_sim_context": "You are contacting support about order ORD-7232. Coffee maker warranty expired recently, so discounted repair is available. Agent must not say there are no warranty options. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation."
+  },
   "task_summary": "Coffee maker warranty expired recently, so discounted repair is available. Agent must not say there are no warranty options.",
-  "task_type": "warranty_claim",
   "task_requirements": [
     {
       "evidence": "conversation_or_tool_calls",
@@ -34,33 +55,6 @@
       "requirement": "Agent must not route the customer to goodwill, live-agent escalation, or an exception request as the resolution."
     }
   ],
-  "user_id": "cust_004",
-  "now": "2026-07-20T10:00:00",
-  "opening_message": "My coffee maker from ORD-7232 broke just after the warranty ended. Is there any help or am I out of luck?",
-  "user_simulator": {
-    "known_info": [
-      "order_id: ORD-7232",
-      "item: BrewPerfect Coffee Maker",
-      "warranty_id: WRT-4102"
-    ],
-    "personality": "detail_oriented",
-    "task_rules": [
-      "Give the order ID.",
-      "Say it broke just after warranty ended.",
-      "If the agent says no warranty help exists because the warranty expired, ask once whether a recent-expiry discounted paid repair option is available.",
-      "If the agent offers free repair, free replacement, refund, goodwill, escalation, or an exception as the resolution, ask whether the policy-supported option is instead discounted paid repair.",
-      "Ask whether there is any free option before accepting discounted paid repair.",
-      "Ask for confirmation that this is not a warranty replacement and not a refund before accepting.",
-      "Do not agree to the repair unless the agent previews the paid repair and asks you to confirm before filing it.",
-      "Accept discounted repair only after the agent states it is a paid discounted repair, not a free option, replacement, or refund, and previews it for your confirmation before filing.",
-      "Accept the final outcome only after the discounted_repair warranty claim is filed and confirmed."
-    ],
-    "unknown_info": [
-      "warranty eligibility",
-      "resolution"
-    ],
-    "user_sim_context": "You are contacting support about order ORD-7232. Coffee maker warranty expired recently, so discounted repair is available. Agent must not say there are no warranty options. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation."
-  },
   "state_requirements": [
     {
       "entity_type": "warranties",
@@ -81,5 +75,6 @@
       "expected_value": "claimed"
     }
   ],
+  "task_type": "warranty_claim",
   "task_env_path": "state_bench/domains/customer_support/task_envs/127-hard_warranty_recent_expiry_discounted_repair.json"
 }

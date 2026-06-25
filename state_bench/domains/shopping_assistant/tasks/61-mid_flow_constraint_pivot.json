@@ -4,7 +4,6 @@
   "now": "2026-06-10T10:00:00",
   "opening_message": "Hey — I'm picking between three laptops for hobby video editing: the BudgetLine Notebook 15, the ProBook 15, and the CreatorStudio 15. Which one should I get?",
   "user_simulator": {
-    "personality": "Thoughtful, trusts the agent's reasoning, reveals constraints incrementally as they come to mind.",
     "user_sim_context": "You want hobby video editing (travel/family/YouTube 1080p). You also travel a LOT and your current laptop is painful to carry — you need under 3 lbs. But you don't think to mention the travel constraint until AFTER you see the agent's first recommendation. Your budget is up to $1500. You care about BOTH constraints equally; don't let the agent talk you into sacrificing one.",
     "known_info": [
       "You want hobby video editing (1080p, not pro 4K).",
@@ -12,23 +11,19 @@
       "Budget up to $1500.",
       "Both constraints matter equally."
     ],
-    "unknown_info": [
-      "Which laptops meet both constraints.",
-      "Specific weight/RAM values in the catalog."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Turn 1 opener: as stated — hobby video editing between BudgetLine / ProBook 15 / CreatorStudio 15. Do NOT mention weight or travel yet.",
-      "If the agent recommends ProBook 15 with correct reasoning (4GB insufficient / 32GB overkill for hobby), reply: 'Makes sense, let's go with the ProBook 15.' Wait for the agent to confirm add_to_cart.",
-      "If the agent recommends BudgetLine, push back: 'isn't 4GB low for video editing?' — expect a pivot to ProBook 15.",
-      "If the agent recommends CreatorStudio, push back: 'I think 32GB is overkill for hobby — is there a middle option?' — expect a pivot to ProBook 15.",
-      "AFTER the agent confirms adding ProBook 15 to cart, reveal the second constraint: 'Oh wait — I also travel a lot, I need something under 3 lbs. Does the ProBook 15 work?'",
-      "If the agent pivots to ProBook 13 (SP-1002) citing same 16GB RAM AND 2.9 lb AND removes the ProBook 15 and adds ProBook 13, reply: 'Perfect, that works — let's go with the ProBook 13.' After final confirmation, reply 'Total looks good.' and [TASK_DONE].",
-      "If the agent sticks with ProBook 15 claiming 4.1 lb 'is still portable', push back: 'no, 3 lbs is a firm limit for me — my current one is 4 lbs and it's too heavy.' If the agent then pivots correctly, proceed. If not, accept and end — failed on constraint respect.",
-      "If the agent pivots to SlimBook Air 13 (SP-1001) without flagging the RAM change, push back: 'wait — doesn't SlimBook Air only have 8GB? You said earlier 16GB was the minimum for video editing.' If the agent then pivots to ProBook 13, proceed. If they insist SlimBook Air is fine for video editing, accept and end — failed on preserving the original constraint.",
-      "If the agent declares 'no laptop in the catalog fits both under-3-lb and 16GB RAM', push back: 'really? The ProBook 13 is 16GB, I thought it might be lighter than the 15-inch.' Expect pivot. If agent stays negative, accept and end — failed on catalog search.",
-      "If the agent asks you to pick between video editing and travel as priorities, push back: 'both matter — isn't there a laptop that does both?' Expect pivot to ProBook 13. If they avoid, accept and end — failed on both-constraint solution.",
-      "Do NOT suggest ProBook 13 by name — let the agent find it.",
-      "Keep replies short — 1-2 sentences.",
+      "Start by asking which of BudgetLine Notebook 15, ProBook 15, or CreatorStudio 15 is best for hobby video editing; do not mention travel, weight, shipping, loyalty, or other preferences yet.",
+      "If the agent recommends ProBook 15 because 4GB is too low for video editing and 32GB is more than needed for hobby editing, agree to add ProBook 15 and wait for the add-to-cart confirmation.",
+      "If the agent recommends BudgetLine, push back once that 4GB sounds low for video editing; if the agent recommends CreatorStudio, push back once that 32GB sounds excessive for hobby use and ask for the middle option.",
+      "After the agent confirms ProBook 15 has been added to the cart, reveal that you travel a lot, need the laptop under 3 lbs, and ask whether ProBook 15 still works.",
+      "Do not suggest ProBook 13 by name before the agent identifies it; ask for a laptop that satisfies both the video-editing RAM need and the under-3-lb travel limit.",
+      "If the agent says ProBook 15 is still suitable despite being over 3 lbs, push back that the 3-lb limit is firm because your current laptop is about 4 lbs and too heavy.",
+      "If the agent proposes SlimBook Air 13, a Chromebook, or any other lighter option that drops below the 16GB RAM needed for video editing, push back that both the original video-editing requirement and the weight limit still matter.",
+      "If the agent says no laptop can satisfy both constraints or asks you to choose between video editing and travel, push back once and ask the agent to check for a 16GB laptop under 3 lbs.",
+      "Accept the switch only after the agent acknowledges ProBook 15 is too heavy and identifies ProBook 13 (SP-1002) as satisfying both constraints with 16GB RAM and 2.9 lb weight.",
+      "Agree to have the agent remove ProBook 15 and add ProBook 13 only after the switch details are clear; refuse unrelated add-ons, shipping choices, promo, or loyalty actions.",
+      "End only after the agent confirms the final cart contains ProBook 13 (SP-1002) quantity 1, ProBook 15 has been removed, and the total is $999.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."
@@ -39,7 +34,7 @@
     {
       "id": "initial_probook15_recommendation",
       "kind": "must",
-      "requirement": "Agent initially recommended ProBook 15 (SP-1101) for hobby video editing, with reasoning about why BudgetLine's 4GB is insufficient and CreatorStudio's 32GB is overkill. This is the setup for the mid-flow reveal.",
+      "requirement": "By the time the customer agrees to add a laptop for hobby video editing, the agent recommended ProBook 15 (SP-1101) as the best fit, having explained why BudgetLine's 4GB RAM is insufficient and why CreatorStudio's 32GB RAM is more than a hobby editor needs. The agent may arrive at ProBook 15 after first suggesting another option and accepting the customer's hobby-use pushback; an equivalent characterization of 32GB as excessive (e.g. 'more headroom than you need') counts. This is the setup for the mid-flow reveal.",
       "evidence": "conversation_or_tool_calls"
     },
     {
@@ -57,7 +52,7 @@
     {
       "id": "cart_switched",
       "kind": "must",
-      "requirement": "Agent removed the initial SP-1101 from the cart and added SP-1002 via the cart tools. The final cart must contain only SP-1002 (1 item), NOT both or just SP-1101.",
+      "requirement": "The agent used the cart tools so that the final cart contains only SP-1002 (1 item) and does NOT contain SP-1101 — neither both nor just SP-1101. If the agent had already added SP-1101 it must remove it; if the weight constraint surfaced before SP-1101 was ever added, never adding it (and adding only SP-1002) also satisfies this.",
       "evidence": "tool_calls"
     },
     {

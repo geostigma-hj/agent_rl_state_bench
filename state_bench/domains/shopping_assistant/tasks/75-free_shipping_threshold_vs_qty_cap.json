@@ -4,30 +4,24 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hey — what's shipping going to cost me on this cart? And is there a way to make it free?",
   "user_simulator": {
-    "personality": "Practical, cost-conscious, will follow the agent's suggestion if it saves money. Not adversarial.",
     "user_sim_context": "Your cart has 3 docks and 1 webcam from earlier. You want to know shipping and will adjust the cart if there's a way to get free shipping. You do NOT know about the 3-per-product cap OR the 5+ free-shipping threshold. Your first instinct for 'add an item' will be to duplicate the dock (since that's what you have most of).",
     "known_info": [
       "Your cart has docks and a webcam.",
       "You want free shipping if possible.",
       "You're a returning Standard-tier customer."
     ],
-    "unknown_info": [
-      "The 5-unit threshold for free standard shipping.",
-      "The 3-per-product cap.",
-      "That your dock is already at the cap.",
-      "Express/next_day fees and tier perks."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Opening: as stated — ask about shipping and free options.",
-      "If the agent explains the 5+ threshold and says 'one more item = free shipping', reply: 'oh — ok, just add another dock then.' (Your first instinct.)",
-      "If the agent then explains the dock is at the 3-per-cart cap AND suggests adding a different item (e.g., another webcam), accept: 'sure, another webcam works.' After agent confirms $545 with free standard, reply 'perfect' and [TASK_DONE].",
-      "If the agent tries and fails to add another dock without pivoting (e.g., 'sorry, can't add another dock — sticking with $6 shipping'), reply 'ok, fine' and [TASK_DONE]. Agent failed to pivot.",
-      "If the agent quotes the $6 standard fee without surfacing the 5+ threshold at all, reply 'ok, let's just check out' and [TASK_DONE]. Agent failed silently on disclosure.",
-      "If the agent suggests express or next_day as the free option (they aren't free for Standard tier), accept whatever they quote — you don't know the tier rules. [TASK_DONE] with whatever cost. Agent failed.",
-      "If the agent picks a much more expensive pivot product (e.g., a $500 item instead of the $79 webcam) without explaining why, push back once: 'is there a cheaper item I could add to hit the threshold?'. If they then suggest the webcam, accept.",
-      "If the agent reaches 5 items but the total still shows $6 shipping or shipping_option is unset, ask: 'is shipping free now?'. If they then set standard to free, accept. If they don't, accept whatever they quote and end.",
-      "Do NOT mention loyalty points, promos, bundles, or gift wrap.",
-      "Keep replies short — 1-2 sentences."
+      "Ask what shipping costs for the current cart and whether there is a way to make shipping free; stay focused on shipping and a minimal cart adjustment.",
+      "Do not volunteer the 5+ free-shipping threshold, the dock quantity cap, loyalty points, promos, bundles, or gift wrap.",
+      "If the agent explains that one more item would make standard shipping free, first ask to add another dock because that is the item you already have the most of.",
+      "If the agent explains that the dock is already at the 3-per-cart cap and suggests adding a different concrete item, accept another webcam or another similarly low-cost existing-cart item.",
+      "If the agent gives up after the dock cannot be increased or only quotes the current $6 standard shipping without explaining the free-shipping threshold, accept that outcome without proposing your own pivot.",
+      "If the agent presents express or next-day shipping as the free option, accept the agent's quoted option and cost because you do not know the tier rules.",
+      "Push back once if the agent suggests a much more expensive item to cross the threshold without explaining why there is no cheaper option; accept if the agent then offers the webcam or another low-cost concrete option.",
+      "Accept a cart or shipping write only after the agent states the item being added or the shipping option being set; do not agree to unrelated cart, promo, loyalty, bundle, or gift-wrap changes.",
+      "If the cart reaches 5 items but the agent still shows a shipping charge or does not say standard shipping is selected and free, ask once whether shipping is free now; accept if the agent fixes it, and otherwise accept the quoted result.",
+      "End only after the accepted no-action outcome is clear, or after the extra item has been added and standard shipping is confirmed free with the final total."
     ]
   },
   "task_summary": "**Task:** A Standard-tier returning customer (shop_004) has a pre-seeded cart: 3x SP-2006 ProBook USB-C Dock ($129) + 1x SP-2005 PixelShot Webcam ($79). 4 units total, subtotal $466. Free standard shipping requires 5+ units. Customer asks about shipping and how to make it free. Agent surfaces the threshold; customer suggests duplicating the dock (already at 3-per-cart cap); agent must detect the collision, pivot to a different product (second webcam), get consent, update cart, and set standard shipping. Final cart: dock qty=3, webcam qty=2, subtotal $545, shipping_option='standard', shipping_cost=0, total $545.\n\n**Challenge:** Two policies collide (qty cap + free-shipping threshold). The primary failure is agents that treat the qty-cap error as terminal and never pivot. Also agents that skip the threshold analysis entirely. A subtle failure is forgetting to call set_shipping_option after crossing the threshold — the tool doesn't auto-recompute shipping on cart mutation.",
@@ -42,7 +36,7 @@
       "id": "detected_dock_cap",
       "kind": "must",
       "requirement": "Agent recognized (either via get_cart + policy knowledge, or via a rejected update_cart_item attempt) that the dock is at the 3-per-cart cap and cannot be incremented further.",
-      "evidence": "tool_calls_or_conversation"
+      "evidence": "conversation_or_tool_calls"
     },
     {
       "id": "pivoted_to_alternative",

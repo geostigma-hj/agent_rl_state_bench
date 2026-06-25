@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "I checked your order and both the shirt and running shoes are still return-eligible because the order was placed in November, which extends holiday returns through January 31.\n\nIf you return them for changed mind, the estimated refunds are:\n- Shirt: $59\n- Running shoes: $121\n\nThe shoes refund is lower because returning both items drops the remaining order below the free-shipping threshold, so there’s an $8 policy deduction applied once. If you want, I can go ahead and submit both returns now.",
+      "content": "Both items are still eligible for return because November orders have an extended return window through Jan 31, 2027. I can start the return for the shirt and the running shoes \u2014 I just need the reason for each item: defective, wrong item, damaged in transit, not as described, or changed mind.",
       "tool_calls": [
         {
           "name": "get_order",
@@ -133,7 +133,7 @@
           "result": {
             "topic": "return",
             "rules": {
-              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim — skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
+              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim \u2014 skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
               "windows_by_category": {
                 "electronics": "15-day return window",
                 "clothing": "30-day return window",
@@ -149,7 +149,8 @@
               },
               "eligibility": {
                 "defective_items": "No window restriction for defective, wrong item, or damaged in transit.",
-                "already_returned": "Items already returned/exchanged/cancelled are ineligible."
+                "already_returned": "Items already returned/exchanged/cancelled are ineligible.",
+                "not_as_described": "Use not_as_described only for an unused/unworn item that materially differs from the listing. If the customer wore, washed, altered, or used the item and only dislikes fit, feel, texture, or preference-based qualities, classify the return as changed_mind instead."
               },
               "restocking_fee": {
                 "base": "15% restocking fee for opened electronics returned for changed_mind.",
@@ -159,12 +160,13 @@
                   "silver": "25% off the restocking fee.",
                   "standard": "No discount."
                 },
-                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency."
+                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency.",
+                "completed_returns": "Once a changed-mind return is completed with the applicable restocking fee, do not reverse that fee later as a courtesy or supplemental refund."
               },
               "return_shipping_fee": {
                 "low_value": "Orders with subtotal < $50: customer pays $8 return shipping fee.",
                 "free_threshold": "Orders >= $50: free return label provided.",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: always free return shipping.",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: always free return shipping.",
                 "deduction": "Return shipping fee, when charged, is deducted from the return refund."
               },
               "bulk_purchase_clawback": {
@@ -175,7 +177,7 @@
               "free_shipping_clawback": {
                 "applies_when": "Order originally qualified for free shipping (subtotal >= $100) AND the return drops remaining subtotal below $100.",
                 "amount": "$8 standard shipping fee is deducted from the return refund. This is a flat policy charge, not the original shipping cost (which was $0 on free-shipping orders).",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: no clawback (customer-fault returns only).",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: no clawback (customer-fault returns only).",
                 "paid_shipping": "If the order did not qualify for free shipping originally (subtotal < $100), no clawback applies."
               },
               "repeat_category_surcharge": {
@@ -183,6 +185,110 @@
                 "different_categories": "Returns from different categories do not trigger the surcharge.",
                 "deduction": "Surcharge is deducted from the return refund."
               }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Changed mind for both items. Before I approve it, can you show me the full breakdown for returning both the shirt and the running shoes, including any deductions or fees?"
+    },
+    {
+      "role": "assistant",
+      "content": "Here\u2019s the full return estimate for both items together:\n\n- Shirt: $59\n- Running shoes: $129\n- Restocking fee: $0\n- Return label / return shipping fee: $0\n- Free-shipping adjustment: -$8\n- Same-category multi-return surcharge: -$5\n- Bulk/discount clawback: $0\n\nEstimated total refund: **$175** back to your original payment method. Since returns are processed item by item, the $8 and $5 deductions may be attached to one item or split by processing order, but the combined refund should still be **$175**.",
+      "tool_calls": [
+        {
+          "name": "process_return",
+          "arguments": {
+            "item_id": "ITEM-10163",
+            "reason": "changed_mind",
+            "amount": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "item_id": "ITEM-10163",
+            "return_eligible": true,
+            "reason": "changed_mind",
+            "refund_amount": 59,
+            "refund_method": "original_payment",
+            "restocking_fee": 0,
+            "discount_adjustment": 0,
+            "free_return_shipping": false,
+            "shipping_refund": false,
+            "shipping_clawback": 0,
+            "bulk_clawback": 0,
+            "repeat_surcharge": 0,
+            "paid_return_shipping_fee": 0,
+            "restocking_discount": 0
+          }
+        },
+        {
+          "name": "process_return",
+          "arguments": {
+            "item_id": "ITEM-10164",
+            "reason": "changed_mind",
+            "amount": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "item_id": "ITEM-10164",
+            "return_eligible": true,
+            "reason": "changed_mind",
+            "refund_amount": 121,
+            "refund_method": "original_payment",
+            "restocking_fee": 0,
+            "discount_adjustment": 0,
+            "free_return_shipping": false,
+            "shipping_refund": false,
+            "shipping_clawback": 8,
+            "bulk_clawback": 0,
+            "repeat_surcharge": 0,
+            "paid_return_shipping_fee": 0,
+            "restocking_discount": 0
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Thanks, that helps. Just to confirm before I approve: both the shirt and the running shoes are included, the holiday extension is what makes the January return eligible, and the refund terms are $59 for the shirt and $129 for the shoes, minus the $8 free-shipping adjustment and $5 same-category surcharge, for $175 total, right?"
+    },
+    {
+      "role": "assistant",
+      "content": "Almost \u2014 I rechecked it, and here\u2019s the precise version:\n\n- Yes, **both the shirt and the running shoes** are included.\n- Yes, the **holiday extension** is what makes this January return eligible.\n- The **live return preview** shows **$59 for the shirt** and **$121 for the shoes**, for a **total of $180**.\n\nSo the current system-calculated total is **$180**, not $175. The **$8 free-shipping adjustment** is showing in the shoes refund, but I\u2019m **not seeing a separate $5 same-category surcharge** in the live preview.",
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Can you check that again and give me the itemized breakdown for each item? Since I\u2019m returning both a shirt and running shoes, I\u2019d expect any repeat-category surcharge and the free-shipping adjustment to be clearly shown, not just folded into one vague total."
+    },
+    {
+      "role": "assistant",
+      "content": "I checked again: you\u2019re a standard member with no extra membership/Prime return extension, so the reason this is still eligible in January is the holiday extension for November orders.  \n**Itemized breakdown:**\n- **Shirt:** item price **$59**, restocking **$0**, return-label fee **$0**, free-shipping adjustment **$0** \u2192 **$59 refund**\n- **Running shoes:** item price **$129**, restocking **$0**, return-label fee **$0**, free-shipping adjustment **-$8** \u2192 **$121 refund**\n- **Same-category surcharge:** because both returns are in the **clothing** category, there is **one additional -$5 charge across the pair**\n\nSo the combined refund is **$175 total**. If I process it with the shirt first, the final line items would be **$59 for the shirt** and **$116 for the shoes**.",
+      "tool_calls": [
+        {
+          "name": "get_customer",
+          "arguments": {
+            "customer_id": "cust_002"
+          },
+          "result": {
+            "customer_id": "cust_002",
+            "name": "Marcus Johnson",
+            "email": "marcus.j@example.com",
+            "membership_tier": "standard",
+            "account_created": "2024-06-01",
+            "total_orders": 12,
+            "preferred_refund_method": "store_credit",
+            "store_credit_balance": 0,
+            "has_prime_shipping": false,
+            "benefits": {
+              "return_window_extension": "+0 days",
+              "compensation_multiplier": "1.0x",
+              "restocking_fee_waiver": false,
+              "prime_shipping": false
             }
           }
         },
@@ -237,49 +343,43 @@
             "paid_return_shipping_fee": 0,
             "restocking_discount": 0
           }
-        },
-        {
-          "name": "get_customer",
-          "arguments": {
-            "customer_id": "cust_002"
-          },
-          "result": {
-            "customer_id": "cust_002",
-            "name": "Marcus Johnson",
-            "email": "marcus.j@example.com",
-            "membership_tier": "standard",
-            "account_created": "2024-06-01",
-            "total_orders": 12,
-            "preferred_refund_method": "store_credit",
-            "store_credit_balance": 0,
-            "has_prime_shipping": false,
-            "benefits": {
-              "return_window_extension": "+0 days",
-              "compensation_multiplier": "1.0x",
-              "restocking_fee_waiver": false,
-              "prime_shipping": false
-            }
-          }
         }
       ]
     },
     {
       "role": "user",
-      "content": "Thanks — just to confirm, both the shirt and the running shoes are included in that, right? Also, can you give me the itemized breakdown for the shoes refund, including that $8 shipping adjustment and any per-item surcharge if there is one?"
+      "content": "Yes, that\u2019s the kind of breakdown I needed. Please go ahead and process the return for both the shirt and the running shoes with that itemization."
     },
     {
       "role": "assistant",
-      "content": "Yes — both items are included.\n\nShoes refund breakdown:\n- Base item price: $129\n- Restocking fee: $0\n- Restocking discount: $0\n- Shipping adjustment: -$8\n- Bulk discount clawback: $0\n- Additional same-category return surcharge: $0\n- Return shipping fee: $0\n\nNet refund for the shoes: $121\n\nThere’s no per-item surcharge here because that only applies when returning 2+ items from the same category together, and these two items are treated without that extra charge in the current return calculation.",
-      "tool_calls": null
-    },
-    {
-      "role": "user",
-      "content": "Got it, thanks for confirming both are included and for the breakdown. That works for me — please go ahead and submit the return for both items."
-    },
-    {
-      "role": "assistant",
-      "content": "Done — both returns have been submitted.\n\nRefunds issued:\n- Shirt: $59\n- Running shoes: $121\n\nBoth are set to refund back to your original payment method.",
+      "content": "Done \u2014 both returns have been processed.\n\nBreakdown:\n- **Shirt:** $59 refund\n- **Running shoes:** $116 refund = $129 item price - $8 free-shipping adjustment - $5 repeat-category surcharge\n\n**Total refund:** **$175** to your original payment method.",
       "tool_calls": [
+        {
+          "name": "process_return",
+          "arguments": {
+            "item_id": "ITEM-10163",
+            "reason": "changed_mind",
+            "amount": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "item_id": "ITEM-10163",
+            "return_eligible": true,
+            "reason": "changed_mind",
+            "refund_amount": 59,
+            "refund_method": "original_payment",
+            "restocking_fee": 0,
+            "discount_adjustment": 0,
+            "free_return_shipping": false,
+            "shipping_refund": false,
+            "shipping_clawback": 0,
+            "bulk_clawback": 0,
+            "repeat_surcharge": 0,
+            "paid_return_shipping_fee": 0,
+            "restocking_discount": 0
+          }
+        },
         {
           "name": "process_return",
           "arguments": {
@@ -308,13 +408,39 @@
           "arguments": {
             "item_id": "ITEM-10164",
             "reason": "changed_mind",
-            "amount": 121,
+            "amount": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "item_id": "ITEM-10164",
+            "return_eligible": true,
+            "reason": "changed_mind",
+            "refund_amount": 116,
+            "refund_method": "original_payment",
+            "restocking_fee": 0,
+            "discount_adjustment": 0,
+            "free_return_shipping": false,
+            "shipping_refund": false,
+            "shipping_clawback": 8,
+            "bulk_clawback": 0,
+            "repeat_surcharge": 5,
+            "paid_return_shipping_fee": 0,
+            "restocking_discount": 0
+          }
+        },
+        {
+          "name": "process_return",
+          "arguments": {
+            "item_id": "ITEM-10164",
+            "reason": "changed_mind",
+            "amount": 116,
             "confirm": true
           },
           "result": {
             "status": "returned",
             "item_id": "ITEM-10164",
-            "refund_amount": 121,
+            "refund_amount": 116,
             "policy_computed_amount": 116,
             "refund_method": "original_payment",
             "restocking_fee": 0,
@@ -330,7 +456,7 @@
     },
     {
       "role": "user",
-      "content": "Thanks for your help. [TASK_DONE]"
+      "content": "[TASK_DONE]"
     }
   ]
 }

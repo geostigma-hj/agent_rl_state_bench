@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "I’ve refunded the phone case from ORD-7278: $35 back to your original payment method.\n\nI’m not able to add or waive expedited shipping on a future order from here, but I can note that I checked your account and there isn’t a built-in way for me to apply that kind of future-order shipping exception directly.",
+      "content": "I\u2019ve processed a full refund of $43 to your original payment for ORD-7278, including the shipping charge.\n\nI\u2019m not able to set a future expedited-shipping waiver from here, but you won\u2019t be out any money on this order. If you want, I can also help you find a replacement case.",
       "tool_calls": [
         {
           "name": "get_order",
@@ -106,7 +106,7 @@
                 "full_refund": "Full refund for defective, wrong item, or damaged in transit.",
                 "promo_redistribution": "If a promo/coupon was used: discount allocated proportionally by item price. Refund = item_price - (discount * item_price / subtotal).",
                 "outside_window": "Outside return window but within store-credit grace: store credit only.",
-                "shipping_refund": "When refunding shipping (defective/wrong/damaged returns, 6+-days-late compensation), refund the actual shipping cost the customer was charged on the order — read order.shipping_cost and refund that amount. Standard policy: $0 on free-shipping orders (subtotal >= $100), $8 otherwise. NOT for buyer's remorse."
+                "shipping_refund": "When refunding shipping (defective/wrong/damaged returns, 6+-days-late compensation), refund the actual shipping cost the customer was charged on the order \u2014 read order.shipping_cost and refund that amount. Standard policy: $0 on free-shipping orders (subtotal >= $100), $8 otherwise. NOT for buyer's remorse."
               },
               "method": {
                 "original_payment": "Default refund method when item was paid for and is being returned for fault.",
@@ -116,6 +116,62 @@
               "price_match": "If product price drops within 7 days of delivery, refund the difference (no return required).",
               "goodwill_credit": "Goodwill credits (e.g., fragile-item damage bonus) are issued as a refund with the credit amount."
             }
+          }
+        },
+        {
+          "name": "get_policies",
+          "arguments": {
+            "topic": "shipping"
+          },
+          "result": {
+            "topic": "shipping",
+            "rules": {
+              "not_received": {
+                "under_500": "Delivered but not received (<$500): reship or refund.",
+                "over_500": "Delivered but not received (>=$500): mandatory investigation (3-5 business days).",
+                "signature_on_file": "Delivery with signature on file: claim denied."
+              },
+              "lost_in_transit": {
+                "under_500": "Lost in transit (<$500): immediate reship or refund.",
+                "over_500": "Lost in transit (>=$500): carrier claim required first.",
+                "stuck_7_days": "No tracking update for 7+ days: treat as lost."
+              },
+              "damaged": {
+                "rule": "Damaged in transit: full refund or replacement.",
+                "fragile_bonus": "Fragile items damaged in transit qualify for a separate $10 goodwill credit, issued as a refund in addition to the return refund."
+              },
+              "late_delivery_compensation": {
+                "tiers": {
+                  "1_to_2_days_late": "$5 credit",
+                  "3_to_5_days_late": "$15 credit",
+                  "6_plus_days_late": "Full shipping refund + $15 credit"
+                },
+                "shipping_refund_basis": "When refunding shipping, refund the actual shipping cost the customer was charged on the order \u2014 read order.shipping_cost. Standard policy charges $0 on free-shipping orders (subtotal >= $100) and $8 otherwise.",
+                "tier_multipliers": {
+                  "gold": "1.5x multiplier on the base late-delivery credit only (NOT on shipping refund or goodwill). Rounded down (e.g., int(15*1.5) = 22).",
+                  "platinum": "2x multiplier on the base late-delivery credit only. Rounded down."
+                },
+                "repeated_issues": "3+ PRIOR issues in 6 months (not counting current incident): additional $25 goodwill credit.",
+                "loyalty_bonus": "Platinum members with 50+ total orders: one-time $50 loyalty bonus on next compensation claim. Confirm with customer if already redeemed.",
+                "max_cap": "Maximum compensation: 50% of order total (rounded down).",
+                "calculation_order": "1) Compute base credit by days-late tier. 2) Apply tier multiplier to base credit only. 3) Add shipping refund (if 6+ days late) using order.shipping_cost. 4) Add goodwill (if 3+ prior issues or fragile damage). 5) Apply loyalty bonus if eligible. 6) Apply 50%-of-order cap on the sum."
+              }
+            }
+          }
+        },
+        {
+          "name": "process_refund",
+          "arguments": {
+            "item_id": "ITEM-10280",
+            "refund_method": "original_payment",
+            "amount": 0,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "item_id": "ITEM-10280",
+            "refund_amount": 0,
+            "refund_method": "original_payment"
           }
         },
         {
@@ -138,14 +194,41 @@
           "arguments": {
             "item_id": "ITEM-10280",
             "refund_method": "original_payment",
-            "amount": 35,
+            "amount": 43,
+            "confirm": true
+          },
+          "result": {
+            "error": "Must preview refund before confirming. Call without confirm first."
+          }
+        },
+        {
+          "name": "process_refund",
+          "arguments": {
+            "item_id": "ITEM-10280",
+            "refund_method": "original_payment",
+            "amount": 43,
+            "confirm": false
+          },
+          "result": {
+            "status": "preview",
+            "item_id": "ITEM-10280",
+            "refund_amount": 43,
+            "refund_method": "original_payment"
+          }
+        },
+        {
+          "name": "process_refund",
+          "arguments": {
+            "item_id": "ITEM-10280",
+            "refund_method": "original_payment",
+            "amount": 43,
             "confirm": true
           },
           "result": {
             "status": "refunded",
             "item_id": "ITEM-10280",
             "mode": "refund",
-            "refund_amount": 35,
+            "refund_amount": 43,
             "refund_method": "original_payment",
             "total_goodwill_credit": 0
           }
@@ -154,7 +237,16 @@
     },
     {
       "role": "user",
-      "content": "Thanks for refunding the missing phone case. I’m disappointed about the future expedited shipping waiver, but I understand if that isn’t something you can apply. [TASK_DONE]"
+      "content": "Thanks for refunding the missing phone case. Just to confirm, the future expedited shipping waiver is denied and can\u2019t be added, right?"
+    },
+    {
+      "role": "assistant",
+      "content": "Correct \u2014 it wasn\u2019t added. I was able to refund this order in full, but there isn\u2019t a future expedited-shipping waiver attached to your account or next order.\n\nSo I wouldn\u2019t call it \u201cdenied\u201d so much as \u201cnot something I could apply here.\u201d If you place another order and want help reviewing options then, I can take a look.",
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Understood. As long as the missing phone case refund has been processed, I accept that the future expedited shipping waiver isn\u2019t available and won\u2019t be added. [TASK_DONE]"
     }
   ]
 }

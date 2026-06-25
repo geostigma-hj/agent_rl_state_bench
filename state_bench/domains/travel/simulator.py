@@ -17,6 +17,17 @@ from state_bench.schemas import TaskDefinition
 _BASE_RULES_PATH = Path(__file__).resolve().parent / "prompts" / "user_sim_base.md"
 
 
+def _is_redundant_known_info(item: str, *, name: str, user_id: str) -> bool:
+    normalized = item.strip().lower()
+    return normalized in {
+        f"your name is {name}".lower(),
+        f"your user id: {user_id}".lower(),
+        f"your user id is {user_id}".lower(),
+        f"user id: {user_id}".lower(),
+        f"user id is {user_id}".lower(),
+    }
+
+
 def build_simulator_prompt(
     task: TaskDefinition,
     env_data: EnvironmentData,
@@ -26,7 +37,7 @@ def build_simulator_prompt(
 
     Order:
     1. Preamble (role + precedence note)
-    2. Identity (name, personality, tier, points, constraints, preferences)
+    2. Identity (name, tier, points, constraints, preferences)
     3. Task Context (user_sim_context + known_info + unknown_info)
     4. Base Rules (shared canonical rules from user_sim_base.md)
     5. Task-Specific Rules
@@ -44,7 +55,7 @@ def build_simulator_prompt(
         "**Important:** Task-specific rules take precedence over base rules if there is a conflict."
     ]
 
-    # --- 1. Identity (who you are + personality) ---
+    # --- 1. Identity ---
     name = user.name
     loyalty_tier = user.loyalty_tier
     loyalty_points = user.loyalty_points
@@ -68,36 +79,25 @@ def build_simulator_prompt(
             placeholders[key] = str(value) if value else "no preference"
 
     identity_lines = [
-        "## Identity\n",
-        f"You are **{name}**.",
-        f"- Personality: {sim.personality}",
+        "## User Identity\n",
+        f"- Name: {name}",
+        f"- User ID: {user_id}",
         f"- Loyalty tier: {loyalty_tier}",
         f"- Loyalty points: {loyalty_points}",
-        "\n### Budget",
-        f"- {placeholders.get('budget', 'none')} — you will NOT accept anything above this amount",
-        "\n### Preferences",
-        f"- Meal: {placeholders.get('meal_preference', 'no preference')}",
-        f"- Seat: {placeholders.get('seat_type', 'no preference')}",
-        f"- WiFi: {placeholders.get('add_wifi', 'no')}",
-        f"- Extra legroom: {placeholders.get('add_extra_legroom', 'no')}",
-        f"- Insurance: {placeholders.get('add_insurance', 'no')}",
-        "\nTask-specific search preferences such as airline, cabin class, departure time, and max stops are provided in the task context below, not as fixed cross-task identity defaults.",
-        "\nYou do not have specific preferences for hotel room type, car rental class, or rental company. "
-        "If asked, say you have no preference and let the agent decide. Your budget still applies to these state_bench.domains.",
+        f"- Budget: {placeholders.get('budget', 'none')} — you will NOT accept anything above this amount",
+        "- Preferences:",
+        f"  - Meal: {placeholders.get('meal_preference', 'no preference')}",
+        f"  - Seat: {placeholders.get('seat_type', 'no preference')}",
+        f"  - WiFi: {placeholders.get('add_wifi', 'no')}",
+        f"  - Extra legroom: {placeholders.get('add_extra_legroom', 'no')}",
+        f"  - Insurance: {placeholders.get('add_insurance', 'no')}",
     ]
 
-    # What you know (includes identity facts + task-specific known info)
-    know_items = [
-        f"Your name is {name}",
-        f"Your loyalty tier is {loyalty_tier}",
-        f"Your loyalty points balance is {loyalty_points}",
-    ]
-    if sim.known_info:
-        know_items.extend(sim.known_info)
+    # What you know contains task-specific facts only.
+    know_items = [item for item in sim.known_info if not _is_redundant_known_info(item, name=name, user_id=user_id)]
     identity_lines.append("\n### What you know")
     for item in know_items:
         identity_lines.append(f"- {item}")
-    identity_lines.append("\nIf the agent states any of these incorrectly, correct them.")
 
     # What you don't know
     if sim.unknown_info:

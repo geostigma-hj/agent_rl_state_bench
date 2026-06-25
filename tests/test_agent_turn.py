@@ -9,27 +9,12 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from state_bench.agents.base import AgentPricing, AgentRuntimeContext
+from state_bench.agents.base import AgentRuntimeContext
 from state_bench.agents.state_bench import RETRIEVE_LEARNINGS_TOOL_NAME, StateBenchAgent
 from state_bench.client import LLMClient, PooledLLMClient
 
 
-def _runtime_context_with_pricing() -> AgentRuntimeContext:
-    return AgentRuntimeContext(
-        task_id="task-1",
-        user_id="user_001",
-        domain="travel",
-        now="2026-06-15T10:00:00",
-        agent_pricing=AgentPricing(
-            model_name="test-model",
-            input_cost_per_1m_tokens=1.25,
-            output_cost_per_1m_tokens=10.0,
-            cached_input_cost_per_1m_tokens=0.13,
-        ),
-    )
-
-
-def _runtime_context_without_pricing() -> AgentRuntimeContext:
+def _runtime_context() -> AgentRuntimeContext:
     return AgentRuntimeContext(
         task_id="task-1",
         user_id="user_001",
@@ -98,7 +83,7 @@ def _make_agent(mock_complete_with_tools: MagicMock, tool_handlers: dict | None 
         system_prompt="You are a travel agent.",
         tools=[{"type": "function", "name": "get_booking"}],
         tool_handlers=tool_handlers or {},
-        runtime_context=_runtime_context_with_pricing(),
+        runtime_context=_runtime_context(),
     )
 
 
@@ -138,7 +123,7 @@ def _make_retrieval_agent(mock_complete_with_tools: MagicMock, *, cls=RetrievalA
         system_prompt="You are a travel agent.",
         tools=[{"type": "function", "name": "get_booking"}],
         tool_handlers={"get_booking": lambda args: {"booking_id": args["booking_id"]}},
-        runtime_context=_runtime_context_with_pricing(),
+        runtime_context=_runtime_context(),
     )
 
 
@@ -171,7 +156,7 @@ class TestStateBenchAgentInstructions:
             system_prompt="You are a travel agent.",
             tools=[],
             tool_handlers={},
-            runtime_context=_runtime_context_with_pricing(),
+            runtime_context=_runtime_context(),
         )
 
         text, tool_calls, raw_items = agent.act([{"role": "user", "content": "Hi"}])
@@ -192,7 +177,7 @@ class TestStateBenchAgentInstructions:
                 system_prompt="You are a travel agent.",
                 tools=[],
                 tool_handlers={},
-                runtime_context=_runtime_context_with_pricing(),
+                runtime_context=_runtime_context(),
             )
 
     def test_first_turn_no_previous_response_id(self):
@@ -295,7 +280,7 @@ class TestStateBenchAgentToolLoopChaining:
                 {"type": "function", "name": "get_booking"},
             ],
             tool_handlers=tool_handlers,
-            runtime_context=_runtime_context_with_pricing(),
+            runtime_context=_runtime_context(),
         )
 
         text, tool_calls, raw_items = agent.act([{"role": "user", "content": "Show my bookings"}])
@@ -471,13 +456,9 @@ class TestStateBenchAgentUsageTracking:
         assert agent.token_usage.output_tokens == 180
         assert agent.token_usage.reasoning_output_tokens == 50
         assert agent.token_usage.total_tokens == 1380
-        assert round(agent.token_usage.agent_turn_cost_usd, 6) == round(
-            ((250 * 1.25) + (950 * 0.13) + (180 * 10.0)) / 1_000_000, 6
-        )
+        assert agent.token_usage.agent_turn_cost_usd == 0.0
         assert agent.token_usage.memory_ingestion_cost_usd == 0.0
-        assert round(agent.token_usage.total_cost_usd, 6) == round(
-            ((250 * 1.25) + (950 * 0.13) + (180 * 10.0)) / 1_000_000, 6
-        )
+        assert agent.token_usage.total_cost_usd == 0.0
 
     def test_accumulates_tokens_without_pricing_metadata(self):
         text_item = _make_text_item("Done.")
@@ -491,7 +472,7 @@ class TestStateBenchAgentUsageTracking:
             system_prompt="You are a travel agent.",
             tools=[],
             tool_handlers={},
-            runtime_context=_runtime_context_without_pricing(),
+            runtime_context=_runtime_context(),
         )
 
         agent.act([{"role": "user", "content": "Do it"}])
@@ -523,7 +504,7 @@ class TestAgentReasoningEffort:
             system_prompt="You are a travel agent.",
             tools=[{"type": "function", "name": "get_booking"}],
             tool_handlers={},
-            runtime_context=_runtime_context_with_pricing(),
+            runtime_context=_runtime_context(),
             agent_reasoning_effort="high",
         )
         agent.act([{"role": "user", "content": "hi"}])
@@ -547,6 +528,6 @@ class TestAgentReasoningEffort:
                 system_prompt="x",
                 tools=[],
                 tool_handlers={},
-                runtime_context=_runtime_context_with_pricing(),
+                runtime_context=_runtime_context(),
                 agent_reasoning_effort="extreme",
             )

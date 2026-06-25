@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "I found 2 in-stock blenders under your $500 budget:\n\n1. PowerBlend Pro Blender — $229\n- Rating: 4.6\n- Reviews: 1,580\n- Description: Pro-grade countertop blender\n- Shipping: about 3 business days\n- Gift wrap: available\n\n2. PowerBlend Plus Blender — $449\n- Rating: 4.5\n- Reviews: 1,680\n- Description: Mid-range blender with 5-year warranty, 8 speeds, ice-crush mode\n- Shipping: about 3 business days\n- Gift wrap: available\n\nQuick take:\n- Best value: PowerBlend Pro Blender at $229\n- More features: PowerBlend Plus Blender at $449\n\nIf you want, I can:\n- compare them side by side,\n- add one to your cart,\n- or check if there are any promotions for kitchen items.",
+      "content": "I found 2 in-stock blenders under your $500 budget:\n\n1. **PowerBlend Pro Blender** \u2014 **$229**  \n   - Rating: **4.6/5** from **1,580** reviews  \n   - Description: **Pro-grade countertop blender**\n\n2. **PowerBlend Plus Blender** \u2014 **$449**  \n   - Rating: **4.5/5** from **1,680** reviews  \n   - Description: **5-year warranty, 8 speeds, ice-crush mode**\n\n**Quick take:**  \n- If you want the **better value**, go with the **PowerBlend Pro**.  \n- If you want **more features and warranty coverage**, choose the **PowerBlend Plus**.\n\nIf you want, I can:\n- recommend the better one for smoothies/ice/crushing,\n- add one to your cart,\n- or check whether any kitchen promos apply.",
       "tool_calls": [
         {
           "name": "search_products",
@@ -109,11 +109,11 @@
     },
     {
       "role": "user",
-      "content": "What about something more premium? The top-of-line option?"
+      "content": "Do you have a more premium or top-of-the-line option?"
     },
     {
       "role": "assistant",
-      "content": "Yes — the top-of-line blender I found is:\n\nKitchenPro Master Blender — $899\n- Rating: 4.8\n- Reviews: 2,140\n- Description: Premium commercial-grade blender with 10-year warranty, variable speed, preset programs\n- Shipping: about 3 business days\n- Gift wrap: available\n\nCompared with your original budget:\n- Your stated budget: $500\n- Premium option: $899\n\nSo this is the best premium pick, but it’s $399 over budget.\n\nIf you want, I can also:\n- compare the $899 KitchenPro Master Blender vs the $449 PowerBlend Plus,\n- look for any kitchen promotions,\n- or help you decide whether the premium upgrade seems worth it.",
+      "content": "Yes \u2014 the most premium in-stock option I found is:\n\n**KitchenPro Master Blender \u2014 $899**  \n- **4.8/5** from **2,140** reviews  \n- **Commercial-grade**\n- **10-year warranty**\n- **Variable speed**\n- **Preset programs**\n\nThat\u2019s the clear **top-of-the-line** model, but it\u2019s **above your original $500 budget**.\n\nIf you want to **stay under $500**, the closest premium option is:\n\n**PowerBlend Plus Blender \u2014 $449**  \n- **4.5/5** from **1,680** reviews  \n- **5-year warranty**\n- **8 speeds**\n- **Ice-crush mode**\n\nSo the choice is basically:\n- **Best overall / top-end:** KitchenPro Master Blender \u2014 **$899**\n- **Best premium under budget:** PowerBlend Plus Blender \u2014 **$449**\n\nIf you want, I can **compare the $899 and $449 models side by side** or **add one to your cart**.",
       "tool_calls": [
         {
           "name": "search_products",
@@ -121,7 +121,7 @@
             "query": "blender",
             "category": "kitchen",
             "min_price": 0,
-            "max_price": 2000,
+            "max_price": 5000,
             "min_rating": 0,
             "in_stock_only": true,
             "sort_by": "price_high"
@@ -196,29 +196,54 @@
     },
     {
       "role": "user",
-      "content": "hmm, I could stretch to $750. Would that work?"
+      "content": "I could stretch to **$750** if needed \u2014 would that work for the KitchenPro Master Blender?"
     },
     {
       "role": "assistant",
-      "content": "Not quite — the premium KitchenPro Master Blender is $899, so it’s still $149 above a $750 budget.\n\nWithin $750, the best blender I found is still:\n\nPowerBlend Plus Blender — $449\n- 4.5 rating\n- 1,680 reviews\n- 5-year warranty\n- 8 speeds\n- Ice-crush mode\n\nIf you want, I can:\n- check whether any promotions could bring the $899 model closer to your budget,\n- compare the $449 and $899 models,\n- or add the $449 option to your cart.",
+      "content": "Not quite.\n\nThe **KitchenPro Master Blender is $899**, and I don\u2019t see any active **kitchen promos** right now. You also have **2,200 loyalty points**, which would be worth **$22 off**, bringing it to about **$877** before shipping/tax.\n\nSo **$750 wouldn\u2019t be enough for that model right now**.\n\nYour best premium option within your stretched budget is still:\n\n- **PowerBlend Plus Blender \u2014 $449**\n\nIf you want, I can:\n- look for the **best blender as close to $750 as possible**,\n- add the **PowerBlend Plus** to your cart,\n- or check whether there\u2019s any **price-match policy** that could help.",
+      "tool_calls": [
+        {
+          "name": "get_promotions",
+          "arguments": {
+            "category": "kitchen"
+          },
+          "result": {
+            "promotions": []
+          }
+        },
+        {
+          "name": "get_customer_account",
+          "arguments": {
+            "customer_id": "shop_004"
+          },
+          "result": {
+            "customer_id": "shop_004",
+            "name": "Taylor Kim",
+            "email": "taylor.kim@example.com",
+            "tier": "standard",
+            "is_first_time": false,
+            "loyalty_points": 2200,
+            "purchase_history": []
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Got it \u2014 I can do the full **$899** for the **KitchenPro Master Blender**. Please add that one to my cart."
+    },
+    {
+      "role": "assistant",
+      "content": "I can do that \u2014 for **1 KitchenPro Master Blender**.\n\nBefore I add it, would you like **gift wrap** for this item? It\u2019s available, and it adds **$5**.",
       "tool_calls": null
     },
     {
       "role": "user",
-      "content": "ok fine, $899 it is. Go with the KitchenPro."
+      "content": "No, thanks \u2014 just the KitchenPro Master Blender, no gift wrap. Please add it to my cart."
     },
     {
       "role": "assistant",
-      "content": "I can add it — do you want gift wrap for it?\n\nThe KitchenPro Master Blender is available, and gift wrap is offered. Once you confirm yes or no, I’ll add it to your cart.",
-      "tool_calls": null
-    },
-    {
-      "role": "user",
-      "content": "No preference, use the default."
-    },
-    {
-      "role": "assistant",
-      "content": "Done — I added 1 × KitchenPro Master Blender to your cart for $899.\n\nCurrent cart total: $899\n\nIf you want, I can also:\n- check for promotions,\n- apply an eligible promo code,\n- or show your cart total with any discounts.",
+      "content": "Added \u2014 **KitchenPro Master Blender** is now in your cart.\n\n**Cart total:** **$899**  \n**Gift wrap:** No\n\nIf you want, I can also:\n- check your cart,\n- redeem your **2,200 loyalty points** for **$22 off**,\n- or help with shipping options.",
       "tool_calls": [
         {
           "name": "add_to_cart",
@@ -243,15 +268,6 @@
           }
         }
       ]
-    },
-    {
-      "role": "user",
-      "content": "great, thanks."
-    },
-    {
-      "role": "assistant",
-      "content": "You’re welcome! If you want, I can still check for any available discounts before you check out.",
-      "tool_calls": null
     },
     {
       "role": "user",

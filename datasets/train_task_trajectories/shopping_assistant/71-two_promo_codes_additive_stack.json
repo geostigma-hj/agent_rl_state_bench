@@ -6,11 +6,11 @@
     },
     {
       "role": "user",
-      "content": "Hi — I want to add the SlimBook Air 13 to my cart. I have two promo codes I'd like to use: SAVE10 and SPRING20. Can you apply both for me?"
+      "content": "Hi \u2014 I want to add the SlimBook Air 13 to my cart. I have two promo codes I'd like to use: SAVE10 and SPRING20. Can you apply both for me?"
     },
     {
       "role": "assistant",
-      "content": "Done — I added the SlimBook Air 13 to your cart.\n\nAbout the promo codes:\n- I could not apply both.\n- Store policy allows only one promo code per cart.\n- Between your two codes, I applied SPRING20 because it gives the larger discount.\n\nCart summary:\n- SlimBook Air 13: $849\n- Promo applied: SPRING20\n- Discount: $169\n- Current total: $680\n\nYou also have 2,200 loyalty points available if you want me to redeem some, but that would be separate from promo-code stacking rules.",
+      "content": "I found the SlimBook Air 13 \u2014 it\u2019s $849 and doesn\u2019t have any variants.\n\nI can\u2019t apply both promo codes: the store only allows one promo code per cart. Both codes are active, and **SPRING20** is the better discount.\n\nBefore I add it, do you want **gift wrap** on the laptop?  \nIf not, I can add it normally and apply **SPRING20** right after.",
       "tool_calls": [
         {
           "name": "search_products",
@@ -18,7 +18,7 @@
             "query": "SlimBook Air 13",
             "category": "electronics",
             "min_price": 0,
-            "max_price": 5000,
+            "max_price": 10000,
             "min_rating": 0,
             "in_stock_only": true,
             "sort_by": "relevance"
@@ -63,6 +63,19 @@
           }
         },
         {
+          "name": "get_variants",
+          "arguments": {
+            "product_id": "SP-1001"
+          },
+          "result": {
+            "product_id": "SP-1001",
+            "product_name": "SlimBook Air 13",
+            "base_price": 849,
+            "variants": [],
+            "note": "This product has no variants; no variant_id is needed for add_to_cart."
+          }
+        },
+        {
           "name": "get_cart",
           "arguments": {
             "customer_id": "shop_004"
@@ -83,6 +96,22 @@
           }
         },
         {
+          "name": "get_policies",
+          "arguments": {
+            "topic": "promo_stacking"
+          },
+          "result": {
+            "topic": "promo_stacking",
+            "summary": "At most one promo code per cart. Some discounts stack with each other but not with promo codes.",
+            "rules": [
+              "One promo code per cart.",
+              "Category bundle (5%) does NOT stack with promo codes on the same items \u2014 customer gets the better of the two.",
+              "Welcome discount (5%) does NOT stack with promo codes \u2014 customer gets the better of the two.",
+              "Brand bundle bonus (3%) DOES stack with everything."
+            ]
+          }
+        },
+        {
           "name": "get_customer_account",
           "arguments": {
             "customer_id": "shop_004"
@@ -98,58 +127,47 @@
           }
         },
         {
-          "name": "get_policies",
+          "name": "get_promotions",
           "arguments": {
-            "topic": "promo_stacking"
+            "category": "electronics"
           },
           "result": {
-            "topic": "promo_stacking",
-            "summary": "At most one promo code per cart. Some discounts stack with each other but not with promo codes.",
-            "rules": [
-              "One promo code per cart.",
-              "Category bundle (5%) does NOT stack with promo codes on the same items — customer gets the better of the two.",
-              "Welcome discount (5%) does NOT stack with promo codes — customer gets the better of the two.",
-              "Brand bundle bonus (3%) DOES stack with everything."
+            "promotions": [
+              {
+                "promo_code": "SAVE10",
+                "description": "Site-wide 10% off, any category, any purchase size.",
+                "discount_type": "percentage",
+                "discount_value": 10,
+                "min_purchase": 0,
+                "max_discount": 0,
+                "category_restriction": null,
+                "expiry_date": "2026-12-31",
+                "active": true
+              },
+              {
+                "promo_code": "SPRING20",
+                "description": "Spring sale: 20% off any order.",
+                "discount_type": "percentage",
+                "discount_value": 20,
+                "min_purchase": 0,
+                "max_discount": 0,
+                "category_restriction": null,
+                "expiry_date": "2026-12-31",
+                "active": true
+              }
             ]
           }
-        },
-        {
-          "name": "get_variants",
-          "arguments": {
-            "product_id": "SP-1001"
-          },
-          "result": {
-            "product_id": "SP-1001",
-            "product_name": "SlimBook Air 13",
-            "base_price": 849,
-            "variants": [],
-            "note": "This product has no variants; no variant_id is needed for add_to_cart."
-          }
-        },
-        {
-          "name": "validate_promo",
-          "arguments": {
-            "customer_id": "shop_004",
-            "promo_code": "SAVE10"
-          },
-          "result": {
-            "valid": true,
-            "reason": "Promo applied: Site-wide 10% off, any category, any purchase size.",
-            "estimated_discount": 0
-          }
-        },
-        {
-          "name": "validate_promo",
-          "arguments": {
-            "customer_id": "shop_004",
-            "promo_code": "SPRING20"
-          },
-          "result": {
-            "valid": true,
-            "reason": "Promo applied: Spring sale: 20% off any order.",
-            "estimated_discount": 0
-          }
-        },
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "No gift wrap, please. Go ahead and add it normally and apply SPRING20."
+    },
+    {
+      "role": "assistant",
+      "content": "Done \u2014 I added **1 \u00d7 SlimBook Air 13** and applied **SPRING20**.\n\nCart summary:\n- Subtotal: **$849**\n- Promo discount: **-$169**\n- Total: **$680**\n\nIf you want, I can also check your cart for any loyalty points redemption options.",
+      "tool_calls": [
         {
           "name": "add_to_cart",
           "arguments": {
@@ -193,7 +211,7 @@
     },
     {
       "role": "user",
-      "content": "oh — ok, makes sense. Go with the bigger one. $680 total works for me, and no points this time. [TASK_DONE]"
+      "content": "[TASK_DONE]"
     }
   ]
 }

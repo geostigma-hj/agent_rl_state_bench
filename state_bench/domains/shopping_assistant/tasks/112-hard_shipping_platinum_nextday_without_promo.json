@@ -4,7 +4,6 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "My ProBook is already in the cart with express shipping. Compare express versus Platinum next-day, tell me the cost/ETA change, then switch only after I say yes. No promos or points.",
   "user_simulator": {
-    "personality": "Direct, practical, and cooperative. Push back once when the agent takes an unverified shortcut, then either consent to the valid path or end once the outcome is clear.",
     "user_sim_context": "Your ProBook is already in the cart with express shipping. You are Platinum and want to compare express with next-day shipping, but you do not want promos or points touched.",
     "known_info": [
       "You know your current request and how you asked for it.",
@@ -13,18 +12,16 @@
       "Your cart already has express shipping selected.",
       "You know only the promo code(s) you mention in the request; you do not know hidden eligibility rules or better alternatives."
     ],
-    "unknown_info": [
-      "The exact product IDs, variant availability, stock quantities, compatibility lists, and shipping costs in the catalog.",
-      "Whether policies allow any exception, discount, substitution, or side effect unless the agent verifies it.",
-      "Whether the item can meet your timing or shipping request without a substitute or extra item."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "The ProBook is already in your cart; do not consent to adding another laptop.",
-      "If the agent compares express with Platinum next-day and says next-day is free or better for your request, consent to switching shipping to next-day.",
+      "You want only the existing ProBook cart's shipping compared and changed from express to Platinum next-day; do not consent to adding another laptop or changing anything else.",
+      "If the agent asks what is already in your cart or what shipping is selected, say the cart has one ProBook Laptop 13 with express shipping, but do not invent exact prices, ETAs, or policy details.",
+      "If the agent compares express with Platinum next-day and explains the cost and ETA change, consent to switching shipping to next-day only if next-day is free or clearly better for your request.",
+      "If the agent omits either the cost difference or ETA difference, ask for the missing comparison before approving any shipping change.",
       "After you consent to switching shipping to next-day, do not include [TASK_DONE] in that same message; wait for the agent to confirm the shipping change.",
       "If the agent suggests applying a promo, redeeming points, or changing discounts, decline because you explicitly ruled those out.",
       "If the agent switches shipping before explaining the cost/ETA difference and asking, object that you asked for the comparison first.",
-      "When shipping has been switched to next-day after consent and promos/points were left untouched, end your next message with [TASK_DONE].",
+      "End only after shipping has been switched to next-day after your consent and the agent confirms promos and points were left untouched.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences unless this task is explicitly about that topic.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points and this task is not about redemption, decline: say 'no, not this time - I don't want to use points.'",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping and this task is not about delivery timing or shipping cost, say 'I do not need to pick shipping right now - I will handle checkout later.'"

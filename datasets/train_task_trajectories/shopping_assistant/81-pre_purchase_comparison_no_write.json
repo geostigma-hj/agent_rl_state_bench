@@ -6,11 +6,11 @@
     },
     {
       "role": "user",
-      "content": "Quick question — how does the SlimBook Air 13 compare to the ProBook 13 on price and specs? I'm deciding between them but not ready to buy yet."
+      "content": "Quick question \u2014 how does the SlimBook Air 13 compare to the ProBook 13 on price and specs? I'm deciding between them but not ready to buy yet."
     },
     {
       "role": "assistant",
-      "content": "Here’s a quick side-by-side:\n\n| Model | Price | Rating | Weight | Battery | RAM | SSD |\n|---|---:|---:|---:|---:|---:|---:|\n| **SlimBook Air 13** | **$849** | 4.5 | **2.6 lb** | **14 hrs** | 8GB | 256GB |\n| **ProBook 13-inch** | **$999** | 4.6 | 2.9 lb | 12 hrs | **16GB** | **512GB** |\n\n### Main differences\n- **Price:** SlimBook Air 13 is **$150 cheaper**\n- **Portability:** SlimBook is **lighter** by 0.3 lb\n- **Battery:** SlimBook is rated **2 hours longer**\n- **Performance/storage:** ProBook gives you **more RAM and double the SSD**\n- **Reviews:** ProBook is slightly higher rated and has more reviews\n\n### Best fit depending on what you want\n- **Choose SlimBook Air 13** if you want:\n  - lower price\n  - lighter carry\n  - longer battery life\n\n- **Choose ProBook 13** if you want:\n  - better multitasking\n  - more storage\n  - a slightly more premium overall spec setup\n\n### Short take\n- **Better value on budget:** SlimBook Air 13\n- **Better specs overall:** ProBook 13\n\nIf you want, I can also give you a **“student use” recommendation** vs **“longer-term performance” recommendation**.",
+      "content": "Here\u2019s a quick side-by-side:\n\n| Model | Price | RAM | Storage | Battery | Weight | Rating |\n|---|---:|---|---|---:|---:|---:|\n| **SlimBook Air 13** | **$849** | 8GB | 256GB SSD | **14 hrs** | **2.6 lb** | 4.5/5 |\n| **ProBook 13-inch** | **$999** | **16GB** | **512GB SSD** | 12 hrs | 2.9 lb | **4.6/5** |\n\n### Main differences\n- **SlimBook Air 13**\n  - **$150 cheaper**\n  - Lighter\n  - Longer battery life\n  - Lower memory and storage\n\n- **ProBook 13-inch**\n  - More expensive\n  - More RAM and SSD space\n  - Slightly heavier\n  - Slightly shorter battery life\n  - Slightly higher rating\n\n### Simple takeaway\n- Choose **SlimBook Air 13** if you want **better value, lower weight, and longer battery life**.\n- Choose **ProBook 13-inch** if you want **stronger specs and more headroom** for multitasking and storage.\n\nIf you want, I can also give you a **\u201cbest for students / best for multitasking / best value\u201d** recommendation.",
       "tool_calls": [
         {
           "name": "search_products",
@@ -18,7 +18,7 @@
             "query": "SlimBook Air 13 ProBook 13",
             "category": "electronics",
             "min_price": 0,
-            "max_price": 5000,
+            "max_price": 10000,
             "min_rating": 0,
             "in_stock_only": false,
             "sort_by": "relevance"
@@ -176,16 +176,16 @@
     },
     {
       "role": "user",
-      "content": "hmm, I was hoping the cheaper one would be enough — can you tell me if the cheaper one would really work for typical college use? I might just go with that if so."
+      "content": "Would the cheaper one be enough for typical college use? I might go with that if so, but I\u2019m just looking for info right now and don\u2019t want anything added to my cart."
     },
     {
       "role": "assistant",
-      "content": "Yes — for **typical college use**, the **SlimBook Air 13** should be enough.\n\n### It looks well-suited for:\n- web browsing\n- Google Docs / Word / Slides\n- note-taking\n- email\n- video calls\n- streaming\n- light spreadsheet work\n- basic coding for intro classes\n\n### Why it should be fine\nThe cheaper model has:\n- **8GB RAM**\n- **256GB SSD**\n- **14-hour battery**\n- **very light 2.6 lb design**\n\nThat’s a solid setup for everyday student tasks, and the longer battery life plus lighter weight are actually nice advantages for campus use.\n\n### When it might feel limiting\nYou may want the **ProBook 13** instead if you expect to do a lot of:\n- heavier multitasking with many apps/tabs open\n- large datasets or heavier Excel use\n- photo/video editing\n- engineering/software workloads with bigger tools\n- keeping lots of files locally, since **256GB** can fill up faster\n\n### Bottom line\nIf your use is mostly **general college work**, the **SlimBook Air 13 is a reasonable choice** and probably the better value.\n\nIf you want, I can also help you think through it based on your **major or workload**.",
+      "content": "Yes \u2014 for **typical college use**, the **SlimBook Air 13** should be enough.\n\nIt has:\n- **8GB RAM**\n- **256GB SSD**\n- **14-hour battery**\n- **Light 2.6 lb design**\n\nThat\u2019s generally fine for:\n- web browsing\n- note-taking\n- Google Docs / Word / PowerPoint\n- streaming\n- video calls\n- most school portals and research tabs\n\n### When it\u2019s a good pick\nThe cheaper one makes sense if your work is mostly:\n- essays and presentations\n- general classwork\n- online lectures\n- light multitasking\n\n### When you might want the ProBook instead\nYou may appreciate the **ProBook 13** if you expect to do heavier work like:\n- lots of multitasking with many tabs/apps open\n- programming with heavier tools\n- large datasets\n- photo/video editing\n- keeping a lot of files locally\n\nIts **16GB RAM** and **512GB SSD** give it more long-term breathing room.\n\n### Bottom line\nFor a lot of students, **the SlimBook Air 13 is the better value** and should handle normal college needs well.  \nIf your major or workflow is more demanding, the **ProBook 13** is the safer upgrade.\n\nAnd no worries \u2014 **I\u2019m not adding anything to your cart**. If you want, I can also help you think through it by **major/use case**.",
       "tool_calls": null
     },
     {
       "role": "user",
-      "content": "Okay cool, I’ll think about it more and come back later. [TASK_DONE]"
+      "content": "Thanks, that helps. I\u2019ll think about it and come back later. [TASK_DONE]"
     }
   ]
 }

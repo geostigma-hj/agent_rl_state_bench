@@ -15,16 +15,25 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from state_bench.agents.base import AgentPricing, BaseAgent
+from state_bench.agents.base import BaseAgent
 from state_bench.agents.loader import load_root_agent_class, load_root_client_class
 from state_bench.agents.state_bench import StateBenchAgent
-from state_bench.client import BaseLLMClient, LLMClient, PooledLLMClient, build_llm_client, build_user_sim_client
+from state_bench.client import (
+    BaseLLMClient,
+    LLMClient,
+    PooledLLMClient,
+    build_llm_client,
+    build_locked_judge_client,
+    build_user_sim_client,
+)
 from state_bench.domain import get_domain_config
 from state_bench.env_loader import load_task_environment
 from state_bench.orchestrator import run_task
 from state_bench.paths import domain_tasks_dir
-from state_bench.protocol import load_default_protocol, load_split_task_ids
+from state_bench.protocol import format_domain_not_in_protocol_error, load_default_protocol, load_split_task_ids
 from state_bench.schemas import TaskDefinition
+from state_bench.scoring import TaskRequirementsJudge, UXQualityJudge
+from state_bench.scripts.score import score_one
 
 
 def _build_agent_model_metadata(args: argparse.Namespace) -> dict[str, str | None]:
@@ -35,36 +44,6 @@ def _build_agent_model_metadata(args: argparse.Namespace) -> dict[str, str | Non
     if isinstance(reasoning_level, str):
         reasoning_level = reasoning_level.strip() or None
     return {"model_name": model_name, "reasoning_level": reasoning_level}
-
-
-def _build_agent_pricing(args: argparse.Namespace) -> AgentPricing | None:
-    model_name = (args.agent_model_name or "").strip()
-    pricing_values = [
-        args.agent_input_cost_per_1m,
-        args.agent_output_cost_per_1m,
-        args.agent_cached_input_cost_per_1m,
-    ]
-    if all(value is None for value in pricing_values):
-        return None
-
-    missing = [
-        flag
-        for flag, value in [
-            ("--agent-input-cost-per-1m", args.agent_input_cost_per_1m),
-            ("--agent-output-cost-per-1m", args.agent_output_cost_per_1m),
-        ]
-        if value is None
-    ]
-    if missing:
-        raise ValueError("agent pricing requires " + ", ".join(missing))
-    pricing = AgentPricing(
-        model_name=model_name,
-        input_cost_per_1m_tokens=args.agent_input_cost_per_1m,
-        output_cost_per_1m_tokens=args.agent_output_cost_per_1m,
-        cached_input_cost_per_1m_tokens=args.agent_cached_input_cost_per_1m,
-    )
-    pricing.validate()
-    return pricing
 
 
 def _parse_task_ids(raw_values: list[str]) -> list[str]:
@@ -120,11 +99,12 @@ def _run_single_task(
     domain,
     output_dir: Path,
     protocol=None,
-    agent_pricing: AgentPricing | None = None,
     agent_model: dict[str, str | None] | None = None,
     agent_class: type[BaseAgent] | None = None,
     retrieve_learnings_top_k: int = 3,
     agent_reasoning_effort: str | None = None,
+    task_requirements_judge: TaskRequirementsJudge | None = None,
+    ux_judge: UXQualityJudge | None = None,
 ) -> dict:
     user_id = user_override or task.user_id
     if not user_id:
@@ -149,8 +129,6 @@ def _run_single_task(
         metadata["agent_name"] = (agent_class or StateBenchAgent).__name__
         if agent_model is not None:
             metadata["agent_model"] = agent_model
-        if agent_pricing is not None:
-            metadata["agent_pricing"] = agent_pricing.to_dict()
 
     trajectory = run_task(
         task,
@@ -162,7 +140,6 @@ def _run_single_task(
         env=None,
         trajectory_metadata=metadata,
         simulator_client=simulator_client,
-        agent_pricing=agent_pricing,
         agent_class=agent_class,
         retrieve_learnings_top_k=retrieve_learnings_top_k,
         agent_reasoning_effort=agent_reasoning_effort,
@@ -183,6 +160,21 @@ def _run_single_task(
         "env_path": str(env_path),
         "task_summary": task.task_summary,
     }
+    if task_requirements_judge is not None or ux_judge is not None:
+        score_result = score_one(
+            output_path,
+            domain_tasks_dir(domain.name),
+            task_requirements_judge,
+            ux_judge,
+            output_path,
+            protocol,
+            domain.name,
+        )
+        result["scoring_status"] = score_result.get("status")
+        if score_result.get("status") == "ERR":
+            result["scoring_error"] = score_result.get("error", "unknown scoring error")
+        if "ux_score" in score_result:
+            result["ux_score"] = score_result["ux_score"]
     if trajectory.efficiency:
         result["efficiency"] = {
             "turns": trajectory.efficiency.turns,
@@ -192,7 +184,8 @@ def _run_single_task(
         }
     if trajectory.token_usage is not None:
         result["token_usage"] = trajectory.token_usage.to_dict()
-        result["cost_usd"] = trajectory.token_usage.total_cost_usd
+        if trajectory.token_usage.total_cost_usd:
+            result["cost_usd"] = trajectory.token_usage.total_cost_usd
     return result
 
 
@@ -217,15 +210,13 @@ def main() -> None:
         default=1,
         help="Starting run index for output directories (default: 1)",
     )
-    parser.add_argument(
-        "--num-workers", "--workers", dest="workers", type=int, default=None, help="Number of parallel task workers"
-    )
+    parser.add_argument("--num-workers", dest="workers", type=int, default=None, help="Number of parallel task workers")
     parser.add_argument(
         "--split",
         type=str,
-        default="test",
-        choices=["test"],
-        help=argparse.SUPPRESS,
+        default="all",
+        choices=["all", "train", "test"],
+        help="Task split to run when --task is omitted (default: all)",
     )
     parser.add_argument(
         "--agent-class",
@@ -274,32 +265,33 @@ def main() -> None:
         help="Optional agent model reasoning level reported in trajectories and metrics",
     )
     parser.add_argument(
-        "--agent-input-cost-per-1m",
-        type=float,
-        default=None,
-        help="Override agent input token cost in USD per 1M tokens",
+        "--no-ux-score",
+        action="store_true",
+        help="Score task/state requirements inline but skip UX judge calls.",
     )
     parser.add_argument(
-        "--agent-output-cost-per-1m",
-        type=float,
-        default=None,
-        help="Override agent output token cost in USD per 1M tokens",
+        "--no-score",
+        action="store_true",
+        help="Disable all inline judge scoring.",
     )
     parser.add_argument(
-        "--agent-cached-input-cost-per-1m",
-        type=float,
+        "--score-reasoning-effort",
+        type=str,
         default=None,
-        help="Override cached-input token cost in USD per 1M tokens",
+        choices=["low", "medium", "high"],
+        help="Reasoning effort for inline judge scoring (default: protocol judge setting)",
     )
     args = parser.parse_args()
     if args.num_runs < 1:
         parser.error("--num-runs must be >= 1")
     if args.num_runs_idx_start < 1:
         parser.error("--num-runs-idx-start must be >= 1")
-    if args.task and args.split != "test":
+    if args.task and args.split != "all":
         parser.error("--task and --split are mutually exclusive")
     if args.retrieve_learnings_top_k < 1:
         parser.error("--retrieve-learnings-top-k must be >= 1")
+    if args.no_score and args.no_ux_score:
+        parser.error("--no-score and --no-ux-score are mutually exclusive")
     try:
         _validate_agent_client_args(args, sys.argv[1:])
     except ValueError as exc:
@@ -308,14 +300,13 @@ def main() -> None:
     protocol = load_default_protocol()
     try:
         agent_model = _build_agent_model_metadata(args)
-        agent_pricing = _build_agent_pricing(args)
     except ValueError as exc:
         parser.error(str(exc))
     protocol_errors = protocol.validate_prompt_hashes()
     if protocol_errors:
         parser.error("Protocol prompt validation failed:\n" + "\n".join(protocol_errors))
     if args.domain not in protocol.domains:
-        parser.error(f"Domain {args.domain!r} is not part of protocol {protocol.protocol_id}")
+        parser.error(format_domain_not_in_protocol_error(args.domain, protocol))
     tasks_dir = domain_tasks_dir(args.domain)
     base_output = Path(args.output_dir) if args.output_dir else Path(f"outputs/{args.domain}")
     agent_class = load_root_agent_class(args.agent_class) if args.agent_class else None
@@ -334,6 +325,24 @@ def main() -> None:
             api_key_var=args.agent_api_key_var,
         )
     user_sim_client = build_user_sim_client()
+    task_requirements_judge = None
+    ux_judge = None
+    if not args.no_score:
+        judge_client = build_locked_judge_client()
+        score_reasoning_effort = args.score_reasoning_effort or protocol.judge_reasoning_effort
+        task_requirements_judge = TaskRequirementsJudge(
+            client=judge_client,
+            prompts_dir=domain.prompts_dir,
+            system_prompt=domain.judge_system_prompt,
+            reasoning_effort=score_reasoning_effort,
+        )
+        if not args.no_ux_score:
+            ux_judge = UXQualityJudge(
+                client=judge_client,
+                prompts_dir=domain.prompts_dir,
+                system_prompt=domain.judge_system_prompt,
+                reasoning_effort=score_reasoning_effort,
+            )
 
     task_ids = (
         _parse_task_ids(args.task)
@@ -356,15 +365,15 @@ def main() -> None:
 
     agent_name = (agent_class or StateBenchAgent).__name__
     print(f"Agent: {agent_name}")
-    if agent_pricing is not None:
+    print("Agent cost: user-reported via BaseAgent.add_cost_usd() when provided")
+    if not args.no_score:
+        score_mode = "task/state only" if args.no_ux_score else "task/state + UX"
         print(
-            f"Agent pricing: {agent_pricing.model_name} "
-            f"input=${agent_pricing.input_cost_per_1m_tokens}/1M "
-            f"output=${agent_pricing.output_cost_per_1m_tokens}/1M "
-            f"source={agent_pricing.source}"
+            f"Scoring: inline {score_mode} "
+            f"(reasoning_effort={args.score_reasoning_effort or protocol.judge_reasoning_effort})"
         )
     else:
-        print("Agent pricing: not provided (token counts recorded without cost)")
+        print("Scoring: off (--no-score set; use state_bench.scripts.score for local scoring)")
 
     run_indices = list(range(args.num_runs_idx_start, args.num_runs_idx_start + args.num_runs))
     run_dirs = {run_idx: base_output / f"run{run_idx}" for run_idx in run_indices}
@@ -376,7 +385,9 @@ def main() -> None:
         f"# Running {len(tasks)} task(s) across run indices {run_indices[0]}..{run_indices[-1]}"
         f" => {len(work_items)} total job(s) with {worker_count} worker(s)"
     )
-    print("# Scoring: off for run_task local execution")
+    print(
+        f"# Scoring: {'off' if args.no_score else ('inline task/state only' if args.no_ux_score else 'inline task/state + UX')}"
+    )
     print(f"{'#' * 60}")
 
     results: list[dict] = []
@@ -394,11 +405,12 @@ def main() -> None:
                 domain,
                 run_dirs[run_idx],
                 protocol,
-                agent_pricing,
                 agent_model,
                 agent_class,
                 args.retrieve_learnings_top_k,
                 (agent_model or {}).get("reasoning_level"),
+                task_requirements_judge,
+                ux_judge,
             )
             results.append(result)
     else:
@@ -414,11 +426,12 @@ def main() -> None:
                     domain,
                     run_dirs[run_idx],
                     protocol,
-                    agent_pricing,
                     agent_model,
                     agent_class,
                     args.retrieve_learnings_top_k,
                     (agent_model or {}).get("reasoning_level"),
+                    task_requirements_judge,
+                    ux_judge,
                 ): (run_idx, task)
                 for run_idx, task in work_items
             }
@@ -460,12 +473,27 @@ def main() -> None:
                 f"memory_ingest=${usage.get('memory_ingestion_cost_usd', 0.0):.4f}, "
                 f"memory_retrieval=${usage.get('memory_retrieval_cost_usd', 0.0):.4f}"
             )
+        if result.get("scoring_status"):
+            suffix = f"; ux={result['ux_score']}" if "ux_score" in result else ""
+            print(f"  Scoring: {result['scoring_status']}{suffix}")
+        if result.get("scoring_error"):
+            print(f"  Scoring error: {result['scoring_error']}")
 
-    print(
-        f"\nScore with: uv run python -m state_bench.scripts.score --domain {args.domain} "
-        f"--results-dir {base_output} "
-        f"--num-runs {args.num_runs} --num-runs-idx-start {args.num_runs_idx_start}"
-    )
+    if not args.no_score:
+        print(
+            f"\nMetrics with: uv run python -m state_bench.scripts.compute_metrics --domain {args.domain} "
+            f"--results-dir {base_output} "
+            f"--num-runs {args.num_runs} --num-runs-idx-start {args.num_runs_idx_start} "
+            f"--split {args.split} "
+            f"--save-filepath {base_output / 'metrics.json'}"
+        )
+    else:
+        print(
+            f"\nScore with: uv run python -m state_bench.scripts.score --domain {args.domain} "
+            f"--results-dir {base_output} "
+            f"--num-runs {args.num_runs} --num-runs-idx-start {args.num_runs_idx_start} "
+            f"--split {args.split}"
+        )
 
 
 if __name__ == "__main__":

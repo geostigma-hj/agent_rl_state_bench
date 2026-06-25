@@ -32,7 +32,6 @@ def build_simulator_prompt(
     identity_lines = [
         "## Identity\n",
         f"You are **{customer.name}**.",
-        f"- Personality: {sim.personality}",
         f"- Membership tier: {customer.membership_tier}",
         f"- Customer ID: {customer.customer_id}",
     ]

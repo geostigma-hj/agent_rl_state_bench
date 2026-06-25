@@ -4,29 +4,23 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "My flight UA100 is showing a huge delay. What are my options? I really need to get to Dallas today.",
   "user_simulator": {
-    "personality": "Frustrated but reasonable. Wants solutions, not excuses.",
     "known_info": [
-      "Your user ID: user_002",
-      "Booking ID: BK-MS04",
-      "Flight UA100 is delayed",
-      "Currently in economy class",
-      "Wants to get to Dallas today",
-      "Willing to upgrade to business if available"
+      "Booking: BK-MS04.",
+      "Needs to get to Dallas today.",
+      "Open to a business upgrade if available."
     ],
-    "unknown_info": [
-      "Exact delay duration",
-      "Compensation eligibility rules",
-      "Available alternative flights",
-      "Upgrade pricing"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Start by mentioning your flight UA100 is delayed and ask about options.",
-      "When agent explains compensation, accept it and ask about rebooking.",
-      "When alternative flights are offered, ask about upgrading the earliest same-day replacement to business class.",
-      "When upgrade price is quoted, accept if the replacement business fare is within your $800 total flight budget and the extra amount from your original $300 economy fare is clear.",
-      "If the agent asks about seat or meal details, answer directly.",
-      "When everything is processed, ask for a summary of compensation + new booking.",
-      "End with [TASK_DONE].",
+      "Start from the delayed UA100 booking and keep the scope to getting to Dallas today, claiming any delay compensation, and considering a business upgrade on the replacement flight.",
+      "If the agent asks for booking details, provide BK-MS04; do not volunteer the business-upgrade interest until rebooking options are being discussed.",
+      "Accept the compensation path only after the agent explains that the 270-minute delay qualifies for full delay compensation, including the meal-voucher benefit; ask about that full path if only a lesser delay remedy is offered.",
+      "When rebooking is discussed, expect it to be handled under the delay waiver with no separate ordinary change fee; push back if the agent treats it as a voluntary paid change.",
+      "If the agent offers same-day replacements, choose the earliest option that still gets you to Dallas today and ask whether that replacement can be upgraded to business class.",
+      "Before approving the replacement, ask for enough option detail to verify the airline, same-day timing, stops, business cabin availability, and that the total remains within your $800 budget; do not try to verify the raw flight_id.",
+      "Approve the business upgrade only after the agent explains the pricing as the fare difference from your original economy booking to the replacement business itinerary, with a $317 additional cost and $617 total paid.",
+      "If the agent asks about booking preferences for the changed booking, keep the existing preferences except set cabin class to business; if asked directly about meal or seat, use vegetarian and window.",
+      "After the agent completes the action, ask for a summary covering the full delay compensation, no change fee, replacement flight, business cabin, fare difference, total paid, and key retained preferences.",
+      "End with [TASK_DONE] only after the compensation is applied and the changed booking is confirmed with the expected business cabin, fare difference, and preserved preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -61,8 +55,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "multi_booking_trip_coordination",
-  "task_env_path": "state_bench/domains/travel/task_envs/29-cascade_delay_rebook_upgrade.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -75,12 +67,6 @@
       "record_key": "BK-MS04",
       "field": "change_fee",
       "expected_value": 0
-    },
-    {
-      "entity_type": "bookings",
-      "record_key": "BK-MS04",
-      "field": "delay_compensation",
-      "expected_value": "full"
     },
     {
       "entity_type": "bookings",
@@ -100,5 +86,7 @@
       "field": "price_paid",
       "expected_value": 617
     }
-  ]
+  ],
+  "task_type": "multi_booking_trip_coordination",
+  "task_env_path": "state_bench/domains/travel/task_envs/29-cascade_delay_rebook_upgrade.json"
 }

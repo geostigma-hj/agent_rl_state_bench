@@ -10,16 +10,16 @@
     },
     {
       "role": "assistant",
-      "content": "Here are two actual coffee-related gift options under $150:\n\n### 1) BrewMaster Thermal Coffee Maker — $129\n- **Type:** Coffee maker\n- **Rating:** 4.5/5\n- **Reviews:** 780\n- **Stock:** In stock\n- **Estimated shipping:** 3 business days standard\n\n### 2) HomeBrew Pour-Over Coffee Set — $59\n- **Type:** Pour-over coffee set\n- **Rating:** 4.4/5\n- **Reviews:** 610\n- **Stock:** In stock\n- **Estimated shipping:** 2 business days standard\n\n## Quick comparison\n- **Best for practicality:** **BrewMaster Thermal Coffee Maker**\n  - Better if you want a more substantial, ready-to-use appliance gift.\n  - Slightly higher rating and more reviews.\n- **Best for value / enthusiast feel:** **HomeBrew Pour-Over Coffee Set**\n  - Much lower price.\n  - Better if the recipient enjoys a more hands-on coffee routine.\n\n## My recommendation\nIf you want the **best overall coffee gift under $150**, I’d pick the **BrewMaster Thermal Coffee Maker** at **$129**. It feels more gift-worthy as a standalone present and has the stronger review profile.\n\nIf you want, I can also suggest the **best option by recipient type**—for example, beginner, coffee enthusiast, or office use.",
+      "content": "Here are two actual coffee-themed options in stock under $150 from the current catalog:\n\n| Product | Price | Rating | Reviews | Best for | Shipping estimate |\n|---|---:|---:|---:|---|---|\n| **BrewMaster Thermal Coffee Maker** (SP-H119) | **$129** | **4.5/5** | 780 | Someone who wants a practical daily-use coffee machine | 3 business days |\n| **HomeBrew Pour-Over Coffee Set** (SP-H118) | **$59** | **4.4/5** | 610 | Someone who enjoys a more hands-on coffee ritual | 2 business days |\n\n### Quick comparison\n- **BrewMaster Thermal Coffee Maker**\n  - Higher-end gift within your budget\n  - Best if you want something more substantial and broadly useful\n  - Slightly better rating and more reviews\n\n- **HomeBrew Pour-Over Coffee Set**\n  - Much more affordable\n  - Feels more niche and enthusiast-friendly\n  - Better if the recipient already likes manual brewing\n\n### My recommendation\n**Best overall gift under $150: BrewMaster Thermal Coffee Maker ($129).**  \nIt feels more gift-worthy at this budget, has the stronger rating/review profile, and is likely to appeal to a wider range of coffee drinkers.\n\nIf you want, I can also suggest the **best coffee gift for a beginner vs. a coffee enthusiast** from these two.",
       "tool_calls": [
         {
           "name": "search_products",
           "arguments": {
-            "query": "coffee maker coffee gift",
+            "query": "coffee",
             "category": "kitchen",
-            "min_price": 1,
+            "min_price": 0,
             "max_price": 150,
-            "min_rating": 3.5,
+            "min_rating": 0,
             "in_stock_only": true,
             "sort_by": "relevance"
           },
@@ -109,7 +109,7 @@
     },
     {
       "role": "user",
-      "content": "That works — thanks for comparing two real options and not adding anything. The BrewMaster sounds like the better pick from those two. [TASK_DONE]"
+      "content": "Thanks \u2014 that\u2019s the kind of comparison I wanted. I\u2019m leaning toward the BrewMaster, but I only wanted recommendations and no cart changes. [TASK_DONE]"
     }
   ]
 }

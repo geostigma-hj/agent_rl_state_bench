@@ -1,7 +1,27 @@
 {
   "task_id": "62-challenge_exchange_oos_pivot",
+  "user_id": "cust_003",
+  "now": "2026-07-08T10:00:00",
+  "opening_message": "I'd like to exchange my headphones from ORD-7061 for the SoundMax Elite premium model instead.",
+  "user_simulator": {
+    "known_info": [
+      "order_id: ORD-7061",
+      "current: SoundMax Wireless ($249)",
+      "desired: SoundMax Elite ($349)"
+    ],
+    "task_rules": [
+      "Start by pursuing an exchange of the ORD-7061 SoundMax Wireless headphones for the SoundMax Elite; do not ask for a refund unless the exchange cannot be fulfilled or no definite restock date is available.",
+      "If the agent asks for identifying details, provide ORD-7061 and the current and desired headphone models; do not invent stock, policy, fee, refund amount, or restock timing facts.",
+      "When the agent says the SoundMax Elite is out of stock, ask whether there is a definite restock date before choosing an alternative.",
+      "If there is no definite restock date, or if the agent suggests waiting, backordering, or continuing the exchange indefinitely, ask to use the refund return option instead.",
+      "Push back if the agent tries to process an exchange for the unavailable Elite, changes the item or replacement model, offers only store credit, or skips the return alternative after the out-of-stock finding.",
+      "Accept the return only after the agent previews a changed-mind return of the original headphones with the restocking fee, refund amount, and original-payment refund method disclosed; ask them to correct or explain any missing or inconsistent detail.",
+      "End only after the agent confirms the original headphones have been returned with the expected changed-mind reason, original-payment refund, and restocking fee applied."
+    ],
+    "unknown_info": [],
+    "user_sim_context": "You start by wanting to exchange your headphones for the premium model, but that only works for you if the replacement is actually available. If it is not, you are willing to pivot rather than wait indefinitely. You need the agent to explain the options and follow your updated choice cleanly."
+  },
   "task_summary": "**Task:** The customer asks for an exchange, but the desired replacement is out of stock and ultimately chooses a refund instead. The correct handling is to explain the out-of-stock constraint, offer the available alternatives, and then complete the changed-mind return path with the $222 refund minus the $37 restocking fee once the customer pivots.\n\n**Challenge:** The agent has to adapt when the first path becomes unavailable. Weak agents keep trying to force the exchange, fail to offer a refund alternative, or stall after discovering the replacement cannot be fulfilled.",
-  "task_type": "compound",
   "task_requirements": [
     {
       "evidence": "conversation_or_tool_calls",
@@ -16,30 +36,6 @@
       "requirement": "Agent must offer return as alternative to out-of-stock exchange."
     }
   ],
-  "user_id": "cust_003",
-  "now": "2026-07-08T10:00:00",
-  "opening_message": "I'd like to exchange my headphones from ORD-7061 for the SoundMax Elite premium model instead.",
-  "user_simulator": {
-    "known_info": [
-      "order_id: ORD-7061",
-      "current: SoundMax Wireless ($249)",
-      "desired: SoundMax Elite ($349)"
-    ],
-    "personality": "friendly",
-    "task_rules": [
-      "Give order ID.",
-      "Request exchange for the Premium model.",
-      "If told out of stock, ask: 'When will it be back?'",
-      "If agent can't give a date, say: 'Fine, just give me a refund then.'",
-      "If the agent suggests waiting, backordering, or continuing the exchange without a definite restock date, say you do not want to wait indefinitely and ask for the refund option instead.",
-      "Confirm the return only after the agent previews a changed-mind return of the original headphones with the restocking fee disclosed and the refund going back to the original payment method; if the preview uses store credit only or omits the restocking fee, ask them to correct or explain it."
-    ],
-    "unknown_info": [
-      "stock availability",
-      "refund amount with restocking"
-    ],
-    "user_sim_context": "You start by wanting to exchange your headphones for the premium model, but that only works for you if the replacement is actually available. If it is not, you are willing to pivot rather than wait indefinitely. You need the agent to explain the options and follow your updated choice cleanly."
-  },
   "state_requirements": [
     {
       "entity_type": "order_items",
@@ -78,5 +74,6 @@
       "expected_value": "fully_returned"
     }
   ],
+  "task_type": "compound",
   "task_env_path": "state_bench/domains/customer_support/task_envs/62-challenge_exchange_oos_pivot.json"
 }

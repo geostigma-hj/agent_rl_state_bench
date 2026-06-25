@@ -40,6 +40,8 @@ Start with the track that matches what you want to evaluate. Each track guide li
 
 The **Main Track** is the default benchmark path. The **Agent Learning Track** uses the same simulator, domain tools, judges, and metrics, but adds train trajectories and a retrieval hook for reusable learnings such as memories, skills, or prompt optimizations.
 
+For run commands and flag selection, start with the relevant track guide. The shared [`run_batch` reference](docs/eval/run-batch.md) lists which flags are required for the built-in agent, custom clients, and learning-track runs.
+
 <br/>
 
 <p align="center">
@@ -57,7 +59,7 @@ STATE-Bench reports four headline metrics:
 | **Task Completion pass@1** | Average task completion rate across five runs per task. |
 | **Task Completion pass^5** | Percentage of tasks completed successfully on all five runs. |
 | **UX Score** | LLM-judged conversation quality on a 1-5 scale. |
-| **Cost Per Task** | Average agent cost from user-reported token usage and pricing. |
+| **Cost Per Task** | Average agent cost from user-reported dollars per task. |
 
 ## License
 

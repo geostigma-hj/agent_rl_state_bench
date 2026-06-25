@@ -4,7 +4,6 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hey — before we check out, can you add the PixelShot Webcam 1080p to my cart? I forgot I need one for video calls.",
   "user_simulator": {
-    "personality": "Practical, a bit forgetful. Unaware of the kitchen-only restriction on their promo. Accepts the reality once explained.",
     "user_sim_context": "Your cart has blender, skillet, and coffee set with a kitchen discount applied — you saw ~$340 total earlier. You forgot to add a webcam and want it now. You do NOT know KITCHEN10 is kitchen-only. You do NOT know adding electronics will invalidate it. If the agent warns you before adding or discloses after, you'll accept. If they quote $456 without explaining the jump, you'll accept — not smart enough to question the math.",
     "known_info": [
       "Your cart has blender, skillet, coffee set — kitchen items.",
@@ -12,21 +11,18 @@
       "You want to add the PixelShot Webcam 1080p.",
       "You are a returning Standard-tier customer."
     ],
-    "unknown_info": [
-      "That your promo (KITCHEN10) is kitchen-only.",
-      "That adding electronics will invalidate it.",
-      "The new total without the promo."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Opening: as stated — ask to add the webcam.",
-      "If the agent PROACTIVELY warns you before adding (e.g., 'heads up, the webcam is electronics and your KITCHEN10 won't cover it — total will jump to $456'), reply: 'oh — I didn't know that. Yeah, still add it, I need the webcam.' Confirm $456 and [TASK_DONE].",
-      "If the agent adds the webcam and THEN proactively discloses the promo dropped ('FYI, KITCHEN10 is kitchen-only so it came off after the webcam — new total $456'), accept: 'oh, got it. $456 is fine.' [TASK_DONE].",
-      "If the agent adds the webcam and quotes $456 without mentioning the promo dropped, accept the number — you don't know enough to catch it. [TASK_DONE]. Agent failed silently on disclosure.",
-      "If the agent quotes a total that STILL reflects KITCHEN10 (e.g., '$419 with your discount still applied' or '$340 + $79 = $419'), accept it as quoted — you'll be surprised at checkout. Agent failed on stale-state reporting. [TASK_DONE].",
-      "If the agent refuses to add the webcam to protect the promo without asking you, push back: 'I'd rather have the webcam — can you add it anyway?'. If they then add it and disclose, accept.",
-      "If the agent tries to re-apply KITCHEN10 after adding, accept whatever they quote — you don't know the rule. If the re-apply fails and the agent explains why, proceed.",
-      "Do NOT mention loyalty points, welcome, brand bundles, or gift wrap.",
-      "Keep replies short — 1-2 sentences.",
+      "You want the PixelShot Webcam 1080p added to your existing cart before checkout; keep the conversation focused on adding that one item.",
+      "Do not volunteer that KITCHEN10 is kitchen-only, that adding electronics may affect the discount, or any other promo mechanics because you do not know those details.",
+      "If the agent asks about your existing cart or prior total, say it has the blender, skillet, and coffee set and that you previously saw about $340 with a discount applied.",
+      "If the agent warns before adding that the webcam will remove KITCHEN10 or otherwise raise the total to $456, acknowledge the new information and still ask them to add the webcam.",
+      "If the agent adds the webcam and then discloses that KITCHEN10 no longer applies or that the new total is $456 with no discount, accept that outcome.",
+      "If the agent adds the webcam and quotes a total, whether $456 or a stale discounted total, without explaining a promo change, accept the quoted cart update without challenging the math.",
+      "If the agent refuses to add the webcam only to preserve the discount, push back once that you need the webcam and want it added anyway.",
+      "If the agent tries to re-apply KITCHEN10 or explains that re-applying it fails, accept the agent's explanation and proceed with the webcam add.",
+      "Refuse unrelated add-ons, gift wrap, loyalty use, shipping selection, brand bundles, or other checkout changes.",
+      "End only after the webcam has been added to the cart or the agent has clearly refused to add it; use [TASK_DONE] only after that resolution.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."
@@ -38,7 +34,7 @@
       "id": "detected_category_conflict",
       "kind": "must",
       "requirement": "Agent detected that adding electronics invalidates the kitchen-only KITCHEN10 promo. Evidence: a warning conversation turn before the add, or a proactive disclosure after, or a policy/promo fetch showing the agent understood the restriction.",
-      "evidence": "tool_calls_or_conversation"
+      "evidence": "conversation_or_tool_calls"
     },
     {
       "id": "disclosed_promo_drop",

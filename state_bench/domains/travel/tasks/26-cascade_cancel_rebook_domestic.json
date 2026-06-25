@@ -4,34 +4,24 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Hi, I need to cancel my flight to Miami — booking BK-MS01 — and then rebook a flight to Denver instead.",
   "user_simulator": {
-    "personality": "Friendly and cooperative. Provides information when asked.",
     "known_info": [
-      "Your user ID: user_004",
-      "Flight booking ID: BK-MS01",
-      "Has travel insurance on this booking",
+      "Flight booking ID: BK-MS01.",
       "Wants to fly ORD → DEN on June 22",
-      "Prefers WN airline, morning, and nonstop options",
-      "Budget max: $600",
-      "Hotel reservation: HR-0104",
-      "Hotel in Miami, June 20-23"
+      "Prefers WN airline, morning, and nonstop options.",
+      "Hotel reservation HR-0104: Miami, June 20-23."
     ],
-    "unknown_info": [
-      "Exact cancellation refund amount",
-      "Available flights to Denver and their prices",
-      "Hotel cancellation fee"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Start by asking to cancel booking BK-MS01.",
-      "Do NOT proactively mention the hotel. Only bring it up if the agent asks about other reservations.",
-      "When cancellation is confirmed, say you need to book a new flight to Denver on June 22.",
-      "If the agent asks about other reservations, mention the hotel.",
-      "If the agent does NOT ask, do not mention it.",
-      "When the agent shows rebook options and the preferred WN morning nonstop is over budget, ask what's available within $600.",
-      "Pick the WN afternoon 1-stop at $280 — keeping the airline is more important than time or stops.",
-      "For the replacement Denver flight, use your profile booking preferences: no WiFi, no extra legroom, and add insurance.",
-      "If the agent asks about seat or meal details, answer directly.",
-      "If the agent asks about add-ons for the replacement flight, answer from your profile preferences.",
-      "When new booking is confirmed, end with [TASK_DONE].",
+      "Start with the request to cancel flight booking BK-MS01 and then rebook to Denver; do not volunteer the Miami hotel unless the agent asks about related reservations or the rest of the trip.",
+      "If the agent asks for Denver details, provide ORD to DEN on June 22, with WN, morning, and nonstop as preferences and a firm $600 budget.",
+      "If the agent asks about related Miami reservations or trip cleanup, mention hotel reservation HR-0104 for Miami on June 20-23 and agree that it should be handled before the Denver replacement is finalized.",
+      "Accept each cancellation only after the agent previews the item being canceled plus any fee and refund; push back if the flight cancellation is treated as the whole Miami trip after the hotel has been surfaced.",
+      "When the agent presents Denver options, reject any option above $600 and ask for within-budget alternatives if they are not already shown.",
+      "Choose WN401 only after the agent makes clear it keeps WN but gives up morning timing and nonstop service to stay within budget; keeping WN matters more than time or stops.",
+      "For the replacement Denver booking, use economy with the profile preferences: window seat, standard meal, no WiFi, no extra legroom, insurance, and no checked bags unless asked otherwise.",
+      "Before approving the replacement booking, make sure the agent has shown enough detail to verify airline, time range, stop count, price, and the booking preferences; ask for missing details instead of approving early.",
+      "If the agent books or previews the replacement with a wrong preference, correct one preference at a time in this order: cabin class, seat type, meal, WiFi, extra legroom, insurance, checked bags.",
+      "End with [TASK_DONE] only after the Miami flight and hotel cancellations are confirmed and the new Denver booking is confirmed within budget with the expected preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -56,7 +46,7 @@
     {
       "id": "state_over_budget_option_explained",
       "kind": "must",
-      "requirement": "Agent must explain that the preferred WN morning nonstop replacement WN400 is over the user's budget and present the within-budget alternatives.",
+      "requirement": "Agent must communicate that no WN morning/nonstop option is available within the $600 budget and present the within-budget WN alternative.",
       "evidence": "conversation"
     },
     {
@@ -66,8 +56,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "multi_booking_trip_coordination",
-  "task_env_path": "state_bench/domains/travel/task_envs/26-cascade_cancel_rebook_domestic.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -146,5 +134,7 @@
         "user_id": "user_004"
       }
     }
-  ]
+  ],
+  "task_type": "multi_booking_trip_coordination",
+  "task_env_path": "state_bench/domains/travel/task_envs/26-cascade_cancel_rebook_domestic.json"
 }

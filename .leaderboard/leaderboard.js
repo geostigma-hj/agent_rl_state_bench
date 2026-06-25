@@ -7,6 +7,7 @@ const entries = [
     agent: "",
     organization: "OpenAI",
     submissionDate: "2026-05-25",
+    benchmarkVersion: "0.7.0",
     verificationStatus: "verified",
     metrics: {
       overallPassAt1: 55.7,
@@ -29,6 +30,7 @@ const entries = [
     agent: "",
     organization: "Anthropic",
     submissionDate: "2026-05-29",
+    benchmarkVersion: "0.7.0",
     verificationStatus: "verified",
     metrics: {
       overallPassAt1: 53.4,
@@ -50,6 +52,7 @@ const entries = [
     agent: "",
     organization: "Moonshot AI",
     submissionDate: "2026-05-25",
+    benchmarkVersion: "0.7.0",
     verificationStatus: "verified",
     metrics: {
       overallPassAt1: 48.3,
@@ -71,6 +74,7 @@ const entries = [
     agent: "",
     organization: "DeepSeek",
     submissionDate: "2026-05-25",
+    benchmarkVersion: "0.7.0",
     verificationStatus: "verified",
     metrics: {
       overallPassAt1: 47.2,
@@ -92,6 +96,7 @@ const entries = [
     model: "GPT-5.4",
     agent: "",
     submissionDate: "2026-05-25",
+    benchmarkVersion: "0.7.0",
     verificationStatus: "verified",
     metrics: {
       overallPassAt1: 46.9,

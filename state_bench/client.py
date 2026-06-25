@@ -26,6 +26,7 @@ import os
 import pprint
 import subprocess
 import threading
+import time
 from pathlib import Path
 from typing import Any
 
@@ -166,31 +167,120 @@ def _get_env_with_numbered_fallback(var_name: str) -> str:
     return os.environ.get(var_name) or os.environ.get(f"{var_name}_1", "")
 
 
-def _get_cli_access_token() -> str | None:
-    """Get a fresh Azure AI token from local CLI auth if available."""
-    commands = [
-        [
-            "az",
-            "account",
-            "get-access-token",
-            "--resource",
-            "https://ai.azure.com",
-            "--query",
-            "accessToken",
-            "-o",
-            "tsv",
-        ],
-        ["azd", "auth", "token", "--scope", "https://ai.azure.com/.default"],
-    ]
-    for cmd in commands:
-        try:
-            proc = subprocess.run(cmd, capture_output=True, text=True, check=True, timeout=20)
-        except Exception:
-            continue
+def _mint_cli_access_token() -> tuple[str, float] | None:
+    """Mint a fresh Azure AI token from local CLI auth, with its expiry.
+
+    Returns ``(token, expires_at_epoch_seconds)`` or ``None`` if no CLI auth is
+    available. ``az`` is queried with ``-o json`` so we can read ``expires_on``
+    and cache the token until shortly before it expires; ``azd`` does not report
+    an expiry, so a conservative default lifetime is assumed for it.
+    """
+    # az: returns JSON including ``expires_on`` (epoch seconds).
+    try:
+        proc = subprocess.run(
+            ["az", "account", "get-access-token", "--resource", "https://ai.azure.com", "-o", "json"],
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=20,
+        )
+        data = json.loads(proc.stdout)
+        token = str(data.get("accessToken", "")).strip()
+        if token:
+            expires_on = data.get("expires_on")
+            try:
+                expires_at = float(expires_on)
+            except (TypeError, ValueError):
+                # Fall back to a conservative 50-minute lifetime if expiry is unparsable.
+                expires_at = time.time() + 50 * 60
+            return token, expires_at
+    except Exception:
+        pass
+
+    # azd fallback: no expiry reported, assume a conservative lifetime.
+    try:
+        proc = subprocess.run(
+            ["azd", "auth", "token", "--scope", "https://ai.azure.com/.default"],
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=20,
+        )
         token = proc.stdout.strip()
         if token:
-            return token
+            return token, time.time() + 50 * 60
+    except Exception:
+        pass
+
     return None
+
+
+# Process-wide cached CLI token shared across all worker threads. Without this,
+# the OpenAI SDK calls the token provider on every request's key refresh, which
+# shelled out to ``az`` each time — under high concurrency (e.g. 120 workers)
+# that mint storm overwhelms the local token endpoint until it transiently fails
+# and aborts the run. We mint once, hand the cached token to every worker, and
+# only re-mint within a safety window before expiry (with retries on transient
+# failures so a single ``az`` hiccup never tears down an in-flight batch).
+_TOKEN_CACHE_LOCK = threading.Lock()
+_TOKEN_CACHE: dict[str, float | str | None] = {"token": None, "expires_at": 0.0}
+_TOKEN_REFRESH_SAFETY_SECONDS = 5 * 60  # re-mint when within 5 min of expiry
+_TOKEN_MINT_RETRIES = 5
+_TOKEN_MINT_RETRY_BACKOFF_SECONDS = 2.0
+
+
+def _get_cached_cli_access_token() -> str:
+    """Return a cached CLI access token, re-minting only near expiry.
+
+    Thread-safe and shared process-wide. Retries transient ``az``/``azd``
+    failures with backoff before giving up, so a momentary token-endpoint hiccup
+    under concurrency does not abort the run.
+    """
+    now = time.time()
+    cached = _TOKEN_CACHE.get("token")
+    expires_at = float(_TOKEN_CACHE.get("expires_at") or 0.0)
+    if isinstance(cached, str) and cached and now < expires_at - _TOKEN_REFRESH_SAFETY_SECONDS:
+        return cached
+
+    with _TOKEN_CACHE_LOCK:
+        # Re-check under the lock — another thread may have just refreshed.
+        now = time.time()
+        cached = _TOKEN_CACHE.get("token")
+        expires_at = float(_TOKEN_CACHE.get("expires_at") or 0.0)
+        if isinstance(cached, str) and cached and now < expires_at - _TOKEN_REFRESH_SAFETY_SECONDS:
+            return cached
+
+        last_error: Exception | None = None
+        for attempt in range(_TOKEN_MINT_RETRIES):
+            minted = None
+            try:
+                minted = _mint_cli_access_token()
+            except Exception as exc:  # defensive: _mint already swallows, but never let this raise here
+                last_error = exc
+            if minted is not None:
+                token, token_expires_at = minted
+                _TOKEN_CACHE["token"] = token
+                _TOKEN_CACHE["expires_at"] = token_expires_at
+                return token
+            if attempt < _TOKEN_MINT_RETRIES - 1:
+                time.sleep(_TOKEN_MINT_RETRY_BACKOFF_SECONDS * (attempt + 1))
+
+        # All retries failed. If we still hold a (possibly within-safety-window
+        # but not yet expired) token, serve it rather than tearing down the run.
+        if isinstance(cached, str) and cached and time.time() < expires_at:
+            return cached
+        raise RuntimeError("Unable to mint Azure OpenAI CLI access token") from last_error
+
+
+def _get_cli_access_token() -> str | None:
+    """Return a CLI access token if CLI auth is available, else ``None``.
+
+    Used to *detect* whether CLI auth is configured (see
+    ``_build_azure_openai_client``). The actual per-request provider uses the
+    cached, retrying ``_get_cached_cli_access_token``.
+    """
+    minted = _mint_cli_access_token()
+    return minted[0] if minted else None
 
 
 def _azure_openai_v1_base_url(endpoint: str) -> str:
@@ -218,10 +308,10 @@ def _build_azure_openai_client(endpoint: str, api_key_var: str = "AZURE_OPENAI_A
     if _get_cli_access_token():
 
         def cli_token_provider() -> str:
-            token = _get_cli_access_token()
-            if not token:
-                raise RuntimeError("Unable to mint Azure OpenAI CLI access token")
-            return token
+            # Cached + retrying provider shared across all worker threads — avoids
+            # the per-request `az` mint storm that previously aborted high-
+            # concurrency runs when the token endpoint transiently failed.
+            return _get_cached_cli_access_token()
 
         return OpenAI(
             base_url=base_url,

@@ -6,11 +6,11 @@
     },
     {
       "role": "user",
-      "content": "Hi, I'd like to return the wireless headphones from my December order ORD-7108. I know it's been over a month — is it still possible?"
+      "content": "Hi, I'd like to return the wireless headphones from my December order ORD-7108. I know it's been over a month \u2014 is it still possible?"
     },
     {
       "role": "assistant",
-      "content": "Yes — it’s still returnable. I checked your December order and the holiday return extension keeps it eligible through January 31, so the headphones can still be returned now.\n\nBecause it’s an electronics return for changed mind, the estimated refund is $222 back to your original payment method after the standard restocking adjustment and shipping clawback. If you want, I can go ahead and submit the return for the headphones.",
+      "content": "Yes \u2014 your SoundMax wireless headphones from order ORD-7108 are still returnable. Since the order was placed in December, the holiday return extension applies, so you have until January 31 to return them. If it\u2019s just a changed-mind return and the headphones were opened, a restocking fee may apply; if they\u2019re defective or arrived damaged, that wouldn\u2019t apply. If you want, I can start the return for you.",
       "tool_calls": [
         {
           "name": "get_order",
@@ -106,7 +106,7 @@
           "result": {
             "topic": "return",
             "rules": {
-              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim — skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
+              "agent_computes_amount": "process_return requires the agent to submit the net refund as `amount` on confirm. Compute it from the preview's component breakdown: base_item_price (after promo redistribution) minus restocking_fee plus restocking_discount minus shipping_clawback minus bulk_clawback minus repeat_surcharge minus paid_return_shipping_fee. The env writes the submitted amount verbatim \u2014 skipping a component (e.g. forgetting the Gold restocking discount) produces a wrong refund_amount and fails state scoring.",
               "windows_by_category": {
                 "electronics": "15-day return window",
                 "clothing": "30-day return window",
@@ -122,7 +122,8 @@
               },
               "eligibility": {
                 "defective_items": "No window restriction for defective, wrong item, or damaged in transit.",
-                "already_returned": "Items already returned/exchanged/cancelled are ineligible."
+                "already_returned": "Items already returned/exchanged/cancelled are ineligible.",
+                "not_as_described": "Use not_as_described only for an unused/unworn item that materially differs from the listing. If the customer wore, washed, altered, or used the item and only dislikes fit, feel, texture, or preference-based qualities, classify the return as changed_mind instead."
               },
               "restocking_fee": {
                 "base": "15% restocking fee for opened electronics returned for changed_mind.",
@@ -132,12 +133,13 @@
                   "silver": "25% off the restocking fee.",
                   "standard": "No discount."
                 },
-                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency."
+                "auto_applied": "Restocking fee and any tier discount are folded into the process_return refund amount automatically; the result reports the discount under 'restocking_discount' for transparency.",
+                "completed_returns": "Once a changed-mind return is completed with the applicable restocking fee, do not reverse that fee later as a courtesy or supplemental refund."
               },
               "return_shipping_fee": {
                 "low_value": "Orders with subtotal < $50: customer pays $8 return shipping fee.",
                 "free_threshold": "Orders >= $50: free return label provided.",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: always free return shipping.",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: always free return shipping.",
                 "deduction": "Return shipping fee, when charged, is deducted from the return refund."
               },
               "bulk_purchase_clawback": {
@@ -148,7 +150,7 @@
               "free_shipping_clawback": {
                 "applies_when": "Order originally qualified for free shipping (subtotal >= $100) AND the return drops remaining subtotal below $100.",
                 "amount": "$8 standard shipping fee is deducted from the return refund. This is a flat policy charge, not the original shipping cost (which was $0 on free-shipping orders).",
-                "fault_exempt": "Defective, wrong item, damaged in transit, or missing: no clawback (customer-fault returns only).",
+                "fault_exempt": "Defective, wrong item, or damaged in transit: no clawback (customer-fault returns only).",
                 "paid_shipping": "If the order did not qualify for free shipping originally (subtotal < $100), no clawback applies."
               },
               "repeat_category_surcharge": {
@@ -158,7 +160,17 @@
               }
             }
           }
-        },
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Yes, it\u2019s just a changed-mind return. Can you check how the restocking fee works with my Gold membership and give me the final refund preview to the original payment method before you process it?"
+    },
+    {
+      "role": "assistant",
+      "content": "I checked it for you: because you\u2019re Gold, the usual 15% restocking fee on opened electronics is reduced by 50%. On your headphones, that works out to a $37 fee with an $18 Gold discount, so the net restocking deduction is $19.\n\nYour refund preview is **$222 to your original payment method**. That includes an **$8 shipping clawback** because returning the headphones would leave the order below the free-shipping threshold. I haven\u2019t processed the return yet \u2014 want me to go ahead?",
+      "tool_calls": [
         {
           "name": "get_customer",
           "arguments": {
@@ -212,20 +224,20 @@
     },
     {
       "role": "user",
-      "content": "Thanks — before I confirm, can you verify how my Gold status affects that restocking adjustment? I was expecting the holiday extension to keep it eligible, and Gold to help on the fee, but not sure by how much."
+      "content": "Before you process it, can you confirm the preview is specifically using the holiday extension for the January eligibility and that the Gold benefit is a discount on the normal restocking fee, not a full waiver? Also, please make sure the refund is going back to the original payment method."
     },
     {
       "role": "assistant",
-      "content": "Yes — your Gold status does help. For opened electronics returned because you changed your mind, the standard restocking fee is 15% of the item price; on a $249 item that’s $37, and Gold cuts that fee in half, giving you an $18 discount, so the net restocking charge is $19.\n\nThe holiday extension is what keeps the return eligible this late, and after that Gold discount plus the $8 shipping clawback for dropping the order below the free-shipping threshold, the refund comes to $222.",
+      "content": "Yes \u2014 the return is eligible specifically because your order was placed in December, so the holiday extension keeps it returnable through **January 31**.\n\nAnd yes, for **Gold** members this is a **50% discount on the normal electronics restocking fee**, not a full waiver. Your preview is set to refund **$222 back to your original payment method**. If you want, I can process it now.",
       "tool_calls": null
     },
     {
       "role": "user",
-      "content": "Got it, thanks for clarifying — that makes sense. Please go ahead and submit the return for the headphones."
+      "content": "Yes, please go ahead and process the return for the wireless headphones from ORD-7108. Once it\u2019s done, can you confirm the final refund amount, that it\u2019s going back to my original payment method, and the restocking fee with the Gold discount applied?"
     },
     {
       "role": "assistant",
-      "content": "Done — the return has been submitted for the headphones.\n\nYou’ll receive $222 back to your original payment method. No return shipping fee was charged, and the return is now in progress.",
+      "content": "Done \u2014 the return has been processed.\n\nYour final refund is **$222**, and it\u2019s going back to your **original payment method**. The standard restocking fee was **$37**, and your **Gold discount applied $18 off that fee**, with the order also incurring an **$8 shipping clawback**.",
       "tool_calls": [
         {
           "name": "process_return",
@@ -254,7 +266,7 @@
     },
     {
       "role": "user",
-      "content": "Perfect, thanks for taking care of that. [TASK_DONE]"
+      "content": "[TASK_DONE]"
     }
   ]
 }

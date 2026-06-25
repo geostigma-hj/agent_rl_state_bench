@@ -4,28 +4,23 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Jury duty means I need to move booking BK-1000 to June 27, but do not change anything yet. Please compare at least two June 27 Delta options, explain whether jury duty waives only the change fee or also the fare difference, and tell me if the earlier option is still worth it when I only want to pay up to $120 extra total. Even if I lean toward one option later, wait until I explicitly tell you to finalize.",
   "user_simulator": {
-    "personality": "Calm and practical.",
     "user_sim_context": "You are asking about an international change driven by jury duty and expect the special reason to wipe out the fee. At the same time, you want the agent to compare at least two real June 27 Delta options, keep the jury-duty waiver limited to the fee rather than the fare difference, reason about whether your preference for the earlier flight survives a hard $120 total-extra cap, and still wait for an explicit final go-ahead even after you indicate which option sounds best.",
     "known_info": [
-      "Your user ID: user_001",
-      "Booking ID: BK-1000",
-      "Current route: JFK to CDG",
-      "Current travel date: 2026-06-20",
-      "Requested new date: 2026-06-27",
-      "Reason: jury duty"
+      "Booking BK-1000: JFK to CDG on 2026-06-20; move to 2026-06-27.",
+      "Reason: jury duty.",
+      "Hard total-extra cap: $120.",
+      "Prefer the earlier June 27 option only if it stays within the hard cap.",
+      "Do not change anything until explicitly finalizing a specific option."
     ],
-    "unknown_info": [
-      "Exact change fee",
-      "Exact total after the change"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "If the agent starts changing the booking before you explicitly tell them to finalize a specific option, say you do not approve any change yet.",
-      "Ask the agent whether the jury-duty waiver removes only the change fee or also the fare difference.",
-      "Do not approve any change until the agent compares at least two June 27 Delta options and gives the total extra amount for each option.",
-      "Only approve once the agent explicitly reasons through your preference conflict: you like the earlier option, but only if the total extra cost stays at or below $120.",
-      "After the agent recommends DL101, first ask for one more explicit recap that DL101 is Delta, afternoon, nonstop, and $100 extra with no separate fee. Do not let a statement like 'that sounds right' count as approval to change.",
-      "Only after that recap should you explicitly say 'go ahead and finalize DL101' if the agent has been correct.",
-      "End with [TASK_DONE] only after the approved option is booked and the final booking details match your preferences.",
+      "You want to compare at least two June 27 Delta options for changing BK-1000 before any booking change, with a hard $120 total-extra cap and a preference for the earlier flight only if it fits that cap.",
+      "If the agent asks for booking details, provide BK-1000, JFK to CDG, June 20 to June 27, and jury duty as the reason; do not volunteer policy details, prices, or flight IDs.",
+      "Do not approve any change until the agent explains whether the jury-duty waiver removes only the change fee or also the fare difference, and gives the total extra amount for at least two concrete June 27 Delta options.",
+      "Push back if the agent treats jury duty as waiving the fare difference, recommends an option over the $120 extra cap, ignores the earlier-flight preference when it is affordable, or starts changing the booking before explicit final approval.",
+      "If the agent identifies the earlier Delta option as over the $120 cap and DL101 as a Delta afternoon nonstop for $100 extra with no separate change fee, lean toward DL101 but ask for one explicit recap before authorizing the change.",
+      "Accept only after the recap confirms that DL101 is Delta, afternoon, nonstop, and costs $100 extra because the jury-duty waiver removes the change fee but not the fare difference.",
+      "End with [TASK_DONE] only after the approved DL101 change is booked and the final details confirm the $0 change fee, $100 fare difference, updated paid amount, and preserved existing booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -83,8 +78,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/107-change_international_jury_duty_zero_fee.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -110,5 +103,7 @@
       "field": "price_paid",
       "expected_value": 860
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/107-change_international_jury_duty_zero_fee.json"
 }

@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from state_bench.paths import CONFIGS_DIR, DOMAINS_DIR
+from state_bench.paths import CONFIGS_DIR, DOMAINS_DIR, domain_tasks_dir
 from state_bench.version import get_benchmark_version, get_package_version
 
 PROTOCOLS_DIR = CONFIGS_DIR / "eval_protocols"
@@ -105,6 +105,33 @@ def _protocol_path(protocol_id: str) -> Path:
     return PROTOCOLS_DIR / f"{protocol_key}.json"
 
 
+def format_domain_not_in_protocol_error(domain: str, protocol: EvaluationProtocol) -> str:
+    """Build an actionable error message for `domain not in protocol.domains`.
+
+    Three CLI scripts (run_task, run_batch, score) all reject unknown domains
+    at the same protocol-validation step. Returning a shared, explicit message
+    that names every JSON key the author must populate avoids the historic
+    "Domain X is not part of protocol Y" line, which gave no hint about where
+    or how to register a new domain.
+
+    The protocol indexes prompts as ``"<domain>/<filename>"`` strings in
+    ``simulator.prompt_hashes`` and ``judge.prompt_hashes`` (see e.g.
+    ``customer_support/user_sim_base.md``); each entry's value is a SHA256
+    hex digest of the file on disk.
+    """
+    path = _protocol_path(protocol.protocol_id)
+    return (
+        f"Domain {domain!r} is not part of protocol {protocol.protocol_id}.\n"
+        f"To register: edit {path} and add:\n"
+        f"  - {domain!r} to the `domains` array\n"
+        f'  - `simulator.prompt_hashes["{domain}/user_sim_base.md"]` (sha256 of that file)\n'
+        f'  - `judge.prompt_hashes["{domain}/judge_task_requirements.md"]` (sha256)\n'
+        f'  - `judge.prompt_hashes["{domain}/judge_ux_quality.md"]` (sha256)\n'
+        f'  - `judge.prompt_hashes["{domain}/judge_ux_quality_user.md"]` (sha256)\n'
+        f"See state_bench/domains/README.md for the full add-a-domain checklist."
+    )
+
+
 def load_protocol(protocol_id: str) -> EvaluationProtocol:
     path = _protocol_path(protocol_id)
     if not path.exists():
@@ -137,13 +164,45 @@ def load_split_task_ids(domain: str, split: str, split_version: str = "train_tes
     data = load_split_manifest(domain, split_version)
     splits = data["splits"]
     if split == "all":
-        seen: dict[str, None] = {}
-        for split_ids in splits.values():
-            for task_id in split_ids:
-                seen.setdefault(str(task_id), None)
-        return list(seen)
+        return _active_task_ids(domain)
     try:
         task_ids = splits[split]
     except KeyError as exc:
         raise ValueError(f"Split {split!r} not found in {path}") from exc
-    return [str(task_id) for task_id in task_ids]
+    return _validate_active_split_task_ids(domain, [str(task_id) for task_id in task_ids], split=split)
+
+
+def _task_number(task_id: str) -> int | None:
+    prefix = task_id.split("-", 1)[0]
+    try:
+        return int(prefix)
+    except ValueError:
+        return None
+
+
+def _active_task_ids(domain: str) -> list[str]:
+    tasks_dir = domain_tasks_dir(domain)
+    task_ids = []
+    for path in tasks_dir.glob("*.json"):
+        number = _task_number(path.stem)
+        if number is not None and 1 <= number <= 150:
+            task_ids.append(path.stem)
+    return sorted(task_ids, key=lambda task_id: _task_number(task_id) or 0)
+
+
+def _validate_active_split_task_ids(domain: str, task_ids: list[str], *, split: str) -> list[str]:
+    tasks_dir = domain_tasks_dir(domain)
+    invalid: list[str] = []
+    for task_id in task_ids:
+        number = _task_number(task_id)
+        if number is None or number > 150 or not (tasks_dir / f"{task_id}.json").exists():
+            invalid.append(task_id)
+    if invalid:
+        preview = ", ".join(invalid[:10])
+        if len(invalid) > 10:
+            preview += f", ... ({len(invalid)} total)"
+        raise ValueError(
+            f"Split {split!r} for domain {domain!r} references inactive task ID(s): {preview}. "
+            "Split tasks must be direct files in tasks/ with numeric IDs 1-150."
+        )
+    return task_ids

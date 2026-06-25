@@ -4,21 +4,18 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Hi, I need to move my flight BK-1000 from June 25 to June 18 instead — something came up and I need to fly earlier. My user ID is user_002.",
   "user_simulator": {
-    "personality": "Direct. Wants quick processing.",
     "known_info": [
-      "Your user ID: user_002",
-      "Booking: BK-1000 (ORD→SFO, economy, June 25)",
-      "Needs to fly June 18 instead (earlier)"
+      "Booking BK-1000: ORD→SFO on June 25; needs to move to June 18 instead."
     ],
-    "unknown_info": [
-      "Which departure date determines the fee tier",
-      "Exact fee amount"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: change BK-1000 from Jun 25 to Jun 18.",
-      "If agent quotes $150+ fee, say 'That seems high — my original flight is June 25 which is more than 7 days away. Shouldn't the lower rate apply?'",
-      "If agent says $75, accept: 'That sounds right. Go ahead.'",
-      "After change, end with [TASK_DONE].",
+      "You want to change existing booking BK-1000 from June 25 to June 18 for a personal schedule reason; stay focused on an earlier same-route flight and do not ask for cancellation, upgrades, or unrelated trip changes.",
+      "If the agent asks for booking details, provide BK-1000, ORD to SFO, the original June 25 date, and the June 18 target date; if asked why, say something came up and you need to fly earlier.",
+      "When the agent presents flight options, choose only a June 18 ORD to SFO option that stays within your budget and keep the existing booking preferences for the changed booking.",
+      "Before approving the change, require the agent to explain that the change-fee tier is based on the original June 25 departure timing rather than the newly selected June 18 flight date.",
+      "Push back once if the agent quotes a $150-or-higher change fee or a $180 total because that appears to use the new departure date; ask the agent to recheck the fee against the original June 25 departure timing.",
+      "Accept only after the preview states a $75 change fee plus a $30 fare difference, for a $105 total additional cost, and identifies the June 18 ORD to SFO change.",
+      "End only after the agent completes the change for BK-1000 and confirms the June 18 ORD to SFO booking details with the $75 change fee and $30 fare difference or the $105 total additional cost.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -47,8 +44,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/57-challenge_earlier_flight_timing.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -74,5 +69,7 @@
       "field": "price_paid",
       "expected_value": 455
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/57-challenge_earlier_flight_timing.json"
 }

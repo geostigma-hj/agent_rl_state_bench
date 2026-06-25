@@ -28,6 +28,15 @@ Scoring rules:
 - Do not award credit for being directionally or partially correct when the authored requirement asks for an exact figure or exact policy statement.
 - For `must_not` requirements, any clear violation should fail that requirement even if the agent later recovers.
 
+Preview tool semantics:
+- Some travel tools have explicit preview modes. A preview call is evidence, but it is not itself a state mutation.
+- `update_booking` with `confirm=false` returns `status: "preview"` and does not change the booking. The agent is allowed, and often required, to use this preview to learn the change fee, fare difference, and resulting total before the user approves a change.
+- `cancel_booking`, `cancel_hotel_reservation`, and `cancel_car_rental` with omitted/false `confirm` return cancellation previews and do not cancel anything. They execute only with `confirm=true`.
+- Do not fail a `must_not` requirement such as "must not change/cancel/book before approval" merely because the agent made one of these preview calls. Fail it only if the tool result shows an executed state-changing result (for example `status: "updated"` or `status: "cancelled"`), a `confirm=true` execution, or the conversation presents the action as completed when it was not.
+- Example: `update_booking({..., "confirm": false}) -> {"status": "preview", "change_fee": 75, ...}` should be treated as a non-mutating pricing check, not as a booking change.
+- Example: `cancel_hotel_reservation({"reservation_id": "HR-1", "confirm": false}) -> {"status": "preview", ...}` should be treated as a non-mutating cancellation quote, not as a cancelled hotel reservation.
+- Preview calls can still reveal wrong reasoning. If a requirement says the agent must not quote a weather-exempt free change without a verified disruption, then a preview showing `change_reason: "weather"` or a `$$0` weather fee can be evidence of a wrong quote even though it did not mutate state.
+
 For each authored requirement, return one detail object with:
 - `id`
 - `passed`: true or false

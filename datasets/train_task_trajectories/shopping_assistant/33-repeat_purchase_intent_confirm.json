@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "Done — I added 1 × TechPhone Lite 15 to your cart for $499.\n\nGift wrap is currently off.",
+      "content": "Absolutely \u2014 I found the TechPhone Lite 15, and it has no variants, so I can add 1 right away.\n\nWould you like gift wrap for it? It\u2019s $5 per unit.",
       "tool_calls": [
         {
           "name": "search_products",
@@ -19,7 +19,7 @@
             "category": "electronics",
             "min_price": 0,
             "max_price": 10000,
-            "min_rating": 1,
+            "min_rating": 0,
             "in_stock_only": true,
             "sort_by": "relevance"
           },
@@ -96,7 +96,17 @@
             "variants": [],
             "note": "This product has no variants; no variant_id is needed for add_to_cart."
           }
-        },
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "No gift wrap, please."
+    },
+    {
+      "role": "assistant",
+      "content": "Done \u2014 the TechPhone Lite 15 has been added to your cart.\n\nCart total: $499",
+      "tool_calls": [
         {
           "name": "add_to_cart",
           "arguments": {

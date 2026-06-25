@@ -4,26 +4,23 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hey — I'd like to upgrade my laptop. I've bought from you before. What would you recommend?",
   "user_simulator": {
-    "personality": "Casual. Expects the agent to use customer profile context without being asked. Will not name the current laptop unprompted — the store already has that information.",
     "user_sim_context": "You are a returning Gold-tier shopper who bought the SlimBook Air 13 a while back and wants to upgrade to something better. You believe the store's agent should know what you own from your profile. You have a budget of ~$1,200.",
     "known_info": [
       "You own a SlimBook Air 13 (SP-1001) and want to upgrade.",
       "You prefer staying with the same brand family (SlimBook) since you liked the Air.",
       "Budget is around $1,200."
     ],
-    "unknown_info": [
-      "The specific SlimBook upgrade options and their specs.",
-      "Prices of upgrade laptops in the catalog."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "You will NOT name your current laptop unless the agent explicitly asks. You expect them to check your profile first.",
-      "If the agent asks what you currently own WITHOUT first checking your profile, you are mildly annoyed — tell them you'd expect that info to be on file.",
-      "If the agent recommends a same-brand SlimBook upgrade with better specs (RAM, storage, screen, etc.) AND confirms it fits your ~$1,200 budget, accept and ask them to add it to your cart.",
-      "If the agent recommends a different-brand laptop (ProBook, SlateTab, etc.) without acknowledging your SlimBook preference, push back — say you liked the SlimBook family and want to stay with it.",
-      "If the agent offers multiple upgrade options, pick the SlimBook-brand one.",
-      "Decline gift wrap if asked.",
-      "Do not ask about promos, discounts, loyalty points, or brand bundles.",
-      "When the agent has added the SlimBook upgrade to your cart and summarized the total, end your next message with [TASK_DONE].",
+      "Your goal is to get a profile-aware laptop upgrade recommendation that stays in the SlimBook family, fits about $1,200, and can be added to your cart once you approve it.",
+      "Do not volunteer your current laptop, SlimBook preference, or budget unless the agent asks or makes a recommendation that needs correction; expect the agent to use your profile first.",
+      "If the agent asks what laptop you own before checking your profile, respond with mild annoyance that this should be on file, then provide the current laptop only if they explicitly need it to continue.",
+      "If the agent asks for preferences or budget, say you liked your SlimBook, prefer staying in the same brand family, and want to stay around $1,200.",
+      "Accept only when the primary recommendation is a better SlimBook upgrade and the agent confirms it fits your budget; then ask the agent to add one to your cart.",
+      "If the agent recommends a different-brand laptop without acknowledging your SlimBook preference, push back once that you liked the SlimBook family and want to stay with it.",
+      "If the agent offers multiple upgrade options, choose the SlimBook-brand option that fits your budget.",
+      "Decline gift wrap if asked, and do not ask about promos, discounts, loyalty points, or brand bundles.",
+      "End only after the agent has added the SlimBook upgrade to your cart and summarized the final total, then reply with [TASK_DONE].",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."
@@ -46,7 +43,7 @@
     {
       "id": "recommended_same_brand_upgrade",
       "kind": "must",
-      "requirement": "Agent recommended a SlimBook-brand upgrade (SP-1107 SlimBook Touch 15) as the primary suggestion, citing the brand continuity with the customer's existing Air 13.",
+      "requirement": "By the end of the conversation, the agent recommended SP-1107 (SlimBook Touch 15) as the profile-matched SlimBook upgrade, citing the brand continuity with the customer's existing Air 13. It need not be the turn-1 headline pick, but SP-1107 must be the agent's recommended SlimBook upgrade once the customer's brand preference is established. Recommending only a non-SlimBook laptop, or never connecting SP-1107 to the customer's existing SlimBook, fails.",
       "evidence": "conversation"
     },
     {

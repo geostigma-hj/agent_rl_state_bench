@@ -4,31 +4,22 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to change my flight (BK-MS08) to a later date. I have a medical appointment that conflicts. Also, I'll need to bring extra luggage.",
   "user_simulator": {
-    "personality": "Polite, a bit anxious about fees. Mentions medical reason upfront.",
     "known_info": [
-      "Your user ID: user_002",
-      "Booking ID: BK-MS08",
-      "Current flight is ORD → SFO on June 20",
-      "Reason for change: medical appointment",
-      "Wants to fly June 22 instead",
-      "Needs 2 extra checked bags"
+      "Booking BK-MS08: current ORD → SFO flight on June 20.",
+      "Reason for change: medical appointment.",
+      "Wants to fly June 22 instead.",
+      "Needs 2 extra checked bags."
     ],
-    "unknown_info": [
-      "Change fee amount or medical discount",
-      "Available flights on June 22",
-      "Baggage fee per bag",
-      "Free baggage allowance"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Start by asking to change booking BK-MS08 to June 22 due to a medical appointment.",
-      "When agent quotes the change fee, ask if there's a medical discount.",
-      "When discounted fee is confirmed, agree to proceed.",
-      "When new flight options are shown, pick UA113, the preferred United afternoon flight.",
-      "If the agent proposes or changes you to any other flight, say you want UA113 on June 22 instead.",
-      "Then ask to add 2 extra checked bags.",
-      "When bag fees are quoted, confirm.",
-      "Ask for a summary of all changes and fees.",
-      "End with [TASK_DONE].",
+      "You want booking BK-MS08 changed to June 22 because of a medical appointment, and you also need 2 extra checked bags handled in the same conversation.",
+      "If the agent asks for booking details, date, reason, or luggage needs, provide the known booking ID, June 22 target date, medical reason, and 2 extra checked bags; do not add unrelated trip changes.",
+      "If the agent quotes a standard or unclear change fee, ask whether the medical reason changes the fee before agreeing to the flight change.",
+      "Accept the flight change only after the agent identifies the June 22 United afternoon option UA113 and explains the $75 medical-discounted change fee, the $20 fare difference, and a total that stays within budget.",
+      "Push back if the agent proposes or changes the booking to any flight other than UA113 on June 22, or if the agent tries to finish after the flight change without addressing the extra bags.",
+      "Accept the baggage update only after the agent explains the free checked-bag allowance and quotes the extra-bag fee as $35 per added bag for the 2 extra checked bags.",
+      "If the agent asks for confirmation too early, ask for a combined preview covering the selected flight change, medical-discounted change fee, fare difference, baggage allowance, extra-bag charges, and final total.",
+      "End only after the flight has been changed to UA113, 2 paid checked bags have been added, and the agent has summarized both the flight-change charges and baggage charges together; then reply with [TASK_DONE].",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -63,8 +54,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "multi_booking_trip_coordination",
-  "task_env_path": "state_bench/domains/travel/task_envs/33-cascade_change_and_add_bags.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -96,5 +85,7 @@
       "field": "price_paid",
       "expected_value": 505
     }
-  ]
+  ],
+  "task_type": "multi_booking_trip_coordination",
+  "task_env_path": "state_bench/domains/travel/task_envs/33-cascade_change_and_add_bags.json"
 }

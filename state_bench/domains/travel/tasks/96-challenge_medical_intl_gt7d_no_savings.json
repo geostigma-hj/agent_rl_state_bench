@@ -4,24 +4,21 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I have a medical issue and want to change BK-1000 to July 5. The later flights seem cheaper too. My user ID is user_004.",
   "user_simulator": {
-    "personality": "Hopeful about saving money with the cheaper flight, but focused on moving the same Paris trip rather than shopping around.",
     "known_info": [
-      "Your user ID: user_004",
-      "Booking: BK-1000 (JFK to CDG, June 28)",
-      "Medical reason",
-      "For this task, keep the same route and accept AF101 if the agent explains the fee correctly"
+      "Booking BK-1000: JFK to CDG, June 28.",
+      "Medical reason.",
+      "Wants to move the same Paris trip to July 5.",
+      "Later flights seem cheaper; wants to know whether that saves money after any medical change fee."
     ],
-    "unknown_info": [
-      "That cheaper flight does not create net savings because the medical change fee offsets it",
-      "Exact fee"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: medical, change BK-1000 to July 5, mention that the later flight seems cheaper.",
-      "If the agent offers AF101 on July 5 on the same route, stay on that route and do not pivot to other airlines, airports, or destinations.",
-      "Ask one clarifying question: does the cheaper fare actually save me money after the medical fee, or does it just cancel out?",
-      "If the agent explains that the $50 cheaper fare is offset by the $50 medical change fee so there is no net savings, say 'That makes sense. Go ahead.'",
-      "If the agent quotes the wrong fee math, push once: 'I thought the flight was $50 cheaper. Can you double-check whether that actually saves me anything after the medical fee?'",
-      "After the same-route July 5 change is completed, end with [TASK_DONE].",
+      "Start by asking to change BK-1000 to July 5 for a medical reason, and mention that the later flights seem cheaper because you want the real out-of-pocket result.",
+      "If the agent asks what trip or option you want, provide the BK-1000 same-route Paris change details and prefer the July 5 AF101 option if it is available; do not pivot to other airlines, airports, destinations, or unrelated trip changes.",
+      "When the agent discusses pricing, ask whether the cheaper fare creates actual savings after the medical change fee or merely offsets it unless the agent has already explained that bottom line clearly.",
+      "Push back once if the agent quotes a domestic, within-seven-days, undiscounted, refunded negative-fare-difference, or positive-savings outcome; ask them to double-check the international more-than-seven-days medical fee and the cheaper-fare math.",
+      "Accept the July 5 same-route change only after the agent explains that the $100 international more-than-seven-days base fee becomes a $50 medical fee, the $50 cheaper fare is not refunded separately, and the net additional cost is $0.",
+      "If the agent proposes canceling and rebooking, upgrades, add-ons, or another workaround, decline unless they show it is required for the requested July 5 medical change and still preserves the same route and budget.",
+      "End only after the July 5 same-route change is completed and the final details confirm the expected medical fee, fare difference, net additional cost, and preserved booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -56,8 +53,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/96-challenge_medical_intl_gt7d_no_savings.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -77,5 +72,7 @@
       "field": "flight_id",
       "expected_value": "AF101"
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/96-challenge_medical_intl_gt7d_no_savings.json"
 }

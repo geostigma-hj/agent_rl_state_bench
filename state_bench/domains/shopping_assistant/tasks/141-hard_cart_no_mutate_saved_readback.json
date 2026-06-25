@@ -4,7 +4,6 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Audit my cart exactly as-is: item IDs, product IDs, names, quantities, gift-wrap flags, promo codes, loyalty points redeemed, shipping option/cost, subtotal, and total. Do not refresh or fix anything.",
   "user_simulator": {
-    "personality": "Direct, practical, and cooperative. Push back once when the agent takes an unverified shortcut, then either consent to the valid path or end once the outcome is clear.",
     "user_sim_context": "You want an exact audit of your current cart, including item IDs, product IDs, names, quantities, gift-wrap flags, promo codes, loyalty fields, shipping, subtotal, and total. You do not want the agent to refresh, fix, or mutate anything.",
     "known_info": [
       "You know your current request and how you asked for it.",
@@ -15,10 +14,7 @@
       "Your cart already has express shipping selected.",
       "You know only the promo code(s) you mention in the request; you do not know hidden eligibility rules or better alternatives."
     ],
-    "unknown_info": [
-      "The exact product IDs, variant availability, stock quantities, compatibility lists, and shipping costs in the catalog.",
-      "Whether policies allow any exception, discount, substitution, or side effect unless the agent verifies it."
-    ],
+    "unknown_info": [],
     "task_rules": [
       "You want an exact cart audit; do not let the agent refresh, fix, apply, remove, or clean up anything.",
       "If the agent reads back item IDs, product IDs, names, quantities, gift-wrap flags, promo codes, loyalty points redeemed, shipping option/cost, subtotal, and total, accept the audit.",

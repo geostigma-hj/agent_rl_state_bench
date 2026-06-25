@@ -4,20 +4,19 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Change of plans! Instead of Miami, I want to fly to Mexico City. Please change BK-1000 to go to MEX instead of MIA, same date. My user ID is user_005.",
   "user_simulator": {
-    "personality": "Excited about the new destination. Does not care about fee details.",
     "known_info": [
-      "Your user ID: user_005",
-      "Booking: BK-1000 (JFK to MIA, June 20)",
-      "Wants JFK to MEX instead"
+      "Booking BK-1000: JFK to MIA on June 20; wants JFK to MEX instead on the same date."
     ],
-    "unknown_info": [
-      "Which rate applies",
-      "Fee amount"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: change BK-1000 from MIA to MEX, same date.",
-      "When agent quotes fee, say: 'OK, go ahead.'",
-      "After change done, end with [TASK_DONE].",
+      "Your goal is to change BK-1000 from Miami to Mexico City on the same date, without adding upgrades or unrelated trip changes.",
+      "If the agent asks for booking details or the requested route, provide the booking ID and say you want JFK to MEX instead of JFK to MIA on June 20.",
+      "Do not volunteer the fee policy; you naturally expect the Mexico destination to matter, but wait for the agent to explain how the original domestic route controls the change fee.",
+      "Push back once if the agent quotes or relies on a $200 international change fee, and ask whether the fee should be based on the original JFK to MIA booking instead.",
+      "Accept only after the agent explains that the original domestic route determines the fee, quotes the $150 change fee, identifies the MEX replacement flight, and the total remains within your $700 budget.",
+      "For the flight change, keep the existing booking's booking-stage preferences unless the agent asks for a required preference; do not request add-ons or upgrades.",
+      "If the completed change has a wrong booking-stage preference, correct exactly one preference at a time in this order: cabin_class, seat_type, meal_preference, add_wifi, add_extra_legroom, add_insurance.",
+      "End only after the booking has been changed to MEX for the same date, the $150 change fee and fare difference are clear, and the preserved preferences are confirmed.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Booking-stage persisted preferences to verify on the final booking are: meal_preference, cabin_class, seat_type, add_wifi, add_extra_legroom, and add_insurance.",
@@ -50,8 +49,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/89-challenge_dom_to_mex_original_route_fee.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -77,5 +74,7 @@
       "field": "price_paid",
       "expected_value": 650
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/89-challenge_dom_to_mex_original_route_fee.json"
 }

@@ -4,30 +4,23 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to move booking BK-1000 to July 4 because of a medical procedure. I would prefer to stay on the same airline if the cheaper valid option does not get worse because of that preference, but I do not want you to do anything until you compare the direct-change path against cancel-and-rebook and then get my final approval.",
   "user_simulator": {
-    "personality": "Practical and cost-aware.",
     "user_sim_context": "The medical reason makes you expect direct change to be strong, and you also prefer to stay on the same airline if that does not make the answer worse. You want the agent to compare both strategies explicitly, explain whether the same-airline preference changes anything, and hold off on any write until you confirm after the recap.",
     "known_info": [
-      "Your user ID: user_001",
-      "Booking ID: BK-1000",
-      "Current trip: JFK to GRU on 2026-06-29",
-      "Requested new date: 2026-07-04",
-      "Reason: medical"
+      "Booking BK-1000: JFK to GRU on 2026-06-29.",
+      "Requested new date: 2026-07-04.",
+      "Reason: medical."
     ],
-    "unknown_info": [
-      "Which strategy is cheaper overall",
-      "Exact fees on each path"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Ask the agent to compare direct change versus cancel-and-rebook before taking action.",
-      "If the agent treats your same-airline preference as decisive, say you do not approve any action yet and need to know whether staying on the same airline still makes sense overall.",
-      "Once the agent identifies the cheaper path, ask whether your preference to stay on the same airline actually changes the answer or just aligns with it.",
-      "Do not approve anything until the agent recaps both strategies, explains why the direct-change path is still the cheaper valid option, and asks for a final explicit go-ahead.",
-      "Only after that recap, give an explicit final approval to proceed with the direct-change path.",
-      "End with [TASK_DONE] once the approved option has been executed and summarized.",
+      "Your goal is to move BK-1000 to 2026-07-04 for a medical reason using the cheaper valid strategy, while staying on the same airline only if that preference does not make the strategy worse.",
+      "Provide BK-1000, the July 4 date, the medical reason, and the same-airline preference when relevant; do not introduce unrelated date, route, cabin, add-on, or upgrade requests.",
+      "If the agent proposes any booking change, cancellation, or replacement booking before comparing both strategies, refuse approval and ask for the direct-change versus cancel-and-rebook comparison first.",
+      "Push back if the agent treats the medical reason or same-airline preference as decisive by itself, omits the international medical-discount reasoning, recommends cancel-and-rebook as cheaper, or fails to explain whether the same-airline preference changes the recommendation or only aligns with it.",
+      "Approve only after the agent recaps both paths, identifies direct change as the cheaper valid path, gives the direct-change fee and fare difference, explains the cancel-and-rebook cost pieces, confirms the selected July 4 same-airline flight details and budget fit, and asks for a final explicit go-ahead.",
+      "For this existing-booking change, preserve BK-1000's current booking-stage preferences and decline unrelated upgrades, add-ons, cancellations, replacement bookings, or changes outside moving BK-1000 to July 4 by the approved direct-change path.",
+      "End only after the approved direct change has been completed and the agent summarizes the July 4 booking, final cost, flight details, and preserved booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
-      "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
-      "If the agent has not surfaced enough option detail to verify airline, time_range, and max_stops, ask for that information before approving the booking.",
       "Booking-stage persisted preferences to verify on the final booking are: meal_preference, cabin_class, seat_type, add_wifi, add_extra_legroom, and add_insurance.",
       "For a new booking, including a replacement after canceling an existing booking, if the agent asks about one of those booking-stage preferences, answer using your profile preferences.",
       "For a flight change to an existing booking, if the agent asks about one of those booking-stage preferences, say to keep the existing booking's preferences unless the task-specific rules say otherwise.",
@@ -75,8 +68,6 @@
       "evidence": "conversation_or_tool_calls"
     }
   ],
-  "task_type": "strategy_compare_paths",
-  "task_env_path": "state_bench/domains/travel/task_envs/149-strategy_medical_international_change_cheaper_same_airline.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -102,5 +93,7 @@
       "field": "price_paid",
       "expected_value": 1030
     }
-  ]
+  ],
+  "task_type": "strategy_compare_paths",
+  "task_env_path": "state_bench/domains/travel/task_envs/149-strategy_medical_international_change_cheaper_same_airline.json"
 }

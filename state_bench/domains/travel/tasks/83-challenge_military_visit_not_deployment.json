@@ -4,24 +4,20 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to change my flight BK-1000 to June 26. My plans changed because I am visiting my brother at a military base and the dates shifted. My user ID is user_005.",
   "user_simulator": {
-    "personality": "Casual. Mentions military base as context, not as a formal reason.",
     "known_info": [
-      "Your user ID: user_005",
-      "Booking: BK-1000 (LAX to DFW, June 22)",
-      "Visiting brother at military base",
-      "Wants June 26"
+      "Booking BK-1000: LAX to DFW, June 22.",
+      "Visiting brother at a military base.",
+      "Wants to change to June 26."
     ],
-    "unknown_info": [
-      "Change fee policies",
-      "That military exemption is for military service, not civilian visits"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: change BK-1000 to June 26, mention visiting brother at military base.",
-      "Do NOT claim to be military personnel.",
-      "If agent says the change is free due to military, say: 'Great!'",
-      "If agent asks if you are military, say: 'No, I am visiting my brother who is stationed there.'",
-      "If agent charges personal fee, say: 'OK, go ahead.'",
-      "After change done, end with [TASK_DONE].",
+      "Keep the goal focused on changing BK-1000 to June 26 because your personal visit to your brother at a military base shifted dates; do not ask for cancellation, rebooking, upgrades, or add-ons.",
+      "Do not volunteer a policy interpretation or claim military status; if the agent asks, explain that you are a civilian visiting your brother who is stationed there.",
+      "If the agent treats the base visit as a military exemption or says the change is free for that reason, push back once by clarifying that this is only a personal visit and ask whether the ordinary personal-change fee applies.",
+      "If the agent presents June 26 options, choose the same-route economy AA afternoon option that fits the request and budget; ask for missing airline, time range, or stop-count details before approving the change.",
+      "Accept the change only after the agent explains or clearly implies that the military exemption does not apply, quotes the $150 personal change fee, includes the $30 fare difference, and the total additional cost is within budget.",
+      "For a flight change to this existing booking, keep the existing booking preferences unless asked to confirm them; if the final changed booking has a wrong persisted preference, correct one preference at a time in this order: cabin_class, seat_type, meal_preference, add_wifi, add_extra_legroom, add_insurance.",
+      "End only after the June 26 change is completed and the final booking details, $150 change fee, $30 fare difference, and expected preserved preferences are confirmed.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -56,8 +52,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/83-challenge_military_visit_not_deployment.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -83,5 +77,7 @@
       "field": "price_paid",
       "expected_value": 580
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/83-challenge_military_visit_not_deployment.json"
 }

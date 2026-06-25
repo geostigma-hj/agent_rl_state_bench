@@ -6,12 +6,27 @@
     },
     {
       "role": "user",
-      "content": "Hi — as a Standard customer, can you tell me how many loyalty points I'd earn on the ProBook 13 laptop? I'm thinking of picking it up."
+      "content": "Hi \u2014 as a Standard customer, can you tell me how many loyalty points I'd earn on the ProBook 13 laptop? I'm thinking of picking it up."
     },
     {
       "role": "assistant",
-      "content": "The ProBook Laptop 13-inch is $999, and Standard members earn 1 point per dollar.\n\nSo you’d earn:\n\n999 loyalty points\n\nOne note: points are calculated on the final total after discounts, so if you use a promo or other discount, the earned points would be a bit lower.\n\nAlso, your account currently shows Platinum status, which would earn 3 points per dollar instead — so on a full-price $999 purchase, that would be 2,997 points.",
+      "content": "For the ProBook Laptop 13-inch at $999, a Standard member would earn 999 loyalty points if purchased at full price.\n\nNote: points are calculated on the final total after discounts, so any promo or price reduction would lower that number.\n\nAlso, your current account actually shows Platinum status, so on this account you\u2019d earn 2,997 points at full price.\n\nIf you want, I can also check whether there\u2019s a promo that would give you the best overall value on it.",
       "tool_calls": [
+        {
+          "name": "get_customer_account",
+          "arguments": {
+            "customer_id": "shop_001"
+          },
+          "result": {
+            "customer_id": "shop_001",
+            "name": "Alex Rivera",
+            "email": "alex.rivera@example.com",
+            "tier": "platinum",
+            "is_first_time": false,
+            "loyalty_points": 52000,
+            "purchase_history": []
+          }
+        },
         {
           "name": "search_products",
           "arguments": {
@@ -140,21 +155,6 @@
           }
         },
         {
-          "name": "get_customer_account",
-          "arguments": {
-            "customer_id": "shop_001"
-          },
-          "result": {
-            "customer_id": "shop_001",
-            "name": "Alex Rivera",
-            "email": "alex.rivera@example.com",
-            "tier": "platinum",
-            "is_first_time": false,
-            "loyalty_points": 52000,
-            "purchase_history": []
-          }
-        },
-        {
           "name": "get_policies",
           "arguments": {
             "topic": "loyalty_points"
@@ -175,16 +175,7 @@
     },
     {
       "role": "user",
-      "content": "oh right, I forgot I'm Platinum — thanks for checking. That's great."
-    },
-    {
-      "role": "assistant",
-      "content": "You’re welcome — yes, as Platinum, the ProBook 13 would earn 2,997 points at full price.\n\nIf you want, I can also:\n- add it to your cart,\n- check whether there’s a promo that could lower the price,\n- or compare it with the 15-inch ProBook first.",
-      "tool_calls": null
-    },
-    {
-      "role": "user",
-      "content": "[TASK_DONE]"
+      "content": "Got it \u2014 2,997 points makes sense if my account is Platinum, thanks. [TASK_DONE]"
     }
   ]
 }

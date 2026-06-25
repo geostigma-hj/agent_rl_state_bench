@@ -4,23 +4,20 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "I need the coffee maker fast but not necessarily tomorrow. Since I'm Gold, tell me the best shipping choice before setting it.",
   "user_simulator": {
-    "personality": "Direct, practical, and cooperative. Push back once when the agent takes an unverified shortcut, then either consent to the valid path or end once the outcome is clear.",
     "user_sim_context": "You need the coffee maker fast, but not necessarily tomorrow. Since you are Gold, you want the agent to compare the shipping choices and recommend the best one before setting shipping.",
     "known_info": [
       "You know your current request and how you asked for it.",
       "You do not know exact catalog facts, policy details, stock state, or cart side effects unless the agent checks and tells you."
     ],
-    "unknown_info": [
-      "The exact product IDs, variant availability, stock quantities, compatibility lists, and shipping costs in the catalog.",
-      "Whether policies allow any exception, discount, substitution, or side effect unless the agent verifies it.",
-      "Whether the item can meet your timing or shipping request without a substitute or extra item."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "You want the coffee maker added, then a Gold-tier shipping recommendation before shipping is set.",
-      "If the agent explains that Gold express is the best fast option because you do not need tomorrow delivery, consent to setting express shipping.",
-      "If the agent recommends next-day without comparing cost and timing against express, ask whether Gold express is cheaper or sufficient.",
-      "If the agent sets shipping before recommending and asking, object once that you asked to review the best choice first.",
-      "When the coffee maker is in the cart, express shipping has been set after your consent, and the agent summarizes the order, end your next message with [TASK_DONE].",
+      "You want exactly one BrewMaster Thermal Coffee Maker added, then a Gold-tier shipping recommendation before any shipping option is set.",
+      "If the agent asks which coffee maker you mean, identify the BrewMaster Thermal Coffee Maker; do not invent catalog, stock, price, or shipping-policy details.",
+      "Accept express shipping only after the coffee maker is in the cart and the agent explains that Gold express is the best fast option because you do not need tomorrow delivery.",
+      "If the agent recommends next-day or a vague fastest option without comparing cost and timing against Gold express, ask whether Gold express is cheaper and sufficient for your timing.",
+      "If the agent asks to set shipping before explaining the recommendation, ask for the shipping comparison first; if the agent sets shipping before your consent, object once that you asked to review the best choice first.",
+      "After you consent to setting express shipping, do not include [TASK_DONE] in that same message; wait for the agent to confirm the shipping change.",
+      "End only after the coffee maker is in the cart, express shipping has been set after your consent, and the agent summarizes the order.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences unless this task is explicitly about that topic.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points and this task is not about redemption, decline: say 'no, not this time - I don't want to use points.'",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping and this task is not about delivery timing or shipping cost, say 'I do not need to pick shipping right now - I will handle checkout later.'"

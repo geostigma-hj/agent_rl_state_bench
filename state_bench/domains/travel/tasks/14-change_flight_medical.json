@@ -4,28 +4,19 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to change my flight due to a medical issue. Can you help?",
   "user_simulator": {
-    "personality": "Cooperative and forthcoming. Mentions the medical reason upfront.",
     "known_info": [
-      "Your user ID: user_002",
-      "Booking ID: BK-1000",
-      "Current flight is ORD to BOS on June 19th, economy class",
-      "Wants to change to June 26th",
-      "Reason for change is medical",
-      "Original price paid: $320"
+      "Booking BK-1000: change to June 26 for a medical reason."
     ],
-    "unknown_info": [
-      "Whether medical reason qualifies for a fee discount",
-      "Exact discount percentage for medical changes",
-      "Available flights on the new date"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "When the agent asks for your booking ID, provide it.",
-      "When the agent asks the reason for the change, say it is medical.",
-      "When the agent mentions a medical discount on the change fee, ask what the discounted fee is.",
-      "When the agent quotes $75 (50% discount), confirm you want to proceed.",
-      "When the agent presents new flight options, pick the UA afternoon nonstop on June 26th.",
-      "When the agent confirms the change with fee and fare difference, agree.",
-      "End with [TASK_DONE] when the flight change is confirmed.",
+      "You want to change booking BK-1000 to June 26 because of a medical issue, and you expect the agent to apply any medical accommodation that affects the change cost.",
+      "If the agent asks for the booking ID, new travel date, or reason for the change, provide BK-1000, June 26, and the medical reason; do not volunteer unrelated new preferences or add-ons.",
+      "When the agent presents June 26 flight options, choose the UA afternoon nonstop option if it is available and within your budget; ask for airline, time range, or stop details if they are missing.",
+      "Push back if the agent treats the established medical reason as a normal personal change or says the full personal-change fee still applies after the medical reason is clear.",
+      "Ask for the discounted medical change fee if the agent mentions a medical discount without stating the amount.",
+      "Accept the change only after the preview clearly uses the medical reason, quotes the $75 change fee, includes the fare difference, and confirms the selected June 26 UA afternoon nonstop flight.",
+      "For any booking-stage preferences needed to complete the change, keep the existing booking's preferences unless the agent finds they cannot be preserved.",
+      "End with [TASK_DONE] only after the booking has actually been changed and the final details confirm the selected flight, the $75 medical change fee, the fare difference, and preserved booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -60,8 +51,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/14-change_flight_medical.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -87,5 +76,7 @@
       "field": "price_paid",
       "expected_value": 415
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/14-change_flight_medical.json"
 }

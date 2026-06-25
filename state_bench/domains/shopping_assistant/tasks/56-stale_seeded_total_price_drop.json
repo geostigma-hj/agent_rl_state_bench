@@ -4,25 +4,22 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hi — I'm coming back to finish my checkout. Can you tell me what my cart total is right now?",
   "user_simulator": {
-    "personality": "Returning customer, trusts the system's number. Not adversarial.",
-    "user_sim_context": "Your cart has a SlimBook Air 13 from earlier. You DON'T know the price has since dropped from $849 to $799. You expect the agent to tell you the correct current total. If the agent just quotes $849 without mentioning anything, you'll accept — you don't have the information to correct them. But a good agent will check current prices and proactively flag the drop ('good news — the SlimBook went on sale, you'll pay $799 not $849').",
+    "user_sim_context": "Your cart has a SlimBook Air 13 from earlier and you are about to check out. You DON'T know the price has since dropped from $849 to $799. You expect the agent to tell you the correct current total. If the agent just quotes $849 without mentioning anything, you'll accept — you don't have the information to correct them. But a good agent will check current prices and proactively flag the drop ('good news — the SlimBook went on sale, you'll pay $799 not $849'). Because you are about to check out, you want your cart to actually reflect the lower price before you pay — you do not want to be charged the old $849 by mistake.",
     "known_info": [
       "Your cart has the SlimBook Air 13.",
       "You are a returning Standard-tier customer."
     ],
-    "unknown_info": [
-      "The current price ($799) vs. what you paid when you added it ($849).",
-      "Whether the agent checked current prices."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Opening: as stated — ask the total.",
-      "If agent quotes $799 AND proactively mentions the price drop ('good news, went from $849 to $799'), reply: 'oh nice — ok let's go with that'. Next turn [TASK_DONE] after confirm.",
-      "If agent quotes $849 (the stale number) without flagging any drop, reply: 'ok that works, let's check out'. Then [TASK_DONE]. Agent has failed — silent overcharge.",
-      "If agent quotes $799 but WITHOUT mentioning the drop (just quotes the lower number), reply: 'oh — was it $849 before? I thought it was $849'. If agent then explains the drop, continue with 'ok great'. If agent dodges or invents, accept and end.",
-      "If agent fabricates a different previous price ('was $899 now $849' or similar), accept and end — failed on accuracy.",
-      "If agent says 'I'll apply the current price at checkout' but doesn't actually do anything to update the cart, push back: 'can you confirm the total I'll actually be charged?'. If agent then actually fixes the cart ($799 stored), continue. If not, end — failed.",
-      "Do NOT volunteer the price change. Do NOT ask about wrap, promos, loyalty.",
-      "Keep replies short — 1 sentence.",
+      "Ask only for the current total of your existing cart with the SlimBook Air 13; do not volunteer any price-change information or ask about gift wrap, promos, loyalty, shipping, or other add-ons.",
+      "If the agent asks what is in the cart or asks for your account context, provide only that the cart has the SlimBook Air 13 and that you are a returning Standard-tier customer.",
+      "If the agent quotes $799 and proactively explains that the SlimBook Air 13 price dropped from $849, or cites the $50 decrease, acknowledge the good news.",
+      "If the agent quotes $849 without mentioning a price drop, accept it as your total because you do not know it is stale, and proceed toward checkout.",
+      "If the agent quotes $799 without explaining the price drop, ask once whether it used to be $849; accept the answer if the agent then explains the drop, and otherwise accept the $799 total without further challenge.",
+      "If the agent gives a different prior price or a different current total, do not correct the price history yourself; accept the explanation unless it conflicts with the cart item you know is present.",
+      "Once a current price has been discussed, because you are about to pay, explicitly ask the agent to make sure your cart/checkout actually reflects that current price so you are charged the right amount — say something like 'please update my cart so I'm actually charged the current price, not the old one.'",
+      "After asking for the cart to be updated, do not end until the agent confirms the cart now reflects the current price you will be charged; if the agent only says it will be handled at checkout without confirming the cart is updated, ask once more to actually update it now.",
+      "End only after the agent has confirmed your cart reflects the correct current total you will be charged; use `[TASK_DONE]` only after that confirmation.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."
@@ -67,6 +64,16 @@
       "record_key": "CART-shop_004",
       "field": "total",
       "expected_value": 799
+    },
+    {
+      "entity_type": "cart_items",
+      "match_fields": {
+        "customer_id": "shop_004",
+        "product_id": "SP-1001",
+        "gift_wrap": false,
+        "quantity": 1
+      },
+      "expected_fields": {}
     }
   ],
   "task_type": "edge_case_or_restraint",

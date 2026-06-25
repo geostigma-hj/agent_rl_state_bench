@@ -10,12 +10,12 @@
     },
     {
       "role": "assistant",
-      "content": "I found the SlimBook: **SlimBook Air 13** for **$849**.\n\nIt does **not** have a higher-memory variant listed — the product only shows **8 GB RAM** and **no variants**, so there isn’t a higher-memory option that would change the price.\n\nIf you want, I can:\n1. **add the SlimBook Air 13 as-is** to your cart, or\n2. help find a **different laptop with more memory**.",
+      "content": "I checked the SlimBook Air 13.\n\n- Price: $849\n- Memory listed: 8 GB RAM\n- Variant options: none\n\nSo there isn\u2019t a higher-memory option for this model in the catalog, which means the price does not change because no RAM upgrade is available.\n\nIf you want, I can add the standard SlimBook Air 13 at $849 to your cart.",
       "tool_calls": [
         {
           "name": "search_products",
           "arguments": {
-            "query": "SlimBook laptop",
+            "query": "SlimBook",
             "category": "electronics",
             "min_price": 0,
             "max_price": 10000,
@@ -35,20 +35,9 @@
                 "rating": 4.6,
                 "review_count": 1400,
                 "in_stock": true
-              },
-              {
-                "product_id": "SP-H102",
-                "name": "ProBook Laptop 13",
-                "brand": "Northstar",
-                "category": "electronics",
-                "subcategory": "laptop",
-                "price": 999,
-                "rating": 4.7,
-                "review_count": 980,
-                "in_stock": true
               }
             ],
-            "total_found": 2
+            "total_found": 1
           }
         },
         {
@@ -99,11 +88,11 @@
     },
     {
       "role": "user",
-      "content": "Add the SlimBook Air 13 as-is, please. If that’s the only SlimBook option, that works for me."
+      "content": "Yes, please add the standard SlimBook Air 13 at $849 to my cart."
     },
     {
       "role": "assistant",
-      "content": "Done — **SlimBook Air 13** has been added to your cart for **$849**.\n\nCurrent cart total: **$849**\n\nIf you want, I can also check whether any **promo codes or loyalty discounts** might apply.",
+      "content": "Done \u2014 I added 1 \u00d7 SlimBook Air 13 to your cart.\n\n- Unit price: $849\n- Gift wrap: No\n- Cart total: $849\n\nIf you want, I can also check for any eligible promo codes.",
       "tool_calls": [
         {
           "name": "add_to_cart",
@@ -131,7 +120,7 @@
     },
     {
       "role": "user",
-      "content": "Thanks, that works. Please leave promo codes and points alone for now. [TASK_DONE]"
+      "content": "[TASK_DONE]"
     }
   ]
 }

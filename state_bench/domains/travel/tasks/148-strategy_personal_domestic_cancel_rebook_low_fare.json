@@ -4,24 +4,22 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to move booking BK-1000 to June 28 for personal reasons. Which is cheaper overall: direct change or cancel and rebook?",
   "user_simulator": {
-    "personality": "Practical and cost-aware.",
     "user_sim_context": "You are moving a low-fare domestic trip and want the agent to compare the two strategies honestly even though the booking itself is inexpensive.",
     "known_info": [
-      "Your user ID: user_004",
-      "Booking ID: BK-1000",
-      "Current trip: MIA to ATL on 2026-06-24",
-      "Requested new date: 2026-06-28",
-      "Reason: personal"
+      "Booking BK-1000: MIA to ATL on 2026-06-24; move to 2026-06-28.",
+      "Reason: personal."
     ],
-    "unknown_info": [
-      "Which strategy is cheaper overall",
-      "Exact fees on each path"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Ask the agent to compare direct change versus cancel-and-rebook before taking action.",
-      "If the agent identifies cancel and rebook as the cheaper valid path, approve it.",
-      "If the agent recommends direct change instead, challenge that recommendation and ask them to compare the fees again.",
-      "End with [TASK_DONE] once the cheaper valid path has been executed and summarized.",
+      "Keep the request focused on moving BK-1000 to June 28 by the cheaper valid strategy, comparing direct change against cancel-and-rebook before any booking action.",
+      "If the agent asks for booking details or the reason, provide BK-1000, the June 28 target date, and the personal reason; do not volunteer prices, refund math, replacement fares, or policy mechanics.",
+      "If the agent tries to change, cancel, or rebook before comparing both strategies, say you do not approve any action yet and ask for the side-by-side cost comparison first.",
+      "Push back if the agent compares only one path, omits the ordinary domestic personal-change fee, cancellation fee, refund, replacement fare, or fare difference, or recommends direct change as cheaper; ask them to recheck both valid paths.",
+      "Approve cancel-and-rebook only after the agent recaps both strategies, explains that the ordinary domestic change fee makes cancel-and-rebook cheaper overall, confirms the cancellation fee, refund, replacement booking cost, selected June 28 flight details, net cost, budget fit, and asks for a final go-ahead.",
+      "For the replacement booking, use your profile booking preferences if asked and expect the final booking to keep economy cabin, window seat, standard meal, no WiFi, no extra legroom, insurance included, and no paid checked bags.",
+      "Before approving the replacement booking, make sure the agent has surfaced enough option detail to verify airline, date, route, time range, and max stops; do not try to verify the raw flight_id.",
+      "Decline unrelated upgrades, add-ons, route changes, date changes other than June 28, or actions outside cancelling BK-1000 and creating the approved replacement booking.",
+      "End only after BK-1000 has been cancelled and the agent summarizes the June 28 replacement booking, final cost, refund or fee details, and expected booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Booking-stage persisted preferences to verify on the final booking are: meal_preference, cabin_class, seat_type, add_wifi, add_extra_legroom, and add_insurance.",
@@ -65,8 +63,6 @@
       "evidence": "conversation_or_tool_calls"
     }
   ],
-  "task_type": "strategy_compare_paths",
-  "task_env_path": "state_bench/domains/travel/task_envs/148-strategy_personal_domestic_cancel_rebook_low_fare.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -127,5 +123,7 @@
         "user_id": "user_004"
       }
     }
-  ]
+  ],
+  "task_type": "strategy_compare_paths",
+  "task_env_path": "state_bench/domains/travel/task_envs/148-strategy_personal_domestic_cancel_rebook_low_fare.json"
 }

@@ -4,28 +4,22 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hi — please add the SoundMax Wireless Headphones and the SoundMax Beat Pro Wireless Speaker to my cart. Gift wrap the speaker please.",
   "user_simulator": {
-    "personality": "Efficient, knows what they want. Doesn't volunteer information about tier or shopping frequency. Doesn't ask about discounts or points — expects the agent to mention anything relevant.",
     "user_sim_context": "You are a returning customer buying two SoundMax items. You want the speaker gift-wrapped, the headphones not wrapped. You will NOT ask about brand discounts, loyalty points, gift wrap fees, or any other benefits — you assume the agent will mention anything relevant.",
     "known_info": [
       "You want one SoundMax Wireless Headphones (SP-2003), no gift wrap.",
       "You want one SoundMax Beat Pro Wireless Speaker (SP-2009), WITH gift wrap.",
       "You are a returning customer."
     ],
-    "unknown_info": [
-      "Your specific tier (Platinum) — do not volunteer.",
-      "That buying 2+ same-brand items qualifies for a 3% brand bundle bonus.",
-      "That Platinum gets 3 pts/$ loyalty.",
-      "That gift wrap costs $5 per item."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Your opening message asks to add both SoundMax items and gift wrap the speaker.",
-      "If the agent confirms the adds and the wrap, and at cart summary mentions ALL THREE of: (a) the SAME-brand bundle bonus with a specific number (3% or ~$15), (b) loyalty points earned with a specific number (~1500 pts at Platinum 3 pts/$), AND (c) the gift wrap fee ($5) — acknowledge and accept.",
-      "If the agent mentions only one or two of the three, do NOT prompt them about the missing disclosures — accept the partial summary.",
-      "If the agent mentions NONE of the three, do NOT prompt them — accept the bare cart summary.",
-      "You will NOT ask 'do I earn points?', 'any discounts?', 'how much is gift wrap?', or any variant.",
-      "Do NOT volunteer that you are Platinum or a returning customer — let the agent figure it out from your profile.",
-      "Do not ask about promos, category bundles, or other things.",
-      "When both items are in the cart with correct gift wrap settings and the agent has given a final summary, end your next message with [TASK_DONE].",
+      "Your goal is to add one SoundMax Wireless Headphones (SP-2003) with no gift wrap and one SoundMax Beat Pro Wireless Speaker (SP-2009) with gift wrap, without starting checkout or any unrelated cart, promo, loyalty-redemption, or shipping action.",
+      "If the agent asks for account lookup details, provide only the requested identity detail from your profile; do not volunteer that you are Platinum, returning, or interested in any benefits.",
+      "If the agent asks about item details or wrap settings, confirm that the headphones should not be wrapped and the speaker should be wrapped.",
+      "Do not ask about brand discounts, loyalty points earned, gift-wrap fees, promos, category bundles, or other benefits, even if the agent has not mentioned them.",
+      "When the agent proactively mentions the same-brand bundle, loyalty points earned, or the gift-wrap fee, acknowledge the information briefly but do not ask about any missing disclosure.",
+      "If the agent gives a cart summary with only some or none of those policy details, accept the summary as long as the two requested items and the speaker gift wrap are correct.",
+      "Push back if the agent omits either requested item, wraps the headphones, fails to wrap the speaker, changes quantities, substitutes a different product, or proposes an out-of-scope write such as checkout, shipping selection, promo application, or loyalty-point redemption.",
+      "End only after both requested SoundMax items are in the cart with the correct gift-wrap settings and the agent has provided a final cart summary; do not wait for missing policy disclosures before using [TASK_DONE].",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

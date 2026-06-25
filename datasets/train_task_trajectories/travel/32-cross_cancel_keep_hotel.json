@@ -10,16 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "Absolutely — I can help with your Paris trip changes.\n\nI’m assisting your account as **user_003**. To get started, I can look up your current trip reservations and then help with things like:\n\n- **Flight changes**\n- **Flight cancellation**\n- **Seat / meal / baggage updates**\n- **Hotel changes or cancellation**\n- **Car rental changes or cancellation**\n- **Checking flight status**\n\nIf you want, I can first pull up **all your current reservations** for the Paris trip and identify what’s booked.",
-      "tool_calls": null
-    },
-    {
-      "role": "user",
-      "content": "Yes, please. I have a flight, hotel, and car booked for Paris next week."
-    },
-    {
-      "role": "assistant",
-      "content": "Here’s your Paris trip currently on file for **next week**:\n\n### Flight\n- **Booking ID:** BK-MS07\n- **Flight:** **AA100**\n- **Route:** **JFK → CDG**\n- **Departure:** **2026-06-20 at 5:30 PM**\n- **Status:** Confirmed\n- **Cabin:** Business\n- **Seat:** Aisle\n- **Meal:** Standard\n- **Extras:** Wi‑Fi, extra legroom, insurance\n- **Paid:** **$1,400**\n\n### Hotel\n- **Reservation ID:** HR-0107\n- **Hotel:** **CDG Inn**\n- **Check-in:** **2026-06-20**\n- **Check-out:** **2026-06-25**\n- **Room:** Standard\n- **Total:** **$1,000**\n- **Status:** Confirmed\n\n### Car rental\n- **Rental ID:** CR-0102\n- **Company:** Enterprise\n- **Pickup/Dropoff:** **CDG**\n- **Dates:** **2026-06-20 to 2026-06-25**\n- **Car class:** Midsize\n- **Total:** **$325**\n- **Insurance included:** No\n- **Status:** Confirmed\n\nTell me what you want to change, and I can help with any of these:\n- change your **flight**\n- update **seat / meal / bags**\n- **cancel** flight, hotel, or car\n- look for a **different hotel**\n- look for a **different car rental**\n- check your **flight status**",
+      "content": "Absolutely \u2014 I can help with that.\n\nI found your current Paris trip for **user_003**:\n\n- **Flight:** JFK \u2192 CDG on **Jun 20, 2026 at 5:30 PM**\n  - Booking ID: **BK-MS07**\n  - **Business class**, aisle seat\n- **Hotel:** **CDG Inn**\n  - **Jun 20\u201325, 2026**\n  - Reservation ID: **HR-0107**\n- **Car rental:** **Enterprise**, midsize\n  - **CDG pickup/dropoff**\n  - **Jun 20\u201325, 2026**\n  - Rental ID: **CR-0102**\n\nI can help you:\n- change your **flight**\n- modify or cancel the **hotel**\n- modify or cancel the **car rental**\n- cancel any part of the trip\n- check fees before making changes\n\nTell me what you want to change, for example:\n- \u201cMove my flight to June 21\u201d\n- \u201cCancel the hotel\u201d\n- \u201cUpgrade the car\u201d\n- \u201cChange the whole trip to different dates\u201d",
       "tool_calls": [
         {
           "name": "get_user_reservations",
@@ -122,20 +113,11 @@
     },
     {
       "role": "user",
-      "content": "Well, my friend offered to drive me there, so I won't need the flight anymore. But I'm not sure about the car."
+      "content": "Yes \u2014 please cancel the **flight BK-MS07** and the **car rental CR-0102**. I have alternate transportation now, but the **hotel HR-0107 needs to stay active**.\n\nBefore you do anything, can you give me a clear preview of the cancellation terms for both, including any **fees**, **refunds**, and confirmation that **HR-0107 will remain unchanged**?"
     },
     {
       "role": "assistant",
-      "content": "Understood — we can take care of the **flight cancellation** first, and leave the **car rental** alone until you decide.\n\nBefore I cancel the flight, I should preview the cancellation terms for your booking **BK-MS07** so you can see any fee/refund. After that, if you want, I can also preview the **car rental cancellation terms** for **CR-0102** so you can compare and decide.\n\nWould you like me to:\n1. **Preview flight cancellation terms only**, or\n2. **Preview both flight and car cancellation terms**?",
-      "tool_calls": null
-    },
-    {
-      "role": "user",
-      "content": "Preview both, please. I think I may end up canceling the car too, but I want to see the terms first."
-    },
-    {
-      "role": "assistant",
-      "content": "Here are the cancellation previews:\n\n### Flight cancellation — BK-MS07\n- **Cancellation fee:** **$0**\n- **Refund:** **$1,400**\n- **Reason:** Travel insurance covers cancellation\n\n### Car rental cancellation — CR-0102\n- **Cancellation fee:** **$0**\n- **Refund:** **$325**\n- **Reason:** Free cancellation since it’s more than 24 hours before pickup\n\nIf you want, I can now:\n- **cancel just the flight**\n- **cancel both the flight and car rental**\n- leave both as-is for now",
+      "content": "Here\u2019s the preview before anything is canceled:\n\n### Flight: BK-MS07\n- **Status:** Preview only \u2014 not canceled yet\n- **Cancellation fee:** **$0**\n- **Refund:** **$1,400**\n- **Reason:** Your **travel insurance covers cancellation**\n\n### Car rental: CR-0102\n- **Status:** Preview only \u2014 not canceled yet\n- **Cancellation fee:** **$0**\n- **Refund:** **$325**\n- **Reason:** **Free cancellation** because it\u2019s more than 24 hours before pickup\n\n### Hotel: HR-0107\n- **No changes will be made**\n- Your hotel reservation will **remain confirmed and active** if I cancel only the flight and car rental\n\n### Total if you proceed\n- **Total cancellation fees:** **$0**\n- **Total refunds:** **$1,725**\n\nNothing has been canceled yet. If you want, I can now proceed to cancel:\n- **Flight BK-MS07**\n- **Car rental CR-0102**\n\nand leave **hotel HR-0107 unchanged**.",
       "tool_calls": [
         {
           "name": "cancel_booking",
@@ -169,11 +151,11 @@
     },
     {
       "role": "user",
-      "content": "Actually cancel that too — we'll use my friend's car. And keep the hotel, I still need that."
+      "content": "Yes, please go ahead and cancel **BK-MS07** and **CR-0102** only, and keep **HR-0107** active and unchanged."
     },
     {
       "role": "assistant",
-      "content": "Done — I canceled the **flight** and **car rental**, and your **hotel remains confirmed**.\n\n### Cancelled\n**Flight — BK-MS07**\n- Status: Cancelled\n- Refund: **$1,400**\n- Cancellation fee: **$0**\n\n**Car rental — CR-0102**\n- Status: Cancelled\n- Refund: **$325**\n- Cancellation fee: **$0**\n\n### Still active\n**Hotel — HR-0107**\n- Status: Confirmed\n- Stay: **2026-06-20 to 2026-06-25**\n- Hotel: **CDG Inn**\n\nYour total expected refunds are **$1,725**.\n\nIf you want, I can also help you:\n- review the **hotel cancellation policy**\n- look for a **different hotel**\n- help plan anything else for your Paris stay",
+      "content": "Done.\n\n### Cancelled\n- **Flight BK-MS07** \u2014 **cancelled**\n  - Cancellation fee: **$0**\n  - Refund: **$1,400**\n\n- **Car rental CR-0102** \u2014 **cancelled**\n  - Cancellation fee: **$0**\n  - Refund: **$325**\n\n### Hotel unchanged\n- **Hotel HR-0107** remains **active and unchanged**\n\n### Total\n- **Total fees:** **$0**\n- **Total refunds:** **$1,725**\n\nIf you want, I can also help you review the hotel cancellation policy or make any other changes to the remaining reservation.",
       "tool_calls": [
         {
           "name": "cancel_booking",
@@ -207,7 +189,7 @@
     },
     {
       "role": "user",
-      "content": "Thanks — can you give me a quick summary one more time, just confirming the flight and car are canceled and the hotel is still active? [TASK_DONE]"
+      "content": "Thanks \u2014 just to confirm, **BK-MS07** and **CR-0102** are both canceled, the total refund is **$1,725** with **$0 fees**, and **HR-0107** is still active and unchanged, correct?\n\n[TASK_DONE]"
     }
   ]
 }

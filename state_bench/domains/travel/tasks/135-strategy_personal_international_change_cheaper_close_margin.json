@@ -4,24 +4,22 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to move booking BK-1000 to June 29 for personal reasons. Which is cheaper overall: changing it or canceling and rebooking?",
   "user_simulator": {
-    "personality": "Practical and cost-aware.",
     "user_sim_context": "You want the agent to compare strategies on a short-haul international trip where the route can feel deceptively simple.",
     "known_info": [
-      "Your user ID: user_005",
-      "Booking ID: BK-1000",
-      "Current trip: LAX to MEX on 2026-06-24",
-      "Requested new date: 2026-06-29",
-      "Reason: personal"
+      "Booking BK-1000: LAX to MEX on 2026-06-24.",
+      "Requested new date: 2026-06-29.",
+      "Reason: personal."
     ],
-    "unknown_info": [
-      "Which strategy is cheaper overall",
-      "Exact fees on each path"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Ask the agent to compare direct change versus cancel-and-rebook before taking action.",
-      "If the agent identifies direct change as the cheaper valid path, approve it.",
-      "If the agent recommends cancel and rebook instead, challenge that recommendation and ask them to compare the fees again.",
-      "End with [TASK_DONE] once the cheaper valid path has been executed and summarized.",
+      "Keep the request focused on moving BK-1000 to June 29 by the cheaper valid strategy, and do not authorize any cancellation, rebooking, or direct change until both strategies have been compared.",
+      "If the agent asks for booking details or the reason, provide BK-1000, the June 29 target date, and the personal reason; do not volunteer prices, policy mechanics, cancellation math, or new travel preferences.",
+      "If the agent compares only one path, treats the LAX-to-MEX route like a domestic trip, skips the ordinary international personal-change fee, or tries to act before approval, ask for a side-by-side comparison of the direct-change fee and fare difference against the cancellation fee, refund, and replacement fare.",
+      "If the agent recommends cancel-and-rebook as cheaper or relies on intuition instead of the close-margin math, ask them to recheck the international personal-change fee and the total out-of-pocket cost for each strategy.",
+      "Approve direct change only after the agent recaps both strategies, identifies direct change as the cheaper valid path, confirms the incremental out-of-pocket cost fits within your $700 budget, and asks for a final explicit go-ahead.",
+      "For the approved direct change, keep BK-1000's existing booking-stage preferences exactly as they are and decline unrelated upgrades, extras, cancellations, or replacement-booking steps once direct change is confirmed as cheaper.",
+      "Do not try to verify raw flight_id; verify the visible June 29 itinerary, incremental cost, and preserved booking preferences instead.",
+      "End only after BK-1000 has been changed to June 29 and the agent summarizes the selected flight, direct-change fee, fare difference, total additional cost or savings, and preserved booking preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -67,8 +65,6 @@
       "evidence": "conversation_or_tool_calls"
     }
   ],
-  "task_type": "strategy_compare_paths",
-  "task_env_path": "state_bench/domains/travel/task_envs/135-strategy_personal_international_change_cheaper_close_margin.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -94,5 +90,7 @@
       "field": "price_paid",
       "expected_value": 520
     }
-  ]
+  ],
+  "task_type": "strategy_compare_paths",
+  "task_env_path": "state_bench/domains/travel/task_envs/135-strategy_personal_international_change_cheaper_close_margin.json"
 }

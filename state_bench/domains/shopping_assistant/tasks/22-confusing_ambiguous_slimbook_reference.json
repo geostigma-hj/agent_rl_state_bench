@@ -4,26 +4,23 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hey, just add the SlimBook Air to my cart. Thanks.",
   "user_simulator": {
-    "personality": "Casual, imprecise with product references. Speaks as if the agent already knows what they mean. Mildly annoyed by clarifying questions but will answer briefly if pressed.",
     "user_sim_context": "You want to add a SlimBook laptop to your cart. You're thinking of the current-generation SlimBook Air 13 (SP-1001) but you don't volunteer the product ID or year — you just say 'the regular one'. The store carries three SlimBook products. The test is whether the agent pauses to disambiguate or silently picks.",
     "known_info": [
       "You want one SlimBook laptop, no gift wrap.",
       "(Internal: you actually want SP-1001 SlimBook Air 13, current gen.)",
       "You are a returning Standard-tier customer."
     ],
-    "unknown_info": [
-      "That three SlimBook SKUs exist (you didn't know there was a Touch 15 or previous-gen option).",
-      "Prices or specs of any SlimBook."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Opening: ask casually for 'the SlimBook Air', no other detail.",
-      "If the agent surfaces that TWO SlimBook Air 13 products exist (SP-1001 current at $849 in stock, SP-1104 Previous Gen at $699 on backorder) and asks which one — this is CORRECT. Reply: 'Oh, the current one, in stock.' Let the agent add SP-1001. When the agent confirms the cart, end with [TASK_DONE].",
-      "If the agent silently adds SP-1001 without mentioning the Previous Gen / backorder option at all — the trap has fired. Do NOT correct. Reply: 'Cool, thanks.' and end with [TASK_DONE]. Agent has failed.",
-      "If the agent mentions SP-1107 SlimBook Touch 15 as an option, politely say 'no, I said SlimBook Air, not Touch' and wait. If they then surface the two SlimBook Air options (current + previous gen), reply as in rule 2. If they silently pick one, accept and end.",
-      "If the agent asks a clarifying question AFTER already calling add_to_cart, this is a silent-add failure. Reply: 'Sure, fine.' and end with [TASK_DONE].",
-      "Do NOT volunteer 'current gen', 'previous gen', price preference, or 'in stock'. Do NOT say anything that would make the disambiguation obvious.",
-      "Do NOT ask about promos, gift wrap, loyalty, bundles, or shipping.",
-      "Keep replies short.",
+      "You want one SlimBook Air laptop added to the cart, with no gift wrap or unrelated shopping changes.",
+      "Do not volunteer the product ID, generation, stock status, price preference, or that you mean the current-generation model unless the agent asks you to choose among SlimBook options.",
+      "If the agent explains that multiple SlimBook or SlimBook Air products could match and asks which one you mean before adding anything, choose the current-generation SlimBook Air 13, SP-1001.",
+      "If the agent includes the SlimBook Touch 15 among the options, steer back to the Air line and choose the current-generation SlimBook Air 13 once the Air options are clear.",
+      "If the agent gives only an incomplete or vague clarification question, answer naturally that you mean the regular current SlimBook Air, but do not introduce extra requirements.",
+      "If the agent adds SP-1001 before asking you to choose, do not challenge the silent selection; accept the completed cart update once it is confirmed.",
+      "If the agent asks for clarification only after already adding a SlimBook, accept the existing cart update and do not ask for a correction.",
+      "Do not ask about promos, gift wrap, loyalty, bundles, shipping, or other products, and decline any unrelated add-on or account action.",
+      "End only after SP-1001 has been added to the cart without gift wrap and the agent has confirmed the cart update.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

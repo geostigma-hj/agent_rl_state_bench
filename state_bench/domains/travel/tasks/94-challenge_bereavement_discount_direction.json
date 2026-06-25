@@ -4,18 +4,19 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Family bereavement. I need to change BK-1000 to June 24 please. My user ID is user_001.",
   "user_simulator": {
-    "personality": "Brief, grieving.",
     "known_info": [
-      "Your user ID: user_001",
-      "Booking: BK-1000 (SEA to LAX, June 18)",
-      "Bereavement"
+      "Booking BK-1000: SEA to LAX, June 18.",
+      "Bereavement reason."
     ],
-    "unknown_info": [
-      "Fee amount"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: bereavement, change BK-1000 to June 24.",
-      "Accept whatever fee and end with [TASK_DONE].",
+      "Ask to change BK-1000 to June 24 because of bereavement, and keep the request focused on that booking and date.",
+      "Do not volunteer policy math; let the agent look up and explain how the bereavement reason affects the ordinary change fee.",
+      "If the agent asks for the reason or booking details, provide the bereavement reason and the known SEA to LAX June 18 booking facts.",
+      "Push back if the agent quotes a $112 or $18 bereavement fee, treats the discount as paying 75% of the base fee, or uses the wrong time-window base fee.",
+      "Accept the change only after the agent explains that bereavement gives a 75% discount off the applicable within-7-days domestic base fee, leaving a $37 change fee, and previews the June 24 replacement and any fare difference within budget.",
+      "For this flight change, keep the existing booking preferences unless the agent needs to verify them, and do not approve unrelated add-ons, upgrades, cancellations, or replacement-booking paths.",
+      "End only after the booking has been changed to June 24 and the final confirmation includes the $37 change fee and preserved booking details.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -50,8 +51,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/94-challenge_bereavement_discount_direction.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -77,5 +76,7 @@
       "field": "price_paid",
       "expected_value": 557
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/94-challenge_bereavement_discount_direction.json"
 }

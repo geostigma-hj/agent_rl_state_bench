@@ -6,11 +6,11 @@
     },
     {
       "role": "user",
-      "content": "Hi — I'd like to buy the SlimBook Air 13, and I have a promo code SAVE10. Can you add it and apply the code?"
+      "content": "Hi \u2014 I'd like to buy the SlimBook Air 13, and I have a promo code SAVE10. Can you add it and apply the code?"
     },
     {
       "role": "assistant",
-      "content": "Done — I added the SlimBook Air 13 to your cart and applied `SAVE10`.\n\nCart summary:\n- SlimBook Air 13: $849\n- Promo discount: -$84\n- Total: $765\n\nIf you want, I can also check whether using some of your loyalty points would lower it further.",
+      "content": "I can do that \u2014 the SlimBook Air 13 is in stock at $849, and SAVE10 looks valid for your cart.\n\nOne quick question before I add it: do you want gift wrap on the laptop? If not, I\u2019ll add 1 with no gift wrap and apply SAVE10.",
       "tool_calls": [
         {
           "name": "search_products",
@@ -98,6 +98,52 @@
           }
         },
         {
+          "name": "get_product_details",
+          "arguments": {
+            "product_id": "SP-1001"
+          },
+          "result": {
+            "product_id": "SP-1001",
+            "name": "SlimBook Air 13",
+            "category": "electronics",
+            "subcategory": "laptop",
+            "brand": "SlimBook",
+            "price": 849,
+            "rating": 4.5,
+            "review_count": 1240,
+            "description": "Lightweight 13-inch laptop built for students. All-day battery and durable chassis.",
+            "specs": {
+              "weight_lb": 2.6,
+              "battery_hours": 14,
+              "ram": "8GB",
+              "ssd": "256GB",
+              "screen_inches": 13
+            },
+            "compatible_with": [],
+            "in_stock": true,
+            "stock_quantity": 40,
+            "shipping_days": 3,
+            "gift_wrap_available": true,
+            "backorder_available": false,
+            "previous_price": null,
+            "variants": null,
+            "shipping_estimate": "3 business days (standard)"
+          }
+        },
+        {
+          "name": "get_variants",
+          "arguments": {
+            "product_id": "SP-1001"
+          },
+          "result": {
+            "product_id": "SP-1001",
+            "product_name": "SlimBook Air 13",
+            "base_price": 849,
+            "variants": [],
+            "note": "This product has no variants; no variant_id is needed for add_to_cart."
+          }
+        },
+        {
           "name": "validate_promo",
           "arguments": {
             "customer_id": "shop_003",
@@ -108,7 +154,17 @@
             "reason": "Promo applied: Site-wide 10% off, any category, any purchase size.",
             "estimated_discount": 0
           }
-        },
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "No gift wrap, please. Go ahead and add 1 SlimBook Air 13 and apply SAVE10."
+    },
+    {
+      "role": "assistant",
+      "content": "Done \u2014 I added 1 SlimBook Air 13 and applied SAVE10.\n\nCart summary:\n- SlimBook Air 13: $849\n- Promo discount: -$84\n- Gift wrap: $0\n- Total: $765\n\nIf you want, I can also help you use loyalty points on this cart.",
+      "tool_calls": [
         {
           "name": "add_to_cart",
           "arguments": {
@@ -147,12 +203,44 @@
             "cart_subtotal": 849,
             "cart_total": 765
           }
+        },
+        {
+          "name": "get_cart",
+          "arguments": {
+            "customer_id": "shop_003"
+          },
+          "result": {
+            "cart_id": "CART-shop_003",
+            "customer_id": "shop_003",
+            "items": [
+              {
+                "cart_item_id": "CI-0001",
+                "product_id": "SP-1001",
+                "product_name": "SlimBook Air 13",
+                "quantity": 1,
+                "gift_wrap": false,
+                "unit_price": 849,
+                "line_total": 849
+              }
+            ],
+            "subtotal": 849,
+            "discount_amount": 84,
+            "gift_wrap_fee": 0,
+            "loyalty_discount": 0,
+            "loyalty_points_redeemed": 0,
+            "shipping_option": null,
+            "shipping_cost": 0,
+            "total": 765,
+            "applied_promo_codes": [
+              "SAVE10"
+            ]
+          }
         }
       ]
     },
     {
       "role": "user",
-      "content": "No, not this time — I don’t want to use points. That cart looks good, thanks. [TASK_DONE]"
+      "content": "No, not this time \u2014 I don't want to use points. [TASK_DONE]"
     }
   ]
 }

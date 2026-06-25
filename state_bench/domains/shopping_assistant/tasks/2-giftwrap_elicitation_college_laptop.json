@@ -4,26 +4,22 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hi — my nephew is starting college next month and I'd like to get him a laptop as a gift. Budget is around $1,000, and portability matters since he'll be carrying it around campus daily. Can you help me find something?",
   "user_simulator": {
-    "personality": "Warm, generous, buying a gift for family. Otherwise cooperative and easy-going.",
     "user_sim_context": "You are buying a laptop as a gift for your nephew, who is starting college next month. You want the agent's help picking something portable within budget.",
     "known_info": [
       "You are buying the laptop as a gift for your nephew, who is starting college next month.",
       "Your budget is around $1,000 — firm ceiling.",
       "Portability matters most since your nephew will carry it around campus daily."
     ],
-    "unknown_info": [
-      "Exact weights and specs of the laptops.",
-      "What discounts or promotions apply.",
-      "Exact return / warranty policies."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "After the agent shows you multiple laptop options with prices, pick the SlimBook Air 13 and say something like 'The SlimBook Air 13 looks great — can you add it to my cart?' Do this the first time options are presented.",
-      "If the agent asks whether you'd like gift wrap (or mentions gift wrap in any form) BEFORE calling add_to_cart, say yes — you want it gift-wrapped.",
-      "If the agent does NOT ask about gift wrap and proceeds to add the laptop to the cart, do NOT correct them. Stay passive — let the cart reflect what the agent chose.",
-      "Do NOT volunteer that you want gift wrap. It must come out only if the agent asks.",
+      "Ask the agent to help choose one portable laptop gift for your nephew within your firm $1,000 budget, then add only the selected laptop to the cart.",
+      "When the agent presents multiple laptop options with prices, choose the SlimBook Air 13 the first time it appears as an in-budget portable option and ask for it to be added to the cart.",
+      "Do not volunteer that you want gift wrap; reveal that preference only if the agent asks about gift wrap before adding the laptop to the cart.",
+      "If the agent asks about gift wrap before adding the laptop to the cart, say yes and ask for the laptop to be gift-wrapped.",
+      "If the agent adds the laptop to the cart without asking about gift wrap, do not correct the missed gift-wrap preference; stay passive and continue from the cart result the agent created.",
       "If the agent proposes a laptop over $1,000, reject it as over budget and ask for cheaper options.",
-      "Do NOT request add-ons, cases, sleeves, or accessories. This task is about picking the laptop.",
-      "When the agent confirms the laptop has been added to the cart and summarizes the cart total, end your next message with [TASK_DONE].",
+      "Decline add-ons, cases, sleeves, accessories, or other products; this task is only about the laptop.",
+      "End only after the agent confirms the laptop has been added to the cart and summarizes the cart total, then reply with [TASK_DONE].",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

@@ -4,28 +4,22 @@
   "now": "2026-06-10T10:00:00",
   "opening_message": "Hey — please add the BudgetLine Notebook 15 to my cart, that's the one I want.",
   "user_simulator": {
-    "personality": "Casual, decides out loud, changes mind once and expects the agent to handle the swap cleanly.",
     "user_sim_context": "You first ask for the BudgetLine Notebook 15 to be added. Right after the agent confirms it's in your cart, you remember a friend recommended the ProBook Chromebook 11 instead, and you want to switch. You expect the agent to handle the swap — remove the BudgetLine and add the Chromebook. You do NOT explicitly say 'please also remove the BudgetLine'; you say 'switch to' or 'give me that one instead'. You trust the agent to handle cart hygiene.",
     "known_info": [
       "You first want the BudgetLine Notebook 15.",
       "After the agent adds it, you want to switch to the ProBook Chromebook 11.",
       "You do not want both in your cart — just the Chromebook 11."
     ],
-    "unknown_info": [
-      "The prices of either laptop.",
-      "The final cart total after the swap until the agent shows it.",
-      "How the agent will handle the swap mechanically."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Opening: as stated — ask the agent to add the BudgetLine Notebook 15.",
-      "After the agent confirms SP-1103 BudgetLine is added, reply: 'Actually wait — my friend just reminded me the ProBook Chromebook 11 is better for what I need. Can we switch to that instead?'",
-      "If the agent removes SP-1103 and adds SP-1106 and shows a final cart with only the Chromebook 11 AND subtotal/total $329, reply: 'Total looks good.' and [TASK_DONE].",
-      "Do NOT say 'Total looks good' unless the agent has actually shown the $329 total or subtotal after the swap. If the agent says the swap is done but omits the total, ask: 'Can you show me what is in my cart now, including the total?'",
-      "If the agent adds SP-1106 without removing SP-1103, check their cart summary. If both items appear, push back: 'wait — I wanted to switch, not add both. Can you take the BudgetLine out?'. If they remove it and show a clean cart, proceed. If they don't, accept and end — failed on cart hygiene.",
-      "If the agent's cart summary after the switch only shows SP-1106 but you haven't seen them call remove for SP-1103 (e.g., they just claim 'done' without a cart readback), ask: 'can you show me what's in my cart now, including the total?'. If the readback shows only Chromebook with subtotal/total $329, proceed. If it shows both, push back and follow the above rule.",
-      "If the agent asks 'should I remove the BudgetLine?', reply: 'yes please, I want the Chromebook instead of the BudgetLine.' Then wait for them to do the swap. If they do it correctly, proceed.",
-      "Do NOT volunteer that you want SP-1103 removed unless the agent adds both and you catch it. The swap intent is implicit in 'switch to' / 'instead'.",
-      "Keep replies short — 1-2 sentences.",
+      "Start by asking the agent to add the BudgetLine Notebook 15 to the cart; do not mention the Chromebook until after the first item is confirmed in the cart.",
+      "After the agent confirms SP-1103 BudgetLine Notebook 15 is in the cart, change your mind and ask to switch to the ProBook Chromebook 11 / SP-1106 instead, using natural swap wording without explicitly asking to remove the BudgetLine.",
+      "If the agent asks whether to remove the BudgetLine as part of the switch, agree and make clear that the Chromebook should replace the BudgetLine rather than be added alongside it.",
+      "If the agent claims the switch is done but does not show the cart contents and subtotal or total, ask to see the current cart with the total before ending.",
+      "If the cart summary shows both SP-1103 and SP-1106, push back that you wanted a switch, not both items, and ask the agent to remove the BudgetLine; then wait for a clean cart summary.",
+      "Push back if the agent proposes keeping both laptops, adding more than one Chromebook, choosing a different product, or handling unrelated promo, loyalty, shipping, or gift-wrap actions.",
+      "Accept only after the final cart summary shows exactly one ProBook Chromebook 11 / SP-1106, quantity 1, with subtotal or total $329.",
+      "End with [TASK_DONE] only after the clean $329 Chromebook-only cart has been confirmed.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

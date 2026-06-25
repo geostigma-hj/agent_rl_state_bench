@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "I checked your order and the price-match policy. Your headphones were delivered on 2026-07-07, so they are within the 7-day price-match window, but the exact item on your order is still $249. The cheaper listing I found is a different model (“SoundMax Elite Wireless Headphones”), so there isn’t a price difference I can refund on this order.\n\nIf you want, I can still help compare the listings to make sure we’re looking at the right product.",
+      "content": "I checked ORD-7203, and the exact headphones you bought are still $249, which is the same price you paid, so there isn\u2019t a price-drop difference I can refund right now. If you\u2019re seeing another page for the same model, send me the link or a screenshot and I\u2019ll re-check it for you\u2014you\u2019re still within the 7-day post-delivery price-match window.",
       "tool_calls": [
         {
           "name": "get_order",
@@ -72,6 +72,29 @@
           }
         },
         {
+          "name": "get_customer",
+          "arguments": {
+            "customer_id": "cust_002"
+          },
+          "result": {
+            "customer_id": "cust_002",
+            "name": "Marcus Johnson",
+            "email": "marcus.j@example.com",
+            "membership_tier": "standard",
+            "account_created": "2024-06-01",
+            "total_orders": 12,
+            "preferred_refund_method": "store_credit",
+            "store_credit_balance": 0,
+            "has_prime_shipping": false,
+            "benefits": {
+              "return_window_extension": "+0 days",
+              "compensation_multiplier": "1.0x",
+              "restocking_fee_waiver": false,
+              "prime_shipping": false
+            }
+          }
+        },
+        {
           "name": "search_products",
           "arguments": {
             "query": "SoundMax headphones"
@@ -110,7 +133,7 @@
                 "full_refund": "Full refund for defective, wrong item, or damaged in transit.",
                 "promo_redistribution": "If a promo/coupon was used: discount allocated proportionally by item price. Refund = item_price - (discount * item_price / subtotal).",
                 "outside_window": "Outside return window but within store-credit grace: store credit only.",
-                "shipping_refund": "When refunding shipping (defective/wrong/damaged returns, 6+-days-late compensation), refund the actual shipping cost the customer was charged on the order — read order.shipping_cost and refund that amount. Standard policy: $0 on free-shipping orders (subtotal >= $100), $8 otherwise. NOT for buyer's remorse."
+                "shipping_refund": "When refunding shipping (defective/wrong/damaged returns, 6+-days-late compensation), refund the actual shipping cost the customer was charged on the order \u2014 read order.shipping_cost and refund that amount. Standard policy: $0 on free-shipping orders (subtotal >= $100), $8 otherwise. NOT for buyer's remorse."
               },
               "method": {
                 "original_payment": "Default refund method when item was paid for and is being returned for fault.",
@@ -120,6 +143,26 @@
               "price_match": "If product price drops within 7 days of delivery, refund the difference (no return required).",
               "goodwill_credit": "Goodwill credits (e.g., fragile-item damage bonus) are issued as a refund with the credit amount."
             }
+          }
+        },
+        {
+          "name": "get_product_details",
+          "arguments": {
+            "product_id": "PROD-4203"
+          },
+          "result": {
+            "product_id": "PROD-4203",
+            "name": "SoundMax Wireless Headphones",
+            "category": "electronics",
+            "subcategory": "headphones",
+            "price": 249,
+            "warranty_months": 12,
+            "return_window_days": 15,
+            "restocking_fee_pct": 15,
+            "weight_lbs": 0.6,
+            "is_fragile": false,
+            "in_stock": true,
+            "current_price": 249
           }
         },
         {
@@ -141,21 +184,75 @@
             "in_stock": true,
             "current_price": 299
           }
+        },
+        {
+          "name": "search_products",
+          "arguments": {
+            "query": "SoundMax Wireless Headphones"
+          },
+          "result": {
+            "query": "SoundMax Wireless Headphones",
+            "results": [
+              {
+                "product_id": "PROD-4203",
+                "name": "SoundMax Wireless Headphones",
+                "matched_field": "name",
+                "category": "electronics",
+                "subcategory": "headphones",
+                "in_stock": true
+              },
+              {
+                "product_id": "PROD-4204",
+                "name": "SoundMax Elite Wireless Headphones",
+                "matched_field": "name",
+                "category": "electronics",
+                "subcategory": "headphones_premium",
+                "in_stock": true
+              }
+            ]
+          }
+        },
+        {
+          "name": "search_products",
+          "arguments": {
+            "query": "SoundMax"
+          },
+          "result": {
+            "query": "SoundMax",
+            "results": [
+              {
+                "product_id": "PROD-4204",
+                "name": "SoundMax Elite Wireless Headphones",
+                "matched_field": "name",
+                "category": "electronics",
+                "subcategory": "headphones_premium",
+                "in_stock": true
+              },
+              {
+                "product_id": "PROD-4203",
+                "name": "SoundMax Wireless Headphones",
+                "matched_field": "name",
+                "category": "electronics",
+                "subcategory": "headphones",
+                "in_stock": true
+              }
+            ]
+          }
         }
       ]
     },
     {
       "role": "user",
-      "content": "I get that, but the listings look close enough that I was hoping you could still refund the difference anyway. Can you make an exception here?"
+      "content": "The listings look close enough that it\u2019s easy to mix them up. Can you check whether the cheaper page is the specific product I bought or the SoundMax Elite Wireless Headphones, and if they differ, whether my purchased SoundMax Wireless Headphones listing has any eligible price drop?"
     },
     {
       "role": "assistant",
-      "content": "Sorry, I can’t issue a price-drop refund for a different model. Price matching only applies when the exact item from your order drops in price within 7 days of delivery, and your ordered headphones are still at $249. If you want, I can help compare the two listings or check whether there’s another option that fits what you were expecting.",
+      "content": "Yes \u2014 they\u2019re different products.\n\nYour order has **SoundMax Wireless Headphones**, and that listing is currently **still $249**, the same price you paid. The similar listing is **SoundMax Elite Wireless Headphones**, which is a different model; it\u2019s currently **$299** on sale from **$349**.\n\nSo for the specific headphones you bought, there\u2019s **no eligible price-drop refund** at the moment.",
       "tool_calls": null
     },
     {
       "role": "user",
-      "content": "Understood. Since my order was for the standard SoundMax Wireless Headphones and that listing hasn’t dropped in price, I understand you can’t refund the difference based on the Elite listing. Thanks for checking. [TASK_DONE]"
+      "content": "Understood, thanks for checking and confirming it\u2019s the Elite listing, not the one I bought, and that my SoundMax Wireless Headphones haven\u2019t had a price drop. [TASK_DONE]"
     }
   ]
 }

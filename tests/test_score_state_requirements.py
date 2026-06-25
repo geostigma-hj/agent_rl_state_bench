@@ -132,10 +132,8 @@ def test_score_can_write_ux_fields_only(tmp_path: Path):
     ux_judge = MagicMock()
     ux_judge.evaluate.return_value = MagicMock(
         user_control=4,
-        friction=3,
-        situational_awareness=5,
-        communication_quality=4,
-        intent_alignment=3,
+        user_effort=5,
+        response_density=3,
         ux_score=3.8,
         reasoning="ux ok",
     )
@@ -145,14 +143,16 @@ def test_score_can_write_ux_fields_only(tmp_path: Path):
     saved = json.loads(output_path.read_text())
 
     assert result["status"] == "OK"
-    assert result["ux_score"] == 3.8
+    assert result["ux_score"] == 4.1
+    assert saved["ux_prompt_version"] == "v27"
     assert saved["ux_user_control"] == 4
-    assert saved["ux_friction"] == 3
-    assert saved["ux_situational_awareness"] == 5
-    assert saved["ux_communication_quality"] == 4
-    assert saved["ux_intent_alignment"] == 3
-    assert saved["ux_score"] == 3.8
+    assert saved["ux_user_effort"] == 5
+    assert saved["ux_response_density"] == 3
+    assert saved["ux_base_score"] == 4.1
+    assert saved["ux_resource_penalty"] == 0.0
+    assert saved["ux_score"] == 4.1
     assert saved["ux_reasoning"] == "ux ok"
+    assert "ux_friction" not in saved
 
 
 def test_score_cli_requires_results_dir():
@@ -202,10 +202,8 @@ def test_score_one_overwrites_in_place(tmp_path: Path):
     ux_judge = MagicMock()
     ux_judge.evaluate.return_value = MagicMock(
         user_control=5,
-        friction=5,
-        situational_awareness=5,
-        communication_quality=5,
-        intent_alignment=5,
+        user_effort=5,
+        response_density=5,
         ux_score=5.0,
         reasoning="ok",
     )

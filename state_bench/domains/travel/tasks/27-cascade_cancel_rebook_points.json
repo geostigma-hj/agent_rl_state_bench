@@ -4,28 +4,23 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to cancel my booking BK-MS02 to LA and rebook for a later date. I'd like to use my points again.",
   "user_simulator": {
-    "personality": "Polite, direct, expects premium service as a platinum member.",
     "known_info": [
-      "Your user ID: user_003",
-      "Booking ID: BK-MS02",
-      "Paid with loyalty points originally",
-      "Has travel insurance",
-      "Wants JFK → LAX on June 25, business class",
-      "Prefers AA and evening flights",
-      "Has 120000 loyalty points"
+      "Booking BK-MS02: paid with loyalty points originally.",
+      "Wants JFK → LAX on June 25, business class.",
+      "Prefers AA and evening flights."
     ],
-    "unknown_info": [
-      "Exact points refund timing",
-      "Available flights on June 25"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Start by asking to cancel booking BK-MS02.",
-      "Mention you paid with points and want them refunded.",
-      "When cancellation is confirmed, ask to rebook JFK → LAX on June 25 in business class.",
-      "Request to pay with loyalty points again.",
-      "When the agent offers options, pick the nonstop AA evening business flight.",
-      "When new booking is confirmed, ask for a summary of both operations.",
-      "End with [TASK_DONE].",
+      "You want booking BK-MS02 canceled and replaced with a later JFK to LAX business-class booking on June 25, using loyalty points again if the points refund from the original booking makes that workable.",
+      "If the agent asks for the booking being canceled, provide BK-MS02; do not volunteer the June 25 flight details until the cancellation or replacement-booking step is being discussed.",
+      "When discussing cancellation, mention or confirm that the original booking was paid with points and ask how those points are returned before the replacement booking is finalized.",
+      "Accept the cancellation only after the agent makes the cancellation fee and points-refund outcome clear; push back if the agent treats the points payment as cash-only or skips the refund explanation.",
+      "After the cancellation is confirmed, ask for JFK to LAX on June 25 in business class and say you want to pay with loyalty points again.",
+      "If the agent presents flight options, choose the AA evening nonstop business option; reject options that are not business class, are over budget, or do not clearly support paying with points again.",
+      "Before approving the replacement booking, make sure the selected flight, points payment, any cash amount, and expected booking preferences are clear; ask for missing details if needed.",
+      "If the agent asks for booking preferences for the replacement, use your profile preferences, including aisle seat, standard meal, WiFi, extra legroom, and insurance.",
+      "Ask for a final summary that covers both the canceled points booking/refund and the new June 25 points booking, not just the new booking alone.",
+      "End only after the cancellation is completed, the replacement booking is confirmed as paid with points, and the two-step summary is clear; then reply with [TASK_DONE].",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -60,8 +55,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "multi_booking_trip_coordination",
-  "task_env_path": "state_bench/domains/travel/task_envs/27-cascade_cancel_rebook_points.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -128,5 +121,7 @@
         "user_id": "user_003"
       }
     }
-  ]
+  ],
+  "task_type": "multi_booking_trip_coordination",
+  "task_env_path": "state_bench/domains/travel/task_envs/27-cascade_cancel_rebook_points.json"
 }

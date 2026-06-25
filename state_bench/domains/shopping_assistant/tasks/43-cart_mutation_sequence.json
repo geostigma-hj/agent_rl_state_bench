@@ -4,7 +4,6 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hey, can you remove the ErgoDesk from my cart? I want to cut down.",
   "user_simulator": {
-    "personality": "Casual, refers to items by brand or category, sometimes ambiguously. Trusts the agent to ask when unclear.",
     "user_sim_context": "Your cart has 3 items: an ErgoDesk Standing DESK, an ErgoDesk Mesh CHAIR, and a PixelShot Webcam. You want to remove the DESK (keep the chair), but your opening message only says 'remove the ErgoDesk', which is ambiguous — both the desk and chair are ErgoDesk brand. You expect the agent to ASK which one. Then 3 more mutations in sequence. You expect the agent to track your cart correctly across the sequence.",
     "known_info": [
       "Your cart has a desk, chair, webcam.",
@@ -14,23 +13,19 @@
       "Then remove the webcam.",
       "You are a returning Standard-tier customer."
     ],
-    "unknown_info": [
-      "You aren't tracking the running total yourself.",
-      "Specific SKUs / cart_item_ids."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Opening: 'remove the ErgoDesk from my cart'. Do NOT specify desk vs chair — the reference is ambiguous. Agent MUST ask to disambiguate.",
-      "If the agent asks 'the desk or the chair?' (or similar disambiguation), reply: 'the standing desk, keep the chair'. Agent passes disambiguation check.",
-      "If the agent removes without disambiguating (picks one by guess), evaluate: if they picked desk correctly, push back: 'I meant to confirm with me first — both are ErgoDesk'. Counts as partial fail on disambiguation. If they removed the chair by guess, that's wrong — say: 'wait, I meant the desk, can you swap?'. Agent failed on disambiguation.",
-      "Turn 3: next request — 'now add an AlpineGear daypack'. No SKU. Agent should find SP-3002 AlpineGear Daypack 25L.",
-      "Turn 4: after daypack is added, ask: 'actually, swap the daypack for a rain jacket from the same brand'. Agent should remove SP-3002, add SP-3006 AlpineGear Rain Jacket.",
-      "If agent adds the rain jacket WITHOUT removing the daypack, push back once: 'did you remove the daypack? I don't want both'. If agent cleans up after reminder, continue. If agent insists both should stay, accept and end.",
-      "Turn 5: next request — 'and take the webcam out too, I have one already'. Agent should remove SP-2005.",
-      "Turn 6: ask 'what's in my cart now and the total?'. Agent should report: chair + rain jacket, $329 + $139 = $468.",
-      "If the agent's final summary matches reality (2 items, $468), reply: 'perfect, thanks. [TASK_DONE]'.",
-      "If wrong, reply: 'wait, that doesn't sound right'. If agent corrects after one nudge, continue. Otherwise accept and end.",
-      "Do NOT volunteer SKUs or cart_item_ids. Do NOT ask about promos, loyalty, shipping proactively.",
-      "Keep replies short.",
+      "Ask only to remove the ErgoDesk item from the current cart at first; do not specify desk versus chair until the agent asks, because the goal is to remove the standing desk and keep the chair.",
+      "If the agent asks which ErgoDesk item to remove, say to remove the standing desk and keep the chair; do not volunteer SKUs or cart item IDs.",
+      "If the agent removes an ErgoDesk item before asking which one, push back once that both items are ErgoDesk and you expected confirmation; if the chair was removed, ask the agent to fix the cart so the chair stays and the desk is removed.",
+      "After the agent confirms the desk removal or fixes an incorrect first removal, ask to add an AlpineGear daypack; let the agent look up the correct catalog item.",
+      "After the daypack is confirmed in the cart, ask to swap it for a rain jacket from the same brand; accept only a swap that removes the daypack and adds the AlpineGear rain jacket.",
+      "If the agent leaves both the daypack and rain jacket in the cart, ask once whether the daypack was removed and restate that you do not want both; continue if the agent cleans it up, and do not keep arguing if no correction is available.",
+      "After the rain-jacket swap is resolved, ask to remove the webcam because you already have one.",
+      "After the webcam removal is confirmed, ask what is in the cart now and what the total is.",
+      "Push back once if the final summary does not include exactly the chair and rain jacket or does not give a $468 total; continue if the agent corrects the summary.",
+      "Do not ask about promos, loyalty, shipping, gift wrap, checkout, or unrelated product changes unless the agent raises them.",
+      "End with `[TASK_DONE]` only after the final cart has been executed or clearly resolved and the agent's final summary shows the chair plus rain jacket with a $468 total.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

@@ -10,17 +10,8 @@
     },
     {
       "role": "assistant",
-      "content": "`SP-DOES-NOT-EXIST` isn’t a valid product ID.\n\nI found these in-stock SoundMax audio options instead:\n\n1. `SP-H114` — SoundMax Elite Noise-Cancelling Headphones — $249 — 4.8★\n2. `SP-H113` — SoundCore Basic Headphones — $149 — 4.1★\n3. `SP-H115` — TravelBuds Mini — $89 — 4.0★, but these are earbuds, not headphones\n\nIf you want, I can:\n- add `SP-H114` or `SP-H113` to your cart, or\n- compare the two headphones first.",
+      "content": "`SP-DOES-NOT-EXIST` isn\u2019t a valid product ID in the catalog.\n\nI found these SoundMax headphone matches:\n\n1. **SP-H114 \u2014 SoundMax Elite Noise-Cancelling Headphones**\n   - **$249**\n   - **4.8\u2605** (940 reviews)\n   - In stock\n   - No variants\n   - Recently dropped from **$299**\n\n2. **SP-H113 \u2014 SoundCore Basic Headphones**  \n   - Brand: **SoundMax**\n   - **$149**\n   - **4.1\u2605** (1,800 reviews)\n   - In stock\n   - No variants\n\nThere\u2019s also **SP-H115 \u2014 TravelBuds Mini** for **$89**, but that\u2019s earbuds, not headphones.\n\nIf you want, I can add:\n- **SP-H114** for the premium noise-cancelling option, or\n- **SP-H113** for the cheaper option.",
       "tool_calls": [
-        {
-          "name": "get_product_details",
-          "arguments": {
-            "product_id": "SP-DOES-NOT-EXIST"
-          },
-          "result": {
-            "error": "Product SP-DOES-NOT-EXIST not found."
-          }
-        },
         {
           "name": "search_products",
           "arguments": {
@@ -70,12 +61,92 @@
             ],
             "total_found": 3
           }
+        },
+        {
+          "name": "get_product_details",
+          "arguments": {
+            "product_id": "SP-H114"
+          },
+          "result": {
+            "product_id": "SP-H114",
+            "name": "SoundMax Elite Noise-Cancelling Headphones",
+            "category": "electronics",
+            "subcategory": "headphones",
+            "brand": "SoundMax",
+            "price": 249,
+            "rating": 4.8,
+            "review_count": 940,
+            "description": "SoundMax Elite Noise-Cancelling Headphones from SoundMax.",
+            "specs": {},
+            "compatible_with": [],
+            "in_stock": true,
+            "stock_quantity": 50,
+            "shipping_days": 3,
+            "gift_wrap_available": true,
+            "backorder_available": false,
+            "previous_price": 299,
+            "variants": null,
+            "shipping_estimate": "3 business days (standard)"
+          }
+        },
+        {
+          "name": "get_variants",
+          "arguments": {
+            "product_id": "SP-H114"
+          },
+          "result": {
+            "product_id": "SP-H114",
+            "product_name": "SoundMax Elite Noise-Cancelling Headphones",
+            "base_price": 249,
+            "variants": [],
+            "note": "This product has no variants; no variant_id is needed for add_to_cart."
+          }
+        },
+        {
+          "name": "get_product_details",
+          "arguments": {
+            "product_id": "SP-H113"
+          },
+          "result": {
+            "product_id": "SP-H113",
+            "name": "SoundCore Basic Headphones",
+            "category": "electronics",
+            "subcategory": "headphones",
+            "brand": "SoundMax",
+            "price": 149,
+            "rating": 4.1,
+            "review_count": 1800,
+            "description": "SoundCore Basic Headphones from SoundMax.",
+            "specs": {},
+            "compatible_with": [],
+            "in_stock": true,
+            "stock_quantity": 50,
+            "shipping_days": 2,
+            "gift_wrap_available": true,
+            "backorder_available": false,
+            "previous_price": null,
+            "variants": null,
+            "shipping_estimate": "2 business days (standard)"
+          }
+        },
+        {
+          "name": "get_variants",
+          "arguments": {
+            "product_id": "SP-H113"
+          },
+          "result": {
+            "product_id": "SP-H113",
+            "product_name": "SoundCore Basic Headphones",
+            "base_price": 149,
+            "variants": [],
+            "note": "This product has no variants; no variant_id is needed for add_to_cart."
+          }
         }
       ]
     },
     {
       "role": "user",
-      "content": "Thanks, that works. I just wanted the real SoundMax headphone options, and `SP-H114` and `SP-H113` are enough for now. [TASK_DONE]"
+      "content": "Thanks \u2014 that\u2019s exactly what I needed. I don\u2019t want to add anything yet; just wanted the real SoundMax headphone options instead of the invalid ID. [TASK_DONE]"
     }
   ]
 }

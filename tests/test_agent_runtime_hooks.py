@@ -4,11 +4,10 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from state_bench.agents.base import AgentPricing, AgentRuntimeContext, AgentTurnResponse, BaseAgent
+from state_bench.agents.base import AgentRuntimeContext, AgentTurnResponse, BaseAgent
 from state_bench.agents.loader import load_root_agent_class, load_root_client_class
 from state_bench.client import BaseLLMClient, LLMClient
 from state_bench.orchestrator import run_task
-from state_bench.scripts.run_batch import _build_agent_pricing as _build_batch_agent_pricing
 from state_bench.scripts.run_batch import _build_run_dirs, _parse_task_ids, _resolve_task_files
 from state_bench.scripts.run_task import _build_agent_model_metadata, _validate_agent_client_args
 
@@ -46,18 +45,12 @@ def test_run_batch_rejects_missing_requested_task_ids(tmp_path):
         _resolve_task_files(tasks_dir, ["task-a", "missing-task"])
 
 
-def _runtime_context_with_pricing() -> AgentRuntimeContext:
+def _runtime_context() -> AgentRuntimeContext:
     return AgentRuntimeContext(
         task_id="task-1",
         user_id="user_001",
         domain="travel",
         now="2026-06-15T10:00:00",
-        agent_pricing=AgentPricing(
-            model_name="test-model",
-            input_cost_per_1m_tokens=1.25,
-            output_cost_per_1m_tokens=10.0,
-            cached_input_cost_per_1m_tokens=0.13,
-        ),
     )
 
 
@@ -333,24 +326,6 @@ def test_custom_agent_and_client_loaded_from_root_extensions(tmp_path):
     assert trajectory.conversation[1]["content"] == "custom client response"
 
 
-def test_agent_pricing_returns_none_when_no_pricing_flags_given():
-    args = type(
-        "Args",
-        (),
-        {
-            "agent_model_name": "gpt-5.1",
-            "agent_model_reasoning_level": None,
-            "agent_input_cost_per_1m": None,
-            "agent_output_cost_per_1m": None,
-            "agent_cached_input_cost_per_1m": None,
-        },
-    )()
-
-    pricing = _build_batch_agent_pricing(args)
-
-    assert pricing is None
-
-
 def test_agent_model_metadata_requires_model_name():
     args = type("Args", (), {"agent_model_name": "", "agent_model_reasoning_level": None})()
 
@@ -362,23 +337,6 @@ def test_agent_model_metadata_records_optional_reasoning_level():
     args = type("Args", (), {"agent_model_name": "gpt-5.1", "agent_model_reasoning_level": " high "})()
 
     assert _build_agent_model_metadata(args) == {"model_name": "gpt-5.1", "reasoning_level": "high"}
-
-
-def test_agent_pricing_args_require_model_input_and_output_together():
-    args = type(
-        "Args",
-        (),
-        {
-            "agent_model_name": "test-model",
-            "agent_model_reasoning_level": None,
-            "agent_input_cost_per_1m": 1.0,
-            "agent_output_cost_per_1m": None,
-            "agent_cached_input_cost_per_1m": None,
-        },
-    )()
-
-    with pytest.raises(ValueError, match="--agent-output-cost-per-1m"):
-        _build_batch_agent_pricing(args)
 
 
 def test_agent_client_args_allow_built_in_path():
@@ -449,8 +407,8 @@ def test_agent_client_args_reject_built_in_client_flags_with_custom_client(flag)
         _validate_agent_client_args(args, [flag])
 
 
-def test_base_agent_add_token_usage_records_tokens_and_costs():
-    agent = HarnessToolAgent(runtime_context=_runtime_context_with_pricing())
+def test_base_agent_add_token_usage_records_tokens_without_computing_cost():
+    agent = HarnessToolAgent(runtime_context=_runtime_context())
 
     agent.add_token_usage(input_tokens=1000, output_tokens=200, cached_input_tokens=400)
 
@@ -459,14 +417,11 @@ def test_base_agent_add_token_usage_records_tokens_and_costs():
     assert usage.cached_input_tokens == 400
     assert usage.output_tokens == 200
     assert usage.total_tokens == 1200
-    assert usage.input_cost_usd == pytest.approx(600 * 1.25 / 1_000_000)
-    assert usage.cached_input_cost_usd == pytest.approx(400 * 0.13 / 1_000_000)
-    assert usage.output_cost_usd == pytest.approx(200 * 10.0 / 1_000_000)
-    assert usage.agent_turn_cost_usd == pytest.approx(usage.total_cost_usd)
+    assert usage.total_cost_usd == 0
 
 
 def test_base_agent_add_token_usage_skips_when_input_or_output_missing():
-    agent = HarnessToolAgent(runtime_context=_runtime_context_with_pricing())
+    agent = HarnessToolAgent(runtime_context=_runtime_context())
 
     agent.add_token_usage(input_tokens=100, output_tokens=None)
     agent.add_token_usage(input_tokens=None, output_tokens=100)
@@ -475,33 +430,19 @@ def test_base_agent_add_token_usage_skips_when_input_or_output_missing():
     assert agent.token_usage.total_cost_usd == 0
 
 
-def test_base_agent_add_token_usage_records_tokens_without_pricing():
+def test_base_agent_add_cost_usd_records_user_reported_costs():
     agent = HarnessToolAgent(runtime_context=AgentRuntimeContext(task_id="t", user_id="u", domain="d", now="n"))
 
-    agent.add_token_usage(input_tokens=100, output_tokens=25)
+    agent.add_cost_usd(0.0123)
+    agent.add_cost_usd(0.004, category="memory_ingestion")
 
-    assert agent.token_usage.input_tokens == 100
-    assert agent.token_usage.output_tokens == 25
-    assert agent.token_usage.total_cost_usd == 0
+    assert agent.token_usage.agent_turn_cost_usd == pytest.approx(0.0123)
+    assert agent.token_usage.memory_ingestion_cost_usd == pytest.approx(0.004)
+    assert agent.token_usage.total_cost_usd == pytest.approx(0.0163)
 
 
-def test_base_agent_add_token_usage_charges_cached_tokens_at_input_rate_without_cached_price():
-    agent = HarnessToolAgent(
-        runtime_context=AgentRuntimeContext(
-            task_id="t",
-            user_id="u",
-            domain="d",
-            now="n",
-            agent_pricing=AgentPricing(
-                model_name="m",
-                input_cost_per_1m_tokens=2.0,
-                output_cost_per_1m_tokens=8.0,
-                cached_input_cost_per_1m_tokens=None,
-            ),
-        )
-    )
+def test_base_agent_add_cost_usd_rejects_negative_cost():
+    agent = HarnessToolAgent(runtime_context=AgentRuntimeContext(task_id="t", user_id="u", domain="d", now="n"))
 
-    agent.add_token_usage(input_tokens=1000, output_tokens=100, cached_input_tokens=500)
-
-    assert agent.token_usage.input_cost_usd == pytest.approx(500 * 2.0 / 1_000_000)
-    assert agent.token_usage.cached_input_cost_usd == pytest.approx(500 * 2.0 / 1_000_000)
+    with pytest.raises(ValueError, match=">= 0"):
+        agent.add_cost_usd(-0.01)

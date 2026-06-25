@@ -4,21 +4,23 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need a Miami trip from New York/JFK from June 22 to June 25 with flights, a hotel, and a rental car. My total budget is $1,050 and I do not want the absolute cheapest trip if a slightly better full package still fits.",
   "user_simulator": {
-    "personality": "Thoughtful and tradeoff-oriented.",
     "user_sim_context": "You want a full Miami package from New York/JFK but not in a purely cheapest-wins way. If a somewhat better hotel or car still fits the full budget, you want the agent to compare complete bundles instead of locking onto the lowest-price component in each category automatically.",
     "known_info": [
-      "Your user ID: user_003",
-      "Budget is $1,050 total.",
+      "Your total budget is $1,050.",
       "You need JFK-MIA round-trip flights, a Miami hotel, and a Miami car rental."
     ],
-    "unknown_info": [
-      "Which full bundle is the best value while still fitting budget"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Ask the agent to compare full-trip bundles, not just the cheapest item in each category.",
-      "Use JFK as the New York origin and MIA as the Miami airport; do not introduce a different origin or airport unless the agent asks you to clarify an ambiguity.",
-      "If a slightly better hotel or car still fits the total budget, prefer the better hotel first; keep the cheaper car unless the car upgrade also fits after the better hotel is included.",
-      "End with [TASK_DONE] once the chosen flight, hotel, and car are all booked and the total is explained.",
+      "Ask the agent to build a JFK-to-MIA round-trip package with flights, a Miami hotel, and a Miami car rental for June 22-25 under the $1,050 total budget, optimizing the full bundle rather than only picking the cheapest component in each category.",
+      "If the agent asks about airport, city, date, hotel, car, or room preferences, provide only the known JFK/MIA dates and say you have no hotel, car, or room preference beyond choosing the best overall in-budget package.",
+      "You have no car-insurance requirement; do not require the rental car to include insurance, and do not refuse a car or the package because a car lacks insurance.",
+      "When the agent presents options, ask for at least two complete flight-plus-hotel-plus-car bundle totals if the comparison is missing or only broken down by isolated components.",
+      "Prefer the better hotel when it still keeps the whole package within budget; keep the cheaper car unless a car upgrade also fits after the better hotel is included.",
+      "Push back if the agent recommends the absolute-cheapest bundle by default, proposes anything over $1,050, omits one part of the trip, or does not explain the tradeoff behind the chosen hotel and car.",
+      "Accept booking only after the final preview names the selected flights, hotel, car, and total trip cost, and the total stays within the $1,050 budget.",
+      "For the flight bookings, pay with your credit card; do not ask to pay with points or points-plus-cash even though you have a loyalty-point balance.",
+      "For the flight bookings, use your profile preferences when asked and correct any wrong booking-stage preference before ending, but do not try to verify raw flight_id values.",
+      "End with [TASK_DONE] only after the flights, hotel, and car are booked and the final summary confirms the in-budget total and expected preference details.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Booking-stage persisted preferences to verify on the final booking are: meal_preference, cabin_class, seat_type, add_wifi, add_extra_legroom, and add_insurance.",
@@ -44,8 +46,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "multi_booking_trip_coordination",
-  "task_env_path": "state_bench/domains/travel/task_envs/123-cross_plan_trip_balanced_mid_budget.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -185,5 +185,7 @@
         "user_id": "user_003"
       }
     }
-  ]
+  ],
+  "task_type": "multi_booking_trip_coordination",
+  "task_env_path": "state_bench/domains/travel/task_envs/123-cross_plan_trip_balanced_mid_budget.json"
 }

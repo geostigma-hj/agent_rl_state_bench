@@ -105,8 +105,10 @@ class MyAgent(BaseAgent):
             tools=provider_tools,
         )
 
-        # Optional: report provider token usage so STATE-Bench can compute
-        # average cost per task. See docs/eval/cost-reporting.md.
+        # Optional: report cost using your provider-specific accounting, and
+        # token usage as telemetry. See docs/eval/cost-reporting.md.
+        if getattr(response, "cost_usd", None) is not None:
+            self.add_cost_usd(response.cost_usd)
         usage = getattr(response, "usage", None)
         self.add_token_usage(
             input_tokens=getattr(usage, "input_tokens", None),

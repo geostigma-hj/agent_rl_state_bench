@@ -10,7 +10,7 @@
     },
     {
       "role": "assistant",
-      "content": "EXPIRED10 is not usable. It expired on 2026-01-01.\n\nEstimated discount: $0.",
+      "content": "EXPIRED10 is not usable. It expired on 2026-01-01.\n\nI did not add the blender or check any other codes.",
       "tool_calls": [
         {
           "name": "validate_promo",
@@ -28,7 +28,7 @@
     },
     {
       "role": "user",
-      "content": "Got it. Since EXPIRED10 is expired, please leave everything as-is and don't check or suggest any other codes. [TASK_DONE]"
+      "content": "[TASK_DONE]"
     }
   ]
 }

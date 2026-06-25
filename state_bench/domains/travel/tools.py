@@ -166,7 +166,7 @@ CREATE_BOOKING: dict[str, Any] = {
             "user_id": {"type": "string", "description": "Customer user ID"},
             "cabin_class": {
                 "type": "string",
-                "enum": ["economy", "business", "first"],
+                "enum": ["basic_economy", "economy", "business", "first"],
                 "description": "Cabin class to book (must be available in the flight's cabin_prices)",
             },
             "seat_type": {
@@ -219,7 +219,8 @@ UPDATE_BOOKING: dict[str, Any] = {
     "name": "update_booking",
     "description": (
         "Update an existing booking. Only pass the fields you want to change for same-flight edits. "
-        "If you pass flight_id to change flights, you must also pass cabin_class, seat_type, meal_preference, add_wifi, add_extra_legroom, and add_insurance explicitly."
+        "If you pass flight_id to change flights, you must also pass cabin_class, seat_type, meal_preference, add_wifi, add_extra_legroom, and add_insurance explicitly. "
+        "For a flight change, call with confirm=false first to preview the exact change fee, fare difference, and new total without applying anything, then call again (omit confirm or pass confirm=true) to execute."
     ),
     "parameters": {
         "type": "object",
@@ -257,6 +258,13 @@ UPDATE_BOOKING: dict[str, Any] = {
             "paid_checked_bags": {
                 "type": "integer",
                 "description": "Number of extra checked bags beyond free allowance ($35 each)",
+            },
+            "confirm": {
+                "type": "boolean",
+                "description": (
+                    "For a flight change: pass false to preview the change fee, fare difference, and new total "
+                    "without applying anything. Omit it (or pass true) to execute the change."
+                ),
             },
         },
         "required": ["booking_id"],

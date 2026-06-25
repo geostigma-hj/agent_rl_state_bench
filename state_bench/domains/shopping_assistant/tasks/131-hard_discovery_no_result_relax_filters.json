@@ -4,23 +4,19 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Find noise-cancelling headphones under $100 with a 4.8 rating. If that exact filter fails, show me the closest under-budget option and the closest true noise-cancelling option, but don't add either.",
   "user_simulator": {
-    "personality": "Direct, practical, and cooperative. Push back once when the agent takes an unverified shortcut, then either consent to the valid path or end once the outcome is clear.",
     "user_sim_context": "You are looking for noise-cancelling headphones under $100 with a 4.8 rating. If no exact match exists, you want to see the closest under-budget option and the closest true noise-cancelling option, with no cart add yet.",
     "known_info": [
       "You know your current request and how you asked for it.",
       "You do not know exact catalog facts, policy details, stock state, or cart side effects unless the agent checks and tells you."
     ],
-    "unknown_info": [
-      "The exact product IDs, variant availability, stock quantities, compatibility lists, and shipping costs in the catalog.",
-      "Whether policies allow any exception, discount, substitution, or side effect unless the agent verifies it.",
-      "Which near-match products or variants actually fit the intended device or preference."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "You asked for exact filters first, then closest alternatives only if the exact filter fails; do not buy headphones in this task.",
-      "If the agent says no exact under-$100 4.8-rated noise-cancelling match exists and shows the closest under-budget and closest true noise-cancelling options, accept the comparison.",
-      "If the agent claims TravelBuds or another non-noise-cancelling item satisfies all filters, do not correct from catalog knowledge; ask them to verify the exact constraints.",
-      "If the agent offers to add either alternative, decline because you asked not to add either yet.",
-      "When the no-match result and two alternatives are explained with no cart mutation, end your next message with [TASK_DONE].",
+      "You want an exact noise-cancelling, under-$100, 4.8-rated headphone match first; if none exists, you only want a comparison of the closest under-budget option and the closest true noise-cancelling option, with no purchase or cart change.",
+      "Do not volunteer catalog facts or decide which tradeoff is better before the agent checks the products and explains the result.",
+      "If the agent says no exact match exists and presents both requested alternatives without pretending either satisfies every constraint, accept the comparison.",
+      "If the agent offers only one alternative, claims a partial match satisfies all filters, or leaves out which constraint each option misses, ask them to verify the exact constraints and show both tradeoff options.",
+      "If the agent offers or attempts to add either alternative, decline and restate that you only asked to see the options for now.",
+      "End only after the no-match result and both alternatives have been explained and the cart/account remains unchanged; then end your next message with [TASK_DONE].",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences unless this task is explicitly about that topic.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points and this task is not about redemption, decline: say 'no, not this time - I don't want to use points.'",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping and this task is not about delivery timing or shipping cost, say 'I do not need to pick shipping right now - I will handle checkout later.'"

@@ -2,22 +2,25 @@
   "task_id": "124-cross_plan_trip_budget_with_preference_floor",
   "user_id": "user_004",
   "now": "2026-06-15T10:00:00",
-  "opening_message": "I need a Denver trip June 23 to June 26 with flights, hotel, and car. My budget is $900, but do not give me a suite or SUV unless you can prove the whole package still fits.",
+  "opening_message": "I need a Denver trip from Chicago O'Hare (ORD) June 23 to June 26 with flights, hotel, and car. My budget is $900, but do not give me a suite or SUV unless you can prove the whole package still fits.",
   "user_simulator": {
-    "personality": "Budget-conscious and explicit.",
     "user_sim_context": "You want a full Denver package under a strict budget and are explicitly wary of nicer hotel or car options that could quietly blow the total. You need the agent to treat the stated budget as a hard cap and justify any upgrade-like choice against the full package total.",
     "known_info": [
-      "Your user ID: user_004",
-      "Budget is a hard $900 cap.",
-      "You need flights, hotel, and car."
+      "Hard budget: $900 total for Denver flights, hotel, and car, June 23-26.",
+      "No suite or SUV unless the agent proves the full package stays within $900.",
+      "You are departing from Chicago O'Hare (ORD); if the agent asks where you fly from, say Chicago O'Hare (ORD)."
     ],
-    "unknown_info": [
-      "Which complete package actually fits under budget"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "If the agent suggests a nicer hotel or SUV, ask for the full package total before accepting it.",
-      "Reject any package that exceeds $900 total.",
-      "End with [TASK_DONE] once the in-budget package is booked and summarized.",
+      "Keep the request focused on booking a complete Denver package from June 23 to June 26 with round-trip flights, hotel, and car under the hard $900 total cap.",
+      "If the agent asks about flight booking preferences, use your profile preferences: economy cabin, window seat, standard meal, no WiFi, no extra legroom, and insurance included.",
+      "Do not volunteer a hotel room type or car class beyond the warning in your opening message; let the agent compare options against the full package budget.",
+      "If the agent suggests a suite, SUV, business-class flight, add-on, or any nicer option, ask for the full package total before accepting it.",
+      "Push back if the agent evaluates a hotel, car, flight, or upgrade only by its component price instead of the flights-plus-hotel-plus-car total.",
+      "Reject any package or partial booking plan that would make the complete trip exceed $900, even if one component sounds better.",
+      "Accept the standard hotel and economy car package once the agent shows that it fits within $900 and explains that the suite and SUV do not fit the whole-package budget.",
+      "Before approving booking, require a recap of the selected outbound and return flights, hotel, car, payment type, and total package cost.",
+      "End with [TASK_DONE] only after all flights, hotel, and car are booked, the total is at or below $900, and the final summary confirms the expected flight preferences.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -41,12 +44,10 @@
     {
       "id": "cross_plan_trip_budget_with_preference_floor_reject_upgrades",
       "kind": "must",
-      "requirement": "Agent must make clear why the suite and SUV options do not fit once the whole trip total is considered.",
+      "requirement": "If the suite or SUV upgrade is discussed (the agent proposes it or the user raises it), the agent must make clear that it does not fit once the whole trip total is considered. If neither upgrade is ever discussed and the agent simply books the standard hotel and economy car within budget, this requirement is satisfied (treat it as a pass).",
       "evidence": "conversation"
     }
   ],
-  "task_type": "multi_booking_trip_coordination",
-  "task_env_path": "state_bench/domains/travel/task_envs/124-cross_plan_trip_budget_with_preference_floor.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -186,5 +187,7 @@
         "user_id": "user_004"
       }
     }
-  ]
+  ],
+  "task_type": "multi_booking_trip_coordination",
+  "task_env_path": "state_bench/domains/travel/task_envs/124-cross_plan_trip_budget_with_preference_floor.json"
 }

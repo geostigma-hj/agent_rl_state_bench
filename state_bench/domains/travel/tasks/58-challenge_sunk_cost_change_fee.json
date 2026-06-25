@@ -4,28 +4,22 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I already changed my flight BK-1000 once and paid a $100 fee for it. But the new time is terrible — a red-eye! I need to fix this. What are my options? I don't want to waste the $100 I already spent. My user ID is user_001.",
   "user_simulator": {
-    "personality": "Loss-averse. Explicitly anchors on the $100 already spent. Wants to 'not waste' the previous investment. Will accept the cheaper path if agent clearly explains the sunk cost logic.",
     "known_info": [
-      "Your user ID: user_001",
-      "Booking: BK-1000 (JFK→LHR, economy, red-eye, already changed once)",
-      "Already paid $100 change fee",
-      "Wants the cheapest reasonable June 21 replacement and cares more about total cost than airline or morning timing",
-      "Doesn't want to waste the $100 already spent"
+      "Booking BK-1000: JFK→LHR red-eye, already changed once with a $100 change fee paid.",
+      "Wants the cheapest reasonable June 21 replacement; total cost matters more than airline or morning timing.",
+      "Doesn't want to waste the $100 already spent."
     ],
-    "unknown_info": [
-      "Exact costs of change-again vs cancel+rebook",
-      "That the $100 is a sunk cost irrelevant to the forward decision",
-      "Specific flight prices for June 21",
-      "That the cheapest correct fix is the $750 economy replacement rather than a pricier morning or business option"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: already changed BK-1000 once, paid $100, new time is bad, want to fix it.",
-      "Emphasize: 'I don't want to waste the $100 I already spent.'",
-      "If agent recommends changing again or pushes a pricier replacement, ask 'Could cancelling and rebooking a different June 21 flight be cheaper than changing again?'",
-      "If agent says cancel+rebook is cheaper overall, say 'But I'll lose the $100 change fee I already paid!' Then accept if agent explains it's sunk either way.",
-      "If agent recommends cancel+rebook to the cheaper $750 economy flight and explains the math, agree: 'OK, let's do it.'",
-      "Do not request Delta, business class, or a morning-only replacement unless the agent asks you to compare options; cost is the deciding factor for this task.",
-      "After the action is complete, end with [TASK_DONE].",
+      "You want help fixing BK-1000 by comparing changing again versus canceling and rebooking for a reasonable June 21 replacement; start emotionally anchored to the already-paid $100, but make total cost the deciding factor once the comparison is clear.",
+      "If the agent asks for booking or account details, provide BK-1000 and user_001; do not introduce new destination, date, airline, cabin, or timing requirements beyond needing a reasonable June 21 replacement.",
+      "If asked about preferences among replacement flights, say cost matters more than airline or morning timing, economy is fine, and the option must stay within your budget.",
+      "If the agent only discusses changing again, recommends a pricier change, or treats the prior $100 fee as a reason to avoid cancellation, ask whether canceling and rebooking a different June 21 flight could be cheaper overall.",
+      "If the agent says canceling and rebooking is cheaper but does not explain how the already-paid $100 affects the decision, push back once that losing that fee feels wasteful and ask whether it changes the current comparison.",
+      "Accept the cancel-and-rebook path only after the agent explains that the prior $100 is sunk in both paths and provides a side-by-side comparison showing canceling and rebooking is cheaper than changing again.",
+      "Before approving cancellation and replacement booking, require the cancellation fee, refund amount, replacement flight price, cabin, and total current cost to be clear; push back if any preview is missing, over budget, or points to the pricier change path.",
+      "For the replacement booking, use your profile booking preferences if asked and reject optional upgrades, add-ons, or timing constraints that make the cheaper reasonable option more expensive.",
+      "End only after the existing booking is canceled, the cheaper replacement booking is confirmed, and the final refund, cancellation fee, booking price, and expected booking preferences are clear.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -60,8 +54,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/58-challenge_sunk_cost_change_fee.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -122,5 +114,7 @@
         "user_id": "user_001"
       }
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/58-challenge_sunk_cost_change_fee.json"
 }

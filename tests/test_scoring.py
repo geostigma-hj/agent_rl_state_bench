@@ -498,6 +498,36 @@ class TestTaskRequirementsJudge:
         assert result.score == 1
         client.complete_json.assert_not_called()
 
+    def test_prompt_includes_full_trajectory_without_abbreviating_tool_payloads(self):
+        client = MagicMock()
+        client.complete_json.return_value = {
+            "details": [{"id": "r1", "passed": True, "reasoning": "Full payload visible."}],
+        }
+        prompts_dir = _make_prompts_dir_with_task_requirements()
+        judge = TaskRequirementsJudge(client, prompts_dir, "Judge")
+        task = _make_task()
+        task.task_requirements = [
+            {"id": "r1", "kind": "must", "requirement": "See full tool payload", "evidence": "tool_calls"}
+        ]
+        long_value = "x" * 80
+        conversation = [
+            {"role": "user", "content": "help"},
+            {
+                "role": "assistant",
+                "content": "checking",
+                "tool_calls": [{"name": "lookup", "arguments": {"long_arg": long_value}}],
+            },
+        ]
+        tool_calls = [{"name": "lookup", "arguments": {"long_arg": long_value}, "result": {"long_result": long_value}}]
+
+        judge.evaluate(task, conversation, tool_calls, StateDiff())
+
+        prompt = client.complete_json.call_args.kwargs["prompt"]
+        assert long_value in prompt
+        assert "..." not in prompt
+        assert '"conversation"' in prompt
+        assert '"tool_calls"' in prompt
+
 
 class TestCombineTaskCompletion:
     def test_returns_none_when_task_requirements_score_is_missing(self):
@@ -534,14 +564,37 @@ class TestUXQualityJudge:
         assert "Challenge: chall" in prompt
         assert "hello" in prompt
 
+    def test_build_ux_prompt_includes_full_trajectory_without_abbreviating_tool_payloads(self):
+        prompts_dir = _make_prompts_dir_with_ux()
+        task = _make_task()
+        long_value = "x" * 80
+        prompt = build_ux_prompt(
+            task=task,
+            conversation=[
+                {"role": "user", "content": "help"},
+                {
+                    "role": "assistant",
+                    "content": "checking",
+                    "tool_calls": [{"name": "lookup", "arguments": {"long_arg": long_value}}],
+                },
+            ],
+            tool_calls=[
+                {"name": "lookup", "arguments": {"long_arg": long_value}, "result": {"long_result": long_value}}
+            ],
+            prompts_dir=prompts_dir,
+        )
+
+        assert long_value in prompt
+        assert "..." not in prompt
+        assert '"conversation"' in prompt
+        assert '"tool_calls"' in prompt
+
     def test_evaluate_returns_ux_result(self):
         client = MagicMock()
         client.complete_json.return_value = {
             "user_control": 4,
-            "friction": 5,
-            "situational_awareness": 3,
-            "communication_quality": 4,
-            "intent_alignment": 5,
+            "user_effort": 5,
+            "response_density": 3,
             "ux_score": 4.0,
             "reasoning": "solid",
         }
@@ -560,10 +613,12 @@ class TestUXQualityJudge:
             user_control=4,
             friction=5,
             situational_awareness=3,
-            communication_quality=4,
-            intent_alignment=5,
+            communication_quality=3,
+            intent_alignment=3,
             reasoning="solid",
             score=4.0,
+            user_effort=5,
+            response_density=3,
         )
         assert result.ux_score == 4.0
         _, kwargs = client.complete_json.call_args

@@ -4,29 +4,26 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to move insured booking BK-1000 to July 2 because of a medical procedure, but do not change anything yet. First compare all July 2 British Airways JFK to LHR nonstop options and tell me exactly whether insurance changes the fee or whether only the medical reason does. If no BA nonstop option both lands by 8 PM local time and keeps my total extra cost at $170 or less, then broaden the comparison to any airline with up to one stop on July 2 before recommending anything.",
   "user_simulator": {
-    "personality": "Calm and practical.",
     "user_sim_context": "You are changing an insured international booking for a medical reason and want the agent to keep two overlapping policy ideas separate. You first want a strict comparison of real July 2 BA nonstop options, and if none of those satisfy both your hard arrival-time and budget constraints, you want the agent to proactively widen the search to any airline with up to one stop while still preserving the original hard constraints. You still expect the agent to wait for a recap and explicit final approval before making any change.",
     "known_info": [
-      "Your user ID: user_003",
-      "Booking ID: BK-1000",
-      "Current route: JFK to LHR",
-      "Current travel date: 2026-06-29",
-      "Requested new date: 2026-07-02",
-      "Reason: medical"
+      "Booking BK-1000: insured JFK to LHR trip currently on 2026-06-29; move to 2026-07-02 for a medical reason.",
+      "Initial comparison scope: all July 2 British Airways JFK to LHR nonstop options.",
+      "Hard constraints: land by 8 PM local time and pay no more than $170 extra in total.",
+      "If no BA nonstop option satisfies both hard constraints, broaden to any airline with up to one stop on July 2.",
+      "Do not change anything until explicitly finalizing a specific option."
     ],
-    "unknown_info": [
-      "Exact change fee",
-      "Exact total after the change"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "If the agent starts changing the booking before you approve a specific option, say you do not approve any change yet.",
-      "Ask the agent to search all July 2 BA JFK to LHR nonstop options if they only discuss one BA flight.",
-      "State clearly that your hard constraints stay the same throughout: land by 8 PM local time and pay no more than $170 extra in total.",
-      "Do not approve any change until the agent has compared at least two BA nonstop options, explained that insurance does not waive the fee, explained that the medical reason is what reduces the >7-day international fee, and explicitly told you whether any BA nonstop option satisfies both hard constraints.",
-      "If the agent correctly explains that no BA nonstop option works, tell them to broaden the search to any airline with up to one stop on July 2 while keeping the original constraints exactly the same.",
-      "Do not approve any change until the agent compares the broadened search results and identifies the valid under-cap, before-8-PM option.",
-      "After the agent recommends the valid broadened-search option, ask for one final recap and only then explicitly say to finalize that specific flight.",
-      "End with [TASK_DONE] only after the approved option is booked and the final details match the recap.",
+      "Start by seeking information only: compare all July 2 British Airways JFK-to-LHR nonstop options for booking BK-1000, separate the insurance rule from the medical-reason fee discount, and do not authorize any booking change yet.",
+      "If the agent asks for the reason, booking, date, route, initial airline scope, arrival cutoff, or extra-cost cap, provide the known details and make clear that the hard constraints are landing by 8 PM local time and paying no more than $170 extra in total.",
+      "If the agent discusses only one BA nonstop option or omits the total extra amount for a BA option, ask them to compare all concrete July 2 BA nonstop options with their arrival fit and total extra cost before recommending anything.",
+      "Push back if the agent says insurance waives or reduces the change fee; accept the fee explanation only when the agent distinguishes that insurance does not waive the fee and the medical reason is what reduces the international more-than-7-days change fee.",
+      "Do not approve any change while the BA-only comparison is incomplete, or until the agent explicitly explains whether any BA nonstop option satisfies both the 8 PM arrival cutoff and the $170 total-extra-cost cap.",
+      "When the agent correctly explains that no BA nonstop option satisfies both hard constraints, ask them to broaden the search to any airline with up to one stop on July 2 while keeping the same arrival cutoff and total-extra-cost cap.",
+      "For the broadened search, approve only an option that lands by 8 PM, has no more than one stop, and stays within the $170 total-extra-cost cap; push back on over-cap options, after-8-PM arrivals, or recommendations that do not include the change fee and fare difference.",
+      "Before authorizing the final change, ask for a recap that identifies the selected flight, airline, stop count, arrival fit, $50 medical change fee, fare difference, $160 total extra cost, and that the existing booking preferences will be preserved.",
+      "Only after that recap explicitly tell the agent to finalize the specific valid broadened-search option, and reject any attempt to change the booking before that instruction.",
+      "End with [TASK_DONE] only after the approved option is booked and the final details match the recap, including the preserved booking preferences and the $160 total extra cost.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
@@ -90,8 +87,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "flight_change_policy",
-  "task_env_path": "state_bench/domains/travel/task_envs/112-change_international_medical_insurance_expand_scope.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -117,5 +112,7 @@
       "field": "price_paid",
       "expected_value": 980
     }
-  ]
+  ],
+  "task_type": "flight_change_policy",
+  "task_env_path": "state_bench/domains/travel/task_envs/112-change_international_medical_insurance_expand_scope.json"
 }

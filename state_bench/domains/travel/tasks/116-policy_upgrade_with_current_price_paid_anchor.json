@@ -4,24 +4,18 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I have booking BK-EP03 in economy. Before I do anything, can you explain how the upgrade price should be calculated from what I already paid?",
   "user_simulator": {
-    "personality": "Calm and detail-oriented.",
     "user_sim_context": "You are not asking the agent to execute an upgrade yet. You want the pricing logic explained from the amount already paid on the booking because you do not trust vague upgrade quotes that ignore the original fare. After that, you want a recommendation about whether a business upgrade still makes sense under a hard comfort budget, but this remains informational and comparison-focused rather than an execution request.",
     "known_info": [
-      "Your user ID: user_004",
-      "Relevant booking: BK-EP03"
+      "Booking BK-EP03."
     ],
-    "unknown_info": [
-      "How economy-to-business upgrade pricing is anchored",
-      "What the actual business upgrade amount would be on this booking",
-      "Whether upgrading still makes sense under a hard $500 comfort budget"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Ask the agent to explain the formula before quoting the number.",
-      "If the agent only gives the final amount, ask how it was derived from the original fare already paid.",
-      "If the agent explains only the formula or gives hypothetical ranges without the live BK-EP03 business upgrade amount, ask them to look up the current business fare and calculate the exact upgrade amount before you ask for a budget recommendation.",
-      "Only after the agent explains the formula and the exact $540 upgrade amount, say you only want to spend up to $500 total on comfort upgrades for this trip and ask whether the business upgrade still fits that budget.",
-      "Keep this informational only; do not authorize the upgrade itself.",
-      "End with [TASK_DONE] once the explanation and recommendation are clear."
+      "Keep the request informational: you want the upgrade-pricing logic for BK-EP03 first, then a budget-based recommendation, and you are not asking to upgrade the booking.",
+      "If the agent asks for the booking reference, provide BK-EP03; do not volunteer your comfort-upgrade budget until the booking-specific upgrade amount has been explained.",
+      "If the agent gives only a final quote, generic formula, or hypothetical range, ask how the quote is derived from the amount already paid and ask them to calculate the exact current BK-EP03 business-upgrade amount.",
+      "When the agent shows that the quote is target business fare minus the amount already paid and gives the exact $540 upgrade amount for BK-EP03, then disclose that you only want to spend up to $500 total on comfort upgrades and ask whether the business upgrade still makes sense.",
+      "Push back if the agent recommends upgrading despite the $540 cost exceeding the $500 comfort budget, or if the agent tries to proceed with the upgrade instead of only advising you.",
+      "End with [TASK_DONE] only after the formula, booking-specific math, and recommendation against upgrading under the $500 comfort budget are clear."
     ]
   },
   "task_summary": "Traveler wants a policy-level explanation of how an upgrade quote is derived from the amount already paid on an economy booking, then a recommendation under a hard comfort budget. Correct resolution: the agent should explain that the business-upgrade quote is based on the target-cabin price minus the amount already paid on the booking, apply that math to show the actual upgrade amount for BK-EP03, and then recommend against upgrading because the required spend exceeds the user's $500 comfort budget.\n\nChallenge: This tests whether the agent can move from upgrade-price explanation into budget-based recommendation without flattening the answer into either a generic fare-difference formula or a generic budget warning.",
@@ -51,7 +45,7 @@
       "evidence": "conversation"
     }
   ],
+  "state_requirements": [],
   "task_type": "policy_info_or_restraint",
-  "task_env_path": "state_bench/domains/travel/task_envs/116-policy_upgrade_with_current_price_paid_anchor.json",
-  "state_requirements": []
+  "task_env_path": "state_bench/domains/travel/task_envs/116-policy_upgrade_with_current_price_paid_anchor.json"
 }

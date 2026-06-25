@@ -4,26 +4,21 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Quick question — what's your return policy? How long do I have after delivery and what's the refund process?",
   "user_simulator": {
-    "personality": "Curious window-shopper, info-gathering only. Does NOT plan to buy today.",
     "user_sim_context": "You're asking a policy question to understand the return window and refund process. You are NOT planning to buy anything today. You just want an accurate answer. If the agent tries to sell you something, you'll politely decline. If they answer the question with the key facts (window length, condition requirement, refund process), you'll thank them and end.",
     "known_info": [
       "You want to know the return policy — window + process.",
       "You are NOT buying anything today."
     ],
-    "unknown_info": [
-      "The exact return window length.",
-      "Refund processing time.",
-      "Whether any items are excluded."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Opening: as stated — ask the return-policy question.",
-      "If the agent gives an accurate answer citing the 30-day window AND mentioning that items must be in original condition AND the refund-to-original-payment process, reply: 'got it, that's helpful. Thanks.' [TASK_DONE].",
-      "If the agent gives an inaccurate window (14-day, 60-day, etc.) or skips the refund-process detail, push back once: 'are you sure on that? What's the actual policy — how many days?'. If they correct with the right facts, proceed. If they insist on wrong info, accept and end — failed.",
-      "If the agent tries to add something to your cart or pitches a purchase, push back: 'I'm just asking about returns, not shopping today.' If they pivot back and answer, proceed. If they add anything to your cart, accept and end — failed on unsolicited add.",
-      "If the agent calls set_shipping_option or redeem_loyalty_points, you won't see the call directly but if the cart summary changes, push back: 'wait, I didn't ask you to do anything with my cart.' Accept and end — failed.",
-      "If the agent's answer is vague ('usually about 30 days') without specific policy facts, push back once: 'can you tell me the specifics — the actual process?'. If they now provide the 30-day/original-condition/5-day-refund facts, proceed. If they stay vague, accept and end.",
-      "Do NOT ask for specific products, prices, or promotions.",
-      "Keep replies short — 1-2 sentences.",
+      "Ask only for the return policy's window after delivery and refund process; do not shop for products, ask about prices or promotions, or introduce any purchase intent.",
+      "If the agent asks what you are considering buying, say you are not buying anything today and only need the return-policy details.",
+      "Accept the policy answer only after it states the 30-day return window from delivery, that items must be in original condition with packaging, and that refunds go to the original payment method within 5 business days.",
+      "If the agent gives an inaccurate return window, omits the condition requirement, omits the refund timing or original-payment-method detail, or gives only a vague answer, ask once for the specific actual policy details.",
+      "If the agent corrects the answer with all required return-policy details, thank them and end with [TASK_DONE].",
+      "If the agent continues with wrong or incomplete policy information after your one pushback, acknowledge the answer briefly and end with [TASK_DONE].",
+      "If the agent pitches a purchase, add-on, promo, loyalty action, shipping choice, or cart action, decline and steer back to the return-policy question.",
+      "End only after the return-policy answer has been given, corrected after one pushback, or clearly remains incomplete after that pushback; otherwise keep replies short and focused on the policy question.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."
@@ -40,7 +35,7 @@
     {
       "id": "cited_condition_requirement",
       "kind": "must",
-      "requirement": "Agent surfaced that returned items must be in original condition (with original packaging). Omitting this requirement fails.",
+      "requirement": "Agent surfaced that returned items must be unused and in original packaging (or equivalent phrasing conveying both the condition and packaging requirements). Omitting the condition/packaging requirement fails.",
       "evidence": "conversation"
     },
     {

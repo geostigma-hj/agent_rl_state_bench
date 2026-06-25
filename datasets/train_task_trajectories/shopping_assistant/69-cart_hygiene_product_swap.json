@@ -6,11 +6,11 @@
     },
     {
       "role": "user",
-      "content": "Hey — please add the BudgetLine Notebook 15 to my cart, that's the one I want."
+      "content": "Hey \u2014 please add the BudgetLine Notebook 15 to my cart, that's the one I want."
     },
     {
       "role": "assistant",
-      "content": "Before I add it: would you like gift wrap on this item? It’s $5 per unit, and I need your preference before acting.Before I add it: do you want gift wrap for the BudgetLine Notebook 15? It’s $5 for this item.",
+      "content": "I found it: BudgetLine Notebook 15 for $449.\n\nBefore I add it, do you want gift wrap on this item? It\u2019s $5 per unit.",
       "tool_calls": [
         {
           "name": "search_products",
@@ -101,11 +101,11 @@
     },
     {
       "role": "user",
-      "content": "No preference, use the default."
+      "content": "No gift wrap, thanks \u2014 just add it to my cart."
     },
     {
       "role": "assistant",
-      "content": "Done — BudgetLine Notebook 15 has been added to your cart.\n\nCart total: $449",
+      "content": "Done \u2014 BudgetLine Notebook 15 has been added to your cart.\n\nCart total: $449",
       "tool_calls": [
         {
           "name": "add_to_cart",
@@ -133,84 +133,12 @@
     },
     {
       "role": "user",
-      "content": "Actually wait — my friend just reminded me the ProBook Chromebook 11 is better for what I need. Can we switch to that instead?"
+      "content": "Actually, can we switch to the ProBook Chromebook 11 instead \u2014 SP-1106? Could you show me the current cart and total after the switch?"
     },
     {
       "role": "assistant",
-      "content": "Switched — I removed the BudgetLine Notebook 15 and added the ProBook Chromebook 11.\n\nNew cart total: $329",
+      "content": "Done \u2014 I switched your cart to the ProBook Chromebook 11.\n\nCurrent cart:\n- ProBook Chromebook 11 \u00d71 \u2014 $329\n\nTotal: $329",
       "tool_calls": [
-        {
-          "name": "search_products",
-          "arguments": {
-            "query": "ProBook Chromebook 11",
-            "category": "electronics",
-            "min_price": 0,
-            "max_price": 10000,
-            "min_rating": 0,
-            "in_stock_only": true,
-            "sort_by": "relevance"
-          },
-          "result": {
-            "products": [
-              {
-                "product_id": "SP-1106",
-                "name": "ProBook Chromebook 11",
-                "brand": "ProBook",
-                "category": "electronics",
-                "subcategory": "laptop",
-                "price": 329,
-                "rating": 3.9,
-                "review_count": 530,
-                "in_stock": true
-              },
-              {
-                "product_id": "SP-1101",
-                "name": "ProBook Laptop 15-inch",
-                "brand": "ProBook",
-                "category": "electronics",
-                "subcategory": "laptop",
-                "price": 1299,
-                "rating": 4.7,
-                "review_count": 1890,
-                "in_stock": true
-              },
-              {
-                "product_id": "SP-1002",
-                "name": "ProBook Laptop 13-inch",
-                "brand": "ProBook",
-                "category": "electronics",
-                "subcategory": "laptop",
-                "price": 999,
-                "rating": 4.6,
-                "review_count": 2180,
-                "in_stock": true
-              },
-              {
-                "product_id": "SP-2001",
-                "name": "SlateTab Pro 11-inch",
-                "brand": "SlateTab",
-                "category": "electronics",
-                "subcategory": "tablet",
-                "price": 599,
-                "rating": 4.5,
-                "review_count": 1870,
-                "in_stock": true
-              },
-              {
-                "product_id": "SP-2006",
-                "name": "ProBook USB-C Dock",
-                "brand": "ProBook",
-                "category": "electronics",
-                "subcategory": "accessory",
-                "price": 129,
-                "rating": 4.3,
-                "review_count": 920,
-                "in_stock": true
-              }
-            ],
-            "total_found": 5
-          }
-        },
         {
           "name": "get_variants",
           "arguments": {
@@ -222,22 +150,6 @@
             "base_price": 329,
             "variants": [],
             "note": "This product has no variants; no variant_id is needed for add_to_cart."
-          }
-        },
-        {
-          "name": "remove_from_cart",
-          "arguments": {
-            "customer_id": "shop_004",
-            "product_id": "SP-1103",
-            "variant_id": ""
-          },
-          "result": {
-            "status": "removed",
-            "cart_id": "CART-shop_004",
-            "product_id": "SP-1103",
-            "variant_id": null,
-            "cart_subtotal": 0,
-            "cart_total": 0
           }
         },
         {
@@ -258,15 +170,61 @@
             "quantity": 1,
             "gift_wrap": false,
             "unit_price": 329,
+            "cart_subtotal": 778,
+            "cart_total": 778
+          }
+        },
+        {
+          "name": "remove_from_cart",
+          "arguments": {
+            "customer_id": "shop_004",
+            "product_id": "SP-1103",
+            "variant_id": ""
+          },
+          "result": {
+            "status": "removed",
+            "cart_id": "CART-shop_004",
+            "product_id": "SP-1103",
+            "variant_id": null,
             "cart_subtotal": 329,
             "cart_total": 329
+          }
+        },
+        {
+          "name": "get_cart",
+          "arguments": {
+            "customer_id": "shop_004"
+          },
+          "result": {
+            "cart_id": "CART-shop_004",
+            "customer_id": "shop_004",
+            "items": [
+              {
+                "cart_item_id": "CI-0002",
+                "product_id": "SP-1106",
+                "product_name": "ProBook Chromebook 11",
+                "quantity": 1,
+                "gift_wrap": false,
+                "unit_price": 329,
+                "line_total": 329
+              }
+            ],
+            "subtotal": 329,
+            "discount_amount": 0,
+            "gift_wrap_fee": 0,
+            "loyalty_discount": 0,
+            "loyalty_points_redeemed": 0,
+            "shipping_option": null,
+            "shipping_cost": 0,
+            "total": 329,
+            "applied_promo_codes": []
           }
         }
       ]
     },
     {
       "role": "user",
-      "content": "Total looks good. [TASK_DONE]"
+      "content": "[TASK_DONE]"
     }
   ]
 }

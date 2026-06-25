@@ -1,7 +1,27 @@
 {
   "task_id": "105-hard_price_match_after_exchange_request",
+  "user_id": "cust_003",
+  "now": "2026-07-08T10:00:00",
+  "opening_message": "Can I exchange the coffee maker in ORD-7205 and buy it again at the cheaper price? It is $20 less today.",
+  "user_simulator": {
+    "known_info": [
+      "order_id: ORD-7205",
+      "item: BrewPerfect Coffee Maker",
+      "current_price: $129"
+    ],
+    "task_rules": [
+      "Keep the request scoped to getting the $20 price drop honored for the BrewPerfect Coffee Maker in ORD-7205 while keeping the item and order active.",
+      "Provide the order ID, item name, and current $129 price when asked, but do not volunteer policy, eligibility, refund-method, or internal order facts.",
+      "If the agent guesses about the price drop, ask them to verify the purchased product and current price from the system records before deciding.",
+      "If the agent proposes cancellation, return, exchange, return-and-rebuy, or exchange-and-rebuy, push back that you would rather keep the coffee maker if the lower price can be honored directly.",
+      "Accept only a direct price-match adjustment that keeps the coffee maker/order active and explains that exchanging or rebuying is unnecessary.",
+      "Confirm only after the agent previews a $20 refund or price adjustment to the original payment method with no return, cancellation, or exchange.",
+      "End only after the direct $20 price-match refund has been processed and the agent confirms the coffee maker/order remains active."
+    ],
+    "unknown_info": [],
+    "user_sim_context": "You are contacting support about order ORD-7205. Customer asks to exchange a coffee maker only because its price dropped. Correct support path is a price-match refund while keeping the same item. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation."
+  },
   "task_summary": "Customer asks to exchange a coffee maker only because its price dropped. Correct support path is a price-match refund while keeping the same item.",
-  "task_type": "price_match_refund",
   "task_requirements": [
     {
       "evidence": "conversation",
@@ -13,7 +33,7 @@
       "evidence": "conversation_or_tool_calls",
       "id": "hard_price_match_after_exchange_request_lookup",
       "kind": "must",
-      "requirement": "Agent must verify from system records that the purchased item has current price $129 before issuing the refund."
+      "requirement": "Agent must verify the order/item from system records (e.g. via get_order or get_product_details) and base the refund on the current price drop before issuing the refund."
     },
     {
       "evidence": "conversation_or_tool_calls",
@@ -34,29 +54,6 @@
       "requirement": "Agent must not recommend or route the customer toward return-and-rebuy or exchange-and-rebuy once the eligible direct price-match path is available."
     }
   ],
-  "user_id": "cust_003",
-  "now": "2026-07-08T10:00:00",
-  "opening_message": "Can I exchange the coffee maker in ORD-7205 and buy it again at the cheaper price? It is $20 less today.",
-  "user_simulator": {
-    "known_info": [
-      "order_id: ORD-7205",
-      "item: BrewPerfect Coffee Maker",
-      "current_price: $129"
-    ],
-    "personality": "friendly",
-    "task_rules": [
-      "Give the order ID when asked.",
-      "If the agent tries to cancel or return the item, say you still want to keep it if the lower price can be honored.",
-      "Ask them to verify the product price rather than guessing.",
-      "Accept the price-match refund once previewed.",
-      "Do not accept return-and-rebuy or exchange language once the agent can check the price-match policy; only accept direct price adjustment."
-    ],
-    "unknown_info": [
-      "whether cancellation is needed",
-      "price-match amount"
-    ],
-    "user_sim_context": "You are contacting support about order ORD-7205. Customer asks to exchange a coffee maker only because its price dropped. Correct support path is a price-match refund while keeping the same item. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation."
-  },
   "state_requirements": [
     {
       "entity_type": "order_items",
@@ -71,5 +68,6 @@
       "expected_value": "original_payment"
     }
   ],
+  "task_type": "price_match_refund",
   "task_env_path": "state_bench/domains/customer_support/task_envs/105-hard_price_match_after_exchange_request.json"
 }

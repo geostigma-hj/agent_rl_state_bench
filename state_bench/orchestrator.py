@@ -17,7 +17,6 @@ import time
 from typing import Any
 
 from state_bench.agents.base import (
-    AgentPricing,
     AgentRuntimeContext,
     AgentToolCallRequest,
     AgentTurnResponse,
@@ -133,7 +132,6 @@ def run_task(
     env: Any | None = None,
     trajectory_metadata: dict[str, Any] | None = None,
     simulator_client: LLMClient | PooledLLMClient | None = None,
-    agent_pricing: AgentPricing | None = None,
     agent_class: type[BaseAgent] | None = None,
     retrieve_learnings_top_k: int = 3,
     agent_reasoning_effort: str | None = None,
@@ -179,7 +177,6 @@ def run_task(
             task_summary=task.task_summary,
             state_requirements=task.state_requirements,
             task_requirements=task.task_requirements,
-            agent_pricing=agent_pricing,
         )
         agent_kwargs: dict[str, Any] = {
             "runtime_context": runtime_context,

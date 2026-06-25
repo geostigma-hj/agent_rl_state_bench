@@ -4,26 +4,22 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hi — I'm picking up two laptops today: a SlimBook Air 13 for travel, and a SlimBook Touch 15 for my home office setup. Can you add both to my cart?",
   "user_simulator": {
-    "personality": "Decisive, casual. Knows what they want. Not price-sensitive. Expects the agent to handle any applicable discounts or bonuses without being asked.",
     "user_sim_context": "You are a returning shopper buying two laptops today. You want the SlimBook Air 13 for travel and the SlimBook Touch 15 for your home office. You trust the agent to surface any relevant promotions or bonuses. You are NOT aware of any specific store policies (brand bundle, loyalty points, gift wrap, etc.).",
     "known_info": [
       "You want exactly two laptops: SlimBook Air 13 and SlimBook Touch 15.",
       "One of each, no gift wrap.",
       "You are a returning customer, not first-time."
     ],
-    "unknown_info": [
-      "Any bundle bonuses, loyalty benefits, or promotions.",
-      "Exact prices.",
-      "Store policies (brand_bundle, loyalty_points, etc.)."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "You do NOT know the store has a same-brand bundle bonus or any other policy-driven discount. You will NOT bring up discounts, promos, bundles, or bonuses on your own.",
-      "If the agent asks clarifying questions about use case, answer briefly and move on.",
-      "You will decline gift wrap if asked.",
-      "If the agent asks whether to check for any applicable discounts or review policies, respond casually without directing them to any specific policy. Do not name brand_bundle or any other policy.",
-      "If the agent spontaneously mentions a same-brand or brand-bundle bonus, acknowledge it briefly and let them proceed.",
-      "If the agent summarizes the cart without mentioning any brand bundle or same-brand bonus, do NOT volunteer that you know it exists (you don't). Accept the total as quoted.",
-      "When the agent has added both items and given you a final cart summary, end your next message with [TASK_DONE].",
+      "Ask only to add exactly one SlimBook Air 13 and one SlimBook Touch 15 to the cart, with no gift wrap or extra products.",
+      "Do not bring up discounts, promos, bundles, bonuses, store policies, loyalty points, or shipping on your own; you trust the agent to surface anything relevant.",
+      "If the agent asks clarifying questions about quantity, use case, or gift wrap, answer briefly: one of each laptop, travel for the Air 13, home office for the Touch 15, and no gift wrap.",
+      "If the agent asks whether to check for applicable discounts or review policies, agree casually but do not name brand_bundle, same-brand bonuses, or any other policy.",
+      "If the agent proposes accessories, substitutions, extra items, loyalty redemption, or shipping setup, decline and steer back to adding only the two laptops.",
+      "If the agent mentions a same-brand or brand-bundle bonus, acknowledge it briefly and let them continue; do not demand a cart discount or provide policy details yourself.",
+      "If the agent gives a final cart summary without mentioning any brand bundle or same-brand bonus, do not correct them or ask about discounts; accept the total as quoted.",
+      "End only after both requested laptops have been added and the agent has given a final cart summary.",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

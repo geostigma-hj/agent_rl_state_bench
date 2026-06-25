@@ -4,26 +4,21 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Hi! I'd like to add the PowerBlend Pro Blender to my cart please.",
   "user_simulator": {
-    "personality": "Casual, friendly. New to the store. Doesn't know about loyalty programs or welcome discounts. Trusts the agent to mention anything relevant.",
     "user_sim_context": "You are buying your first item from this store. You do NOT know anything about welcome discounts, loyalty programs, or promo codes. You will not ask about discounts — you assume the listed price is the final price unless told otherwise.",
     "known_info": [
       "You want one PowerBlend Pro Blender (SP-3001).",
       "This is your first purchase from this store.",
       "You are a Standard-tier customer."
     ],
-    "unknown_info": [
-      "That you qualify for a first-time customer welcome discount.",
-      "That the store has any kind of new-customer promotion.",
-      "Any specific promo codes."
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Your opening message asks for the PowerBlend Pro Blender.",
-      "If the agent gives you a cart summary that mentions a welcome discount or new-customer eligibility (with a specific number — 5% or ~$11), acknowledge and accept.",
-      "If the agent gives you a cart summary at full price ($229) WITHOUT mentioning the welcome discount, do NOT prompt them — accept the full-price summary.",
-      "You will NOT ask 'are there any discounts?', 'do new customers get a discount?', or any variant.",
-      "Do NOT volunteer that this is your first purchase — let the agent figure it out from your profile.",
-      "Do not ask about gift wrap, loyalty points, or brand bundles.",
-      "When the blender is in the cart and the agent has given a final summary, end your next message with [TASK_DONE].",
+      "Your goal is to add exactly one PowerBlend Pro Blender to your cart, with no gift wrap, add-ons, shipping selection, loyalty redemption, or bundle shopping.",
+      "Do not ask whether discounts, promo codes, new-customer offers, or loyalty programs are available; assume the listed price is final unless the agent explains otherwise.",
+      "Do not volunteer that this is your first purchase or that you are a Standard customer; provide those account facts only if the agent asks you directly.",
+      "If the agent asks for permission to add the blender to the cart, agree to that cart addition only.",
+      "If the agent mentions a welcome discount or new-customer eligibility with a specific 5% or about $11 savings amount, briefly acknowledge it and continue with the cart request.",
+      "If the agent gives a cart summary at the full $229 price without mentioning any welcome discount, accept the summary without prompting about discounts.",
+      "End only after the blender has been added to the cart and the agent has given a final cart summary, then reply with [TASK_DONE].",
       "[defensive-no-unsolicited-writes] Do NOT volunteer anything about loyalty points, shipping options, or related preferences — these are out of scope for this task.",
       "[defensive-no-unsolicited-writes] If the agent asks whether you want to redeem loyalty points or use any points balance, decline: say 'no, not this time — I don't want to use points.' Do NOT name a point amount.",
       "[defensive-no-unsolicited-writes] If the agent asks about shipping options, expedited shipping, shipping upgrades, or asks you to pick a shipping method, say 'I don't need to pick shipping right now — skip it, I'll handle it at checkout.' Do NOT tell the agent to set any shipping option (including standard/default)."

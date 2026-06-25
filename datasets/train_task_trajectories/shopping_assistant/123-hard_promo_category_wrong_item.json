@@ -10,12 +10,12 @@
     },
     {
       "role": "assistant",
-      "content": "No — **KITCHEN10 will not discount the PosturePro Office Chair**.\n\n- **PosturePro Office Chair** is in **home_office**\n- **KITCHEN10** applies only to **kitchen** items\n\nI did **not** add the chair, and I did **not** switch to any kitchen product.",
+      "content": "No \u2014 **KITCHEN10 will not discount the PosturePro Office Chair**.\n\n- **PosturePro Office Chair** is in **home_office**\n- **KITCHEN10** is **10% off kitchen items only**\n- So it does **not** apply to that chair\n\nI did **not** add the chair or swap anything in your cart.",
       "tool_calls": [
         {
           "name": "search_products",
           "arguments": {
-            "query": "PosturePro Office Chair",
+            "query": "PosturePro office chair",
             "category": "home_office",
             "min_price": 0,
             "max_price": 10000,
@@ -38,6 +38,15 @@
               }
             ],
             "total_found": 1
+          }
+        },
+        {
+          "name": "get_promotions",
+          "arguments": {
+            "category": "home_office"
+          },
+          "result": {
+            "promotions": []
           }
         },
         {
@@ -67,7 +76,7 @@
     },
     {
       "role": "user",
-      "content": "Got it, that answers my question. Thanks for checking without adding or swapping anything. [TASK_DONE]"
+      "content": "[TASK_DONE]"
     }
   ]
 }

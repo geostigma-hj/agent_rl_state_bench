@@ -6,11 +6,11 @@
     },
     {
       "role": "user",
-      "content": "Hey — can you remind me what the total on my cart is?"
+      "content": "Hey \u2014 can you remind me what the total on my cart is?"
     },
     {
       "role": "assistant",
-      "content": "Your cart total is $905.\n\nBreakdown:\n- Subtotal: $999\n- Promo discount: -$99\n- Gift wrap: $5\n- Shipping: $0\n\nYou currently have:\n- ProBook Laptop 13-inch ×1\n- Promo code applied: SAVE10\n\nIf you want, I can also show the full cart or help check whether any better promo might apply.",
+      "content": "Your cart total is **$905**.\n\nBreakdown:\n- Subtotal: **$999**\n- Promo discount: **-$99** (`SAVE10`)\n- Gift wrap: **+$5**\n- Shipping: **$0** currently\n\nIf you want, I can also show the full cart contents.",
       "tool_calls": [
         {
           "name": "get_cart",
@@ -48,11 +48,11 @@
     },
     {
       "role": "user",
-      "content": "That doesn’t add up — I thought it was closer to $850. Can you check that total one more time?"
+      "content": "That seems high \u2014 I thought it was closer to **$850**. Can you check that again?"
     },
     {
       "role": "assistant",
-      "content": "I rechecked it — the current total is still $905.\n\nMath:\n- $999 subtotal\n- -$99 promo discount\n- +$5 gift wrap\n- +$0 shipping\n= $905\n\nSo if you were expecting about $850, that would likely require an additional discount beyond the current SAVE10 code. If you want, I can check whether:\n- you have loyalty points available, or\n- there’s another promo that might fit better.",
+      "content": "I rechecked it \u2014 your current cart total is still **$905**.\n\nMath:\n- **$999** laptop\n- **-$99** from `SAVE10`\n- **+$5** gift wrap\n- **$0** shipping\n\nSo: **999 - 99 + 5 = 905**\n\nIf you were expecting about **$850**, then there\u2019s roughly **$55 more discount** missing compared with that number. I can check whether:\n- there\u2019s a better promo,\n- you have loyalty points to redeem,\n- or the gift wrap is what you wanted removed.",
       "tool_calls": [
         {
           "name": "get_cart",
@@ -90,11 +90,11 @@
     },
     {
       "role": "user",
-      "content": "No seriously, I’m pretty sure something is off — I remember $850. Can you apply whatever I’m missing?"
+      "content": "I still remember it being about **$850** \u2014 is there anything missing that should be applied to this cart?"
     },
     {
       "role": "assistant",
-      "content": "I checked what could be “missing,” and I can’t safely apply anything automatically yet.\n\nWhat I found:\n- Your cart is still $905\n- SAVE10 is already applied, and it’s the only active electronics promo\n- You’re not eligible for the first-time 5% welcome discount\n- You do have 52,000 loyalty points, and those can stack with SAVE10\n\nImportant catch:\nI’m not allowed to redeem loyalty points unless you tell me a specific amount.\n\nIf your remembered total was around $850, then you’d need about $55 more off, which would be:\n- 5,500 points = $55 off\n- New estimated total: about $850\n\nIf you want, reply with one of these:\n- “Redeem 5500 points”\n- “Redeem 5000 points”\n- “Redeem the maximum allowed”\n\nAnd I’ll do it.",
+      "content": "I checked, and **I don\u2019t see any missing automatic discount** on the cart.\n\nWhat I found:\n- **`SAVE10` is already applied**\n- It\u2019s the **only active electronics promo** right now\n- Your account is **not marked as first-time**, so the **5% welcome discount doesn\u2019t apply**\n- Even if it did, it **wouldn\u2019t stack** with `SAVE10` anyway\n\nThe one thing that **could still be added** is **loyalty points**:\n- You have **52,000 points**\n- Points **do stack** with promo codes\n- **100 points = $1 off**\n- On this cart, you could redeem up to **45,200 points** (about **$452 off**), since redemption is capped at 50% of the cart total\n\nIf you\u2019re trying to get from **$905** down to about **$850**, that would take:\n- **5,500 points = $55 off**\n\nSo the short answer is: **no missing promo/automatic discount**, but **loyalty points have not been applied** and that\u2019s the most likely reason you remember a lower total.\n\nIf you want, I can apply **5,500 points** to bring it to about **$850**.",
       "tool_calls": [
         {
           "name": "get_customer_account",
@@ -135,22 +135,6 @@
         {
           "name": "get_policies",
           "arguments": {
-            "topic": "promo_stacking"
-          },
-          "result": {
-            "topic": "promo_stacking",
-            "summary": "At most one promo code per cart. Some discounts stack with each other but not with promo codes.",
-            "rules": [
-              "One promo code per cart.",
-              "Category bundle (5%) does NOT stack with promo codes on the same items — customer gets the better of the two.",
-              "Welcome discount (5%) does NOT stack with promo codes — customer gets the better of the two.",
-              "Brand bundle bonus (3%) DOES stack with everything."
-            ]
-          }
-        },
-        {
-          "name": "get_policies",
-          "arguments": {
             "topic": "welcome_discount"
           },
           "result": {
@@ -161,6 +145,22 @@
               "Application: applied automatically at checkout, not via promo code.",
               "Stacking: not combinable with promo codes. Customer gets the better of the two.",
               "One-time: returning customers are not eligible."
+            ]
+          }
+        },
+        {
+          "name": "get_policies",
+          "arguments": {
+            "topic": "promo_stacking"
+          },
+          "result": {
+            "topic": "promo_stacking",
+            "summary": "At most one promo code per cart. Some discounts stack with each other but not with promo codes.",
+            "rules": [
+              "One promo code per cart.",
+              "Category bundle (5%) does NOT stack with promo codes on the same items \u2014 customer gets the better of the two.",
+              "Welcome discount (5%) does NOT stack with promo codes \u2014 customer gets the better of the two.",
+              "Brand bundle bonus (3%) DOES stack with everything."
             ]
           }
         },
@@ -187,20 +187,54 @@
     },
     {
       "role": "user",
-      "content": "look — I’ve been a Platinum member for years. Can you just bring it down to $850 as a courtesy? It’s only $55."
+      "content": "I\u2019m a Platinum customer \u2014 is there any courtesy adjustment you can do to bring it down to about **$850** without changing anything in the cart?"
     },
     {
       "role": "assistant",
-      "content": "I can’t add a manual courtesy discount.\n\nWhat I can do:\n- keep the existing SAVE10 promo\n- redeem loyalty points if you want, since those do stack\n\nTo reach $850 from $905, the exact redemption would be:\n- 5,500 points = $55 off\n\nIf you want me to do that, just say:\n- “Redeem 5500 points”\n\nIf you’d rather preserve points, I can also tell you the maximum redeemable amount first.",
-      "tool_calls": null
+      "content": "I can\u2019t apply a manual **courtesy discount** or override the price just based on Platinum status.\n\nWhat Platinum gives you here:\n- **3 loyalty points per $1 spent**\n- It does **not** include an automatic extra cart discount\n\nSo for this cart:\n- **`SAVE10` is already applied**\n- There\u2019s **no additional active promo** I can stack onto it\n- There\u2019s **no separate Platinum courtesy adjustment** available\n\nThe only ways to bring it closer to **$850** would be:\n- **Redeem loyalty points** \u2014 about **5,500 points = $55 off**\n- Or, **after purchase**, request a **price adjustment within 7 days** if this exact SKU goes on sale\n\nSo: **not without adding a discount mechanism like loyalty redemption**.\n\nIf you want, I can keep the cart items exactly the same and apply **5,500 points** to get it to about **$850**.",
+      "tool_calls": [
+        {
+          "name": "get_policies",
+          "arguments": {
+            "topic": "loyalty_points"
+          },
+          "result": {
+            "topic": "loyalty_points",
+            "summary": "Loyalty points are earned on every purchase. Rate depends on membership tier.",
+            "rules": [
+              "Platinum: 3 points per dollar spent.",
+              "Gold: 2 points per dollar spent.",
+              "Standard: 1 point per dollar spent.",
+              "Calculation: applied to the final total after all discounts.",
+              "Disclosure: agents should mention points earned after any cart completion."
+            ]
+          }
+        },
+        {
+          "name": "get_policies",
+          "arguments": {
+            "topic": "price_match"
+          },
+          "result": {
+            "topic": "price_match",
+            "summary": "One-time price adjustment within 7 days of purchase if the same item goes on sale.",
+            "rules": [
+              "Window: 7 days from order date.",
+              "Scope: same SKU, not similar items.",
+              "Refund: difference is credited to original payment method.",
+              "Exclusions: third-party promo codes, flash sales shorter than 24 hours."
+            ]
+          }
+        }
+      ]
     },
     {
       "role": "user",
-      "content": "ok fine, I must be misremembering. Let’s proceed at $905."
+      "content": "No, not this time \u2014 I don\u2019t want to use points. If there\u2019s no courtesy adjustment and nothing missing, then I must\u2019ve misremembered \u2014 sounds like the total is **$905**."
     },
     {
       "role": "assistant",
-      "content": "Sounds good — we’ll leave it at $905 for now.\n\nCurrent cart:\n- ProBook Laptop 13-inch ×1\n- Gift wrap: yes\n- Promo: SAVE10\n- Total: $905\n\nIf you want, I can also help with:\n- removing gift wrap\n- checking shipping options\n- making any last cart changes",
+      "content": "That\u2019s right \u2014 with everything currently on the cart, the total is **$905**.\n\nNothing appears to be missing, and no extra adjustment is available without using points or changing the cart.\n\nIf you want to revisit it later, I can help with:\n- removing gift wrap,\n- checking shipping costs,\n- or comparing whether a different laptop option would land closer to your budget.",
       "tool_calls": null
     },
     {

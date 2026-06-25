@@ -4,7 +4,6 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "I have five accessories in my cart for free standard shipping, but remove the USB hub. Tell me if that changes shipping.",
   "user_simulator": {
-    "personality": "Direct, practical, and cooperative. Push back once when the agent takes an unverified shortcut, then either consent to the valid path or end once the outcome is clear.",
     "user_sim_context": "Your cart has five accessories and you believe that may be why standard shipping is free. You want the USB hub removed, but you also want to know whether that changes shipping.",
     "known_info": [
       "You know your current request and how you asked for it.",
@@ -12,11 +11,7 @@
       "Your cart already contains: 1 x ClearGrip Case for Pixel 7; 1 x ClearGrip Case for Pixel 8; 1 x ClearGrip Slim Case for iPhone 14; 1 x ProBook USB-C Dock; 1 x 7-Port USB-C Hub.",
       "Your cart already has standard shipping selected."
     ],
-    "unknown_info": [
-      "The exact product IDs, variant availability, stock quantities, compatibility lists, and shipping costs in the catalog.",
-      "Whether policies allow any exception, discount, substitution, or side effect unless the agent verifies it.",
-      "Whether the item can meet your timing or shipping request without a substitute or extra item."
-    ],
+    "unknown_info": [],
     "task_rules": [
       "You want only the USB hub removed from the five-accessory cart, and you want the free-standard-shipping effect disclosed.",
       "If the agent removes the hub and says dropping below five items may remove free standard shipping or require shipping to be rechecked, accept the result.",

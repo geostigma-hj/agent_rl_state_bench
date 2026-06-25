@@ -4,26 +4,19 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "Book me the afternoon JetBlue flight from JFK to Miami on June 22. Economy. Just do it.",
   "user_simulator": {
-    "personality": "Very terse and impatient. Gives minimal responses. Annoyed by questions.",
     "known_info": [
-      "Your user ID: user_005",
-      "Wants the afternoon JetBlue JFK → MIA flight on June 22",
-      "Economy class",
-      "Prefers B6 airline",
-      "If options are shown, the intended choice is the afternoon nonstop JetBlue flight B6100"
+      "Wants the afternoon JetBlue JFK to Miami flight on June 22 in economy."
     ],
-    "unknown_info": [
-      "Available flights and prices"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Give minimal answers. No pleasantries.",
-      "IF agent asks for meal preference → respond 'vegan' (one word).",
-      "IF agent asks for seat preference → respond 'aisle'.",
-      "IF agent asks multiple questions at once → answer only the first one, say 'just book it already'.",
-      "IF agent asks for name or account ID → give your account ID, nothing more.",
-      "IF agent shows options → pick the afternoon nonstop JetBlue option (B6100).",
-      "If the agent tries to book a morning flight or a non-JetBlue option, correct them and restate that you want the afternoon JetBlue flight only.",
-      "When the correct afternoon JetBlue booking is confirmed, respond with just 'fine' and [TASK_DONE]."
+      "Keep pushing for a quick economy booking, but accept only the afternoon JetBlue JFK-to-Miami flight on June 22 within your budget.",
+      "Answer tersely and without pleasantries; if the agent asks several questions at once, answer only the first known item and impatiently prompt them to keep moving.",
+      "If the agent asks for identification, provide only your user ID unless they specifically need your name.",
+      "If the agent asks for booking preferences, provide the relevant profile preference: vegan meal, aisle seat, WiFi yes, no extra legroom, no insurance, no checked bags, and credit card payment.",
+      "If the agent presents flight options, choose only the afternoon nonstop JetBlue option (B6100) in economy and reject options that change the airline, time window, route, date, or cabin.",
+      "Push back if the agent tries to guess missing booking details, book a morning flight, book another airline, use business class, add unwanted extras, or exceed your budget just to finish faster.",
+      "Accept booking only after the preview clearly matches the JetBlue afternoon economy flight, total cash price, payment method, and required preferences.",
+      "End only after the booking is completed and the final confirmation shows the correct flight, economy cabin, price, and requested preferences."
     ],
     "user_sim_context": "You want a very specific flight and are annoyed by anything that slows the booking down. You answer tersely, often one detail at a time, and behave like the obvious choice should already be enough. Even so, you still expect the final booking to match what you asked for."
   },
@@ -42,8 +35,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "adversarial_or_reasoning_trap",
-  "task_env_path": "state_bench/domains/travel/task_envs/46-adversarial_impatient_booking.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -86,5 +77,7 @@
         "user_id": "user_005"
       }
     }
-  ]
+  ],
+  "task_type": "adversarial_or_reasoning_trap",
+  "task_env_path": "state_bench/domains/travel/task_envs/46-adversarial_impatient_booking.json"
 }

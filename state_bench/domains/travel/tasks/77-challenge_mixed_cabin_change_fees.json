@@ -4,24 +4,21 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I need to change two flights. BK-1000 to London needs to move to June 26, and BK-1001 to Paris needs to move to June 28. Both personal reasons. What will the total fees be? My user ID is user_001.",
   "user_simulator": {
-    "personality": "Organized. Asks for combined total cost upfront before proceeding.",
     "known_info": [
-      "Your user ID: user_001",
-      "Booking A: BK-1000 (JFK to LHR, June 20, economy)",
-      "Booking B: BK-1001 (JFK to CDG, June 22, business class)",
-      "Both changes are for personal reasons"
+      "Booking A BK-1000: JFK to LHR, June 20, economy.",
+      "Booking B BK-1001: JFK to CDG, June 22, business class.",
+      "Both changes are for personal reasons."
     ],
-    "unknown_info": [
-      "That business class has free changes",
-      "Exact fee formulas per cabin",
-      "Fare differences for new flights"
-    ],
+    "unknown_info": [],
     "task_rules": [
-      "Open with: change both BK-1000 and BK-1001, ask total fees.",
-      "When agent quotes fees, ask: 'Why is one change so much more expensive than the other?'",
-      "If agent charges same fee for both, ask: 'But one booking is business class. Does that affect the fee?'",
-      "If agent correctly explains business=free, economy=$200, say: 'That makes sense. Go ahead with both.'",
-      "After both changes done, end with [TASK_DONE].",
+      "Keep the request focused on changing both BK-1000 to London on June 26 and BK-1001 to Paris on June 28 for personal reasons, with a clear combined additional cost before approval.",
+      "If the agent asks for booking details, provide the two booking IDs, destinations, current dates, requested new dates, cabin classes, and personal-change reasons from what you know.",
+      "Do not volunteer preferences or add-ons; if asked about booking-stage preferences for these changes, ask to keep each existing booking's preferences unchanged.",
+      "When the agent presents costs, expect separate treatment for the economy London booking and the business-class Paris booking, including change fee, fare difference, and per-booking additional total.",
+      "Push back if the agent applies the same change fee to both bookings, omits the cabin-class reason, omits fare differences, or gives a combined additional total other than $350.",
+      "Accept the changes only after the agent makes clear that the London economy booking has a $200 change fee plus a $50 fare difference, the Paris business-class booking has a $0 change fee plus a $100 fare difference, and the combined additional total is $350.",
+      "Reject unrelated upgrades, cancellations, new bookings, or add-ons unless the agent explains that a replacement booking is required to complete the requested changes within budget.",
+      "End only after both requested changes are completed and the final confirmation preserves the two destinations, new dates, cabin classes, and $350 combined additional total.",
       "For new booking creation, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "For changes to an existing booking, preserve the existing booking's booking-stage preferences unless task-specific rules say otherwise.",
       "Booking-stage persisted preferences to verify on the final booking are: meal_preference, cabin_class, seat_type, add_wifi, add_extra_legroom, and add_insurance.",
@@ -54,8 +51,6 @@
       "evidence": "conversation"
     }
   ],
-  "task_type": "adversarial_or_reasoning_trap",
-  "task_env_path": "state_bench/domains/travel/task_envs/77-challenge_mixed_cabin_change_fees.json",
   "state_requirements": [
     {
       "entity_type": "bookings",
@@ -105,5 +100,7 @@
       "field": "price_paid",
       "expected_value": 2100
     }
-  ]
+  ],
+  "task_type": "adversarial_or_reasoning_trap",
+  "task_env_path": "state_bench/domains/travel/task_envs/77-challenge_mixed_cabin_change_fees.json"
 }

@@ -20,7 +20,7 @@ def build_simulator_prompt(
 
     Order:
     1. Preamble (role + precedence note)
-    2. Identity (name, personality, tier, first-time, loyalty points, purchase history)
+    2. Identity (name, tier, first-time, loyalty points, purchase history)
     3. Task Context (from user_sim_context — sim-safe framing)
     4. Base Rules (static behavioral rules from user_sim_base.md)
     5. Task-Specific Rules (override base rules if conflicting)
@@ -48,7 +48,7 @@ def build_simulator_prompt(
     identity_lines: list[str] = [
         "## Identity\n",
         f"You are **{name}**.",
-        f"- Personality: {sim.personality}",
+        f"- Customer ID: {user_id}",
         f"- Membership tier: {tier_label}",
         f"- First-time customer: {'yes' if is_first_time else 'no'}",
         f"- Loyalty points: {loyalty_points}",
@@ -57,17 +57,12 @@ def build_simulator_prompt(
         identity_lines.append(f"- Past purchases: {', '.join(purchase_history)}")
 
     # What you know
-    know_items = [
-        f"Your name is {name}",
-        f"Your customer ID is {user_id}",
-        f"Your membership tier is {tier_label}",
-    ]
+    know_items = []
     if sim.known_info:
         know_items.extend(sim.known_info)
     identity_lines.append("\n### What you know")
     for item in know_items:
         identity_lines.append(f"- {item}")
-    identity_lines.append("\nIf the agent states any of these incorrectly, correct them.")
 
     # What you don't know
     if sim.unknown_info:

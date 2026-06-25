@@ -1,7 +1,27 @@
 {
   "task_id": "82-challenge_low_value_electronics_silver",
+  "user_id": "cust_004",
+  "now": "2026-06-20T10:00:00",
+  "opening_message": "I'd like to return the USB hub from order ORD-7115. I changed my mind about it.",
+  "user_simulator": {
+    "known_info": [
+      "order_id: ORD-7115",
+      "item: USB hub",
+      "reason: changed mind"
+    ],
+    "task_rules": [
+      "Keep the request scoped to returning the USB hub from ORD-7115 because you changed your mind; do not ask for exchanges, replacements, store credit, or unrelated order changes.",
+      "Provide the order ID, item, changed-mind reason, and Silver membership status when asked, but do not volunteer refund amounts, policy details, fees, or eligibility rules.",
+      "If the agent mentions an electronics restocking fee without explaining any Silver restocking adjustment, ask whether your Silver status changes that fee.",
+      "If the agent previews the return without explaining whether a low-value return-shipping fee applies, ask them to check that before you approve the return.",
+      "Push back if the preview omits the restocking fee, omits the Silver restocking adjustment, omits the low-value return-shipping deduction, uses the wrong item or reason, or gives a refund amount that does not match the explained breakdown.",
+      "Accept only after the agent previews an original-payment refund that itemizes the USB hub price, electronics restocking fee, Silver restocking adjustment, low-value return-shipping deduction, and final refund amount.",
+      "End only after the agent confirms the USB hub return has been processed with the final original-payment refund and no unrelated changes to the order."
+    ],
+    "unknown_info": [],
+    "user_sim_context": "You want to return a low-cost electronics item and know the final amount may involve more than one rule. Your Silver status may help a little, but you do not know how much that actually changes. You want the agent to walk through the refund in a way that makes the small-dollar adjustments understandable."
+  },
   "task_summary": "**Task:** A Silver customer is returning a $45 USB hub from a low-value order. The correct handling is to combine the normal $6 electronics restocking fee, the $1 Silver restocking-discount adjustment, and the $8 low-value return-shipping fee to reach the proper $32 refund.\n\n**Challenge:** Three modest adjustments stack here, which makes partial reasoning easy to miss. Weak agents forget the Silver adjustment, skip the return-shipping fee, or apply only one of the policies while overlooking the rest.",
-  "task_type": "return_item",
   "task_requirements": [
     {
       "evidence": "conversation_or_tool_calls",
@@ -16,30 +36,6 @@
       "requirement": "Agent must explain that the $32 refund comes from the $45 item price minus a $6 electronics restocking fee, plus a $1 Silver restocking discount, minus the $8 low-value return-shipping fee."
     }
   ],
-  "user_id": "cust_004",
-  "now": "2026-06-20T10:00:00",
-  "opening_message": "I'd like to return the USB hub from order ORD-7115. I changed my mind about it.",
-  "user_simulator": {
-    "known_info": [
-      "order_id: ORD-7115",
-      "item: USB hub",
-      "reason: changed mind"
-    ],
-    "personality": "detail_oriented",
-    "task_rules": [
-      "Give order ID.",
-      "If restocking fee mentioned, ask about Silver member discount.",
-      "If the preview includes a restocking fee but does not clearly apply the Silver discount, ask whether the Silver discount is reflected in the refund.",
-      "If the preview does not mention return shipping for this low-value order, ask whether a low-value return-shipping fee also applies.",
-      "Accept the final preview once it itemizes the restocking fee, Silver discount, and return-shipping deduction."
-    ],
-    "unknown_info": [
-      "restocking fee",
-      "Silver discount",
-      "return shipping fee"
-    ],
-    "user_sim_context": "You want to return a low-cost electronics item and know the final amount may involve more than one rule. Your Silver status may help a little, but you do not know how much that actually changes. You want the agent to walk through the refund in a way that makes the small-dollar adjustments understandable."
-  },
   "state_requirements": [
     {
       "entity_type": "order_items",
@@ -78,5 +74,6 @@
       "expected_value": "fully_returned"
     }
   ],
+  "task_type": "return_item",
   "task_env_path": "state_bench/domains/customer_support/task_envs/82-challenge_low_value_electronics_silver.json"
 }
