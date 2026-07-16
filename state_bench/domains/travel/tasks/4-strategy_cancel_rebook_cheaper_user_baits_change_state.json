@@ -2,14 +2,14 @@
   "task_id": "4-strategy_cancel_rebook_cheaper_user_baits_change_state",
   "user_id": "user_001",
   "now": "2026-06-15T10:00:00",
-  "opening_message": "I'd like to move my booking BK-1000 (ORD to LAX on AA920) to the later flight AA921 on the same route — can you just change it over to that flight? I want it done the cheapest way that's valid. My current flight is nonstop and I'd like the later one to be a comparable nonstop. Reason is personal.",
+  "opening_message": "I'd like to move my booking BK-1000 (ORD to LAX on AA920) to flight AA921 on the same ORD-LAX route — can you just change it over to that flight? I want it done the cheapest way that's valid. Reason is personal.",
   "user_simulator": {
     "personality": "Practical and cost-conscious. Cooperative and will accept the agent's recommendation, but cares about not overpaying and wants the cheaper option once it is identified.",
-    "user_sim_context": "You want to move one trip to a later flight on the same route and you want it done the cheapest legitimate way. You instinctively think of this as 'changing' your booking, but you do not actually know whether changing or cancelling-and-rebooking is cheaper, and you will not do the fee math yourself.",
+    "user_sim_context": "You want to move one trip to flight AA921 on the same route and you want it done the cheapest legitimate way. You instinctively think of this as 'changing' your booking, but you do not actually know whether changing or cancelling-and-rebooking is cheaper, and you will not do the fee math yourself.",
     "known_info": [
-      "Booking BK-1000: ORD to LAX on flight AA920; you want to move it to the later flight AA921 (same route).",
+      "Booking BK-1000: ORD to LAX on flight AA920; you want to move it to flight AA921 on the same ORD-LAX route.",
       "You want it done the cheapest valid way.",
-      "Your current flight is nonstop and you want the later one to be a comparable nonstop.",
+      "AA921 is the specific flight you want to move to; it is a nonstop on the same route. It departs on its own scheduled date (later than AA920) — you are not looking for a same-day flight, you want AA921.",
       "Reason for the move: personal."
     ],
     "unknown_info": [
@@ -18,13 +18,13 @@
       "The fare of the later flight."
     ],
     "task_rules": [
-      "Open by asking the agent to move BK-1000 to the later flight AA921, and phrase it naturally as wanting to 'just change' your booking to that flight — but make clear you want it done the cheapest valid way.",
+      "Open by asking the agent to move BK-1000 to flight AA921, and phrase it naturally as wanting to 'just change' your booking to that flight — but make clear you want it done the cheapest valid way.",
       "Do not propose or insist on a specific mechanism; you do not know whether changing or cancelling-and-rebooking is cheaper. Do not volunteer prices, fees, fare math, or policy rules; you do not know them.",
-      "If the agent asks for details or the reason, provide BK-1000, that you want the later same-route flight AA921, and that the reason is personal.",
+      "If the agent asks for details or the reason, provide BK-1000, that you want to move to flight AA921, and that the reason is personal.",
       "Do not approve a method until the agent has compared, for this booking, the cost of a direct change against the cost of cancelling and rebooking the same trip (including the cancellation fee and the new fare), and has told you which is cheaper.",
       "Once both methods are priced, take the genuinely cheaper one; if the agent proposes the more expensive method (including the direct change you first mentioned), decline it and ask for the cheaper path.",
       "If the agent simply does the direct change because you said 'change it', without checking whether cancelling and rebooking would be cheaper, do not accept that as final — ask it to confirm you are not overpaying versus cancelling and rebooking.",
-      "Before approving, make sure the agent has surfaced enough detail to confirm the later flight is the comparable nonstop on the same route, and decline unrelated upgrades, add-ons, or itinerary changes.",
+      "Before approving, make sure the agent has confirmed the move is onto flight AA921, and decline unrelated upgrades, add-ons, or itinerary changes.",
       "End with [TASK_DONE] only after the trip has been moved to AA921 by the cheaper method, with the out-of-pocket cost summarized.",
       "For new booking creation, including a replacement after canceling an existing booking, booking-stage preferences should match your profile preferences unless task-specific rules say otherwise.",
       "Search-stage preferences to verify before approving a booking: airline, time_range, and max_stops.",
