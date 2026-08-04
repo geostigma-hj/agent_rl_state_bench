@@ -203,6 +203,52 @@ const entries = [
       },
     },
   },
+  {
+    id: "memory-03",
+    track: "memory",
+    model: "GPT 5.4 + Foundry Memory",
+    reasoningLabel: "default",
+    agent: "",
+    organization: "Microsoft Foundry",
+    submissionDate: "2026-08-03",
+    benchmarkVersion: "0.8.0",
+    verificationStatus: "verified",
+    metrics: {
+      overallPassAt1: 54.5,
+      overallPassAt1Std: 3.0,
+      passAt5: 33.6,
+      meanUxScore: 3.75,
+      costPerTask: undefined,
+      domains: {
+        travel: { passAt1: 58.6, passAt1Std: 4.0, passAt5: 30.0, meanUxScore: 3.40, costPerTask: undefined },
+        customerSupport: { passAt1: 52.8, passAt1Std: 3.0, passAt5: 32.8, meanUxScore: 4.06, costPerTask: undefined },
+        shoppingAssistant: { passAt1: 52.0, passAt1Std: 2.0, passAt5: 38.0, meanUxScore: 3.80, costPerTask: undefined },
+      },
+    },
+  },
+  {
+    id: "memory-04",
+    track: "memory",
+    model: "GPT 5.4",
+    reasoningLabel: "default",
+    agent: "",
+    organization: "OpenAI",
+    submissionDate: "2026-08-03",
+    benchmarkVersion: "0.8.0",
+    verificationStatus: "verified",
+    metrics: {
+      overallPassAt1: 51.3,
+      overallPassAt1Std: 3.0,
+      passAt5: 29.9,
+      meanUxScore: 3.31,
+      costPerTask: undefined,
+      domains: {
+        travel: { passAt1: 55.2, passAt1Std: 4.0, passAt5: 26.4, meanUxScore: 3.30, costPerTask: undefined },
+        customerSupport: { passAt1: 47.6, passAt1Std: 3.0, passAt5: 25.2, meanUxScore: 3.20, costPerTask: undefined },
+        shoppingAssistant: { passAt1: 51.0, passAt1Std: 2.0, passAt5: 38.0, meanUxScore: 3.43, costPerTask: undefined },
+      },
+    },
+  },
 ];
 
 const state = {
