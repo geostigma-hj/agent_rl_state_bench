@@ -27,6 +27,7 @@ class VLLMCompletionClient(BaseLLMClient):
         ]
         self._in_flight = [0] * len(self.clients)
         self._pool_lock = threading.Lock()
+        self._next_client_idx = 0
         self.model = model
         self.temperature = temperature
         self.top_p = top_p
@@ -53,7 +54,13 @@ class VLLMCompletionClient(BaseLLMClient):
 
     def _acquire(self) -> tuple[int, OpenAI]:
         with self._pool_lock:
-            idx = min(range(len(self._in_flight)), key=lambda i: self._in_flight[i])
+            min_load = min(self._in_flight)
+            candidates = {i for i, load in enumerate(self._in_flight) if load == min_load}
+            for offset in range(len(self.clients)):
+                idx = (self._next_client_idx + offset) % len(self.clients)
+                if idx in candidates:
+                    self._next_client_idx = (idx + 1) % len(self.clients)
+                    break
             self._in_flight[idx] += 1
             return idx, self.clients[idx]
 

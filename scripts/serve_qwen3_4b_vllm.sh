@@ -5,7 +5,7 @@ model_path="${MODEL_PATH:-/mnt/models/Qwen3-4B}"
 served_model_name="${SERVED_MODEL_NAME:-$(basename "$model_path")}"
 port="${PORT:-8000}"
 cuda_visible_devices="${CUDA_VISIBLE_DEVICES:-0}"
-max_model_len="${MAX_MODEL_LEN:-8192}"
+max_model_len="${MAX_MODEL_LEN:-32768}"
 conda_python="${VERL_CONDA_PYTHON:-/home/hj/shixi/.conda/envs/verl-rl-base2/bin/python}"
 
 export CUDA_VISIBLE_DEVICES="$cuda_visible_devices"

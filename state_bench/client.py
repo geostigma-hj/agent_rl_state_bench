@@ -492,6 +492,8 @@ class LLMClient(BaseLLMClient):
         }
         if temperature is not None:
             kwargs["temperature"] = temperature
+        elif os.environ.get("STATE_BENCH_EVAL_TEMPERATURE") is not None:
+            kwargs["temperature"] = float(os.environ["STATE_BENCH_EVAL_TEMPERATURE"])
         response = self._client.responses.create(**kwargs)
         _check_content_filter(response)
 
@@ -670,6 +672,11 @@ class OpenAICompatibleChatClient(BaseLLMClient):
     def model_name(self) -> str:
         return self.model
 
+    def _provider_extra_body(self) -> dict[str, Any] | None:
+        if self._provider_name == "deepseek":
+            return {"thinking": {"type": os.environ.get("STATE_BENCH_DEEPSEEK_THINKING", "disabled")}}
+        return None
+
     @_llm_retry
     def complete_chat(
         self,
@@ -677,6 +684,7 @@ class OpenAICompatibleChatClient(BaseLLMClient):
         max_tokens: int = _DEFAULT_MAX_TOKENS,
         temperature: float | None = None,
     ) -> str:
+        max_tokens = min(max_tokens, int(os.environ.get("STATE_BENCH_EVAL_MAX_TOKENS", str(max_tokens))))
         kwargs: dict[str, Any] = {
             "model": self.model,
             "messages": messages,
@@ -684,6 +692,9 @@ class OpenAICompatibleChatClient(BaseLLMClient):
         }
         if temperature is not None:
             kwargs["temperature"] = temperature
+        extra_body = self._provider_extra_body()
+        if extra_body is not None:
+            kwargs["extra_body"] = extra_body
         self._throttle()
         response = self._client.chat.completions.create(**kwargs)
         return response.choices[0].message.content or ""
@@ -697,6 +708,7 @@ class OpenAICompatibleChatClient(BaseLLMClient):
         reasoning_effort: str | None = None,
     ) -> dict[str, Any]:
         _ = reasoning_effort
+        max_tokens = min(max_tokens, int(os.environ.get("STATE_BENCH_EVAL_MAX_TOKENS", str(max_tokens))))
         messages: list[dict[str, str]] = []
         if system_prompt:
             messages.append({"role": "system", "content": system_prompt})
@@ -705,8 +717,14 @@ class OpenAICompatibleChatClient(BaseLLMClient):
             "model": self.model,
             "messages": messages,
             "max_tokens": max_tokens,
-            "response_format": {"type": "json_object"},
         }
+        if os.environ.get("STATE_BENCH_EVAL_JSON_MODE", "1") != "0":
+            kwargs["response_format"] = {"type": "json_object"}
+        if os.environ.get("STATE_BENCH_EVAL_TEMPERATURE") is not None:
+            kwargs["temperature"] = float(os.environ["STATE_BENCH_EVAL_TEMPERATURE"])
+        extra_body = self._provider_extra_body()
+        if extra_body is not None:
+            kwargs["extra_body"] = extra_body
         self._throttle()
         response = self._client.chat.completions.create(**kwargs)
         content = response.choices[0].message.content or "{}"
@@ -957,14 +975,14 @@ def build_judge_client(env_prefix: str = "JUDGE") -> LLMClient | PooledLLMClient
 
 def build_user_sim_client() -> LLMClient | PooledLLMClient:
     """Build the locked user-simulator client for canonical protocol runs."""
-    if os.environ.get("STATE_BENCH_EVAL_PROVIDER") in {"stepfun", "openai_compatible"}:
+    if os.environ.get("STATE_BENCH_EVAL_PROVIDER") in {"stepfun", "siliconflow", "deepseek", "openai_compatible"}:
         api_key = os.environ.get("STATE_BENCH_EVAL_API_KEY")
         base_url = os.environ.get("STATE_BENCH_EVAL_BASE_URL")
         model = os.environ.get("STATE_BENCH_EVAL_MODEL") or os.environ.get("STATE_BENCH_EVAL_DEPLOYMENTS")
         if not api_key or not base_url or not model:
             raise ValueError(
                 "Set STATE_BENCH_EVAL_API_KEY, STATE_BENCH_EVAL_BASE_URL, and STATE_BENCH_EVAL_MODEL "
-                "for STATE_BENCH_EVAL_PROVIDER=stepfun."
+                "for STATE_BENCH_EVAL_PROVIDER=stepfun/siliconflow/deepseek."
             )
         return OpenAICompatibleChatClient(
             base_url=base_url,
@@ -981,7 +999,7 @@ def build_user_sim_client() -> LLMClient | PooledLLMClient:
 
 def build_locked_judge_client() -> LLMClient | PooledLLMClient:
     """Build the locked judge client for canonical protocol scoring."""
-    if os.environ.get("STATE_BENCH_EVAL_PROVIDER") in {"stepfun", "openai_compatible"}:
+    if os.environ.get("STATE_BENCH_EVAL_PROVIDER") in {"stepfun", "siliconflow", "deepseek", "openai_compatible"}:
         return build_user_sim_client()
     return build_llm_client(
         endpoint_var="STATE_BENCH_EVAL_ENDPOINT",

@@ -11,18 +11,35 @@ if [[ -f .env ]]; then
 fi
 
 export STATE_BENCH_EVAL_PROVIDER="${STATE_BENCH_EVAL_PROVIDER:-stepfun}"
-export STATE_BENCH_EVAL_MODEL="${STATE_BENCH_EVAL_MODEL:-step-3.7-flash}"
+if [[ -z "${STATE_BENCH_EVAL_MODEL:-}" ]]; then
+  if [[ "$STATE_BENCH_EVAL_PROVIDER" == "siliconflow" ]]; then
+    export STATE_BENCH_EVAL_MODEL="stepfun-ai/Step-3.5-Flash"
+  elif [[ "$STATE_BENCH_EVAL_PROVIDER" == "deepseek" ]]; then
+    export STATE_BENCH_EVAL_MODEL="deepseek-v4-flash"
+  else
+    export STATE_BENCH_EVAL_MODEL="step-3.7-flash"
+  fi
+fi
 export STATE_BENCH_EVAL_DEPLOYMENTS="${STATE_BENCH_EVAL_DEPLOYMENTS:-$STATE_BENCH_EVAL_MODEL}"
 export STATE_BENCH_SIMULATOR_TEMPERATURE="${STATE_BENCH_SIMULATOR_TEMPERATURE:-0.2}"
 
+eval_config_json=""
 if [[ "$STATE_BENCH_EVAL_PROVIDER" == "stepfun" && -f /home/hj/shixi/step.json ]]; then
+  eval_config_json="/home/hj/shixi/step.json"
+elif [[ "$STATE_BENCH_EVAL_PROVIDER" == "siliconflow" && -f /home/hj/shixi/siliconflow.json ]]; then
+  eval_config_json="/home/hj/shixi/siliconflow.json"
+elif [[ "$STATE_BENCH_EVAL_PROVIDER" == "deepseek" && -f /home/hj/shixi/deepseek.json ]]; then
+  eval_config_json="/home/hj/shixi/deepseek.json"
+fi
+
+if [[ -n "$eval_config_json" ]]; then
   step_exports="$(
-    .venv/bin/python - <<'PY'
+    EVAL_CONFIG_JSON="$eval_config_json" .venv/bin/python - <<'PY'
 import json
 import os
 import shlex
 
-data = json.load(open("/home/hj/shixi/step.json"))
+data = json.load(open(os.environ["EVAL_CONFIG_JSON"]))
 if not os.environ.get("STATE_BENCH_EVAL_BASE_URL"):
     print("export STATE_BENCH_EVAL_BASE_URL=" + shlex.quote(data["base_url"]))
 if not os.environ.get("STATE_BENCH_EVAL_API_KEY"):
@@ -35,7 +52,7 @@ PY
 fi
 
 missing=()
-if [[ "$STATE_BENCH_EVAL_PROVIDER" == "stepfun" || "$STATE_BENCH_EVAL_PROVIDER" == "openai_compatible" ]]; then
+if [[ "$STATE_BENCH_EVAL_PROVIDER" == "stepfun" || "$STATE_BENCH_EVAL_PROVIDER" == "siliconflow" || "$STATE_BENCH_EVAL_PROVIDER" == "deepseek" || "$STATE_BENCH_EVAL_PROVIDER" == "openai_compatible" ]]; then
   [[ -n "${STATE_BENCH_EVAL_BASE_URL:-}" ]] || missing+=("STATE_BENCH_EVAL_BASE_URL")
   [[ -n "${STATE_BENCH_EVAL_API_KEY:-}" ]] || missing+=("STATE_BENCH_EVAL_API_KEY")
   [[ -n "${STATE_BENCH_EVAL_MODEL:-}" ]] || missing+=("STATE_BENCH_EVAL_MODEL")
