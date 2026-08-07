@@ -17,6 +17,8 @@ class VLLMCompletionClient(BaseLLMClient):
         model: str,
         temperature: float,
         top_p: float,
+        top_k: int | None,
+        min_p: float | None,
         max_tokens: int,
         enable_thinking: bool | None = None,
     ):
@@ -32,6 +34,8 @@ class VLLMCompletionClient(BaseLLMClient):
         self.model = model
         self.temperature = temperature
         self.top_p = top_p
+        self.top_k = top_k
+        self.min_p = min_p
         self.max_tokens = max_tokens
         self.enable_thinking = enable_thinking
 
@@ -43,6 +47,8 @@ class VLLMCompletionClient(BaseLLMClient):
             model=os.environ.get("STATE_BENCH_VLLM_MODEL", "Qwen/Qwen3-4B"),
             temperature=float(os.environ.get("STATE_BENCH_VLLM_TEMPERATURE", "0.0")),
             top_p=float(os.environ.get("STATE_BENCH_VLLM_TOP_P", "1.0")),
+            top_k=_parse_optional_int(os.environ.get("STATE_BENCH_VLLM_TOP_K")),
+            min_p=_parse_optional_float(os.environ.get("STATE_BENCH_VLLM_MIN_P")),
             max_tokens=int(os.environ.get("STATE_BENCH_VLLM_MAX_TOKENS", "2048")),
             enable_thinking=_parse_optional_bool(os.environ.get("STATE_BENCH_QWEN_ENABLE_THINKING")),
         )
@@ -80,6 +86,7 @@ class VLLMCompletionClient(BaseLLMClient):
                 temperature=self.temperature,
                 top_p=self.top_p,
                 max_tokens=self.max_tokens,
+                extra_body=self._sampling_extra_body(),
             )
             return response.choices[0].text or "", getattr(response, "usage", None)
         finally:
@@ -91,8 +98,11 @@ class VLLMChatClient(VLLMCompletionClient):
         idx, client = self._acquire()
         try:
             kwargs: dict[str, Any] = {}
+            extra_body = self._sampling_extra_body()
             if self.enable_thinking is not None:
-                kwargs["extra_body"] = {"chat_template_kwargs": {"enable_thinking": self.enable_thinking}}
+                extra_body["chat_template_kwargs"] = {"enable_thinking": self.enable_thinking}
+            if extra_body:
+                kwargs["extra_body"] = extra_body
             response = client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": prompt}],
@@ -105,6 +115,14 @@ class VLLMChatClient(VLLMCompletionClient):
         finally:
             self._release(idx)
 
+    def _sampling_extra_body(self) -> dict[str, Any]:
+        extra_body: dict[str, Any] = {}
+        if self.top_k is not None:
+            extra_body["top_k"] = self.top_k
+        if self.min_p is not None:
+            extra_body["min_p"] = self.min_p
+        return extra_body
+
 
 def _parse_optional_bool(value: str | None) -> bool | None:
     if value is None or value == "":
@@ -115,3 +133,15 @@ def _parse_optional_bool(value: str | None) -> bool | None:
     if normalized in {"0", "false", "no", "off"}:
         return False
     raise ValueError(f"Invalid boolean value: {value!r}")
+
+
+def _parse_optional_int(value: str | None) -> int | None:
+    if value is None or value == "":
+        return None
+    return int(value)
+
+
+def _parse_optional_float(value: str | None) -> float | None:
+    if value is None or value == "":
+        return None
+    return float(value)
