@@ -18,6 +18,7 @@ class VLLMCompletionClient(BaseLLMClient):
         temperature: float,
         top_p: float,
         max_tokens: int,
+        enable_thinking: bool | None = None,
     ):
         base_urls = [item.strip() for item in base_url.split(",") if item.strip()]
         if not base_urls:
@@ -32,6 +33,7 @@ class VLLMCompletionClient(BaseLLMClient):
         self.temperature = temperature
         self.top_p = top_p
         self.max_tokens = max_tokens
+        self.enable_thinking = enable_thinking
 
     @classmethod
     def from_env(cls):
@@ -42,6 +44,7 @@ class VLLMCompletionClient(BaseLLMClient):
             temperature=float(os.environ.get("STATE_BENCH_VLLM_TEMPERATURE", "0.0")),
             top_p=float(os.environ.get("STATE_BENCH_VLLM_TOP_P", "1.0")),
             max_tokens=int(os.environ.get("STATE_BENCH_VLLM_MAX_TOKENS", "2048")),
+            enable_thinking=_parse_optional_bool(os.environ.get("STATE_BENCH_QWEN_ENABLE_THINKING")),
         )
 
     @property
@@ -87,13 +90,28 @@ class VLLMChatClient(VLLMCompletionClient):
     def complete(self, prompt: str) -> tuple[str, Any]:
         idx, client = self._acquire()
         try:
+            kwargs: dict[str, Any] = {}
+            if self.enable_thinking is not None:
+                kwargs["extra_body"] = {"chat_template_kwargs": {"enable_thinking": self.enable_thinking}}
             response = client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=self.temperature,
                 top_p=self.top_p,
                 max_tokens=self.max_tokens,
+                **kwargs,
             )
             return response.choices[0].message.content or "", getattr(response, "usage", None)
         finally:
             self._release(idx)
+
+
+def _parse_optional_bool(value: str | None) -> bool | None:
+    if value is None or value == "":
+        return None
+    normalized = value.strip().lower()
+    if normalized in {"1", "true", "yes", "on"}:
+        return True
+    if normalized in {"0", "false", "no", "off"}:
+        return False
+    raise ValueError(f"Invalid boolean value: {value!r}")

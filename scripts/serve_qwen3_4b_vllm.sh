@@ -7,13 +7,23 @@ port="${PORT:-8000}"
 cuda_visible_devices="${CUDA_VISIBLE_DEVICES:-0}"
 max_model_len="${MAX_MODEL_LEN:-32768}"
 conda_python="${VERL_CONDA_PYTHON:-/home/hj/shixi/.conda/envs/verl-rl-base2/bin/python}"
+enable_reasoning="${ENABLE_REASONING:-0}"
+reasoning_parser="${REASONING_PARSER:-deepseek_r1}"
 
 export CUDA_VISIBLE_DEVICES="$cuda_visible_devices"
 
-exec "$conda_python" -m vllm.entrypoints.openai.api_server \
+args=(
+  -m vllm.entrypoints.openai.api_server
   --model "$model_path" \
   --served-model-name "$served_model_name" \
   --host 127.0.0.1 \
   --port "$port" \
   --dtype bfloat16 \
   --max-model-len "$max_model_len"
+)
+
+if [[ "$enable_reasoning" == "1" ]]; then
+  args+=(--enable-reasoning --reasoning-parser "$reasoning_parser")
+fi
+
+exec "$conda_python" "${args[@]}"
