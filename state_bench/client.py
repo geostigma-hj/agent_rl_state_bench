@@ -30,6 +30,7 @@ import time
 from pathlib import Path
 from typing import Any
 
+import httpx
 import yaml
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 from openai import APIStatusError, AuthenticationError, BadRequestError, OpenAI
@@ -628,6 +629,97 @@ class LLMClient(BaseLLMClient):
             raise
 
 
+class OpenAICompatibleChatClient(BaseLLMClient):
+    """Chat-completions client for OpenAI-compatible providers used by eval traffic."""
+
+    _rate_lock = threading.Lock()
+    _request_times: list[float] = []
+
+    def __init__(
+        self,
+        *,
+        base_url: str,
+        api_key: str,
+        model: str,
+        provider_name: str = "openai_compatible",
+    ):
+        self.base_url = base_url
+        self.model = model
+        self._provider_name = provider_name
+        self._client = OpenAI(base_url=base_url, api_key=api_key, http_client=httpx.Client(trust_env=False))
+
+    def _throttle(self) -> None:
+        rpm = int(os.environ.get("STATE_BENCH_EVAL_RPM_LIMIT", "9"))
+        if rpm <= 0:
+            return
+        while True:
+            with self._rate_lock:
+                now = time.monotonic()
+                self._request_times[:] = [ts for ts in self._request_times if now - ts < 60]
+                if len(self._request_times) < rpm:
+                    self._request_times.append(now)
+                    return
+                sleep_for = max(0.1, 60 - (now - self._request_times[0]))
+            time.sleep(sleep_for)
+
+    @property
+    def provider_name(self) -> str:
+        return self._provider_name
+
+    @property
+    def model_name(self) -> str:
+        return self.model
+
+    @_llm_retry
+    def complete_chat(
+        self,
+        messages: list[dict[str, str]],
+        max_tokens: int = _DEFAULT_MAX_TOKENS,
+        temperature: float | None = None,
+    ) -> str:
+        kwargs: dict[str, Any] = {
+            "model": self.model,
+            "messages": messages,
+            "max_tokens": max_tokens,
+        }
+        if temperature is not None:
+            kwargs["temperature"] = temperature
+        self._throttle()
+        response = self._client.chat.completions.create(**kwargs)
+        return response.choices[0].message.content or ""
+
+    @_llm_retry
+    def complete_json(
+        self,
+        prompt: str,
+        system_prompt: str | None = None,
+        max_tokens: int = _DEFAULT_MAX_TOKENS,
+        reasoning_effort: str | None = None,
+    ) -> dict[str, Any]:
+        _ = reasoning_effort
+        messages: list[dict[str, str]] = []
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        messages.append({"role": "user", "content": prompt})
+        kwargs: dict[str, Any] = {
+            "model": self.model,
+            "messages": messages,
+            "max_tokens": max_tokens,
+            "response_format": {"type": "json_object"},
+        }
+        self._throttle()
+        response = self._client.chat.completions.create(**kwargs)
+        content = response.choices[0].message.content or "{}"
+        try:
+            return json.loads(content)
+        except json.JSONDecodeError:
+            start = content.find("{")
+            end = content.rfind("}")
+            if start >= 0 and end > start:
+                return json.loads(content[start : end + 1])
+            raise
+
+
 def _resolve_deployments(
     deployments: list[str] | None = None,
     endpoint_var: str = "STATE_BENCH_AGENT_ENDPOINT",
@@ -865,6 +957,21 @@ def build_judge_client(env_prefix: str = "JUDGE") -> LLMClient | PooledLLMClient
 
 def build_user_sim_client() -> LLMClient | PooledLLMClient:
     """Build the locked user-simulator client for canonical protocol runs."""
+    if os.environ.get("STATE_BENCH_EVAL_PROVIDER") in {"stepfun", "openai_compatible"}:
+        api_key = os.environ.get("STATE_BENCH_EVAL_API_KEY")
+        base_url = os.environ.get("STATE_BENCH_EVAL_BASE_URL")
+        model = os.environ.get("STATE_BENCH_EVAL_MODEL") or os.environ.get("STATE_BENCH_EVAL_DEPLOYMENTS")
+        if not api_key or not base_url or not model:
+            raise ValueError(
+                "Set STATE_BENCH_EVAL_API_KEY, STATE_BENCH_EVAL_BASE_URL, and STATE_BENCH_EVAL_MODEL "
+                "for STATE_BENCH_EVAL_PROVIDER=stepfun."
+            )
+        return OpenAICompatibleChatClient(
+            base_url=base_url,
+            api_key=api_key,
+            model=model,
+            provider_name=os.environ.get("STATE_BENCH_EVAL_PROVIDER", "openai_compatible"),
+        )
     return build_llm_client(
         endpoint_var="STATE_BENCH_EVAL_ENDPOINT",
         deployments_var="STATE_BENCH_EVAL_DEPLOYMENTS",
@@ -874,6 +981,8 @@ def build_user_sim_client() -> LLMClient | PooledLLMClient:
 
 def build_locked_judge_client() -> LLMClient | PooledLLMClient:
     """Build the locked judge client for canonical protocol scoring."""
+    if os.environ.get("STATE_BENCH_EVAL_PROVIDER") in {"stepfun", "openai_compatible"}:
+        return build_user_sim_client()
     return build_llm_client(
         endpoint_var="STATE_BENCH_EVAL_ENDPOINT",
         deployments_var="STATE_BENCH_EVAL_DEPLOYMENTS",

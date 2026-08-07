@@ -5,6 +5,7 @@ The UserSimulator receives an assembled system prompt (personality + task contex
 """
 
 import json
+import os
 from typing import Any
 
 from state_bench.client import LLMClient, PooledLLMClient
@@ -56,4 +57,8 @@ class UserSimulator:
             {"role": "user", "content": instruction},
         ]
 
-        return self.client.complete_chat(messages=messages).strip()
+        temperature = os.environ.get("STATE_BENCH_SIMULATOR_TEMPERATURE")
+        return self.client.complete_chat(
+            messages=messages,
+            temperature=float(temperature) if temperature is not None else None,
+        ).strip()
