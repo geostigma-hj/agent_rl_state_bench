@@ -12,7 +12,7 @@ from state_bench.client import BaseLLMClient
 
 
 class DeepSeekCompletionClient(BaseLLMClient):
-    """OpenAI-compatible completion client for using DeepSeek as a JSON agent."""
+    """OpenAI-compatible client used by DeepSeekToolCallingAgent."""
 
     _rate_lock = threading.Lock()
     _request_times: list[float] = []
@@ -23,7 +23,7 @@ class DeepSeekCompletionClient(BaseLLMClient):
         base_url: str,
         api_key: str,
         model: str,
-        temperature: float,
+        temperature: float | None,
         top_p: float | None,
         max_tokens: int,
     ):
@@ -41,7 +41,7 @@ class DeepSeekCompletionClient(BaseLLMClient):
             base_url=os.environ.get("DEEPSEEK_AGENT_BASE_URL") or config.get("base_url", ""),
             api_key=os.environ.get("DEEPSEEK_AGENT_API_KEY") or config.get("api_key", ""),
             model=os.environ.get("DEEPSEEK_AGENT_MODEL", "deepseek-v4-flash"),
-            temperature=float(os.environ.get("DEEPSEEK_AGENT_TEMPERATURE", "0.2")),
+            temperature=_parse_optional_float(os.environ.get("DEEPSEEK_AGENT_TEMPERATURE")),
             top_p=_parse_optional_float(os.environ.get("DEEPSEEK_AGENT_TOP_P")),
             max_tokens=int(os.environ.get("DEEPSEEK_AGENT_MAX_TOKENS", "4096")),
         )
@@ -54,22 +54,6 @@ class DeepSeekCompletionClient(BaseLLMClient):
     def model_name(self) -> str:
         return self.model
 
-    def complete(self, prompt: str) -> tuple[str, Any]:
-        kwargs: dict[str, Any] = {
-            "model": self.model,
-            "messages": [{"role": "user", "content": prompt}],
-            "temperature": self.temperature,
-            "max_tokens": self.max_tokens,
-            "extra_body": {"thinking": {"type": os.environ.get("DEEPSEEK_AGENT_THINKING", "disabled")}},
-        }
-        if self.top_p is not None:
-            kwargs["top_p"] = self.top_p
-        if os.environ.get("DEEPSEEK_AGENT_JSON_MODE", "0") == "1":
-            kwargs["response_format"] = {"type": "json_object"}
-        self._throttle()
-        response = self._client.chat.completions.create(**kwargs)
-        return response.choices[0].message.content or "", getattr(response, "usage", None)
-
     def complete_with_tools(
         self,
         *,
@@ -80,10 +64,11 @@ class DeepSeekCompletionClient(BaseLLMClient):
             "model": self.model,
             "messages": messages,
             "tools": [_to_chat_completion_tool(tool) for tool in tools],
-            "temperature": self.temperature,
             "max_tokens": self.max_tokens,
             "extra_body": {"thinking": {"type": os.environ.get("DEEPSEEK_AGENT_THINKING", "disabled")}},
         }
+        if self.temperature is not None:
+            kwargs["temperature"] = self.temperature
         if self.top_p is not None:
             kwargs["top_p"] = self.top_p
         self._throttle()
