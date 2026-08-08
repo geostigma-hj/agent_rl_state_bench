@@ -79,6 +79,7 @@ num_runs="${NUM_RUNS:-1}"
 num_workers="${NUM_WORKERS:-1}"
 model_label="${MODEL_LABEL:-${STATE_BENCH_VLLM_MODEL//\//_}}"
 output_dir="${OUTPUT_DIR:-outputs/customer_support_${model_label}_${split}}"
+agent_class="${AGENT_CLASS:-JsonCompletionAgent}"
 agent_client_class="${AGENT_CLIENT_CLASS:-VLLMCompletionClient}"
 
 if [[ -z "${TASKS:-}" && -n "$task_limit" ]]; then
@@ -98,7 +99,7 @@ args=(
   -m state_bench.scripts.run_batch
   --domain customer_support
   --split "$([[ -n "${TASKS:-}" ]] && printf all || printf %s "$split")"
-  --agent-class JsonCompletionAgent
+  --agent-class "$agent_class"
   --agent-client-class "$agent_client_class"
   --agent-model-name "$STATE_BENCH_VLLM_MODEL"
   --num-runs "$num_runs"

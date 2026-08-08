@@ -70,6 +70,25 @@ class DeepSeekCompletionClient(BaseLLMClient):
         response = self._client.chat.completions.create(**kwargs)
         return response.choices[0].message.content or "", getattr(response, "usage", None)
 
+    def complete_with_tools(
+        self,
+        *,
+        messages: list[dict[str, Any]],
+        tools: list[dict[str, Any]],
+    ) -> Any:
+        kwargs: dict[str, Any] = {
+            "model": self.model,
+            "messages": messages,
+            "tools": [_to_chat_completion_tool(tool) for tool in tools],
+            "temperature": self.temperature,
+            "max_tokens": self.max_tokens,
+            "extra_body": {"thinking": {"type": os.environ.get("DEEPSEEK_AGENT_THINKING", "disabled")}},
+        }
+        if self.top_p is not None:
+            kwargs["top_p"] = self.top_p
+        self._throttle()
+        return self._client.chat.completions.create(**kwargs)
+
     def _throttle(self) -> None:
         rpm = int(os.environ.get("DEEPSEEK_AGENT_RPM_LIMIT", "0"))
         if rpm <= 0:
@@ -96,3 +115,16 @@ def _parse_optional_float(value: str | None) -> float | None:
     if value is None or value == "":
         return None
     return float(value)
+
+
+def _to_chat_completion_tool(tool: dict[str, Any]) -> dict[str, Any]:
+    if "function" in tool:
+        return tool
+    return {
+        "type": "function",
+        "function": {
+            "name": tool["name"],
+            "description": tool.get("description", ""),
+            "parameters": tool.get("parameters", {"type": "object", "properties": {}}),
+        },
+    }
