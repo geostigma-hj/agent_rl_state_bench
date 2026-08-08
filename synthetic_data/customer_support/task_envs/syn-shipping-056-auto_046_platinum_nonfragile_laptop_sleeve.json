@@ -22,7 +22,7 @@
       "order_date": "2026-06-01T10:00:00",
       "status": "delivered",
       "shipping_status": "damaged",
-      "shipping_method": "standard",
+      "shipping_method": "promotional_free_standard",
       "shipping_cost": 0,
       "tracking_number": "TRK50466313",
       "delivery_date": "2026-06-08T14:00:00",

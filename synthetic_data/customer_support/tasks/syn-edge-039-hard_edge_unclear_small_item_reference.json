@@ -1,6 +1,6 @@
 {
   "task_id": "syn-edge-039-hard_edge_unclear_small_item_reference",
-  "task_summary": "Synthetic edge_case task derived from official customer_support template 135-hard_edge_unclear_small_item_reference, surface variant 3. Customer says only 'the small accessory' in a multi-item order. Agent must clarify which item before any write action.",
+  "task_summary": "Customer says only 'the small accessory' in a multi-item order. Agent must clarify which item before any write action.",
   "task_requirements": [
     {
       "evidence": "conversation_or_tool_calls",
@@ -19,7 +19,7 @@
   "now": "2026-07-08T10:00:00",
   "opening_message": "Please check the policy and do the right thing here. I want to return the small accessory from ORD-7243. Can you just do it?",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic edge_case benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 3.\n\nYou are contacting support about order ORD-7243. Customer says only 'the small accessory' in a multi-item order. Agent must clarify which item before any write action. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation.",
+    "user_sim_context": "You are contacting support about order ORD-7243. Customer says only 'the small accessory' in a multi-item order. Agent must clarify which item before any write action. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation.",
     "known_info": [
       "order_id: ORD-7243"
     ],

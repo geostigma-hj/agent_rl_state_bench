@@ -48,7 +48,12 @@ def clone_task_from_template(
     )
     source["opening_message"] = _surface_opening(source_task.opening_message, surface_variant)
     source["task_summary"] = _surface_summary(source_task.task_summary, task_type, source_task_id, surface_variant)
-    source["user_simulator"] = _surface_simulator(source_task.user_simulator, task_type, surface_variant)
+    source["user_simulator"] = _surface_simulator(
+        source_task.user_simulator,
+        task_type,
+        surface_variant,
+        requires_confirmation=bool(source.get("state_requirements")),
+    )
 
     task = TaskDefinition.from_dict(source)
     metadata = {
@@ -99,20 +104,26 @@ def _surface_opening(opening: str, variant: int) -> str:
 
 
 def _surface_summary(summary: str, task_type: str, source_task_id: str, variant: int) -> str:
-    prefix = (
-        f"Synthetic {task_type} task derived from official customer_support template "
-        f"{source_task_id}, surface variant {variant}. "
-    )
-    return prefix + summary
+    if "\n\n**Challenge:**" in summary:
+        summary = summary.split("\n\n**Challenge:**", 1)[0]
+    return summary
 
 
-def _surface_simulator(simulator: UserSimulatorConfig, task_type: str, variant: int) -> dict[str, Any]:
+def _surface_simulator(
+    simulator: UserSimulatorConfig,
+    task_type: str,
+    variant: int,
+    *,
+    requires_confirmation: bool,
+) -> dict[str, Any]:
     data = simulator.to_dict()
-    data["user_sim_context"] = (
-        f"You are in a synthetic {task_type} benchmark scenario. "
-        f"Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. "
-        f"Surface variant: {variant}.\n\n{data['user_sim_context']}"
-    )
+    context = data["user_sim_context"]
+    if not requires_confirmation:
+        context = context.replace(
+            ", and accept a correct preview before confirmation",
+            ", and accept only the correct no-action explanation",
+        )
+    data["user_sim_context"] = context
     rules = list(data.get("task_rules") or [])
     rules.append("Do not change the intended resolution path from the task summary.")
     data["task_rules"] = rules

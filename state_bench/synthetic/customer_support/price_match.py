@@ -10,7 +10,7 @@ from typing import Any
 from state_bench.domains.customer_support.environment import CustomerSupportEnvironment
 from state_bench.domains.customer_support.schemas import CSEnvironmentData
 from state_bench.schemas import TaskDefinition, UserSimulatorConfig
-from state_bench.synthetic.customer_support.core import build_state_requirements, finalize_task, load_seed
+from state_bench.synthetic.customer_support.core import apply_product_profile, build_state_requirements, finalize_task, load_seed
 
 GENERATOR_VERSION = "price_match_v0.1"
 
@@ -170,6 +170,7 @@ def build_price_match_variant(
 
     customer.membership_tier = variant.membership_tier
     product.name = variant.product_name
+    apply_product_profile(product, variant.product_name)
     product.price = variant.original_price
     product.current_price = variant.current_price
     product.in_stock = True

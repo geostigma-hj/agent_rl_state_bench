@@ -1,0 +1,61 @@
+{
+  "task_id": "syn-exchange-067-auto_055_expensive_649_instock",
+  "task_type": "exchange_item",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "PASS",
+  "confidence": "high",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-exchange-067-auto_055_expensive_649_instock.json",
+    "synthetic_data/customer_support/task_envs/syn-exchange-067-auto_055_expensive_649_instock.json",
+    "synthetic_data/customer_support/metadata/syn-exchange-067-auto_055_expensive_649_instock.json",
+    "synthetic_data/customer_support/judgments/syn-exchange-067-auto_055_expensive_649_instock.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "逐条读取 task/env/metadata/judgment，任务引用和本地 checker 通过。",
+    "judge decision=ACCEPT，issues/ambiguities 为空或无阻断项。",
+    "换货原 item、目标 product、库存/缺货分支和 replacement/store-credit 状态目标一致。"
+  ],
+  "evidence_summary": "exchange_item；summary/opening 对齐；state_requirements 数量 3；gold_tool_plan_steps=3；checker passed=True。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "gold_tool_plan_steps": 3,
+    "metadata": {
+      "generator_version": "exchange_v0.1",
+      "changed_factors": [
+        "expensive_item",
+        "large_price_difference"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Customer wants to exchange Premium Cotton Shirt from ORD-6034 for Premium Cotton Shirt (Large). Correct handling is to apply exchange policy, preview, confirm, and use the policy-defined payment or store-credit outcome. If the target item costs more, the customer pays the difference; if it costs less, the difference is store credit.",
+    "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for Premium Cotton Shirt (Large).",
+    "known_info": [
+      "You bought Premium Cotton Shirt in order ORD-6034.",
+      "You want Premium Cotton Shirt (Large) instead."
+    ],
+    "task_rules": [
+      "Do not ask for a different product. Confirm after a valid preview."
+    ]
+  }
+}

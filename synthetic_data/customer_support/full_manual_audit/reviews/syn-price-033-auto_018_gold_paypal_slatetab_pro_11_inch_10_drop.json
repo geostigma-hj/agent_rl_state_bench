@@ -1,0 +1,79 @@
+{
+  "task_id": "syn-price-033-auto_018_gold_paypal_slatetab_pro_11_inch_10_drop",
+  "task_type": "price_match_refund",
+  "reviewer": "full_manual_audit_with_sharded_subagents_and_post_repair_checks",
+  "verdict": "PASS",
+  "confidence": "high",
+  "findings": [],
+  "evidence_summary": "Deterministic check passed; pattern issues=0; judge=ACCEPT; repairs_applied=1; human shard=shard_13.",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": {
+    "task": "synthetic_data/customer_support/tasks/syn-price-033-auto_018_gold_paypal_slatetab_pro_11_inch_10_drop.json",
+    "env": "synthetic_data/customer_support/task_envs/syn-price-033-auto_018_gold_paypal_slatetab_pro_11_inch_10_drop.json",
+    "metadata": "synthetic_data/customer_support/metadata/syn-price-033-auto_018_gold_paypal_slatetab_pro_11_inch_10_drop.json",
+    "judgment": "synthetic_data/customer_support/judgments/syn-price-033-auto_018_gold_paypal_slatetab_pro_11_inch_10_drop.json"
+  },
+  "manual_checks": [
+    "task clarity and user goal consistency",
+    "environment product/order/policy consistency",
+    "state_requirements and deterministic replay consistency",
+    "known template residue and language-conflict patterns",
+    "post-repair regression validation"
+  ],
+  "human_shard_review": {
+    "shard": "shard_13",
+    "status": "completed",
+    "post_repair_verdict": "PASS"
+  },
+  "auxiliary_results": {
+    "deterministic": {
+      "task_id": "syn-price-033-auto_018_gold_paypal_slatetab_pro_11_inch_10_drop",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "judge_decision": "ACCEPT",
+    "pattern_issues": [],
+    "repairs": [
+      {
+        "task_id": "syn-price-033-auto_018_gold_paypal_slatetab_pro_11_inch_10_drop",
+        "repair_type": "price_match_product_profile",
+        "files": [
+          "synthetic_data/customer_support/task_envs/syn-price-033-auto_018_gold_paypal_slatetab_pro_11_inch_10_drop.json"
+        ],
+        "before": [
+          {
+            "product_id": "PROD-4210",
+            "name": "SlateTab Pro 11-inch",
+            "fields": {
+              "category": "electronics",
+              "subcategory": "headphones_budget",
+              "warranty_months": 12,
+              "return_window_days": 15,
+              "restocking_fee_pct": 15,
+              "weight_lbs": 0.5,
+              "is_fragile": false
+            }
+          }
+        ],
+        "after": [
+          {
+            "product_id": "PROD-4210",
+            "name": "SlateTab Pro 11-inch",
+            "fields": {
+              "category": "electronics",
+              "subcategory": "tablet",
+              "warranty_months": 12,
+              "return_window_days": 15,
+              "restocking_fee_pct": 15,
+              "weight_lbs": 1.1,
+              "is_fragile": true
+            }
+          }
+        ],
+        "note": "Synchronized task-local product metadata with product name for price-match tasks."
+      }
+    ],
+    "residual_notes": []
+  }
+}

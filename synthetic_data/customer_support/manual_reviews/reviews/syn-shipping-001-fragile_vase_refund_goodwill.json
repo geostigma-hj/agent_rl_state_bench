@@ -1,0 +1,61 @@
+{
+  "task_id": "syn-shipping-001-fragile_vase_refund_goodwill",
+  "task_type": "shipping_claim",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "PASS",
+  "confidence": "high",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-shipping-001-fragile_vase_refund_goodwill.json",
+    "synthetic_data/customer_support/task_envs/syn-shipping-001-fragile_vase_refund_goodwill.json",
+    "synthetic_data/customer_support/metadata/syn-shipping-001-fragile_vase_refund_goodwill.json",
+    "synthetic_data/customer_support/judgments/syn-shipping-001-fragile_vase_refund_goodwill.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "逐条读取 task/env/metadata/judgment，任务引用和本地 checker 通过。",
+    "judge decision=ACCEPT，issues/ambiguities 为空或无阻断项。",
+    "运输损坏路径、fragile goodwill 条件、return label 和退款状态目标一致。"
+  ],
+  "evidence_summary": "shipping_claim；summary/opening 对齐；state_requirements 数量 9；gold_tool_plan_steps=7；checker passed=True。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "gold_tool_plan_steps": 7,
+    "metadata": {
+      "generator_version": "shipping_v0.1",
+      "changed_factors": [
+        "fragile_goodwill"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Customer reports Artisan Crystal Vase from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
+    "opening_message": "My Artisan Crystal Vase from order ORD-6023 arrived damaged. The package was crushed.",
+    "known_info": [
+      "You bought Artisan Crystal Vase in order ORD-6023.",
+      "The item arrived damaged with crushed packaging."
+    ],
+    "task_rules": [
+      "Keep the issue scoped to shipping damage; do not ask for a changed-mind return, cancellation, warranty claim, or exchange.",
+      "Confirm after a valid damaged-in-transit return preview. If the item is fragile, expect the separate goodwill credit."
+    ]
+  }
+}

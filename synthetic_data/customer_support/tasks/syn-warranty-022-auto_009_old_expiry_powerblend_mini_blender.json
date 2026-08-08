@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-022-auto_009_old_expiry_powerblend_mini_blender",
-  "task_summary": "Customer asks for warranty service on PowerBlend Mini Blender from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty expired more than 30 days ago, so official policy allows full-price repair or 25% off replacement rather than a free warranty claim.",
+  "task_summary": "Customer asks for warranty service on PowerBlend Mini Blender from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct discounted replacement claim. The warranty expired more than 30 days ago, so official policy does not allow a free claim. The customer accepts the discounted replacement option after the agent previews it; the paid-repair alternative should be mentioned only as an alternative, not selected.",
   "task_requirements": [
     {
       "id": "syn-warranty-022-auto_009_old_expiry_powerblend_mini_blender_must_check_warranty_status",
@@ -23,18 +23,21 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My PowerBlend Mini Blender from order ORD-6032 is malfunctioning. Can I use the warranty?",
+  "opening_message": "My PowerBlend Mini Blender from order ORD-6032 is malfunctioning. If the warranty is expired, I would prefer the discounted replacement option over a paid repair.",
   "user_simulator": {
-    "user_sim_context": "You want warranty help for PowerBlend Mini Blender from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty expired more than 30 days ago, so official policy allows full-price repair or 25% off replacement rather than a free warranty claim.",
+    "user_sim_context": "You want warranty help for PowerBlend Mini Blender from order ORD-6032. The warranty expired more than 30 days ago, so official policy does not allow a free claim. The customer accepts the discounted replacement option after the agent previews it; the paid-repair alternative should be mentioned only as an alternative, not selected. If the agent previews the discounted replacement under policy and asks for confirmation, agree to proceed.",
     "known_info": [
       "You bought PowerBlend Mini Blender in order ORD-6032.",
-      "The product is malfunctioning."
+      "The product is malfunctioning.",
+      "If the free warranty claim is unavailable, you prefer the discounted replacement option over paid repair."
     ],
     "unknown_info": [
       "You do not know the claim count or exact warranty resolution."
     ],
     "task_rules": [
-      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
+      "Confirm after a valid warranty preview for the discounted replacement option.",
+      "Do not ask for a return unless the agent says warranty service is unavailable.",
+      "If the agent presents paid repair and discounted replacement as options, choose discounted replacement."
     ]
   },
   "task_type": "warranty_claim",

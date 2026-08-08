@@ -1,6 +1,6 @@
 {
   "task_id": "syn-compound-019-challenge_defective_plus_clawback",
-  "task_summary": "Synthetic compound task derived from official customer_support template 65-challenge_defective_plus_clawback, surface variant 1. **Task:** The customer is returning a defective tablet from a three-item bulk-discounted order. Defective status means no restocking fee and free return shipping, but the previewed net refund still includes promo redistribution and the separate $10 bulk clawback because the remaining order drops below the bulk threshold.\n\n**Challenge:** Two policies have to coexist without contaminating each other. Weak agents ignore the preview math, forget the downstream bulk clawback, or never explain that the clawback follows from the changed qualifying item count.",
+  "task_summary": "**Task:** The customer is returning a defective tablet from a three-item bulk-discounted order. Defective status means no restocking fee and free return shipping, but the previewed net refund still includes promo redistribution and the separate $10 bulk clawback because the remaining order drops below the bulk threshold.",
   "task_requirements": [
     {
       "evidence": "conversation",
@@ -13,7 +13,7 @@
   "now": "2026-07-08T10:00:00",
   "opening_message": "Can you help me with this? The tablet from order ORD-7092 is defective — the touchscreen is unresponsive in the bottom third. I need to return it.",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic compound benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 1.\n\nThe tablet is genuinely defective, and you want a full refund based on that defect. At the same time, this item came from a larger discounted order, and you are not automatically thinking through what that means for the items you are keeping. You need the agent to explain any separate consequence on the rest of the order without muddying the defect issue itself.",
+    "user_sim_context": "The tablet is genuinely defective, and you want a full refund based on that defect. At the same time, this item came from a larger discounted order, and you are not automatically thinking through what that means for the items you are keeping. You need the agent to explain any separate consequence on the rest of the order without muddying the defect issue itself.",
     "known_info": [
       "order_id: ORD-7092",
       "defect: touchscreen unresponsive bottom third"

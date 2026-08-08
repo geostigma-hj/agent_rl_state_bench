@@ -1,0 +1,15 @@
+syn-cancel-007-gift_card_pre_shipment_full
+syn-compound-008-challenge_bulk_plus_shipping_clawback
+syn-compound-034-challenge_bulk_plus_shipping_clawback
+syn-edge-023-hard_privacy_apartment_notice_no_disclosure
+syn-exchange-006-deeply_cheaper_store_credit
+syn-exchange-036-auto_024_expensive_449_oos
+syn-price-009-small_five_dollar_drop
+syn-price-042-auto_027_standard_debit_card_deskhub_usb_c_adapter_15_drop
+syn-price-078-auto_063_gold_paypal_soundmax_studio_headphones_40_drop
+syn-return-053-auto_038_silver_nopri_defective
+syn-shipping-001-fragile_vase_refund_goodwill
+syn-shipping-011-auto_001_platinum_fragile_porcelain_dinner_set
+syn-shipping-085-auto_075_standard_nonfragile_wireless_charging_pad
+syn-warranty-016-auto_003_recent_expiry_soundmax_wireless_headphones
+syn-warranty-058-auto_045_maxed_airpure_compact_purifier

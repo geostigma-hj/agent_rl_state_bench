@@ -1,0 +1,61 @@
+{
+  "task_id": "syn-price-054-auto_039_silver_gift_card_probook_laptop_40_drop",
+  "task_type": "price_match_refund",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "REVIEW",
+  "confidence": "medium",
+  "recommended_action": "usable_if_metadata_noise_accepted",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-price-054-auto_039_silver_gift_card_probook_laptop_40_drop.json",
+    "synthetic_data/customer_support/task_envs/syn-price-054-auto_039_silver_gift_card_probook_laptop_40_drop.json",
+    "synthetic_data/customer_support/metadata/syn-price-054-auto_039_silver_gift_card_probook_laptop_40_drop.json",
+    "synthetic_data/customer_support/judgments/syn-price-054-auto_039_silver_gift_card_probook_laptop_40_drop.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "主 price-match 路径正确：ProBook Laptop 原价 799、current_price 759、退款 40；用户误报 35 可被纠正。",
+    "质量疑点：产品名是 laptop，但 subcategory/weight 像 headphones 模板残留，现实感偏弱。"
+  ],
+  "evidence_summary": "任务目标可执行且金额正确；商品属性噪声不影响 benchmark 状态目标，但应记录。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "gold_tool_plan_steps": 4,
+    "metadata": {
+      "generator_version": "price_match_v0.1",
+      "changed_factors": [
+        "price_drop",
+        "customer_wrong_amount"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Customer requests a price-match adjustment for ProBook Laptop in ORD-7208. The correct outcome is a $40 price-match refund while keeping the order and item active.",
+    "opening_message": "The ProBook Laptop from order ORD-7208 is cheaper now, so I think I should get $35 back.",
+    "known_info": [
+      "You bought ProBook Laptop in order ORD-7208.",
+      "The current product price is $759."
+    ],
+    "task_rules": [
+      "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
+      "If the agent previews the policy-supported amount and keeps the order active, confirm the refund."
+    ]
+  }
+}

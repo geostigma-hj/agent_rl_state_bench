@@ -3,13 +3,13 @@
     {
       "product_id": "PROD-2215",
       "name": "DeskHub USB-C Adapter",
-      "category": "accessories",
-      "subcategory": "adapter",
+      "category": "electronics",
+      "subcategory": "accessory",
       "price": 45,
       "warranty_months": 12,
-      "return_window_days": 15,
-      "restocking_fee_pct": 15,
-      "weight_lbs": 0.6,
+      "return_window_days": 30,
+      "restocking_fee_pct": 0,
+      "weight_lbs": 0.2,
       "is_fragile": false,
       "in_stock": true,
       "current_price": null

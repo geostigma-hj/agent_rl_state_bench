@@ -3,14 +3,14 @@
     {
       "product_id": "PROD-4210",
       "name": "PowerBlend Mini Blender",
-      "category": "electronics",
-      "subcategory": "headphones_budget",
+      "category": "kitchen",
+      "subcategory": "blender",
       "price": 89,
-      "warranty_months": 12,
-      "return_window_days": 15,
-      "restocking_fee_pct": 15,
-      "weight_lbs": 0.5,
-      "is_fragile": false,
+      "warranty_months": 6,
+      "return_window_days": 30,
+      "restocking_fee_pct": 0,
+      "weight_lbs": 4.0,
+      "is_fragile": true,
       "in_stock": true,
       "current_price": 59
     }

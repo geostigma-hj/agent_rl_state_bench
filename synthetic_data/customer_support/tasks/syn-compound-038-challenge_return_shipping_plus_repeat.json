@@ -1,6 +1,6 @@
 {
   "task_id": "syn-compound-038-challenge_return_shipping_plus_repeat",
-  "task_summary": "Synthetic compound task derived from official customer_support template 90-challenge_return_shipping_plus_repeat, surface variant 2. **Task:** A Standard customer is returning two phone cases from a $44 order. The first return triggers the $8 low-value return-shipping fee, and the second same-category return also carries the $5 repeat surcharge, so the two lines must be settled differently.\n\n**Challenge:** The refunds are intentionally asymmetric even though the items match. Weak agents apply the shipping fee without the repeat surcharge, treat both cases identically, or fail to sequence the second same-category adjustment correctly.",
+  "task_summary": "**Task:** A Standard customer is returning two phone cases from a $44 order. The first return triggers the $8 low-value return-shipping fee, and the second same-category return also carries the $5 repeat surcharge, so the two lines must be settled differently.",
   "task_requirements": [
     {
       "evidence": "conversation_or_tool_calls",
@@ -19,7 +19,7 @@
   "now": "2026-06-20T10:00:00",
   "opening_message": "I need this handled carefully: I want to return both phone cases from order ORD-7121. Neither fits my phone.",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic compound benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 2.\n\nYou want to return two phone cases because neither fits, and on the surface that feels like a simple two-item return. Since the total order value was low, you may not expect the final refund to be reduced in more than one way. You need the agent to explain any shipping deduction or repeated-category effect without making the answer feel arbitrary.",
+    "user_sim_context": "You want to return two phone cases because neither fits, and on the surface that feels like a simple two-item return. Since the total order value was low, you may not expect the final refund to be reduced in more than one way. You need the agent to explain any shipping deduction or repeated-category effect without making the answer feel arbitrary.",
     "known_info": [
       "order_id: ORD-7121",
       "items: 2 phone cases",

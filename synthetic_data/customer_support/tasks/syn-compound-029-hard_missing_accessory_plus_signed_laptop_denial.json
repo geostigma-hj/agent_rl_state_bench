@@ -1,6 +1,6 @@
 {
   "task_id": "syn-compound-029-hard_missing_accessory_plus_signed_laptop_denial",
-  "task_summary": "Synthetic compound task derived from official customer_support template 43-hard_missing_accessory_plus_signed_laptop_denial, surface variant 2. **Task:** A customer reports a missing low-value phone case from one delivered order and a separate laptop not-received claim on another order with signature `E. Chen` on file. Correct handling is to ask refund versus reship for the missing phone case, process only the chosen $35 original-payment direct refund, leave the received book unchanged, and deny the signed laptop claim with no laptop action.\n\n**Challenge:** This repairs the proven task-143 compound failure pattern after the backend clarified that missing/not-received items must use `process_refund`, not `process_return`. Weak agents often refund both items, create a return for the missing accessory, skip the refund/reship choice, or soften the signed-delivery denial with a credit/escalation path.",
+  "task_summary": "**Task:** A customer reports a missing low-value phone case from one delivered order and a separate laptop not-received claim on another order with signature `E. Chen` on file. Correct handling is to ask refund versus reship for the missing phone case, process only the chosen $35 original-payment direct refund, leave the received book unchanged, and deny the signed laptop claim with no laptop action.",
   "task_requirements": [
     {
       "id": "syn-compound-029-hard_missing_accessory_plus_signed_laptop_denial_01_155_ask_phone_case_refund_or_reship",
@@ -37,7 +37,7 @@
   "now": "2026-07-12T10:00:00",
   "opening_message": "I need this handled carefully: I have two delivery problems. In ORD-7443, the book arrived but the phone case was missing, and there was no signature. In ORD-7444, the laptop says it was signed for by E. Chen, but I can't find it either. Please refund both.",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic compound benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 2.\n\nYou are contacting support about two delivery problems. One low-value accessory was missing from a no-signature delivery, so refund or reship is available after you choose. A separate laptop order has a signature on file, so the correct support outcome is denial with no laptop-order action. You initially ask for both refunds, push once on the laptop, then accept a clear signature-based denial.",
+    "user_sim_context": "You are contacting support about two delivery problems. One low-value accessory was missing from a no-signature delivery, so refund or reship is available after you choose. A separate laptop order has a signature on file, so the correct support outcome is denial with no laptop-order action. You initially ask for both refunds, push once on the laptop, then accept a clear signature-based denial.",
     "known_info": [
       "missing_order: ORD-7443",
       "missing_item: UltraShield Phone Case",

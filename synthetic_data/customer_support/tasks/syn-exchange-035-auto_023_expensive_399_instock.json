@@ -1,6 +1,6 @@
 {
   "task_id": "syn-exchange-035-auto_023_expensive_399_instock",
-  "task_summary": "Customer wants to exchange a Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt (Large). The correct handling is to apply the exchange policy, preview the exchange, confirm, and proceed with the policy-defined payment or store-credit outcome. If the target item costs more, the customer pays the difference; if it costs less, the difference is issued as store credit.",
+  "task_summary": "Customer wants to exchange Premium Cotton Shirt from ORD-6034 for Designer Merino Jacket (Large). Correct handling is to apply exchange policy, preview, confirm, and use the policy-defined payment or store-credit outcome. If the target item costs more, the customer pays the difference; if it costs less, the difference is store credit.",
   "task_requirements": [
     {
       "id": "syn-exchange-035-auto_023_expensive_399_instock_must_review_exchange_policy",
@@ -13,16 +13,22 @@
       "kind": "must",
       "requirement": "Agent must make a process_exchange preview tool call for ITEM-9250 to PROD-2251 with confirm false or omitted before making the confirm=true process_exchange tool call.",
       "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-exchange-035-auto_023_expensive_399_instock_must_disclose_exchange_price_difference",
+      "kind": "must",
+      "requirement": "Agent must make clear before confirmation that the requested replacement costs $399 and the customer pays the $340 exchange price difference.",
+      "evidence": "messages"
     }
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in Large.",
+  "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for Designer Merino Jacket (Large).",
   "user_simulator": {
-    "user_sim_context": "You want to exchange a Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt (Large). If the agent presents a valid exchange preview and requests confirmation, agree to proceed.",
+    "user_sim_context": "You want to exchange Premium Cotton Shirt from order ORD-6034 for Designer Merino Jacket (Large). If the agent previews a valid exchange and asks for confirmation, agree to proceed.",
     "known_info": [
-      "You bought a Premium Cotton Shirt in order ORD-6034.",
-      "You want a Premium Cotton Shirt (Large) instead."
+      "You bought Premium Cotton Shirt in order ORD-6034.",
+      "You want Designer Merino Jacket (Large) instead."
     ],
     "unknown_info": [
       "You do not know the exchange price-difference policy."

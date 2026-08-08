@@ -4,13 +4,13 @@
       "product_id": "PROD-4210",
       "name": "SlateTab Pro 11-inch",
       "category": "electronics",
-      "subcategory": "headphones_budget",
+      "subcategory": "tablet",
       "price": 599,
       "warranty_months": 12,
       "return_window_days": 15,
       "restocking_fee_pct": 15,
-      "weight_lbs": 0.5,
-      "is_fragile": false,
+      "weight_lbs": 1.1,
+      "is_fragile": true,
       "in_stock": true,
       "current_price": 579
     }

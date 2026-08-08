@@ -1,0 +1,124 @@
+{
+  "task_id": "syn-edge-010-edge_vague_complaint",
+  "task_type": "edge_case",
+  "reviewer": "full_manual_audit_with_sharded_subagents_and_post_repair_checks",
+  "verdict": "PASS",
+  "confidence": "medium",
+  "findings": [],
+  "evidence_summary": "Deterministic check passed; pattern issues=0; judge=ACCEPT; repairs_applied=5; human shard=shard_10.",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": {
+    "task": "synthetic_data/customer_support/tasks/syn-edge-010-edge_vague_complaint.json",
+    "env": "synthetic_data/customer_support/task_envs/syn-edge-010-edge_vague_complaint.json",
+    "metadata": "synthetic_data/customer_support/metadata/syn-edge-010-edge_vague_complaint.json",
+    "judgment": "synthetic_data/customer_support/judgments/syn-edge-010-edge_vague_complaint.json"
+  },
+  "manual_checks": [
+    "task clarity and user goal consistency",
+    "environment product/order/policy consistency",
+    "state_requirements and deterministic replay consistency",
+    "known template residue and language-conflict patterns",
+    "post-repair regression validation"
+  ],
+  "human_shard_review": {
+    "shard": "shard_10",
+    "status": "completed",
+    "post_repair_verdict": "PASS"
+  },
+  "auxiliary_results": {
+    "deterministic": {
+      "task_id": "syn-edge-010-edge_vague_complaint",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        "metadata has no gold_tool_plan"
+      ]
+    },
+    "judge_decision": "ACCEPT",
+    "pattern_issues": [],
+    "repairs": [
+      {
+        "task_id": "syn-edge-010-edge_vague_complaint",
+        "repair_type": "edge_wrong_item_env_modeling_clarification",
+        "path": "synthetic_data/customer_support/tasks/syn-edge-010-edge_vague_complaint.json",
+        "changes": [
+          {
+            "field": "task_summary",
+            "added": "Synthetic data note: in the environment, ITEM-9412 is the received wrong-item line that must be returned; the expected phone case is represented in the user facts rather than as a separate active order line."
+          }
+        ]
+      },
+      {
+        "task_id": "syn-edge-010-edge_vague_complaint",
+        "repair_type": "template_residue_cleanup",
+        "path": "synthetic_data/customer_support/tasks/syn-edge-010-edge_vague_complaint.json",
+        "changes": [
+          {
+            "field": "task_summary",
+            "old_prefix_removed": "Synthetic edge_case task derived from official customer_support template 49-edge_vague_complaint, surface variant 0. **Task:** The customer "
+          },
+          {
+            "field": "user_simulator.user_sim_context",
+            "old_prefix_removed": "You are in a synthetic edge_case benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 0.\n"
+          }
+        ]
+      },
+      {
+        "task_id": "syn-edge-010-edge_vague_complaint",
+        "repair_type": "edge_vague_wrong_item_env_alignment",
+        "path": "synthetic_data/customer_support/task_envs/syn-edge-010-edge_vague_complaint.json",
+        "changes": [
+          {
+            "field": "products.PROD-2412",
+            "old": {
+              "name": "PowerBlend Pro Blender",
+              "category": "kitchen",
+              "subcategory": "blender",
+              "warranty_months": 6,
+              "return_window_days": 30,
+              "restocking_fee_pct": 0,
+              "weight_lbs": 5.0,
+              "is_fragile": true
+            },
+            "new": {
+              "name": "UltraShield Phone Case Bundle",
+              "category": "accessories",
+              "subcategory": "phone_case",
+              "warranty_months": 3,
+              "return_window_days": 30,
+              "restocking_fee_pct": 0,
+              "weight_lbs": 0.3,
+              "is_fragile": false
+            }
+          }
+        ]
+      },
+      {
+        "task_id": "syn-edge-010-edge_vague_complaint",
+        "repair_type": "edge_vague_wrong_item_task_text_alignment",
+        "path": "synthetic_data/customer_support/tasks/syn-edge-010-edge_vague_complaint.json",
+        "changes": [
+          {
+            "field": "task_summary/user_simulator",
+            "old_summary_prefix": "**Task:** The customer opens with a vague complaint that the order is 'messed up,' and the agent has to diagnose what actually happened. The correct read is that the customer recei"
+          }
+        ]
+      },
+      {
+        "task_id": "syn-edge-010-edge_vague_complaint",
+        "repair_type": "template_challenge_meta_cleanup",
+        "path": "synthetic_data/customer_support/tasks/syn-edge-010-edge_vague_complaint.json",
+        "changes": [
+          {
+            "field": "task_summary",
+            "removed_after": "**Challenge:**"
+          }
+        ]
+      }
+    ],
+    "residual_notes": [
+      "metadata.gold_tool_plan is null; task relies on official harness state/task requirements rather than metadata gold trajectory.",
+      "metadata.expected_state_diff is null; deterministic validity is checked from task state requirements."
+    ]
+  }
+}

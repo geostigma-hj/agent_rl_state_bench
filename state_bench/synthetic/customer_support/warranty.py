@@ -4,13 +4,20 @@ from __future__ import annotations
 
 import copy
 from dataclasses import dataclass
+from datetime import date
 from pathlib import Path
 from typing import Any
 
 from state_bench.domains.customer_support.environment import CustomerSupportEnvironment
 from state_bench.domains.customer_support.schemas import CSEnvironmentData
 from state_bench.schemas import TaskDefinition, UserSimulatorConfig
-from state_bench.synthetic.customer_support.core import build_state_requirements, finalize_task, load_seed
+from state_bench.synthetic.customer_support.core import (
+    PRODUCT_PROFILES,
+    apply_product_profile,
+    build_state_requirements,
+    finalize_task,
+    load_seed,
+)
 
 GENERATOR_VERSION = "warranty_v0.1"
 
@@ -101,6 +108,18 @@ def _auto_warranty_variants() -> tuple[WarrantyVariant, ...]:
 DEFAULT_WARRANTY_VARIANTS: tuple[WarrantyVariant, ...] = (*BASE_WARRANTY_VARIANTS, *_auto_warranty_variants())
 
 
+def _should_mark_extended_warranty(start_date: str, end_date: str, warranty_months: int) -> bool:
+    if warranty_months <= 0:
+        return True
+    start = date.fromisoformat(start_date)
+    end = date.fromisoformat(end_date)
+    expected_year = start.year + (start.month - 1 + warranty_months) // 12
+    expected_month = (start.month - 1 + warranty_months) % 12 + 1
+    expected_day = min(start.day, 28)
+    expected_end = date(expected_year, expected_month, expected_day)
+    return end > expected_end
+
+
 def _product_taxonomy(product_name: str, item_price: int) -> tuple[str, str]:
     name = product_name.lower()
     if "headphones" in name or "earbuds" in name:
@@ -150,7 +169,9 @@ def build_warranty_variant(
 
     product.name = variant.product_name
     product.price = variant.item_price
-    product.category, product.subcategory = _product_taxonomy(variant.product_name, variant.item_price)
+    apply_product_profile(product, variant.product_name)
+    if variant.product_name not in PRODUCT_PROFILES:
+        product.category, product.subcategory = _product_taxonomy(variant.product_name, variant.item_price)
     product.warranty_months = 12
     item.unit_price = variant.item_price
     item.item_status = "delivered"
@@ -164,6 +185,11 @@ def build_warranty_variant(
     order.shipping_status = "delivered"
     order.delivery_date = "2025-08-05T14:00:00"
     warranty.end_date = variant.warranty_end
+    warranty.warranty_type = (
+        "extended"
+        if _should_mark_extended_warranty(warranty.start_date, warranty.end_date, product.warranty_months)
+        else "manufacturer"
+    )
     warranty.claim_count = variant.claim_count
     warranty.max_claims = variant.max_claims
     warranty.status = "expired" if variant.warranty_end < now[:10] else "active"

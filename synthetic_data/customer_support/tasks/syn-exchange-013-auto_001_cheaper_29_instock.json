@@ -17,7 +17,7 @@
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in Large size.",
+  "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for Premium Cotton Shirt (Large).",
   "user_simulator": {
     "user_sim_context": "You want to exchange Premium Cotton Shirt from order ORD-6034 for Premium Cotton Shirt (Large). If the agent previews a valid exchange and asks for confirmation, agree to proceed.",
     "known_info": [

@@ -1,0 +1,70 @@
+{
+  "task_id": "syn-exchange-020-auto_008_expensive_61_instock",
+  "task_type": "exchange_item",
+  "reviewer": "full_manual_audit_with_sharded_subagents_and_post_repair_checks",
+  "verdict": "PASS",
+  "confidence": "high",
+  "findings": [],
+  "evidence_summary": "Deterministic check passed; pattern issues=0; judge=ACCEPT; repairs_applied=3; human shard=shard_20.",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": {
+    "task": "synthetic_data/customer_support/tasks/syn-exchange-020-auto_008_expensive_61_instock.json",
+    "env": "synthetic_data/customer_support/task_envs/syn-exchange-020-auto_008_expensive_61_instock.json",
+    "metadata": "synthetic_data/customer_support/metadata/syn-exchange-020-auto_008_expensive_61_instock.json",
+    "judgment": "synthetic_data/customer_support/judgments/syn-exchange-020-auto_008_expensive_61_instock.json"
+  },
+  "manual_checks": [
+    "task clarity and user goal consistency",
+    "environment product/order/policy consistency",
+    "state_requirements and deterministic replay consistency",
+    "known template residue and language-conflict patterns",
+    "post-repair regression validation"
+  ],
+  "human_shard_review": {
+    "shard": "shard_20",
+    "status": "completed",
+    "post_repair_verdict": "PASS"
+  },
+  "auxiliary_results": {
+    "deterministic": {
+      "task_id": "syn-exchange-020-auto_008_expensive_61_instock",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "judge_decision": "ACCEPT",
+    "pattern_issues": [],
+    "repairs": [
+      {
+        "task_id": "syn-exchange-020-auto_008_expensive_61_instock",
+        "repair_type": "exchange_task_text_normalization",
+        "path": "synthetic_data/customer_support/tasks/syn-exchange-020-auto_008_expensive_61_instock.json",
+        "changes": [
+          {
+            "target_product_id": "PROD-2251",
+            "target_name": "Premium Cotton Shirt (Large)",
+            "old": {
+              "task_summary": "Customer requests to exchange the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt (Large). The correct process is to apply the exchange policy, preview the exchange for the customer, and upon confirmation, process the exchange, charging the price difference if the new item costs more or issuing store credit if it costs less.",
+              "opening_message": "I'd like to exchange the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in size Large."
+            },
+            "new": {
+              "task_summary": "Customer wants to exchange Premium Cotton Shirt from ORD-6034 for Premium Cotton Shirt (Large). Correct handling is to apply exchange policy, preview, confirm, and use the policy-defined payment or store-credit outcome. If the target item costs more, the customer pays the difference; if it costs less, the difference is store credit.",
+              "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for Premium Cotton Shirt (Large)."
+            }
+          }
+        ]
+      },
+      {
+        "task_id": "syn-exchange-020-auto_008_expensive_61_instock",
+        "repair_type": "exchange_target_product_profile_completion",
+        "details": "Aligned replacement product profile with product name."
+      },
+      {
+        "task_id": "syn-exchange-020-auto_008_expensive_61_instock",
+        "repair_type": "exchange_price_difference_requirement",
+        "details": "Added explicit price-difference disclosure requirement for $2."
+      }
+    ],
+    "residual_notes": []
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "task_id": "syn-edge-060-hard_edge_post_return_restocking_fee_reversal_denied",
+  "task_type": "edge_case",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "PASS",
+  "confidence": "medium",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-edge-060-hard_edge_post_return_restocking_fee_reversal_denied.json",
+    "synthetic_data/customer_support/task_envs/syn-edge-060-hard_edge_post_return_restocking_fee_reversal_denied.json",
+    "synthetic_data/customer_support/metadata/syn-edge-060-hard_edge_post_return_restocking_fee_reversal_denied.json",
+    "synthetic_data/customer_support/judgments/syn-edge-060-hard_edge_post_return_restocking_fee_reversal_denied.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "逐条读取 task/env/metadata/judgment，任务引用和本地 checker 通过。",
+    "judge decision=ACCEPT，issues/ambiguities 为空或无阻断项。",
+    "拒绝/无状态变更类任务的 must/must_not 与空 state_requirements 一致。"
+  ],
+  "evidence_summary": "edge_case；summary/opening 对齐；state_requirements 数量 0；gold_tool_plan_steps=0；checker passed=True。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        "metadata has no gold_tool_plan"
+      ]
+    },
+    "gold_tool_plan_steps": 0,
+    "metadata": {
+      "generator_version": "edge_case_template_v0.1",
+      "changed_factors": [
+        "official_template_structure",
+        "surface_variant_4"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Synthetic edge_case task derived from official customer_support template 9-hard_edge_post_return_restocking_fee_reversal_denied, surface variant 4. **Task:** Customer asks to reverse a restocking fee after an already completed changed-mind electronics return. Return policy says completed changed-mind restocking fees are not reversed later as courtesy or supplemental refunds. Correct handling is to explain that no additional refund or courtesy credit is due and leave state unchanged.\n\n**Challenge:** This is not a duplicate full-refund request; it is a targeted fee reversal after completion. Weak agents try to appease with goodwill or supplemental refund tools.",
+    "opening_message": "I already returned the opened headphones from ORD-7305. Now refund the $37 restocking fee too as a courtesy.",
+    "known_info": [
+      "order_id: ORD-7305",
+      "already_returned: opened headphones",
+      "restocking_fee: $37"
+    ],
+    "task_rules": [
+      "Start by asking to reverse the already-applied $37 restocking fee for ORD-7305 as a courtesy.",
+      "When the agent asks for details, provide the order ID and that the headphones were already returned opened; do not volunteer item IDs, policy rules, membership tier, or refund fields.",
+      "If the agent explains that the prior restocking fee was policy-correct and cannot be reversed as a courtesy here, accept the denial.",
+      "If the agent offers to process a courtesy, goodwill, supplemental refund, or other credit for the $37 fee and asks for confirmation, accept because that matches your request.",
+      "If the agent says the $37 fee refund or credit has been processed, accept that outcome and end the conversation; do not challenge the policy after receiving the refund you asked for.",
+      "If the agent offers only escalation, a manual note, or review without either denying the request or processing the credit, ask once whether the $37 fee itself can be refunded now.",
+      "End after either the final denial with no write action pending or after the agent confirms the $37 refund/credit has been processed.",
+      "Do not change the intended resolution path from the task summary."
+    ]
+  }
+}

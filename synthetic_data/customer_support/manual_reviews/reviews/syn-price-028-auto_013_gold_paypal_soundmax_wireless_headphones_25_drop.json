@@ -1,0 +1,64 @@
+{
+  "task_id": "syn-price-028-auto_013_gold_paypal_soundmax_wireless_headphones_25_drop",
+  "task_type": "price_match_refund",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "PASS",
+  "confidence": "high",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-price-028-auto_013_gold_paypal_soundmax_wireless_headphones_25_drop.json",
+    "synthetic_data/customer_support/task_envs/syn-price-028-auto_013_gold_paypal_soundmax_wireless_headphones_25_drop.json",
+    "synthetic_data/customer_support/metadata/syn-price-028-auto_013_gold_paypal_soundmax_wireless_headphones_25_drop.json",
+    "synthetic_data/customer_support/judgments/syn-price-028-auto_013_gold_paypal_soundmax_wireless_headphones_25_drop.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "逐条读取 task/env/metadata/judgment，任务引用和本地 checker 通过。",
+    "judge decision=ACCEPT，issues/ambiguities 为空或无阻断项。",
+    "price-match 金额可由 unit_price/current_price 推导，task_requirements 限制不退货/取消/换货。"
+  ],
+  "evidence_summary": "price_match_refund；summary/opening 对齐；state_requirements 数量 2；gold_tool_plan_steps=4；checker passed=True。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": [
+        "The price-match policy states 'within 7 days of delivery' (delivery date 2026-07-05, request 2026-07-08; exactly 3 days later, so it is within window, no ambiguity).",
+        "The refund amount of $25 is not explicitly spelled out in the opening message/simulator rules, but it is derived from original price $249 minus current price $224, and the state requirements and gold plan confirm it."
+      ]
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "gold_tool_plan_steps": 4,
+    "metadata": {
+      "generator_version": "price_match_v0.1",
+      "changed_factors": [
+        "price_drop"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "The customer requests a price-match adjustment for the SoundMax Wireless Headphones purchased in order ORD-7208. The expected resolution is a $25 price-match refund, and the order and item must remain active.",
+    "opening_message": "I noticed the SoundMax Wireless Headphones from my order ORD-7208 have dropped in price. Can you help with a price adjustment?",
+    "known_info": [
+      "You purchased SoundMax Wireless Headphones in order ORD-7208.",
+      "The current price of the product is $224."
+    ],
+    "task_rules": [
+      "Focus your request solely on a price-match refund; do not mention returning, canceling, exchanging, or replacing the item.",
+      "If the agent confirms a policy-supported refund and ensures the order remains active, agree to the refund."
+    ]
+  }
+}

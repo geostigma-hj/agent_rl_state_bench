@@ -1,0 +1,100 @@
+{
+  "task_id": "syn-exchange-033-auto_021_expensive_299_oos",
+  "task_type": "exchange_item",
+  "reviewer": "full_manual_audit_with_sharded_subagents_and_post_repair_checks",
+  "verdict": "PASS",
+  "confidence": "high",
+  "findings": [],
+  "evidence_summary": "Deterministic check passed; pattern issues=0; judge=ACCEPT; repairs_applied=5; human shard=shard_13.",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": {
+    "task": "synthetic_data/customer_support/tasks/syn-exchange-033-auto_021_expensive_299_oos.json",
+    "env": "synthetic_data/customer_support/task_envs/syn-exchange-033-auto_021_expensive_299_oos.json",
+    "metadata": "synthetic_data/customer_support/metadata/syn-exchange-033-auto_021_expensive_299_oos.json",
+    "judgment": "synthetic_data/customer_support/judgments/syn-exchange-033-auto_021_expensive_299_oos.json"
+  },
+  "manual_checks": [
+    "task clarity and user goal consistency",
+    "environment product/order/policy consistency",
+    "state_requirements and deterministic replay consistency",
+    "known template residue and language-conflict patterns",
+    "post-repair regression validation"
+  ],
+  "human_shard_review": {
+    "shard": "shard_13",
+    "status": "completed",
+    "post_repair_verdict": "PASS"
+  },
+  "auxiliary_results": {
+    "deterministic": {
+      "task_id": "syn-exchange-033-auto_021_expensive_299_oos",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "judge_decision": "ACCEPT",
+    "pattern_issues": [],
+    "repairs": [
+      {
+        "task_id": "syn-exchange-033-auto_021_expensive_299_oos",
+        "repair_type": "exchange_target_product_realism",
+        "path": "synthetic_data/customer_support/task_envs/syn-exchange-033-auto_021_expensive_299_oos.json",
+        "changes": [
+          {
+            "field": "products.PROD-2251.name",
+            "old": "Premium Cotton Shirt (Large)",
+            "new": "Designer Merino Jacket (Large)",
+            "price": 299
+          }
+        ]
+      },
+      {
+        "task_id": "syn-exchange-033-auto_021_expensive_299_oos",
+        "repair_type": "exchange_target_product_realism_task_text",
+        "path": "synthetic_data/customer_support/tasks/syn-exchange-033-auto_021_expensive_299_oos.json",
+        "changes": [
+          {
+            "replace": "Premium Cotton Shirt (Large)",
+            "with": "Designer Merino Jacket (Large)"
+          }
+        ]
+      },
+      {
+        "task_id": "syn-exchange-033-auto_021_expensive_299_oos",
+        "repair_type": "exchange_target_text_alignment",
+        "path": "synthetic_data/customer_support/tasks/syn-exchange-033-auto_021_expensive_299_oos.json",
+        "changes": [
+          {
+            "target_product_id": "PROD-2251",
+            "target_name": "Designer Merino Jacket (Large)"
+          }
+        ]
+      },
+      {
+        "task_id": "syn-exchange-033-auto_021_expensive_299_oos",
+        "repair_type": "exchange_task_text_normalization",
+        "path": "synthetic_data/customer_support/tasks/syn-exchange-033-auto_021_expensive_299_oos.json",
+        "changes": [
+          {
+            "target_product_id": "PROD-2251",
+            "target_name": "Designer Merino Jacket (Large)",
+            "old": {
+              "task_summary": "Customer requests an exchange of the Premium Cotton Shirt from ORD-6034 to the Designer Merino Jacket (Large). The correct handling is to apply the exchange policy, preview the outcome, and obtain confirmation. Since the requested item is out of stock, the policy mandates issuing store credit for the original item's amount, and the exchange cannot proceed. The unavailability of the target item incurs no additional charge.",
+              "opening_message": "I'd like to exchange the Premium Cotton Shirt from order ORD-6034 for the Designer Merino Jacket (Large)."
+            },
+            "new": {
+              "task_summary": "Customer wants to exchange Premium Cotton Shirt from ORD-6034 for Designer Merino Jacket (Large). Correct handling is to apply exchange policy, preview, confirm, and use the policy-defined payment or store-credit outcome. Because the requested item is out of stock, policy requires store credit for the original item amount and the exchange itself must not be completed.",
+              "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for Designer Merino Jacket (Large)."
+            }
+          }
+        ]
+      },
+      {
+        "task_id": "syn-exchange-033-auto_021_expensive_299_oos",
+        "repair_type": "exchange_target_product_profile_completion",
+        "details": "Aligned replacement product profile with product name."
+      }
+    ],
+    "residual_notes": []
+  }
+}

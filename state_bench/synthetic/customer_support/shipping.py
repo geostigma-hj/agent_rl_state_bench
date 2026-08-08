@@ -10,7 +10,7 @@ from typing import Any
 from state_bench.domains.customer_support.environment import CustomerSupportEnvironment
 from state_bench.domains.customer_support.schemas import CSEnvironmentData
 from state_bench.schemas import TaskDefinition, UserSimulatorConfig
-from state_bench.synthetic.customer_support.core import build_state_requirements, finalize_task, load_seed
+from state_bench.synthetic.customer_support.core import apply_product_profile, build_state_requirements, finalize_task, load_seed
 
 GENERATOR_VERSION = "shipping_v0.1"
 
@@ -111,7 +111,13 @@ DEFAULT_SHIPPING_VARIANTS: tuple[ShippingDamageVariant, ...] = (*BASE_SHIPPING_V
 
 def _product_taxonomy(product_name: str, is_fragile: bool) -> tuple[str, str]:
     name = product_name.lower()
-    if any(token in name for token in ("earbuds", "headphones", "display", "fitness band")):
+    if "tablet" in name:
+        return "electronics", "tablet"
+    if "fitness band" in name:
+        return "electronics", "fitness_tracker"
+    if "display" in name:
+        return "electronics", "display"
+    if any(token in name for token in ("earbuds", "headphones")):
         return "electronics", "headphones"
     if any(token in name for token in ("adapter", "laptop sleeve")):
         return "accessories", "adapter"
@@ -154,6 +160,7 @@ def build_shipping_damage_variant(
     order.delivery_date = "2026-06-08T14:00:00"
     order.delivery_promised_date = "2026-06-05T18:00:00"
     order.shipping_cost = 0
+    order.shipping_method = "promotional_free_standard" if variant.item_price < 100 else "standard"
     order.payment_method = "credit_card"
     order.payment_details = {"credit_card": variant.item_price}
     order.subtotal = variant.item_price
@@ -163,6 +170,7 @@ def build_shipping_damage_variant(
 
     customer.membership_tier = variant.membership_tier
     product.name = variant.product_name
+    apply_product_profile(product, variant.product_name)
     product.price = variant.item_price
     product.category, product.subcategory = _product_taxonomy(variant.product_name, variant.is_fragile)
     product.current_price = None

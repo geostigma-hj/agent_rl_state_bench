@@ -1,6 +1,6 @@
 {
   "task_id": "syn-compound-007-challenge_seasonal_plus_bulk_clawback",
-  "task_summary": "Synthetic compound task derived from official customer_support template 67-challenge_seasonal_plus_bulk_clawback, surface variant 0. **Task:** A November order with four items and a discount code is still returnable in January only because the seasonal extension applies. The correct handling is to process both requested returns and recognize that the second return drops the order below both the bulk-discount threshold and the free-shipping threshold, so the shirt refund includes a $10 bulk clawback and an $8 free-shipping clawback.\n\n**Challenge:** This is a layered policy case, not a single-rule lookup. Weak agents miss the seasonal extension, process the second return without the state-dependent clawbacks, or complete only one of the two lines.",
+  "task_summary": "**Task:** A November order with four items and a discount code is still returnable in January only because the seasonal extension applies. The correct handling is to process both requested returns and recognize that the second return drops the order below both the bulk-discount threshold and the free-shipping threshold, so the shirt refund includes a $10 bulk clawback and an $8 free-shipping clawback.",
   "task_requirements": [
     {
       "evidence": "conversation_or_tool_calls",
@@ -31,7 +31,7 @@
   "now": "2027-01-20T10:00:00",
   "opening_message": "Hi, I'd like to return the headphones from my November order ORD-7095 first, and once that's done I'll return the shirt too. I know it's been a while but I thought holiday orders had extended return windows?",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic compound benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 0.\n\nYou want to return two items from a holiday-season order and believe the extended season matters. You are not also thinking about how returning those items could change the discount applied to the rest of the order. You need the agent to explain both the timing and the financial consequence together.",
+    "user_sim_context": "You want to return two items from a holiday-season order and believe the extended season matters. You are not also thinking about how returning those items could change the discount applied to the rest of the order. You need the agent to explain both the timing and the financial consequence together.",
     "known_info": [
       "order_id: ORD-7095",
       "return order: headphones first, then the shirt",

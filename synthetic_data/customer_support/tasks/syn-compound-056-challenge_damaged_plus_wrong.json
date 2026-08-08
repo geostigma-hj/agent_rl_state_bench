@@ -1,6 +1,6 @@
 {
   "task_id": "syn-compound-056-challenge_damaged_plus_wrong",
-  "task_summary": "Synthetic compound task derived from official customer_support template 59-challenge_damaged_plus_wrong, surface variant 4. **Task:** The customer has two legitimate fulfillment problems at once: a fragile scale that arrived damaged and a shirt that is the wrong item. The correct handling is to resolve both lines, refund the damaged scale and the wrong-item shirt separately, and also include the extra $10 fragile-item goodwill credit tied to the damaged scale.\n\n**Challenge:** This case rewards complete bookkeeping across multiple issue types. Weak agents resolve only one item, forget the fragile goodwill credit, or muddle the two problems into one incomplete action.",
+  "task_summary": "**Task:** The customer has two legitimate fulfillment problems at once: a fragile scale that arrived damaged and a shirt that is the wrong item. The correct handling is to resolve both lines, refund the damaged scale and the wrong-item shirt separately, and also include the extra $10 fragile-item goodwill credit tied to the damaged scale.",
   "task_requirements": [
     {
       "evidence": "conversation",
@@ -19,7 +19,7 @@
   "now": "2026-07-08T10:00:00",
   "opening_message": "My order ORD-7051 is a mess — the kitchen scale arrived smashed (the glass is cracked) and the shirt is the wrong one.",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic compound benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 4.\n\nYour order has two different problems at once: one item arrived damaged and another was simply the wrong product. You are not trying to collapse them into one issue, but you do want them handled in a single coherent conversation. The agent should keep both mistakes straight and resolve the whole mess cleanly. You want refunds for both items to your original payment method — not replacements, not exchanges, not store credit — but don't volunteer this preference unprompted; let the agent ask.",
+    "user_sim_context": "Your order has two different problems at once: one item arrived damaged and another was simply the wrong product. You are not trying to collapse them into one issue, but you do want them handled in a single coherent conversation. The agent should keep both mistakes straight and resolve the whole mess cleanly. You want refunds for both items to your original payment method — not replacements, not exchanges, not store credit — but don't volunteer this preference unprompted; let the agent ask.",
     "known_info": [
       "order_id: ORD-7051",
       "scale: damaged (cracked)",

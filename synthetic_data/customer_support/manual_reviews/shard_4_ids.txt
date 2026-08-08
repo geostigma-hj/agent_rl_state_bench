@@ -1,0 +1,14 @@
+syn-cancel-025-auto_010_debit_card_processing_full
+syn-compound-014-spare_compound_cancel_plus_shipping_claim
+syn-compound-051-challenge_return_shipping_plus_repeat
+syn-edge-025-hard_edge_wrong_customer_order_privacy
+syn-exchange-020-auto_008_expensive_61_instock
+syn-exchange-041-auto_029_expensive_799_instock
+syn-price-027-auto_012_standard_debit_card_soundmax_wireless_headphones_20_drop
+syn-price-054-auto_039_silver_gift_card_probook_laptop_40_drop
+syn-return-016-auto_001_platinum_prime_changed_mind
+syn-return-054-auto_039_silver_nopri_wrong_item
+syn-shipping-005-nonfragile_shoes_refund
+syn-shipping-028-auto_018_gold_fragile_ceramic_serving_bowl
+syn-shipping-099-auto_089_silver_fragile_glass_food_storage_set
+syn-warranty-024-auto_011_active_slatetab_pro_11_inch

@@ -1,6 +1,6 @@
 {
   "task_id": "syn-compound-005-challenge_bulk_clawback",
-  "task_summary": "Synthetic compound task derived from official customer_support template 63-challenge_bulk_clawback, surface variant 0. **Task:** The customer is returning headphones and a shirt from a four-item order that originally qualified for a bulk discount. Once those two items come out, the order drops below the bulk threshold, so the correct handling is to process both returns and account for the $10 clawback that now applies.\n\n**Challenge:** The refund math has to reflect the changed order composition. Weak agents miss the bulk clawback entirely, mention it vaguely without actually applying it, or deduct the wrong amount from the combined return.",
+  "task_summary": "**Task:** The customer is returning headphones and a shirt from a four-item order that originally qualified for a bulk discount. Once those two items come out, the order drops below the bulk threshold, so the correct handling is to process both returns and account for the $10 clawback that now applies.",
   "task_requirements": [
     {
       "evidence": "conversation",
@@ -13,7 +13,7 @@
   "now": "2026-07-08T10:00:00",
   "opening_message": "I want to return the headphones from order ORD-7081 first, and once that's done I'd like to return the shirt too. I'll keep the book and phone case.",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic compound benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 0.\n\nYou want to return two items from a bulk order and are thinking mostly about the value of those specific items. You are not focused on how the original discount depended on keeping more of the order. If returning items changes the economics of what remains, you want the agent to surface that explicitly.",
+    "user_sim_context": "You want to return two items from a bulk order and are thinking mostly about the value of those specific items. You are not focused on how the original discount depended on keeping more of the order. If returning items changes the economics of what remains, you want the agent to surface that explicitly.",
     "known_info": [
       "order_id: ORD-7081",
       "return order: headphones first, then the shirt",

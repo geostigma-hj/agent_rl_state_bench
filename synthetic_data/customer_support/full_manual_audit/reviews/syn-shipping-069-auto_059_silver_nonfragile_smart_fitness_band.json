@@ -1,0 +1,90 @@
+{
+  "task_id": "syn-shipping-069-auto_059_silver_nonfragile_smart_fitness_band",
+  "task_type": "shipping_claim",
+  "reviewer": "full_manual_audit_with_sharded_subagents_and_post_repair_checks",
+  "verdict": "PASS",
+  "confidence": "high",
+  "findings": [],
+  "evidence_summary": "Deterministic check passed; pattern issues=0; judge=ACCEPT; repairs_applied=2; human shard=shard_04.",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": {
+    "task": "synthetic_data/customer_support/tasks/syn-shipping-069-auto_059_silver_nonfragile_smart_fitness_band.json",
+    "env": "synthetic_data/customer_support/task_envs/syn-shipping-069-auto_059_silver_nonfragile_smart_fitness_band.json",
+    "metadata": "synthetic_data/customer_support/metadata/syn-shipping-069-auto_059_silver_nonfragile_smart_fitness_band.json",
+    "judgment": "synthetic_data/customer_support/judgments/syn-shipping-069-auto_059_silver_nonfragile_smart_fitness_band.json"
+  },
+  "manual_checks": [
+    "task clarity and user goal consistency",
+    "environment product/order/policy consistency",
+    "state_requirements and deterministic replay consistency",
+    "known template residue and language-conflict patterns",
+    "post-repair regression validation"
+  ],
+  "human_shard_review": {
+    "shard": "shard_04",
+    "status": "completed",
+    "post_repair_verdict": "PASS"
+  },
+  "auxiliary_results": {
+    "deterministic": {
+      "task_id": "syn-shipping-069-auto_059_silver_nonfragile_smart_fitness_band",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "judge_decision": "ACCEPT",
+    "pattern_issues": [],
+    "repairs": [
+      {
+        "task_id": "syn-shipping-069-auto_059_silver_nonfragile_smart_fitness_band",
+        "repair_type": "shipping_product_metadata",
+        "files": [
+          "synthetic_data/customer_support/task_envs/syn-shipping-069-auto_059_silver_nonfragile_smart_fitness_band.json"
+        ],
+        "before": [
+          {
+            "product_id": "PROD-2155",
+            "name": "Smart Fitness Band",
+            "fields": {
+              "category": "electronics",
+              "subcategory": "headphones",
+              "warranty_months": 0,
+              "return_window_days": 30,
+              "restocking_fee_pct": 0,
+              "weight_lbs": 3.0
+            }
+          }
+        ],
+        "after": [
+          {
+            "product_id": "PROD-2155",
+            "name": "Smart Fitness Band",
+            "fields": {
+              "category": "electronics",
+              "subcategory": "fitness_tracker",
+              "warranty_months": 12,
+              "return_window_days": 30,
+              "restocking_fee_pct": 0,
+              "weight_lbs": 0.2
+            }
+          }
+        ],
+        "note": "Fixed shipping task product category/subcategory/weight metadata while preserving configured fragile flag."
+      },
+      {
+        "task_id": "syn-shipping-069-auto_059_silver_nonfragile_smart_fitness_band",
+        "repair_type": "shipping_low_value_free_shipping_explained",
+        "path": "synthetic_data/customer_support/task_envs/syn-shipping-069-auto_059_silver_nonfragile_smart_fitness_band.json",
+        "changes": [
+          {
+            "order_id": "ORD-6023",
+            "field": "shipping_method",
+            "old": "standard",
+            "new": "promotional_free_standard"
+          }
+        ]
+      }
+    ],
+    "residual_notes": []
+  }
+}

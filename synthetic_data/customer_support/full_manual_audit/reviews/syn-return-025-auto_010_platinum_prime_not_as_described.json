@@ -1,0 +1,62 @@
+{
+  "task_id": "syn-return-025-auto_010_platinum_prime_not_as_described",
+  "task_type": "return_item",
+  "reviewer": "full_manual_audit_with_sharded_subagents_and_post_repair_checks",
+  "verdict": "PASS",
+  "confidence": "high",
+  "findings": [],
+  "evidence_summary": "Deterministic check passed; pattern issues=0; judge=ACCEPT; repairs_applied=1; human shard=shard_15.",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": {
+    "task": "synthetic_data/customer_support/tasks/syn-return-025-auto_010_platinum_prime_not_as_described.json",
+    "env": "synthetic_data/customer_support/task_envs/syn-return-025-auto_010_platinum_prime_not_as_described.json",
+    "metadata": "synthetic_data/customer_support/metadata/syn-return-025-auto_010_platinum_prime_not_as_described.json",
+    "judgment": "synthetic_data/customer_support/judgments/syn-return-025-auto_010_platinum_prime_not_as_described.json"
+  },
+  "manual_checks": [
+    "task clarity and user goal consistency",
+    "environment product/order/policy consistency",
+    "state_requirements and deterministic replay consistency",
+    "known template residue and language-conflict patterns",
+    "post-repair regression validation"
+  ],
+  "human_shard_review": {
+    "shard": "shard_15",
+    "status": "completed",
+    "post_repair_verdict": "PASS"
+  },
+  "auxiliary_results": {
+    "deterministic": {
+      "task_id": "syn-return-025-auto_010_platinum_prime_not_as_described",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "judge_decision": "ACCEPT",
+    "pattern_issues": [],
+    "repairs": [
+      {
+        "task_id": "syn-return-025-auto_010_platinum_prime_not_as_described",
+        "repair_type": "return_not_as_described_language",
+        "files": [
+          "synthetic_data/customer_support/tasks/syn-return-025-auto_010_platinum_prime_not_as_described.json"
+        ],
+        "before": {
+          "task_summary": "Customer wants to return SoundMax Wireless Headphones from ORD-6011. The agent must apply the return policy, preview the return, obtain confirmation, and process the correct refund.",
+          "opening_message": "I would like to return the SoundMax Wireless Headphones from order ORD-6011. I opened it, but I do not want it anymore, and I want the refund back to my original payment method."
+        },
+        "after": {
+          "task_summary": "Customer reports SoundMax Wireless Headphones from ORD-6011 does not match the product description. The agent must process a not-as-described return with no restocking fee.",
+          "opening_message": "I need to return the SoundMax Wireless Headphones from order ORD-6011. The item does not match the product description, so I want the refund back to my original payment method.",
+          "known_info": [
+            "You bought SoundMax Wireless Headphones in order ORD-6011.",
+            "You received the order on 2026-06-06T14:00:00.",
+            "The item does not match the product description."
+          ]
+        },
+        "note": "Aligned user-facing wording with expected return_reason=not_as_described."
+      }
+    ],
+    "residual_notes": []
+  }
+}

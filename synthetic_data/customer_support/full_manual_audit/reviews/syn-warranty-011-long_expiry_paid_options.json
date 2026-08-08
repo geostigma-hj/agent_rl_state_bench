@@ -1,0 +1,86 @@
+{
+  "task_id": "syn-warranty-011-long_expiry_paid_options",
+  "task_type": "warranty_claim",
+  "reviewer": "full_manual_audit_with_sharded_subagents_and_post_repair_checks",
+  "verdict": "PASS",
+  "confidence": "high",
+  "findings": [],
+  "evidence_summary": "Deterministic check passed; pattern issues=0; judge=ACCEPT; repairs_applied=1; human shard=shard_16.",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": {
+    "task": "synthetic_data/customer_support/tasks/syn-warranty-011-long_expiry_paid_options.json",
+    "env": "synthetic_data/customer_support/task_envs/syn-warranty-011-long_expiry_paid_options.json",
+    "metadata": "synthetic_data/customer_support/metadata/syn-warranty-011-long_expiry_paid_options.json",
+    "judgment": "synthetic_data/customer_support/judgments/syn-warranty-011-long_expiry_paid_options.json"
+  },
+  "manual_checks": [
+    "task clarity and user goal consistency",
+    "environment product/order/policy consistency",
+    "state_requirements and deterministic replay consistency",
+    "known template residue and language-conflict patterns",
+    "post-repair regression validation"
+  ],
+  "human_shard_review": {
+    "shard": "shard_16",
+    "status": "completed",
+    "post_repair_verdict": "PASS"
+  },
+  "auxiliary_results": {
+    "deterministic": {
+      "task_id": "syn-warranty-011-long_expiry_paid_options",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "judge_decision": "ACCEPT",
+    "pattern_issues": [],
+    "repairs": [
+      {
+        "task_id": "syn-warranty-011-long_expiry_paid_options",
+        "repair_type": "old_expiry_warranty_choice_clarification",
+        "files": [
+          "synthetic_data/customer_support/tasks/syn-warranty-011-long_expiry_paid_options.json"
+        ],
+        "before": {
+          "task_summary": "Customer asks for warranty service on SoundMax Wireless Headphones from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty expired more than 30 days ago, so official policy allows full-price repair or 25% off replacement rather than a free warranty claim.",
+          "opening_message": "My SoundMax Wireless Headphones from order ORD-6032 is malfunctioning. Can I use the warranty?",
+          "user_simulator": {
+            "user_sim_context": "You want warranty help for SoundMax Wireless Headphones from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty expired more than 30 days ago, so official policy allows full-price repair or 25% off replacement rather than a free warranty claim.",
+            "known_info": [
+              "You bought SoundMax Wireless Headphones in order ORD-6032.",
+              "The product is malfunctioning."
+            ],
+            "unknown_info": [
+              "You do not know the claim count or exact warranty resolution."
+            ],
+            "task_rules": [
+              "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
+            ]
+          }
+        },
+        "after": {
+          "task_summary": "Customer asks for warranty service on SoundMax Wireless Headphones from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct discounted replacement claim. The warranty expired more than 30 days ago, so official policy does not allow a free claim. The customer accepts the discounted replacement option after the agent previews it; the paid-repair alternative should be mentioned only as an alternative, not selected.",
+          "opening_message": "My SoundMax Wireless Headphones from order ORD-6032 is malfunctioning. If the warranty is expired, I would prefer the discounted replacement option over a paid repair.",
+          "user_simulator": {
+            "user_sim_context": "You want warranty help for SoundMax Wireless Headphones from order ORD-6032. The warranty expired more than 30 days ago, so official policy does not allow a free claim. The customer accepts the discounted replacement option after the agent previews it; the paid-repair alternative should be mentioned only as an alternative, not selected. If the agent previews the discounted replacement under policy and asks for confirmation, agree to proceed.",
+            "known_info": [
+              "You bought SoundMax Wireless Headphones in order ORD-6032.",
+              "The product is malfunctioning.",
+              "If the free warranty claim is unavailable, you prefer the discounted replacement option over paid repair."
+            ],
+            "unknown_info": [
+              "You do not know the claim count or exact warranty resolution."
+            ],
+            "task_rules": [
+              "Confirm after a valid warranty preview for the discounted replacement option.",
+              "Do not ask for a return unless the agent says warranty service is unavailable.",
+              "If the agent presents paid repair and discounted replacement as options, choose discounted replacement."
+            ]
+          }
+        },
+        "note": "Clarified user preference so replacement-creating warranty state target is not ambiguous."
+      }
+    ],
+    "residual_notes": []
+  }
+}

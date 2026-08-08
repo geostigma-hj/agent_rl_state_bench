@@ -1,0 +1,60 @@
+{
+  "task_id": "syn-warranty-024-auto_011_active_slatetab_pro_11_inch",
+  "task_type": "warranty_claim",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "PASS",
+  "confidence": "high",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-warranty-024-auto_011_active_slatetab_pro_11_inch.json",
+    "synthetic_data/customer_support/task_envs/syn-warranty-024-auto_011_active_slatetab_pro_11_inch.json",
+    "synthetic_data/customer_support/metadata/syn-warranty-024-auto_011_active_slatetab_pro_11_inch.json",
+    "synthetic_data/customer_support/judgments/syn-warranty-024-auto_011_active_slatetab_pro_11_inch.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "逐条读取 task/env/metadata/judgment，任务引用和本地 checker 通过。",
+    "judge decision=ACCEPT，issues/ambiguities 为空或无阻断项。",
+    "保修状态、claim_count/max_claims、resolution 和 preview/confirm 流程一致。"
+  ],
+  "evidence_summary": "warranty_claim；summary/opening 对齐；state_requirements 数量 3；gold_tool_plan_steps=4；checker passed=True。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "gold_tool_plan_steps": 4,
+    "metadata": {
+      "generator_version": "warranty_v0.1",
+      "changed_factors": [
+        "active_warranty"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Customer asks for warranty service on SlateTab Pro 11-inch from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
+    "opening_message": "My SlateTab Pro 11-inch from order ORD-6032 is malfunctioning. Can I use the warranty?",
+    "known_info": [
+      "You bought SlateTab Pro 11-inch in order ORD-6032.",
+      "The product is malfunctioning."
+    ],
+    "task_rules": [
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
+    ]
+  }
+}

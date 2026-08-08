@@ -1,0 +1,60 @@
+{
+  "task_id": "syn-shipping-068-auto_058_gold_nonfragile_smart_fitness_band",
+  "task_type": "shipping_claim",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "REVIEW",
+  "confidence": "medium",
+  "recommended_action": "usable_if_metadata_noise_accepted",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-shipping-068-auto_058_gold_nonfragile_smart_fitness_band.json",
+    "synthetic_data/customer_support/task_envs/syn-shipping-068-auto_058_gold_nonfragile_smart_fitness_band.json",
+    "synthetic_data/customer_support/metadata/syn-shipping-068-auto_058_gold_nonfragile_smart_fitness_band.json",
+    "synthetic_data/customer_support/judgments/syn-shipping-068-auto_058_gold_nonfragile_smart_fitness_band.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "运输损坏主路径正确：full refund 89、return_label_issued=true、restocking_fee=0、非 fragile 不给 goodwill。",
+    "质量疑点：Smart Fitness Band 的 subcategory 写成 headphones，商品属性有轻微不一致。"
+  ],
+  "evidence_summary": "shipping claim 行为目标清楚可达；商品细分类噪声建议清洗。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "gold_tool_plan_steps": 4,
+    "metadata": {
+      "generator_version": "shipping_v0.1",
+      "changed_factors": [
+        "damaged_no_goodwill"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Customer reports Smart Fitness Band from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
+    "opening_message": "My Smart Fitness Band from order ORD-6023 arrived damaged. The package was crushed.",
+    "known_info": [
+      "You bought Smart Fitness Band in order ORD-6023.",
+      "The item arrived damaged with crushed packaging."
+    ],
+    "task_rules": [
+      "Keep the issue scoped to shipping damage; do not ask for a changed-mind return, cancellation, warranty claim, or exchange.",
+      "Confirm after a valid damaged-in-transit return preview. If the item is fragile, expect the separate goodwill credit."
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "task_id": "syn-warranty-059-auto_046_active_flexcharge_travel_dock",
+  "task_type": "warranty_claim",
+  "reviewer": "full_manual_audit_with_sharded_subagents_and_post_repair_checks",
+  "verdict": "PASS",
+  "confidence": "high",
+  "findings": [],
+  "evidence_summary": "Deterministic check passed; pattern issues=0; judge=ACCEPT; repairs_applied=3; human shard=shard_04.",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": {
+    "task": "synthetic_data/customer_support/tasks/syn-warranty-059-auto_046_active_flexcharge_travel_dock.json",
+    "env": "synthetic_data/customer_support/task_envs/syn-warranty-059-auto_046_active_flexcharge_travel_dock.json",
+    "metadata": "synthetic_data/customer_support/metadata/syn-warranty-059-auto_046_active_flexcharge_travel_dock.json",
+    "judgment": "synthetic_data/customer_support/judgments/syn-warranty-059-auto_046_active_flexcharge_travel_dock.json"
+  },
+  "manual_checks": [
+    "task clarity and user goal consistency",
+    "environment product/order/policy consistency",
+    "state_requirements and deterministic replay consistency",
+    "known template residue and language-conflict patterns",
+    "post-repair regression validation"
+  ],
+  "human_shard_review": {
+    "shard": "shard_04",
+    "status": "completed",
+    "post_repair_verdict": "PASS"
+  },
+  "auxiliary_results": {
+    "deterministic": {
+      "task_id": "syn-warranty-059-auto_046_active_flexcharge_travel_dock",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "judge_decision": "ACCEPT",
+    "pattern_issues": [],
+    "repairs": [
+      {
+        "task_id": "syn-warranty-059-auto_046_active_flexcharge_travel_dock",
+        "repair_type": "warranty_product_profile",
+        "files": [
+          "synthetic_data/customer_support/task_envs/syn-warranty-059-auto_046_active_flexcharge_travel_dock.json"
+        ],
+        "before": [
+          {
+            "product_id": "PROD-2215",
+            "name": "FlexCharge Travel Dock",
+            "fields": {
+              "warranty_months": 12,
+              "return_window_days": 15,
+              "restocking_fee_pct": 15,
+              "weight_lbs": 0.6,
+              "is_fragile": false
+            }
+          }
+        ],
+        "after": [
+          {
+            "product_id": "PROD-2215",
+            "name": "FlexCharge Travel Dock",
+            "fields": {
+              "warranty_months": 12,
+              "return_window_days": 30,
+              "restocking_fee_pct": 0,
+              "weight_lbs": 0.5,
+              "is_fragile": false
+            }
+          }
+        ],
+        "note": "Synchronized warranty task product weight/return/warranty metadata with product name."
+      },
+      {
+        "task_id": "syn-warranty-059-auto_046_active_flexcharge_travel_dock",
+        "repair_type": "warranty_product_profile_completion",
+        "env_path": "synthetic_data/customer_support/task_envs/syn-warranty-059-auto_046_active_flexcharge_travel_dock.json",
+        "changes": [
+          {
+            "product_id": "PROD-2215",
+            "product": "FlexCharge Travel Dock",
+            "field": "category",
+            "old": "accessories",
+            "new": "electronics"
+          },
+          {
+            "product_id": "PROD-2215",
+            "product": "FlexCharge Travel Dock",
+            "field": "subcategory",
+            "old": "adapter",
+            "new": "accessory"
+          }
+        ]
+      },
+      {
+        "task_id": "syn-warranty-059-auto_046_active_flexcharge_travel_dock",
+        "repair_type": "warranty_extended_coverage_explained",
+        "path": "synthetic_data/customer_support/task_envs/syn-warranty-059-auto_046_active_flexcharge_travel_dock.json",
+        "changes": [
+          {
+            "warranty_id": "WRT-4013",
+            "field": "warranty_type",
+            "old": "manufacturer",
+            "new": "extended",
+            "product": "FlexCharge Travel Dock",
+            "product_warranty_months": 12,
+            "record_end_date": "2026-12-31"
+          }
+        ]
+      }
+    ],
+    "residual_notes": []
+  }
+}

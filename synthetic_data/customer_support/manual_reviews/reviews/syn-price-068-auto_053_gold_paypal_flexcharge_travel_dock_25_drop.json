@@ -1,0 +1,61 @@
+{
+  "task_id": "syn-price-068-auto_053_gold_paypal_flexcharge_travel_dock_25_drop",
+  "task_type": "price_match_refund",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "REVIEW",
+  "confidence": "medium",
+  "recommended_action": "usable_if_metadata_noise_accepted",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-price-068-auto_053_gold_paypal_flexcharge_travel_dock_25_drop.json",
+    "synthetic_data/customer_support/task_envs/syn-price-068-auto_053_gold_paypal_flexcharge_travel_dock_25_drop.json",
+    "synthetic_data/customer_support/metadata/syn-price-068-auto_053_gold_paypal_flexcharge_travel_dock_25_drop.json",
+    "synthetic_data/customer_support/judgments/syn-price-068-auto_053_gold_paypal_flexcharge_travel_dock_25_drop.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "主 price-match 路径正确：原价 69、current_price 44、退款 25；用户误报 40 可由 agent 查价纠正。",
+    "质量疑点：FlexCharge Travel Dock 的 subcategory 为 headphones_budget，商品属性不自然。"
+  ],
+  "evidence_summary": "金额和状态目标通过；仅标记产品细分类噪声。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "gold_tool_plan_steps": 4,
+    "metadata": {
+      "generator_version": "price_match_v0.1",
+      "changed_factors": [
+        "price_drop",
+        "customer_wrong_amount"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Customer requests a price-match adjustment for FlexCharge Travel Dock in ORD-7208. The correct outcome is a $25 price-match refund while keeping the order and item active.",
+    "opening_message": "I noticed the FlexCharge Travel Dock from my order ORD-7208 is now listed at a lower price, so I believe I should get $40 back.",
+    "known_info": [
+      "You bought FlexCharge Travel Dock in order ORD-7208.",
+      "The current product price is $44."
+    ],
+    "task_rules": [
+      "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
+      "If the agent previews the policy-supported amount and keeps the order active, confirm the refund."
+    ]
+  }
+}

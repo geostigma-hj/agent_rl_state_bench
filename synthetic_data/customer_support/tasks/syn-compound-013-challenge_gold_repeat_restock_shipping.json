@@ -1,6 +1,6 @@
 {
   "task_id": "syn-compound-013-challenge_gold_repeat_restock_shipping",
-  "task_summary": "Synthetic compound task derived from official customer_support template 95-challenge_gold_repeat_restock_shipping, surface variant 0. **Task:** A Gold customer is returning both headphones and a USB hub from a free-shipping order. The correct handling is to apply the Gold restocking-discount credit to both electronics lines, add the $5 repeat same-category surcharge to the second item, and also account for the $8 shipping clawback caused by the reduced remaining order.\n\n**Challenge:** The main risk is incomplete item-by-item accounting. Weak agents remember only one of the Gold credits, miss the repeat surcharge, or ignore the shipping clawback once the return logic becomes more complex.",
+  "task_summary": "**Task:** A Gold customer is returning both headphones and a USB hub from a free-shipping order. The correct handling is to apply the Gold restocking-discount credit to both electronics lines, add the $5 repeat same-category surcharge to the second item, and also account for the $8 shipping clawback caused by the reduced remaining order.",
   "task_requirements": [
     {
       "evidence": "conversation",
@@ -25,7 +25,7 @@
   "now": "2026-06-15T10:00:00",
   "opening_message": "I want to return the headphones and USB hub from order ORD-7130.",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic compound benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 0.\n\nYou want to return two electronics items from a free-shipping order and know your Gold status should matter, but you are not sure where. Because there are two related items involved, you expect the agent to keep the per-item logic straight. You want the final explanation to make sense across both items and the order as a whole.",
+    "user_sim_context": "You want to return two electronics items from a free-shipping order and know your Gold status should matter, but you are not sure where. Because there are two related items involved, you expect the agent to keep the per-item logic straight. You want the final explanation to make sense across both items and the order as a whole.",
     "known_info": [
       "order_id: ORD-7130",
       "items: headphones+hub",

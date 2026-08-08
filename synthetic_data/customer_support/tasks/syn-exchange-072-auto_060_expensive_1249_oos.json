@@ -1,6 +1,6 @@
 {
   "task_id": "syn-exchange-072-auto_060_expensive_1249_oos",
-  "task_summary": "Customer wants to exchange Premium Cotton Shirt from ORD-6034 for Premium Cotton Shirt (Large). Correct handling is to apply exchange policy, preview, confirm, and use the policy-defined payment or store-credit outcome. Because the requested item is out of stock, policy requires store credit for the original item amount and the exchange itself must not be completed; the unavailable target item's price does not create an extra charge.",
+  "task_summary": "Customer wants to exchange Premium Cotton Shirt from ORD-6034 for Premium Wool Coat (Large). Correct handling is to apply exchange policy, preview, confirm, and use the policy-defined payment or store-credit outcome. Because the requested item is out of stock, policy requires store credit for the original item amount and the exchange itself must not be completed.",
   "task_requirements": [
     {
       "id": "syn-exchange-072-auto_060_expensive_1249_oos_must_review_exchange_policy",
@@ -17,12 +17,12 @@
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for Premium Cotton Shirt (Large).",
+  "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for Premium Wool Coat (Large).",
   "user_simulator": {
-    "user_sim_context": "You want to exchange Premium Cotton Shirt from order ORD-6034 for Premium Cotton Shirt (Large). If the agent previews the out-of-stock store-credit fallback and asks for confirmation, agree to proceed.",
+    "user_sim_context": "You want to exchange Premium Cotton Shirt from order ORD-6034 for Premium Wool Coat (Large). If the agent previews the out-of-stock store-credit fallback and asks for confirmation, agree to proceed.",
     "known_info": [
       "You bought Premium Cotton Shirt in order ORD-6034.",
-      "You want Premium Cotton Shirt (Large) instead."
+      "You want Premium Wool Coat (Large) instead."
     ],
     "unknown_info": [
       "You do not know the exchange price-difference policy."

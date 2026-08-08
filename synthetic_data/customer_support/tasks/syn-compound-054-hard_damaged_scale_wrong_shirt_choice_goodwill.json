@@ -1,6 +1,6 @@
 {
   "task_id": "syn-compound-054-hard_damaged_scale_wrong_shirt_choice_goodwill",
-  "task_summary": "Synthetic compound task derived from official customer_support template 39-hard_damaged_scale_wrong_shirt_choice_goodwill, surface variant 4. **Task:** Customer reports two issues in one delivered order: a fragile kitchen scale arrived cracked and the shirt is the wrong item. Correct handling is to ask the customer's resolution preference, then process a $32 damaged-in-transit return for the scale, a $59 wrong-item return for the shirt, and a separate $10 original-payment fragile goodwill credit for the scale.\n\n**Challenge:** Distinct from task 168's warranty/paid-shipping blender path and task 161's single wrong-item classification. Weak agents often propose refunds before asking the customer's preference, handle only one item, collapse the two issues into one reason, or omit the fragile goodwill credit.",
+  "task_summary": "**Task:** Customer reports two issues in one delivered order: a fragile kitchen scale arrived cracked and the shirt is the wrong item. Correct handling is to ask the customer's resolution preference, then process a $32 damaged-in-transit return for the scale, a $59 wrong-item return for the shirt, and a separate $10 original-payment fragile goodwill credit for the scale.",
   "task_requirements": [
     {
       "id": "syn-compound-054-hard_damaged_scale_wrong_shirt_choice_goodwill_01_170_ask_resolution_before_write",
@@ -25,7 +25,7 @@
   "now": "2026-07-12T10:00:00",
   "opening_message": "ORD-7539 arrived with two problems: the glass kitchen scale is cracked, and the shirt is the wrong one. Can you sort out both items?",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic compound benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 4.\n\nYou have two fulfillment problems on one order. A perfect agent should ask what resolution you want before processing, keep the damaged scale and wrong shirt separate, process both refunds, and add the separate fragile goodwill credit.",
+    "user_sim_context": "You have two fulfillment problems on one order. A perfect agent should ask what resolution you want before processing, keep the damaged scale and wrong shirt separate, process both refunds, and add the separate fragile goodwill credit.",
     "known_info": [
       "order_id: ORD-7539",
       "damaged_item: PrecisionScale Digital Kitchen Scale with cracked glass",

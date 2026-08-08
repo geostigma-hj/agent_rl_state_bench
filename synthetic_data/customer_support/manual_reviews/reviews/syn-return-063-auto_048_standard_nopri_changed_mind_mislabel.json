@@ -1,0 +1,64 @@
+{
+  "task_id": "syn-return-063-auto_048_standard_nopri_changed_mind_mislabel",
+  "task_type": "return_item",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "PASS",
+  "confidence": "high",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-return-063-auto_048_standard_nopri_changed_mind_mislabel.json",
+    "synthetic_data/customer_support/task_envs/syn-return-063-auto_048_standard_nopri_changed_mind_mislabel.json",
+    "synthetic_data/customer_support/metadata/syn-return-063-auto_048_standard_nopri_changed_mind_mislabel.json",
+    "synthetic_data/customer_support/judgments/syn-return-063-auto_048_standard_nopri_changed_mind_mislabel.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "逐条读取 task/env/metadata/judgment，任务引用和本地 checker 通过。",
+    "judge decision=ACCEPT，issues/ambiguities 为空或无阻断项。",
+    "退货原因、费用/label/退款方式和最终订单状态目标一致。"
+  ],
+  "evidence_summary": "return_item；summary/opening 对齐；state_requirements 数量 6；gold_tool_plan_steps=3；checker passed=True。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "gold_tool_plan_steps": 3,
+    "metadata": {
+      "generator_version": "return_refund_v0.1",
+      "changed_factors": [
+        "restocking_fee",
+        "recent_delivery",
+        "membership_tier"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Customer describes SoundMax Wireless Headphones from ORD-6011 as defective, but the described issue is cosmetic preference. The correct resolution is a changed-mind return with normal electronics restocking policy.",
+    "opening_message": "I need to return the SoundMax Wireless Headphones from order ORD-6011. It is defective: the color and look are not what I expected at all.",
+    "known_info": [
+      "You bought SoundMax Wireless Headphones in order ORD-6011.",
+      "You received the order on 2026-06-08T14:00:00."
+    ],
+    "task_rules": [
+      "Do not invent order IDs, item IDs, prices, dates, or policy details.",
+      "If the agent previews a valid return and asks for confirmation, agree to proceed.",
+      "When asked to clarify the defect, say the item functions correctly but does not match your aesthetic expectations."
+    ]
+  }
+}

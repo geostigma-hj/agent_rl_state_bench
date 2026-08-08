@@ -1,6 +1,6 @@
 {
   "task_id": "syn-compound-049-false_damage_return_cancel_pending_jar",
-  "task_summary": "Synthetic compound task derived from official customer_support template 80-false_damage_return_cancel_pending_jar, surface variant 3. **Task:** Customer says a working blender was scratched after unpacking and the delivery box was fine. They want to return the blender and also want a pending replacement jar cancelled if the blender is returned, while keeping an unrelated recipe book. Correct handling is to classify the blender return as changed_mind for an $89 original-payment refund with no return label, cancel only the replacement jar, and keep the recipe book confirmed.\n\n**Challenge:** This tests return-reason classification from explicit facts plus cascading cleanup. Weak agents may still process a damaged_in_transit return with a free label despite being told the scratch happened after unpacking, then perform the dependent cancellation.",
+  "task_summary": "**Task:** Customer says a working blender was scratched after unpacking and the delivery box was fine. They want to return the blender and also want a pending replacement jar cancelled if the blender is returned, while keeping an unrelated recipe book. Correct handling is to classify the blender return as changed_mind for an $89 original-payment refund with no return label, cancel only the replacement jar, and keep the recipe book confirmed.",
   "task_requirements": [
     {
       "id": "syn-compound-049-false_damage_return_cancel_pending_jar_01_214_return_blender_changed_mind",
@@ -25,7 +25,7 @@
   "now": "2026-07-16T10:00:00",
   "opening_message": "Please check the policy and do the right thing here. The PowerBlend Pro Blender from ORD-7831 got scratched after I unpacked it; the delivery box was fine and it still works, but I do not want to keep it. If you take the blender back, cancel the pending replacement jar in ORD-7832, but keep the Smoothie Recipe Book.",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic compound benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 3.\n\nThe blender was not damaged in transit: the delivery box was fine, the scratch happened after unpacking, and the blender still works. You still want to return the blender and stop the pending replacement jar, while keeping the recipe book.",
+    "user_sim_context": "The blender was not damaged in transit: the delivery box was fine, the scratch happened after unpacking, and the blender still works. You still want to return the blender and stop the pending replacement jar, while keeping the recipe book.",
     "known_info": [
       "blender_order_id: ORD-7831",
       "item: PowerBlend Pro Blender",

@@ -13,6 +13,12 @@
       "kind": "must",
       "requirement": "Agent must make a process_exchange preview tool call for ITEM-9250 to PROD-2251 with confirm false or omitted before making the confirm=true process_exchange tool call.",
       "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-exchange-007-slightly_more_expensive_pays_must_disclose_exchange_price_difference",
+      "kind": "must",
+      "requirement": "Agent must make clear before confirmation that the requested replacement costs $69 and the customer pays the $10 exchange price difference.",
+      "evidence": "messages"
     }
   ],
   "user_id": "cust_003",

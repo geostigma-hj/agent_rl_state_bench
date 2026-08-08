@@ -1,0 +1,15 @@
+syn-cancel-002-in_transit_full_intercept_fee
+syn-cancel-032-auto_017_debit_card_lost_item0
+syn-compound-023-false_damage_return_cancel_pending_jar
+syn-edge-007-false_keep_item_refund_small_appliance
+syn-edge-049-hard_edge_wrong_customer_order_privacy
+syn-exchange-023-auto_011_expensive_79_instock
+syn-exchange-066-auto_054_expensive_529_oos
+syn-price-028-auto_013_gold_paypal_soundmax_wireless_headphones_25_drop
+syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop
+syn-return-046-auto_031_gold_prime_not_as_described
+syn-return-058-auto_043_standard_nopri_changed_mind
+syn-shipping-009-nonfragile_tablet_refund
+syn-shipping-029-auto_019_silver_fragile_ceramic_serving_bowl
+syn-shipping-106-auto_096_platinum_fragile_tabletop_fire_bowl
+syn-warranty-035-auto_022_recurring_brewmaster_espresso_machine

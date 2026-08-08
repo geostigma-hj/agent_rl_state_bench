@@ -3,14 +3,14 @@
     {
       "product_id": "PROD-4210",
       "name": "Artisan Crystal Vase",
-      "category": "electronics",
-      "subcategory": "headphones_budget",
+      "category": "accessories",
+      "subcategory": "decor",
       "price": 109,
-      "warranty_months": 12,
-      "return_window_days": 15,
-      "restocking_fee_pct": 15,
-      "weight_lbs": 0.5,
-      "is_fragile": false,
+      "warranty_months": 0,
+      "return_window_days": 30,
+      "restocking_fee_pct": 0,
+      "weight_lbs": 2.0,
+      "is_fragile": true,
       "in_stock": true,
       "current_price": 99
     }

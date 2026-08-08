@@ -1,0 +1,489 @@
+{
+  "sample_seed": 20260809,
+  "population_size": 590,
+  "sample_size": 59,
+  "allocation": {
+    "cancel_order": 6,
+    "compound": 6,
+    "edge_case": 6,
+    "exchange_item": 8,
+    "price_match_refund": 9,
+    "return_item": 7,
+    "shipping_claim": 11,
+    "warranty_claim": 6
+  },
+  "samples": [
+    {
+      "task_id": "syn-cancel-002-in_transit_full_intercept_fee",
+      "task_type": "cancel_order",
+      "task_path": "synthetic_data/customer_support/tasks/syn-cancel-002-in_transit_full_intercept_fee.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-cancel-002-in_transit_full_intercept_fee.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-cancel-002-in_transit_full_intercept_fee.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-cancel-002-in_transit_full_intercept_fee.json"
+    },
+    {
+      "task_id": "syn-cancel-006-debit_pre_shipment_full",
+      "task_type": "cancel_order",
+      "task_path": "synthetic_data/customer_support/tasks/syn-cancel-006-debit_pre_shipment_full.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-cancel-006-debit_pre_shipment_full.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-cancel-006-debit_pre_shipment_full.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-cancel-006-debit_pre_shipment_full.json"
+    },
+    {
+      "task_id": "syn-cancel-007-gift_card_pre_shipment_full",
+      "task_type": "cancel_order",
+      "task_path": "synthetic_data/customer_support/tasks/syn-cancel-007-gift_card_pre_shipment_full.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-cancel-007-gift_card_pre_shipment_full.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-cancel-007-gift_card_pre_shipment_full.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-cancel-007-gift_card_pre_shipment_full.json"
+    },
+    {
+      "task_id": "syn-cancel-025-auto_010_debit_card_processing_full",
+      "task_type": "cancel_order",
+      "task_path": "synthetic_data/customer_support/tasks/syn-cancel-025-auto_010_debit_card_processing_full.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-cancel-025-auto_010_debit_card_processing_full.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-cancel-025-auto_010_debit_card_processing_full.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-cancel-025-auto_010_debit_card_processing_full.json"
+    },
+    {
+      "task_id": "syn-cancel-032-auto_017_debit_card_lost_item0",
+      "task_type": "cancel_order",
+      "task_path": "synthetic_data/customer_support/tasks/syn-cancel-032-auto_017_debit_card_lost_item0.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-cancel-032-auto_017_debit_card_lost_item0.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-cancel-032-auto_017_debit_card_lost_item0.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-cancel-032-auto_017_debit_card_lost_item0.json"
+    },
+    {
+      "task_id": "syn-cancel-055-auto_040_split_processing_item0",
+      "task_type": "cancel_order",
+      "task_path": "synthetic_data/customer_support/tasks/syn-cancel-055-auto_040_split_processing_item0.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-cancel-055-auto_040_split_processing_item0.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-cancel-055-auto_040_split_processing_item0.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-cancel-055-auto_040_split_processing_item0.json"
+    },
+    {
+      "task_id": "syn-compound-008-challenge_bulk_plus_shipping_clawback",
+      "task_type": "compound",
+      "task_path": "synthetic_data/customer_support/tasks/syn-compound-008-challenge_bulk_plus_shipping_clawback.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-compound-008-challenge_bulk_plus_shipping_clawback.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-compound-008-challenge_bulk_plus_shipping_clawback.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-compound-008-challenge_bulk_plus_shipping_clawback.json"
+    },
+    {
+      "task_id": "syn-compound-014-spare_compound_cancel_plus_shipping_claim",
+      "task_type": "compound",
+      "task_path": "synthetic_data/customer_support/tasks/syn-compound-014-spare_compound_cancel_plus_shipping_claim.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-compound-014-spare_compound_cancel_plus_shipping_claim.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-compound-014-spare_compound_cancel_plus_shipping_claim.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-compound-014-spare_compound_cancel_plus_shipping_claim.json"
+    },
+    {
+      "task_id": "syn-compound-023-false_damage_return_cancel_pending_jar",
+      "task_type": "compound",
+      "task_path": "synthetic_data/customer_support/tasks/syn-compound-023-false_damage_return_cancel_pending_jar.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-compound-023-false_damage_return_cancel_pending_jar.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-compound-023-false_damage_return_cancel_pending_jar.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-compound-023-false_damage_return_cancel_pending_jar.json"
+    },
+    {
+      "task_id": "syn-compound-032-challenge_defective_plus_clawback",
+      "task_type": "compound",
+      "task_path": "synthetic_data/customer_support/tasks/syn-compound-032-challenge_defective_plus_clawback.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-compound-032-challenge_defective_plus_clawback.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-compound-032-challenge_defective_plus_clawback.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-compound-032-challenge_defective_plus_clawback.json"
+    },
+    {
+      "task_id": "syn-compound-034-challenge_bulk_plus_shipping_clawback",
+      "task_type": "compound",
+      "task_path": "synthetic_data/customer_support/tasks/syn-compound-034-challenge_bulk_plus_shipping_clawback.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-compound-034-challenge_bulk_plus_shipping_clawback.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-compound-034-challenge_bulk_plus_shipping_clawback.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-compound-034-challenge_bulk_plus_shipping_clawback.json"
+    },
+    {
+      "task_id": "syn-compound-051-challenge_return_shipping_plus_repeat",
+      "task_type": "compound",
+      "task_path": "synthetic_data/customer_support/tasks/syn-compound-051-challenge_return_shipping_plus_repeat.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-compound-051-challenge_return_shipping_plus_repeat.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-compound-051-challenge_return_shipping_plus_repeat.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-compound-051-challenge_return_shipping_plus_repeat.json"
+    },
+    {
+      "task_id": "syn-edge-007-false_keep_item_refund_small_appliance",
+      "task_type": "edge_case",
+      "task_path": "synthetic_data/customer_support/tasks/syn-edge-007-false_keep_item_refund_small_appliance.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-edge-007-false_keep_item_refund_small_appliance.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-edge-007-false_keep_item_refund_small_appliance.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-edge-007-false_keep_item_refund_small_appliance.json"
+    },
+    {
+      "task_id": "syn-edge-013-hard_edge_wrong_customer_order_privacy",
+      "task_type": "edge_case",
+      "task_path": "synthetic_data/customer_support/tasks/syn-edge-013-hard_edge_wrong_customer_order_privacy.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-edge-013-hard_edge_wrong_customer_order_privacy.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-edge-013-hard_edge_wrong_customer_order_privacy.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-edge-013-hard_edge_wrong_customer_order_privacy.json"
+    },
+    {
+      "task_id": "syn-edge-023-hard_privacy_apartment_notice_no_disclosure",
+      "task_type": "edge_case",
+      "task_path": "synthetic_data/customer_support/tasks/syn-edge-023-hard_privacy_apartment_notice_no_disclosure.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-edge-023-hard_privacy_apartment_notice_no_disclosure.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-edge-023-hard_privacy_apartment_notice_no_disclosure.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-edge-023-hard_privacy_apartment_notice_no_disclosure.json"
+    },
+    {
+      "task_id": "syn-edge-025-hard_edge_wrong_customer_order_privacy",
+      "task_type": "edge_case",
+      "task_path": "synthetic_data/customer_support/tasks/syn-edge-025-hard_edge_wrong_customer_order_privacy.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-edge-025-hard_edge_wrong_customer_order_privacy.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-edge-025-hard_edge_wrong_customer_order_privacy.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-edge-025-hard_edge_wrong_customer_order_privacy.json"
+    },
+    {
+      "task_id": "syn-edge-049-hard_edge_wrong_customer_order_privacy",
+      "task_type": "edge_case",
+      "task_path": "synthetic_data/customer_support/tasks/syn-edge-049-hard_edge_wrong_customer_order_privacy.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-edge-049-hard_edge_wrong_customer_order_privacy.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-edge-049-hard_edge_wrong_customer_order_privacy.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-edge-049-hard_edge_wrong_customer_order_privacy.json"
+    },
+    {
+      "task_id": "syn-edge-060-hard_edge_post_return_restocking_fee_reversal_denied",
+      "task_type": "edge_case",
+      "task_path": "synthetic_data/customer_support/tasks/syn-edge-060-hard_edge_post_return_restocking_fee_reversal_denied.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-edge-060-hard_edge_post_return_restocking_fee_reversal_denied.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-edge-060-hard_edge_post_return_restocking_fee_reversal_denied.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-edge-060-hard_edge_post_return_restocking_fee_reversal_denied.json"
+    },
+    {
+      "task_id": "syn-exchange-006-deeply_cheaper_store_credit",
+      "task_type": "exchange_item",
+      "task_path": "synthetic_data/customer_support/tasks/syn-exchange-006-deeply_cheaper_store_credit.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-exchange-006-deeply_cheaper_store_credit.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-exchange-006-deeply_cheaper_store_credit.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-exchange-006-deeply_cheaper_store_credit.json"
+    },
+    {
+      "task_id": "syn-exchange-020-auto_008_expensive_61_instock",
+      "task_type": "exchange_item",
+      "task_path": "synthetic_data/customer_support/tasks/syn-exchange-020-auto_008_expensive_61_instock.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-exchange-020-auto_008_expensive_61_instock.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-exchange-020-auto_008_expensive_61_instock.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-exchange-020-auto_008_expensive_61_instock.json"
+    },
+    {
+      "task_id": "syn-exchange-023-auto_011_expensive_79_instock",
+      "task_type": "exchange_item",
+      "task_path": "synthetic_data/customer_support/tasks/syn-exchange-023-auto_011_expensive_79_instock.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-exchange-023-auto_011_expensive_79_instock.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-exchange-023-auto_011_expensive_79_instock.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-exchange-023-auto_011_expensive_79_instock.json"
+    },
+    {
+      "task_id": "syn-exchange-034-auto_022_expensive_349_instock",
+      "task_type": "exchange_item",
+      "task_path": "synthetic_data/customer_support/tasks/syn-exchange-034-auto_022_expensive_349_instock.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-exchange-034-auto_022_expensive_349_instock.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-exchange-034-auto_022_expensive_349_instock.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-exchange-034-auto_022_expensive_349_instock.json"
+    },
+    {
+      "task_id": "syn-exchange-036-auto_024_expensive_449_oos",
+      "task_type": "exchange_item",
+      "task_path": "synthetic_data/customer_support/tasks/syn-exchange-036-auto_024_expensive_449_oos.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-exchange-036-auto_024_expensive_449_oos.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-exchange-036-auto_024_expensive_449_oos.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-exchange-036-auto_024_expensive_449_oos.json"
+    },
+    {
+      "task_id": "syn-exchange-041-auto_029_expensive_799_instock",
+      "task_type": "exchange_item",
+      "task_path": "synthetic_data/customer_support/tasks/syn-exchange-041-auto_029_expensive_799_instock.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-exchange-041-auto_029_expensive_799_instock.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-exchange-041-auto_029_expensive_799_instock.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-exchange-041-auto_029_expensive_799_instock.json"
+    },
+    {
+      "task_id": "syn-exchange-066-auto_054_expensive_529_oos",
+      "task_type": "exchange_item",
+      "task_path": "synthetic_data/customer_support/tasks/syn-exchange-066-auto_054_expensive_529_oos.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-exchange-066-auto_054_expensive_529_oos.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-exchange-066-auto_054_expensive_529_oos.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-exchange-066-auto_054_expensive_529_oos.json"
+    },
+    {
+      "task_id": "syn-exchange-067-auto_055_expensive_649_instock",
+      "task_type": "exchange_item",
+      "task_path": "synthetic_data/customer_support/tasks/syn-exchange-067-auto_055_expensive_649_instock.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-exchange-067-auto_055_expensive_649_instock.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-exchange-067-auto_055_expensive_649_instock.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-exchange-067-auto_055_expensive_649_instock.json"
+    },
+    {
+      "task_id": "syn-price-009-small_five_dollar_drop",
+      "task_type": "price_match_refund",
+      "task_path": "synthetic_data/customer_support/tasks/syn-price-009-small_five_dollar_drop.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-price-009-small_five_dollar_drop.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-price-009-small_five_dollar_drop.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-price-009-small_five_dollar_drop.json"
+    },
+    {
+      "task_id": "syn-price-027-auto_012_standard_debit_card_soundmax_wireless_headphones_20_drop",
+      "task_type": "price_match_refund",
+      "task_path": "synthetic_data/customer_support/tasks/syn-price-027-auto_012_standard_debit_card_soundmax_wireless_headphones_20_drop.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-price-027-auto_012_standard_debit_card_soundmax_wireless_headphones_20_drop.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-price-027-auto_012_standard_debit_card_soundmax_wireless_headphones_20_drop.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-price-027-auto_012_standard_debit_card_soundmax_wireless_headphones_20_drop.json"
+    },
+    {
+      "task_id": "syn-price-028-auto_013_gold_paypal_soundmax_wireless_headphones_25_drop",
+      "task_type": "price_match_refund",
+      "task_path": "synthetic_data/customer_support/tasks/syn-price-028-auto_013_gold_paypal_soundmax_wireless_headphones_25_drop.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-price-028-auto_013_gold_paypal_soundmax_wireless_headphones_25_drop.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-price-028-auto_013_gold_paypal_soundmax_wireless_headphones_25_drop.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-price-028-auto_013_gold_paypal_soundmax_wireless_headphones_25_drop.json"
+    },
+    {
+      "task_id": "syn-price-032-auto_017_standard_debit_card_slatetab_pro_11_inch_5_drop",
+      "task_type": "price_match_refund",
+      "task_path": "synthetic_data/customer_support/tasks/syn-price-032-auto_017_standard_debit_card_slatetab_pro_11_inch_5_drop.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-price-032-auto_017_standard_debit_card_slatetab_pro_11_inch_5_drop.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-price-032-auto_017_standard_debit_card_slatetab_pro_11_inch_5_drop.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-price-032-auto_017_standard_debit_card_slatetab_pro_11_inch_5_drop.json"
+    },
+    {
+      "task_id": "syn-price-042-auto_027_standard_debit_card_deskhub_usb_c_adapter_15_drop",
+      "task_type": "price_match_refund",
+      "task_path": "synthetic_data/customer_support/tasks/syn-price-042-auto_027_standard_debit_card_deskhub_usb_c_adapter_15_drop.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-price-042-auto_027_standard_debit_card_deskhub_usb_c_adapter_15_drop.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-price-042-auto_027_standard_debit_card_deskhub_usb_c_adapter_15_drop.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-price-042-auto_027_standard_debit_card_deskhub_usb_c_adapter_15_drop.json"
+    },
+    {
+      "task_id": "syn-price-054-auto_039_silver_gift_card_probook_laptop_40_drop",
+      "task_type": "price_match_refund",
+      "task_path": "synthetic_data/customer_support/tasks/syn-price-054-auto_039_silver_gift_card_probook_laptop_40_drop.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-price-054-auto_039_silver_gift_card_probook_laptop_40_drop.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-price-054-auto_039_silver_gift_card_probook_laptop_40_drop.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-price-054-auto_039_silver_gift_card_probook_laptop_40_drop.json"
+    },
+    {
+      "task_id": "syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop",
+      "task_type": "price_match_refund",
+      "task_path": "synthetic_data/customer_support/tasks/syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop.json"
+    },
+    {
+      "task_id": "syn-price-068-auto_053_gold_paypal_flexcharge_travel_dock_25_drop",
+      "task_type": "price_match_refund",
+      "task_path": "synthetic_data/customer_support/tasks/syn-price-068-auto_053_gold_paypal_flexcharge_travel_dock_25_drop.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-price-068-auto_053_gold_paypal_flexcharge_travel_dock_25_drop.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-price-068-auto_053_gold_paypal_flexcharge_travel_dock_25_drop.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-price-068-auto_053_gold_paypal_flexcharge_travel_dock_25_drop.json"
+    },
+    {
+      "task_id": "syn-price-078-auto_063_gold_paypal_soundmax_studio_headphones_40_drop",
+      "task_type": "price_match_refund",
+      "task_path": "synthetic_data/customer_support/tasks/syn-price-078-auto_063_gold_paypal_soundmax_studio_headphones_40_drop.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-price-078-auto_063_gold_paypal_soundmax_studio_headphones_40_drop.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-price-078-auto_063_gold_paypal_soundmax_studio_headphones_40_drop.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-price-078-auto_063_gold_paypal_soundmax_studio_headphones_40_drop.json"
+    },
+    {
+      "task_id": "syn-return-016-auto_001_platinum_prime_changed_mind",
+      "task_type": "return_item",
+      "task_path": "synthetic_data/customer_support/tasks/syn-return-016-auto_001_platinum_prime_changed_mind.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-return-016-auto_001_platinum_prime_changed_mind.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-return-016-auto_001_platinum_prime_changed_mind.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-return-016-auto_001_platinum_prime_changed_mind.json"
+    },
+    {
+      "task_id": "syn-return-046-auto_031_gold_prime_not_as_described",
+      "task_type": "return_item",
+      "task_path": "synthetic_data/customer_support/tasks/syn-return-046-auto_031_gold_prime_not_as_described.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-return-046-auto_031_gold_prime_not_as_described.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-return-046-auto_031_gold_prime_not_as_described.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-return-046-auto_031_gold_prime_not_as_described.json"
+    },
+    {
+      "task_id": "syn-return-047-auto_032_silver_nopri_changed_mind",
+      "task_type": "return_item",
+      "task_path": "synthetic_data/customer_support/tasks/syn-return-047-auto_032_silver_nopri_changed_mind.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-return-047-auto_032_silver_nopri_changed_mind.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-return-047-auto_032_silver_nopri_changed_mind.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-return-047-auto_032_silver_nopri_changed_mind.json"
+    },
+    {
+      "task_id": "syn-return-053-auto_038_silver_nopri_defective",
+      "task_type": "return_item",
+      "task_path": "synthetic_data/customer_support/tasks/syn-return-053-auto_038_silver_nopri_defective.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-return-053-auto_038_silver_nopri_defective.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-return-053-auto_038_silver_nopri_defective.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-return-053-auto_038_silver_nopri_defective.json"
+    },
+    {
+      "task_id": "syn-return-054-auto_039_silver_nopri_wrong_item",
+      "task_type": "return_item",
+      "task_path": "synthetic_data/customer_support/tasks/syn-return-054-auto_039_silver_nopri_wrong_item.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-return-054-auto_039_silver_nopri_wrong_item.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-return-054-auto_039_silver_nopri_wrong_item.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-return-054-auto_039_silver_nopri_wrong_item.json"
+    },
+    {
+      "task_id": "syn-return-058-auto_043_standard_nopri_changed_mind",
+      "task_type": "return_item",
+      "task_path": "synthetic_data/customer_support/tasks/syn-return-058-auto_043_standard_nopri_changed_mind.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-return-058-auto_043_standard_nopri_changed_mind.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-return-058-auto_043_standard_nopri_changed_mind.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-return-058-auto_043_standard_nopri_changed_mind.json"
+    },
+    {
+      "task_id": "syn-return-063-auto_048_standard_nopri_changed_mind_mislabel",
+      "task_type": "return_item",
+      "task_path": "synthetic_data/customer_support/tasks/syn-return-063-auto_048_standard_nopri_changed_mind_mislabel.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-return-063-auto_048_standard_nopri_changed_mind_mislabel.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-return-063-auto_048_standard_nopri_changed_mind_mislabel.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-return-063-auto_048_standard_nopri_changed_mind_mislabel.json"
+    },
+    {
+      "task_id": "syn-shipping-001-fragile_vase_refund_goodwill",
+      "task_type": "shipping_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-shipping-001-fragile_vase_refund_goodwill.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-shipping-001-fragile_vase_refund_goodwill.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-shipping-001-fragile_vase_refund_goodwill.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-shipping-001-fragile_vase_refund_goodwill.json"
+    },
+    {
+      "task_id": "syn-shipping-005-nonfragile_shoes_refund",
+      "task_type": "shipping_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-shipping-005-nonfragile_shoes_refund.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-shipping-005-nonfragile_shoes_refund.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-shipping-005-nonfragile_shoes_refund.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-shipping-005-nonfragile_shoes_refund.json"
+    },
+    {
+      "task_id": "syn-shipping-009-nonfragile_tablet_refund",
+      "task_type": "shipping_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-shipping-009-nonfragile_tablet_refund.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-shipping-009-nonfragile_tablet_refund.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-shipping-009-nonfragile_tablet_refund.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-shipping-009-nonfragile_tablet_refund.json"
+    },
+    {
+      "task_id": "syn-shipping-010-fragile_frame_refund_goodwill",
+      "task_type": "shipping_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-shipping-010-fragile_frame_refund_goodwill.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-shipping-010-fragile_frame_refund_goodwill.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-shipping-010-fragile_frame_refund_goodwill.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-shipping-010-fragile_frame_refund_goodwill.json"
+    },
+    {
+      "task_id": "syn-shipping-011-auto_001_platinum_fragile_porcelain_dinner_set",
+      "task_type": "shipping_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-shipping-011-auto_001_platinum_fragile_porcelain_dinner_set.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-shipping-011-auto_001_platinum_fragile_porcelain_dinner_set.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-shipping-011-auto_001_platinum_fragile_porcelain_dinner_set.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-shipping-011-auto_001_platinum_fragile_porcelain_dinner_set.json"
+    },
+    {
+      "task_id": "syn-shipping-028-auto_018_gold_fragile_ceramic_serving_bowl",
+      "task_type": "shipping_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-shipping-028-auto_018_gold_fragile_ceramic_serving_bowl.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-shipping-028-auto_018_gold_fragile_ceramic_serving_bowl.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-shipping-028-auto_018_gold_fragile_ceramic_serving_bowl.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-shipping-028-auto_018_gold_fragile_ceramic_serving_bowl.json"
+    },
+    {
+      "task_id": "syn-shipping-029-auto_019_silver_fragile_ceramic_serving_bowl",
+      "task_type": "shipping_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-shipping-029-auto_019_silver_fragile_ceramic_serving_bowl.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-shipping-029-auto_019_silver_fragile_ceramic_serving_bowl.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-shipping-029-auto_019_silver_fragile_ceramic_serving_bowl.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-shipping-029-auto_019_silver_fragile_ceramic_serving_bowl.json"
+    },
+    {
+      "task_id": "syn-shipping-068-auto_058_gold_nonfragile_smart_fitness_band",
+      "task_type": "shipping_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-shipping-068-auto_058_gold_nonfragile_smart_fitness_band.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-shipping-068-auto_058_gold_nonfragile_smart_fitness_band.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-shipping-068-auto_058_gold_nonfragile_smart_fitness_band.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-shipping-068-auto_058_gold_nonfragile_smart_fitness_band.json"
+    },
+    {
+      "task_id": "syn-shipping-085-auto_075_standard_nonfragile_wireless_charging_pad",
+      "task_type": "shipping_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-shipping-085-auto_075_standard_nonfragile_wireless_charging_pad.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-shipping-085-auto_075_standard_nonfragile_wireless_charging_pad.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-shipping-085-auto_075_standard_nonfragile_wireless_charging_pad.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-shipping-085-auto_075_standard_nonfragile_wireless_charging_pad.json"
+    },
+    {
+      "task_id": "syn-shipping-099-auto_089_silver_fragile_glass_food_storage_set",
+      "task_type": "shipping_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-shipping-099-auto_089_silver_fragile_glass_food_storage_set.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-shipping-099-auto_089_silver_fragile_glass_food_storage_set.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-shipping-099-auto_089_silver_fragile_glass_food_storage_set.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-shipping-099-auto_089_silver_fragile_glass_food_storage_set.json"
+    },
+    {
+      "task_id": "syn-shipping-106-auto_096_platinum_fragile_tabletop_fire_bowl",
+      "task_type": "shipping_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-shipping-106-auto_096_platinum_fragile_tabletop_fire_bowl.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-shipping-106-auto_096_platinum_fragile_tabletop_fire_bowl.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-shipping-106-auto_096_platinum_fragile_tabletop_fire_bowl.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-shipping-106-auto_096_platinum_fragile_tabletop_fire_bowl.json"
+    },
+    {
+      "task_id": "syn-warranty-011-long_expiry_paid_options",
+      "task_type": "warranty_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-warranty-011-long_expiry_paid_options.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-warranty-011-long_expiry_paid_options.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-warranty-011-long_expiry_paid_options.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-warranty-011-long_expiry_paid_options.json"
+    },
+    {
+      "task_id": "syn-warranty-016-auto_003_recent_expiry_soundmax_wireless_headphones",
+      "task_type": "warranty_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-warranty-016-auto_003_recent_expiry_soundmax_wireless_headphones.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-warranty-016-auto_003_recent_expiry_soundmax_wireless_headphones.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-warranty-016-auto_003_recent_expiry_soundmax_wireless_headphones.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-warranty-016-auto_003_recent_expiry_soundmax_wireless_headphones.json"
+    },
+    {
+      "task_id": "syn-warranty-024-auto_011_active_slatetab_pro_11_inch",
+      "task_type": "warranty_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-warranty-024-auto_011_active_slatetab_pro_11_inch.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-warranty-024-auto_011_active_slatetab_pro_11_inch.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-warranty-024-auto_011_active_slatetab_pro_11_inch.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-warranty-024-auto_011_active_slatetab_pro_11_inch.json"
+    },
+    {
+      "task_id": "syn-warranty-035-auto_022_recurring_brewmaster_espresso_machine",
+      "task_type": "warranty_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-warranty-035-auto_022_recurring_brewmaster_espresso_machine.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-warranty-035-auto_022_recurring_brewmaster_espresso_machine.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-warranty-035-auto_022_recurring_brewmaster_espresso_machine.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-warranty-035-auto_022_recurring_brewmaster_espresso_machine.json"
+    },
+    {
+      "task_id": "syn-warranty-040-auto_027_recurring_probook_laptop",
+      "task_type": "warranty_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-warranty-040-auto_027_recurring_probook_laptop.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-warranty-040-auto_027_recurring_probook_laptop.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-warranty-040-auto_027_recurring_probook_laptop.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-warranty-040-auto_027_recurring_probook_laptop.json"
+    },
+    {
+      "task_id": "syn-warranty-058-auto_045_maxed_airpure_compact_purifier",
+      "task_type": "warranty_claim",
+      "task_path": "synthetic_data/customer_support/tasks/syn-warranty-058-auto_045_maxed_airpure_compact_purifier.json",
+      "env_path": "synthetic_data/customer_support/task_envs/syn-warranty-058-auto_045_maxed_airpure_compact_purifier.json",
+      "metadata_path": "synthetic_data/customer_support/metadata/syn-warranty-058-auto_045_maxed_airpure_compact_purifier.json",
+      "judgment_path": "synthetic_data/customer_support/judgments/syn-warranty-058-auto_045_maxed_airpure_compact_purifier.json"
+    }
+  ]
+}

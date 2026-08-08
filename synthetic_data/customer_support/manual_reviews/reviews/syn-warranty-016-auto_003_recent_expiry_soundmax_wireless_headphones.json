@@ -1,0 +1,60 @@
+{
+  "task_id": "syn-warranty-016-auto_003_recent_expiry_soundmax_wireless_headphones",
+  "task_type": "warranty_claim",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "PASS",
+  "confidence": "high",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-warranty-016-auto_003_recent_expiry_soundmax_wireless_headphones.json",
+    "synthetic_data/customer_support/task_envs/syn-warranty-016-auto_003_recent_expiry_soundmax_wireless_headphones.json",
+    "synthetic_data/customer_support/metadata/syn-warranty-016-auto_003_recent_expiry_soundmax_wireless_headphones.json",
+    "synthetic_data/customer_support/judgments/syn-warranty-016-auto_003_recent_expiry_soundmax_wireless_headphones.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "逐条读取 task/env/metadata/judgment，任务引用和本地 checker 通过。",
+    "judge decision=ACCEPT，issues/ambiguities 为空或无阻断项。",
+    "保修状态、claim_count/max_claims、resolution 和 preview/confirm 流程一致。"
+  ],
+  "evidence_summary": "warranty_claim；summary/opening 对齐；state_requirements 数量 3；gold_tool_plan_steps=4；checker passed=True。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "gold_tool_plan_steps": 4,
+    "metadata": {
+      "generator_version": "warranty_v0.1",
+      "changed_factors": [
+        "recent_expiry"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Customer asks for warranty service on SoundMax Wireless Headphones from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty expired less than 30 days ago, so official policy allows a 50% off repair outcome after preview and confirmation.",
+    "opening_message": "My SoundMax Wireless Headphones from order ORD-6032 is malfunctioning. Can I use the warranty?",
+    "known_info": [
+      "You bought SoundMax Wireless Headphones in order ORD-6032.",
+      "The product is malfunctioning."
+    ],
+    "task_rules": [
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+syn-cancel-006-debit_pre_shipment_full
+syn-cancel-055-auto_040_split_processing_item0
+syn-compound-032-challenge_defective_plus_clawback
+syn-edge-013-hard_edge_wrong_customer_order_privacy
+syn-edge-060-hard_edge_post_return_restocking_fee_reversal_denied
+syn-exchange-034-auto_022_expensive_349_instock
+syn-exchange-067-auto_055_expensive_649_instock
+syn-price-032-auto_017_standard_debit_card_slatetab_pro_11_inch_5_drop
+syn-price-068-auto_053_gold_paypal_flexcharge_travel_dock_25_drop
+syn-return-047-auto_032_silver_nopri_changed_mind
+syn-return-063-auto_048_standard_nopri_changed_mind_mislabel
+syn-shipping-010-fragile_frame_refund_goodwill
+syn-shipping-068-auto_058_gold_nonfragile_smart_fitness_band
+syn-warranty-011-long_expiry_paid_options
+syn-warranty-040-auto_027_recurring_probook_laptop

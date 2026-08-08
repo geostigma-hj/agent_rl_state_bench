@@ -1,6 +1,6 @@
 {
   "task_id": "syn-edge-021-edge_signature_conflict",
-  "task_summary": "Synthetic edge_case task derived from official customer_support template 47-edge_signature_conflict, surface variant 1. **Task:** The customer disputes a laptop delivery, but the order record shows a matching signature from E. Chen. The correct outcome is to rely on the signed-delivery evidence, deny the not-received claim, and explain that the matching signature is why no refund or replacement is available.\n\n**Challenge:** This is an evidence-driven denial. Weak agents ignore the signature, refund the order to be accommodating, or avoid making a firm decision even though the delivery record already resolves the dispute.",
+  "task_summary": "**Task:** The customer disputes a laptop delivery, but the order record shows a matching signature from E. Chen. The correct outcome is to rely on the signed-delivery evidence, deny the not-received claim, and explain that the matching signature is why no refund or replacement is available.",
   "task_requirements": [
     {
       "evidence": "conversation",
@@ -19,7 +19,7 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "Can you help me with this? I never received my laptop from order ORD-6048. The tracking says delivered but I don't have it.",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic edge_case benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 1.\n\nTracking shows the laptop as delivered, but you do not have it and want the company to look past the tracking status. You are not focused on the delivery proof the company might rely on. You need the agent to explain clearly if there is a reason the missing-package claim cannot go forward.",
+    "user_sim_context": "Tracking shows the laptop as delivered, but you do not have it and want the company to look past the tracking status. You are not focused on the delivery proof the company might rely on. You need the agent to explain clearly if there is a reason the missing-package claim cannot go forward.",
     "known_info": [
       "order_id: ORD-6048",
       "item: laptop"

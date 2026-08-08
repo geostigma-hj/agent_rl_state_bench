@@ -1,0 +1,51 @@
+{
+  "task_id": "syn-exchange-007-slightly_more_expensive_pays",
+  "task_type": "exchange_item",
+  "reviewer": "full_manual_audit_with_sharded_subagents_and_post_repair_checks",
+  "verdict": "PASS",
+  "confidence": "high",
+  "findings": [],
+  "evidence_summary": "Deterministic check passed; pattern issues=0; judge=ACCEPT; repairs_applied=2; human shard=shard_07.",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": {
+    "task": "synthetic_data/customer_support/tasks/syn-exchange-007-slightly_more_expensive_pays.json",
+    "env": "synthetic_data/customer_support/task_envs/syn-exchange-007-slightly_more_expensive_pays.json",
+    "metadata": "synthetic_data/customer_support/metadata/syn-exchange-007-slightly_more_expensive_pays.json",
+    "judgment": "synthetic_data/customer_support/judgments/syn-exchange-007-slightly_more_expensive_pays.json"
+  },
+  "manual_checks": [
+    "task clarity and user goal consistency",
+    "environment product/order/policy consistency",
+    "state_requirements and deterministic replay consistency",
+    "known template residue and language-conflict patterns",
+    "post-repair regression validation"
+  ],
+  "human_shard_review": {
+    "shard": "shard_07",
+    "status": "completed",
+    "post_repair_verdict": "PASS"
+  },
+  "auxiliary_results": {
+    "deterministic": {
+      "task_id": "syn-exchange-007-slightly_more_expensive_pays",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "judge_decision": "ACCEPT",
+    "pattern_issues": [],
+    "repairs": [
+      {
+        "task_id": "syn-exchange-007-slightly_more_expensive_pays",
+        "repair_type": "exchange_target_product_profile_completion",
+        "details": "Aligned replacement product profile with product name."
+      },
+      {
+        "task_id": "syn-exchange-007-slightly_more_expensive_pays",
+        "repair_type": "exchange_price_difference_requirement",
+        "details": "Added explicit price-difference disclosure requirement for $10."
+      }
+    ],
+    "residual_notes": []
+  }
+}

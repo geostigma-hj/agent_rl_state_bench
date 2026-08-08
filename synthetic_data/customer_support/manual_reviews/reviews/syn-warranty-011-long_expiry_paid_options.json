@@ -1,0 +1,60 @@
+{
+  "task_id": "syn-warranty-011-long_expiry_paid_options",
+  "task_type": "warranty_claim",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "REVIEW",
+  "confidence": "medium",
+  "recommended_action": "needs_policy_clarification_before_sft_prefer_exclude",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-warranty-011-long_expiry_paid_options.json",
+    "synthetic_data/customer_support/task_envs/syn-warranty-011-long_expiry_paid_options.json",
+    "synthetic_data/customer_support/metadata/syn-warranty-011-long_expiry_paid_options.json",
+    "synthetic_data/customer_support/judgments/syn-warranty-011-long_expiry_paid_options.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "保修已过期超过 30 天，paid option 路径可执行，claim_count/status/resolution 可由工具达成。",
+    "质量疑点：任务语义是 full-price repair or 25% off replacement 的选项，但 state_requirements 强制创建 replacement_item_id，用户选择不够明确。"
+  ],
+  "evidence_summary": "状态目标可达，但 paid repair 与 discounted replacement 选择语义略模糊；SFT 前建议修清或排除。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "gold_tool_plan_steps": 4,
+    "metadata": {
+      "generator_version": "warranty_v0.1",
+      "changed_factors": [
+        "expired_warranty",
+        "paid_repair_options"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Customer asks for warranty service on SoundMax Wireless Headphones from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty expired more than 30 days ago, so official policy allows full-price repair or 25% off replacement rather than a free warranty claim.",
+    "opening_message": "My SoundMax Wireless Headphones from order ORD-6032 is malfunctioning. Can I use the warranty?",
+    "known_info": [
+      "You bought SoundMax Wireless Headphones in order ORD-6032.",
+      "The product is malfunctioning."
+    ],
+    "task_rules": [
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
+    ]
+  }
+}

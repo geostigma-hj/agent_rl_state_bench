@@ -1,0 +1,62 @@
+{
+  "task_id": "syn-cancel-055-auto_040_split_processing_item0",
+  "task_type": "cancel_order",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "PASS",
+  "confidence": "high",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-cancel-055-auto_040_split_processing_item0.json",
+    "synthetic_data/customer_support/task_envs/syn-cancel-055-auto_040_split_processing_item0.json",
+    "synthetic_data/customer_support/metadata/syn-cancel-055-auto_040_split_processing_item0.json",
+    "synthetic_data/customer_support/judgments/syn-cancel-055-auto_040_split_processing_item0.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "逐条读取 task/env/metadata/judgment，任务引用和本地 checker 通过。",
+    "judge decision=ACCEPT，issues/ambiguities 为空或无阻断项。",
+    "取消范围在 opening、known_info 和 state_requirements 中一致；policy/preview/confirm 要求完整。"
+  ],
+  "evidence_summary": "cancel_order；summary/opening 对齐；state_requirements 数量 4；gold_tool_plan_steps=3；checker passed=True。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "gold_tool_plan_steps": 3,
+    "metadata": {
+      "generator_version": "cancel_v0.1",
+      "changed_factors": [
+        "partial_cancel",
+        "payment_method"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Customer wants to cancel only item ITEM-9020 from order ORD-6003 (containing SoundMax Wireless Headphones and a 7-Port USB-C Hub). The correct procedure is to handle the cancellation according to policy, provide a preview, obtain confirmation, and update only the eligible item.",
+    "opening_message": "I'd like to cancel the SoundMax Wireless Headphones from order ORD-6003, but keep the remaining items.",
+    "known_info": [
+      "You placed order ORD-6003.",
+      "The order contains: SoundMax Wireless Headphones and a 7-Port USB-C Hub."
+    ],
+    "task_rules": [
+      "If the agent previews a valid cancellation and asks for confirmation, agree to proceed.",
+      "Do not request cancellation of any items outside the specified scope."
+    ]
+  }
+}

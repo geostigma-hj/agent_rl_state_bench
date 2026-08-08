@@ -1,0 +1,73 @@
+{
+  "task_id": "syn-edge-053-hard_edge_all_windows_plus_false_defect",
+  "task_type": "edge_case",
+  "reviewer": "full_manual_audit_with_sharded_subagents_and_post_repair_checks",
+  "verdict": "PASS",
+  "confidence": "medium",
+  "findings": [],
+  "evidence_summary": "Deterministic check passed; pattern issues=0; judge=ACCEPT; repairs_applied=2; human shard=shard_13.",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": {
+    "task": "synthetic_data/customer_support/tasks/syn-edge-053-hard_edge_all_windows_plus_false_defect.json",
+    "env": "synthetic_data/customer_support/task_envs/syn-edge-053-hard_edge_all_windows_plus_false_defect.json",
+    "metadata": "synthetic_data/customer_support/metadata/syn-edge-053-hard_edge_all_windows_plus_false_defect.json",
+    "judgment": "synthetic_data/customer_support/judgments/syn-edge-053-hard_edge_all_windows_plus_false_defect.json"
+  },
+  "manual_checks": [
+    "task clarity and user goal consistency",
+    "environment product/order/policy consistency",
+    "state_requirements and deterministic replay consistency",
+    "known template residue and language-conflict patterns",
+    "post-repair regression validation"
+  ],
+  "human_shard_review": {
+    "shard": "shard_13",
+    "status": "completed",
+    "post_repair_verdict": "PASS"
+  },
+  "auxiliary_results": {
+    "deterministic": {
+      "task_id": "syn-edge-053-hard_edge_all_windows_plus_false_defect",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        "metadata has no gold_tool_plan"
+      ]
+    },
+    "judge_decision": "ACCEPT",
+    "pattern_issues": [],
+    "repairs": [
+      {
+        "task_id": "syn-edge-053-hard_edge_all_windows_plus_false_defect",
+        "repair_type": "edge_no_write_simulator_preview_residue_cleanup",
+        "path": "synthetic_data/customer_support/tasks/syn-edge-053-hard_edge_all_windows_plus_false_defect.json",
+        "changes": [
+          {
+            "field": "user_simulator.user_sim_context",
+            "old_fragment": "accept a correct preview before confirmation",
+            "new_fragment": "accept only the correct no-action explanation"
+          }
+        ]
+      },
+      {
+        "task_id": "syn-edge-053-hard_edge_all_windows_plus_false_defect",
+        "repair_type": "template_residue_cleanup",
+        "path": "synthetic_data/customer_support/tasks/syn-edge-053-hard_edge_all_windows_plus_false_defect.json",
+        "changes": [
+          {
+            "field": "task_summary",
+            "old_prefix_removed": "Synthetic edge_case task derived from official customer_support template 137-hard_edge_all_windows_plus_false_defect, surface variant 4. Boo"
+          },
+          {
+            "field": "user_simulator.user_sim_context",
+            "old_prefix_removed": "You are in a synthetic edge_case benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 4.\n"
+          }
+        ]
+      }
+    ],
+    "residual_notes": [
+      "metadata.gold_tool_plan is null; task relies on official harness state/task requirements rather than metadata gold trajectory.",
+      "metadata.expected_state_diff is null; deterministic validity is checked from task state requirements."
+    ]
+  }
+}

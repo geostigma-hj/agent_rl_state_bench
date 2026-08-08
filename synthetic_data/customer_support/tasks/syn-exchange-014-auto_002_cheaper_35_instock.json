@@ -1,6 +1,6 @@
 {
   "task_id": "syn-exchange-014-auto_002_cheaper_35_instock",
-  "task_summary": "Customer requests an exchange of the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in size Large. The correct handling is to apply the exchange policy, preview the exchange, obtain confirmation, and then process the outcome as per policy: if the new item costs more, the customer pays the difference; if it costs less, the customer receives store credit for the difference.",
+  "task_summary": "Customer wants to exchange Premium Cotton Shirt from ORD-6034 for Premium Cotton Shirt (Large). Correct handling is to apply exchange policy, preview, confirm, and use the policy-defined payment or store-credit outcome. If the target item costs more, the customer pays the difference; if it costs less, the difference is store credit.",
   "task_requirements": [
     {
       "id": "syn-exchange-014-auto_002_cheaper_35_instock_must_review_exchange_policy",
@@ -17,12 +17,12 @@
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to exchange the Premium Cotton Shirt from my order ORD-6034 for the same shirt in Large, please.",
+  "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for Premium Cotton Shirt (Large).",
   "user_simulator": {
-    "user_sim_context": "You want to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in Large. If the agent presents a valid exchange for confirmation, you agree to proceed.",
+    "user_sim_context": "You want to exchange Premium Cotton Shirt from order ORD-6034 for Premium Cotton Shirt (Large). If the agent previews a valid exchange and asks for confirmation, agree to proceed.",
     "known_info": [
-      "You purchased a Premium Cotton Shirt in order ORD-6034.",
-      "You wish to receive a Premium Cotton Shirt in size Large instead."
+      "You bought Premium Cotton Shirt in order ORD-6034.",
+      "You want Premium Cotton Shirt (Large) instead."
     ],
     "unknown_info": [
       "You are unaware of the exchange policy regarding price differences."

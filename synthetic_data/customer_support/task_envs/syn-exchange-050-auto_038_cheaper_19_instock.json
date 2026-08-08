@@ -23,7 +23,7 @@
       "warranty_months": 0,
       "return_window_days": 30,
       "restocking_fee_pct": 0,
-      "weight_lbs": 0.4,
+      "weight_lbs": 0.5,
       "is_fragile": false,
       "in_stock": true,
       "current_price": null

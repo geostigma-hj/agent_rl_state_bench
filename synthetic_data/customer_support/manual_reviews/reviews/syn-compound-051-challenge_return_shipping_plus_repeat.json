@@ -1,0 +1,72 @@
+{
+  "task_id": "syn-compound-051-challenge_return_shipping_plus_repeat",
+  "task_type": "compound",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "PASS",
+  "confidence": "medium",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-compound-051-challenge_return_shipping_plus_repeat.json",
+    "synthetic_data/customer_support/task_envs/syn-compound-051-challenge_return_shipping_plus_repeat.json",
+    "synthetic_data/customer_support/metadata/syn-compound-051-challenge_return_shipping_plus_repeat.json",
+    "synthetic_data/customer_support/judgments/syn-compound-051-challenge_return_shipping_plus_repeat.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "逐条读取 task/env/metadata/judgment，任务引用和本地 checker 通过。",
+    "judge decision=ACCEPT，issues/ambiguities 为空或无阻断项。",
+    "复合任务的多步骤目标、must/must_not 和状态变更范围一致；无 gold_tool_plan 是模板派生任务的已知 warning。"
+  ],
+  "evidence_summary": "compound；summary/opening 对齐；state_requirements 数量 11；gold_tool_plan_steps=0；checker passed=True。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        "metadata has no gold_tool_plan"
+      ]
+    },
+    "gold_tool_plan_steps": 0,
+    "metadata": {
+      "generator_version": "compound_template_v0.1",
+      "changed_factors": [
+        "official_template_structure",
+        "surface_variant_3"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Synthetic compound task derived from official customer_support template 90-challenge_return_shipping_plus_repeat, surface variant 3. **Task:** A Standard customer is returning two phone cases from a $44 order. The first return triggers the $8 low-value return-shipping fee, and the second same-category return also carries the $5 repeat surcharge, so the two lines must be settled differently.\n\n**Challenge:** The refunds are intentionally asymmetric even though the items match. Weak agents apply the shipping fee without the repeat surcharge, treat both cases identically, or fail to sequence the second same-category adjustment correctly.",
+    "opening_message": "Please check the policy and do the right thing here. I want to return both phone cases from order ORD-7121. Neither fits my phone.",
+    "known_info": [
+      "order_id: ORD-7121",
+      "items: 2 phone cases",
+      "reason: don't fit"
+    ],
+    "task_rules": [
+      "Return both phone cases from ORD-7121 because neither fits; do not broaden the request to other items or order changes.",
+      "If the agent asks for details, provide only the order ID, that there are two phone cases, and that the fit is the return reason.",
+      "Do not volunteer refund amounts, shipping-fee rules, or repeat-surcharge rules before the agent checks the order and policies.",
+      "If the agent previews or processes only one phone case, ask to include both phone cases before agreeing to any final action.",
+      "If the agent offers identical refunds for both cases, a full refund with no deductions, or a preview that omits the repeated same-category handling, ask them to verify whether returning another accessories item changes the second refund.",
+      "If the agent omits any shipping deduction or gives only a vague lump-sum total, ask for an itemized preview that explains each case's refund and any shipping or repeated-category deduction.",
+      "Accept only after the preview covers both phone cases, the original-payment refund path, the low-value return-shipping deduction, and a separate repeat same-category surcharge on the second case.",
+      "End only after both phone-case returns have been processed and the final per-item refund details have been confirmed.",
+      "Do not change the intended resolution path from the task summary."
+    ]
+  }
+}

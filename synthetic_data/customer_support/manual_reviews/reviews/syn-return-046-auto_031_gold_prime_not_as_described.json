@@ -1,0 +1,62 @@
+{
+  "task_id": "syn-return-046-auto_031_gold_prime_not_as_described",
+  "task_type": "return_item",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "FAIL",
+  "confidence": "high",
+  "recommended_action": "exclude_from_sft_until_fixed",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-return-046-auto_031_gold_prime_not_as_described.json",
+    "synthetic_data/customer_support/task_envs/syn-return-046-auto_031_gold_prime_not_as_described.json",
+    "synthetic_data/customer_support/metadata/syn-return-046-auto_031_gold_prime_not_as_described.json",
+    "synthetic_data/customer_support/judgments/syn-return-046-auto_031_gold_prime_not_as_described.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": false,
+    "simulator_consistent": false,
+    "state_requirements_reachable": false,
+    "task_requirements_noncontradictory": false,
+    "judge_accept_credible": false,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "核心矛盾：opening_message 是“I opened it, but I do not want it anymore”，自然语义是 changed_mind，不是 not_as_described。",
+    "user_simulator/context 和 task_requirements 强制 not_as_described，但 known_info 没给任何“描述不符”的事实，agent 无法从对话事实合理推出该原因。",
+    "state_requirements/gold_tool_plan 要求 refund_amount=241、restocking_fee=0；这与用户开场的 changed_mind 事实冲突，judge auto-accept 未捕捉该问题。"
+  ],
+  "evidence_summary": "用户话术、预期 return_reason 和退款金额/费用语义不一致；这是实质构造错误，不能进 SFT 冷启动数据。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "gold_tool_plan_steps": 3,
+    "metadata": {
+      "generator_version": "return_refund_v0.1",
+      "changed_factors": [
+        "return_reason",
+        "membership_tier"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Customer wants to return SoundMax Wireless Headphones from ORD-6011. The agent must apply the return policy, preview the return, obtain confirmation, and process the correct refund.",
+    "opening_message": "I would like to return the SoundMax Wireless Headphones from order ORD-6011. I opened it, but I do not want it anymore, and I want the refund back to my original payment method.",
+    "known_info": [
+      "You bought SoundMax Wireless Headphones in order ORD-6011.",
+      "You received the order on 2026-06-06T14:00:00."
+    ],
+    "task_rules": [
+      "Do not invent order IDs, item IDs, prices, dates, or policy details.",
+      "If the agent previews a valid return and asks for confirmation, agree to proceed."
+    ]
+  }
+}

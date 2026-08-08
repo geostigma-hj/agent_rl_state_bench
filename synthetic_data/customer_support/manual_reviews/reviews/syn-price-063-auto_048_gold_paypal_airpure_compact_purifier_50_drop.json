@@ -1,0 +1,62 @@
+{
+  "task_id": "syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop",
+  "task_type": "price_match_refund",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "PASS",
+  "confidence": "high",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop.json",
+    "synthetic_data/customer_support/task_envs/syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop.json",
+    "synthetic_data/customer_support/metadata/syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop.json",
+    "synthetic_data/customer_support/judgments/syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "逐条读取 task/env/metadata/judgment，任务引用和本地 checker 通过。",
+    "judge decision=ACCEPT，issues/ambiguities 为空或无阻断项。",
+    "price-match 金额可由 unit_price/current_price 推导，task_requirements 限制不退货/取消/换货。"
+  ],
+  "evidence_summary": "price_match_refund；summary/opening 对齐；state_requirements 数量 2；gold_tool_plan_steps=4；checker passed=True。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "gold_tool_plan_steps": 4,
+    "metadata": {
+      "generator_version": "price_match_v0.1",
+      "changed_factors": [
+        "price_drop",
+        "customer_wrong_amount"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Customer requests a price-match adjustment for the AirPure Compact Purifier in order ORD-7208. The expected resolution is a $50 refund while keeping the order and item active.",
+    "opening_message": "I noticed the AirPure Compact Purifier from order ORD-7208 is now listed at a lower price, and I believe I'm entitled to a refund of the difference. Could you please process that?",
+    "known_info": [
+      "You purchased an AirPure Compact Purifier in order ORD-7208.",
+      "The current product price is $109."
+    ],
+    "task_rules": [
+      "Focus solely on obtaining a price-match refund; do not propose returning, canceling, or exchanging the item.",
+      "If the agent confirms the policy-backed refund amount and ensures the order/item remains active, accept the refund."
+    ]
+  }
+}

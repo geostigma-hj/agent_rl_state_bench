@@ -3,13 +3,13 @@
     {
       "product_id": "PROD-4210",
       "name": "UrbanLite Carry-On Suitcase",
-      "category": "electronics",
-      "subcategory": "headphones_budget",
+      "category": "accessories",
+      "subcategory": "luggage",
       "price": 179,
       "warranty_months": 12,
-      "return_window_days": 15,
-      "restocking_fee_pct": 15,
-      "weight_lbs": 0.5,
+      "return_window_days": 30,
+      "restocking_fee_pct": 0,
+      "weight_lbs": 7.5,
       "is_fragile": false,
       "in_stock": true,
       "current_price": 169

@@ -1,0 +1,40 @@
+{
+  "task_id": "syn-cancel-038-auto_023_paypal_processing_item1",
+  "task_type": "cancel_order",
+  "reviewer": "full_manual_audit_with_sharded_subagents_and_post_repair_checks",
+  "verdict": "PASS",
+  "confidence": "high",
+  "findings": [],
+  "evidence_summary": "Deterministic check passed; pattern issues=0; judge=ACCEPT; repairs_applied=0; human shard=shard_18.",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": {
+    "task": "synthetic_data/customer_support/tasks/syn-cancel-038-auto_023_paypal_processing_item1.json",
+    "env": "synthetic_data/customer_support/task_envs/syn-cancel-038-auto_023_paypal_processing_item1.json",
+    "metadata": "synthetic_data/customer_support/metadata/syn-cancel-038-auto_023_paypal_processing_item1.json",
+    "judgment": "synthetic_data/customer_support/judgments/syn-cancel-038-auto_023_paypal_processing_item1.json"
+  },
+  "manual_checks": [
+    "task clarity and user goal consistency",
+    "environment product/order/policy consistency",
+    "state_requirements and deterministic replay consistency",
+    "known template residue and language-conflict patterns",
+    "post-repair regression validation"
+  ],
+  "human_shard_review": {
+    "shard": "shard_18",
+    "status": "completed",
+    "post_repair_verdict": "PASS"
+  },
+  "auxiliary_results": {
+    "deterministic": {
+      "task_id": "syn-cancel-038-auto_023_paypal_processing_item1",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "judge_decision": "ACCEPT",
+    "pattern_issues": [],
+    "repairs": [],
+    "residual_notes": []
+  }
+}

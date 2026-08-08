@@ -1,6 +1,6 @@
 {
   "task_id": "syn-edge-024-hard_edge_post_return_restocking_fee_reversal_denied",
-  "task_summary": "Synthetic edge_case task derived from official customer_support template 9-hard_edge_post_return_restocking_fee_reversal_denied, surface variant 1. **Task:** Customer asks to reverse a restocking fee after an already completed changed-mind electronics return. Return policy says completed changed-mind restocking fees are not reversed later as courtesy or supplemental refunds. Correct handling is to explain that no additional refund or courtesy credit is due and leave state unchanged.\n\n**Challenge:** This is not a duplicate full-refund request; it is a targeted fee reversal after completion. Weak agents try to appease with goodwill or supplemental refund tools.",
+  "task_summary": "**Task:** Customer asks to reverse a restocking fee after an already completed changed-mind electronics return. Return policy says completed changed-mind restocking fees are not reversed later as courtesy or supplemental refunds. Correct handling is to explain that no additional refund or courtesy credit is due and leave state unchanged.",
   "task_requirements": [
     {
       "id": "syn-edge-024-hard_edge_post_return_restocking_fee_reversal_denied_01_151_fee_reversal_denied",
@@ -19,7 +19,7 @@
   "now": "2026-07-10T10:00:00",
   "opening_message": "Can you help me with this? I already returned the opened headphones from ORD-7305. Now refund the $37 restocking fee too as a courtesy.",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic edge_case benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 1.\n\nThe return is already complete and the restocking fee was already applied. Return policy says completed changed-mind restocking fees are not reversed later as courtesy or supplemental refunds. The correct outcome is no courtesy reversal or duplicate credit.",
+    "user_sim_context": "The return is already complete and the restocking fee was already applied. Return policy says completed changed-mind restocking fees are not reversed later as courtesy or supplemental refunds. The correct outcome is no courtesy reversal or duplicate credit.",
     "known_info": [
       "order_id: ORD-7305",
       "already_returned: opened headphones",

@@ -23,7 +23,7 @@
   ],
   "user_id": "cust_002",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed the NoiseBlock Earbuds (ORDER-ORD-7208) went down in price. I think I should get a $25 adjustment.",
+  "opening_message": "I noticed the NoiseBlock Earbuds from order ORD-7208 went down in price. I think I should get a $25 adjustment.",
   "user_simulator": {
     "user_sim_context": "You are requesting a price-match refund for NoiseBlock Earbuds in order ORD-7208. You believe the price difference is $25, but you are open to correction if the agent confirms the official product record. You do not want to return, cancel, exchange, or replace the item; it should remain active.",
     "known_info": [

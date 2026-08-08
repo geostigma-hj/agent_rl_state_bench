@@ -1,0 +1,46 @@
+{
+  "task_id": "syn-exchange-018-auto_006_cheaper_55_instock",
+  "task_type": "exchange_item",
+  "reviewer": "full_manual_audit_with_sharded_subagents_and_post_repair_checks",
+  "verdict": "PASS",
+  "confidence": "high",
+  "findings": [],
+  "evidence_summary": "Deterministic check passed; pattern issues=0; judge=ACCEPT; repairs_applied=1; human shard=shard_18.",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": {
+    "task": "synthetic_data/customer_support/tasks/syn-exchange-018-auto_006_cheaper_55_instock.json",
+    "env": "synthetic_data/customer_support/task_envs/syn-exchange-018-auto_006_cheaper_55_instock.json",
+    "metadata": "synthetic_data/customer_support/metadata/syn-exchange-018-auto_006_cheaper_55_instock.json",
+    "judgment": "synthetic_data/customer_support/judgments/syn-exchange-018-auto_006_cheaper_55_instock.json"
+  },
+  "manual_checks": [
+    "task clarity and user goal consistency",
+    "environment product/order/policy consistency",
+    "state_requirements and deterministic replay consistency",
+    "known template residue and language-conflict patterns",
+    "post-repair regression validation"
+  ],
+  "human_shard_review": {
+    "shard": "shard_18",
+    "status": "completed",
+    "post_repair_verdict": "PASS"
+  },
+  "auxiliary_results": {
+    "deterministic": {
+      "task_id": "syn-exchange-018-auto_006_cheaper_55_instock",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "judge_decision": "ACCEPT",
+    "pattern_issues": [],
+    "repairs": [
+      {
+        "task_id": "syn-exchange-018-auto_006_cheaper_55_instock",
+        "repair_type": "exchange_target_product_profile_completion",
+        "details": "Aligned replacement product profile with product name."
+      }
+    ],
+    "residual_notes": []
+  }
+}

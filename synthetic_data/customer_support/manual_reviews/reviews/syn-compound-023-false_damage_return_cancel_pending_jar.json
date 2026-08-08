@@ -1,0 +1,75 @@
+{
+  "task_id": "syn-compound-023-false_damage_return_cancel_pending_jar",
+  "task_type": "compound",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "PASS",
+  "confidence": "medium",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-compound-023-false_damage_return_cancel_pending_jar.json",
+    "synthetic_data/customer_support/task_envs/syn-compound-023-false_damage_return_cancel_pending_jar.json",
+    "synthetic_data/customer_support/metadata/syn-compound-023-false_damage_return_cancel_pending_jar.json",
+    "synthetic_data/customer_support/judgments/syn-compound-023-false_damage_return_cancel_pending_jar.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "逐条读取 task/env/metadata/judgment，任务引用和本地 checker 通过。",
+    "judge decision=ACCEPT，issues/ambiguities 为空或无阻断项。",
+    "复合任务的多步骤目标、must/must_not 和状态变更范围一致；无 gold_tool_plan 是模板派生任务的已知 warning。"
+  ],
+  "evidence_summary": "compound；summary/opening 对齐；state_requirements 数量 13；gold_tool_plan_steps=0；checker passed=True。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        "metadata has no gold_tool_plan"
+      ]
+    },
+    "gold_tool_plan_steps": 0,
+    "metadata": {
+      "generator_version": "compound_template_v0.1",
+      "changed_factors": [
+        "official_template_structure",
+        "surface_variant_1"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Synthetic compound task derived from official customer_support template 80-false_damage_return_cancel_pending_jar, surface variant 1. **Task:** Customer says a working blender was scratched after unpacking and the delivery box was fine. They want to return the blender and also want a pending replacement jar cancelled if the blender is returned, while keeping an unrelated recipe book. Correct handling is to classify the blender return as changed_mind for an $89 original-payment refund with no return label, cancel only the replacement jar, and keep the recipe book confirmed.\n\n**Challenge:** This tests return-reason classification from explicit facts plus cascading cleanup. Weak agents may still process a damaged_in_transit return with a free label despite being told the scratch happened after unpacking, then perform the dependent cancellation.",
+    "opening_message": "Can you help me with this? The PowerBlend Pro Blender from ORD-7831 got scratched after I unpacked it; the delivery box was fine and it still works, but I do not want to keep it. If you take the blender back, cancel the pending replacement jar in ORD-7832, but keep the Smoothie Recipe Book.",
+    "known_info": [
+      "blender_order_id: ORD-7831",
+      "item: PowerBlend Pro Blender",
+      "scratch_context: the delivery box was fine; the blender got scratched after unpacking and still works",
+      "dependent_order_id: ORD-7832",
+      "dependent_item: PowerBlend Replacement Jar",
+      "keep_item: Smoothie Recipe Book"
+    ],
+    "task_rules": [
+      "Start by saying the PowerBlend Pro Blender got scratched after unpacking, the delivery box was fine, it still works, and you do not want to keep it; also ask to cancel the pending replacement jar if the blender is taken back and to keep the Smoothie Recipe Book.",
+      "Provide both order IDs, the post-unpacking scratch context, pending replacement jar, and keep-the-book instruction when asked; do not volunteer item IDs, policy details, exact refund amounts, or tool behavior before the agent checks.",
+      "If the agent asks whether the package was damaged, whether it arrived that way, or whether this was shipping damage, repeat that the delivery box was fine, the blender got scratched after you unpacked it, and it still works but you do not want to keep it.",
+      "If the agent says that means the return should be classified as changed mind rather than damaged in transit, accept that classification.",
+      "If the agent tries to cancel the Smoothie Recipe Book, push back that only the replacement jar should be cancelled and the book should remain in the order.",
+      "Approve only after the agent previews a changed-mind return for the blender and cancellation of only the PowerBlend Replacement Jar.",
+      "Accept only after the blender is returned for $89 to original payment as changed mind with no return label, the replacement jar is cancelled, and the Smoothie Recipe Book remains confirmed.",
+      "End only after those final states are confirmed.",
+      "Do not change the intended resolution path from the task summary."
+    ]
+  }
+}

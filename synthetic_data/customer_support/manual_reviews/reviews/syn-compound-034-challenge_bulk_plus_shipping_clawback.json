@@ -1,0 +1,72 @@
+{
+  "task_id": "syn-compound-034-challenge_bulk_plus_shipping_clawback",
+  "task_type": "compound",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "PASS",
+  "confidence": "medium",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-compound-034-challenge_bulk_plus_shipping_clawback.json",
+    "synthetic_data/customer_support/task_envs/syn-compound-034-challenge_bulk_plus_shipping_clawback.json",
+    "synthetic_data/customer_support/metadata/syn-compound-034-challenge_bulk_plus_shipping_clawback.json",
+    "synthetic_data/customer_support/judgments/syn-compound-034-challenge_bulk_plus_shipping_clawback.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "逐条读取 task/env/metadata/judgment，任务引用和本地 checker 通过。",
+    "judge decision=ACCEPT，issues/ambiguities 为空或无阻断项。",
+    "复合任务的多步骤目标、must/must_not 和状态变更范围一致；无 gold_tool_plan 是模板派生任务的已知 warning。"
+  ],
+  "evidence_summary": "compound；summary/opening 对齐；state_requirements 数量 11；gold_tool_plan_steps=0；checker passed=True。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        "metadata has no gold_tool_plan"
+      ]
+    },
+    "gold_tool_plan_steps": 0,
+    "metadata": {
+      "generator_version": "compound_template_v0.1",
+      "changed_factors": [
+        "official_template_structure",
+        "surface_variant_2"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Synthetic compound task derived from official customer_support template 72-challenge_bulk_plus_shipping_clawback, surface variant 2. **Task:** A Standard customer is returning a blender and a shirt from a four-item order that had both a bulk discount and free shipping. Once those two items are removed, the order loses both benefits, so the correct handling is to process both returns while applying the $10 bulk clawback and the $8 shipping clawback.\n\n**Challenge:** This is a double-clawback case where incomplete math is the most common failure. Weak agents catch only one adjustment, refund both items as if the original perks still applied, or miss that the post-return order state drives both deductions.",
+    "opening_message": "I need this handled carefully: Hi, I want to return the blender from order ORD-7101 first, and once that's done I'll return the cotton shirt too. I changed my mind on both of them.",
+    "known_info": [
+      "order_id: ORD-7101",
+      "return order: blender first, then the cotton shirt",
+      "reason: changed mind"
+    ],
+    "task_rules": [
+      "Ask the agent to fully process and confirm the blender return first; only after the blender return is confirmed do you bring up the cotton shirt return. If the agent offers to handle both at once or starts with the shirt, restate that you want the blender returned and confirmed first, then the shirt.",
+      "Keep the request scoped to returning both the blender and the cotton shirt from ORD-7101 because you changed your mind.",
+      "Provide the order ID, the two items, and the changed-mind reason when asked, but do not volunteer policy rules, threshold math, or refund amounts.",
+      "If the agent handles only one item or tries to leave either requested item out of the return, ask them to include both the blender and the cotton shirt.",
+      "Before approving the returns, require a preview that covers both item refunds and explains how returning both items affects the order's discount and free-shipping eligibility.",
+      "Accept the preview only after the agent explains both the $10 bulk-discount clawback and the $8 free-shipping clawback; if only one clawback is mentioned, ask whether the other threshold also changes.",
+      "Push back if the preview treats the returns as a simple full refund for both items, uses the wrong item or reason, or gives deductions without explaining why they apply.",
+      "End only after BOTH returns have been processed in that order (blender first, then shirt) and the agent confirms the final refund handling for the blender and cotton shirt, including both clawbacks.",
+      "Do not change the intended resolution path from the task summary."
+    ]
+  }
+}

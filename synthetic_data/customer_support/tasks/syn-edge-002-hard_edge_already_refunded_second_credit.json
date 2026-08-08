@@ -1,6 +1,6 @@
 {
   "task_id": "syn-edge-002-hard_edge_already_refunded_second_credit",
-  "task_summary": "Synthetic edge_case task derived from official customer_support template 134-hard_edge_already_refunded_second_credit, surface variant 0. Item is already returned and refunded. Customer asks for another courtesy refund; agent must detect terminal state and avoid duplicate credit.",
+  "task_summary": "Item is already returned and refunded. Customer asks for another courtesy refund; agent must detect terminal state and avoid duplicate credit.",
   "task_requirements": [
     {
       "evidence": "conversation_or_tool_calls",
@@ -31,7 +31,7 @@
   "now": "2026-07-08T10:00:00",
   "opening_message": "I returned the phone case from ORD-7242, but can you refund it again as a courtesy?",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic edge_case benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 0.\n\nYou are contacting support about order ORD-7242. Item is already returned and refunded. Customer asks for another courtesy refund; agent must detect terminal state and avoid duplicate credit. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation.",
+    "user_sim_context": "You are contacting support about order ORD-7242. Item is already returned and refunded. Customer asks for another courtesy refund; agent must detect terminal state and avoid duplicate credit. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept only the correct no-action explanation.",
     "known_info": [
       "order_id: ORD-7242"
     ],

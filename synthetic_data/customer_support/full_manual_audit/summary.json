@@ -1,0 +1,68 @@
+{
+  "total": 590,
+  "verdict_counts": {
+    "PASS": 590
+  },
+  "task_type_counts": {
+    "cancel_order": 60,
+    "compound": 60,
+    "edge_case": 60,
+    "exchange_item": 80,
+    "price_match_refund": 90,
+    "return_item": 65,
+    "shipping_claim": 110,
+    "warranty_claim": 65
+  },
+  "deterministic": {
+    "total": 590,
+    "passed": 590,
+    "failed": 0,
+    "warnings": 120
+  },
+  "pattern_issue_count": 0,
+  "judge_counts": {
+    "ACCEPT": 590
+  },
+  "repair_count": 854,
+  "repair_counts": {
+    "return_not_as_described_language": 4,
+    "price_match_product_profile": 90,
+    "shipping_product_metadata": 6,
+    "warranty_product_profile": 55,
+    "old_expiry_warranty_choice_clarification": 11,
+    "shipping_product_profile_completion": 9,
+    "warranty_product_profile_completion": 29,
+    "exchange_target_product_realism": 36,
+    "exchange_target_product_realism_task_text": 36,
+    "shipping_low_value_free_shipping_explained": 53,
+    "warranty_extended_coverage_explained": 44,
+    "return_mislabel_summary_policy_clarification": 1,
+    "edge_no_write_simulator_preview_residue_cleanup": 15,
+    "edge_wrong_item_env_modeling_clarification": 1,
+    "template_residue_cleanup": 120,
+    "exchange_target_text_alignment": 27,
+    "edge_vague_wrong_item_env_alignment": 5,
+    "edge_vague_wrong_item_task_text_alignment": 5,
+    "compound_bulk_shipping_summary_math_clarification": 5,
+    "template_challenge_meta_cleanup": 85,
+    "exchange_task_text_normalization": 58,
+    "price_opening_order_token_cleanup": 2,
+    "exchange_target_product_profile_completion": 116,
+    "exchange_price_difference_requirement": 41
+  },
+  "shard_count": 20,
+  "review_records_dir": "synthetic_data/customer_support/full_manual_audit/reviews",
+  "residual_note_counts": {
+    "null_gold_tool_plan": 120,
+    "null_expected_state_diff": 120,
+    "deterministic_warnings": 120
+  },
+  "residual_risk_summary": [
+    "Some template-derived compound/edge tasks intentionally have null metadata.gold_tool_plan/expected_state_diff; final validation uses official task state_requirements/task_requirements and deterministic checker.",
+    "These residual notes are traceability limitations, not unresolved content contradictions after repair."
+  ],
+  "verification": {
+    "pytest": "tests/test_synthetic_customer_support.py: 3 passed",
+    "pattern_regex": "no matches for ORDER-ORD/ORD-ORD/template residue/challenge residue"
+  }
+}

@@ -10,7 +10,7 @@ from typing import Any
 from state_bench.domains.customer_support.environment import CustomerSupportEnvironment
 from state_bench.domains.customer_support.schemas import CSEnvironmentData
 from state_bench.schemas import TaskDefinition, UserSimulatorConfig
-from state_bench.synthetic.customer_support.core import build_state_requirements, finalize_task, load_seed
+from state_bench.synthetic.customer_support.core import apply_product_profile, build_state_requirements, finalize_task, load_seed
 
 GENERATOR_VERSION = "exchange_v0.1"
 
@@ -138,6 +138,16 @@ def _auto_exchange_variants() -> tuple[ExchangeVariant, ...]:
 DEFAULT_EXCHANGE_VARIANTS: tuple[ExchangeVariant, ...] = (*BASE_EXCHANGE_VARIANTS, *_auto_exchange_variants())
 
 
+def _target_product_name(price: int) -> str:
+    if price <= 249:
+        return "Premium Cotton Shirt (Large)"
+    if price <= 699:
+        return "Designer Merino Jacket (Large)"
+    if price <= 1499:
+        return "Premium Wool Coat (Large)"
+    return "Limited Edition Leather Jacket (Large)"
+
+
 def generate_exchange_tasks(*, output_root: Path, limit: int | None = None, rewrite: bool = False) -> list[dict[str, Path]]:
     seed_task, seed_env = load_seed("33-exchange_size_swap")
     variants = DEFAULT_EXCHANGE_VARIANTS[:limit] if limit is not None else DEFAULT_EXCHANGE_VARIANTS
@@ -169,6 +179,8 @@ def build_exchange_variant(
     item.refund_amount = None
     item.refund_method = None
     item.replacement_item_id = None
+    new_product.name = _target_product_name(variant.new_price)
+    apply_product_profile(new_product, new_product.name)
     new_product.price = variant.new_price
     new_product.current_price = None
     new_product.in_stock = variant.in_stock
@@ -205,7 +217,14 @@ def build_exchange_variant(
         ),
         task_type="exchange_item",
         state_requirements=state_requirements,
-        task_requirements=_requirements(task_id, item.item_id, new_product.product_id, in_stock=variant.in_stock),
+        task_requirements=_requirements(
+            task_id,
+            item.item_id,
+            new_product.product_id,
+            in_stock=variant.in_stock,
+            old_price=old_product.price,
+            new_price=new_product.price,
+        ),
     )
     metadata = {
         "task_id": task_id,
@@ -239,7 +258,15 @@ def _build_gold_exchange_plan(env_data: CSEnvironmentData, now: str, item_id: st
     ]
 
 
-def _requirements(task_id: str, item_id: str, new_product_id: str, *, in_stock: bool) -> list[dict[str, Any]]:
+def _requirements(
+    task_id: str,
+    item_id: str,
+    new_product_id: str,
+    *,
+    in_stock: bool,
+    old_price: int,
+    new_price: int,
+) -> list[dict[str, Any]]:
     requirements = [
         {
             "id": f"{task_id}_must_review_exchange_policy",
@@ -260,6 +287,18 @@ def _requirements(task_id: str, item_id: str, new_product_id: str, *, in_stock: 
                 "evidence": "tool_calls",
             }
         )
+        if new_price > old_price:
+            requirements.append(
+                {
+                    "id": f"{task_id}_must_disclose_exchange_price_difference",
+                    "kind": "must",
+                    "requirement": (
+                        f"Agent must make clear before confirmation that the requested replacement costs ${new_price} "
+                        f"and the customer pays the ${new_price - old_price} exchange price difference."
+                    ),
+                    "evidence": "messages",
+                }
+            )
     else:
         requirements.append(
             {

@@ -1,0 +1,76 @@
+{
+  "task_id": "syn-exchange-014-auto_002_cheaper_35_instock",
+  "task_type": "exchange_item",
+  "reviewer": "full_manual_audit_with_sharded_subagents_and_post_repair_checks",
+  "verdict": "PASS",
+  "confidence": "high",
+  "findings": [],
+  "evidence_summary": "Deterministic check passed; pattern issues=0; judge=ACCEPT; repairs_applied=3; human shard=shard_14.",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": {
+    "task": "synthetic_data/customer_support/tasks/syn-exchange-014-auto_002_cheaper_35_instock.json",
+    "env": "synthetic_data/customer_support/task_envs/syn-exchange-014-auto_002_cheaper_35_instock.json",
+    "metadata": "synthetic_data/customer_support/metadata/syn-exchange-014-auto_002_cheaper_35_instock.json",
+    "judgment": "synthetic_data/customer_support/judgments/syn-exchange-014-auto_002_cheaper_35_instock.json"
+  },
+  "manual_checks": [
+    "task clarity and user goal consistency",
+    "environment product/order/policy consistency",
+    "state_requirements and deterministic replay consistency",
+    "known template residue and language-conflict patterns",
+    "post-repair regression validation"
+  ],
+  "human_shard_review": {
+    "shard": "shard_14",
+    "status": "completed",
+    "post_repair_verdict": "PASS"
+  },
+  "auxiliary_results": {
+    "deterministic": {
+      "task_id": "syn-exchange-014-auto_002_cheaper_35_instock",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "judge_decision": "ACCEPT",
+    "pattern_issues": [],
+    "repairs": [
+      {
+        "task_id": "syn-exchange-014-auto_002_cheaper_35_instock",
+        "repair_type": "exchange_target_text_alignment",
+        "path": "synthetic_data/customer_support/tasks/syn-exchange-014-auto_002_cheaper_35_instock.json",
+        "changes": [
+          {
+            "target_product_id": "PROD-2251",
+            "target_name": "Premium Cotton Shirt (Large)"
+          }
+        ]
+      },
+      {
+        "task_id": "syn-exchange-014-auto_002_cheaper_35_instock",
+        "repair_type": "exchange_task_text_normalization",
+        "path": "synthetic_data/customer_support/tasks/syn-exchange-014-auto_002_cheaper_35_instock.json",
+        "changes": [
+          {
+            "target_product_id": "PROD-2251",
+            "target_name": "Premium Cotton Shirt (Large)",
+            "old": {
+              "task_summary": "Customer requests an exchange of the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in size Large. The correct handling is to apply the exchange policy, preview the exchange, obtain confirmation, and then process the outcome as per policy: if the new item costs more, the customer pays the difference; if it costs less, the customer receives store credit for the difference.",
+              "opening_message": "I'd like to exchange the Premium Cotton Shirt from my order ORD-6034 for Premium Cotton Shirt (Large), please."
+            },
+            "new": {
+              "task_summary": "Customer wants to exchange Premium Cotton Shirt from ORD-6034 for Premium Cotton Shirt (Large). Correct handling is to apply exchange policy, preview, confirm, and use the policy-defined payment or store-credit outcome. If the target item costs more, the customer pays the difference; if it costs less, the difference is store credit.",
+              "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for Premium Cotton Shirt (Large)."
+            }
+          }
+        ]
+      },
+      {
+        "task_id": "syn-exchange-014-auto_002_cheaper_35_instock",
+        "repair_type": "exchange_target_product_profile_completion",
+        "details": "Aligned replacement product profile with product name."
+      }
+    ],
+    "residual_notes": []
+  }
+}

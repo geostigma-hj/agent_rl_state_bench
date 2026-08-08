@@ -1,0 +1,61 @@
+{
+  "task_id": "syn-price-032-auto_017_standard_debit_card_slatetab_pro_11_inch_5_drop",
+  "task_type": "price_match_refund",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "REVIEW",
+  "confidence": "medium",
+  "recommended_action": "usable_if_metadata_noise_accepted",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-price-032-auto_017_standard_debit_card_slatetab_pro_11_inch_5_drop.json",
+    "synthetic_data/customer_support/task_envs/syn-price-032-auto_017_standard_debit_card_slatetab_pro_11_inch_5_drop.json",
+    "synthetic_data/customer_support/metadata/syn-price-032-auto_017_standard_debit_card_slatetab_pro_11_inch_5_drop.json",
+    "synthetic_data/customer_support/judgments/syn-price-032-auto_017_standard_debit_card_slatetab_pro_11_inch_5_drop.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "主 price-match 路径正确：原价 599、current_price 594、正确退款 5，用户误报 20 可由 agent 查价纠正。",
+    "质量疑点：产品名 SlateTab Pro 11-inch 但 subcategory 为 headphones_budget，属于商品属性模板残留。"
+  ],
+  "evidence_summary": "金额、状态和工具路径可用；产品细分类元数据不自然，建议后续清洗。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    "gold_tool_plan_steps": 4,
+    "metadata": {
+      "generator_version": "price_match_v0.1",
+      "changed_factors": [
+        "price_drop",
+        "customer_wrong_amount"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Customer requests a price-match adjustment for SlateTab Pro 11-inch in ORD-7208. The correct outcome is a $5 price-match refund while keeping the order and item active.",
+    "opening_message": "Hi, I bought a SlateTab Pro 11-inch with order ORD-7208, and I noticed the price has dropped. I'd like a price-match refund of $20, please.",
+    "known_info": [
+      "You bought SlateTab Pro 11-inch in order ORD-7208.",
+      "The current product price is $594."
+    ],
+    "task_rules": [
+      "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
+      "If the agent confirms the price difference is actually $5 and processes the refund, accept that amount and confirm."
+    ]
+  }
+}

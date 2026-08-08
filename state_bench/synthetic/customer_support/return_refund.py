@@ -475,6 +475,11 @@ def _opening_message(product_name: str, order_id: str, variant: ReturnVariant) -
         return f"I received the wrong item in order {order_id}. I need to return the {product_name} for a refund to my original payment method."
     if variant.reason == "damaged_in_transit":
         return f"The {product_name} from order {order_id} arrived damaged in transit, and I need to return it to my original payment method."
+    if variant.reason == "not_as_described":
+        return (
+            f"I need to return the {product_name} from order {order_id}. "
+            "The item does not match the product description, so I want the refund back to my original payment method."
+        )
     return (
         f"I would like to return the {product_name} from order {order_id}. "
         "I opened it, but I do not want it anymore, and I want the refund back to my original payment method."
@@ -501,6 +506,11 @@ def _task_summary(product_name: str, order_id: str, variant: ReturnVariant) -> s
         return (
             f"Customer reports {product_name} from {order_id} was damaged in transit. The agent must process a "
             "merchant-fault return with no restocking fee."
+        )
+    if variant.reason == "not_as_described":
+        return (
+            f"Customer reports {product_name} from {order_id} does not match the product description. "
+            "The agent must process a not-as-described return with no restocking fee."
         )
     return (
         f"Customer wants to return {product_name} from {order_id}. The agent must apply the return policy, preview "

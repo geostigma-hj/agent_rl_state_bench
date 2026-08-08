@@ -1,6 +1,6 @@
 {
   "task_id": "syn-edge-017-hard_edge_all_windows_plus_false_defect",
-  "task_summary": "Synthetic edge_case task derived from official customer_support template 137-hard_edge_all_windows_plus_false_defect, surface variant 1. Book is far outside every return window. Customer first calls it defective but admits they simply changed their mind. Agent must deny return and not use defective exception.",
+  "task_summary": "Book is far outside every return window. Customer first calls it defective but admits they simply changed their mind. Agent must deny return and not use defective exception.",
   "task_requirements": [
     {
       "evidence": "conversation_or_tool_calls",
@@ -25,7 +25,7 @@
   "now": "2026-07-08T10:00:00",
   "opening_message": "Can you help me with this? The book from ORD-7245 is defective... well, I just didn't like it. Can you still refund it?",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic edge_case benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 1.\n\nYou are contacting support about order ORD-7245. Book is far outside every return window. Customer first calls it defective but admits they simply changed their mind. Agent must deny return and not use defective exception. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation.",
+    "user_sim_context": "You are contacting support about order ORD-7245. Book is far outside every return window. Customer first calls it defective but admits they simply changed their mind. Agent must deny return and not use defective exception. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept only the correct no-action explanation.",
     "known_info": [
       "order_id: ORD-7245"
     ],

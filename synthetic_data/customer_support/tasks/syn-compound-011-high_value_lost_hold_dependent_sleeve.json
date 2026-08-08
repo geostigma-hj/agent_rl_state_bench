@@ -1,6 +1,6 @@
 {
   "task_id": "syn-compound-011-high_value_lost_hold_dependent_sleeve",
-  "task_summary": "Synthetic compound task derived from official customer_support template 85-high_value_lost_hold_dependent_sleeve, surface variant 0. **Task:** Customer has a high-value ProBook laptop lost in transit and wants an immediate refund or replacement. They also give a conditional cleanup instruction: cancel the pending laptop sleeve only if the laptop is resolved now; otherwise keep the pending accessories. Correct handling is no write: explain that the $1,299 lost laptop requires investigation before refund/reship, do not refund/cancel the laptop, and do not cancel the sleeve or mouse yet.\n\n**Challenge:** This tests conditional cascading restraint. Weak agents may cave to the immediate refund/cancellation request and then cascade into cancelling the dependent sleeve, even though high-value lost shipments require investigation first.",
+  "task_summary": "**Task:** Customer has a high-value ProBook laptop lost in transit and wants an immediate refund or replacement. They also give a conditional cleanup instruction: cancel the pending laptop sleeve only if the laptop is resolved now; otherwise keep the pending accessories. Correct handling is no write: explain that the $1,299 lost laptop requires investigation before refund/reship, do not refund/cancel the laptop, and do not cancel the sleeve or mouse yet.",
   "task_requirements": [
     {
       "id": "syn-compound-011-high_value_lost_hold_dependent_sleeve_01_216_require_investigation_no_laptop_write",
@@ -25,7 +25,7 @@
   "now": "2026-07-16T10:00:00",
   "opening_message": "ORD-7851 with my ProBook laptop is showing lost in transit. I need a refund or replacement today. If you resolve the laptop now, cancel the pending ProBook Travel Sleeve in ORD-7852; otherwise keep the sleeve and mouse pending until we know what happens.",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic compound benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 0.\n\nYou want the lost high-value laptop resolved immediately, and you only want the laptop sleeve cancelled if the laptop is actually refunded or replaced now. If the agent correctly says investigation is required first, the dependent sleeve should remain pending.",
+    "user_sim_context": "You want the lost high-value laptop resolved immediately, and you only want the laptop sleeve cancelled if the laptop is actually refunded or replaced now. If the agent correctly says investigation is required first, the dependent sleeve should remain pending.",
     "known_info": [
       "lost_order_id: ORD-7851",
       "lost_item: ProBook Laptop 15-inch",

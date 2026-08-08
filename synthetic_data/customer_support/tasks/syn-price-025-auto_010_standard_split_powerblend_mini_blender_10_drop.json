@@ -23,7 +23,7 @@
   ],
   "user_id": "cust_005",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed that the PowerBlend Mini Blender I ordered (ORDER-ORD-7208) now has a lower price. Could you process a price adjustment for me?",
+  "opening_message": "I noticed that the PowerBlend Mini Blender from order ORD-7208 now has a lower price. Could you process a price adjustment for me?",
   "user_simulator": {
     "user_sim_context": "You want a price adjustment refund for the PowerBlend Mini Blender in order ORD-7208. You do not want to return, cancel, exchange, or replace the item; the order should remain active.",
     "known_info": [

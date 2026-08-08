@@ -1,6 +1,6 @@
 {
   "task_id": "syn-compound-027-spare_compound_cancel_plus_shipping_claim",
-  "task_summary": "Synthetic compound task derived from official customer_support template 141-spare_compound_cancel_plus_shipping_claim, surface variant 2. Customer needs cancellation of one unshipped tablet order and also asks for refund on a separate signed-for laptop. Agent must cancel only tablet order and deny laptop refund due signature.",
+  "task_summary": "Customer needs cancellation of one unshipped tablet order and also asks for refund on a separate signed-for laptop. Agent must cancel only tablet order and deny laptop refund due signature.",
   "task_requirements": [
     {
       "evidence": "conversation",
@@ -19,7 +19,7 @@
   "now": "2026-07-08T10:00:00",
   "opening_message": "I need this handled carefully: Cancel ORD-7276 before it ships. Also, ORD-7277 says E. Chen signed for the laptop, but refund that too.",
   "user_simulator": {
-    "user_sim_context": "You are in a synthetic compound benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 2.\n\nYou are contacting support about order ORD-7276. Customer needs cancellation of one unshipped tablet order and also asks for refund on a separate signed-for laptop. Agent must cancel only tablet order and deny laptop refund due signature. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation.",
+    "user_sim_context": "You are contacting support about order ORD-7276. Customer needs cancellation of one unshipped tablet order and also asks for refund on a separate signed-for laptop. Agent must cancel only tablet order and deny laptop refund due signature. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation.",
     "known_info": [
       "cancel_order: ORD-7276",
       "signed_order: ORD-7277",

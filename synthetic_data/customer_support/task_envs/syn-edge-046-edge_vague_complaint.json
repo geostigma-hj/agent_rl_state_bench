@@ -30,15 +30,15 @@
     },
     {
       "product_id": "PROD-2412",
-      "name": "PowerBlend Pro Blender",
-      "category": "kitchen",
-      "subcategory": "blender",
+      "name": "UltraShield Phone Case Bundle",
+      "category": "accessories",
+      "subcategory": "phone_case",
       "price": 89,
-      "warranty_months": 6,
+      "warranty_months": 3,
       "return_window_days": 30,
       "restocking_fee_pct": 0,
-      "weight_lbs": 5.0,
-      "is_fragile": true,
+      "weight_lbs": 0.3,
+      "is_fragile": false,
       "in_stock": true,
       "current_price": null
     }

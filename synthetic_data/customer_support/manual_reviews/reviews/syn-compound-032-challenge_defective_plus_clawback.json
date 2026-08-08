@@ -1,0 +1,71 @@
+{
+  "task_id": "syn-compound-032-challenge_defective_plus_clawback",
+  "task_type": "compound",
+  "reviewed_at": "2026-08-09T00:00:00+08:00",
+  "reviewer": "codex_manual_audit_subagent_assisted",
+  "sample_seed": 20260809,
+  "verdict": "PASS",
+  "confidence": "medium",
+  "recommended_action": "eligible_for_sft",
+  "checked_files": [
+    "synthetic_data/customer_support/tasks/syn-compound-032-challenge_defective_plus_clawback.json",
+    "synthetic_data/customer_support/task_envs/syn-compound-032-challenge_defective_plus_clawback.json",
+    "synthetic_data/customer_support/metadata/syn-compound-032-challenge_defective_plus_clawback.json",
+    "synthetic_data/customer_support/judgments/syn-compound-032-challenge_defective_plus_clawback.json"
+  ],
+  "manual_checks": {
+    "task_intent_clear": true,
+    "simulator_consistent": true,
+    "state_requirements_reachable": true,
+    "task_requirements_noncontradictory": true,
+    "judge_accept_credible": true,
+    "sensitive_or_privacy_issue": false
+  },
+  "findings": [
+    "逐条读取 task/env/metadata/judgment，任务引用和本地 checker 通过。",
+    "judge decision=ACCEPT，issues/ambiguities 为空或无阻断项。",
+    "复合任务的多步骤目标、must/must_not 和状态变更范围一致；无 gold_tool_plan 是模板派生任务的已知 warning。"
+  ],
+  "evidence_summary": "compound；summary/opening 对齐；state_requirements 数量 7；gold_tool_plan_steps=0；checker passed=True。",
+  "auxiliary_results": {
+    "judge": {
+      "decision": "ACCEPT",
+      "issues": [],
+      "ambiguities": []
+    },
+    "checker": {
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        "metadata has no gold_tool_plan"
+      ]
+    },
+    "gold_tool_plan_steps": 0,
+    "metadata": {
+      "generator_version": "compound_template_v0.1",
+      "changed_factors": [
+        "official_template_structure",
+        "surface_variant_2"
+      ]
+    }
+  },
+  "task_excerpt": {
+    "task_summary": "Synthetic compound task derived from official customer_support template 65-challenge_defective_plus_clawback, surface variant 2. **Task:** The customer is returning a defective tablet from a three-item bulk-discounted order. Defective status means no restocking fee and free return shipping, but the previewed net refund still includes promo redistribution and the separate $10 bulk clawback because the remaining order drops below the bulk threshold.\n\n**Challenge:** Two policies have to coexist without contaminating each other. Weak agents ignore the preview math, forget the downstream bulk clawback, or never explain that the clawback follows from the changed qualifying item count.",
+    "opening_message": "I need this handled carefully: The tablet from order ORD-7092 is defective — the touchscreen is unresponsive in the bottom third. I need to return it.",
+    "known_info": [
+      "order_id: ORD-7092",
+      "defect: touchscreen unresponsive bottom third"
+    ],
+    "task_rules": [
+      "Keep the request scoped to returning the defective tablet from ORD-7092; provide the order ID and touchscreen defect when the agent needs identifying details.",
+      "Do not volunteer policy, refund, fee, discount, or clawback amounts; ask the agent to check the order and policies for those details.",
+      "If the agent treats the tablet as changed mind or includes a restocking fee, correct them once that the touchscreen is defective and ask for the defective-return path.",
+      "If the agent mentions a clawback or extra reduction tied to the remaining items, ask why that still applies when the tablet is defective, then accept only after the agent explains it is separate from the defective-return fee waiver.",
+      "If the agent previews a defective return but does not mention whether the original bulk discount changes, ask whether returning one item from the three-item discounted order affects the remaining discount.",
+      "Confirm the return only after the preview treats the tablet as defective, shows no restocking fee and free return shipping, and explains the separate $10 bulk-discount clawback because the two kept items no longer meet the bulk threshold.",
+      "Push back if the agent says no clawback applies, omits the changed qualifying item count, or blends the clawback into a defect-related fee.",
+      "End only after the agent has processed the defective return and confirmed the return label, original-payment refund, no restocking fee, and separate bulk clawback outcome.",
+      "Do not change the intended resolution path from the task summary."
+    ]
+  }
+}
