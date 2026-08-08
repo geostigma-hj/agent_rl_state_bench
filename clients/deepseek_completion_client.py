@@ -64,6 +64,8 @@ class DeepSeekCompletionClient(BaseLLMClient):
         }
         if self.top_p is not None:
             kwargs["top_p"] = self.top_p
+        if os.environ.get("DEEPSEEK_AGENT_JSON_MODE", "0") == "1":
+            kwargs["response_format"] = {"type": "json_object"}
         self._throttle()
         response = self._client.chat.completions.create(**kwargs)
         return response.choices[0].message.content or "", getattr(response, "usage", None)
