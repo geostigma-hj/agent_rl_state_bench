@@ -60,7 +60,7 @@ def judge_task(
                     "task": task,
                     "environment": _compact_env(env),
                     "metadata": _compact_metadata(metadata),
-                    "gold_tool_replay_trace": _gold_tool_replay_trace(env, task["now"], metadata.get("gold_tool_plan", [])),
+                    "gold_tool_replay_trace": _gold_tool_replay_trace(env, task["now"], metadata.get("gold_tool_plan") or []),
                     "deterministic_check": {
                         "passed": deterministic.passed,
                         "errors": deterministic.errors,
@@ -194,6 +194,9 @@ def _judge_system_prompt() -> str:
         "Judge whether the task is clear, executable, internally consistent, and has a single reasonable final state. "
         "Check consistency among opening_message, user_simulator, environment, task_requirements, state_requirements, "
         "and gold_tool_plan. Do not solve with hidden assumptions. Prefer REVIEW over ACCEPT when there is ambiguity. "
+        "For split-payment refunds, distinguish API response allocation from persisted item state: process_refund may "
+        "return refund_method='split' with split_details while order_items.refund_method remains the requested "
+        "high-level method such as 'original_payment'; state_requirements evaluate persisted state, not response-only fields. "
         "Return exactly one JSON object with keys: decision, confidence, issues, ambiguities, recommendation. "
         "decision must be ACCEPT, REVIEW, or REJECT. issues and ambiguities must be arrays of strings. "
         "If deterministic checks passed and you find no concrete issue or ambiguity, return decision=ACCEPT."

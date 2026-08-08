@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.9,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Accept the task. It is clear, internally consistent, and executable. The environment supports the stated facts (order ORD-7305 returned with $37 restocking fee), the user simulator matches the denial scenario, and the expected correct outcome is unchanged state with no supplemental credit. The absence of a gold_tool_plan is expected for a no-write denial task.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

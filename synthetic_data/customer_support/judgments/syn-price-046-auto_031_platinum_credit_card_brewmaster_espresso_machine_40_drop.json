@@ -1,9 +1,9 @@
 {
+  "decision": "ACCEPT",
+  "confidence": 0.98,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
-  "confidence": null,
-  "decision": "ACCEPT",
+  "recommendation": "The task is internally consistent: price drop from $349 to $309 yields a $40 refund, order qualifies within 7-day delivery window, and the gold workflow correctly verifies price and previews before confirming. No clarifying changes needed.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

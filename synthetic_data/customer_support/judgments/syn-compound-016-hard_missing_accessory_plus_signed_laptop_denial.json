@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.9,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent and executable. All required facts (order IDs, item prices, signature on file) are present and align with the expected outcome. Note that metadata/gold_tool_plan is explicitly null, but the task_requirements and state_requirements provide sufficient specification for evaluation; no action needed.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

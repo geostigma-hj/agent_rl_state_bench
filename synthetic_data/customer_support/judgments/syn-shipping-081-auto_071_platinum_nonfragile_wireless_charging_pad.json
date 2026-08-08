@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.98,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent and executable. Follow the gold plan: review shipping and return policies, preview then confirm a damaged_in_transit return for ITEM-9155 with a $39 refund via original payment, issue the return label, and do not issue fragile-item goodwill for this non-fragile product.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

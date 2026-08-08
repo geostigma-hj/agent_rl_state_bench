@@ -1,9 +1,9 @@
 {
+  "decision": "ACCEPT",
+  "confidence": 0.97,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
-  "confidence": null,
-  "decision": "ACCEPT",
+  "recommendation": "Accept: the task is clear and internally consistent. The environment, user simulator, expected state changes, and gold tool plan all align on exchanging ITEM-9250 for PROD-2251 with preview-and-confirm and the correct price-difference handling.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

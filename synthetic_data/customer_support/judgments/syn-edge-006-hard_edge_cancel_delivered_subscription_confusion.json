@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is clear and internally consistent. The delivered one-time order cannot be cancelled; the agent must explain there is no subscription/future charge and direct the customer to return eligibility without mutating state. No tool calls are required or expected, matching the empty gold_tool_plan. The user simulator's guardrails align with the task requirements.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

@@ -1,9 +1,11 @@
 {
-  "issues": [],
-  "ambiguities": [],
-  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
-  "confidence": null,
   "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [
+    "The order has a tracking number even though shipping_status is 'processing'; an agent might incorrectly infer the order is in transit and apply a cancellation fee. However, the environment clearly indicates shipping_status 'processing' and the policy explicitly treats pending/processing as pre-shipment."
+  ],
+  "recommendation": "Proceed with the task. The environment state, requirements, and gold plan are consistent. No changes needed.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

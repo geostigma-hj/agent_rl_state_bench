@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.98,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent. Execute the shipping-damage flow: review shipping and return policies, process the return for ITEM-9155 as damaged_in_transit, and issue the separate $10 fragile-item goodwill credit back to original payment as specified in the gold plan.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

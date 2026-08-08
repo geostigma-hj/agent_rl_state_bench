@@ -3,7 +3,7 @@
   "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "No issues found; task is clear, executable, and internally consistent.",
+  "recommendation": "The task is clear and internally consistent. The environment supports the exchange, the gold tool plan matches the stated requirements, and the expected final state is coherent with the exchange policy for a cheaper item.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

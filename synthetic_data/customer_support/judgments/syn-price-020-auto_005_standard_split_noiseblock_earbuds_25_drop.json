@@ -1,9 +1,9 @@
 {
-  "decision": "ACCEPT",
-  "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "The task is internally consistent and executable. The correct refund amount is $25 (119-94), the required tools and flow are specified, and state requirements align with the environment and user simulator.",
+  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
+  "confidence": null,
+  "decision": "ACCEPT",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

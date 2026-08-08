@@ -1,0 +1,38 @@
+{
+  "task_id": "syn-compound-016-hard_missing_accessory_plus_signed_laptop_denial",
+  "source_task_id": "43-hard_missing_accessory_plus_signed_laptop_denial",
+  "generator_version": "compound_template_v0.1",
+  "task_family": "compound",
+  "mutation_level": "template_surface",
+  "difficulty": "hard",
+  "changed_factors": [
+    "official_template_structure",
+    "surface_variant_1"
+  ],
+  "requires_confirmation": true,
+  "is_compound": true,
+  "gold_tool_plan": null,
+  "expected_state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10443",
+      "field": "refund_amount",
+      "expected_value": 35
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10443",
+      "field": "refund_method",
+      "expected_value": "original_payment"
+    }
+  ],
+  "language_rewritten": false,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "deepseek-v4-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  }
+}

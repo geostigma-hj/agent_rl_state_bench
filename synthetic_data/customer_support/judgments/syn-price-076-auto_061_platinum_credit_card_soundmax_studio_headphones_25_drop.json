@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is consistent and executable. Agent should verify current price via get_product_details for PROD-4210, preview the $25 price-match refund, then confirm it with original_payment, without returning, canceling, or exchanging the item.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

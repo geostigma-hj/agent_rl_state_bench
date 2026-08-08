@@ -1,9 +1,9 @@
 {
+  "decision": "ACCEPT",
+  "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
-  "confidence": null,
-  "decision": "ACCEPT",
+  "recommendation": "The task is clear and internally consistent. The customer request maps unambiguously to exchanging ITEM-9250 (PROD-2250) for PROD-2251, the policy is correctly applied (more expensive item: customer pays difference), and the gold tool plan and expected state are coherent.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

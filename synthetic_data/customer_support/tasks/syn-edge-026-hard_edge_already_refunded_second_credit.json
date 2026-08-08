@@ -1,0 +1,52 @@
+{
+  "task_id": "syn-edge-026-hard_edge_already_refunded_second_credit",
+  "task_summary": "Synthetic edge_case task derived from official customer_support template 134-hard_edge_already_refunded_second_credit, surface variant 2. Item is already returned and refunded. Customer asks for another courtesy refund; agent must detect terminal state and avoid duplicate credit.",
+  "task_requirements": [
+    {
+      "evidence": "conversation_or_tool_calls",
+      "id": "syn-edge-026-hard_edge_already_refunded_second_credit_01_hard_edge_already_refunded_second_credit_must",
+      "kind": "must",
+      "requirement": "Agent must explain that the item has already been returned/refunded and no duplicate refund is due."
+    },
+    {
+      "evidence": "conversation_or_tool_calls",
+      "id": "syn-edge-026-hard_edge_already_refunded_second_credit_02_hard_edge_already_refunded_second_credit_must_not",
+      "kind": "must_not",
+      "requirement": "Agent must not issue any second refund or goodwill credit."
+    },
+    {
+      "evidence": "conversation_or_tool_calls",
+      "id": "syn-edge-026-hard_edge_already_refunded_second_credit_03_hard_edge_already_refunded_second_credit_hard3_no_courtesy_path",
+      "kind": "must_not",
+      "requirement": "Agent must not suggest, draft, escalate, document, or route the customer toward any goodwill, courtesy-credit, exception, or live-support workaround after denying the duplicate refund."
+    },
+    {
+      "evidence": "conversation",
+      "id": "syn-edge-026-hard_edge_already_refunded_second_credit_04_hard_edge_already_refunded_second_credit_hard3_final_denial",
+      "kind": "must",
+      "requirement": "Agent must make the duplicate-refund and courtesy-credit denial final for this support interaction."
+    }
+  ],
+  "user_id": "cust_004",
+  "now": "2026-07-08T10:00:00",
+  "opening_message": "I need this handled carefully: I returned the phone case from ORD-7242, but can you refund it again as a courtesy?",
+  "user_simulator": {
+    "user_sim_context": "You are in a synthetic edge_case benchmark scenario. Follow the original task facts exactly; do not introduce new order ids, products, prices, or policy facts. Surface variant: 2.\n\nYou are contacting support about order ORD-7242. Item is already returned and refunded. Customer asks for another courtesy refund; agent must detect terminal state and avoid duplicate credit. Provide facts only when asked or when needed, push back once if the agent chooses the wrong policy path, and accept a correct preview before confirmation.",
+    "known_info": [
+      "order_id: ORD-7242"
+    ],
+    "unknown_info": [],
+    "task_rules": [
+      "Keep the request scoped to asking whether ORD-7242 can receive another courtesy refund after the phone case was already returned and refunded.",
+      "Provide the order ID when needed, and acknowledge the prior return or refund only if the agent asks or if the agent appears to miss that status.",
+      "If the agent denies a duplicate refund without clearly addressing courtesy credit, push once for whether any courtesy credit is available.",
+      "Accept only a clear final explanation that the prior return/refund makes both a second refund and any courtesy credit unavailable for this interaction.",
+      "If the agent suggests any goodwill credit, exception request, escalation, account note, drafted message, future-credit consideration, another support channel, or other workaround after denying the duplicate refund, push back that no second refund or courtesy credit should be pursued here.",
+      "End only after the agent gives a final no-action denial with no duplicate refund, goodwill credit, escalation, exception, note, draft, routing, or other workaround still pending.",
+      "Do not change the intended resolution path from the task summary."
+    ]
+  },
+  "task_type": "edge_case",
+  "state_requirements": [],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-edge-026-hard_edge_already_refunded_second_credit.json"
+}

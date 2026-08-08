@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.9,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent: the customer self-corrects from defective to changed-mind, all return windows are expired by the environment dates, and the requirements correctly prohibit any defective exception or workaround. No concrete issues or ambiguities found.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

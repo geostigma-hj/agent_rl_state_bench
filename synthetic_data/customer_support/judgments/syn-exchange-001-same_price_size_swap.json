@@ -1,9 +1,9 @@
 {
   "decision": "ACCEPT",
-  "confidence": 0.98,
+  "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Task is internally consistent and executable as specified. Proceed with the gold tool plan: review exchange policy, preview exchange, then confirm.",
+  "recommendation": "The task is clear and internally consistent. The requested exchange maps cleanly to a different product SKU (PROD-2251) with the same price, satisfying all policies and state requirements. The gold tool plan and state expectations align, and the user simulator provides the necessary confirmation. No revision needed.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

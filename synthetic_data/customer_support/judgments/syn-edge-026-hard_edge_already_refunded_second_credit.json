@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.97,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent and executable. The environment clearly marks ORD-7242 as fully returned and refunded, the task requirements and user simulator align on a final denial of any duplicate refund or courtesy credit, and no state or tool requirements conflict. Accept.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

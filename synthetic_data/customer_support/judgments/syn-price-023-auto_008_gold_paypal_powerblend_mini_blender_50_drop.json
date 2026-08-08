@@ -1,9 +1,9 @@
 {
   "decision": "ACCEPT",
-  "confidence": 0.95,
+  "confidence": 0.98,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "The task is internally consistent and executable. The price-match amount is correctly calculated as $50 (original $89 minus current $39), the refund method matches the original payment method, and the gold tool plan aligns with all requirements including preview before confirmation and avoiding return/cancel/exchange. No ambiguity found.",
+  "recommendation": "The task is clear, internally consistent, and has a single correct final state (a $50 price-match refund to original payment). The user simulator accepts correction from the incorrect $65 amount, and the environment supports the $50 refund calculation. Proceed with the gold plan.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

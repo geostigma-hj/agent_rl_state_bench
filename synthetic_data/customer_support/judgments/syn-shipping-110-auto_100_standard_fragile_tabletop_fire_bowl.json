@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.98,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent. The opening message, user simulator, environment, and required final state all align with the shipping-damage handling path: review policies, process a damaged_in_transit return with full refund, issue a return label, and add the fragile goodwill credit to original payment. The gold tool plan matches the state requirements and no contradictory information was found.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

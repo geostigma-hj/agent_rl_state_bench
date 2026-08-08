@@ -1,9 +1,9 @@
 {
+  "decision": "ACCEPT",
+  "confidence": 0.97,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
-  "confidence": null,
-  "decision": "ACCEPT",
+  "recommendation": "Proceed as designed. The task is internally consistent: the user requests cancellation of only ITEM-9021, the tool plan follows the required policy review and preview-before-confirm sequence, and the expected state changes align with the in-transit partial cancellation policy and split payment refund handling.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

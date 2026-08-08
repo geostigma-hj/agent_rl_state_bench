@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is clear and internally consistent. The agent must explain that the delivered one-time order cannot be cancelled, clarify that it is not a subscription (no future charge), and direct the customer to check return eligibility without making any state changes. No tool calls are required, and the empty gold_tool_plan is appropriate. Proceed as specified.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

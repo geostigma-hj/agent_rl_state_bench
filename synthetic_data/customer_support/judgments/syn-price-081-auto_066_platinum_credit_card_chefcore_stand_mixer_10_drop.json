@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is clear and internally consistent. The agent should verify the product current price ($219), correct the customer's $5 assumption to the actual $10 price-drop difference, preview the refund, then confirm it as original_payment while keeping the order active.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

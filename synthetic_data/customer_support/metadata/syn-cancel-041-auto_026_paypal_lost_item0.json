@@ -43,6 +43,22 @@
   "expected_state_diff": {
     "created": {},
     "modified": {
+      "order_items": {
+        "ITEM-9020": {
+          "refund_amount": {
+            "old": null,
+            "new": 249
+          },
+          "item_status": {
+            "old": "shipped",
+            "new": "cancelled"
+          },
+          "refund_method": {
+            "old": null,
+            "new": "paypal"
+          }
+        }
+      },
       "orders": {
         "ORD-6003": {
           "status": {
@@ -50,27 +66,11 @@
             "new": "partially_cancelled"
           }
         }
-      },
-      "order_items": {
-        "ITEM-9020": {
-          "refund_method": {
-            "old": null,
-            "new": "paypal"
-          },
-          "item_status": {
-            "old": "shipped",
-            "new": "cancelled"
-          },
-          "refund_amount": {
-            "old": null,
-            "new": 249
-          }
-        }
       }
     },
     "deleted": {}
   },
-  "language_rewritten": true,
+  "language_rewritten": false,
   "judge": {
     "decision": "ACCEPT",
     "judge_model": "deepseek-v4-flash",
@@ -78,6 +78,5 @@
     "issues": [],
     "ambiguities": [],
     "manual_adjudication": null
-  },
-  "language_rewriter_model": "deepseek-v4-flash"
+  }
 }

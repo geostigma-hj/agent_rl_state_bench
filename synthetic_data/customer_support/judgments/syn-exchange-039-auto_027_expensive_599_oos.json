@@ -1,9 +1,9 @@
 {
+  "decision": "ACCEPT",
+  "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
-  "confidence": null,
-  "decision": "ACCEPT",
+  "recommendation": "The task is clear and internally consistent. The environment, state requirements, and gold tool plan all align with the exchange policy for an out-of-stock target item: issue store credit for the original item and mark the original item as returned. The user simulator cooperates with the required confirmation. Proceed as specified.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

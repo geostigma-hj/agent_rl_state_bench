@@ -1,0 +1,72 @@
+{
+  "task_id": "syn-exchange-073-auto_061_expensive_1449_instock",
+  "task_summary": "Customer wants to exchange Premium Cotton Shirt from ORD-6034 for Premium Cotton Shirt (Large). Correct handling is to apply exchange policy, preview, confirm, and use the policy-defined payment or store-credit outcome. If the target item costs more, the customer pays the difference; if it costs less, the difference is store credit.",
+  "task_requirements": [
+    {
+      "id": "syn-exchange-073-auto_061_expensive_1449_instock_must_review_exchange_policy",
+      "kind": "must",
+      "requirement": "Agent must review the exchange policy before handling the exchange request.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-exchange-073-auto_061_expensive_1449_instock_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a process_exchange preview tool call for ITEM-9250 to PROD-2251 with confirm false or omitted before making the confirm=true process_exchange tool call.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_003",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for Premium Cotton Shirt (Large).",
+  "user_simulator": {
+    "user_sim_context": "You want to exchange Premium Cotton Shirt from order ORD-6034 for Premium Cotton Shirt (Large). If the agent previews a valid exchange and asks for confirmation, agree to proceed.",
+    "known_info": [
+      "You bought Premium Cotton Shirt in order ORD-6034.",
+      "You want Premium Cotton Shirt (Large) instead."
+    ],
+    "unknown_info": [
+      "You do not know the exchange price-difference policy."
+    ],
+    "task_rules": [
+      "Do not ask for a different product. Confirm after a valid preview."
+    ]
+  },
+  "task_type": "exchange_item",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9250",
+      "field": "item_status",
+      "expected_value": "exchanged"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9250",
+      "field": "replacement_item_id",
+      "expected_value": "ITEM-9251"
+    },
+    {
+      "entity_type": "order_items",
+      "match_fields": {
+        "item_id": "ITEM-9251"
+      },
+      "expected_fields": {
+        "order_id": "ORD-6034",
+        "product_id": "PROD-2251",
+        "quantity": 1,
+        "unit_price": 1449,
+        "item_status": "confirmed",
+        "return_reason": null,
+        "refund_amount": null,
+        "refund_method": null,
+        "restocking_fee": null,
+        "return_label_issued": false,
+        "replacement_item_id": null,
+        "goodwill_credit": 0,
+        "goodwill_credit_method": null,
+        "store_credit_only": false
+      }
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-exchange-073-auto_061_expensive_1449_instock.json"
+}

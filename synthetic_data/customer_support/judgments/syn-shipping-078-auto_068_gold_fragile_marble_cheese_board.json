@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is clear, internally consistent, and the gold tool plan resolves to the expected final state. All policies and environment data support the required actions (damaged return for full refund, fragile goodwill credit), and no conflicts or ambiguities were found.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

@@ -1,9 +1,9 @@
 {
   "decision": "ACCEPT",
-  "confidence": 0.98,
+  "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "The task is clear and internally consistent. The price-drop difference ($119 - $114 = $5) is correctly specified, the refund method is consistent with the original payment, and the required tool sequence (policy lookup, product details, preview, confirm) is well-defined. No conflicts or hidden assumptions detected.",
+  "recommendation": "The task is clear, internally consistent, and has a single reasonable final state. All policies, order data, product price drop, and user intent align with the expected $5 original-payment price-match refund.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

@@ -1,9 +1,9 @@
 {
+  "decision": "ACCEPT",
+  "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
-  "confidence": null,
-  "decision": "ACCEPT",
+  "recommendation": "Task is internally consistent. The opening message, user simulator, environment, state requirements, and gold tool plan align. The exchange involves a more expensive product (PROD-2251 at $179 vs. PROD-2250 at $59) and is within the return window; the policy requires the customer to pay the $120 difference. The gold plan correctly includes reviewing policy, previewing the exchange, and confirming. No ambiguities or blocking issues found.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

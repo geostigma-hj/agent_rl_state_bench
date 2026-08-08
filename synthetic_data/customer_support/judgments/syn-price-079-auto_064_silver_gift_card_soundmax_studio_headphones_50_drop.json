@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.97,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent and executable. Price drop from $299 to $249 within the 7-day window supports a $50 price-match refund to original payment, and the gold plan aligns with task, state, and simulator requirements.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

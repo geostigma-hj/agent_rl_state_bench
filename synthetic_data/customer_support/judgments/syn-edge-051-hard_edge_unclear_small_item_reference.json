@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is clear and internally consistent. The ambiguous 'small accessory' reference is intentionally resolved through the user simulator's clarification behavior, and all state requirements align with the expected phone-case return (ITEM-10243) and partially returned order status. No blocking issues.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

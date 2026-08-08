@@ -78,9 +78,7 @@
     "judge_model": "deepseek-v4-flash",
     "deterministic_check_passed": true,
     "issues": [],
-    "ambiguities": [
-      "The exchange policy states the customer pays the price difference, but the gold plan does not include a separate payment tool. This is resolved by assuming process_exchange handles payment internally, and the state requirements do not require a payment record."
-    ],
+    "ambiguities": [],
     "manual_adjudication": null
   },
   "language_rewriter_model": "deepseek-v4-flash"

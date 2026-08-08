@@ -1,9 +1,9 @@
 {
   "decision": "ACCEPT",
-  "confidence": 0.95,
+  "confidence": 0.94,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "The task is internally consistent: the cancellation policy must be fetched, a preview must be shown, the user will confirm, and the final state matches the expected refunds to gift_card. No concrete issues or ambiguities found.",
+  "recommendation": "The task is internally consistent: the environment, user intent, task requirements, gold plan, and expected final state all align. Proceed with the cancellation workflow as specified.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

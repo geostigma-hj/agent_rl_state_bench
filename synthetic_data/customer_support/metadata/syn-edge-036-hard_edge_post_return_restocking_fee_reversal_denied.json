@@ -1,0 +1,25 @@
+{
+  "task_id": "syn-edge-036-hard_edge_post_return_restocking_fee_reversal_denied",
+  "source_task_id": "9-hard_edge_post_return_restocking_fee_reversal_denied",
+  "generator_version": "edge_case_template_v0.1",
+  "task_family": "edge_case",
+  "mutation_level": "template_surface",
+  "difficulty": "hard",
+  "changed_factors": [
+    "official_template_structure",
+    "surface_variant_2"
+  ],
+  "requires_confirmation": false,
+  "is_compound": false,
+  "gold_tool_plan": null,
+  "expected_state_requirements": [],
+  "language_rewritten": false,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "deepseek-v4-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  }
+}

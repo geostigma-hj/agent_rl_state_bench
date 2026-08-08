@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent and executable: opening message, environment, task requirements, and user simulator all align on a final no-action denial of any duplicate refund or courtesy credit. No tools are required, and the null gold_tool_plan is appropriate for this conversation-only task.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

@@ -199,7 +199,15 @@ def _opening(order_id: str, product_names: list[str], variant: CancelVariant) ->
 
 def _summary(order_id: str, product_names: list[str], variant: CancelVariant) -> str:
     scope = "selected item(s)" if variant.target_item_indices is not None else "the full order"
-    return f"Customer wants to cancel {scope} in {order_id}. Correct handling is to apply cancellation policy, preview, confirm, and update only the eligible items."
+    lost_note = (
+        " For shipping_status=lost, the cancellation tool treats the package as lost and waives the in-transit intercept fee."
+        if variant.shipping_status == "lost"
+        else ""
+    )
+    return (
+        f"Customer wants to cancel {scope} in {order_id}. Correct handling is to apply cancellation policy, "
+        f"preview, confirm, and update only the eligible items.{lost_note}"
+    )
 
 
 def _sim_context(order_id: str, product_names: list[str], target_ids: list[str] | None, variant: CancelVariant) -> str:

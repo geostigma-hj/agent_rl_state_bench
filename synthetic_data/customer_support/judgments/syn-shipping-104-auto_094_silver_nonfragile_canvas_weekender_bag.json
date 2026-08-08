@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.97,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent. The product is non-fragile, so no fragile goodwill credit applies. The damaged-in-transit return path with full refund of 129, original payment, return label, and order status fully_returned is clearly specified and supported by the gold_tool_plan and environment.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

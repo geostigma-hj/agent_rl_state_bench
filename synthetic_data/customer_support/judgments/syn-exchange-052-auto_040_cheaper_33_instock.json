@@ -1,9 +1,9 @@
 {
   "decision": "ACCEPT",
-  "confidence": 0.98,
+  "confidence": 0.97,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Approve the task. The opening message, user simulator, environment, state requirements, and gold tool plan are internally consistent. The exchange is straightforward: the cheaper replacement (PROD-2251 at $33) results in a $26 store-credit difference, matching the expected state. The required policy review and preview-before-confirm tool calls are explicitly specified and supported by the gold plan.",
+  "recommendation": "The task is consistent and executable. The exchange request maps cleanly to a cheaper-item exchange, the policy defines the store credit outcome, the preview-then-confirm requirement is clear, and the state requirements align with the gold tool plan and expected diff. No blocking issues found.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

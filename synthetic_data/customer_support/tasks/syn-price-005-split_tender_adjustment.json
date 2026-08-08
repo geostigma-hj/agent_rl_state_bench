@@ -23,7 +23,7 @@
   ],
   "user_id": "cust_001",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed the TechPhone Pro 16 from my order ORD-7208 has dropped in price, so I believe I'm entitled to a $50 price adjustment.",
+  "opening_message": "The TechPhone Pro 16 from order ORD-7208 is cheaper now, so I think I should get $50 back.",
   "user_simulator": {
     "user_sim_context": "You want a price-match refund for TechPhone Pro 16 in order ORD-7208. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [

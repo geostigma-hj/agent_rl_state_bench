@@ -1,9 +1,9 @@
 {
   "decision": "ACCEPT",
-  "confidence": 0.97,
+  "confidence": 0.98,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "No issues found. The task is internally consistent and executable.",
+  "recommendation": "Task is internally consistent. The gold tool plan and state requirements correctly reflect a defective return with no restocking fee, full refund of $249 to original payment, and return label issuance. No blocking ambiguities found.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

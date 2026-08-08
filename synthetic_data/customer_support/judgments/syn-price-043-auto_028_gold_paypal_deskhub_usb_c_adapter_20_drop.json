@@ -1,9 +1,9 @@
 {
   "decision": "ACCEPT",
-  "confidence": 0.98,
+  "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "The task is internally consistent. The product's current price ($25) vs. purchased price ($45) yields a $20 price-match refund, matching state requirements and gold tool plan. The refund method aligns with original payment (PayPal). No ambiguity found.",
+  "recommendation": "Task is internally consistent. All requirements, environment, state expectations, and gold tool plan align. Proceed.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

@@ -1,9 +1,9 @@
 {
+  "decision": "ACCEPT",
+  "confidence": 0.97,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
-  "confidence": null,
-  "decision": "ACCEPT",
+  "recommendation": "The task is clear and internally consistent. The price-drop refund of $15 matches the product price difference ($599 - $584), the order is within the 7-day price-match window (delivered 2026-07-05, request 2026-07-08), and the required state change to ITEM-10209 refund_amount=15 and refund_method=original_payment is supported by policy and gold_tool_plan. No concrete issues or ambiguities found.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

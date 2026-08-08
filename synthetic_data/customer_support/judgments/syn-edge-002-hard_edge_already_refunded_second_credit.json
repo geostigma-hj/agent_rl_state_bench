@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Accept as-is. The task is internally consistent: the environment confirms the item is already returned and refunded, the user simulator expects a final denial of any duplicate refund or courtesy credit, and the requirements prohibit all workarounds. No further clarity is needed.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

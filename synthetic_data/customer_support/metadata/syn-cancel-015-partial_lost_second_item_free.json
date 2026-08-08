@@ -75,7 +75,9 @@
     "judge_model": "deepseek-v4-flash",
     "deterministic_check_passed": true,
     "issues": [],
-    "ambiguities": [],
+    "ambiguities": [
+      "The cancellation policy in get_policies does not explicitly mention lost-package handling, while the cancel_order preview shows no fee with reason 'Package lost — free cancellation with full refund'. This could momentarily confuse an agent, but the tool output resolves it."
+    ],
     "manual_adjudication": null
   },
   "language_rewriter_model": "deepseek-v4-flash"

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent. The agent should review shipping and return policies, process ITEM-9155 as damaged_in_transit with refund of 49 to original payment and return label, and avoid issuing fragile goodwill since the product is non-fragile.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

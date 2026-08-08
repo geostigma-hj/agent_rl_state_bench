@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-030-auto_015_standard_split_soundmax_wireless_headphones_40_drop",
-  "task_summary": "Customer requests a price-match refund for SoundMax Wireless Headphones in order ORD-7208. The correct outcome is a $40 price-match refund while keeping the order and item active.",
+  "task_summary": "Customer requests a price-match adjustment for SoundMax Wireless Headphones in ORD-7208. The correct outcome is a $40 price-match refund while keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-030-auto_015_standard_split_soundmax_wireless_headphones_40_drop_must_lookup_product_price",
@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_005",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed the SoundMax Wireless Headphones from my order ORD-7208 now have a lower price. Could I get a price adjustment of $35 back?",
+  "opening_message": "The SoundMax Wireless Headphones from order ORD-7208 is cheaper now, so I think I should get $35 back.",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for the SoundMax Wireless Headphones in order ORD-7208. You believe the price drop is $35, but you are open to the correct amount of $40 if the agent provides verification from the product record. You do not want any return, cancellation, exchange, or replacement; the item must stay active.",
+    "user_sim_context": "You want a price-match refund for SoundMax Wireless Headphones in order ORD-7208. You think the drop is $35, but accept correction to $40 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [
-      "You purchased SoundMax Wireless Headphones in order ORD-7208.",
-      "The current product price is $209."
+      "You bought SoundMax Wireless Headphones in order ORD-7208.",
+      "You believe the price dropped by $35, but you are not certain."
     ],
     "unknown_info": [
-      "You are not familiar with the exact internal policy for price matching.",
-      "You do not know how the refund will be allocated to your payment method unless the agent explains."
+      "You do not know the exact internal price-match workflow.",
+      "You do not know payment allocation details unless the agent explains them."
     ],
     "task_rules": [
-      "Keep the request focused on a price-match refund; do not ask to return, cancel, or exchange the item.",
-      "If the agent confirms a policy-supported refund amount and ensures the order remains active, confirm the refund."
+      "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
+      "If the agent previews the policy-supported amount and keeps the order active, confirm the refund."
     ]
   },
   "task_type": "price_match_refund",

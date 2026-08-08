@@ -74,7 +74,9 @@
     "judge_model": "deepseek-v4-flash",
     "deterministic_check_passed": true,
     "issues": [],
-    "ambiguities": [],
+    "ambiguities": [
+      "The order has a tracking number even though shipping_status is 'processing'; an agent might incorrectly infer the order is in transit and apply a cancellation fee. However, the environment clearly indicates shipping_status 'processing' and the policy explicitly treats pending/processing as pre-shipment."
+    ],
     "manual_adjudication": null
   },
   "language_rewriter_model": "deepseek-v4-flash"

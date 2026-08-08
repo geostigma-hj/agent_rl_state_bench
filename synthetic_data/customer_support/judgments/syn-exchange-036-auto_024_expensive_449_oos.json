@@ -1,9 +1,9 @@
 {
+  "decision": "ACCEPT",
+  "confidence": 0.97,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
-  "confidence": null,
-  "decision": "ACCEPT",
+  "recommendation": "Proceed with the task as specified. Review exchange policy via get_policies, preview the out-of-stock store credit fallback by calling process_exchange with confirm=false, obtain user confirmation, then confirm with process_exchange confirm=true. Ensure final state matches ITEM-9250 returned, refund_amount 59, refund_method store_credit, restocking_fee 0, return_reason changed_mind, and ORD-6034 fully_returned.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

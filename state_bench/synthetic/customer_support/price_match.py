@@ -62,6 +62,9 @@ def _auto_price_match_variants() -> tuple[PriceMatchVariant, ...]:
         ("AirPure Compact Purifier", 159),
         ("FlexCharge Travel Dock", 69),
         ("ViewPlus 27-inch Monitor", 499),
+        ("SoundMax Studio Headphones", 299),
+        ("ChefCore Stand Mixer", 229),
+        ("UrbanLite Carry-On Suitcase", 179),
     ]
     customers = [
         ("cust_001", "platinum"),
@@ -115,7 +118,7 @@ def _auto_price_match_variants() -> tuple[PriceMatchVariant, ...]:
                 )
             )
             idx += 1
-            if len(BASE_PRICE_MATCH_VARIANTS) + len(variants) >= 75:
+            if len(BASE_PRICE_MATCH_VARIANTS) + len(variants) >= 90:
                 return tuple(variants)
     return tuple(variants)
 
@@ -190,7 +193,7 @@ def build_price_match_variant(
         opening_message=_opening(product.name, order.order_id, variant, refund_amount),
         user_simulator=UserSimulatorConfig(
             user_sim_context=_sim_context(product.name, order.order_id, variant, refund_amount),
-            known_info=[f"You bought {product.name} in order {order.order_id}.", f"The current product price is ${variant.current_price}."],
+            known_info=_known_info(product.name, order.order_id, variant, refund_amount),
             unknown_info=["You do not know the exact internal price-match workflow.", "You do not know payment allocation details unless the agent explains them."],
             task_rules=[
                 "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
@@ -247,6 +250,15 @@ def _sim_context(product_name: str, order_id: str, variant: PriceMatchVariant, r
         f"You want a price-match refund for {product_name} in order {order_id}. "
         f"{quoted}Do not allow a return, cancellation, exchange, or replacement; the item should stay active."
     )
+
+
+def _known_info(product_name: str, order_id: str, variant: PriceMatchVariant, refund_amount: int) -> list[str]:
+    facts = [f"You bought {product_name} in order {order_id}."]
+    if variant.quoted_drop is not None and variant.quoted_drop != refund_amount:
+        facts.append(f"You believe the price dropped by ${variant.quoted_drop}, but you are not certain.")
+    else:
+        facts.append(f"The current product price is ${variant.current_price}.")
+    return facts
 
 
 def _requirements(task_id: str, product_id: str, refund_amount: int) -> list[dict[str, Any]]:

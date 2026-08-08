@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.93,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "No changes required. The task is clear and internally consistent: the agent should verify the order and policy, decline the unsupported no-return refund while the customer keeps the item, and make no state changes.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

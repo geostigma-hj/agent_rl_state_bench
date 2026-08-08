@@ -3,7 +3,7 @@
   "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Approve task as deterministic checks passed and all requirements are internally consistent.",
+  "recommendation": "Task is clear and executable. The price-match amount is correctly $5 (current price 54 vs paid 59), the state requirements match the gold tool plan, and no return/cancel/exchange is required. Proceed with the generated plan.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

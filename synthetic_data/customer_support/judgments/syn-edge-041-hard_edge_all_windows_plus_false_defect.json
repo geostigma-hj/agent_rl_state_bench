@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Accept. The task is internally consistent and executable: the agent must deny the expired changed-mind return, must not use the defective exception, and must not offer any alternative path. The environment and user simulator align with the required final denial outcome.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

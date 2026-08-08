@@ -1,9 +1,9 @@
 {
+  "decision": "ACCEPT",
+  "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
-  "confidence": null,
-  "decision": "ACCEPT",
+  "recommendation": "The task is internally consistent. The customer asks for a $25 price-match refund, but the verified product record shows a $10 price drop, and the simulator accepts correction. The gold plan checks policies, verifies product details, previews, and confirms the $10 refund to original payment without returning/canceling/exchanging the item. All state requirements align with the expected final state.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

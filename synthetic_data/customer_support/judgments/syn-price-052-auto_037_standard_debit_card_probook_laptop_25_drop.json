@@ -1,9 +1,9 @@
 {
   "decision": "ACCEPT",
-  "confidence": 0.95,
+  "confidence": 0.98,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Task is internally consistent and executable. The environment supports a $25 price-match refund to original payment for ITEM-10209, matching state requirements and gold tool plan.",
+  "recommendation": "The task is internally consistent and executable. The price difference between the original price ($799) and current price ($774) is $25, matching the required refund amount. The gold tool plan verifies the price, previews the refund, and confirms it without any return, cancellation, or exchange. State requirements and expected final state are consistent.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is clear, internally consistent, and unambiguous. The non-fragile product correctly excludes the fragile goodwill credit, and the required refund, return label, reason, and order status all align with the environment and gold plan.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

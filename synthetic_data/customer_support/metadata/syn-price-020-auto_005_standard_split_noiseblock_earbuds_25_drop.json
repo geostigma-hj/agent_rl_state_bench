@@ -49,20 +49,20 @@
     "modified": {
       "order_items": {
         "ITEM-10209": {
-          "refund_method": {
-            "old": null,
-            "new": "original_payment"
-          },
           "refund_amount": {
             "old": null,
             "new": 25
+          },
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
           }
         }
       }
     },
     "deleted": {}
   },
-  "language_rewritten": true,
+  "language_rewritten": false,
   "judge": {
     "decision": "ACCEPT",
     "judge_model": "deepseek-v4-flash",
@@ -70,6 +70,5 @@
     "issues": [],
     "ambiguities": [],
     "manual_adjudication": null
-  },
-  "language_rewriter_model": "deepseek-v4-flash"
+  }
 }

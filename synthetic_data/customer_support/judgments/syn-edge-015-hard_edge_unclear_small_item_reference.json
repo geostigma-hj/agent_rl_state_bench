@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.92,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent and executable. The ambiguous 'small accessory' reference is intentional and the user simulator resolves it to the phone case once the agent asks for clarification. All state requirements align with returning ITEM-10243 with the specified refund details and setting ORD-7243 to partially_returned.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

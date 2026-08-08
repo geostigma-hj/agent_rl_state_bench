@@ -1,9 +1,9 @@
 {
   "decision": "ACCEPT",
-  "confidence": 0.95,
+  "confidence": 0.98,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "The task is internally consistent. Requirements, environment data, state requirements, and gold tool plan align.",
+  "recommendation": "The task is internally consistent, executable, and has a single well-defined final state. Proceed with the gold tool plan: review exchange policy, preview, then confirm.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

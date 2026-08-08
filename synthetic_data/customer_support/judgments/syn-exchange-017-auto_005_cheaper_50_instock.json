@@ -1,9 +1,9 @@
 {
-  "decision": "ACCEPT",
-  "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "The task is clear, executable, internally consistent, and has a single reasonable final state. All requirements align with the environment and gold tool plan.",
+  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
+  "confidence": null,
+  "decision": "ACCEPT",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

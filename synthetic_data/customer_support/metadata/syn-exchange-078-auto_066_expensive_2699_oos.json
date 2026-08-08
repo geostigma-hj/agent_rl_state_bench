@@ -1,0 +1,86 @@
+{
+  "task_id": "syn-exchange-078-auto_066_expensive_2699_oos",
+  "source_seed": "33-exchange_size_swap",
+  "generator_version": "exchange_v0.1",
+  "task_family": "exchange",
+  "mutation_level": "state",
+  "difficulty": "hard",
+  "changed_factors": [
+    "out_of_stock",
+    "expensive_item",
+    "store_credit_fallback"
+  ],
+  "requires_confirmation": true,
+  "is_compound": false,
+  "gold_tool_plan": [
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "exchange"
+      }
+    },
+    {
+      "tool": "process_exchange",
+      "params": {
+        "item_id": "ITEM-9250",
+        "new_product_id": "PROD-2251",
+        "confirm": false
+      }
+    },
+    {
+      "tool": "process_exchange",
+      "params": {
+        "item_id": "ITEM-9250",
+        "new_product_id": "PROD-2251",
+        "confirm": true
+      }
+    }
+  ],
+  "expected_state_diff": {
+    "created": {},
+    "modified": {
+      "orders": {
+        "ORD-6034": {
+          "status": {
+            "old": "delivered",
+            "new": "fully_returned"
+          }
+        }
+      },
+      "order_items": {
+        "ITEM-9250": {
+          "item_status": {
+            "old": "delivered",
+            "new": "returned"
+          },
+          "return_reason": {
+            "old": null,
+            "new": "changed_mind"
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 59
+          },
+          "restocking_fee": {
+            "old": null,
+            "new": 0
+          },
+          "refund_method": {
+            "old": null,
+            "new": "store_credit"
+          }
+        }
+      }
+    },
+    "deleted": {}
+  },
+  "language_rewritten": false,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "deepseek-v4-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  }
+}

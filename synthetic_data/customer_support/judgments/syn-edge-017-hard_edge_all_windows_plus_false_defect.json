@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.92,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is clear, internally consistent, and executable conversationally. The agent should deny the return as changed_mind because all return windows have expired, and must not invoke any defective exception, refund, credit, escalation, or workaround. No gold_tool_plan is required for this no-action conversation-only task.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

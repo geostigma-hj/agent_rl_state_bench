@@ -1,9 +1,11 @@
 {
   "decision": "ACCEPT",
-  "confidence": 0.98,
+  "confidence": 0.95,
   "issues": [],
-  "ambiguities": [],
-  "recommendation": "Task is clear and internally consistent: price difference ($119 - $99 = $20), expected refund amount and method match gold plan, and requirements align with a straightforward price-match refund without return/cancel/exchange.",
+  "ambiguities": [
+    "Payment was made via gift card, but required refund method is 'original_payment'. This is acceptable per policy (original payment method is the gift card), but could be considered ambiguous in systems where 'original_payment' might require a specific payment instrument."
+  ],
+  "recommendation": "No blocking issues found. The task is internally consistent: price difference is $20, price-match policy applies within 7 days of delivery, and the refund method aligns with the original gift card payment. Proceed as designed.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

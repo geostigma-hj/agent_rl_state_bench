@@ -23,12 +23,12 @@
   ],
   "user_id": "cust_005",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed that the NoiseBlock Earbuds from order ORD-7208 have dropped in price, and I believe I’m eligible for a $40 refund.",
+  "opening_message": "The NoiseBlock Earbuds from order ORD-7208 is cheaper now, so I think I should get $40 back.",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for NoiseBlock Earbuds in order ORD-7208. You think the refund should be $40, but you will accept the correct amount of $25 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
+    "user_sim_context": "You want a price-match refund for NoiseBlock Earbuds in order ORD-7208. You think the drop is $40, but accept correction to $25 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [
       "You bought NoiseBlock Earbuds in order ORD-7208.",
-      "The current product price is $94."
+      "You believe the price dropped by $40, but you are not certain."
     ],
     "unknown_info": [
       "You do not know the exact internal price-match workflow.",

@@ -1,9 +1,9 @@
 {
+  "decision": "ACCEPT",
+  "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
-  "confidence": null,
-  "decision": "ACCEPT",
+  "recommendation": "Proceed. The correct final state is a $40 price-match refund for ITEM-10209 with refund_method=original_payment. Agent should verify current product price (PROD-4210 current price $209), preview the refund, confirm it, and avoid any return/cancel/exchange. The temporary 'split' response from the confirm call is an API allocation detail and does not affect the persisted order_items.refund_method='original_payment' state requirement.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

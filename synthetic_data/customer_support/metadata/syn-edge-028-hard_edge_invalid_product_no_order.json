@@ -1,0 +1,68 @@
+{
+  "task_id": "syn-edge-028-hard_edge_invalid_product_no_order",
+  "source_task_id": "136-hard_edge_invalid_product_no_order",
+  "generator_version": "edge_case_template_v0.1",
+  "task_family": "edge_case",
+  "mutation_level": "template_surface",
+  "difficulty": "hard",
+  "changed_factors": [
+    "official_template_structure",
+    "surface_variant_2"
+  ],
+  "requires_confirmation": true,
+  "is_compound": false,
+  "gold_tool_plan": null,
+  "expected_state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10245",
+      "field": "item_status",
+      "expected_value": "returned"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10245",
+      "field": "refund_amount",
+      "expected_value": 149
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10245",
+      "field": "refund_method",
+      "expected_value": "original_payment"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10245",
+      "field": "restocking_fee",
+      "expected_value": 0
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10245",
+      "field": "return_label_issued",
+      "expected_value": true
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10245",
+      "field": "return_reason",
+      "expected_value": "defective"
+    },
+    {
+      "entity_type": "orders",
+      "record_key": "ORD-7244",
+      "field": "status",
+      "expected_value": "fully_returned"
+    }
+  ],
+  "language_rewritten": false,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "deepseek-v4-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  }
+}

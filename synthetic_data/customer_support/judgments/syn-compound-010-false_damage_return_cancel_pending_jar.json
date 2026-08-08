@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.97,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent and fully executable. The opening message, user simulator, environment data, task requirements, and state requirements all align on a changed_mind return for the blender ($89 original payment, no return label), cancellation of the replacement jar only, and preservation of the recipe book. No concrete issues or ambiguities found.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

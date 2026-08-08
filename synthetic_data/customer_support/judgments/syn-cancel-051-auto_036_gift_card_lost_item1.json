@@ -1,9 +1,9 @@
 {
+  "decision": "ACCEPT",
+  "confidence": 0.97,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
-  "confidence": null,
-  "decision": "ACCEPT",
+  "recommendation": "Proceed with the task as specified: agent should review cancellation policy, preview cancellation of ITEM-9021, confirm after customer agreement, and update ORD-6003 to partially_cancelled with ITEM-9021 cancelled, refund_amount 45, and refund_method gift_card.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

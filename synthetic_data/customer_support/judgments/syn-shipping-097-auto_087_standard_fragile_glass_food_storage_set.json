@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent and executable. The gold tool plan correctly reviews shipping and return policies, processes the damaged-in-transit return with full refund and return label, and applies the separate $10 fragile-item goodwill credit to original payment. State requirements match the environment and expected diff. No blocking ambiguities found.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

@@ -1,9 +1,11 @@
 {
-  "issues": [],
-  "ambiguities": [],
-  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
-  "confidence": null,
   "decision": "ACCEPT",
+  "confidence": 0.9,
+  "issues": [],
+  "ambiguities": [
+    "The cancellation policy in get_policies does not explicitly mention lost-package handling, while the cancel_order preview shows no fee with reason 'Package lost — free cancellation with full refund'. This could momentarily confuse an agent, but the tool output resolves it."
+  ],
+  "recommendation": "Proceed with the task as specified. Ensure the agent reviews the cancellation policy, obtains a preview for ITEM-9021, asks for confirmation, then confirms the cancellation.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

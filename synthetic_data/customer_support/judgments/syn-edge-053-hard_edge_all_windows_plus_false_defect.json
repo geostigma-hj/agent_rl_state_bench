@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is clear and internally consistent: the book is far outside the 14-day return window, the customer explicitly retracts the defect claim, and the required denial with no exception/refund paths is well-defined. Proceed with the scenario as specified.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.85,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent and executable. All state requirements align with environment data for the two order items and the order status. The fragile goodwill credit is specified in the task summary and state requirements, and the user simulator provides a cue if the agent omits it. Missing gold_tool_plan is a metadata warning, not a task correctness issue.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

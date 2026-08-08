@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is clear and internally consistent. The user expects a damaged-in-transit refund to original payment plus the fragile-item goodwill credit. The environment, state requirements, and gold plan all align. Proceed with the standard shipping-damage flow: review shipping and return policies, process return for ITEM-9155 with damaged_in_transit, issue $119 refund to original payment, then issue the separate $10 goodwill credit to original payment.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

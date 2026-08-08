@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Accept. The task is internally consistent: the order/item are marked fully returned and refunded, and the requirements and simulator clearly require a final denial of both duplicate refund and any courtesy credit/workaround. No state mutations or tool calls are required, so the conversation-only final state is unambiguous.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

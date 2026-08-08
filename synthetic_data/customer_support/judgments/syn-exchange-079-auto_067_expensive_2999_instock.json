@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is clear, internally consistent, and has a unique reasonable final state. The exchange policy clearly applies (more expensive item requires customer payment of the difference), the gold tool plan satisfies the must requirements, and the state requirements are consistent with the expected exchange outcome.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

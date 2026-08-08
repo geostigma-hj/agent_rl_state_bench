@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is clear and internally consistent: the order is fully returned/refunded, and the only correct terminal state is a final, no-action denial of both a second refund and any courtesy credit. The environment supports all facts, the user simulator matches the intent, and the empty tool plan/state requirements are appropriate for a purely conversational task. No hidden assumptions or conflicting constraints found.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

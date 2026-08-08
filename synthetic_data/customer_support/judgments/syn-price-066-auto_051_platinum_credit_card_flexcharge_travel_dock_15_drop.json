@@ -1,9 +1,9 @@
 {
   "decision": "ACCEPT",
-  "confidence": 0.95,
+  "confidence": 0.97,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Task is clear and internally consistent. The price difference is verified as $15 (69-54), the customer is open to the actual amount, and state requirements align with the gold tool plan.",
+  "recommendation": "Task is internally consistent, executable, and unambiguous. The price difference is clearly $15 (69 - 54), the refund policy supports price-match refunds within 7 days of delivery, and the required state changes are fully specified.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

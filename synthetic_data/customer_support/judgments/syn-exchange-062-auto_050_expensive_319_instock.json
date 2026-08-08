@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent: the exchange request is valid, both products are in stock, the exchange policy is clear for a more expensive item, the preview-before-confirm requirement is satisfied by the gold plan, and the expected final state is unambiguous.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

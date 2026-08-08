@@ -1,0 +1,104 @@
+{
+  "task_id": "syn-compound-010-false_damage_return_cancel_pending_jar",
+  "source_task_id": "80-false_damage_return_cancel_pending_jar",
+  "generator_version": "compound_template_v0.1",
+  "task_family": "compound",
+  "mutation_level": "template_surface",
+  "difficulty": "medium",
+  "changed_factors": [
+    "official_template_structure",
+    "surface_variant_0"
+  ],
+  "requires_confirmation": true,
+  "is_compound": true,
+  "gold_tool_plan": null,
+  "expected_state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10850",
+      "field": "item_status",
+      "expected_value": "returned"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10850",
+      "field": "refund_amount",
+      "expected_value": 89
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10850",
+      "field": "refund_method",
+      "expected_value": "original_payment"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10850",
+      "field": "restocking_fee",
+      "expected_value": 0
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10850",
+      "field": "return_reason",
+      "expected_value": "changed_mind"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10851",
+      "field": "item_status",
+      "expected_value": "cancelled"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10851",
+      "field": "refund_amount",
+      "expected_value": 39
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10851",
+      "field": "refund_method",
+      "expected_value": "credit_card"
+    },
+    {
+      "entity_type": "orders",
+      "record_key": "ORD-7831",
+      "field": "status",
+      "expected_value": "fully_returned"
+    },
+    {
+      "entity_type": "orders",
+      "record_key": "ORD-7832",
+      "field": "status",
+      "expected_value": "partially_cancelled"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10850",
+      "field": "return_label_issued",
+      "expected_value": false
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10852",
+      "field": "item_status",
+      "expected_value": "confirmed"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10852",
+      "field": "refund_amount",
+      "expected_value": null
+    }
+  ],
+  "language_rewritten": false,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "deepseek-v4-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  }
+}

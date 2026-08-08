@@ -3,7 +3,7 @@
   "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "The task is clear, internally consistent, and executable. The correct price drop is $15 (from $45 to $30), and the state requirements match the gold plan and expected diff. No ambiguity found.",
+  "recommendation": "Approve the task. The environment, state requirements, and gold tool plan are consistent: the correct price-match refund is $15, refunded to original payment, with no return/cancel/exchange.",
   "judge_model": "deepseek-v4-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null
