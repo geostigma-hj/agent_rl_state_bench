@@ -97,6 +97,7 @@ def _run_single(
     simulator_client: LLMClient | PooledLLMClient | None,
     output_dir: Path,
     domain: DomainConfig,
+    tasks_dir: Path,
     max_attempts: int,
     protocol=None,
     agent_model: dict[str, str | None] | None = None,
@@ -145,7 +146,7 @@ def _run_single(
             if task_requirements_judge is not None or ux_judge is not None:
                 score_result = score_one(
                     out_path,
-                    domain_tasks_dir(domain.name),
+                    tasks_dir,
                     task_requirements_judge,
                     ux_judge,
                     out_path,
@@ -186,6 +187,12 @@ def main() -> None:
     parser.add_argument("--domain", type=str, required=True, help="Domain name")
     parser.add_argument("--num-workers", dest="workers", type=int, default=None, help="Number of parallel task workers")
     parser.add_argument("--tasks", type=str, default=None, help="Comma-separated task IDs")
+    parser.add_argument(
+        "--tasks-dir",
+        type=Path,
+        default=None,
+        help="Optional directory of task JSON files. Defaults to the checked-in domain tasks.",
+    )
     parser.add_argument(
         "--split",
         type=str,
@@ -295,7 +302,7 @@ def main() -> None:
         parser.error("Protocol prompt validation failed:\n" + "\n".join(protocol_errors))
     if args.domain not in protocol.domains:
         parser.error(format_domain_not_in_protocol_error(args.domain, protocol))
-    tasks_dir = domain_tasks_dir(args.domain)
+    tasks_dir = args.tasks_dir or domain_tasks_dir(args.domain)
     base_output = Path(args.output_dir) if args.output_dir else Path(f"outputs/{args.domain}")
     agent_class = load_root_agent_class(args.agent_class) if args.agent_class else None
     if agent_class is not None and args.agent_client_class is None and not issubclass(agent_class, StateBenchAgent):
@@ -340,6 +347,10 @@ def main() -> None:
             task_files = _resolve_task_files(tasks_dir, task_ids)
         except ValueError as exc:
             parser.error(str(exc))
+    elif args.tasks_dir is not None and args.split == "all":
+        task_files = sorted(tasks_dir.glob("*.json"))
+        if not task_files:
+            parser.error(f"--tasks-dir contains no task JSON files: {tasks_dir}")
     else:
         task_ids = load_split_task_ids(args.domain, args.split, protocol.split_version)
         try:
@@ -389,6 +400,7 @@ def main() -> None:
                 user_sim_client,
                 run_dirs[run_idx],
                 domain,
+                tasks_dir,
                 args.retry_attempts,
                 protocol,
                 agent_model,

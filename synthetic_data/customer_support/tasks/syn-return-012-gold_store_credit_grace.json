@@ -1,0 +1,95 @@
+{
+  "task_id": "syn-return-012-gold_store_credit_grace",
+  "task_summary": "Customer wants to return SoundMax Wireless Headphones from ORD-6011 outside the full-refund window but inside the store-credit grace period. The return is allowed, but the refund method must remain store credit.",
+  "task_requirements": [
+    {
+      "id": "syn-return-012-gold_store_credit_grace_must_review_return_policy",
+      "kind": "must",
+      "requirement": "Agent must review the return policy before using process_return.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-return-012-gold_store_credit_grace_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a process_return preview tool call for ITEM-9075 with confirm false or omitted before making the confirm=true process_return tool call.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-return-012-gold_store_credit_grace_must_process_correct_reason",
+      "kind": "must",
+      "requirement": "Agent must process the item with return reason changed_mind.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-return-012-gold_store_credit_grace_must_not_flip_store_credit",
+      "kind": "must_not",
+      "requirement": "Agent must not change the refund method from store credit to original payment.",
+      "evidence": "conversation_or_tool_calls"
+    }
+  ],
+  "user_id": "cust_003",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "I'd like to return the SoundMax Wireless Headphones from order ORD-6011. I know it has been a while, but I want a refund to my original payment method.",
+  "user_simulator": {
+    "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is changed mind. Your preferred refund method is store credit. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed. If the agent says the refund must be store credit, push once for a card refund, then accept the policy.",
+    "known_info": [
+      "You bought SoundMax Wireless Headphones in order ORD-6011.",
+      "You received the order on 2026-04-25T14:00:00."
+    ],
+    "unknown_info": [
+      "You do not know the exact return policy calculation.",
+      "You do not know the internal item_id unless the agent tells you."
+    ],
+    "task_rules": [
+      "Do not invent order IDs, item IDs, prices, dates, or policy details.",
+      "If the agent previews a valid return and asks for confirmation, agree to proceed.",
+      "Push back once for original-payment refund, but accept store credit if the agent explains the policy."
+    ]
+  },
+  "task_type": "return_item",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "item_status",
+      "expected_value": "returned"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "refund_amount",
+      "expected_value": 222
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "refund_method",
+      "expected_value": "store_credit"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "restocking_fee",
+      "expected_value": 37
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "return_reason",
+      "expected_value": "changed_mind"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "store_credit_only",
+      "expected_value": true
+    },
+    {
+      "entity_type": "orders",
+      "record_key": "ORD-6011",
+      "field": "status",
+      "expected_value": "fully_returned"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-return-012-gold_store_credit_grace.json"
+}

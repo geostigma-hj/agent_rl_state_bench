@@ -1,0 +1,63 @@
+{
+  "task_id": "syn-cancel-014-partial_lost_first_item_free",
+  "task_summary": "Customer wishes to cancel only ITEM-9020 from ORD-6003. Agent must follow cancellation policy, present preview, obtain confirmation, and update accordingly.",
+  "task_requirements": [
+    {
+      "id": "syn-cancel-014-partial_lost_first_item_free_must_review_cancellation_policy",
+      "kind": "must",
+      "requirement": "Agent must review the cancellation policy before using cancel_order.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-cancel-014-partial_lost_first_item_free_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a cancel_order preview tool call for items ['ITEM-9020'] with confirm false or omitted before making the confirm=true cancel_order tool call.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_004",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "Please cancel only the SoundMax Wireless Headphones (ITEM-9020) from order ORD-6003, not the other item.",
+  "user_simulator": {
+    "user_sim_context": "You intend to cancel only ITEM-9020 (SoundMax Wireless Headphones) from ORD-6003, which also includes a 7-Port USB-C Hub. If the agent presents a valid cancellation preview, you will confirm to proceed.",
+    "known_info": [
+      "You have order ORD-6003.",
+      "Items: SoundMax Wireless Headphones and 7-Port USB-C Hub."
+    ],
+    "unknown_info": [
+      "You don't know if a cancellation fee applies."
+    ],
+    "task_rules": [
+      "If the agent previews a valid cancellation and asks for confirmation, agree.",
+      "Do not request cancellation of any items outside this scope."
+    ]
+  },
+  "task_type": "cancel_order",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9020",
+      "field": "item_status",
+      "expected_value": "cancelled"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9020",
+      "field": "refund_amount",
+      "expected_value": 249
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9020",
+      "field": "refund_method",
+      "expected_value": "credit_card"
+    },
+    {
+      "entity_type": "orders",
+      "record_key": "ORD-6003",
+      "field": "status",
+      "expected_value": "partially_cancelled"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-cancel-014-partial_lost_first_item_free.json"
+}

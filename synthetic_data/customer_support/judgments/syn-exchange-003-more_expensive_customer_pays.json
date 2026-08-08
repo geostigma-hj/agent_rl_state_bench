@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is well-structured, internally consistent, and executable. The gold tool plan correctly satisfies all task requirements (policy review, preview, confirm), and the expected state diff is precise and achievable given the environment data. No changes needed.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

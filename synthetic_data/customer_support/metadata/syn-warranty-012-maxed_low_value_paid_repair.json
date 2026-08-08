@@ -1,0 +1,78 @@
+{
+  "task_id": "syn-warranty-012-maxed_low_value_paid_repair",
+  "source_seed": "30-warranty_manufacturer",
+  "generator_version": "warranty_v0.1",
+  "task_family": "warranty",
+  "mutation_level": "state",
+  "difficulty": "hard",
+  "changed_factors": [
+    "claim_limit",
+    "paid_repair"
+  ],
+  "requires_confirmation": true,
+  "is_compound": false,
+  "gold_tool_plan": [
+    {
+      "tool": "get_warranty_status",
+      "params": {
+        "item_id": "ITEM-9215"
+      }
+    },
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "warranty"
+      }
+    },
+    {
+      "tool": "process_warranty_claim",
+      "params": {
+        "warranty_id": "WRT-4013",
+        "item_id": "ITEM-9215",
+        "issue_description": "Product is malfunctioning",
+        "confirm": false
+      }
+    },
+    {
+      "tool": "process_warranty_claim",
+      "params": {
+        "warranty_id": "WRT-4013",
+        "item_id": "ITEM-9215",
+        "issue_description": "Product is malfunctioning",
+        "confirm": true
+      }
+    }
+  ],
+  "expected_state_diff": {
+    "created": {},
+    "modified": {
+      "warranties": {
+        "WRT-4013": {
+          "resolution": {
+            "old": null,
+            "new": "paid_repair"
+          },
+          "status": {
+            "old": "active",
+            "new": "claimed"
+          },
+          "claim_count": {
+            "old": 3,
+            "new": 4
+          }
+        }
+      }
+    },
+    "deleted": {}
+  },
+  "language_rewritten": true,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "step-3.7-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  },
+  "language_rewriter_model": "deepseek-v4-flash"
+}

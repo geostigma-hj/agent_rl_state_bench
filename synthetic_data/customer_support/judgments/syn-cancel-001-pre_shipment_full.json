@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is well-specified with clear requirements, consistent environment state, and a gold tool plan that directly satisfies the task requirements. The expected final state is achievable and unambiguous given the pre-shipment order status and user intent to cancel all items in the order.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.98,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent and executable. The user request, environment state, gold tool plan, and expected state diff all align: order ORD-6003 is pre-shipment (processing status), both items are eligible for full refund to the original gift_card payment method, and the required preview-then-confirm workflow is clearly specified. No changes needed.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

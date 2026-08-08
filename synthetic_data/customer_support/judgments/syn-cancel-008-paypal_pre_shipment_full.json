@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.98,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is well-structured and internally consistent. The gold tool plan satisfies both 'must' requirements (policy review and preview before confirmation). The expected state aligns with the pre-shipment environment (processing status, PayPal refunds for full item prices, no restocking fee). No ambiguities detected.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

@@ -1,0 +1,74 @@
+{
+  "task_id": "syn-exchange-004-out_of_stock_store_credit",
+  "task_summary": "Customer requests an exchange of the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in Large. The correct handling is to apply the exchange policy, preview the exchange details, confirm with the customer, and then process the exchange with the policy-defined payment or store-credit outcome.",
+  "task_requirements": [
+    {
+      "id": "syn-exchange-004-out_of_stock_store_credit_must_review_exchange_policy",
+      "kind": "must",
+      "requirement": "Agent must review the exchange policy before using process_exchange.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-exchange-004-out_of_stock_store_credit_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a process_exchange preview tool call for ITEM-9250 to PROD-2251 with confirm false or omitted before making the confirm=true process_exchange tool call.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_003",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in size Large.",
+  "user_simulator": {
+    "user_sim_context": "Your goal is to exchange the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in Large. If the agent previews a valid exchange or store-credit fallback and asks for confirmation, agree to proceed.",
+    "known_info": [
+      "You purchased a Premium Cotton Shirt in order ORD-6034.",
+      "You want the Premium Cotton Shirt in large size instead."
+    ],
+    "unknown_info": [
+      "You are not aware of the exchange price-difference policy."
+    ],
+    "task_rules": [
+      "Do not request a different product. Confirm after a valid preview."
+    ]
+  },
+  "task_type": "exchange_item",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9250",
+      "field": "item_status",
+      "expected_value": "returned"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9250",
+      "field": "refund_amount",
+      "expected_value": 59
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9250",
+      "field": "refund_method",
+      "expected_value": "store_credit"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9250",
+      "field": "restocking_fee",
+      "expected_value": 0
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9250",
+      "field": "return_reason",
+      "expected_value": "changed_mind"
+    },
+    {
+      "entity_type": "orders",
+      "record_key": "ORD-6034",
+      "field": "status",
+      "expected_value": "fully_returned"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-exchange-004-out_of_stock_store_credit.json"
+}

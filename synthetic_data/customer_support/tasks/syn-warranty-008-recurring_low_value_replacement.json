@@ -1,0 +1,90 @@
+{
+  "task_id": "syn-warranty-008-recurring_low_value_replacement",
+  "task_summary": "Customer seeks warranty assistance for a malfunctioning PowerBlend Mini Blender purchased under order ORD-6032. Proper procedure: validate warranty eligibility, explain the warranty policy, provide a preview of the coverage, obtain customer confirmation, and proceed with the claim accordingly.",
+  "task_requirements": [
+    {
+      "id": "syn-warranty-008-recurring_low_value_replacement_must_check_warranty_status",
+      "kind": "must",
+      "requirement": "Agent must check warranty status for ITEM-9215.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-008-recurring_low_value_replacement_must_review_warranty_policy",
+      "kind": "must",
+      "requirement": "Agent must review warranty policy before filing a warranty claim.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-008-recurring_low_value_replacement_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a process_warranty_claim preview tool call for WRT-4013 with confirm false or omitted before making the confirm=true process_warranty_claim tool call.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_004",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "Hi, my PowerBlend Mini Blender from order ORD-6032 is not working properly. Could you assist me with the warranty claim?",
+  "user_simulator": {
+    "user_sim_context": "You need warranty support for a malfunctioning PowerBlend Mini Blender from order ORD-6032. If the agent explains the warranty resolution and requests confirmation, you should agree to move forward.",
+    "known_info": [
+      "You purchased a PowerBlend Mini Blender under order ORD-6032.",
+      "The product is malfunctioning."
+    ],
+    "unknown_info": [
+      "You are unaware of the warranty claim count or specific resolution details."
+    ],
+    "task_rules": [
+      "Confirm after receiving a proper warranty preview. Do not request a return unless warranty coverage is denied by the agent."
+    ]
+  },
+  "task_type": "warranty_claim",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9215",
+      "field": "replacement_item_id",
+      "expected_value": "ITEM-9216"
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "claim_count",
+      "expected_value": 3
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "resolution",
+      "expected_value": "full_replacement"
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "status",
+      "expected_value": "claimed"
+    },
+    {
+      "entity_type": "order_items",
+      "match_fields": {
+        "item_id": "ITEM-9216"
+      },
+      "expected_fields": {
+        "order_id": "ORD-6032",
+        "product_id": "PROD-2215",
+        "quantity": 1,
+        "unit_price": 79,
+        "item_status": "confirmed",
+        "return_reason": null,
+        "refund_amount": null,
+        "refund_method": null,
+        "restocking_fee": null,
+        "return_label_issued": false,
+        "replacement_item_id": null,
+        "goodwill_credit": 0,
+        "goodwill_credit_method": null,
+        "store_credit_only": false
+      }
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-warranty-008-recurring_low_value_replacement.json"
+}

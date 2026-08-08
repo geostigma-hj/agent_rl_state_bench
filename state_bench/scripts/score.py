@@ -210,6 +210,12 @@ def main() -> None:
         help="Results dir containing run1/, run2/, ... Trajectories are scored in place.",
     )
     parser.add_argument(
+        "--tasks-dir",
+        type=Path,
+        default=None,
+        help="Optional directory of task JSON files. Defaults to the checked-in domain tasks.",
+    )
+    parser.add_argument(
         "--split",
         type=str,
         default="all",
@@ -258,7 +264,7 @@ def main() -> None:
             f"scoring with {args.num_runs} run(s) for local analysis. Results are NOT protocol-compliant.",
             file=sys.stderr,
         )
-    tasks_dir = domain_tasks_dir(args.domain)
+    tasks_dir = args.tasks_dir or domain_tasks_dir(args.domain)
     results_dir = Path(args.results_dir)
     split_task_ids = None
     if args.split != "all":
