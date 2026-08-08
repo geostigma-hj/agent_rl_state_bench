@@ -74,29 +74,29 @@
             "old": 0,
             "new": 10
           },
-          "refund_method": {
-            "old": null,
-            "new": "original_payment"
-          },
-          "restocking_fee": {
-            "old": null,
-            "new": 0
-          },
-          "return_reason": {
-            "old": null,
-            "new": "damaged_in_transit"
-          },
-          "refund_amount": {
-            "old": null,
-            "new": 89
+          "item_status": {
+            "old": "delivered",
+            "new": "returned"
           },
           "goodwill_credit_method": {
             "old": null,
             "new": "original_payment"
           },
-          "item_status": {
-            "old": "delivered",
-            "new": "returned"
+          "refund_amount": {
+            "old": null,
+            "new": 89
+          },
+          "restocking_fee": {
+            "old": null,
+            "new": 0
+          },
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
+          },
+          "return_reason": {
+            "old": null,
+            "new": "damaged_in_transit"
           },
           "return_label_issued": {
             "old": false,

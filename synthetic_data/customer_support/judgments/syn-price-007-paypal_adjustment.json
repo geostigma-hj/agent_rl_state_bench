@@ -1,11 +1,9 @@
 {
-  "decision": "ACCEPT",
-  "confidence": 0.95,
   "issues": [],
-  "ambiguities": [
-    "The customer's preferred_refund_method is 'store_credit' while the task requires 'original_payment'. The agent may need to explain this discrepancy, though the task does not explicitly require such an explanation."
-  ],
-  "recommendation": "Proceed with the task as specified. The agent should follow the gold tool plan: verify product price, preview the $10 refund to original payment (PayPal), and confirm. The order and item must remain active with no return, cancellation, or exchange.",
+  "ambiguities": [],
+  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
+  "confidence": null,
+  "decision": "ACCEPT",
   "judge_model": "step-3.7-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

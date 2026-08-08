@@ -1,11 +1,9 @@
 {
-  "decision": "ACCEPT",
-  "confidence": 0.92,
   "issues": [],
-  "ambiguities": [
-    "The expected state marks both items with refund_method 'split', but the payment breakdown shows each item was paid by a single payment method (headphones by credit card, hub by gift card). This could be a system convention where 'split' indicates the order used split payment, but it's slightly inconsistent with per-item payment mapping."
-  ],
-  "recommendation": "Task is clear, executable, and internally consistent. The gold tool plan correctly implements the required policy review, preview, and confirmation sequence. The expected state (full refunds, no restocking fee) is appropriate for a lost shipment. Proceed with acceptance.",
+  "ambiguities": [],
+  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
+  "confidence": null,
+  "decision": "ACCEPT",
   "judge_model": "step-3.7-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

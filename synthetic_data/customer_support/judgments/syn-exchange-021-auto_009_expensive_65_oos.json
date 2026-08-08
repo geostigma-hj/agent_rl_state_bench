@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is well-specified with consistent elements across all components. The OOS target triggers a store-credit fallback that is explicitly supported by the user simulator. The gold tool plan and expected state align with the exchange policy review requirement.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

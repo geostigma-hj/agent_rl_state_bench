@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 1.0,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Follow the gold tool plan: first retrieve the exchange policy via get_policies, then submit an unconfirmed process_exchange preview for ITEM-9250 to PROD-2251, then submit the confirmed process_exchange after receiving customer approval to finalize the exchange per policy.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

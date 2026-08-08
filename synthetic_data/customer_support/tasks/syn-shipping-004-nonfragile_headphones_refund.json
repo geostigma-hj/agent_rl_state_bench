@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-004-nonfragile_headphones_refund",
-  "task_summary": "Customer reports that the SoundMax Basic Headphones from order ORD-6023 were damaged during shipping. The proper handling is to follow the shipping-damage process: review the shipping and return policy, refund the purchase price to the original payment method, provide a return label for the damaged item, and add a fragile-item goodwill credit only if applicable.",
+  "task_summary": "Customer reports that the SoundMax Basic Headphones from order ORD-6023 arrived damaged in transit. The proper handling path is for shipping damage: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill credit only when applicable. The expected outcome is a refund and return label.",
   "task_requirements": [
     {
       "id": "syn-shipping-004-nonfragile_headphones_refund_must_review_shipping_policy",
@@ -23,19 +23,19 @@
   ],
   "user_id": "cust_002",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "Hi, I received my SoundMax Basic Headphones from order ORD-6023, but they arrived damaged. The packaging was crushed.",
+  "opening_message": "My SoundMax Basic Headphones from order ORD-6023 showed up damaged, with the packaging crushed.",
   "user_simulator": {
-    "user_sim_context": "You received SoundMax Basic Headphones from order ORD-6023 that were damaged in transit. You want a refund to the original payment method. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
+    "user_sim_context": "You received SoundMax Basic Headphones from order ORD-6023, but they arrived damaged in transit. Your goal is to get a refund to the original payment method. If the item is fragile, you will ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [
-      "You bought SoundMax Basic Headphones in order ORD-6023.",
-      "The item arrived damaged with crushed packaging."
+      "You purchased SoundMax Basic Headphones in order ORD-6023.",
+      "The item arrived damaged, with crushed packaging."
     ],
     "unknown_info": [
       "You do not know the internal item_id unless the agent tells you."
     ],
     "task_rules": [
-      "Keep the issue scoped to shipping damage; do not ask for a changed-mind return, cancellation, warranty claim, or exchange.",
-      "Confirm after a valid damaged-in-transit return preview. If the item is fragile, expect the separate goodwill credit."
+      "Keep the issue limited to shipping damage; do not request a changed-mind return, cancellation, warranty claim, or exchange.",
+      "After the agent provides a valid damaged-in-transit return preview, confirm it. If the item is fragile, expect the separate goodwill credit."
     ]
   },
   "task_type": "shipping_claim",

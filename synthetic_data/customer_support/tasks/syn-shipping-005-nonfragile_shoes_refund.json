@@ -23,7 +23,7 @@
   ],
   "user_id": "cust_005",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My TrailStep Running Shoes from order ORD-6023 arrived damaged. The package was crushed.",
+  "opening_message": "Hi, I ordered TrailStep Running Shoes (order ORD-6023) and they arrived damaged—the box was crushed.",
   "user_simulator": {
     "user_sim_context": "You received TrailStep Running Shoes from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is well-formed, internally consistent, and executable. The gold_tool_plan aligns with all must/must_not requirements and state_requirements. Minor synthetic data quirk (blender listed under headphones subcategory) does not affect task logic. Accept.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

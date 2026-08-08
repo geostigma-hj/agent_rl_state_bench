@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 1.0,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is clear, executable, and internally consistent. All requirements align with environment state and expected outcomes.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

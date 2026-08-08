@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is clear, executable, and internally consistent. The lost shipping status provides a coherent rationale for allowing full cancellation of a shipped order with no restocking fees. All requirements align with the gold tool plan and expected final state.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

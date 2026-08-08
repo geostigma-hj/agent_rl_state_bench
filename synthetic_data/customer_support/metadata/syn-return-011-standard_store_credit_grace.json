@@ -39,8 +39,28 @@
   "expected_state_diff": {
     "created": {},
     "modified": {
+      "orders": {
+        "ORD-6011": {
+          "status": {
+            "old": "delivered",
+            "new": "fully_returned"
+          }
+        }
+      },
       "order_items": {
         "ITEM-9075": {
+          "item_status": {
+            "old": "delivered",
+            "new": "returned"
+          },
+          "store_credit_only": {
+            "old": false,
+            "new": true
+          },
+          "return_reason": {
+            "old": null,
+            "new": "changed_mind"
+          },
           "restocking_fee": {
             "old": null,
             "new": 37
@@ -49,29 +69,9 @@
             "old": null,
             "new": 204
           },
-          "item_status": {
-            "old": "delivered",
-            "new": "returned"
-          },
           "refund_method": {
             "old": null,
             "new": "store_credit"
-          },
-          "return_reason": {
-            "old": null,
-            "new": "changed_mind"
-          },
-          "store_credit_only": {
-            "old": false,
-            "new": true
-          }
-        }
-      },
-      "orders": {
-        "ORD-6011": {
-          "status": {
-            "old": "delivered",
-            "new": "fully_returned"
           }
         }
       }

@@ -1,0 +1,62 @@
+{
+  "task_id": "syn-warranty-018-auto_005_maxed_soundmax_wireless_headphones",
+  "task_summary": "Customer requests warranty service for SoundMax Wireless Headphones purchased in order ORD-6032. The correct procedure is to verify warranty status, review policy, provide a preview, obtain confirmation, and then file the claim. However, the warranty has reached its maximum claim count, so only a paid repair is possible under the official policy.",
+  "task_requirements": [
+    {
+      "id": "syn-warranty-018-auto_005_maxed_soundmax_wireless_headphones_must_check_warranty_status",
+      "kind": "must",
+      "requirement": "Agent must check warranty status for ITEM-9215.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-018-auto_005_maxed_soundmax_wireless_headphones_must_review_warranty_policy",
+      "kind": "must",
+      "requirement": "Agent must review warranty policy before filing a warranty claim.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-018-auto_005_maxed_soundmax_wireless_headphones_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a process_warranty_claim preview tool call for WRT-4013 with confirm false or omitted before making the confirm=true process_warranty_claim tool call.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_004",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "I'm having issues with my SoundMax Wireless Headphones from order ORD-6032. Can I get them repaired under warranty?",
+  "user_simulator": {
+    "user_sim_context": "You want to claim warranty for your SoundMax Wireless Headphones from order ORD-6032. If the agent explains that the warranty is exhausted and offers a paid repair, accept and proceed. The warranty has reached its maximum claim count, so official policy only allows paid repair.",
+    "known_info": [
+      "You purchased SoundMax Wireless Headphones in order ORD-6032.",
+      "The product is malfunctioning."
+    ],
+    "unknown_info": [
+      "You do not know the number of claims made or the warranty resolution."
+    ],
+    "task_rules": [
+      "Agree to proceed after a warranty preview. Do not request a return unless the agent states warranty is unavailable."
+    ]
+  },
+  "task_type": "warranty_claim",
+  "state_requirements": [
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "claim_count",
+      "expected_value": 4
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "resolution",
+      "expected_value": "paid_repair"
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "status",
+      "expected_value": "claimed"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-warranty-018-auto_005_maxed_soundmax_wireless_headphones.json"
+}

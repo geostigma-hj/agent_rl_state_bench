@@ -48,17 +48,17 @@
     "modified": {
       "warranties": {
         "WRT-4013": {
-          "resolution": {
-            "old": null,
-            "new": "discounted_repair"
-          },
           "status": {
-            "old": "active",
+            "old": "expired",
             "new": "claimed"
           },
           "claim_count": {
             "old": 1,
             "new": 2
+          },
+          "resolution": {
+            "old": null,
+            "new": "discounted_repair"
           }
         }
       }
@@ -66,13 +66,6 @@
     "deleted": {}
   },
   "language_rewritten": true,
-  "judge": {
-    "decision": "ACCEPT",
-    "judge_model": "step-3.7-flash",
-    "deterministic_check_passed": true,
-    "issues": [],
-    "ambiguities": [],
-    "manual_adjudication": null
-  },
+  "judge": null,
   "language_rewriter_model": "deepseek-v4-flash"
 }

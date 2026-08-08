@@ -38,13 +38,13 @@
     "modified": {
       "order_items": {
         "ITEM-9020": {
-          "refund_amount": {
-            "old": null,
-            "new": 249
-          },
           "item_status": {
             "old": "shipped",
             "new": "cancelled"
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 249
           },
           "refund_method": {
             "old": null,
@@ -52,13 +52,13 @@
           }
         },
         "ITEM-9021": {
-          "refund_amount": {
-            "old": null,
-            "new": 45
-          },
           "item_status": {
             "old": "shipped",
             "new": "cancelled"
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 45
           },
           "refund_method": {
             "old": null,
@@ -83,9 +83,7 @@
     "judge_model": "step-3.7-flash",
     "deterministic_check_passed": true,
     "issues": [],
-    "ambiguities": [
-      "The expected state marks both items with refund_method 'split', but the payment breakdown shows each item was paid by a single payment method (headphones by credit card, hub by gift card). This could be a system convention where 'split' indicates the order used split payment, but it's slightly inconsistent with per-item payment mapping."
-    ],
+    "ambiguities": [],
     "manual_adjudication": null
   },
   "language_rewriter_model": "deepseek-v4-flash"

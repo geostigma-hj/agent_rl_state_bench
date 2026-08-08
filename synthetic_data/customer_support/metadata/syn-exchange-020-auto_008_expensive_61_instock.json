@@ -1,0 +1,79 @@
+{
+  "task_id": "syn-exchange-020-auto_008_expensive_61_instock",
+  "source_seed": "33-exchange_size_swap",
+  "generator_version": "exchange_v0.1",
+  "task_family": "exchange",
+  "mutation_level": "state",
+  "difficulty": "medium",
+  "changed_factors": [
+    "expensive_item",
+    "small_price_difference"
+  ],
+  "requires_confirmation": true,
+  "is_compound": false,
+  "gold_tool_plan": [
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "exchange"
+      }
+    },
+    {
+      "tool": "process_exchange",
+      "params": {
+        "item_id": "ITEM-9250",
+        "new_product_id": "PROD-2251",
+        "confirm": false
+      }
+    },
+    {
+      "tool": "process_exchange",
+      "params": {
+        "item_id": "ITEM-9250",
+        "new_product_id": "PROD-2251",
+        "confirm": true
+      }
+    }
+  ],
+  "expected_state_diff": {
+    "created": {
+      "order_items": {
+        "ITEM-9251": {
+          "item_id": "ITEM-9251",
+          "order_id": "ORD-6034",
+          "product_id": "PROD-2251",
+          "quantity": 1,
+          "unit_price": 61,
+          "item_status": "confirmed",
+          "return_reason": null,
+          "refund_amount": null,
+          "refund_method": null,
+          "restocking_fee": null,
+          "return_label_issued": false,
+          "replacement_item_id": null,
+          "goodwill_credit": 0,
+          "goodwill_credit_method": null,
+          "store_credit_only": false
+        }
+      }
+    },
+    "modified": {
+      "order_items": {
+        "ITEM-9250": {
+          "replacement_item_id": {
+            "old": null,
+            "new": "ITEM-9251"
+          },
+          "item_status": {
+            "old": "delivered",
+            "new": "exchanged"
+          }
+        }
+      }
+    },
+    "deleted": {}
+  },
+  "language_rewritten": true,
+  "judge": null,
+  "language_rewriter_model": "deepseek-v4-flash"
+}

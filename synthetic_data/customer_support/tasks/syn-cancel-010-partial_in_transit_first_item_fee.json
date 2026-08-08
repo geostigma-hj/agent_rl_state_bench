@@ -1,6 +1,6 @@
 {
   "task_id": "syn-cancel-010-partial_in_transit_first_item_fee",
-  "task_summary": "Customer wants to cancel only specific item(s) in order ORD-6003. The correct handling is to apply the cancellation policy, provide a preview, confirm the cancellation, and update only the eligible item(s) as requested.",
+  "task_summary": "User requests cancellation of specific items (ITEM-9020) from order ORD-6003. Handle by reviewing cancellation policy, providing a preview, and updating only eligible items after confirmation.",
   "task_requirements": [
     {
       "id": "syn-cancel-010-partial_in_transit_first_item_fee_must_review_cancellation_policy",
@@ -17,9 +17,9 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to cancel only the SoundMax Wireless Headphones from my order ORD-6003, please.",
+  "opening_message": "I'd like to cancel just the SoundMax Wireless Headphones from order ORD-6003.",
   "user_simulator": {
-    "user_sim_context": "You want to cancel only item(s) ['ITEM-9020'] from order ORD-6003, which includes SoundMax Wireless Headphones and a 7-Port USB-C Hub. If the agent provides a valid cancellation preview and asks for confirmation, you should agree to proceed.",
+    "user_sim_context": "You intend to cancel only the item ITEM-9020 (SoundMax Wireless Headphones) from order ORD-6003, which also includes a 7-Port USB-C Hub. If the agent provides a valid cancellation preview and asks for confirmation, you will agree to proceed.",
     "known_info": [
       "You placed order ORD-6003.",
       "The order contains: SoundMax Wireless Headphones, 7-Port USB-C Hub."

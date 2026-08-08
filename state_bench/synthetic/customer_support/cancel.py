@@ -27,7 +27,7 @@ class CancelVariant:
     changed_factors: list[str]
 
 
-DEFAULT_CANCEL_VARIANTS: tuple[CancelVariant, ...] = (
+BASE_CANCEL_VARIANTS: tuple[CancelVariant, ...] = (
     CancelVariant("pre_shipment_full", "easy", "processing", "processing", ("confirmed", "confirmed"), None, "credit_card", ["shipping_status"]),
     CancelVariant("in_transit_full_intercept_fee", "medium", "shipped", "in_transit", ("shipped", "shipped"), None, "credit_card", ["intercept_fee"]),
     CancelVariant("partial_pre_shipment_item", "medium", "processing", "processing", ("shipped", "confirmed"), (1,), "credit_card", ["partial_cancel"]),
@@ -44,6 +44,54 @@ DEFAULT_CANCEL_VARIANTS: tuple[CancelVariant, ...] = (
     CancelVariant("partial_lost_first_item_free", "medium", "shipped", "lost", ("shipped", "shipped"), (0,), "credit_card", ["partial_cancel", "lost_shipping_status"]),
     CancelVariant("partial_lost_second_item_free", "medium", "shipped", "lost", ("shipped", "shipped"), (1,), "credit_card", ["partial_cancel", "lost_shipping_status"]),
 )
+
+
+def _auto_cancel_variants() -> tuple[CancelVariant, ...]:
+    templates = [
+        ("processing", "processing", ("confirmed", "confirmed"), None, "easy", ["shipping_status"]),
+        ("shipped", "in_transit", ("shipped", "shipped"), None, "medium", ["intercept_fee"]),
+        ("shipped", "lost", ("shipped", "shipped"), None, "medium", ["lost_shipping_status"]),
+        ("processing", "processing", ("confirmed", "confirmed"), (0,), "medium", ["partial_cancel"]),
+        ("processing", "processing", ("confirmed", "confirmed"), (1,), "medium", ["partial_cancel"]),
+        ("shipped", "in_transit", ("shipped", "shipped"), (0,), "hard", ["partial_cancel", "intercept_fee"]),
+        ("shipped", "in_transit", ("shipped", "shipped"), (1,), "hard", ["partial_cancel", "intercept_fee"]),
+        ("shipped", "lost", ("shipped", "shipped"), (0,), "medium", ["partial_cancel", "lost_shipping_status"]),
+        ("shipped", "lost", ("shipped", "shipped"), (1,), "medium", ["partial_cancel", "lost_shipping_status"]),
+    ]
+    payments = ["credit_card", "debit_card", "paypal", "gift_card", "split"]
+    variants: list[CancelVariant] = []
+    seen = {variant.suffix for variant in BASE_CANCEL_VARIANTS}
+    idx = 0
+    for payment in payments:
+        for order_status, shipping_status, item_statuses, target_indices, difficulty, factors in templates:
+            scope = "full" if target_indices is None else f"item{target_indices[0]}"
+            suffix = f"auto_{idx+1:03d}_{payment}_{shipping_status}_{scope}"
+            if suffix in seen:
+                idx += 1
+                continue
+            seen.add(suffix)
+            changed = [*factors]
+            if payment != "credit_card":
+                changed.append("payment_method")
+            variants.append(
+                CancelVariant(
+                    suffix,
+                    difficulty if payment != "split" else "hard",
+                    order_status,
+                    shipping_status,
+                    item_statuses,
+                    target_indices,
+                    payment,
+                    changed,
+                )
+            )
+            idx += 1
+            if len(BASE_CANCEL_VARIANTS) + len(variants) >= 45:
+                return tuple(variants)
+    return tuple(variants)
+
+
+DEFAULT_CANCEL_VARIANTS: tuple[CancelVariant, ...] = (*BASE_CANCEL_VARIANTS, *_auto_cancel_variants())
 
 
 def generate_cancel_tasks(*, output_root: Path, limit: int | None = None, rewrite: bool = False) -> list[dict[str, Path]]:

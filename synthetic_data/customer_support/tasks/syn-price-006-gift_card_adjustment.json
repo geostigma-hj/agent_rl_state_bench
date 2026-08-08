@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-006-gift_card_adjustment",
-  "task_summary": "Customer requests a price-match refund for the Artisan Crystal Vase in order ORD-7208. The correct resolution is to issue a $10 price-match refund while keeping the order and item active.",
+  "task_summary": "Customer requests a price-match refund for Artisan Crystal Vase in order ORD-7208. The correct outcome is a $10 price-match refund while keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-006-gift_card_adjustment_must_lookup_product_price",
@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_004",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "The Artisan Crystal Vase from my order ORD-7208 has dropped in price, so I believe I'm entitled to a $10 price adjustment.",
+  "opening_message": "The Artisan Crystal Vase from order ORD-7208 is reduced in price, so I believe I'm entitled to a $10 refund under your price-match policy.",
   "user_simulator": {
-    "user_sim_context": "You are seeking a price-match refund for the Artisan Crystal Vase in order ORD-7208. Please do not offer a return, cancellation, exchange, or replacement; the item should remain active.",
+    "user_sim_context": "You want a price-match refund for Artisan Crystal Vase in order ORD-7208. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [
-      "You purchased the Artisan Crystal Vase in order ORD-7208.",
-      "The current price of the product is $99."
+      "You bought Artisan Crystal Vase in order ORD-7208.",
+      "The current product price is $99."
     ],
     "unknown_info": [
-      "You are not aware of the exact internal price-match policy or process.",
-      "You do not know how the refund will be allocated unless the agent explains it."
+      "You do not know the exact internal price-match workflow.",
+      "You do not know payment allocation details unless the agent explains them."
     ],
     "task_rules": [
-      "Focus only on obtaining a price-match refund; do not ask to return, cancel, or exchange the item.",
-      "If the agent communicates the policy-supported refund amount and confirms the order remains active, you will accept the refund."
+      "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
+      "If the agent previews the policy-supported amount and keeps the order active, confirm the refund."
     ]
   },
   "task_type": "price_match_refund",

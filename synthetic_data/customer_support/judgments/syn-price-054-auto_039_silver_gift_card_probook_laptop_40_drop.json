@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent and executable. The price drop ($799 -> $759 = $40) is correctly computed, the required tool sequence (lookup, preview, confirm) is sound, and the expected state (refund_amount: 40, refund_method: original_payment) matches the gold plan and environment. Minor environmental data quality note: PROD-4210 has category 'electronics' but subcategory 'headphones_budget', which is inconsistent though irrelevant to task execution.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

@@ -1,0 +1,88 @@
+{
+  "task_id": "syn-return-022-auto_007_platinum_prime_defective",
+  "task_summary": "Customer needs to return defective SoundMax Wireless Headphones from order ORD-6011. Agent must apply return policy, preview the return, get confirmation, and process the refund to original payment method.",
+  "task_requirements": [
+    {
+      "id": "syn-return-022-auto_007_platinum_prime_defective_must_review_return_policy",
+      "kind": "must",
+      "requirement": "Agent must review the return policy before using process_return.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-return-022-auto_007_platinum_prime_defective_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a process_return preview tool call for ITEM-9075 with confirm false or omitted before making the confirm=true process_return tool call.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-return-022-auto_007_platinum_prime_defective_must_process_correct_reason",
+      "kind": "must",
+      "requirement": "Agent must process the item with return reason defective.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_001",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "I'd like to return the SoundMax Wireless Headphones from my order ORD-6011. They're defective.",
+  "user_simulator": {
+    "user_sim_context": "You are seeking to return defective SoundMax Wireless Headphones from order ORD-6011. The item in question is ITEM-9075. Your reason for return is defective. Preferred refund method is original payment. If the agent shows a return preview and asks for confirmation, you will confirm to proceed.",
+    "known_info": [
+      "You purchased SoundMax Wireless Headphones in order ORD-6011.",
+      "The order was received on 2026-06-06T14:00:00."
+    ],
+    "unknown_info": [
+      "You do not know the exact return policy details.",
+      "You do not know the item_id internal reference unless the agent provides it."
+    ],
+    "task_rules": [
+      "Do not make up order IDs, item IDs, prices, dates, or policy specifics.",
+      "If the agent previews a valid return and asks for confirmation, agree to it."
+    ]
+  },
+  "task_type": "return_item",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "item_status",
+      "expected_value": "returned"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "refund_amount",
+      "expected_value": 249
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "refund_method",
+      "expected_value": "original_payment"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "restocking_fee",
+      "expected_value": 0
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "return_label_issued",
+      "expected_value": true
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "return_reason",
+      "expected_value": "defective"
+    },
+    {
+      "entity_type": "orders",
+      "record_key": "ORD-6011",
+      "field": "status",
+      "expected_value": "fully_returned"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-return-022-auto_007_platinum_prime_defective.json"
+}

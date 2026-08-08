@@ -1,0 +1,77 @@
+{
+  "task_id": "syn-price-050-auto_035_standard_split_brewmaster_espresso_machine_15_drop",
+  "source_seed": "108-hard_price_match_customer_quotes_wrong_amount",
+  "generator_version": "price_match_v0.1",
+  "task_family": "price_match",
+  "mutation_level": "state",
+  "difficulty": "hard",
+  "changed_factors": [
+    "price_drop",
+    "customer_wrong_amount",
+    "split_payment"
+  ],
+  "requires_confirmation": true,
+  "is_compound": false,
+  "gold_tool_plan": [
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "refund"
+      }
+    },
+    {
+      "tool": "get_product_details",
+      "params": {
+        "product_id": "PROD-4210"
+      }
+    },
+    {
+      "tool": "process_refund",
+      "params": {
+        "item_id": "ITEM-10209",
+        "amount": 15,
+        "refund_method": "original_payment",
+        "confirm": false
+      }
+    },
+    {
+      "tool": "process_refund",
+      "params": {
+        "item_id": "ITEM-10209",
+        "amount": 15,
+        "refund_method": "original_payment",
+        "confirm": true
+      }
+    }
+  ],
+  "expected_state_diff": {
+    "created": {},
+    "modified": {
+      "order_items": {
+        "ITEM-10209": {
+          "refund_amount": {
+            "old": null,
+            "new": 15
+          },
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
+          }
+        }
+      }
+    },
+    "deleted": {}
+  },
+  "language_rewritten": true,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "step-3.7-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [
+      "Customer profile (cust_005) shows preferred_refund_method as 'store_credit', but the task requirements and gold_tool_plan mandate 'original_payment'. An agent relying on customer preference might choose store_credit instead of original_payment, creating a risk of deviating from the expected state."
+    ],
+    "manual_adjudication": null
+  },
+  "language_rewriter_model": "deepseek-v4-flash"
+}

@@ -46,25 +46,25 @@
     "modified": {
       "order_items": {
         "ITEM-9155": {
-          "refund_method": {
-            "old": null,
-            "new": "original_payment"
-          },
-          "restocking_fee": {
-            "old": null,
-            "new": 0
-          },
-          "return_reason": {
-            "old": null,
-            "new": "damaged_in_transit"
+          "item_status": {
+            "old": "delivered",
+            "new": "returned"
           },
           "refund_amount": {
             "old": null,
             "new": 149
           },
-          "item_status": {
-            "old": "delivered",
-            "new": "returned"
+          "restocking_fee": {
+            "old": null,
+            "new": 0
+          },
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
+          },
+          "return_reason": {
+            "old": null,
+            "new": "damaged_in_transit"
           },
           "return_label_issued": {
             "old": false,

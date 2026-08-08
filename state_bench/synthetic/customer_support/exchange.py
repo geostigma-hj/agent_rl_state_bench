@@ -24,7 +24,7 @@ class ExchangeVariant:
     changed_factors: list[str]
 
 
-DEFAULT_EXCHANGE_VARIANTS: tuple[ExchangeVariant, ...] = (
+BASE_EXCHANGE_VARIANTS: tuple[ExchangeVariant, ...] = (
     ExchangeVariant("same_price_size_swap", "easy", 59, True, ["same_price"]),
     ExchangeVariant("cheaper_store_credit", "medium", 39, True, ["cheaper_item", "store_credit_refund"]),
     ExchangeVariant("more_expensive_customer_pays", "medium", 89, True, ["more_expensive_item"]),
@@ -38,6 +38,69 @@ DEFAULT_EXCHANGE_VARIANTS: tuple[ExchangeVariant, ...] = (
     ExchangeVariant("near_same_price_credit", "medium", 58, True, ["cheaper_item", "small_price_difference"]),
     ExchangeVariant("near_same_price_payment", "medium", 60, True, ["more_expensive_item", "small_price_difference"]),
 )
+
+
+def _auto_exchange_variants() -> tuple[ExchangeVariant, ...]:
+    price_stock_pairs = [
+        (29, True),
+        (35, True),
+        (42, True),
+        (45, False),
+        (50, True),
+        (55, True),
+        (57, True),
+        (61, True),
+        (65, False),
+        (72, True),
+        (79, True),
+        (84, False),
+        (95, True),
+        (109, True),
+        (129, False),
+        (149, True),
+        (179, True),
+        (199, False),
+        (219, True),
+        (249, True),
+        (299, False),
+        (349, True),
+        (399, True),
+        (449, False),
+        (499, True),
+        (549, True),
+        (599, False),
+        (699, True),
+        (799, True),
+        (899, False),
+        (999, True),
+        (1199, True),
+        (1399, False),
+    ]
+    variants: list[ExchangeVariant] = []
+    seen = {variant.suffix for variant in BASE_EXCHANGE_VARIANTS}
+    for idx, (price, in_stock) in enumerate(price_stock_pairs, 1):
+        relation = "cheaper" if price < 59 else "same" if price == 59 else "expensive"
+        stock = "instock" if in_stock else "oos"
+        suffix = f"auto_{idx:03d}_{relation}_{price}_{stock}"
+        if suffix in seen:
+            continue
+        factors = [f"{relation}_item"]
+        difficulty = "medium"
+        if not in_stock:
+            factors = ["out_of_stock", *factors, "store_credit_fallback"]
+            difficulty = "hard"
+        elif abs(price - 59) <= 5:
+            factors.append("small_price_difference")
+        elif price >= 119:
+            factors.append("large_price_difference")
+            difficulty = "hard"
+        variants.append(ExchangeVariant(suffix, difficulty, price, in_stock, factors))
+        if len(BASE_EXCHANGE_VARIANTS) + len(variants) >= 45:
+            return tuple(variants)
+    return tuple(variants)
+
+
+DEFAULT_EXCHANGE_VARIANTS: tuple[ExchangeVariant, ...] = (*BASE_EXCHANGE_VARIANTS, *_auto_exchange_variants())
 
 
 def generate_exchange_tasks(*, output_root: Path, limit: int | None = None, rewrite: bool = False) -> list[dict[str, Path]]:
@@ -77,11 +140,21 @@ def build_exchange_variant(
 
     gold_tool_plan = _build_gold_exchange_plan(env_data, now, item.item_id, new_product.product_id)
     state_requirements, state_diff = build_state_requirements(env_data, now, gold_tool_plan)
+    if variant.in_stock:
+        policy_hint = "If the target item costs more, the customer pays the difference; if it costs less, the difference is store credit."
+        simulator_hint = "If the agent previews a valid exchange and asks for confirmation, agree to proceed."
+    else:
+        policy_hint = (
+            "Because the requested item is out of stock, policy requires store credit for the original item amount "
+            "and the exchange itself must not be completed; the unavailable target item's price does not create an extra charge."
+        )
+        simulator_hint = "If the agent previews the out-of-stock store-credit fallback and asks for confirmation, agree to proceed."
     task = TaskDefinition(
         task_id=task_id,
         task_summary=(
             f"Customer wants to exchange {old_product.name} from {order.order_id} for {new_product.name}. "
-            "Correct handling is to apply exchange policy, preview, confirm, and use the policy-defined payment or store-credit outcome."
+            "Correct handling is to apply exchange policy, preview, confirm, and use the policy-defined payment or store-credit outcome. "
+            f"{policy_hint}"
         ),
         user_id=order.customer_id,
         now=now,
@@ -89,7 +162,7 @@ def build_exchange_variant(
         user_simulator=UserSimulatorConfig(
             user_sim_context=(
                 f"You want to exchange {old_product.name} from order {order.order_id} for {new_product.name}. "
-                "If the agent previews a valid exchange or store-credit fallback and asks for confirmation, agree to proceed."
+                f"{simulator_hint}"
             ),
             known_info=[f"You bought {old_product.name} in order {order.order_id}.", f"You want {new_product.name} instead."],
             unknown_info=["You do not know the exchange price-difference policy."],
@@ -97,7 +170,7 @@ def build_exchange_variant(
         ),
         task_type="exchange_item",
         state_requirements=state_requirements,
-        task_requirements=_requirements(task_id, item.item_id, new_product.product_id),
+        task_requirements=_requirements(task_id, item.item_id, new_product.product_id, in_stock=variant.in_stock),
     )
     metadata = {
         "task_id": task_id,
@@ -131,21 +204,38 @@ def _build_gold_exchange_plan(env_data: CSEnvironmentData, now: str, item_id: st
     ]
 
 
-def _requirements(task_id: str, item_id: str, new_product_id: str) -> list[dict[str, Any]]:
-    return [
+def _requirements(task_id: str, item_id: str, new_product_id: str, *, in_stock: bool) -> list[dict[str, Any]]:
+    requirements = [
         {
             "id": f"{task_id}_must_review_exchange_policy",
             "kind": "must",
-            "requirement": "Agent must review the exchange policy before using process_exchange.",
-            "evidence": "tool_calls",
-        },
-        {
-            "id": f"{task_id}_must_preview_before_confirm",
-            "kind": "must",
-            "requirement": (
-                f"Agent must make a process_exchange preview tool call for {item_id} to {new_product_id} "
-                "with confirm false or omitted before making the confirm=true process_exchange tool call."
-            ),
+            "requirement": "Agent must review the exchange policy before handling the exchange request.",
             "evidence": "tool_calls",
         },
     ]
+    if in_stock:
+        requirements.append(
+            {
+                "id": f"{task_id}_must_preview_before_confirm",
+                "kind": "must",
+                "requirement": (
+                    f"Agent must make a process_exchange preview tool call for {item_id} to {new_product_id} "
+                    "with confirm false or omitted before making the confirm=true process_exchange tool call."
+                ),
+                "evidence": "tool_calls",
+            }
+        )
+    else:
+        requirements.append(
+            {
+                "id": f"{task_id}_must_handle_oos_store_credit_fallback",
+                "kind": "must",
+                "requirement": (
+                    f"Agent must handle the out-of-stock exchange fallback for {item_id} to {new_product_id} by "
+                    "issuing store credit for the original item. This may be done through process_exchange's "
+                    "out-of-stock path or through a return plus store-credit refund path after reviewing exchange policy."
+                ),
+                "evidence": "tool_calls",
+            }
+        )
+    return requirements

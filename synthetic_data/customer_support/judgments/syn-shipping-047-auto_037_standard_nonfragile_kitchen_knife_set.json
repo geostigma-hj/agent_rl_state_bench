@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent and executable. The gold tool plan correctly follows the shipping-damage path: reviewing policies, processing the return with damaged_in_transit reason, confirming the refund to original payment (matching user request despite customer profile preference), and omitting fragile goodwill for the non-fragile product. No changes needed.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

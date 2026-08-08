@@ -1,0 +1,73 @@
+{
+  "task_id": "syn-price-049-auto_034_silver_gift_card_brewmaster_espresso_machine_10_drop",
+  "source_seed": "108-hard_price_match_customer_quotes_wrong_amount",
+  "generator_version": "price_match_v0.1",
+  "task_family": "price_match",
+  "mutation_level": "state",
+  "difficulty": "easy",
+  "changed_factors": [
+    "price_drop"
+  ],
+  "requires_confirmation": true,
+  "is_compound": false,
+  "gold_tool_plan": [
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "refund"
+      }
+    },
+    {
+      "tool": "get_product_details",
+      "params": {
+        "product_id": "PROD-4210"
+      }
+    },
+    {
+      "tool": "process_refund",
+      "params": {
+        "item_id": "ITEM-10209",
+        "amount": 10,
+        "refund_method": "original_payment",
+        "confirm": false
+      }
+    },
+    {
+      "tool": "process_refund",
+      "params": {
+        "item_id": "ITEM-10209",
+        "amount": 10,
+        "refund_method": "original_payment",
+        "confirm": true
+      }
+    }
+  ],
+  "expected_state_diff": {
+    "created": {},
+    "modified": {
+      "order_items": {
+        "ITEM-10209": {
+          "refund_amount": {
+            "old": null,
+            "new": 10
+          },
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
+          }
+        }
+      }
+    },
+    "deleted": {}
+  },
+  "language_rewritten": true,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "step-3.7-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  },
+  "language_rewriter_model": "deepseek-v4-flash"
+}

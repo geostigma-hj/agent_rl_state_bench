@@ -38,7 +38,7 @@ class ReturnVariant:
     user_mislabels_defect: bool = False
 
 
-DEFAULT_RETURN_VARIANTS: tuple[ReturnVariant, ...] = (
+BASE_RETURN_VARIANTS: tuple[ReturnVariant, ...] = (
     ReturnVariant(
         suffix="standard_changed_mind_restock",
         mutation_level="state",
@@ -239,6 +239,77 @@ DEFAULT_RETURN_VARIANTS: tuple[ReturnVariant, ...] = (
         changed_factors=["return_reason", "merchant_fault", "membership_tier"],
     ),
 )
+
+
+def _auto_return_variants() -> tuple[ReturnVariant, ...]:
+    customers = [
+        ("cust_001", "platinum", True),
+        ("cust_002", "standard", False),
+        ("cust_003", "gold", True),
+        ("cust_004", "silver", False),
+        ("cust_005", "standard", False),
+    ]
+    scenarios = [
+        ("changed_mind", "changed mind", "2026-06-01T10:00:00", "2026-06-05T14:00:00", False, ["restocking_fee"]),
+        ("changed_mind", "changed mind", "2026-06-03T10:00:00", "2026-06-07T14:00:00", False, ["restocking_fee", "recent_delivery"]),
+        ("changed_mind", "changed mind", "2026-06-04T10:00:00", "2026-06-08T14:00:00", False, ["restocking_fee", "recent_delivery"]),
+        ("defective", "defective", "2026-06-02T10:00:00", "2026-06-06T14:00:00", False, ["return_reason", "restocking_fee_exemption"]),
+        ("wrong_item", "wrong item", "2026-06-02T10:00:00", "2026-06-06T14:00:00", False, ["return_reason", "merchant_fault"]),
+        ("damaged_in_transit", "damaged in transit", "2026-06-02T10:00:00", "2026-06-06T14:00:00", False, ["return_reason", "merchant_fault"]),
+        ("not_as_described", "not as described", "2026-06-02T10:00:00", "2026-06-06T14:00:00", False, ["return_reason"]),
+        ("changed_mind", "changed mind", "2026-05-18T10:00:00", "2026-05-20T14:00:00", True, ["return_window", "store_credit_only"]),
+    ]
+    variants: list[ReturnVariant] = []
+    seen = {variant.suffix for variant in BASE_RETURN_VARIANTS}
+    idx = 0
+    for customer_id, tier, prime in customers:
+        for reason, label, order_date, delivery_date, store_credit, factors in scenarios:
+            if store_credit and tier in {"gold", "platinum"}:
+                continue
+            for mislabel in (False, True) if reason == "changed_mind" and not store_credit else (False,):
+                local_order_date = order_date
+                local_delivery_date = delivery_date
+                if store_credit:
+                    if tier == "platinum":
+                        local_order_date = "2026-04-05T10:00:00"
+                        local_delivery_date = "2026-04-08T14:00:00"
+                    elif tier == "gold" and prime:
+                        local_order_date = "2026-04-20T10:00:00"
+                        local_delivery_date = "2026-04-23T14:00:00"
+                    else:
+                        local_order_date = "2026-05-18T10:00:00"
+                        local_delivery_date = "2026-05-20T14:00:00"
+                suffix = f"auto_{idx+1:03d}_{tier}_{'prime' if prime else 'nopri'}_{reason}{'_mislabel' if mislabel else ''}{'_grace' if store_credit else ''}"
+                if suffix in seen:
+                    idx += 1
+                    continue
+                seen.add(suffix)
+                changed = [*factors, "membership_tier"]
+                difficulty = "hard" if store_credit or mislabel else "easy" if reason != "changed_mind" else "medium"
+                variants.append(
+                    ReturnVariant(
+                        suffix=suffix,
+                        mutation_level="constraint" if store_credit or mislabel else "state",
+                        difficulty=difficulty,
+                        customer_id=customer_id,
+                        membership_tier=tier,
+                        has_prime_shipping=prime,
+                        reason=reason,
+                        requested_reason_label="defective" if mislabel else label,
+                        order_date=local_order_date,
+                        delivery_date=local_delivery_date,
+                        changed_factors=changed,
+                        store_credit_pushback=store_credit,
+                        user_mislabels_defect=mislabel,
+                    )
+                )
+                idx += 1
+                if len(BASE_RETURN_VARIANTS) + len(variants) >= 55:
+                    return tuple(variants)
+    return tuple(variants)
+
+
+DEFAULT_RETURN_VARIANTS: tuple[ReturnVariant, ...] = (*BASE_RETURN_VARIANTS, *_auto_return_variants())
 
 
 def generate_return_refund_tasks(

@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-001-active_repair",
-  "task_summary": "The customer needs warranty service for the SoundMax Wireless Headphones from order ORD-6032. The correct procedure is to verify warranty status, review the policy, provide a preview, obtain confirmation, and then process a complaint that complies with the policy.",
+  "task_summary": "The customer wants warranty service for SoundMax Wireless Headphones associated with order ORD-6032. The correct process is to verify warranty status, review the warranty policy, present the resolution, obtain confirmation, and then process the claim according to policy. Since the warranty is active, the policy determines whether a repair or replacement is provided.",
   "task_requirements": [
     {
       "id": "syn-warranty-001-active_repair_must_check_warranty_status",
@@ -23,18 +23,18 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "Hi, I purchased the SoundMax Wireless Headphones under order ID ORD-6032, and they're not working properly. Could I get warranty assistance?",
+  "opening_message": "I need warranty service for my SoundMax Wireless Headphones from order ORD-6032. They are not working properly. Can you help me with that?",
   "user_simulator": {
-    "user_sim_context": "You're seeking warranty assistance for the SoundMax Wireless Headphones from order ORD-6032. If the agent explains the warranty decision and asks for your confirmation, you approve to proceed.",
+    "user_sim_context": "You are seeking warranty assistance for your SoundMax Wireless Headphones from order ORD-6032. If the agent explains the warranty outcome based on policy and requests confirmation, you should agree to proceed. The warranty is valid, so the policy determines the appropriate resolution (repair or replacement).",
     "known_info": [
-      "You purchased SoundMax Wireless Headphones under order ORD-6032.",
-      "The product is defective."
+      "You purchased SoundMax Wireless Headphones in order ORD-6032.",
+      "The product is malfunctioning."
     ],
     "unknown_info": [
-      "You are unaware of the number of claims or the specific warranty solution."
+      "You do not know the claim count or the exact warranty resolution."
     ],
     "task_rules": [
-      "Agree after a valid warranty preview. Only request a return if the agent indicates that warranty coverage is unavailable."
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent indicates the warranty is not applicable."
     ]
   },
   "task_type": "warranty_claim",

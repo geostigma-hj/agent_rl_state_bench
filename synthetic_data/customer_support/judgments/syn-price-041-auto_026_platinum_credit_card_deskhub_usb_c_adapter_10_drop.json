@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.98,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent and executable. The price drop calculation ($45 original - $35 current = $10) aligns with the expected refund amount, and the gold tool plan satisfies all must/must_not requirements while preserving the order/item status.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

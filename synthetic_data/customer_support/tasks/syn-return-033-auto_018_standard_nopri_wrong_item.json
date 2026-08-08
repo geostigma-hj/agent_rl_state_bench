@@ -1,0 +1,88 @@
+{
+  "task_id": "syn-return-033-auto_018_standard_nopri_wrong_item",
+  "task_summary": "Customer wants to return the SoundMax Wireless Headphones from order ORD-6011 to the original payment method. The agent must check the return policy, preview the return, get customer confirmation, and issue the correct refund.",
+  "task_requirements": [
+    {
+      "id": "syn-return-033-auto_018_standard_nopri_wrong_item_must_review_return_policy",
+      "kind": "must",
+      "requirement": "Agent must review the return policy before using process_return.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-return-033-auto_018_standard_nopri_wrong_item_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a process_return preview tool call for ITEM-9075 with confirm false or omitted before making the confirm=true process_return tool call.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-return-033-auto_018_standard_nopri_wrong_item_must_process_correct_reason",
+      "kind": "must",
+      "requirement": "Agent must process the item with return reason wrong_item.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_002",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "I would like to return the SoundMax Wireless Headphones from order ORD-6011. I opened it, but I do not want it anymore. I'd like the refund to go back to my original payment method.",
+  "user_simulator": {
+    "user_sim_context": "You want to return the SoundMax Wireless Headphones from order ORD-6011. The item is ITEM-9075. Your stated reason for return is wrong item. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed.",
+    "known_info": [
+      "You bought the SoundMax Wireless Headphones in order ORD-6011.",
+      "You received the order on 2026-06-06T14:00:00."
+    ],
+    "unknown_info": [
+      "You don't know the exact return policy calculation.",
+      "You don't know the internal item_id unless the agent tells you."
+    ],
+    "task_rules": [
+      "Do not invent order IDs, item IDs, prices, dates, or policy details.",
+      "If the agent previews a valid return and asks for confirmation, agree to proceed."
+    ]
+  },
+  "task_type": "return_item",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "item_status",
+      "expected_value": "returned"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "refund_amount",
+      "expected_value": 249
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "refund_method",
+      "expected_value": "original_payment"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "restocking_fee",
+      "expected_value": 0
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "return_label_issued",
+      "expected_value": true
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9075",
+      "field": "return_reason",
+      "expected_value": "wrong_item"
+    },
+    {
+      "entity_type": "orders",
+      "record_key": "ORD-6011",
+      "field": "status",
+      "expected_value": "fully_returned"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-return-033-auto_018_standard_nopri_wrong_item.json"
+}

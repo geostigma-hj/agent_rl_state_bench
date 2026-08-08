@@ -1,0 +1,74 @@
+{
+  "task_id": "syn-exchange-021-auto_009_expensive_65_oos",
+  "task_summary": "The customer requests an exchange of the Premium Cotton Shirt from ORD-6034 for a Premium Cotton Shirt in size Large. Correct handling: apply exchange policy, preview, confirm, and use the policy-defined store-credit outcome. Since the requested size is out of stock, policy mandates store credit for the original item amount; the exchange is not completed and no additional charge applies.",
+  "task_requirements": [
+    {
+      "id": "syn-exchange-021-auto_009_expensive_65_oos_must_review_exchange_policy",
+      "kind": "must",
+      "requirement": "Agent must review the exchange policy before handling the exchange request.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-exchange-021-auto_009_expensive_65_oos_must_handle_oos_store_credit_fallback",
+      "kind": "must",
+      "requirement": "Agent must handle the out-of-stock exchange fallback for ITEM-9250 to PROD-2251 by issuing store credit for the original item. This may be done through process_exchange's out-of-stock path or through a return plus store-credit refund path after reviewing exchange policy.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_003",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "I'd like to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in size Large.",
+  "user_simulator": {
+    "user_sim_context": "You wish to exchange the Premium Cotton Shirt from order ORD-6034 for the same shirt in size Large. If the agent presents the out-of-stock store-credit preview and seeks confirmation, agree to proceed.",
+    "known_info": [
+      "You purchased a Premium Cotton Shirt under order ORD-6034.",
+      "You want the Premium Cotton Shirt in size Large instead."
+    ],
+    "unknown_info": [
+      "You are not aware of the exchange price-difference policy."
+    ],
+    "task_rules": [
+      "Do not request a different product. Confirm after a valid preview."
+    ]
+  },
+  "task_type": "exchange_item",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9250",
+      "field": "item_status",
+      "expected_value": "returned"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9250",
+      "field": "refund_amount",
+      "expected_value": 59
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9250",
+      "field": "refund_method",
+      "expected_value": "store_credit"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9250",
+      "field": "restocking_fee",
+      "expected_value": 0
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9250",
+      "field": "return_reason",
+      "expected_value": "changed_mind"
+    },
+    {
+      "entity_type": "orders",
+      "record_key": "ORD-6034",
+      "field": "status",
+      "expected_value": "fully_returned"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-exchange-021-auto_009_expensive_65_oos.json"
+}

@@ -47,13 +47,13 @@
     "modified": {
       "order_items": {
         "ITEM-10209": {
-          "refund_method": {
-            "old": null,
-            "new": "original_payment"
-          },
           "refund_amount": {
             "old": null,
             "new": 30
+          },
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
           }
         }
       }
@@ -66,7 +66,9 @@
     "judge_model": "step-3.7-flash",
     "deterministic_check_passed": true,
     "issues": [],
-    "ambiguities": [],
+    "ambiguities": [
+      "The customer initially requests $20 but the correct amount is $30; however, the user_simulator explicitly states the customer is open to correction if the agent verifies the product record, so this is handled consistently."
+    ],
     "manual_adjudication": null
   },
   "language_rewriter_model": "deepseek-v4-flash"

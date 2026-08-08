@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 1,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is fully consistent and executable: all required steps (review exchange policy, preview exchange, confirm exchange) are specified, environment state supports the requested exchange, and expected final state aligns with the gold tool plan and task requirements.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

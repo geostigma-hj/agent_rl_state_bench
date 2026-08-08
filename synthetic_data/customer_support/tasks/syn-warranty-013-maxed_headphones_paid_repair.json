@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-013-maxed_headphones_paid_repair",
-  "task_summary": "Customer requests warranty service for SoundMax Wireless Headphones purchased with order ORD-6032. The correct handling is to check warranty status, review warranty policy, preview the resolution, confirm with customer, and process the claim per policy.",
+  "task_summary": "Customer requests warranty service for SoundMax Wireless Headphones purchased under order ORD-6032. The correct process involves checking warranty eligibility, reviewing the warranty policy, presenting the relevant warranty details to the customer, obtaining confirmation, and filing a claim according to policy. In this case, the warranty's maximum claim count has been reached, so the only official option is a paid repair.",
   "task_requirements": [
     {
       "id": "syn-warranty-013-maxed_headphones_paid_repair_must_check_warranty_status",
@@ -23,18 +23,18 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My SoundMax Wireless Headphones from order ORD-6032 are malfunctioning. Can I get them replaced under warranty?",
+  "opening_message": "Hi, I bought SoundMax Wireless Headphones with order ORD-6032, and they're malfunctioning. Can I get warranty service?",
   "user_simulator": {
-    "user_sim_context": "You need warranty assistance for your SoundMax Wireless Headphones from order ORD-6032. If the agent explains the warranty outcome and asks for confirmation, agree to proceed.",
+    "user_sim_context": "You are seeking warranty assistance for SoundMax Wireless Headphones from order ORD-6032. If the agent explains that the warranty has been exhausted and that a paid repair is the only option under policy, you should agree to proceed with that. The warranty has reached its maximum claim count, so only paid repair is allowed.",
     "known_info": [
       "You purchased SoundMax Wireless Headphones in order ORD-6032.",
       "The product is malfunctioning."
     ],
     "unknown_info": [
-      "You do not know the claim count or the exact warranty resolution."
+      "You do not know the warranty claim count or the exact warranty resolution."
     ],
     "task_rules": [
-      "Confirm after a valid warranty preview. Do not request a return unless the agent indicates that warranty service is not available."
+      "Confirm after the agent presents the warranty outcome clearly. Do not ask for a return or a replacement unless the agent says warranty service is unavailable."
     ]
   },
   "task_type": "warranty_claim",

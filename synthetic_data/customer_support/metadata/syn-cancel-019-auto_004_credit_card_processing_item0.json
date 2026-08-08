@@ -1,0 +1,81 @@
+{
+  "task_id": "syn-cancel-019-auto_004_credit_card_processing_item0",
+  "source_seed": "12-cancel_after_shipment",
+  "generator_version": "cancel_v0.1",
+  "task_family": "cancel",
+  "mutation_level": "state",
+  "difficulty": "medium",
+  "changed_factors": [
+    "partial_cancel"
+  ],
+  "requires_confirmation": true,
+  "is_compound": false,
+  "gold_tool_plan": [
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "cancellation"
+      }
+    },
+    {
+      "tool": "cancel_order",
+      "params": {
+        "order_id": "ORD-6003",
+        "confirm": false,
+        "item_ids": [
+          "ITEM-9020"
+        ]
+      }
+    },
+    {
+      "tool": "cancel_order",
+      "params": {
+        "order_id": "ORD-6003",
+        "confirm": true,
+        "item_ids": [
+          "ITEM-9020"
+        ]
+      }
+    }
+  ],
+  "expected_state_diff": {
+    "created": {},
+    "modified": {
+      "order_items": {
+        "ITEM-9020": {
+          "item_status": {
+            "old": "confirmed",
+            "new": "cancelled"
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 249
+          },
+          "refund_method": {
+            "old": null,
+            "new": "credit_card"
+          }
+        }
+      },
+      "orders": {
+        "ORD-6003": {
+          "status": {
+            "old": "processing",
+            "new": "partially_cancelled"
+          }
+        }
+      }
+    },
+    "deleted": {}
+  },
+  "language_rewritten": true,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "step-3.7-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  },
+  "language_rewriter_model": "deepseek-v4-flash"
+}

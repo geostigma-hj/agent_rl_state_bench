@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-009-small_five_dollar_drop",
-  "task_summary": "Customer requests a price-match adjustment for DeskHub USB-C Adapter in ORD-7208. The correct outcome is a $5 price-match refund while keeping the order and item active.",
+  "task_summary": "The customer requests a price adjustment for the DeskHub USB-C Adapter in order ORD-7208. The expected resolution is to provide a $5 refund for the price difference while keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-009-small_five_dollar_drop_must_lookup_product_price",
@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_004",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "The DeskHub USB-C Adapter from my order ORD-7208 is now listed at a lower price, so I believe I'm entitled to a $5 price adjustment.",
+  "opening_message": "I noticed the DeskHub USB-C Adapter from my order ORD-7208 has dropped in price, so I believe I'm entitled to a $5 refund for the price difference.",
   "user_simulator": {
-    "user_sim_context": "You are seeking a price-match refund for the DeskHub USB-C Adapter in order ORD-7208. Do not accept any return, cancellation, exchange, or replacement; the item must remain active.",
+    "user_sim_context": "You are asking for a price-match refund on the DeskHub USB-C Adapter from order ORD-7208. Ensure that no return, cancellation, exchange, or replacement is made; the item must remain active.",
     "known_info": [
       "You purchased the DeskHub USB-C Adapter in order ORD-7208.",
       "The current price of the product is $40."
     ],
     "unknown_info": [
-      "You are not aware of the exact internal price-match procedure.",
-      "You do not know payment allocation details unless the agent explains them."
+      "You are unaware of the specific internal policy for price adjustments.",
+      "You do not know how the refund will be processed unless the agent explains."
     ],
     "task_rules": [
-      "Limit the request to a price-match refund; do not ask to return, cancel, or exchange the item.",
-      "If the agent states the policy-supported amount and keeps the order active, confirm the refund."
+      "Stick to requesting a price-match refund; do not ask for a return, cancellation, exchange, or replacement.",
+      "If the agent states the eligible refund amount and confirms the order stays active, accept the refund."
     ]
   },
   "task_type": "price_match_refund",

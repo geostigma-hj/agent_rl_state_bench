@@ -1,0 +1,99 @@
+{
+  "task_id": "syn-shipping-041-auto_031_platinum_fragile_framed_wall_mirror",
+  "task_summary": "Customer reports Framed Wall Mirror from ORD-6023 arrived damaged in transit. Due to shipping damage, the correct path is: review shipping and return policy, refund the item, issue a return label, and if the item is classified as fragile, apply the separate fragile-item goodwill credit.",
+  "task_requirements": [
+    {
+      "id": "syn-shipping-041-auto_031_platinum_fragile_framed_wall_mirror_must_review_shipping_policy",
+      "kind": "must",
+      "requirement": "Agent must review the shipping policy before resolving the damaged-in-transit claim.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-shipping-041-auto_031_platinum_fragile_framed_wall_mirror_must_use_damaged_reason",
+      "kind": "must",
+      "requirement": "Agent must process item ITEM-9155 with reason damaged_in_transit, not changed_mind.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-shipping-041-auto_031_platinum_fragile_framed_wall_mirror_must_issue_fragile_goodwill",
+      "kind": "must",
+      "requirement": "Agent must issue the separate $10 fragile-item goodwill credit to original payment.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_001",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "I received a Framed Wall Mirror from order ORD-6023, but it arrived damaged - the package was crushed. I'd like a refund to my original payment method.",
+  "user_simulator": {
+    "user_sim_context": "You ordered a Framed Wall Mirror (order ORD-6023) which arrived damaged due to crushed packaging. You want a full refund to the original payment method. If the item is fragile, you expect a separate goodwill credit as per policy.",
+    "known_info": [
+      "You purchased a Framed Wall Mirror under order ORD-6023.",
+      "The item arrived damaged with crushed packaging."
+    ],
+    "unknown_info": [
+      "You do not know the internal item_id unless the agent discloses it."
+    ],
+    "task_rules": [
+      "Only address shipping damage; do not pivot to returns, cancellations, warranty, or exchanges.",
+      "If the item is fragile, confirm the refund and the additional goodwill credit."
+    ]
+  },
+  "task_type": "shipping_claim",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "goodwill_credit",
+      "expected_value": 10
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "goodwill_credit_method",
+      "expected_value": "original_payment"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "item_status",
+      "expected_value": "returned"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "refund_amount",
+      "expected_value": 189
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "refund_method",
+      "expected_value": "original_payment"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "restocking_fee",
+      "expected_value": 0
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "return_label_issued",
+      "expected_value": true
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "return_reason",
+      "expected_value": "damaged_in_transit"
+    },
+    {
+      "entity_type": "orders",
+      "record_key": "ORD-6023",
+      "field": "status",
+      "expected_value": "fully_returned"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-shipping-041-auto_031_platinum_fragile_framed_wall_mirror.json"
+}

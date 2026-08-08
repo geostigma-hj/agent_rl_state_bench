@@ -1,34 +1,34 @@
 {
   "task_id": "syn-exchange-009-budget_out_of_stock_store_credit",
-  "task_summary": "Customer requests an exchange of the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in Large. The correct process is to apply the exchange policy, preview the exchange or store-credit fallback, and confirm the outcome.",
+  "task_summary": "Customer wants to exchange Premium Cotton Shirt from ORD-6034 for Premium Cotton Shirt (Large). The correct handling is to apply the exchange policy, preview the details, confirm with the customer, and then follow the policy-defined outcome: since the requested item is out of stock, the policy requires issuing store credit for the original item amount, and the exchange cannot be completed. The unavailability of the target item means there is no additional charge.",
   "task_requirements": [
     {
       "id": "syn-exchange-009-budget_out_of_stock_store_credit_must_review_exchange_policy",
       "kind": "must",
-      "requirement": "Agent must review the exchange policy before using process_exchange.",
+      "requirement": "Agent must review the exchange policy before handling the exchange request.",
       "evidence": "tool_calls"
     },
     {
-      "id": "syn-exchange-009-budget_out_of_stock_store_credit_must_preview_before_confirm",
+      "id": "syn-exchange-009-budget_out_of_stock_store_credit_must_handle_oos_store_credit_fallback",
       "kind": "must",
-      "requirement": "Agent must make a process_exchange preview tool call for ITEM-9250 to PROD-2251 with confirm false or omitted before making the confirm=true process_exchange tool call.",
+      "requirement": "Agent must handle the out-of-stock exchange fallback for ITEM-9250 to PROD-2251 by issuing store credit for the original item. This may be done through process_exchange's out-of-stock path or through a return plus store-credit refund path after reviewing exchange policy.",
       "evidence": "tool_calls"
     }
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to swap the Premium Cotton Shirt from order ORD-6034 for the same shirt in Large.",
+  "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in Large.",
   "user_simulator": {
-    "user_sim_context": "You want to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in Large. If the agent shows a valid exchange or store-credit fallback and asks for confirmation, agree to proceed.",
+    "user_sim_context": "You want to exchange the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in Large. If the agent previews the out-of-stock store-credit fallback and asks for confirmation, agree to proceed.",
     "known_info": [
-      "You purchased a Premium Cotton Shirt in order ORD-6034.",
-      "You want a Premium Cotton Shirt in Large to replace it."
+      "You bought Premium Cotton Shirt in order ORD-6034.",
+      "You want Premium Cotton Shirt (Large) instead."
     ],
     "unknown_info": [
-      "You don't know the exchange price-difference policy."
+      "You do not know the exchange price-difference policy."
     ],
     "task_rules": [
-      "Do not request a different product. Confirm after seeing a valid preview."
+      "Do not ask for a different product. Confirm after a valid preview."
     ]
   },
   "task_type": "exchange_item",

@@ -1,0 +1,63 @@
+{
+  "task_id": "syn-cancel-040-auto_025_paypal_in_transit_item1",
+  "task_summary": "The customer requests cancellation of selected item(s) in ORD-6003. Proper procedure is to review the cancellation policy, provide a preview, obtain confirmation, and update only the eligible items.",
+  "task_requirements": [
+    {
+      "id": "syn-cancel-040-auto_025_paypal_in_transit_item1_must_review_cancellation_policy",
+      "kind": "must",
+      "requirement": "Agent must review the cancellation policy before using cancel_order.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-cancel-040-auto_025_paypal_in_transit_item1_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a cancel_order preview tool call for items ['ITEM-9021'] with confirm false or omitted before making the confirm=true cancel_order tool call.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_004",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "I'd like to cancel just the 7-Port USB-C Hub from order ORD-6003.",
+  "user_simulator": {
+    "user_sim_context": "You need to cancel only item(s) ['ITEM-9021'] from order ORD-6003, which includes SoundMax Wireless Headphones and 7-Port USB-C Hub. If the agent presents a valid cancellation preview, you should confirm your intention to proceed.",
+    "known_info": [
+      "You placed order ORD-6003.",
+      "The order contains: SoundMax Wireless Headphones, 7-Port USB-C Hub."
+    ],
+    "unknown_info": [
+      "You do not know if a cancellation fee applies."
+    ],
+    "task_rules": [
+      "If the agent previews a valid cancellation and asks for confirmation, agree to proceed.",
+      "Do not request cancellation of items outside the specified scope."
+    ]
+  },
+  "task_type": "cancel_order",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9021",
+      "field": "item_status",
+      "expected_value": "cancelled"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9021",
+      "field": "refund_amount",
+      "expected_value": 35
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9021",
+      "field": "refund_method",
+      "expected_value": "paypal"
+    },
+    {
+      "entity_type": "orders",
+      "record_key": "ORD-6003",
+      "field": "status",
+      "expected_value": "partially_cancelled"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-cancel-040-auto_025_paypal_in_transit_item1.json"
+}

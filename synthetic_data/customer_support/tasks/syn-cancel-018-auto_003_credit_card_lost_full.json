@@ -1,0 +1,81 @@
+{
+  "task_id": "syn-cancel-018-auto_003_credit_card_lost_full",
+  "task_summary": "Customer requests cancellation of the entire order ORD-6003. The agent should apply the cancellation policy, provide a preview, confirm with the customer, and then update the order for eligible items.",
+  "task_requirements": [
+    {
+      "id": "syn-cancel-018-auto_003_credit_card_lost_full_must_review_cancellation_policy",
+      "kind": "must",
+      "requirement": "Agent must review the cancellation policy before using cancel_order.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-cancel-018-auto_003_credit_card_lost_full_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a cancel_order preview tool call for order ORD-6003 with confirm false or omitted before making the confirm=true cancel_order tool call.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_004",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "I would like to cancel order ORD-6003. I no longer need the SoundMax Wireless Headphones and the 7-Port USB-C Hub.",
+  "user_simulator": {
+    "user_sim_context": "Your objective is to cancel the complete order ORD-6003, which includes the SoundMax Wireless Headphones and the 7-Port USB-C Hub. If the agent gives a valid cancellation preview, you should confirm that you want to proceed.",
+    "known_info": [
+      "You placed order ORD-6003.",
+      "The order contains: SoundMax Wireless Headphones and 7-Port USB-C Hub."
+    ],
+    "unknown_info": [
+      "You do not know whether a cancellation fee applies."
+    ],
+    "task_rules": [
+      "If the agent previews a valid cancellation and asks for confirmation, agree to proceed.",
+      "Do not ask to cancel items outside the stated scope."
+    ]
+  },
+  "task_type": "cancel_order",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9020",
+      "field": "item_status",
+      "expected_value": "cancelled"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9020",
+      "field": "refund_amount",
+      "expected_value": 249
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9020",
+      "field": "refund_method",
+      "expected_value": "credit_card"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9021",
+      "field": "item_status",
+      "expected_value": "cancelled"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9021",
+      "field": "refund_amount",
+      "expected_value": 45
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9021",
+      "field": "refund_method",
+      "expected_value": "credit_card"
+    },
+    {
+      "entity_type": "orders",
+      "record_key": "ORD-6003",
+      "field": "status",
+      "expected_value": "cancelled"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-cancel-018-auto_003_credit_card_lost_full.json"
+}

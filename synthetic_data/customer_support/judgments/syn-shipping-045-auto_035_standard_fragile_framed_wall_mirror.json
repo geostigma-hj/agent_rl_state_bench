@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.98,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is well-structured and internally consistent. The agent should follow the gold tool plan: review shipping/return policies, preview and confirm the damaged_in_transit return for ITEM-9155 with $189 refund to original payment, then preview and confirm the separate $10 fragile-item goodwill credit to original payment. Note that the customer's explicit request for original_payment overrides their profile preference for store_credit.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

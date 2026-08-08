@@ -47,13 +47,13 @@
     "modified": {
       "order_items": {
         "ITEM-10209": {
-          "refund_method": {
-            "old": null,
-            "new": "original_payment"
-          },
           "refund_amount": {
             "old": null,
             "new": 50
+          },
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
           }
         }
       }
@@ -66,9 +66,7 @@
     "judge_model": "step-3.7-flash",
     "deterministic_check_passed": true,
     "issues": [],
-    "ambiguities": [
-      "The order ORD-7208 uses split payment ($599 credit card, $200 gift card). The task specifies refund_method='original_payment' and amount=50 without detailing how the $50 refund should be allocated between the two original payment methods. The gold tool plan treats this as a single refund record on the order item, implying the system handles allocation internally, but real-world split tender refunds often require explicit allocation decisions."
-    ],
+    "ambiguities": [],
     "manual_adjudication": null
   },
   "language_rewriter_model": "deepseek-v4-flash"

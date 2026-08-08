@@ -47,13 +47,13 @@
     "modified": {
       "order_items": {
         "ITEM-10209": {
-          "refund_method": {
-            "old": null,
-            "new": "original_payment"
-          },
           "refund_amount": {
             "old": null,
             "new": 10
+          },
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
           }
         }
       }

@@ -37,13 +37,13 @@
     "modified": {
       "order_items": {
         "ITEM-9020": {
-          "refund_amount": {
-            "old": null,
-            "new": 249
-          },
           "item_status": {
             "old": "shipped",
             "new": "cancelled"
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 249
           },
           "refund_method": {
             "old": null,
@@ -51,13 +51,13 @@
           }
         },
         "ITEM-9021": {
-          "refund_amount": {
-            "old": null,
-            "new": 45
-          },
           "item_status": {
             "old": "shipped",
             "new": "cancelled"
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 45
           },
           "refund_method": {
             "old": null,

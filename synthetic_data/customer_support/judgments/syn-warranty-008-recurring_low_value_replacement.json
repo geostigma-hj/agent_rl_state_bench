@@ -1,9 +1,9 @@
 {
-  "decision": "ACCEPT",
-  "confidence": 1.0,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Task is clear, executable, and internally consistent. All state requirements align with the expected state diff and gold tool plan. Proceed with execution.",
+  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
+  "confidence": null,
+  "decision": "ACCEPT",
   "judge_model": "step-3.7-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

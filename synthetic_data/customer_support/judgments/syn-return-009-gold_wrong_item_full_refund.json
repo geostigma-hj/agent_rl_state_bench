@@ -1,9 +1,9 @@
 {
+  "decision": "ACCEPT",
+  "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
-  "confidence": null,
-  "decision": "ACCEPT",
+  "recommendation": "Task is well-structured and internally consistent. The opening message's phrasing ('don't want them anymore') is clarified by the user_simulator which establishes the ground truth reason as 'wrong_item'. All requirements, environment data, gold tool plan, and expected state are aligned. Accept as-is.",
   "judge_model": "step-3.7-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

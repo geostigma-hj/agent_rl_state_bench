@@ -29,7 +29,7 @@ class PriceMatchVariant:
     changed_factors: list[str]
 
 
-DEFAULT_PRICE_MATCH_VARIANTS: tuple[PriceMatchVariant, ...] = (
+BASE_PRICE_MATCH_VARIANTS: tuple[PriceMatchVariant, ...] = (
     PriceMatchVariant("standard_exact_drop", "easy", "cust_002", "standard", "SoundMax Basic Headphones", 149, 139, 10, "credit_card", ["price_drop"]),
     PriceMatchVariant("customer_overquotes_drop", "medium", "cust_002", "standard", "SoundMax Basic Headphones", 149, 139, 30, "credit_card", ["customer_wrong_amount"]),
     PriceMatchVariant("gold_small_drop", "easy", "cust_003", "gold", "PowerBlend Mini Blender", 89, 79, 10, "credit_card", ["membership_tier"]),
@@ -46,6 +46,78 @@ DEFAULT_PRICE_MATCH_VARIANTS: tuple[PriceMatchVariant, ...] = (
     PriceMatchVariant("gold_current_price_lookup", "medium", "cust_003", "gold", "BrewMaster Espresso Machine", 349, 319, None, "credit_card", ["agent_must_lookup"]),
     PriceMatchVariant("silver_fifteen_drop", "easy", "cust_004", "silver", "NoiseBlock Earbuds", 119, 104, 15, "credit_card", ["price_drop"]),
 )
+
+
+def _auto_price_match_variants() -> tuple[PriceMatchVariant, ...]:
+    products = [
+        ("NoiseBlock Earbuds", 119),
+        ("PowerBlend Mini Blender", 89),
+        ("SoundMax Wireless Headphones", 249),
+        ("SlateTab Pro 11-inch", 599),
+        ("TrailStep Running Shoes", 129),
+        ("DeskHub USB-C Adapter", 45),
+        ("BrewMaster Espresso Machine", 349),
+        ("ProBook Laptop", 799),
+        ("ComfyCotton Shirt", 59),
+    ]
+    customers = [
+        ("cust_001", "platinum"),
+        ("cust_002", "standard"),
+        ("cust_003", "gold"),
+        ("cust_004", "silver"),
+        ("cust_005", "standard"),
+    ]
+    payments = ["credit_card", "debit_card", "paypal", "gift_card", "split"]
+    drops = [5, 10, 15, 20, 25, 30, 40, 50]
+    variants: list[PriceMatchVariant] = []
+    seen = {variant.suffix for variant in BASE_PRICE_MATCH_VARIANTS}
+    idx = 0
+    for product_name, original_price in products:
+        for customer_id, tier in customers:
+            drop = drops[idx % len(drops)]
+            if drop >= original_price:
+                continue
+            payment = payments[idx % len(payments)]
+            quoted = None
+            factors = ["price_drop"]
+            difficulty = "easy"
+            if idx % 3 == 1:
+                quoted = drop + 15
+                factors.append("customer_wrong_amount")
+                difficulty = "medium"
+            elif idx % 3 == 2:
+                quoted = max(1, drop - 5)
+                factors.append("customer_wrong_amount")
+                difficulty = "medium"
+            if payment == "split":
+                factors.append("split_payment")
+                difficulty = "hard"
+            suffix = f"auto_{idx+1:03d}_{tier}_{payment}_{product_name.lower().replace(' ', '_').replace('-', '_')}_{drop}_drop"
+            if suffix in seen:
+                idx += 1
+                continue
+            seen.add(suffix)
+            variants.append(
+                PriceMatchVariant(
+                    suffix,
+                    difficulty,
+                    customer_id,
+                    tier,
+                    product_name,
+                    original_price,
+                    original_price - drop,
+                    quoted,
+                    payment,
+                    factors,
+                )
+            )
+            idx += 1
+            if len(BASE_PRICE_MATCH_VARIANTS) + len(variants) >= 60:
+                return tuple(variants)
+    return tuple(variants)
+
+
+DEFAULT_PRICE_MATCH_VARIANTS: tuple[PriceMatchVariant, ...] = (*BASE_PRICE_MATCH_VARIANTS, *_auto_price_match_variants())
 
 
 def generate_price_match_tasks(*, output_root: Path, limit: int | None = None, rewrite: bool = False) -> list[dict[str, Path]]:

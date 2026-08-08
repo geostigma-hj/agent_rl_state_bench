@@ -27,7 +27,7 @@ class WarrantyVariant:
     changed_factors: list[str]
 
 
-DEFAULT_WARRANTY_VARIANTS: tuple[WarrantyVariant, ...] = (
+BASE_WARRANTY_VARIANTS: tuple[WarrantyVariant, ...] = (
     WarrantyVariant("active_repair", "easy", 249, "SoundMax Wireless Headphones", "2026-07-31", 0, 3, ["active_warranty", "repair"]),
     WarrantyVariant("active_low_value_replacement", "easy", 89, "PowerBlend Mini Blender", "2026-12-31", 0, 3, ["low_value", "replacement"]),
     WarrantyVariant("recurring_replacement", "medium", 249, "SoundMax Wireless Headphones", "2026-07-31", 2, 3, ["recurring_defect"]),
@@ -42,6 +42,60 @@ DEFAULT_WARRANTY_VARIANTS: tuple[WarrantyVariant, ...] = (
     WarrantyVariant("maxed_low_value_paid_repair", "hard", 89, "PowerBlend Mini Blender", "2026-12-31", 3, 3, ["claim_limit", "paid_repair"]),
     WarrantyVariant("maxed_headphones_paid_repair", "hard", 249, "SoundMax Wireless Headphones", "2027-01-31", 3, 3, ["claim_limit", "paid_repair"]),
 )
+
+
+def _auto_warranty_variants() -> tuple[WarrantyVariant, ...]:
+    products = [
+        (249, "SoundMax Wireless Headphones"),
+        (89, "PowerBlend Mini Blender"),
+        (599, "SlateTab Pro 11-inch"),
+        (45, "DeskHub USB-C Adapter"),
+        (349, "BrewMaster Espresso Machine"),
+        (799, "ProBook Laptop"),
+        (129, "TrailStep Running Shoes"),
+        (119, "NoiseBlock Earbuds"),
+    ]
+    scenarios = [
+        ("active", "2026-12-31", 0, 3, ["active_warranty"]),
+        ("recurring", "2026-12-31", 2, 3, ["recurring_defect"]),
+        ("recent_expiry", "2026-06-01", 0, 3, ["recent_expiry"]),
+        ("old_expiry", "2026-04-01", 0, 3, ["expired_warranty"]),
+        ("maxed", "2027-01-31", 3, 3, ["claim_limit", "paid_repair"]),
+    ]
+    variants: list[WarrantyVariant] = []
+    seen = {variant.suffix for variant in BASE_WARRANTY_VARIANTS}
+    idx = 0
+    for price, product_name in products:
+        for scenario, warranty_end, claim_count, max_claims, factors in scenarios:
+            suffix = f"auto_{idx+1:03d}_{scenario}_{product_name.lower().replace(' ', '_').replace('-', '_')}"
+            if suffix in seen:
+                idx += 1
+                continue
+            changed = [*factors]
+            difficulty = "easy" if scenario == "active" else "medium"
+            if price < 100:
+                changed.append("low_value")
+            if scenario in {"old_expiry", "maxed"}:
+                difficulty = "hard"
+            variants.append(
+                WarrantyVariant(
+                    suffix,
+                    difficulty,
+                    price,
+                    product_name,
+                    warranty_end,
+                    claim_count,
+                    max_claims,
+                    changed,
+                )
+            )
+            idx += 1
+            if len(BASE_WARRANTY_VARIANTS) + len(variants) >= 45:
+                return tuple(variants)
+    return tuple(variants)
+
+
+DEFAULT_WARRANTY_VARIANTS: tuple[WarrantyVariant, ...] = (*BASE_WARRANTY_VARIANTS, *_auto_warranty_variants())
 
 
 def generate_warranty_tasks(*, output_root: Path, limit: int | None = None, rewrite: bool = False) -> list[dict[str, Path]]:
@@ -86,16 +140,25 @@ def build_warranty_variant(
     warranty.end_date = variant.warranty_end
     warranty.claim_count = variant.claim_count
     warranty.max_claims = variant.max_claims
-    warranty.status = "active"
+    warranty.status = "expired" if variant.warranty_end < now[:10] else "active"
     warranty.resolution = None
 
     gold_tool_plan = _build_gold_warranty_plan(env_data, now, warranty.warranty_id, item.item_id)
     state_requirements, state_diff = build_state_requirements(env_data, now, gold_tool_plan)
+    if "recent_expiry" in variant.changed_factors:
+        policy_hint = "The warranty expired less than 30 days ago, so official policy allows a 50% off repair outcome after preview and confirmation."
+    elif "expired_warranty" in variant.changed_factors:
+        policy_hint = "The warranty expired more than 30 days ago, so official policy allows full-price repair or 25% off replacement rather than a free warranty claim."
+    elif "claim_limit" in variant.changed_factors:
+        policy_hint = "The warranty has reached its maximum claim count, so official policy allows paid repair only."
+    else:
+        policy_hint = "The warranty is active, so official policy determines whether repair or replacement is appropriate."
     task = TaskDefinition(
         task_id=task_id,
         task_summary=(
             f"Customer asks for warranty service on {product.name} from {order.order_id}. "
-            "Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim."
+            "Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. "
+            f"{policy_hint}"
         ),
         user_id=order.customer_id,
         now=now,
@@ -103,7 +166,7 @@ def build_warranty_variant(
         user_simulator=UserSimulatorConfig(
             user_sim_context=(
                 f"You want warranty help for {product.name} from order {order.order_id}. "
-                "If the agent explains the warranty outcome and asks for confirmation, agree to proceed."
+                f"If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. {policy_hint}"
             ),
             known_info=[f"You bought {product.name} in order {order.order_id}.", "The product is malfunctioning."],
             unknown_info=["You do not know the claim count or exact warranty resolution."],

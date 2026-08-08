@@ -1,0 +1,88 @@
+{
+  "task_id": "syn-return-042-auto_027_gold_prime_changed_mind_mislabel",
+  "source_seed": "7-return_restocking_waived",
+  "generator_version": "return_refund_v0.1",
+  "task_family": "return_refund",
+  "mutation_level": "constraint",
+  "difficulty": "hard",
+  "changed_factors": [
+    "restocking_fee",
+    "recent_delivery",
+    "membership_tier"
+  ],
+  "requires_confirmation": true,
+  "is_compound": false,
+  "gold_tool_plan": [
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "return"
+      }
+    },
+    {
+      "tool": "process_return",
+      "params": {
+        "item_id": "ITEM-9075",
+        "reason": "changed_mind",
+        "confirm": false
+      }
+    },
+    {
+      "tool": "process_return",
+      "params": {
+        "item_id": "ITEM-9075",
+        "reason": "changed_mind",
+        "amount": 222,
+        "confirm": true
+      }
+    }
+  ],
+  "expected_state_diff": {
+    "created": {},
+    "modified": {
+      "orders": {
+        "ORD-6011": {
+          "status": {
+            "old": "delivered",
+            "new": "fully_returned"
+          }
+        }
+      },
+      "order_items": {
+        "ITEM-9075": {
+          "item_status": {
+            "old": "delivered",
+            "new": "returned"
+          },
+          "return_reason": {
+            "old": null,
+            "new": "changed_mind"
+          },
+          "restocking_fee": {
+            "old": null,
+            "new": 37
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 222
+          },
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
+          }
+        }
+      }
+    },
+    "deleted": {}
+  },
+  "language_rewritten": true,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "step-3.7-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  },
+  "language_rewriter_model": "deepseek-v4-flash"
+}

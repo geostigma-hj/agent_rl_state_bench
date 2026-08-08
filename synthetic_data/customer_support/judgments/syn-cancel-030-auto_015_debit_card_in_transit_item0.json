@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is well-formed with consistent environment, requirements, and gold tool plan. The $10 refund difference from the $249 item price is handled via the cancellation policy tool as indicated by the 'intercept_fee' changed factor, and the workflow correctly includes policy review, preview, and confirmation steps.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

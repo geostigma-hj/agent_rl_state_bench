@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-004-defective_full_refund",
-  "task_summary": "Customer wants to return defective SoundMax Wireless Headphones from order ORD-6011. The agent must apply the return policy, preview the return, obtain confirmation, and process the correct refund.",
+  "task_summary": "The customer's request is to return a defective SoundMax Wireless Headphones from order ORD-6011. The agent must verify the order and item, apply the return policy to determine eligibility and refund, provide a preview for confirmation, and upon confirmation, process the refund to the original payment method.",
   "task_requirements": [
     {
       "id": "syn-return-004-defective_full_refund_must_review_return_policy",
@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "The SoundMax Wireless Headphones from order ORD-6011 are defective and I need to return them and get my money back to the original payment method.",
+  "opening_message": "I need to return the SoundMax Wireless Headphones from order ORD-6011 because they are defective. Please process the return to my original payment method.",
   "user_simulator": {
-    "user_sim_context": "You need help returning defective SoundMax Wireless Headphones from order ORD-6011. The item is ITEM-9075. State reason as defective and prefer original payment method. If agent asks for confirmation after explaining refund, confirm to proceed.",
+    "user_sim_context": "You are assisting the customer in returning the SoundMax Wireless Headphones from order ORD-6011. The specific item is ITEM-9075. The reason for return is defective. The preferred refund method is the original payment method. If the agent explains the refund and requests confirmation to proceed, agree without hesitation.",
     "known_info": [
-      "You bought SoundMax Wireless Headphones in order ORD-6011.",
-      "You received the order on 2026-06-05T14:00:00."
+      "The customer purchased SoundMax Wireless Headphones in order ORD-6011.",
+      "The order was received on 2026-06-05T14:00:00."
     ],
     "unknown_info": [
-      "You do not know the exact return policy calculation.",
-      "You do not know the internal item_id unless the agent tells you."
+      "The customer does not know the exact refund calculation based on the return policy.",
+      "The customer does not know the internal item_id unless the agent discloses it."
     ],
     "task_rules": [
-      "Do not invent order IDs, item IDs, prices, dates, or policy details.",
-      "If the agent previews a valid return and asks for confirmation, agree to proceed."
+      "Do not invent or modify order IDs, item IDs, prices, dates, or policy details.",
+      "When the agent presents a valid return preview and requests confirmation, agree to proceed."
     ]
   },
   "task_type": "return_item",

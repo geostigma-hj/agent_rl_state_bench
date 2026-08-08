@@ -1,0 +1,58 @@
+{
+  "task_id": "syn-price-040-auto_025_standard_split_trailstep_running_shoes_5_drop",
+  "task_summary": "Customer requests a price-match adjustment for TrailStep Running Shoes in ORD-7208. The correct outcome is a $5 price-match refund while keeping the order and item active.",
+  "task_requirements": [
+    {
+      "id": "syn-price-040-auto_025_standard_split_trailstep_running_shoes_5_drop_must_lookup_product_price",
+      "kind": "must",
+      "requirement": "Agent must verify current price with get_product_details for PROD-4210.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-price-040-auto_025_standard_split_trailstep_running_shoes_5_drop_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must preview the $5 price-match refund before confirming it.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-price-040-auto_025_standard_split_trailstep_running_shoes_5_drop_must_not_return_cancel_exchange",
+      "kind": "must_not",
+      "requirement": "Agent must not return, cancel, or exchange the item.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_005",
+  "now": "2026-07-08T10:00:00",
+  "opening_message": "I noticed the TrailStep Running Shoes from my order ORD-7208 are now listed at a lower price. Could you please process a price adjustment for me?",
+  "user_simulator": {
+    "user_sim_context": "You want a price-match refund for TrailStep Running Shoes in order ORD-7208. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
+    "known_info": [
+      "You bought TrailStep Running Shoes in order ORD-7208.",
+      "The current product price is $124."
+    ],
+    "unknown_info": [
+      "You do not know the exact internal price-match workflow.",
+      "You do not know payment allocation details unless the agent explains them."
+    ],
+    "task_rules": [
+      "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
+      "If the agent previews the policy-supported amount and keeps the order active, confirm the refund."
+    ]
+  },
+  "task_type": "price_match_refund",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10209",
+      "field": "refund_amount",
+      "expected_value": 5
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10209",
+      "field": "refund_method",
+      "expected_value": "original_payment"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-price-040-auto_025_standard_split_trailstep_running_shoes_5_drop.json"
+}

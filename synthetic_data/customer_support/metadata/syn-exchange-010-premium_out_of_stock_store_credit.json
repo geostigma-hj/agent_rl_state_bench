@@ -45,6 +45,14 @@
             "old": null,
             "new": 0
           },
+          "return_reason": {
+            "old": null,
+            "new": "changed_mind"
+          },
+          "refund_method": {
+            "old": null,
+            "new": "store_credit"
+          },
           "refund_amount": {
             "old": null,
             "new": 59
@@ -52,14 +60,6 @@
           "item_status": {
             "old": "delivered",
             "new": "returned"
-          },
-          "refund_method": {
-            "old": null,
-            "new": "store_credit"
-          },
-          "return_reason": {
-            "old": null,
-            "new": "changed_mind"
           }
         }
       },
@@ -75,13 +75,6 @@
     "deleted": {}
   },
   "language_rewritten": true,
-  "judge": {
-    "decision": "ACCEPT",
-    "judge_model": "step-3.7-flash",
-    "deterministic_check_passed": true,
-    "issues": [],
-    "ambiguities": [],
-    "manual_adjudication": null
-  },
+  "judge": null,
   "language_rewriter_model": "deepseek-v4-flash"
 }

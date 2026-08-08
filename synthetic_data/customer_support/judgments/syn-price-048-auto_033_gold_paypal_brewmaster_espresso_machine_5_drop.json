@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.98,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is well-formed with internally consistent environment, clear requirements, and a gold tool plan that produces the expected state diff. No changes needed.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent and executable. The agent must follow the gold tool plan sequence: retrieve exchange policy, preview the exchange (ITEM-9250 to PROD-2251), and confirm. The agent should clearly communicate the $24 store credit resulting from the price difference ($59 -> $35) before obtaining user confirmation.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

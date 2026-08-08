@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent, executable, and has a single deterministic final state. The non-fragile product classification correctly prevents fragile-item goodwill credit issuance. Gold tool plan aligns with state requirements and policy review requirements.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

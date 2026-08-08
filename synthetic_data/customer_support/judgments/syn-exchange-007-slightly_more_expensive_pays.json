@@ -1,9 +1,9 @@
 {
-  "decision": "ACCEPT",
-  "confidence": 0.98,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Task is clear, executable, and internally consistent. The gold tool plan correctly reflects the requirements to review exchange policy and preview before confirmation. The state requirements align with the expected state diff. No changes needed.",
+  "recommendation": "Auto-accepted: deterministic checks passed and judge reported no concrete issues.",
+  "confidence": null,
+  "decision": "ACCEPT",
   "judge_model": "step-3.7-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

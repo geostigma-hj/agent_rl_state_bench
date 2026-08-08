@@ -1,9 +1,11 @@
 {
   "decision": "ACCEPT",
-  "confidence": 1.0,
+  "confidence": 0.95,
   "issues": [],
-  "ambiguities": [],
-  "recommendation": "Task is well-formed and internally consistent. No changes needed.",
+  "ambiguities": [
+    "The customer initially requests $20 but the correct amount is $30; however, the user_simulator explicitly states the customer is open to correction if the agent verifies the product record, so this is handled consistently."
+  ],
+  "recommendation": "Task is well-formed with consistent environment data, clear requirements, and a gold tool plan that achieves the expected final state. The minor ambiguity about the customer's initial wrong amount is explicitly addressed in the user simulator rules.",
   "judge_model": "step-3.7-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

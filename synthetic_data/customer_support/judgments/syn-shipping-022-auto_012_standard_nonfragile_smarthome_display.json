@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is well-defined with consistent requirements, environment state, and expected final state. The agent must follow the shipping-damage path: review policies, process return with reason damaged_in_transit, refund $199 to original payment, issue return label, and avoid fragile goodwill credit since the item is non-fragile.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

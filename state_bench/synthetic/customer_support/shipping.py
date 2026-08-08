@@ -28,7 +28,7 @@ class ShippingDamageVariant:
     changed_factors: list[str]
 
 
-DEFAULT_SHIPPING_VARIANTS: tuple[ShippingDamageVariant, ...] = (
+BASE_SHIPPING_VARIANTS: tuple[ShippingDamageVariant, ...] = (
     ShippingDamageVariant("fragile_vase_refund_goodwill", "medium", "cust_003", "gold", "Artisan Crystal Vase", 109, True, "refund", ["fragile_goodwill"]),
     ShippingDamageVariant("fragile_lamp_refund_goodwill", "medium", "cust_004", "silver", "Ceramic Table Lamp", 129, True, "refund", ["fragile_goodwill", "membership_tier"]),
     ShippingDamageVariant("fragile_glassware_refund_goodwill", "medium", "cust_002", "standard", "Crystal Glassware Set", 89, True, "refund", ["fragile_goodwill"]),
@@ -40,6 +40,63 @@ DEFAULT_SHIPPING_VARIANTS: tuple[ShippingDamageVariant, ...] = (
     ShippingDamageVariant("nonfragile_tablet_refund", "medium", "cust_001", "platinum", "SlateTab Pro 11-inch", 599, False, "refund", ["high_value_item"]),
     ShippingDamageVariant("fragile_frame_refund_goodwill", "medium", "cust_005", "standard", "Framed Wall Art", 119, True, "refund", ["fragile_goodwill"]),
 )
+
+
+def _auto_shipping_variants() -> tuple[ShippingDamageVariant, ...]:
+    products = [
+        ("Porcelain Dinner Set", 149, True),
+        ("Glass Coffee Carafe", 69, True),
+        ("SmartHome Display", 199, False),
+        ("Ceramic Serving Bowl", 79, True),
+        ("NoiseBlock Earbuds", 119, False),
+        ("Travel Backpack", 89, False),
+        ("Framed Wall Mirror", 189, True),
+        ("Kitchen Knife Set", 139, False),
+        ("Crystal Wine Decanter", 159, True),
+        ("Laptop Sleeve", 49, False),
+    ]
+    customers = [
+        ("cust_001", "platinum"),
+        ("cust_002", "standard"),
+        ("cust_003", "gold"),
+        ("cust_004", "silver"),
+        ("cust_005", "standard"),
+    ]
+    variants: list[ShippingDamageVariant] = []
+    seen = {variant.suffix for variant in BASE_SHIPPING_VARIANTS}
+    idx = 0
+    for product_name, price, fragile in products:
+        for customer_id, tier in customers:
+            suffix = f"auto_{idx+1:03d}_{tier}_{'fragile' if fragile else 'nonfragile'}_{product_name.lower().replace(' ', '_').replace('-', '_')}"
+            if suffix in seen:
+                idx += 1
+                continue
+            seen.add(suffix)
+            factors = ["fragile_goodwill"] if fragile else ["damaged_no_goodwill"]
+            if price >= 500:
+                factors.append("high_value_item")
+            if price < 75:
+                factors.append("low_value_item")
+            variants.append(
+                ShippingDamageVariant(
+                    suffix,
+                    "medium" if fragile else "easy",
+                    customer_id,
+                    tier,
+                    product_name,
+                    price,
+                    fragile,
+                    "refund",
+                    factors,
+                )
+            )
+            idx += 1
+            if len(BASE_SHIPPING_VARIANTS) + len(variants) >= 50:
+                return tuple(variants)
+    return tuple(variants)
+
+
+DEFAULT_SHIPPING_VARIANTS: tuple[ShippingDamageVariant, ...] = (*BASE_SHIPPING_VARIANTS, *_auto_shipping_variants())
 
 
 def generate_shipping_tasks(*, output_root: Path, limit: int | None = None, rewrite: bool = False) -> list[dict[str, Path]]:

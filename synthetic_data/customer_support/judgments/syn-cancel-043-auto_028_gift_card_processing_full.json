@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is well-formed with consistent requirements, environment state, and expected outcomes. The cancellation flow (policy review → preview → confirm) is clearly specified and aligned with the user simulator behavior. No changes needed.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

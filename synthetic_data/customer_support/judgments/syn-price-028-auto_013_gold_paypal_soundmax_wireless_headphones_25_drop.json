@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 1.0,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Accept the task as written. All task requirements are internally consistent and executable: the price drop ($249 paid → $224 current) yields a $25 refund, the gold tool plan includes the required product lookup and preview-before-confirm steps, and it avoids prohibited actions (return/cancel/exchange). The expected state changes match the state requirements.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

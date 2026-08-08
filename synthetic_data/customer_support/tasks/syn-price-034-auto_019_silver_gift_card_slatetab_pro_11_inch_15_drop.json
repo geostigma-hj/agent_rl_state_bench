@@ -1,0 +1,58 @@
+{
+  "task_id": "syn-price-034-auto_019_silver_gift_card_slatetab_pro_11_inch_15_drop",
+  "task_summary": "Customer requests a price adjustment for the SlateTab Pro 11-inch in order ORD-7208. The expected resolution is a price-match refund of $15, while the order and item remain active.",
+  "task_requirements": [
+    {
+      "id": "syn-price-034-auto_019_silver_gift_card_slatetab_pro_11_inch_15_drop_must_lookup_product_price",
+      "kind": "must",
+      "requirement": "Agent must verify current price with get_product_details for PROD-4210.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-price-034-auto_019_silver_gift_card_slatetab_pro_11_inch_15_drop_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must preview the $15 price-match refund before confirming it.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-price-034-auto_019_silver_gift_card_slatetab_pro_11_inch_15_drop_must_not_return_cancel_exchange",
+      "kind": "must_not",
+      "requirement": "Agent must not return, cancel, or exchange the item.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_004",
+  "now": "2026-07-08T10:00:00",
+  "opening_message": "I noticed the SlateTab Pro 11-inch from my order ORD-7208 is now listed at a lower price. Could you process a price adjustment for me?",
+  "user_simulator": {
+    "user_sim_context": "You would like a price adjustment on the SlateTab Pro 11-inch from order ORD-7208. Please do not process any return, cancellation, exchange, or replacement; the item should stay active and the adjustment should be processed as a refund.",
+    "known_info": [
+      "You purchased the SlateTab Pro 11-inch in order ORD-7208.",
+      "The current price for the item is $584."
+    ],
+    "unknown_info": [
+      "You do not know the exact steps for price adjustment processing.",
+      "You do not know how the refund will be allocated unless the agent explains it."
+    ],
+    "task_rules": [
+      "Request only a price adjustment refund; do not ask for return, cancellation, exchange, or replacement.",
+      "If the agent confirms a refund amount that matches the price difference and keeps the order active, confirm the adjustment."
+    ]
+  },
+  "task_type": "price_match_refund",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10209",
+      "field": "refund_amount",
+      "expected_value": 15
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10209",
+      "field": "refund_method",
+      "expected_value": "original_payment"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-price-034-auto_019_silver_gift_card_slatetab_pro_11_inch_15_drop.json"
+}

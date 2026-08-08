@@ -1,0 +1,62 @@
+{
+  "task_id": "syn-warranty-021-auto_008_recent_expiry_powerblend_mini_blender",
+  "task_summary": "Customer requests warranty assistance for a PowerBlend Mini Blender from order ORD-6032. Correct handling involves checking warranty status, reviewing the policy, previewing the resolution, confirming with the customer, and then filing the claim in line with policy. Since the warranty expired less than 30 days ago, the official policy allows a 50% discount on repair, which should be previewed and confirmed before proceeding.",
+  "task_requirements": [
+    {
+      "id": "syn-warranty-021-auto_008_recent_expiry_powerblend_mini_blender_must_check_warranty_status",
+      "kind": "must",
+      "requirement": "Agent must check warranty status for ITEM-9215.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-021-auto_008_recent_expiry_powerblend_mini_blender_must_review_warranty_policy",
+      "kind": "must",
+      "requirement": "Agent must review warranty policy before filing a warranty claim.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-021-auto_008_recent_expiry_powerblend_mini_blender_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a process_warranty_claim preview tool call for WRT-4013 with confirm false or omitted before making the confirm=true process_warranty_claim tool call.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_004",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "My PowerBlend Mini Blender from order ORD-6032 is malfunctioning. Can I use the warranty?",
+  "user_simulator": {
+    "user_sim_context": "You are seeking warranty support for your PowerBlend Mini Blender from order ORD-6032. If the agent explains the warranty resolution per policy and requests confirmation, you agree to proceed. The warranty expired less than 30 days ago, so the policy allows a 50% off repair after preview and confirmation.",
+    "known_info": [
+      "You purchased a PowerBlend Mini Blender in order ORD-6032.",
+      "The product is malfunctioning."
+    ],
+    "unknown_info": [
+      "You are unaware of the claim count or the specific warranty resolution."
+    ],
+    "task_rules": [
+      "Confirm after a valid warranty preview. Do not request a return unless the agent states warranty is unavailable."
+    ]
+  },
+  "task_type": "warranty_claim",
+  "state_requirements": [
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "claim_count",
+      "expected_value": 1
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "resolution",
+      "expected_value": "discounted_repair"
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "status",
+      "expected_value": "claimed"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-warranty-021-auto_008_recent_expiry_powerblend_mini_blender.json"
+}

@@ -44,13 +44,13 @@
     "modified": {
       "order_items": {
         "ITEM-9020": {
-          "refund_amount": {
-            "old": null,
-            "new": 239
-          },
           "item_status": {
             "old": "shipped",
             "new": "cancelled"
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 239
           },
           "refund_method": {
             "old": null,

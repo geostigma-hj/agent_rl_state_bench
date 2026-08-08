@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-005-cosmetic_claim_not_defective",
-  "task_summary": "Customer describes SoundMax Wireless Headphones from ORD-6011 as defective, but the described issue is cosmetic preference. The correct resolution is a changed-mind return with normal electronics restocking policy.",
+  "task_summary": "Customer requests return of SoundMax Wireless Headphones from order ORD-6011, citing defect, but the described issue is a cosmetic preference. Correct resolution is a changed-mind return with standard electronics restocking policy.",
   "task_requirements": [
     {
       "id": "syn-return-005-cosmetic_claim_not_defective_must_review_return_policy",
@@ -29,9 +29,9 @@
   ],
   "user_id": "cust_005",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I need to return the SoundMax Wireless Headphones from order ORD-6011. They are defective: the color and look are not what I expected at all.",
+  "opening_message": "I need to return the SoundMax Wireless Headphones from order ORD-6011. They are defective because the color and appearance are not what I expected.",
   "user_simulator": {
-    "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is defective. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed. If asked what is defective, explain that the product works but the color/appearance is disappointing.",
+    "user_sim_context": "You need assistance returning SoundMax Wireless Headphones from order ORD-6011. The item in question is ITEM-9075. Your stated reason is 'defective'. Preferred refund method is original payment. If asked to confirm after the agent explains the refund process, confirm that you want to proceed. If asked to specify the defect, explain that the product works properly but the color/appearance is disappointing.",
     "known_info": [
       "You bought SoundMax Wireless Headphones in order ORD-6011.",
       "You received the order on 2026-06-05T14:00:00."
@@ -43,7 +43,7 @@
     "task_rules": [
       "Do not invent order IDs, item IDs, prices, dates, or policy details.",
       "If the agent previews a valid return and asks for confirmation, agree to proceed.",
-      "When asked to clarify the defect, say the item functions correctly but does not match your aesthetic expectations."
+      "When asked to clarify the defect, say the item functions correctly but does not meet your aesthetic expectations."
     ]
   },
   "task_type": "return_item",

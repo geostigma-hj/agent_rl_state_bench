@@ -1,0 +1,13 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [
+    "The task describes an 'exchange' but the expected outcome is effectively a return with store credit due to the target product being out of stock and significantly more expensive. However, this is consistent with the task's stated factors (out_of_stock, expensive_item, store_credit_fallback) and the task requirements explicitly mention 'store credit if applicable' as a valid resolution.",
+    "The gold tool plan uses process_exchange for both preview and confirmation, which implies the tool internally handles out-of-stock scenarios by converting to a return+store credit flow. This is unconventional but internally consistent with the expected state."
+  ],
+  "recommendation": "Task is well-designed and internally consistent. The agent must review exchange policy, preview the exchange (which reveals store credit as the only viable option due to out-of-stock and price difference), obtain user confirmation, and process the exchange, resulting in the expected return/store_credit state. No changes needed.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

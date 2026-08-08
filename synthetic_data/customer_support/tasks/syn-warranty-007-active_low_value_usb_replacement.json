@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-007-active_low_value_usb_replacement",
-  "task_summary": "Customer asks for warranty service on DeskHub USB-C Adapter from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim.",
+  "task_summary": "Customer asks for warranty service on DeskHub USB-C Adapter from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
   "task_requirements": [
     {
       "id": "syn-warranty-007-active_low_value_usb_replacement_must_check_warranty_status",
@@ -25,7 +25,7 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "My DeskHub USB-C Adapter from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You want warranty help for DeskHub USB-C Adapter from order ORD-6032. If the agent explains the warranty outcome and asks for confirmation, agree to proceed.",
+    "user_sim_context": "You want warranty help for DeskHub USB-C Adapter from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
     "known_info": [
       "You bought DeskHub USB-C Adapter in order ORD-6032.",
       "The product is malfunctioning."

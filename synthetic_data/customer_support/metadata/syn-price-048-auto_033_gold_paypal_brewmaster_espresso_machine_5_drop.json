@@ -1,0 +1,74 @@
+{
+  "task_id": "syn-price-048-auto_033_gold_paypal_brewmaster_espresso_machine_5_drop",
+  "source_seed": "108-hard_price_match_customer_quotes_wrong_amount",
+  "generator_version": "price_match_v0.1",
+  "task_family": "price_match",
+  "mutation_level": "state",
+  "difficulty": "medium",
+  "changed_factors": [
+    "price_drop",
+    "customer_wrong_amount"
+  ],
+  "requires_confirmation": true,
+  "is_compound": false,
+  "gold_tool_plan": [
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "refund"
+      }
+    },
+    {
+      "tool": "get_product_details",
+      "params": {
+        "product_id": "PROD-4210"
+      }
+    },
+    {
+      "tool": "process_refund",
+      "params": {
+        "item_id": "ITEM-10209",
+        "amount": 5,
+        "refund_method": "original_payment",
+        "confirm": false
+      }
+    },
+    {
+      "tool": "process_refund",
+      "params": {
+        "item_id": "ITEM-10209",
+        "amount": 5,
+        "refund_method": "original_payment",
+        "confirm": true
+      }
+    }
+  ],
+  "expected_state_diff": {
+    "created": {},
+    "modified": {
+      "order_items": {
+        "ITEM-10209": {
+          "refund_amount": {
+            "old": null,
+            "new": 5
+          },
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
+          }
+        }
+      }
+    },
+    "deleted": {}
+  },
+  "language_rewritten": true,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "step-3.7-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  },
+  "language_rewriter_model": "deepseek-v4-flash"
+}

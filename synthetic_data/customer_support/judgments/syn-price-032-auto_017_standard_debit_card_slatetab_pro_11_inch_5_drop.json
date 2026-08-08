@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is clear, executable, and internally consistent. The price-match refund amount ($5) is correctly derived from the product data ($599 original - $594 current). The required workflow (policy lookup → product verification → preview → confirm) is well-defined and satisfies all must/must_not requirements. No changes needed.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 1.0,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is well-formed and internally consistent. The price drop is correctly calculated as $30 (249 - 219), the customer's incorrect $45 belief is handled by the user simulator accepting verification, and the gold tool plan satisfies all must/must_not requirements while achieving the specified final state.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

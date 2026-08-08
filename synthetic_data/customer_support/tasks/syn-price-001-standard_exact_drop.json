@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-001-standard_exact_drop",
-  "task_summary": "Customer requests a price-match adjustment for SoundMax Basic Headphones in order ORD-7208. The correct outcome is a $10 price-match refund while keeping the order and item active.",
+  "task_summary": "Customer requests a price-match adjustment for SoundMax Basic Headphones in ORD-7208. The correct outcome is a $10 price-match refund while keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-001-standard_exact_drop_must_lookup_product_price",
@@ -23,7 +23,7 @@
   ],
   "user_id": "cust_002",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed the SoundMax Basic Headphones in my order ORD-7208 are now listed at a lower price, so I'd like to request a price adjustment.",
+  "opening_message": "I noticed the SoundMax Basic Headphones from order ORD-7208 are now priced lower, so I'd like a price match for the difference of $10.",
   "user_simulator": {
     "user_sim_context": "You want a price-match refund for SoundMax Basic Headphones in order ORD-7208. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [

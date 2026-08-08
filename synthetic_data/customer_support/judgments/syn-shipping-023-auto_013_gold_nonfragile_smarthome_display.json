@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.98,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is well-formed and internally consistent. Environment state, task requirements, user simulator constraints, and gold tool plan all align for a non-fragile damaged-in-transit claim. No changes needed.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

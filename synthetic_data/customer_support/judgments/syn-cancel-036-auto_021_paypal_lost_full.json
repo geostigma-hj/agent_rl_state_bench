@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 1.0,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Execute the validated cancellation workflow: first retrieve the cancellation policy via get_policies, then run a non-confirming cancel_order preview for ORD-6003, and finally submit the confirmed cancellation to process full refunds to PayPal for both order items as specified.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is well-defined with consistent data, clear requirements, and a deterministic expected outcome. The warranty is active and valid, the tool sequence is logical (status check → policy review → preview → confirm), and the final state requirements are specific and achievable.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

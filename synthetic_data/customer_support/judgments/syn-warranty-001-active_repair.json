@@ -1,9 +1,9 @@
 {
   "decision": "ACCEPT",
-  "confidence": 1.0,
+  "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Proceed with benchmark generation. The task is well-defined, internally consistent, and has a single deterministic final state. The gold tool plan correctly sequences warranty status check, policy review, preview, and confirmation, aligning with user simulator expectations and state requirements.",
+  "recommendation": "Task is well-structured with clear requirements and consistent environment. Minor warranty end_date discrepancy (2026-07-31 vs expected 2026-08-05 based on 12-month warranty from delivery) does not affect task validity since warranty remains active on the current date (2026-06-12).",
   "judge_model": "step-3.7-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

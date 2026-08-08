@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.9,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is well-structured and internally consistent. The lost shipment status logically explains the full refund without restocking fees. The gold tool plan aligns with task requirements and expected state changes.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

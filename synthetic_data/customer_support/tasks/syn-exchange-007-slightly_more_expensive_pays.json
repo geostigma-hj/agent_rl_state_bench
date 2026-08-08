@@ -1,11 +1,11 @@
 {
   "task_id": "syn-exchange-007-slightly_more_expensive_pays",
-  "task_summary": "The customer wants to exchange the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in size Large. The correct procedure is to apply the exchange policy, provide a preview of the exchange (including any price difference or store credit), and ask for confirmation. The expected outcome is the customer agreeing to the exchange and the policy-defined payment or store credit.",
+  "task_summary": "The customer wants to exchange a Premium Cotton Shirt from order ORD-6034 for the same shirt in size Large. The correct process is to verify the exchange policy, preview the exchange details, get customer confirmation, and then handle any price difference: if the new item costs more, the customer pays the difference; if it costs less, they receive store credit for the difference.",
   "task_requirements": [
     {
       "id": "syn-exchange-007-slightly_more_expensive_pays_must_review_exchange_policy",
       "kind": "must",
-      "requirement": "Agent must review the exchange policy before using process_exchange.",
+      "requirement": "Agent must review the exchange policy before handling the exchange request.",
       "evidence": "tool_calls"
     },
     {
@@ -17,18 +17,18 @@
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to exchange the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in Large.",
+  "opening_message": "I have order ORD-6034 with a Premium Cotton Shirt. I'd like to exchange it for a Premium Cotton Shirt in size Large.",
   "user_simulator": {
-    "user_sim_context": "The customer wants to exchange the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in Large. If the agent shows a valid exchange preview (including any price difference or store credit fallback) and asks for confirmation, the customer will agree to proceed.",
+    "user_sim_context": "You are requesting an exchange for the Premium Cotton Shirt from order ORD-6034 to get it in a Larger size. Your goal is to exchange the shirt for the same model but size Large. You are not aware of the exchange price-difference policy. If the agent presents a valid exchange preview and asks for confirmation, you will agree to it.",
     "known_info": [
-      "Customer purchased a Premium Cotton Shirt in order ORD-6034.",
-      "Customer wants to exchange it for the Premium Cotton Shirt in size Large."
+      "You purchased a Premium Cotton Shirt in order ORD-6034.",
+      "You want the Premium Cotton Shirt in size Large instead."
     ],
     "unknown_info": [
-      "Customer does not know the exchange price-difference policy."
+      "You do not know what the exchange policy says about price differences."
     ],
     "task_rules": [
-      "Do not ask for a different product. Confirm after a valid preview."
+      "Stick to your request for a size exchange; do not change the product. When the agent gives you a clear exchange preview, confirm it."
     ]
   },
   "task_type": "exchange_item",

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 1.0,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Execute the gold tool plan as specified: first call get_policies with topic 'return' to review return rules, then call process_return for ITEM-9075 with reason 'defective' and confirm=false to generate a preview, then call process_return again with confirm=true to finalize the return, which will produce all required expected state changes.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

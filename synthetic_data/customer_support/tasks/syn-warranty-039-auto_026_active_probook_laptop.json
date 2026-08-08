@@ -1,0 +1,62 @@
+{
+  "task_id": "syn-warranty-039-auto_026_active_probook_laptop",
+  "task_summary": "Customer requests warranty service for ProBook Laptop from ORD-6032. The proper procedure is to verify warranty coverage, review the warranty policy, provide a clear explanation, obtain customer confirmation, and then file the appropriate claim according to the policy. Since the warranty is active, the official policy will determine whether repair or replacement is necessary.",
+  "task_requirements": [
+    {
+      "id": "syn-warranty-039-auto_026_active_probook_laptop_must_check_warranty_status",
+      "kind": "must",
+      "requirement": "Agent must check warranty status for ITEM-9215.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-039-auto_026_active_probook_laptop_must_review_warranty_policy",
+      "kind": "must",
+      "requirement": "Agent must review warranty policy before filing a warranty claim.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-039-auto_026_active_probook_laptop_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a process_warranty_claim preview tool call for WRT-4013 with confirm false or omitted before making the confirm=true process_warranty_claim tool call.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_004",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "I'm having issues with my ProBook Laptop from order ORD-6032. Is it covered under warranty?",
+  "user_simulator": {
+    "user_sim_context": "You are seeking warranty assistance for a ProBook Laptop from order ORD-6032. If the agent explains the warranty coverage as per the policy and asks for your confirmation, you agree to proceed. The warranty is still in effect, so the official policy will dictate whether repair or replacement is offered.",
+    "known_info": [
+      "You purchased a ProBook Laptop under order ORD-6032.",
+      "The product is not working correctly."
+    ],
+    "unknown_info": [
+      "You are not aware of the claim history or the specific outcome under the warranty."
+    ],
+    "task_rules": [
+      "Agree to proceed once a valid warranty explanation is provided. Do not request a return unless the agent explicitly states the warranty is not applicable."
+    ]
+  },
+  "task_type": "warranty_claim",
+  "state_requirements": [
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "claim_count",
+      "expected_value": 1
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "resolution",
+      "expected_value": "repair"
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "status",
+      "expected_value": "claimed"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-warranty-039-auto_026_active_probook_laptop.json"
+}

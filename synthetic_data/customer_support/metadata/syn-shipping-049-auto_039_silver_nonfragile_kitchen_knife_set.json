@@ -1,0 +1,96 @@
+{
+  "task_id": "syn-shipping-049-auto_039_silver_nonfragile_kitchen_knife_set",
+  "source_seed": "21-shipping_damaged_fragile",
+  "generator_version": "shipping_v0.1",
+  "task_family": "shipping",
+  "mutation_level": "state",
+  "difficulty": "easy",
+  "changed_factors": [
+    "damaged_no_goodwill"
+  ],
+  "requires_confirmation": true,
+  "is_compound": false,
+  "gold_tool_plan": [
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "shipping"
+      }
+    },
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "return"
+      }
+    },
+    {
+      "tool": "process_return",
+      "params": {
+        "item_id": "ITEM-9155",
+        "reason": "damaged_in_transit",
+        "confirm": false
+      }
+    },
+    {
+      "tool": "process_return",
+      "params": {
+        "item_id": "ITEM-9155",
+        "reason": "damaged_in_transit",
+        "confirm": true,
+        "amount": 139
+      }
+    }
+  ],
+  "expected_state_diff": {
+    "created": {},
+    "modified": {
+      "order_items": {
+        "ITEM-9155": {
+          "item_status": {
+            "old": "delivered",
+            "new": "returned"
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 139
+          },
+          "restocking_fee": {
+            "old": null,
+            "new": 0
+          },
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
+          },
+          "return_reason": {
+            "old": null,
+            "new": "damaged_in_transit"
+          },
+          "return_label_issued": {
+            "old": false,
+            "new": true
+          }
+        }
+      },
+      "orders": {
+        "ORD-6023": {
+          "status": {
+            "old": "delivered",
+            "new": "fully_returned"
+          }
+        }
+      }
+    },
+    "deleted": {}
+  },
+  "language_rewritten": true,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "step-3.7-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  },
+  "language_rewriter_model": "deepseek-v4-flash"
+}

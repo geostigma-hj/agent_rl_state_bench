@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is clear, executable, and internally consistent. The customer's initial $20 request is correctly handled by the user simulator accepting the verified $5 drop. All required tool calls (get_product_details, preview and confirm process_refund) and state changes (refund_amount: 5, refund_method: original_payment) are well-defined and achievable.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

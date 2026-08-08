@@ -47,13 +47,13 @@
     "modified": {
       "order_items": {
         "ITEM-10209": {
-          "refund_method": {
-            "old": null,
-            "new": "original_payment"
-          },
           "refund_amount": {
             "old": null,
             "new": 10
+          },
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
           }
         }
       }
@@ -65,9 +65,7 @@
     "decision": "ACCEPT",
     "judge_model": "step-3.7-flash",
     "deterministic_check_passed": true,
-    "issues": [
-      "Product PROD-4210 has subcategory 'headphones_budget' despite being a blender, which is a minor data inconsistency in the synthetic environment though it does not affect task executability."
-    ],
+    "issues": [],
     "ambiguities": [],
     "manual_adjudication": null
   },

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.98,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent, executable, and has a clear single final state. The gold tool plan aligns with task requirements, and the expected state diff matches the environment setup and user simulator constraints. Ready for use.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

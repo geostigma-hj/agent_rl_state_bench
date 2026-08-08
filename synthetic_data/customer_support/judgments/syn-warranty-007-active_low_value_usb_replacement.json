@@ -1,9 +1,9 @@
 {
   "decision": "ACCEPT",
-  "confidence": 0.98,
+  "confidence": 0.95,
   "issues": [],
   "ambiguities": [],
-  "recommendation": "Task is well-formed and internally consistent. The opening message, user simulator, task requirements, gold tool plan, and expected state diff all align. The deterministic check passed. No concrete issues or ambiguities detected.",
+  "recommendation": "Task is clear, executable, and internally consistent. The warranty is active at the current time, the order belongs to the correct customer, and the gold tool plan leads to the expected state diff. Minor data quality inconsistency (product category 'kitchen' vs subcategory 'headphones' for a USB-C adapter) does not affect task execution.",
   "judge_model": "step-3.7-flash",
   "deterministic_check_passed": true,
   "manual_adjudication": null

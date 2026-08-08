@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is well-formed with consistent requirements, environment data, and expected state. The price difference ($119 - $99 = $20) is correctly calculated, refund method aligns with customer preference, and the gold tool plan satisfies all mandatory requirements. Proceed as designed.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

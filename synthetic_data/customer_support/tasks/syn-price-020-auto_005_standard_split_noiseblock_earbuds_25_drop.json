@@ -1,0 +1,58 @@
+{
+  "task_id": "syn-price-020-auto_005_standard_split_noiseblock_earbuds_25_drop",
+  "task_summary": "Customer requests a price adjustment for NoiseBlock Earbuds in order ORD-7208. The acceptable resolution is a $25 price-match refund, with the order and item remaining active.",
+  "task_requirements": [
+    {
+      "id": "syn-price-020-auto_005_standard_split_noiseblock_earbuds_25_drop_must_lookup_product_price",
+      "kind": "must",
+      "requirement": "Agent must verify current price with get_product_details for PROD-4210.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-price-020-auto_005_standard_split_noiseblock_earbuds_25_drop_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must preview the $25 price-match refund before confirming it.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-price-020-auto_005_standard_split_noiseblock_earbuds_25_drop_must_not_return_cancel_exchange",
+      "kind": "must_not",
+      "requirement": "Agent must not return, cancel, or exchange the item.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_005",
+  "now": "2026-07-08T10:00:00",
+  "opening_message": "I noticed that the NoiseBlock Earbuds from my order ORD-7208 have dropped in price, so I believe I'm entitled to a $40 refund.",
+  "user_simulator": {
+    "user_sim_context": "You are seeking a price-match refund for the NoiseBlock Earbuds in order ORD-7208. You estimate the price drop at $40, but you will accept the correct amount of $25 if the agent verifies the product information. Do not request a return, cancelation, exchange, or replacement; keep the item active.",
+    "known_info": [
+      "You purchased NoiseBlock Earbuds in order ORD-7208.",
+      "The current price of the product is $94."
+    ],
+    "unknown_info": [
+      "You are not aware of the exact internal price-match process.",
+      "You do not know how the refund is allocated to your payment unless the agent explains."
+    ],
+    "task_rules": [
+      "Focus solely on requesting a price-match refund; do not ask for a return, cancelation, or exchange.",
+      "If the agent provides a policy-compliant amount and confirms the order remains active, accept the refund."
+    ]
+  },
+  "task_type": "price_match_refund",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10209",
+      "field": "refund_amount",
+      "expected_value": 25
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10209",
+      "field": "refund_method",
+      "expected_value": "original_payment"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-price-020-auto_005_standard_split_noiseblock_earbuds_25_drop.json"
+}

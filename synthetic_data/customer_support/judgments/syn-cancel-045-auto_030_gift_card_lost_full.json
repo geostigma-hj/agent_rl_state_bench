@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is clear, internally consistent, and executable. The gold tool plan satisfies all requirements: reviewing cancellation policy via get_policies, providing a preview via cancel_order with confirm=false, and processing the cancellation with confirm=true. The lost shipping status and gift card payment method align with the expected full refunds to gift card. No concrete issues or ambiguities identified.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}
