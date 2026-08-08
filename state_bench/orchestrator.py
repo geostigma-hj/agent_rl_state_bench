@@ -70,7 +70,7 @@ def _run_harness_executed_agent_turn(
     conversation_full: list[dict[str, Any]],
     domain_tools: list[dict[str, Any]],
     domain_tool_handlers: dict[str, Any],
-    max_tool_rounds: int = 8,
+    max_tool_rounds: int = 15,
 ) -> tuple[str, list[dict[str, Any]]]:
     """Run one assistant turn while the benchmark executes allowed tools."""
     memory_tools = agent.memory_tool_schemas()
