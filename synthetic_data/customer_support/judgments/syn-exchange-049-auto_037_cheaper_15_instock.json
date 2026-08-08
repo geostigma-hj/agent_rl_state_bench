@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent and unambiguous. Proceed with the exchange following the gold_tool_plan: review exchange policy, preview the exchange, confirm, then apply store credit for the $44 price difference.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

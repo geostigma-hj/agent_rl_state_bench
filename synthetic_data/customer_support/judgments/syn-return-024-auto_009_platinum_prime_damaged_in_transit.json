@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Proceed with the gold tool plan: call get_policies for return policy, then process_return with item ITEM-9075, reason damaged_in_transit, confirm false (preview), and finally process_return with item ITEM-9075, reason damaged_in_transit, amount 249, confirm true.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

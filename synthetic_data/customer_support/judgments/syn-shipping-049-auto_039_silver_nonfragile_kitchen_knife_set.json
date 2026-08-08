@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is clear and internally consistent: the damaged non-fragile kitchen knife set should follow shipping-damage return flow with a damaged_in_transit return, full refund to original payment, no fragile goodwill, and matching final state.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

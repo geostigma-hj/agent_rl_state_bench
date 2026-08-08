@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent. The customer requests a $45 price-match refund, but the verified price difference is $30 (249 - 219). The environment, state requirements, and gold tool plan all align on a $30 refund via original_payment, with preview before confirm and no return/cancel/exchange. Execute the gold plan.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

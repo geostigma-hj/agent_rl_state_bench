@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-056-auto_043_recent_expiry_airpure_compact_purifier",
-  "task_summary": "Customer requests warranty service for an AirPure Compact Purifier from order ORD-6032. The correct process is to verify warranty status, review the warranty policy, preview the outcome, confirm with the customer, and then file the policy-compliant claim. Since the warranty expired less than 30 days ago, the official policy allows a 50% off repair after preview and confirmation.",
+  "task_summary": "Customer asks for warranty service on AirPure Compact Purifier from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty expired less than 30 days ago, so official policy allows a 50% off repair outcome after preview and confirmation.",
   "task_requirements": [
     {
       "id": "syn-warranty-056-auto_043_recent_expiry_airpure_compact_purifier_must_check_warranty_status",
@@ -25,16 +25,16 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "My AirPure Compact Purifier from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You are seeking warranty assistance for your AirPure Compact Purifier from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. Despite the warranty having expired less than 30 days ago, the official policy allows a 50% off repair after preview and confirmation.",
+    "user_sim_context": "You want warranty help for AirPure Compact Purifier from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty expired less than 30 days ago, so official policy allows a 50% off repair outcome after preview and confirmation.",
     "known_info": [
-      "You purchased an AirPure Compact Purifier in order ORD-6032.",
+      "You bought AirPure Compact Purifier in order ORD-6032.",
       "The product is malfunctioning."
     ],
     "unknown_info": [
-      "You are not aware of the claim count or the exact warranty resolution."
+      "You do not know the claim count or exact warranty resolution."
     ],
     "task_rules": [
-      "Confirm after receiving a valid warranty preview. Do not request a return unless the agent states that the warranty is unavailable."
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
     ]
   },
   "task_type": "warranty_claim",

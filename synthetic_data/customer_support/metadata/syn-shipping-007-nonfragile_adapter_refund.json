@@ -44,16 +44,24 @@
   "expected_state_diff": {
     "created": {},
     "modified": {
-      "orders": {
-        "ORD-6023": {
-          "status": {
-            "old": "delivered",
-            "new": "fully_returned"
-          }
-        }
-      },
       "order_items": {
         "ITEM-9155": {
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
+          },
+          "restocking_fee": {
+            "old": null,
+            "new": 0
+          },
+          "return_label_issued": {
+            "old": false,
+            "new": true
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 45
+          },
           "item_status": {
             "old": "delivered",
             "new": "returned"
@@ -61,29 +69,27 @@
           "return_reason": {
             "old": null,
             "new": "damaged_in_transit"
-          },
-          "return_label_issued": {
-            "old": false,
-            "new": true
-          },
-          "restocking_fee": {
-            "old": null,
-            "new": 0
-          },
-          "refund_amount": {
-            "old": null,
-            "new": 45
-          },
-          "refund_method": {
-            "old": null,
-            "new": "original_payment"
+          }
+        }
+      },
+      "orders": {
+        "ORD-6023": {
+          "status": {
+            "old": "delivered",
+            "new": "fully_returned"
           }
         }
       }
     },
     "deleted": {}
   },
-  "language_rewritten": true,
-  "judge": null,
-  "language_rewriter_model": "deepseek-v4-flash"
+  "language_rewritten": false,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "deepseek-v4-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  }
 }

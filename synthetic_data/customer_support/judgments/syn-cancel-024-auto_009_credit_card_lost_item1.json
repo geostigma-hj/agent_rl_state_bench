@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is clear, executable, and internally consistent. The gold_tool_plan satisfies all task requirements, state_requirements align, and the user simulator supports the expected cancellation flow.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

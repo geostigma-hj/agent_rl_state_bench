@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is clear and internally consistent. The customer requests an exchange from PROD-2250 to PROD-2251, which is cheaper by $2, and the expected final state correctly reflects a store credit for the difference. The gold tool plan includes policy review, preview, and confirmation. No blockers found.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

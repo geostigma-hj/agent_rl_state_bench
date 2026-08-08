@@ -23,7 +23,7 @@
   ],
   "user_id": "cust_005",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I received my Kitchen Knife Set from order ORD-6023, but it arrived damaged. The package was crushed, and the knives are damaged.",
+  "opening_message": "My Kitchen Knife Set from order ORD-6023 arrived damaged. The package was crushed.",
   "user_simulator": {
     "user_sim_context": "You received Kitchen Knife Set from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [

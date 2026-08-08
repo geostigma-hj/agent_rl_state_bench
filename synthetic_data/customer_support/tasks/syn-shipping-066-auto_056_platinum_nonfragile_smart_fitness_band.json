@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-066-auto_056_platinum_nonfragile_smart_fitness_band",
-  "task_summary": "Customer reports that the Smart Fitness Band from order ORD-6023 arrived damaged in transit. The correct handling path is for shipping damage: review shipping and return policy, process a refund, issue a return label, and apply fragile goodwill credit if applicable.",
+  "task_summary": "Customer reports Smart Fitness Band from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
   "task_requirements": [
     {
       "id": "syn-shipping-066-auto_056_platinum_nonfragile_smart_fitness_band_must_review_shipping_policy",
@@ -23,19 +23,19 @@
   ],
   "user_id": "cust_001",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My Smart Fitness Band from order ORD-6023 arrived damaged; the packaging was crushed.",
+  "opening_message": "My Smart Fitness Band from order ORD-6023 arrived damaged. The package was crushed.",
   "user_simulator": {
-    "user_sim_context": "You received a Smart Fitness Band from order ORD-6023 that was damaged during shipping. You want a refund to your original payment method. If the item is classified as fragile, ask whether a separate fragile-item goodwill credit applies.",
+    "user_sim_context": "You received Smart Fitness Band from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [
-      "You purchased a Smart Fitness Band in order ORD-6023.",
-      "The item arrived damaged, with the packaging crushed."
+      "You bought Smart Fitness Band in order ORD-6023.",
+      "The item arrived damaged with crushed packaging."
     ],
     "unknown_info": [
-      "You do not know the internal item ID unless the agent tells you."
+      "You do not know the internal item_id unless the agent tells you."
     ],
     "task_rules": [
-      "Keep the issue limited to shipping damage; do not ask for a change-of-mind return, cancellation, warranty claim, or exchange.",
-      "After reviewing a valid damaged-in-transit return option, if the item is fragile, expect the separate goodwill credit."
+      "Keep the issue scoped to shipping damage; do not ask for a changed-mind return, cancellation, warranty claim, or exchange.",
+      "Confirm after a valid damaged-in-transit return preview. If the item is fragile, expect the separate goodwill credit."
     ]
   },
   "task_type": "shipping_claim",

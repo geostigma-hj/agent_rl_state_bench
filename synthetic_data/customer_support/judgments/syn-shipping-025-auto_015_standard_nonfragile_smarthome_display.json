@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is clear, internally consistent, and the expected final state is well-defined. The non-fragile product correctly excludes goodwill credit, and the user's explicit refund-to-original-payment request overrides the profile default. Proceed as designed.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

@@ -72,7 +72,7 @@
   "language_rewritten": true,
   "judge": {
     "decision": "ACCEPT",
-    "judge_model": "step-3.7-flash",
+    "judge_model": "deepseek-v4-flash",
     "deterministic_check_passed": true,
     "issues": [],
     "ambiguities": [],

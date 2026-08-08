@@ -39,16 +39,20 @@
   "expected_state_diff": {
     "created": {},
     "modified": {
-      "orders": {
-        "ORD-6011": {
-          "status": {
-            "old": "delivered",
-            "new": "fully_returned"
-          }
-        }
-      },
       "order_items": {
         "ITEM-9075": {
+          "restocking_fee": {
+            "old": null,
+            "new": 37
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 213
+          },
+          "item_status": {
+            "old": "delivered",
+            "new": "returned"
+          },
           "return_reason": {
             "old": null,
             "new": "changed_mind"
@@ -56,25 +60,27 @@
           "refund_method": {
             "old": null,
             "new": "original_payment"
-          },
-          "item_status": {
+          }
+        }
+      },
+      "orders": {
+        "ORD-6011": {
+          "status": {
             "old": "delivered",
-            "new": "returned"
-          },
-          "refund_amount": {
-            "old": null,
-            "new": 213
-          },
-          "restocking_fee": {
-            "old": null,
-            "new": 37
+            "new": "fully_returned"
           }
         }
       }
     },
     "deleted": {}
   },
-  "language_rewritten": true,
-  "judge": null,
-  "language_rewriter_model": "deepseek-v4-flash"
+  "language_rewritten": false,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "deepseek-v4-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  }
 }

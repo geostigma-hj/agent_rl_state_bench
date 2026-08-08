@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent. Product is non-fragile, so no goodwill credit applies. Gold plan correctly reviews shipping/return policies, processes return with reason damaged_in_transit, and sets refund/return state.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

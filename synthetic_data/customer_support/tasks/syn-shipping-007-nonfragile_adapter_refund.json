@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-007-nonfragile_adapter_refund",
-  "task_summary": "Customer reports DeskHub USB-C Adapter from order ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
+  "task_summary": "Customer reports DeskHub USB-C Adapter from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
   "task_requirements": [
     {
       "id": "syn-shipping-007-nonfragile_adapter_refund_must_review_shipping_policy",
@@ -23,7 +23,7 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'm contacting you because the DeskHub USB-C Adapter I ordered (order ORD-6023) arrived damaged. The package was crushed during shipping.",
+  "opening_message": "My DeskHub USB-C Adapter from order ORD-6023 arrived damaged. The package was crushed.",
   "user_simulator": {
     "user_sim_context": "You received DeskHub USB-C Adapter from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [

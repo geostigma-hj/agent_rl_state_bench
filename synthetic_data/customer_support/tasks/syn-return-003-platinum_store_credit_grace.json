@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-003-platinum_store_credit_grace",
-  "task_summary": "Customer requests return for SoundMax Wireless Headphones (ITEM-9075) from order ORD-6011. The return is outside the full-refund window but within the store-credit grace period, so a return is allowed but only as store credit. Customer initially pushes for original payment refund but ultimately accepts store credit.",
+  "task_summary": "Customer wants to return SoundMax Wireless Headphones from ORD-6011. The agent must apply the return policy, preview the return, obtain confirmation, and process the correct refund.",
   "task_requirements": [
     {
       "id": "syn-return-003-platinum_store_credit_grace_must_review_return_policy",
@@ -19,19 +19,13 @@
       "kind": "must",
       "requirement": "Agent must process the item with return reason changed_mind.",
       "evidence": "tool_calls"
-    },
-    {
-      "id": "syn-return-003-platinum_store_credit_grace_must_not_flip_store_credit",
-      "kind": "must_not",
-      "requirement": "Agent must not change the refund method from store credit to original payment.",
-      "evidence": "conversation_or_tool_calls"
     }
   ],
   "user_id": "cust_001",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "Hi, I'd like to return the SoundMax Wireless Headphones from my order ORD-6011. It's been a while, but I want to get a refund to my card. Can you help with that?",
+  "opening_message": "I would like to return the SoundMax Wireless Headphones from order ORD-6011. I opened it, but I do not want it anymore, and I want the refund back to my original payment method.",
   "user_simulator": {
-    "user_sim_context": "You need assistance returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is changed mind, and you'd prefer store credit. If the agent asks for confirmation after explaining the refund, confirm to proceed. If the agent states the refund must be store credit, push once for a card refund, then accept the policy.",
+    "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is changed mind. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed.",
     "known_info": [
       "You bought SoundMax Wireless Headphones in order ORD-6011.",
       "You received the order on 2026-05-03T14:00:00."
@@ -42,8 +36,7 @@
     ],
     "task_rules": [
       "Do not invent order IDs, item IDs, prices, dates, or policy details.",
-      "If the agent previews a valid return and asks for confirmation, agree to proceed.",
-      "Push back once for original-payment refund, but accept store credit if the agent explains the policy."
+      "If the agent previews a valid return and asks for confirmation, agree to proceed."
     ]
   },
   "task_type": "return_item",

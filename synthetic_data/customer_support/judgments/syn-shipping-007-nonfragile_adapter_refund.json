@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent and executable; no ambiguities found. Proceed with shipping-damage path: review policies, process damaged-in-transit return, issue refund and return label, and do not issue goodwill credit for non-fragile item.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

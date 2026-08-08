@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Accept: the task is clear, executable, and internally consistent. The gold plan correctly verifies the current price of PROD-4210 ($224 vs $249), previews the $25 refund, confirms it via original_payment, and matches the state requirements without altering order/item status.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

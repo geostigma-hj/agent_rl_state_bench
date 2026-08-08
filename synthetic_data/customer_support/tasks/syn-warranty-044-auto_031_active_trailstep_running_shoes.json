@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-044-auto_031_active_trailstep_running_shoes",
-  "task_summary": "Customer requests warranty service for TrailStep Running Shoes from order ORD-6032. The correct process is to verify warranty coverage, review the warranty policy, preview the resolution, and then confirm and file the appropriate claim. Since the warranty is active, the policy determines whether repair or replacement is applicable.",
+  "task_summary": "Customer asks for warranty service on TrailStep Running Shoes from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
   "task_requirements": [
     {
       "id": "syn-warranty-044-auto_031_active_trailstep_running_shoes_must_check_warranty_status",
@@ -23,18 +23,18 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My TrailStep Running Shoes from order ORD-6032 are malfunctioning. Can I get warranty service?",
+  "opening_message": "My TrailStep Running Shoes from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You are seeking warranty assistance for TrailStep Running Shoes from order ORD-6032. If the agent explains the warranty outcome per policy and asks for confirmation, agree to proceed. The warranty is active, so the official policy decides whether repair or replacement is suitable.",
+    "user_sim_context": "You want warranty help for TrailStep Running Shoes from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
     "known_info": [
-      "You purchased TrailStep Running Shoes in order ORD-6032.",
+      "You bought TrailStep Running Shoes in order ORD-6032.",
       "The product is malfunctioning."
     ],
     "unknown_info": [
-      "You do not know the claim count or the exact warranty resolution."
+      "You do not know the claim count or exact warranty resolution."
     ],
     "task_rules": [
-      "Confirm after a valid warranty preview. Do not ask for a return unless the agent indicates the warranty is not applicable."
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
     ]
   },
   "task_type": "warranty_claim",

@@ -63,6 +63,13 @@
     "deleted": {}
   },
   "language_rewritten": true,
-  "judge": null,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "deepseek-v4-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  },
   "language_rewriter_model": "deepseek-v4-flash"
 }

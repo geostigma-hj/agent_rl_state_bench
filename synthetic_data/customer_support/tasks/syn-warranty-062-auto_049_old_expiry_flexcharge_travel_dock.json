@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-062-auto_049_old_expiry_flexcharge_travel_dock",
-  "task_summary": "Customer requests warranty assistance for a faulty FlexCharge Travel Dock purchased under order ORD-6032. The correct process is to verify warranty coverage, review the warranty policy, provide a preview, obtain confirmation, and proceed with filing a claim as per policy. Since the warranty expired more than 30 days ago, the policy permits either a paid repair at full price or a 25% discount on a replacement, not a free warranty claim.",
+  "task_summary": "Customer asks for warranty service on FlexCharge Travel Dock from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty expired more than 30 days ago, so official policy allows full-price repair or 25% off replacement rather than a free warranty claim.",
   "task_requirements": [
     {
       "id": "syn-warranty-062-auto_049_old_expiry_flexcharge_travel_dock_must_check_warranty_status",
@@ -23,18 +23,18 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My FlexCharge Travel Dock from order ORD-6032 is not working properly. Can I get help with the warranty?",
+  "opening_message": "My FlexCharge Travel Dock from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You are seeking warranty support for your malfunctioning FlexCharge Travel Dock from order ORD-6032. If the agent explains that your warranty has expired and offers the policy-based options (full-price repair or 25% off replacement), you agree to proceed. Note that the warranty ended over 30 days ago, so your options are limited to paid repair or discounted replacement.",
+    "user_sim_context": "You want warranty help for FlexCharge Travel Dock from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty expired more than 30 days ago, so official policy allows full-price repair or 25% off replacement rather than a free warranty claim.",
     "known_info": [
-      "You purchased the FlexCharge Travel Dock under order ORD-6032.",
+      "You bought FlexCharge Travel Dock in order ORD-6032.",
       "The product is malfunctioning."
     ],
     "unknown_info": [
-      "You are unaware of the exact warranty resolution or claim count."
+      "You do not know the claim count or exact warranty resolution."
     ],
     "task_rules": [
-      "Confirm when the agent presents a valid warranty preview. Do not request a return unless the warranty is deemed invalid."
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
     ]
   },
   "task_type": "warranty_claim",

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.97,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent. The opening message, user simulator, environment, state requirements, and gold tool plan all align on processing the damaged-in-transit return for ITEM-9155, refunding the item to original payment, issuing a return label, and applying the $10 fragile-item goodwill credit. No blocking ambiguities found.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

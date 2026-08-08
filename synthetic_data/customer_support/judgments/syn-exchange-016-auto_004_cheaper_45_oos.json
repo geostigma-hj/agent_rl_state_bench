@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is clear and internally consistent. The environment data, state requirements, and gold tool plan align with the out-of-stock store-credit exchange fallback policy. The agent must review the exchange policy, process the preview, obtain confirmation, and complete the fallback, which will result in the expected state changes.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

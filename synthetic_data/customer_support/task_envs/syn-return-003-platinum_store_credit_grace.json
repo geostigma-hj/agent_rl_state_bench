@@ -68,7 +68,7 @@
       "membership_tier": "platinum",
       "account_created": "2020-03-15",
       "total_orders": 87,
-      "preferred_refund_method": "store_credit",
+      "preferred_refund_method": "original_payment",
       "store_credit_balance": 150,
       "has_prime_shipping": true
     },

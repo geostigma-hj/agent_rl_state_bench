@@ -29,7 +29,7 @@
   ],
   "user_id": "cust_002",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to return the SoundMax Wireless Headphones from order ORD-6011 because they are defective: the color and appearance don't match what I expected at all.",
+  "opening_message": "I need to return the SoundMax Wireless Headphones from order ORD-6011. It is defective: the color and look are not what I expected at all.",
   "user_simulator": {
     "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is defective. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed. If asked what is defective, explain that the product works but the color/appearance is disappointing.",
     "known_info": [

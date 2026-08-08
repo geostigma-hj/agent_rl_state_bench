@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.97,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent: the price difference (599-549) yields a $50 refund, refund method is original_payment, and the gold tool plan and state requirements align.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

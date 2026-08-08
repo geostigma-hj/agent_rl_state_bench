@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.98,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent with a clear final state. The restocking fee waiver for defective items is appropriately reflected in the expected state and gold tool plan, and should be discoverable via the get_policies tool.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

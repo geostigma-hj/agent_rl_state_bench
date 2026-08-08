@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-051-auto_041_platinum_fragile_crystal_wine_decanter",
-  "task_summary": "Customer reports that the Crystal Wine Decanter from order ORD-6023 arrived damaged due to shipping. The proper procedure is the shipping-damage path: review the shipping and return policy, issue a refund to the original payment method, provide a return label, and include a fragile-item goodwill credit if the item qualifies as fragile.",
+  "task_summary": "Customer reports Crystal Wine Decanter from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
   "task_requirements": [
     {
       "id": "syn-shipping-051-auto_041_platinum_fragile_crystal_wine_decanter_must_review_shipping_policy",
@@ -23,19 +23,19 @@
   ],
   "user_id": "cust_001",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I received my Crystal Wine Decanter from order ORD-6023, but it arrived damaged. The package was crushed.",
+  "opening_message": "My Crystal Wine Decanter from order ORD-6023 arrived damaged. The package was crushed.",
   "user_simulator": {
-    "user_sim_context": "You received a Crystal Wine Decanter from order ORD-6023, but it was damaged in transit. You want a refund to the original payment method. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
+    "user_sim_context": "You received Crystal Wine Decanter from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [
-      "You bought a Crystal Wine Decanter in order ORD-6023.",
+      "You bought Crystal Wine Decanter in order ORD-6023.",
       "The item arrived damaged with crushed packaging."
     ],
     "unknown_info": [
       "You do not know the internal item_id unless the agent tells you."
     ],
     "task_rules": [
-      "Keep the issue focused on shipping damage; do not request a changed-mind return, cancellation, warranty claim, or exchange.",
-      "Confirm after a valid damaged-in-transit return preview. If the item is fragile, expect a separate goodwill credit."
+      "Keep the issue scoped to shipping damage; do not ask for a changed-mind return, cancellation, warranty claim, or exchange.",
+      "Confirm after a valid damaged-in-transit return preview. If the item is fragile, expect the separate goodwill credit."
     ]
   },
   "task_type": "shipping_claim",

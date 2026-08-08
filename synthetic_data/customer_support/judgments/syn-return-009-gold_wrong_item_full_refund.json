@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.97,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent; agent should review return policy, preview return with reason wrong_item, then confirm full refund to original payment, resulting in returned status, no restocking fee, and fully_returned order.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

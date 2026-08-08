@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-072-auto_062_standard_fragile_glass_pendant_light",
-  "task_summary": "Customer reports that a Glass Pendant Light from order ORD-6023 arrived damaged in transit. Correct handling: review shipping and return policy, refund the item, issue a return label, and apply fragile-item goodwill credit only if applicable.",
+  "task_summary": "Customer reports Glass Pendant Light from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
   "task_requirements": [
     {
       "id": "syn-shipping-072-auto_062_standard_fragile_glass_pendant_light_must_review_shipping_policy",
@@ -23,11 +23,11 @@
   ],
   "user_id": "cust_002",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "The Glass Pendant Light I ordered (order ORD-6023) arrived damaged; the package was crushed in transit.",
+  "opening_message": "My Glass Pendant Light from order ORD-6023 arrived damaged. The package was crushed.",
   "user_simulator": {
-    "user_sim_context": "You received a Glass Pendant Light from order ORD-6023 damaged in transit. You want a refund to the original payment method. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
+    "user_sim_context": "You received Glass Pendant Light from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [
-      "You bought a Glass Pendant Light in order ORD-6023.",
+      "You bought Glass Pendant Light in order ORD-6023.",
       "The item arrived damaged with crushed packaging."
     ],
     "unknown_info": [

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Accept the task. The opening message, user simulator, environment state, and state requirements are internally consistent. The gold tool plan includes the required policy review and preview-before-confirm steps, and deterministic checks passed.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

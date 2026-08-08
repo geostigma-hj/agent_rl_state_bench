@@ -3,8 +3,8 @@
     {
       "product_id": "PROD-2215",
       "name": "BrewMaster Espresso Machine",
-      "category": "electronics",
-      "subcategory": "headphones",
+      "category": "kitchen",
+      "subcategory": "appliance",
       "price": 349,
       "warranty_months": 12,
       "return_window_days": 15,

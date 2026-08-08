@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.97,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "No blocking issues found; proceed with the gold tool plan and final state as specified.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

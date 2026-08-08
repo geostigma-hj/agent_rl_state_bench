@@ -66,6 +66,22 @@
       }
     },
     "modified": {
+      "warranties": {
+        "WRT-4013": {
+          "claim_count": {
+            "old": 2,
+            "new": 3
+          },
+          "resolution": {
+            "old": null,
+            "new": "full_replacement"
+          },
+          "status": {
+            "old": "active",
+            "new": "claimed"
+          }
+        }
+      },
       "order_items": {
         "ITEM-9215": {
           "replacement_item_id": {
@@ -73,27 +89,17 @@
             "new": "ITEM-9216"
           }
         }
-      },
-      "warranties": {
-        "WRT-4013": {
-          "status": {
-            "old": "active",
-            "new": "claimed"
-          },
-          "resolution": {
-            "old": null,
-            "new": "full_replacement"
-          },
-          "claim_count": {
-            "old": 2,
-            "new": 3
-          }
-        }
       }
     },
     "deleted": {}
   },
-  "language_rewritten": true,
-  "judge": null,
-  "language_rewriter_model": "deepseek-v4-flash"
+  "language_rewritten": false,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "deepseek-v4-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  }
 }

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is clear and internally consistent. The required correction from $45 to $30 is explicitly supported by product current_price (769) versus original unit price (799), and the environment/state requirements align on a $30 original_payment refund for ITEM-10209. The user simulator accepts the corrected amount, and the gold plan verifies the price before refund preview and confirmation. Proceed with the task.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

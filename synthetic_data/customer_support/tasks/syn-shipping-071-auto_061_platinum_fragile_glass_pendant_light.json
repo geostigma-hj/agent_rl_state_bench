@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-071-auto_061_platinum_fragile_glass_pendant_light",
-  "task_summary": "Customer reports damages to Glass Pendant Light from order ORD-6023 due to transit. Follow the shipping-damage process: review return policy, issue refund, provide return label, and offer fragile goodwill if applicable.",
+  "task_summary": "Customer reports Glass Pendant Light from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
   "task_requirements": [
     {
       "id": "syn-shipping-071-auto_061_platinum_fragile_glass_pendant_light_must_review_shipping_policy",
@@ -23,19 +23,19 @@
   ],
   "user_id": "cust_001",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "The Glass Pendant Light from my order ORD-6023 arrived broken; the box was crushed.",
+  "opening_message": "My Glass Pendant Light from order ORD-6023 arrived damaged. The package was crushed.",
   "user_simulator": {
-    "user_sim_context": "You received a damaged Glass Pendant Light from order ORD-6023 in transit. You want a refund back to your original payment. If the item is fragile, ask about a goodwill credit for fragile items.",
+    "user_sim_context": "You received Glass Pendant Light from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [
-      "You purchased Glass Pendant Light in order ORD-6023.",
-      "The item arrived damaged and the packaging was crushed."
+      "You bought Glass Pendant Light in order ORD-6023.",
+      "The item arrived damaged with crushed packaging."
     ],
     "unknown_info": [
-      "You do not know the item_id until the agent provides it."
+      "You do not know the internal item_id unless the agent tells you."
     ],
     "task_rules": [
-      "Stick to the shipping damage issue; do not request returns for change of mind, cancellations, warranty claims, or exchanges.",
-      "After seeing a proper damaged-in-transit return summary, confirm. If the item is fragile, expect the separate goodwill credit."
+      "Keep the issue scoped to shipping damage; do not ask for a changed-mind return, cancellation, warranty claim, or exchange.",
+      "Confirm after a valid damaged-in-transit return preview. If the item is fragile, expect the separate goodwill credit."
     ]
   },
   "task_type": "shipping_claim",

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent, executable, and has a clear expected final state. The customer's incorrect $1 difference claim is explicitly modeled in the user simulator, which expects the agent to verify the product price and correct to $5. Requirements, gold plan, and state expectations align. Approve.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

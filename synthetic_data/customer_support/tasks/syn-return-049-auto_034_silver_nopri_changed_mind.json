@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-049-auto_034_silver_nopri_changed_mind",
-  "task_summary": "The customer wants to initiate a return for SoundMax Wireless Headphones from order ORD-6011. The agent must verify the return eligibility, provide a preview of the return and refund amount, get customer confirmation, and process the refund to the original payment method.",
+  "task_summary": "Customer wants to return SoundMax Wireless Headphones from ORD-6011. The agent must apply the return policy, preview the return, obtain confirmation, and process the correct refund.",
   "task_requirements": [
     {
       "id": "syn-return-049-auto_034_silver_nopri_changed_mind_must_review_return_policy",
@@ -23,11 +23,11 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "Hi, I'd like to return the SoundMax Wireless Headphones from my order ORD-6011. I opened the box, but I've changed my mind and no longer want them. Please refund the amount to my original payment method.",
+  "opening_message": "I would like to return the SoundMax Wireless Headphones from order ORD-6011. I opened it, but I do not want it anymore, and I want the refund back to my original payment method.",
   "user_simulator": {
-    "user_sim_context": "You are seeking to return the SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075, and your stated reason is 'changed mind'. You prefer the refund to be issued to your original payment method. If the agent explains the refund details and asks for your confirmation, agree to proceed.",
+    "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is changed mind. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed.",
     "known_info": [
-      "You purchased SoundMax Wireless Headphones in order ORD-6011.",
+      "You bought SoundMax Wireless Headphones in order ORD-6011.",
       "You received the order on 2026-06-07T14:00:00."
     ],
     "unknown_info": [

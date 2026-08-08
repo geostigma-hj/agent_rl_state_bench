@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Benchmark task is consistent, executable, and has a single reasonable final state. Price drop of $10 is supported by product data, policy, and delivered-date timing. Gold tool plan aligns with task and state requirements.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

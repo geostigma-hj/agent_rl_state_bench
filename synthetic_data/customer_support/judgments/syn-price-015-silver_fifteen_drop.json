@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.97,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent and executable. Proceed with the gold tool plan: get policies, verify product price, preview the $15 refund, then confirm with original_payment method.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

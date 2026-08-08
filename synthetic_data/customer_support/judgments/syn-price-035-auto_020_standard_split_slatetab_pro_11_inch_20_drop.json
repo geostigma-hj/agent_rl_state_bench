@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent. The customer's quoted $35 refund is corrected to $20 based on the price difference ($599 to $579), the required refund method is original_payment, and all tool calls align with state requirements.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

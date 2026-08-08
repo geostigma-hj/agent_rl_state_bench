@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-030-auto_017_recurring_deskhub_usb_c_adapter",
-  "task_summary": "Customer requests warranty service for a malfunctioning DeskHub USB-C Adapter from order ORD-6032. The agent must verify the warranty is active, state the policy outcome (repair or replacement) per terms, preview the resolution, obtain customer confirmation, and file the claim accordingly.",
+  "task_summary": "Customer asks for warranty service on DeskHub USB-C Adapter from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
   "task_requirements": [
     {
       "id": "syn-warranty-030-auto_017_recurring_deskhub_usb_c_adapter_must_check_warranty_status",
@@ -25,13 +25,13 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "My DeskHub USB-C Adapter from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You need warranty assistance for a malfunctioning DeskHub USB-C Adapter purchased under order ORD-6032. The agent will explain the policy-based outcome (repair or replacement) and ask for confirmation. You agree to proceed if the proposal aligns with the warranty terms.",
+    "user_sim_context": "You want warranty help for DeskHub USB-C Adapter from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
     "known_info": [
-      "The product is a DeskHub USB-C Adapter from order ORD-6032.",
+      "You bought DeskHub USB-C Adapter in order ORD-6032.",
       "The product is malfunctioning."
     ],
     "unknown_info": [
-      "You do not know the claim count or the exact warranty resolution (repair or replacement)."
+      "You do not know the claim count or exact warranty resolution."
     ],
     "task_rules": [
       "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."

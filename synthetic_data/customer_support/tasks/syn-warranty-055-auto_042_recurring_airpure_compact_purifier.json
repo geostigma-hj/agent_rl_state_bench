@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-055-auto_042_recurring_airpure_compact_purifier",
-  "task_summary": "Customer requests warranty service for an AirPure Compact Purifier from order ORD-6032. The agent must verify warranty eligibility, explain the applicable warranty policy, obtain customer confirmation, and then file the appropriate claim. Since the warranty is active, the official policy will determine whether repair or replacement is issued.",
+  "task_summary": "Customer asks for warranty service on AirPure Compact Purifier from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
   "task_requirements": [
     {
       "id": "syn-warranty-055-auto_042_recurring_airpure_compact_purifier_must_check_warranty_status",
@@ -23,18 +23,18 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I have an AirPure Compact Purifier from order ORD-6032 that's broken. Can I get it fixed under warranty?",
+  "opening_message": "My AirPure Compact Purifier from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You are seeking warranty assistance for your AirPure Compact Purifier from order ORD-6032. If the agent presents the warranty outcome as per policy and asks for confirmation, agree to move forward. As the warranty is active, the official policy will dictate the resolution.",
+    "user_sim_context": "You want warranty help for AirPure Compact Purifier from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
     "known_info": [
-      "You purchased an AirPure Compact Purifier under order ORD-6032.",
-      "The device is malfunctioning."
+      "You bought AirPure Compact Purifier in order ORD-6032.",
+      "The product is malfunctioning."
     ],
     "unknown_info": [
-      "You are not aware of the claim count or the exact warranty decision."
+      "You do not know the claim count or exact warranty resolution."
     ],
     "task_rules": [
-      "Agree to proceed once a valid warranty preview is provided. Do not request a return unless the agent states the warranty is not applicable."
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
     ]
   },
   "task_type": "warranty_claim",

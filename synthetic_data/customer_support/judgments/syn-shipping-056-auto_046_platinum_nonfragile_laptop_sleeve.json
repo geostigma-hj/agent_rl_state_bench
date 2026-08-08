@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is clear and internally consistent. The damaged-in-transit claim for a non-fragile Laptop Sleeve should be processed with a full refund, no fragile goodwill credit, and the gold plan matches all state requirements.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

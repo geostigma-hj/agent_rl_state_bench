@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-043-auto_028_gold_prime_defective",
-  "task_summary": "Customer requests a return for SoundMax Wireless Headphones from order ORD-6011. The agent must review the return policy, preview the return, get customer confirmation, and process the correct refund.",
+  "task_summary": "Customer wants to return SoundMax Wireless Headphones from ORD-6011. The agent must apply the return policy, preview the return, obtain confirmation, and process the correct refund.",
   "task_requirements": [
     {
       "id": "syn-return-043-auto_028_gold_prime_defective_must_review_return_policy",
@@ -23,15 +23,15 @@
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I received my SoundMax Wireless Headphones from order ORD-6011, but they are defective. I want to return them to my original payment method.",
+  "opening_message": "The SoundMax Wireless Headphones from order ORD-6011 is defective and I need to return it to my original payment method.",
   "user_simulator": {
-    "user_sim_context": "You need help returning SoundMax Wireless Headphones from order ORD-6011. The item is identified as ITEM-9075. You will state the reason as defective. Your preferred refund method is the original payment. If the agent asks for confirmation after explaining the refund, you confirm that you want to proceed.",
+    "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is defective. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed.",
     "known_info": [
-      "You purchased SoundMax Wireless Headphones in order ORD-6011.",
+      "You bought SoundMax Wireless Headphones in order ORD-6011.",
       "You received the order on 2026-06-06T14:00:00."
     ],
     "unknown_info": [
-      "You do not know the exact return policy calculations.",
+      "You do not know the exact return policy calculation.",
       "You do not know the internal item_id unless the agent tells you."
     ],
     "task_rules": [

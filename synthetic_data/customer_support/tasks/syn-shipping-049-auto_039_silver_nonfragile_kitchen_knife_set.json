@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-049-auto_039_silver_nonfragile_kitchen_knife_set",
-  "task_summary": "The customer reports that their kitchen knife set from order ORD-6023 was damaged during shipping. The proper resolution is to follow the shipping-damage protocol: review the return and shipping policies, refund the item to the original payment method, provide a return label, and apply the fragile item goodwill credit if applicable.",
+  "task_summary": "Customer reports Kitchen Knife Set from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
   "task_requirements": [
     {
       "id": "syn-shipping-049-auto_039_silver_nonfragile_kitchen_knife_set_must_review_shipping_policy",
@@ -23,19 +23,19 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My kitchen knife set from order ORD-6023 arrived damaged; the package was crushed.",
+  "opening_message": "My Kitchen Knife Set from order ORD-6023 arrived damaged. The package was crushed.",
   "user_simulator": {
-    "user_sim_context": "You received a kitchen knife set from order ORD-6023 that was damaged in transit. You want a refund to the original payment method. If the item is classified as fragile, inquire about a separate fragile-item goodwill credit.",
+    "user_sim_context": "You received Kitchen Knife Set from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [
-      "You purchased a kitchen knife set in order ORD-6023.",
-      "The item arrived with crushed packaging and damage."
+      "You bought Kitchen Knife Set in order ORD-6023.",
+      "The item arrived damaged with crushed packaging."
     ],
     "unknown_info": [
-      "You do not know the internal item ID unless the agent provides it."
+      "You do not know the internal item_id unless the agent tells you."
     ],
     "task_rules": [
-      "Keep the issue focused solely on shipping damage; do not request a changed-mind return, cancellation, warranty claim, or exchange.",
-      "After a valid damaged-in-transit return preview, confirm the resolution. If the item is fragile, expect the separate goodwill credit to be included."
+      "Keep the issue scoped to shipping damage; do not ask for a changed-mind return, cancellation, warranty claim, or exchange.",
+      "Confirm after a valid damaged-in-transit return preview. If the item is fragile, expect the separate goodwill credit."
     ]
   },
   "task_type": "shipping_claim",

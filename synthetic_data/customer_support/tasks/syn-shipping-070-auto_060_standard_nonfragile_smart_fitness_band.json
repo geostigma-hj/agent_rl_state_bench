@@ -23,7 +23,7 @@
   ],
   "user_id": "cust_005",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "Hey, I received the Smart Fitness Band from order ORD-6023, but the package was crushed and the item is damaged. What can you do about it?",
+  "opening_message": "My Smart Fitness Band from order ORD-6023 arrived damaged. The package was crushed.",
   "user_simulator": {
     "user_sim_context": "You received Smart Fitness Band from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [

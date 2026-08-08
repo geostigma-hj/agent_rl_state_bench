@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-008-standard_wrong_item_full_refund",
-  "task_summary": "Customer requests a return for the SoundMax Wireless Headphones (ITEM-9075) from order ORD-6011. The agent should apply the return policy, present a return preview, obtain customer confirmation, and process the refund to the original payment method.",
+  "task_summary": "Customer received the wrong item for SoundMax Wireless Headphones from ORD-6011. The agent must process a merchant-fault return with no restocking fee.",
   "task_requirements": [
     {
       "id": "syn-return-008-standard_wrong_item_full_refund_must_review_return_policy",
@@ -23,11 +23,11 @@
   ],
   "user_id": "cust_002",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to return the SoundMax Wireless Headphones from order ORD-6011. I opened the box, but I've changed my mind and no longer want them. I'd like the refund to go back to my original payment method.",
+  "opening_message": "I received the wrong item in order ORD-6011. I need to return the SoundMax Wireless Headphones for a refund to my original payment method.",
   "user_simulator": {
-    "user_sim_context": "You need help returning the SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is 'wrong item'. Your preferred refund method is original payment. If the agent explains the refund and asks for confirmation, agree to proceed.",
+    "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is wrong item. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed.",
     "known_info": [
-      "You purchased SoundMax Wireless Headphones in order ORD-6011.",
+      "You bought SoundMax Wireless Headphones in order ORD-6011.",
       "You received the order on 2026-06-05T14:00:00."
     ],
     "unknown_info": [

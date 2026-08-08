@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent. The environment supports the exchange, the expected state diff matches the cheaper-item scenario with store credit refund, and the gold tool plan includes the required policy review and preview-before-confirm. No ambiguities found.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

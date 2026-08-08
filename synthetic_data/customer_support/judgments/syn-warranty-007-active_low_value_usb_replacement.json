@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent, with clear requirements, environment, and state expectations. The agent should check warranty status, retrieve warranty policy, preview the claim, then confirm, resulting in a full replacement item ITEM-9216 and warranty marked claimed.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

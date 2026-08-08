@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Accept the task. The opening message, user simulator, environment state, requirements, and gold plan are consistent. The order is pre-shipment and all items are eligible for full cancellation, matching the expected state requirements.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is internally consistent. The opening message, user simulator, environment, requirements, state requirements, and gold tool plan all align on the damaged-in-transit return and fragile goodwill credit to original payment. No concrete issue or ambiguity found.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

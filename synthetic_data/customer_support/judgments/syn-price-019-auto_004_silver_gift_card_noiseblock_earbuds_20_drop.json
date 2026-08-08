@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.98,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is clear and internally consistent: price difference ($119 - $99 = $20), expected refund amount and method match gold plan, and requirements align with a straightforward price-match refund without return/cancel/exchange.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

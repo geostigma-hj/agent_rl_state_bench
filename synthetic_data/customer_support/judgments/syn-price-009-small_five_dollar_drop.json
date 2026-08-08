@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent. The expected $5 refund for ITEM-10209 is well-supported by the environment (original price $45, current price $40, quantity 1) and the gold tool plan matches all requirements. No ambiguity requiring review.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

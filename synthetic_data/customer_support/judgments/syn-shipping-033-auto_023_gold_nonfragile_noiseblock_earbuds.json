@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "All components are consistent: product is non-fragile, policy review precedes return processing, damaged_in_transit reason is required, no fragile goodwill is expected, and the state diff matches the gold tool plan.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is clear and internally consistent. The agent should verify the product's current price (PROD-4210, $769), correct the customer's $80 overquote to the actual $30 price drop, preview and confirm a $30 original_payment refund for ITEM-10209, and avoid return/cancel/exchange.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

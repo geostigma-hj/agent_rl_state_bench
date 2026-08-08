@@ -102,6 +102,21 @@ def _auto_shipping_variants() -> tuple[ShippingDamageVariant, ...]:
 DEFAULT_SHIPPING_VARIANTS: tuple[ShippingDamageVariant, ...] = (*BASE_SHIPPING_VARIANTS, *_auto_shipping_variants())
 
 
+def _product_taxonomy(product_name: str, is_fragile: bool) -> tuple[str, str]:
+    name = product_name.lower()
+    if any(token in name for token in ("earbuds", "headphones", "display", "fitness band")):
+        return "electronics", "headphones"
+    if any(token in name for token in ("adapter", "laptop sleeve")):
+        return "accessories", "adapter"
+    if any(token in name for token in ("backpack", "shoes")):
+        return "accessories", "bag"
+    if any(token in name for token in ("knife", "blender", "carafe", "bowl", "dinner", "tea", "decanter")):
+        return "kitchen", "glassware" if is_fragile else "kitchenware"
+    if any(token in name for token in ("vase", "lamp", "mirror", "frame", "art", "pendant")):
+        return "accessories", "decor"
+    return "kitchen" if is_fragile else "accessories", "fragile_goods" if is_fragile else "general"
+
+
 def generate_shipping_tasks(*, output_root: Path, limit: int | None = None, rewrite: bool = False) -> list[dict[str, Path]]:
     seed_task, seed_env = load_seed("21-shipping_damaged_fragile")
     variants = DEFAULT_SHIPPING_VARIANTS[:limit] if limit is not None else DEFAULT_SHIPPING_VARIANTS
@@ -142,6 +157,7 @@ def build_shipping_damage_variant(
     customer.membership_tier = variant.membership_tier
     product.name = variant.product_name
     product.price = variant.item_price
+    product.category, product.subcategory = _product_taxonomy(variant.product_name, variant.is_fragile)
     product.current_price = None
     product.is_fragile = variant.is_fragile
     product.restocking_fee_pct = 0

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.96,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent and clearly specified. The environment matches the damaged-in-transit fragile-item scenario, and the required state changes and gold tool plan align with the stated requirements.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

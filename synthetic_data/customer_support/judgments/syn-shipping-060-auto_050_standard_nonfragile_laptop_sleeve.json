@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is clear, executable, and internally consistent. The damaged-in-transit claim is scoped correctly, the gold tool plan matches the required state changes, and the non-fragile product correctly excludes goodwill credit. No action needed.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

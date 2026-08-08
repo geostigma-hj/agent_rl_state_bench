@@ -1,4 +1,4 @@
-"""Step3.7 Flash judging for synthetic customer_support tasks."""
+"""LLM judging for synthetic customer_support tasks."""
 
 from __future__ import annotations
 
@@ -11,6 +11,8 @@ from pathlib import Path
 from threading import Lock
 from typing import Any
 
+from state_bench.domains.customer_support.environment import CustomerSupportEnvironment
+from state_bench.domains.customer_support.schemas import CSEnvironmentData
 from state_bench.synthetic.customer_support.checker import check_task_files
 from state_bench.synthetic.customer_support.llm import OpenAICompatibleJsonClient
 
@@ -38,10 +40,11 @@ def judge_task(
     env_path: Path,
     metadata_path: Path,
     output_path: Path,
+    judge_provider: str = "step",
     client: OpenAICompatibleJsonClient | None = None,
     rate_limiter: RateLimiter | None = None,
 ) -> dict[str, Any]:
-    client = client or OpenAICompatibleJsonClient.step37_flash()
+    client = client or _build_judge_client(judge_provider)
     task = _load_json(task_path)
     env = _load_json(env_path)
     metadata = _load_json(metadata_path)
@@ -57,6 +60,7 @@ def judge_task(
                     "task": task,
                     "environment": _compact_env(env),
                     "metadata": _compact_metadata(metadata),
+                    "gold_tool_replay_trace": _gold_tool_replay_trace(env, task["now"], metadata.get("gold_tool_plan", [])),
                     "deterministic_check": {
                         "passed": deterministic.passed,
                         "errors": deterministic.errors,
@@ -119,10 +123,16 @@ def judge_task(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Judge synthetic customer_support tasks with Step3.7 Flash")
+    parser = argparse.ArgumentParser(description="Judge synthetic customer_support tasks with an OpenAI-compatible LLM")
     parser.add_argument("--synthetic-root", type=Path, default=Path("synthetic_data/customer_support"))
     parser.add_argument("--task-id", action="append", default=None, help="Task id to judge. May be repeated.")
     parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument(
+        "--judge-provider",
+        choices=("step", "deepseek"),
+        default=os.environ.get("SYNTH_JUDGE_PROVIDER", "step"),
+        help="LLM provider for synthetic judging (default: env SYNTH_JUDGE_PROVIDER or step).",
+    )
     parser.add_argument(
         "--num-workers",
         type=int,
@@ -155,6 +165,7 @@ def main() -> None:
                 env_path=args.synthetic_root / "task_envs" / f"{task_id}.json",
                 metadata_path=args.synthetic_root / "metadata" / f"{task_id}.json",
                 output_path=args.synthetic_root / "judgments" / f"{task_id}.json",
+                judge_provider=args.judge_provider,
                 client=None,
                 rate_limiter=rate_limiter,
             ): task_id
@@ -167,6 +178,14 @@ def main() -> None:
             results.append(item)
             print(json.dumps(item, ensure_ascii=False), flush=True)
     print(json.dumps({"judged": len(results), "results": results}, indent=2, ensure_ascii=False))
+
+
+def _build_judge_client(judge_provider: str) -> OpenAICompatibleJsonClient:
+    if judge_provider == "step":
+        return OpenAICompatibleJsonClient.step37_flash()
+    if judge_provider == "deepseek":
+        return OpenAICompatibleJsonClient.deepseek_v4_flash()
+    raise ValueError(f"Unsupported judge provider: {judge_provider}")
 
 
 def _judge_system_prompt() -> str:
@@ -206,6 +225,24 @@ def _compact_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
         "expected_state_diff",
     }
     return {key: value for key, value in metadata.items() if key in allowed}
+
+
+def _gold_tool_replay_trace(env: dict[str, Any], now: str, plan: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    env_data = CSEnvironmentData.from_dict(env)
+    environment = CustomerSupportEnvironment(env_data, now)
+    trace = []
+    for step in plan:
+        tool = step.get("tool")
+        params = step.get("params", {})
+        handler = environment.tool_handlers.get(tool)
+        if handler is None:
+            trace.append({"tool": tool, "params": params, "result": {"error": f"unknown tool {tool!r}"}})
+            break
+        result = handler(params)
+        trace.append({"tool": tool, "params": params, "result": result})
+        if isinstance(result, dict) and ("error" in result or result.get("status") == "rejected"):
+            break
+    return trace
 
 
 def _load_json(path: Path) -> dict[str, Any]:

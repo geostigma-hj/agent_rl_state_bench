@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.97,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent and clearly specified. The environment supports a damaged-in-transit return with a full refund, return label, and $10 fragile goodwill credit to original payment. Accept as-is.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

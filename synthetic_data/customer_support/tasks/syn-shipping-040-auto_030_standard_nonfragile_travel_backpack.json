@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-040-auto_030_standard_nonfragile_travel_backpack",
-  "task_summary": "Customer reports that the Travel Backpack from order ORD-6023 arrived damaged in transit. Proper handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and apply fragile goodwill credit only if applicable.",
+  "task_summary": "Customer reports Travel Backpack from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
   "task_requirements": [
     {
       "id": "syn-shipping-040-auto_030_standard_nonfragile_travel_backpack_must_review_shipping_policy",
@@ -23,15 +23,15 @@
   ],
   "user_id": "cust_005",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I received my Travel Backpack from order ORD-6023, but it arrived damaged—the package was crushed.",
+  "opening_message": "My Travel Backpack from order ORD-6023 arrived damaged. The package was crushed.",
   "user_simulator": {
-    "user_sim_context": "You received your Travel Backpack from order ORD-6023, and it arrived damaged in transit. You want a refund to your original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
+    "user_sim_context": "You received Travel Backpack from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [
-      "You bought a Travel Backpack in order ORD-6023.",
+      "You bought Travel Backpack in order ORD-6023.",
       "The item arrived damaged with crushed packaging."
     ],
     "unknown_info": [
-      "You do not know internal item_id unless the agent tells you."
+      "You do not know the internal item_id unless the agent tells you."
     ],
     "task_rules": [
       "Keep the issue scoped to shipping damage; do not ask for a changed-mind return, cancellation, warranty claim, or exchange.",

@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.98,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent: the price drop is $30, the user simulator accepts correction to $30 upon verification, and the required final state (refund amount 30, refund method original_payment) matches the gold tool plan. Proceed with the provided task.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

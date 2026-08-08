@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Accept task. The scenario is clear and internally consistent: the customer wants a damaged-in-transit refund to original payment, the product is non-fragile so no goodwill credit applies, and the state requirements match the expected return processing.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

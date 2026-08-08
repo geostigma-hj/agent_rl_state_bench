@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.98,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is clear, executable, and internally consistent. The gold tool plan matches the required sequence (policy review, preview, confirm) and the expected state diff is consistent with a full cancellation with debit-card refunds.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

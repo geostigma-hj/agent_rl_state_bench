@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-004-recent_expiry_discounted_repair",
-  "task_summary": "The customer is requesting warranty service for SoundMax Wireless Headphones purchased under order ORD-6032. The correct process involves verifying the warranty status, reviewing the warranty policy, presenting the applicable outcome, obtaining customer confirmation, and then filing the claim. Since the warranty expired less than 30 days ago, the standard policy permits a repair with 50% cost coverage. This must be clearly communicated to the customer, and upon their agreement, the claim is processed accordingly.",
+  "task_summary": "Customer asks for warranty service on SoundMax Wireless Headphones from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty expired less than 30 days ago, so official policy allows a 50% off repair outcome after preview and confirmation.",
   "task_requirements": [
     {
       "id": "syn-warranty-004-recent_expiry_discounted_repair_must_check_warranty_status",
@@ -23,9 +23,9 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I recently purchased SoundMax Wireless Headphones under order ORD-6032, and they are malfunctioning. Could you assist me with a warranty claim?",
+  "opening_message": "My SoundMax Wireless Headphones from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You need assistance with warranty service for SoundMax Wireless Headphones from order ORD-6032. The agent will review the warranty policy and explain that the warranty has recently expired (less than 30 days ago) and thus a repair with 50% cost coverage is applicable. You should listen to the explanation and confirm your acceptance to proceed with the 50% off repair.",
+    "user_sim_context": "You want warranty help for SoundMax Wireless Headphones from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty expired less than 30 days ago, so official policy allows a 50% off repair outcome after preview and confirmation.",
     "known_info": [
       "You bought SoundMax Wireless Headphones in order ORD-6032.",
       "The product is malfunctioning."
@@ -34,8 +34,7 @@
       "You do not know the claim count or exact warranty resolution."
     ],
     "task_rules": [
-      "After the agent presents the warranty outcome and asks for confirmation, you must agree to proceed.",
-      "Do not ask for a return unless the agent says warranty is unavailable."
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
     ]
   },
   "task_type": "warranty_claim",

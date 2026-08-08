@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-019-auto_006_active_powerblend_mini_blender",
-  "task_summary": "Customer requests warranty assistance for a PowerBlend Mini Blender purchased under order ORD-6032. The proper handling involves checking warranty status, reviewing the warranty policy, providing a preview of the resolution, obtaining customer confirmation, and then filing the claim according to policy. Since the warranty is active, the official policy will determine whether a repair or replacement is warranted.",
+  "task_summary": "Customer asks for warranty service on PowerBlend Mini Blender from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
   "task_requirements": [
     {
       "id": "syn-warranty-019-auto_006_active_powerblend_mini_blender_must_check_warranty_status",
@@ -23,19 +23,18 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'm having trouble with my PowerBlend Mini Blender from order ORD-6032. It's not working properly. Can you help me with the warranty?",
+  "opening_message": "My PowerBlend Mini Blender from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You are seeking warranty support for your PowerBlend Mini Blender from order ORD-6032. If the agent explains the warranty resolution based on the policy and asks for your confirmation, you should agree to proceed. The warranty is active, so the official policy will guide the outcome.",
+    "user_sim_context": "You want warranty help for PowerBlend Mini Blender from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
     "known_info": [
-      "You purchased a PowerBlend Mini Blender in order ORD-6032.",
+      "You bought PowerBlend Mini Blender in order ORD-6032.",
       "The product is malfunctioning."
     ],
     "unknown_info": [
-      "You do not know the number of claims you have made or the exact warranty resolution."
+      "You do not know the claim count or exact warranty resolution."
     ],
     "task_rules": [
-      "If the agent provides a valid warranty preview, you should confirm to proceed.",
-      "Do not request a return unless the agent indicates that the warranty is not applicable."
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
     ]
   },
   "task_type": "warranty_claim",

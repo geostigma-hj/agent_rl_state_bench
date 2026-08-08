@@ -23,7 +23,7 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My NoiseBlock Earbuds from order ORD-6032 are malfunctioning. Can I use the warranty?",
+  "opening_message": "My NoiseBlock Earbuds from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
     "user_sim_context": "You want warranty help for NoiseBlock Earbuds from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
     "known_info": [

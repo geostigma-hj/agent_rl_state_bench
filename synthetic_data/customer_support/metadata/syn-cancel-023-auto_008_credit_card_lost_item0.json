@@ -71,12 +71,10 @@
   },
   "language_rewritten": true,
   "judge": {
-    "decision": "REVIEW",
-    "judge_model": "step-3.7-flash",
+    "decision": "ACCEPT",
+    "judge_model": "deepseek-v4-flash",
     "deterministic_check_passed": true,
-    "issues": [
-      "Judge call or JSON parsing failed: JSONDecodeError: Unterminated string starting at: line 6 column 21 (char 105)"
-    ],
+    "issues": [],
     "ambiguities": [],
     "manual_adjudication": null
   },

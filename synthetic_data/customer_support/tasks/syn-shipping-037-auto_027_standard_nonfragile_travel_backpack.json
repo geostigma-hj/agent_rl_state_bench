@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-037-auto_027_standard_nonfragile_travel_backpack",
-  "task_summary": "Customer reports Travel Backpack from ORD-6023 arrived damaged in transit. Handle via shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
+  "task_summary": "Customer reports Travel Backpack from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
   "task_requirements": [
     {
       "id": "syn-shipping-037-auto_027_standard_nonfragile_travel_backpack_must_review_shipping_policy",
@@ -23,7 +23,7 @@
   ],
   "user_id": "cust_002",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I received my Travel Backpack from order ORD-6023, and it arrived damaged. The package was crushed.",
+  "opening_message": "My Travel Backpack from order ORD-6023 arrived damaged. The package was crushed.",
   "user_simulator": {
     "user_sim_context": "You received Travel Backpack from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [

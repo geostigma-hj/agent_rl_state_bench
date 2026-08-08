@@ -80,12 +80,10 @@
   "language_rewritten": true,
   "judge": {
     "decision": "ACCEPT",
-    "judge_model": "step-3.7-flash",
+    "judge_model": "deepseek-v4-flash",
     "deterministic_check_passed": true,
     "issues": [],
-    "ambiguities": [
-      "The expected refund amounts ($239 and $35) imply a flat $10 intercept fee per item, but the product data shows restocking_fee_pct=15% which does not match this calculation. The fee structure must come from the cancellation policy (get_policies), which is not visible in the static environment data, creating a minor derivation gap for auditors."
-    ],
+    "ambiguities": [],
     "manual_adjudication": null
   },
   "language_rewriter_model": "deepseek-v4-flash"

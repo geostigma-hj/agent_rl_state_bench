@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-014-silver_defective_full_refund",
-  "task_summary": "Customer wants to return SoundMax Wireless Headphones from order ORD-6011. The agent must apply the return policy, preview the return, obtain confirmation, and process the correct refund.",
+  "task_summary": "Customer wants to return SoundMax Wireless Headphones from ORD-6011. The agent must apply the return policy, preview the return, obtain confirmation, and process the correct refund.",
   "task_requirements": [
     {
       "id": "syn-return-014-silver_defective_full_refund_must_review_return_policy",
@@ -23,9 +23,9 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I need to return the SoundMax Wireless Headphones from order ORD-6011 because they are defective. Please process the return to my original payment method.",
+  "opening_message": "The SoundMax Wireless Headphones from order ORD-6011 is defective and I need to return it to my original payment method.",
   "user_simulator": {
-    "user_sim_context": "You need help returning the SoundMax Wireless Headphones from order ORD-6011. The item is ITEM-9075. You stated the reason as defective. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed.",
+    "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is defective. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed.",
     "known_info": [
       "You bought SoundMax Wireless Headphones in order ORD-6011.",
       "You received the order on 2026-06-06T13:00:00."

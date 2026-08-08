@@ -76,8 +76,7 @@ BASE_RETURN_VARIANTS: tuple[ReturnVariant, ...] = (
         requested_reason_label="changed mind",
         order_date="2026-05-01T10:00:00",
         delivery_date="2026-05-03T14:00:00",
-        changed_factors=["return_window", "store_credit_only", "membership_tier"],
-        store_credit_pushback=True,
+        changed_factors=["return_window", "membership_tier", "shipping_clawback"],
     ),
     ReturnVariant(
         suffix="defective_full_refund",
@@ -472,6 +471,10 @@ def _opening_message(product_name: str, order_id: str, variant: ReturnVariant) -
         )
     if variant.reason == "defective":
         return f"The {product_name} from order {order_id} is defective and I need to return it to my original payment method."
+    if variant.reason == "wrong_item":
+        return f"I received the wrong item in order {order_id}. I need to return the {product_name} for a refund to my original payment method."
+    if variant.reason == "damaged_in_transit":
+        return f"The {product_name} from order {order_id} arrived damaged in transit, and I need to return it to my original payment method."
     return (
         f"I would like to return the {product_name} from order {order_id}. "
         "I opened it, but I do not want it anymore, and I want the refund back to my original payment method."
@@ -488,6 +491,16 @@ def _task_summary(product_name: str, order_id: str, variant: ReturnVariant) -> s
         return (
             f"Customer wants to return {product_name} from {order_id} outside the full-refund window but inside "
             "the store-credit grace period. The return is allowed, but the refund method must remain store credit."
+        )
+    if variant.reason == "wrong_item":
+        return (
+            f"Customer received the wrong item for {product_name} from {order_id}. The agent must process a "
+            "merchant-fault return with no restocking fee."
+        )
+    if variant.reason == "damaged_in_transit":
+        return (
+            f"Customer reports {product_name} from {order_id} was damaged in transit. The agent must process a "
+            "merchant-fault return with no restocking fee."
         )
     return (
         f"Customer wants to return {product_name} from {order_id}. The agent must apply the return policy, preview "

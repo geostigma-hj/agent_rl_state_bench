@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.97,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent and executable. The price difference ($59 to $44) yields a $15 refund, matching state requirements. The gold tool plan aligns with the requirements and user simulator. No blocking issues found.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

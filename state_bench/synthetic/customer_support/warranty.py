@@ -101,6 +101,29 @@ def _auto_warranty_variants() -> tuple[WarrantyVariant, ...]:
 DEFAULT_WARRANTY_VARIANTS: tuple[WarrantyVariant, ...] = (*BASE_WARRANTY_VARIANTS, *_auto_warranty_variants())
 
 
+def _product_taxonomy(product_name: str, item_price: int) -> tuple[str, str]:
+    name = product_name.lower()
+    if "headphones" in name or "earbuds" in name:
+        return "electronics", "headphones"
+    if "tablet" in name:
+        return "electronics", "tablet"
+    if "laptop" in name:
+        return "electronics", "laptop"
+    if "monitor" in name:
+        return "electronics", "monitor"
+    if "adapter" in name or "dock" in name:
+        return "accessories", "adapter"
+    if "blender" in name:
+        return "kitchen", "blender"
+    if "espresso" in name:
+        return "kitchen", "appliance"
+    if "shoes" in name:
+        return "clothing", "shoes"
+    if "purifier" in name:
+        return "electronics", "appliance"
+    return ("electronics", "general") if item_price >= 100 else ("accessories", "general")
+
+
 def generate_warranty_tasks(*, output_root: Path, limit: int | None = None, rewrite: bool = False) -> list[dict[str, Path]]:
     seed_task, seed_env = load_seed("30-warranty_manufacturer")
     variants = DEFAULT_WARRANTY_VARIANTS[:limit] if limit is not None else DEFAULT_WARRANTY_VARIANTS
@@ -127,7 +150,7 @@ def build_warranty_variant(
 
     product.name = variant.product_name
     product.price = variant.item_price
-    product.category = "electronics" if variant.item_price >= 100 else "kitchen"
+    product.category, product.subcategory = _product_taxonomy(variant.product_name, variant.item_price)
     product.warranty_months = 12
     item.unit_price = variant.item_price
     item.item_status = "delivered"

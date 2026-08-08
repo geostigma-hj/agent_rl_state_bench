@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-024-auto_009_platinum_prime_damaged_in_transit",
-  "task_summary": "Customer requests a return for SoundMax Wireless Headphones from ORD-6011. Agent must apply the return policy, preview the return, get customer confirmation, and process the correct refund.",
+  "task_summary": "Customer reports SoundMax Wireless Headphones from ORD-6011 was damaged in transit. The agent must process a merchant-fault return with no restocking fee.",
   "task_requirements": [
     {
       "id": "syn-return-024-auto_009_platinum_prime_damaged_in_transit_must_review_return_policy",
@@ -23,9 +23,9 @@
   ],
   "user_id": "cust_001",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to return the SoundMax Wireless Headphones from order ORD-6011. I opened it, but I've changed my mind and want a refund to my original payment method.",
+  "opening_message": "The SoundMax Wireless Headphones from order ORD-6011 arrived damaged in transit, and I need to return it to my original payment method.",
   "user_simulator": {
-    "user_sim_context": "You need assistance returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is damaged in transit. Preferred refund method is original payment. If agent asks for confirmation after explaining the refund, agree to proceed.",
+    "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is damaged in transit. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed.",
     "known_info": [
       "You bought SoundMax Wireless Headphones in order ORD-6011.",
       "You received the order on 2026-06-06T14:00:00."

@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-054-auto_039_silver_nopri_wrong_item",
-  "task_summary": "The customer wants to return SoundMax Wireless Headphones from order ORD-6011. The agent must apply the return policy, preview the return, obtain confirmation, and process the correct refund.",
+  "task_summary": "Customer received the wrong item for SoundMax Wireless Headphones from ORD-6011. The agent must process a merchant-fault return with no restocking fee.",
   "task_requirements": [
     {
       "id": "syn-return-054-auto_039_silver_nopri_wrong_item_must_review_return_policy",
@@ -23,16 +23,16 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I would like to return the SoundMax Wireless Headphones from order ORD-6011. I opened it, but I do not want it anymore, and I want the refund back to my original payment method.",
+  "opening_message": "I received the wrong item in order ORD-6011. I need to return the SoundMax Wireless Headphones for a refund to my original payment method.",
   "user_simulator": {
-    "user_sim_context": "The user wants help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. The stated reason is wrong item. The preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, the user will confirm to proceed.",
+    "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is wrong item. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed.",
     "known_info": [
-      "The user bought SoundMax Wireless Headphones in order ORD-6011.",
-      "The user received the order on 2026-06-06T14:00:00."
+      "You bought SoundMax Wireless Headphones in order ORD-6011.",
+      "You received the order on 2026-06-06T14:00:00."
     ],
     "unknown_info": [
-      "The user does not know the exact return policy calculation.",
-      "The user does not know the internal item_id unless the agent tells them."
+      "You do not know the exact return policy calculation.",
+      "You do not know the internal item_id unless the agent tells you."
     ],
     "task_rules": [
       "Do not invent order IDs, item IDs, prices, dates, or policy details.",

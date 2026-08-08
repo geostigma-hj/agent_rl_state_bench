@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is internally consistent. The customer's stated $10 expectation is a deliberate distractor that the agent should correct to the verified price difference of $15 ($119 - $104). The gold plan verifies product details, previews the refund, and confirms it with original_payment, matching the state requirements. No blocking issues found.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

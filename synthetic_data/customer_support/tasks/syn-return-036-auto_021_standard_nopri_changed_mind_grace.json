@@ -29,7 +29,7 @@
   ],
   "user_id": "cust_002",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to return the SoundMax Wireless Headphones from order ORD-6011. I know it's been a while, but I still want to return them and get my money back on my card.",
+  "opening_message": "I want to return the SoundMax Wireless Headphones from order ORD-6011. I know it has been a while, but I want the money back on my card.",
   "user_simulator": {
     "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is changed mind. Your preferred refund method is store credit. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed. If the agent says the refund must be store credit, push once for a card refund, then accept the policy.",
     "known_info": [

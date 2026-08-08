@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-052-auto_039_old_expiry_noiseblock_earbuds",
-  "task_summary": "Customer requests warranty service for NoiseBlock Earbuds from order ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty expired more than 30 days ago, so official policy allows full-price repair or 25% off replacement rather than a free warranty claim.",
+  "task_summary": "Customer asks for warranty service on NoiseBlock Earbuds from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty expired more than 30 days ago, so official policy allows full-price repair or 25% off replacement rather than a free warranty claim.",
   "task_requirements": [
     {
       "id": "syn-warranty-052-auto_039_old_expiry_noiseblock_earbuds_must_check_warranty_status",
@@ -23,9 +23,9 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My NoiseBlock Earbuds from order ORD-6032 are not working properly. Can I get them repaired under warranty?",
+  "opening_message": "My NoiseBlock Earbuds from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You need warranty support for your NoiseBlock Earbuds from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty expired more than 30 days ago, so official policy allows full-price repair or 25% off replacement rather than a free warranty claim.",
+    "user_sim_context": "You want warranty help for NoiseBlock Earbuds from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty expired more than 30 days ago, so official policy allows full-price repair or 25% off replacement rather than a free warranty claim.",
     "known_info": [
       "You bought NoiseBlock Earbuds in order ORD-6032.",
       "The product is malfunctioning."

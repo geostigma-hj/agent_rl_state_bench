@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-035-auto_022_recurring_brewmaster_espresso_machine",
-  "task_summary": "The customer is requesting warranty service for their BrewMaster Espresso Machine purchased under order ORD-6032. The correct course of action is to verify the warranty status, review the warranty policy, provide a preview of the resolution, obtain confirmation, and then process the claim according to policy. Since the warranty is active, the official policy will determine whether a repair or replacement is appropriate.",
+  "task_summary": "Customer asks for warranty service on BrewMaster Espresso Machine from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
   "task_requirements": [
     {
       "id": "syn-warranty-035-auto_022_recurring_brewmaster_espresso_machine_must_check_warranty_status",
@@ -23,18 +23,18 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'm having trouble with my BrewMaster Espresso Machine from order ORD-6032. Can I get it fixed under warranty?",
+  "opening_message": "My BrewMaster Espresso Machine from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You are seeking warranty assistance for your BrewMaster Espresso Machine from order ORD-6032. The agent will explain the warranty outcome based on policy and ask for confirmation; you should agree to proceed. The warranty is active, so the official policy will dictate whether repair or replacement is suitable.",
+    "user_sim_context": "You want warranty help for BrewMaster Espresso Machine from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
     "known_info": [
-      "You purchased a BrewMaster Espresso Machine in order ORD-6032.",
+      "You bought BrewMaster Espresso Machine in order ORD-6032.",
       "The product is malfunctioning."
     ],
     "unknown_info": [
-      "You do not know the claim count or the exact warranty resolution."
+      "You do not know the claim count or exact warranty resolution."
     ],
     "task_rules": [
-      "Confirm after a valid warranty preview. Do not request a return unless the agent states that the warranty is not applicable."
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
     ]
   },
   "task_type": "warranty_claim",

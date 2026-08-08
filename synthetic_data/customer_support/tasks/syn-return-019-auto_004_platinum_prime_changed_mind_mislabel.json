@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-019-auto_004_platinum_prime_changed_mind_mislabel",
-  "task_summary": "Customer describes SoundMax Wireless Headphones from ORD-6011 as defective, but the issue is actually a cosmetic preference. The correct resolution is a changed-mind return with normal electronics restocking policy.",
+  "task_summary": "Customer describes SoundMax Wireless Headphones from ORD-6011 as defective, but the described issue is cosmetic preference. The correct resolution is a changed-mind return with normal electronics restocking policy.",
   "task_requirements": [
     {
       "id": "syn-return-019-auto_004_platinum_prime_changed_mind_mislabel_must_review_return_policy",
@@ -29,12 +29,12 @@
   ],
   "user_id": "cust_001",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I need to return the SoundMax Wireless Headphones from order ORD-6011. They are defective because the color and appearance are not what I expected.",
+  "opening_message": "I need to return the SoundMax Wireless Headphones from order ORD-6011. It is defective: the color and look are not what I expected at all.",
   "user_simulator": {
-    "user_sim_context": "You need help returning the SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. You stated the reason as defective. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed. If asked what is defective, explain that the product works but the color/appearance is disappointing.",
+    "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is defective. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed. If asked what is defective, explain that the product works but the color/appearance is disappointing.",
     "known_info": [
-      "You bought the SoundMax Wireless Headphones in order ORD-6011.",
-      "You received the order on 2026-06-07T14:00:00.\""
+      "You bought SoundMax Wireless Headphones in order ORD-6011.",
+      "You received the order on 2026-06-07T14:00:00."
     ],
     "unknown_info": [
       "You do not know the exact return policy calculation.",

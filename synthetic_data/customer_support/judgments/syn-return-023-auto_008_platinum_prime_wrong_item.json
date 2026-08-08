@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "The task is clear and internally consistent. The user reports a wrong item, the order and item identifiers align, the requested refund method matches the customer's payment method, and the state requirements are consistent with a merchant-fault return with a waived restocking fee. The gold tool plan satisfies all must requirements.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

@@ -79,13 +79,10 @@
   "language_rewritten": true,
   "judge": {
     "decision": "ACCEPT",
-    "judge_model": "step-3.7-flash",
+    "judge_model": "deepseek-v4-flash",
     "deterministic_check_passed": true,
     "issues": [],
-    "ambiguities": [
-      "The exact content of the cancellation policy retrieved by get_policies is not defined in the environment, though the task only requires that the agent review it, not that specific policy text be matched.",
-      "The shipping_status is 'processing' with a tracking number assigned but no delivery date; this is consistent with pre-shipment but relies on the tool interpreting 'processing' as not-yet-shipped."
-    ],
+    "ambiguities": [],
     "manual_adjudication": null
   },
   "language_rewriter_model": "deepseek-v4-flash"

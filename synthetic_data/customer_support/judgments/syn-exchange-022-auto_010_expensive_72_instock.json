@@ -1,0 +1,12 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [
+    "The exchange policy states the customer pays the price difference, but the gold plan does not include a separate payment tool. This is resolved by assuming process_exchange handles payment internally, and the state requirements do not require a payment record."
+  ],
+  "recommendation": "Proceed with the task. The gold plan and state requirements are consistent. If a separate payment step is expected, clarify the tooling, but current environment supports the planned execution.",
+  "judge_model": "deepseek-v4-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

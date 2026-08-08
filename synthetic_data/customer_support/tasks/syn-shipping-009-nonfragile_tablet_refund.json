@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-009-nonfragile_tablet_refund",
-  "task_summary": "Customer reports that the SlateTab Pro 11-inch tablet from order ORD-6023 arrived damaged in transit. The appropriate resolution is to follow the shipping-damage procedure: review the shipping and return policy, process a refund to the original payment method, issue a return label, and apply a separate fragile-item goodwill credit if applicable.",
+  "task_summary": "Customer reports SlateTab Pro 11-inch from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
   "task_requirements": [
     {
       "id": "syn-shipping-009-nonfragile_tablet_refund_must_review_shipping_policy",
@@ -25,16 +25,16 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "My SlateTab Pro 11-inch from order ORD-6023 arrived damaged. The package was crushed.",
   "user_simulator": {
-    "user_sim_context": "You received a SlateTab Pro 11-inch tablet from order ORD-6023 that was damaged during shipping. Your goal is to get a refund to your original payment method. If the item is considered fragile, ask whether a separate fragile-item goodwill credit applies.",
+    "user_sim_context": "You received SlateTab Pro 11-inch from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [
-      "You bought a SlateTab Pro 11-inch tablet in order ORD-6023.",
-      "The tablet arrived damaged with crushed packaging."
+      "You bought SlateTab Pro 11-inch in order ORD-6023.",
+      "The item arrived damaged with crushed packaging."
     ],
     "unknown_info": [
-      "You do not know the internal item_id unless the agent provides it."
+      "You do not know the internal item_id unless the agent tells you."
     ],
     "task_rules": [
-      "Keep the issue focused on shipping damage; do not request a change-of-mind return, cancellation, warranty claim, or exchange.",
+      "Keep the issue scoped to shipping damage; do not ask for a changed-mind return, cancellation, warranty claim, or exchange.",
       "Confirm after a valid damaged-in-transit return preview. If the item is fragile, expect the separate goodwill credit."
     ]
   },
