@@ -1,0 +1,81 @@
+{
+  "task_id": "syn-return-061-auto_046_standard_nopri_changed_mind_mislabel",
+  "source_seed": "7-return_restocking_waived",
+  "generator_version": "return_refund_v0.1",
+  "task_family": "return_refund",
+  "mutation_level": "constraint",
+  "difficulty": "hard",
+  "changed_factors": [
+    "restocking_fee",
+    "recent_delivery",
+    "membership_tier"
+  ],
+  "requires_confirmation": true,
+  "is_compound": false,
+  "gold_tool_plan": [
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "return"
+      }
+    },
+    {
+      "tool": "process_return",
+      "params": {
+        "item_id": "ITEM-9075",
+        "reason": "changed_mind",
+        "confirm": false
+      }
+    },
+    {
+      "tool": "process_return",
+      "params": {
+        "item_id": "ITEM-9075",
+        "reason": "changed_mind",
+        "amount": 204,
+        "confirm": true
+      }
+    }
+  ],
+  "expected_state_diff": {
+    "created": {},
+    "modified": {
+      "orders": {
+        "ORD-6011": {
+          "status": {
+            "old": "delivered",
+            "new": "fully_returned"
+          }
+        }
+      },
+      "order_items": {
+        "ITEM-9075": {
+          "return_reason": {
+            "old": null,
+            "new": "changed_mind"
+          },
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
+          },
+          "item_status": {
+            "old": "delivered",
+            "new": "returned"
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 204
+          },
+          "restocking_fee": {
+            "old": null,
+            "new": 37
+          }
+        }
+      }
+    },
+    "deleted": {}
+  },
+  "language_rewritten": true,
+  "judge": null,
+  "language_rewriter_model": "deepseek-v4-flash"
+}

@@ -52,13 +52,13 @@
             "old": "active",
             "new": "claimed"
           },
-          "claim_count": {
-            "old": 3,
-            "new": 4
-          },
           "resolution": {
             "old": null,
             "new": "paid_repair"
+          },
+          "claim_count": {
+            "old": 3,
+            "new": 4
           }
         }
       }

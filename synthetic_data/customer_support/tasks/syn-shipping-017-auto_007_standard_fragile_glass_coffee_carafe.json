@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-017-auto_007_standard_fragile_glass_coffee_carafe",
-  "task_summary": "Customer's Glass Coffee Carafe from ORD-6023 arrived damaged due to crushed packaging. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and apply fragile-item goodwill credit if the item is classified as fragile.",
+  "task_summary": "Customer reports that the glass coffee carafe from order ORD-6023 arrived damaged in transit. The correct handling is the shipping-damage path: review the shipping and return policy, issue a refund to the original payment method, provide a return label, and include a fragile-item goodwill credit if the item is classified as fragile.",
   "task_requirements": [
     {
       "id": "syn-shipping-017-auto_007_standard_fragile_glass_coffee_carafe_must_review_shipping_policy",
@@ -23,19 +23,19 @@
   ],
   "user_id": "cust_002",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I received my Glass Coffee Carafe from order ORD-6023, but the package was crushed and the carafe broke. It was damaged during shipping.",
+  "opening_message": "The glass coffee carafe from my order ORD-6023 arrived damaged - the packaging was crushed.",
   "user_simulator": {
-    "user_sim_context": "The Glass Coffee Carafe you ordered (ORD-6023) arrived with the box crushed and the item broken. You want a refund credited back to your original payment method. If the item is considered fragile, you should also ask if a separate fragile-item goodwill credit applies.",
+    "user_sim_context": "You received the glass coffee carafe from order ORD-6023, and it was damaged during shipping. You want a refund to your original payment method. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [
-      "You purchased a Glass Coffee Carafe under order ORD-6023.",
-      "The item arrived damaged because the packaging was crushed."
+      "You purchased the glass coffee carafe in order ORD-6023.",
+      "The item arrived damaged and the packaging was crushed."
     ],
     "unknown_info": [
-      "You do not know the internal item_id unless the agent provides it."
+      "You do not know the internal item_id unless the agent tells you."
     ],
     "task_rules": [
-      "Keep the issue focused solely on shipping damage; do not ask about returns for other reasons, cancellations, warranty claims, or exchanges.",
-      "After confirming a valid damaged-in-transit return and refund, if the item is fragile, expect additional goodwill credit."
+      "Keep the issue focused on shipping damage; do not ask for a changed-mind return, cancellation, warranty claim, or exchange.",
+      "Confirm after a valid damaged-in-transit return preview. If the item is fragile, expect the separate goodwill credit."
     ]
   },
   "task_type": "shipping_claim",

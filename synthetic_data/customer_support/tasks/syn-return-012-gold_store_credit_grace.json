@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-012-gold_store_credit_grace",
-  "task_summary": "Customer wants to return SoundMax Wireless Headphones from ORD-6011 outside the full-refund window but inside the store-credit grace period. The return is allowed, but the refund method must remain store credit.",
+  "task_summary": "Customer wants to return SoundMax Wireless Headphones from ORD-6011. The return is outside the full-refund window but within the store-credit grace period. The refund must be issued as store credit, not to the original payment method.",
   "task_requirements": [
     {
       "id": "syn-return-012-gold_store_credit_grace_must_review_return_policy",
@@ -29,9 +29,9 @@
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I want to return the SoundMax Wireless Headphones from order ORD-6011. I know it has been a while, but I want the money back on my card.",
+  "opening_message": "I'd like to return the SoundMax Wireless Headphones from order ORD-6011. I know it's been a while, but I'd prefer to get the money back on my card.",
   "user_simulator": {
-    "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is changed mind. Your preferred refund method is store credit. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed. If the agent says the refund must be store credit, push once for a card refund, then accept the policy.",
+    "user_sim_context": "You need assistance returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is changed mind. Your preferred refund method is store credit. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed. If the agent says the refund must be store credit, push once for a card refund, then accept the policy.",
     "known_info": [
       "You bought SoundMax Wireless Headphones in order ORD-6011.",
       "You received the order on 2026-04-25T14:00:00."

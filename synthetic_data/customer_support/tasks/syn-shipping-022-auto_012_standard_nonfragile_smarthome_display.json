@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-022-auto_012_standard_nonfragile_smarthome_display",
-  "task_summary": "Customer reports SmartHome Display from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
+  "task_summary": "Customer reports a SmartHome Display from order ORD-6023 arrived damaged due to crushed packaging. Proper handling follows the shipping-damage procedure: review shipping and return policy, refund the item, issue a return label, and apply a separate fragile-item goodwill credit if applicable.",
   "task_requirements": [
     {
       "id": "syn-shipping-022-auto_012_standard_nonfragile_smarthome_display_must_review_shipping_policy",
@@ -23,11 +23,11 @@
   ],
   "user_id": "cust_002",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "Hi, I received my SmartHome Display for order ORD-6023 today, but the box was crushed and the device is damaged. I'd like a refund to my original payment method, please.",
+  "opening_message": "Hi, I received my SmartHome Display from order ORD-6023, but the package was crushed and the device is damaged.",
   "user_simulator": {
-    "user_sim_context": "You received SmartHome Display from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
+    "user_sim_context": "You received a SmartHome Display from order ORD-6023 that was damaged in transit. You want a refund to your original payment. If the item is classified as fragile, ask whether a separate fragile-item goodwill credit is applicable.",
     "known_info": [
-      "You bought SmartHome Display in order ORD-6023.",
+      "You purchased a SmartHome Display under order ORD-6023.",
       "The item arrived damaged with crushed packaging."
     ],
     "unknown_info": [

@@ -1,6 +1,6 @@
 {
   "task_id": "syn-exchange-032-auto_020_expensive_249_instock",
-  "task_summary": "Customer requests an exchange of the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in size Large. The correct handling is to apply the exchange policy: preview the exchange, confirm with the customer, and then charge the price difference if the new item costs more, or issue store credit if it costs less.",
+  "task_summary": "Customer wants to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in size Large. Correct handling is to apply exchange policy, preview the exchange, confirm with the customer, and then handle any price difference according to policy (pay if more, store credit if less).",
   "task_requirements": [
     {
       "id": "syn-exchange-032-auto_020_expensive_249_instock_must_review_exchange_policy",
@@ -17,18 +17,18 @@
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to exchange the Premium Cotton Shirt I got in order ORD-6034 for a Premium Cotton Shirt in Large.",
+  "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in size Large.",
   "user_simulator": {
-    "user_sim_context": "You want to exchange the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in Large. If the agent shows you a valid exchange preview and asks for confirmation, agree to proceed.",
+    "user_sim_context": "You want to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in size Large. If the agent previews a valid exchange and asks for confirmation, agree to proceed.",
     "known_info": [
-      "You purchased a Premium Cotton Shirt in order ORD-6034.",
-      "You want the Premium Cotton Shirt in size Large instead."
+      "You bought a Premium Cotton Shirt in order ORD-6034.",
+      "You want a Premium Cotton Shirt in size Large instead."
     ],
     "unknown_info": [
-      "You don't know the store's policy on price differences for exchanges."
+      "You do not know the exchange price-difference policy."
     ],
     "task_rules": [
-      "Do not ask for a different product. If the agent provides a valid preview, confirm the exchange."
+      "Do not ask for a different product. Confirm after a valid preview."
     ]
   },
   "task_type": "exchange_item",

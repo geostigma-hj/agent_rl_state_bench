@@ -1,6 +1,6 @@
 {
   "task_id": "syn-cancel-032-auto_017_debit_card_lost_item0",
-  "task_summary": "User requests cancellation of only item ITEM-9020 (SoundMax Wireless Headphones) from order ORD-6003. Agent must handle by checking cancellation policy, providing a preview, and confirming before updating only that item.",
+  "task_summary": "User intends to cancel selected items in ORD-6003. Proper handling includes checking cancellation policy, previewing the cancellation, obtaining confirmation, and updating only eligible items.",
   "task_requirements": [
     {
       "id": "syn-cancel-032-auto_017_debit_card_lost_item0_must_review_cancellation_policy",
@@ -17,9 +17,9 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "Could I please cancel the SoundMax Wireless Headphones from my order ORD-6003? That's the only item I want to remove.",
+  "opening_message": "I'd like to cancel only the SoundMax Wireless Headphones from order ORD-6003.",
   "user_simulator": {
-    "user_sim_context": "You want to cancel only item ITEM-9020 (SoundMax Wireless Headphones) from order ORD-6003, which also includes the 7-Port USB-C Hub. The agent should show a cancellation preview for that item. When the preview is given and the agent asks for confirmation, you will agree to proceed.",
+    "user_sim_context": "You want to cancel only item(s) ['ITEM-9020'] from order ORD-6003, which contains SoundMax Wireless Headphones and a 7-Port USB-C Hub. If the agent explains a valid cancellation preview, confirm that you want to proceed.",
     "known_info": [
       "You placed order ORD-6003.",
       "The order contains: SoundMax Wireless Headphones, 7-Port USB-C Hub."
@@ -28,8 +28,8 @@
       "You do not know whether a cancellation fee applies."
     ],
     "task_rules": [
-      "If the agent presents a valid cancellation preview and asks for confirmation, agree to cancel the item.",
-      "Do not ask to cancel any other items beyond the stated scope."
+      "If the agent previews a valid cancellation and asks for confirmation, agree to proceed.",
+      "Do not ask to cancel items outside the stated scope."
     ]
   },
   "task_type": "cancel_order",

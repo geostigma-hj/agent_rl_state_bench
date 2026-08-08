@@ -68,31 +68,19 @@
   "expected_state_diff": {
     "created": {},
     "modified": {
+      "orders": {
+        "ORD-6023": {
+          "status": {
+            "old": "delivered",
+            "new": "fully_returned"
+          }
+        }
+      },
       "order_items": {
         "ITEM-9155": {
-          "goodwill_credit": {
-            "old": 0,
-            "new": 10
-          },
           "item_status": {
             "old": "delivered",
             "new": "returned"
-          },
-          "goodwill_credit_method": {
-            "old": null,
-            "new": "original_payment"
-          },
-          "refund_amount": {
-            "old": null,
-            "new": 189
-          },
-          "restocking_fee": {
-            "old": null,
-            "new": 0
-          },
-          "refund_method": {
-            "old": null,
-            "new": "original_payment"
           },
           "return_reason": {
             "old": null,
@@ -101,14 +89,26 @@
           "return_label_issued": {
             "old": false,
             "new": true
-          }
-        }
-      },
-      "orders": {
-        "ORD-6023": {
-          "status": {
-            "old": "delivered",
-            "new": "fully_returned"
+          },
+          "goodwill_credit": {
+            "old": 0,
+            "new": 10
+          },
+          "goodwill_credit_method": {
+            "old": null,
+            "new": "original_payment"
+          },
+          "restocking_fee": {
+            "old": null,
+            "new": 0
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 189
+          },
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
           }
         }
       }
@@ -116,15 +116,6 @@
     "deleted": {}
   },
   "language_rewritten": true,
-  "judge": {
-    "decision": "ACCEPT",
-    "judge_model": "step-3.7-flash",
-    "deterministic_check_passed": true,
-    "issues": [],
-    "ambiguities": [
-      "The user simulator states the agent should 'ask whether a separate fragile-item goodwill credit applies,' while the task requirement mandates the agent must issue it. Since the item is objectively fragile (is_fragile: true), the agent can determine applicability without user input, though informing the user aligns with customer service expectations. The confirmation flow (preview then confirm) in the gold tool plan likely satisfies this."
-    ],
-    "manual_adjudication": null
-  },
+  "judge": null,
   "language_rewriter_model": "deepseek-v4-flash"
 }

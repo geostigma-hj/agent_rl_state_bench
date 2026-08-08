@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-001-standard_exact_drop",
-  "task_summary": "Customer requests a price-match adjustment for SoundMax Basic Headphones in ORD-7208. The correct outcome is a $10 price-match refund while keeping the order and item active.",
+  "task_summary": "Customer requests a price-match refund for SoundMax Basic Headphones in ORD-7208. The correct outcome is a $10 price-match refund while keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-001-standard_exact_drop_must_lookup_product_price",
@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_002",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed the SoundMax Basic Headphones from order ORD-7208 are now priced lower, so I'd like a price match for the difference of $10.",
+  "opening_message": "The SoundMax Basic Headphones I bought in order ORD-7208 just dropped in price, so I believe I'm eligible for a $10 refund.",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for SoundMax Basic Headphones in order ORD-7208. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
+    "user_sim_context": "Your goal is to obtain a price-match refund for the SoundMax Basic Headphones in order ORD-7208. You should not request a return, cancellation, exchange, or replacement; the item should remain active. You can push for the refund amount if needed.",
     "known_info": [
-      "You bought SoundMax Basic Headphones in order ORD-7208.",
-      "The current product price is $139."
+      "You purchased SoundMax Basic Headphones in order ORD-7208.",
+      "The current price for the headphones is $139."
     ],
     "unknown_info": [
-      "You do not know the exact internal price-match workflow.",
-      "You do not know payment allocation details unless the agent explains them."
+      "You are not aware of the exact internal price-match policy.",
+      "You do not know how the refund will be processed or allocated."
     ],
     "task_rules": [
-      "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
-      "If the agent previews the policy-supported amount and keeps the order active, confirm the refund."
+      "Focus solely on obtaining a price-match refund; avoid any discussion of returning, canceling, or exchanging the item.",
+      "If the agent confirms the refund amount and that the order remains active, accept the offer without unnecessary pushback."
     ]
   },
   "task_type": "price_match_refund",

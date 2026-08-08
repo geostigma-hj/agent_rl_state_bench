@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-055-auto_040_standard_split_probook_laptop_50_drop",
-  "task_summary": "Customer requests a price adjustment for the ProBook Laptop in order ORD-7208. The correct outcome is to provide a $50 price-match refund while keeping the order and item active.",
+  "task_summary": "Customer requests a price-match adjustment for ProBook Laptop in order ORD-7208. The correct outcome is a $50 price-match refund while keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-055-auto_040_standard_split_probook_laptop_50_drop_must_lookup_product_price",
@@ -23,11 +23,11 @@
   ],
   "user_id": "cust_005",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed the ProBook Laptop in my order ORD-7208 has dropped in price. Can you process a price adjustment for me?",
+  "opening_message": "Hi, I noticed the price for the ProBook Laptop I ordered (ORD-7208) has dropped. Can I get a price adjustment?",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for the ProBook Laptop in order ORD-7208. Do not allow a return, cancellation, exchange, or replacement; the item must remain active.",
+    "user_sim_context": "You want a price-match refund for ProBook Laptop in order ORD-7208. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [
-      "You bought the ProBook Laptop in order ORD-7208.",
+      "You bought ProBook Laptop in order ORD-7208.",
       "The current product price is $749."
     ],
     "unknown_info": [
@@ -36,7 +36,7 @@
     ],
     "task_rules": [
       "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
-      "If the agent confirms the policy-supported refund amount and keeps the order active, approve the refund."
+      "If the agent previews the policy-supported amount and keeps the order active, confirm the refund."
     ]
   },
   "task_type": "price_match_refund",

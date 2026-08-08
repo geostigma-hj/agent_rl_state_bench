@@ -23,11 +23,11 @@
   ],
   "user_id": "cust_002",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed the BrewMaster Espresso Machine from order ORD-7208 is now on sale for a lower price, so I'd like to request a price match refund of $65.",
+  "opening_message": "I noticed the BrewMaster Espresso Machine from my order ORD-7208 now has a lower price. Could I get a price-match refund for the difference?",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for BrewMaster Espresso Machine in order ORD-7208. You think the drop is $65, but accept correction to $50 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
+    "user_sim_context": "You want a price-match refund for the BrewMaster Espresso Machine in order ORD-7208. You believe the price difference is $65, but you will accept the $50 refund if the agent verifies the product record. You do not want a return, cancellation, exchange, or replacement; the item must remain active.",
     "known_info": [
-      "You bought BrewMaster Espresso Machine in order ORD-7208.",
+      "You bought the BrewMaster Espresso Machine in order ORD-7208.",
       "The current product price is $299."
     ],
     "unknown_info": [
@@ -36,7 +36,7 @@
     ],
     "task_rules": [
       "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
-      "If the agent previews the policy-supported amount and keeps the order active, confirm the refund."
+      "If the agent states the policy-supported refund amount is $50 and the order remains active, confirm the refund."
     ]
   },
   "task_type": "price_match_refund",

@@ -36,8 +36,20 @@
   "expected_state_diff": {
     "created": {},
     "modified": {
+      "orders": {
+        "ORD-6003": {
+          "status": {
+            "old": "shipped",
+            "new": "cancelled"
+          }
+        }
+      },
       "order_items": {
         "ITEM-9020": {
+          "refund_method": {
+            "old": null,
+            "new": "gift_card"
+          },
           "item_status": {
             "old": "shipped",
             "new": "cancelled"
@@ -45,13 +57,13 @@
           "refund_amount": {
             "old": null,
             "new": 249
-          },
-          "refund_method": {
-            "old": null,
-            "new": "gift_card"
           }
         },
         "ITEM-9021": {
+          "refund_method": {
+            "old": null,
+            "new": "gift_card"
+          },
           "item_status": {
             "old": "shipped",
             "new": "cancelled"
@@ -59,18 +71,6 @@
           "refund_amount": {
             "old": null,
             "new": 45
-          },
-          "refund_method": {
-            "old": null,
-            "new": "gift_card"
-          }
-        }
-      },
-      "orders": {
-        "ORD-6003": {
-          "status": {
-            "old": "shipped",
-            "new": "cancelled"
           }
         }
       }
@@ -83,7 +83,9 @@
     "judge_model": "step-3.7-flash",
     "deterministic_check_passed": true,
     "issues": [],
-    "ambiguities": [],
+    "ambiguities": [
+      "The task summary mentions 'process cancellation for eligible items only,' which could imply partial cancellation, but the environment and expected state show the entire order is eligible (shipping status is 'lost'), and the gold tool plan cancels the full order. This wording is slightly ambiguous but does not conflict with the deterministic expected state."
+    ],
     "manual_adjudication": null
   },
   "language_rewriter_model": "deepseek-v4-flash"

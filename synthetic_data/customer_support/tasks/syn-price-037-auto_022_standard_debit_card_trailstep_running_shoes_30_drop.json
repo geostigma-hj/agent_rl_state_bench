@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-037-auto_022_standard_debit_card_trailstep_running_shoes_30_drop",
-  "task_summary": "Customer requests a price adjustment for the TrailStep Running Shoes in order ORD-7208. The correct outcome is a $30 refund while keeping the order and item active.",
+  "task_summary": "The customer requests a price-match adjustment for the TrailStep Running Shoes in order ORD-7208. The expected outcome is a $30 price-match refund, while the order and item remain active.",
   "task_requirements": [
     {
       "id": "syn-price-037-auto_022_standard_debit_card_trailstep_running_shoes_30_drop_must_lookup_product_price",
@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_002",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed the TrailStep Running Shoes I purchased in order ORD-7208 are now priced lower. Can you process a price adjustment for me?",
+  "opening_message": "I noticed the TrailStep Running Shoes I ordered (order ORD-7208) are now listed at a lower price. Can I get a price adjustment?",
   "user_simulator": {
-    "user_sim_context": "You are seeking a price adjustment for the TrailStep Running Shoes in order ORD-7208. Do not accept a return, cancellation, exchange, or replacement; the item must remain active.",
+    "user_sim_context": "You want a price-match refund for the TrailStep Running Shoes from order ORD-7208. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [
-      "You purchased TrailStep Running Shoes in order ORD-7208.",
+      "You bought TrailStep Running Shoes in order ORD-7208.",
       "The current product price is $99."
     ],
     "unknown_info": [
-      "You are unaware of the exact internal price adjustment process.",
+      "You do not know the exact internal price-match workflow.",
       "You do not know payment allocation details unless the agent explains them."
     ],
     "task_rules": [
-      "Focus solely on the price adjustment; do not request a return, cancellation, or exchange.",
-      "If the agent previews the supported refund amount and confirms the order remains active, accept the refund."
+      "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
+      "If the agent previews the policy-supported amount and keeps the order active, confirm the refund."
     ]
   },
   "task_type": "price_match_refund",

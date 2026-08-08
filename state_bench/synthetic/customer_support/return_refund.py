@@ -304,7 +304,7 @@ def _auto_return_variants() -> tuple[ReturnVariant, ...]:
                     )
                 )
                 idx += 1
-                if len(BASE_RETURN_VARIANTS) + len(variants) >= 55:
+                if len(BASE_RETURN_VARIANTS) + len(variants) >= 65:
                     return tuple(variants)
     return tuple(variants)
 

@@ -1,6 +1,6 @@
 {
   "task_id": "syn-cancel-021-auto_006_credit_card_in_transit_item0",
-  "task_summary": "Customer wants to cancel only item ITEM-9020 (SoundMax Wireless Headphones) from order ORD-6003. Proper handling includes explaining the cancellation policy, providing a preview, confirming, and updating only that item.",
+  "task_summary": "Customer wants to cancel a specific item (ITEM-9020) in order ORD-6003. The correct action is to review the cancellation policy, preview the cancellation, get confirmation, and then update only the eligible items.",
   "task_requirements": [
     {
       "id": "syn-cancel-021-auto_006_credit_card_in_transit_item0_must_review_cancellation_policy",
@@ -17,19 +17,19 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to cancel only the SoundMax Wireless Headphones from order ORD-6003, not the USB hub.",
+  "opening_message": "I'd like to cancel only the SoundMax Wireless Headphones from my order ORD-6003, please.",
   "user_simulator": {
-    "user_sim_context": "You intend to cancel only item ITEM-9020 (SoundMax Wireless Headphones) from order ORD-6003, which also includes a 7-Port USB-C Hub. If the agent presents a valid cancellation preview and asks for confirmation, you will agree to proceed.",
+    "user_sim_context": "You need to cancel only the item [ITEM-9020] from order ORD-6003, which includes SoundMax Wireless Headphones and a 7-Port USB-C Hub. If the agent provides a valid cancellation preview and asks for confirmation, you will agree to proceed.",
     "known_info": [
       "You placed order ORD-6003.",
-      "The order contains: SoundMax Wireless Headphones and a 7-Port USB-C Hub."
+      "The order contains: SoundMax Wireless Headphones, 7-Port USB-C Hub."
     ],
     "unknown_info": [
-      "You do not know whether a cancellation fee applies."
+      "You are not sure if a cancellation fee applies."
     ],
     "task_rules": [
-      "If the agent previews a valid cancellation and asks for confirmation, agree to proceed.",
-      "Do not ask to cancel any items other than ITEM-9020."
+      "If the agent previews a valid cancellation and requests confirmation, agree to proceed.",
+      "Do not ask to cancel items outside the stated scope."
     ]
   },
   "task_type": "cancel_order",

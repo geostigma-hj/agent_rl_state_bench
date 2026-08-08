@@ -49,25 +49,25 @@
       },
       "order_items": {
         "ITEM-9075": {
-          "item_status": {
-            "old": "delivered",
-            "new": "returned"
-          },
           "return_reason": {
             "old": null,
             "new": "changed_mind"
           },
-          "restocking_fee": {
+          "refund_method": {
             "old": null,
-            "new": 37
+            "new": "original_payment"
+          },
+          "item_status": {
+            "old": "delivered",
+            "new": "returned"
           },
           "refund_amount": {
             "old": null,
             "new": 204
           },
-          "refund_method": {
+          "restocking_fee": {
             "old": null,
-            "new": "original_payment"
+            "new": 37
           }
         }
       }
@@ -75,13 +75,6 @@
     "deleted": {}
   },
   "language_rewritten": true,
-  "judge": {
-    "decision": "ACCEPT",
-    "judge_model": "step-3.7-flash",
-    "deterministic_check_passed": true,
-    "issues": [],
-    "ambiguities": [],
-    "manual_adjudication": null
-  },
+  "judge": null,
   "language_rewriter_model": "deepseek-v4-flash"
 }

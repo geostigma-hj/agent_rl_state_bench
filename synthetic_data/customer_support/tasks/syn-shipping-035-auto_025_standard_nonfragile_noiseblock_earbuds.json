@@ -23,9 +23,9 @@
   ],
   "user_id": "cust_005",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My NoiseBlock Earbuds from order ORD-6023 arrived damaged. The package was crushed.",
+  "opening_message": "Hi, my NoiseBlock Earbuds from order ORD-6023 just arrived damaged. The box was crushed and the earbuds don't work properly.",
   "user_simulator": {
-    "user_sim_context": "You received NoiseBlock Earbuds from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
+    "user_sim_context": "You received NoiseBlock Earbuds from order ORD-6023 damaged in transit. You want a refund to the original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [
       "You bought NoiseBlock Earbuds in order ORD-6023.",
       "The item arrived damaged with crushed packaging."

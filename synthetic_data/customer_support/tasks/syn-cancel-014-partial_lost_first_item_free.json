@@ -1,6 +1,6 @@
 {
   "task_id": "syn-cancel-014-partial_lost_first_item_free",
-  "task_summary": "Customer requests cancellation of specific item(s) in ORD-6003. Handle by checking cancellation policy, previewing the changes, confirming, and updating only the eligible items.",
+  "task_summary": "Customer wants to cancel only item ITEM-9020 (SoundMax Wireless Headphones) from order ORD-6003. The agent should handle the cancellation request by reviewing the cancellation policy, providing a preview of the cancellation (including any applicable fees or refunds), obtaining confirmation from the customer, and then updating the order to cancel only the specified item.",
   "task_requirements": [
     {
       "id": "syn-cancel-014-partial_lost_first_item_free_must_review_cancellation_policy",
@@ -17,19 +17,19 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I would like to cancel the SoundMax Wireless Headphones from order ORD-6003, but keep the rest of the order.",
+  "opening_message": "I'd like to cancel only the SoundMax Wireless Headphones from order ORD-6003.",
   "user_simulator": {
-    "user_sim_context": "Your goal is to cancel only item 'ITEM-9020' (SoundMax Wireless Headphones) from order ORD-6003, which also includes a 7-Port USB-C Hub. If the agent provides a valid cancellation preview and asks for confirmation, you should agree to proceed.",
+    "user_sim_context": "You want to cancel only the item with ID 'ITEM-9020' (SoundMax Wireless Headphones) from order ORD-6003, which also contains a 7-Port USB-C Hub. If the agent provides a valid cancellation preview (including any applicable fees or refunds) and asks for confirmation, you will agree to proceed. Do not agree to cancel any other items.",
     "known_info": [
       "You placed order ORD-6003.",
-      "The order contains: SoundMax Wireless Headphones and 7-Port USB-C Hub."
+      "The order contains: SoundMax Wireless Headphones (ITEM-9020) and a 7-Port USB-C Hub."
     ],
     "unknown_info": [
-      "You are unsure if any cancellation fee applies."
+      "You do not know whether a cancellation fee applies."
     ],
     "task_rules": [
-      "If the agent previews a valid cancellation and requests confirmation, agree to proceed.",
-      "Do not ask to cancel any items beyond the specified one."
+      "If the agent previews a valid cancellation and asks for confirmation, agree to proceed.",
+      "Do not ask to cancel items outside the stated scope."
     ]
   },
   "task_type": "cancel_order",

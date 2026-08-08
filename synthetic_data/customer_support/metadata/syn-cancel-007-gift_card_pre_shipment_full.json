@@ -35,8 +35,20 @@
   "expected_state_diff": {
     "created": {},
     "modified": {
+      "orders": {
+        "ORD-6003": {
+          "status": {
+            "old": "processing",
+            "new": "cancelled"
+          }
+        }
+      },
       "order_items": {
         "ITEM-9020": {
+          "refund_method": {
+            "old": null,
+            "new": "gift_card"
+          },
           "item_status": {
             "old": "confirmed",
             "new": "cancelled"
@@ -44,13 +56,13 @@
           "refund_amount": {
             "old": null,
             "new": 249
-          },
-          "refund_method": {
-            "old": null,
-            "new": "gift_card"
           }
         },
         "ITEM-9021": {
+          "refund_method": {
+            "old": null,
+            "new": "gift_card"
+          },
           "item_status": {
             "old": "confirmed",
             "new": "cancelled"
@@ -58,18 +70,6 @@
           "refund_amount": {
             "old": null,
             "new": 45
-          },
-          "refund_method": {
-            "old": null,
-            "new": "gift_card"
-          }
-        }
-      },
-      "orders": {
-        "ORD-6003": {
-          "status": {
-            "old": "processing",
-            "new": "cancelled"
           }
         }
       }

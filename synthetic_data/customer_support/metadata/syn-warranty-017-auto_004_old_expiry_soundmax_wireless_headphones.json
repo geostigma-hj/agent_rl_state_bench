@@ -65,27 +65,27 @@
       }
     },
     "modified": {
+      "order_items": {
+        "ITEM-9215": {
+          "replacement_item_id": {
+            "old": null,
+            "new": "ITEM-9216"
+          }
+        }
+      },
       "warranties": {
         "WRT-4013": {
           "status": {
             "old": "expired",
             "new": "claimed"
           },
-          "claim_count": {
-            "old": 0,
-            "new": 1
-          },
           "resolution": {
             "old": null,
             "new": "paid_repair_or_discounted_replacement"
-          }
-        }
-      },
-      "order_items": {
-        "ITEM-9215": {
-          "replacement_item_id": {
-            "old": null,
-            "new": "ITEM-9216"
+          },
+          "claim_count": {
+            "old": 0,
+            "new": 1
           }
         }
       }

@@ -23,7 +23,7 @@
   ],
   "user_id": "cust_005",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed the TrailStep Running Shoes from my order ORD-7208 are now cheaper, so I'd like a price adjustment refund of $25.",
+  "opening_message": "The TrailStep Running Shoes from order ORD-7208 are now listed at a lower price, so I believe I should receive a $25 refund to match the price difference.",
   "user_simulator": {
     "user_sim_context": "You want a price-match refund for TrailStep Running Shoes in order ORD-7208. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [

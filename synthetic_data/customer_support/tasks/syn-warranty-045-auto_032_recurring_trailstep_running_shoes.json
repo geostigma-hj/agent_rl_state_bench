@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-045-auto_032_recurring_trailstep_running_shoes",
-  "task_summary": "The customer seeks warranty assistance for TrailStep Running Shoes purchased under order ORD-6032. The correct procedure involves verifying warranty status, reviewing the warranty policy, presenting the resolution, obtaining confirmation, and then filing a claim according to policy. The warranty is valid, so the final decision on repair or replacement must follow the official policy.",
+  "task_summary": "Customer is requesting warranty service for defective TrailStep Running Shoes from order ORD-6032. The correct procedure involves verifying warranty status, reviewing warranty policy, previewing the resolution, confirming details, and filing a claim according to policy. Since the warranty is active, the policy determines whether a repair or replacement is issued.",
   "task_requirements": [
     {
       "id": "syn-warranty-045-auto_032_recurring_trailstep_running_shoes_must_check_warranty_status",
@@ -23,18 +23,18 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'm having issues with my TrailStep Running Shoes from order ORD-6032. Can I get a warranty replacement?",
+  "opening_message": "My TrailStep Running Shoes from order ORD-6032 are defective. Can I get warranty service?",
   "user_simulator": {
-    "user_sim_context": "You need warranty support for TrailStep Running Shoes from order ORD-6032. If the agent explains the warranty outcome per policy and asks for your consent, agree to proceed. The warranty is active, so the official policy will decide whether repair or replacement is offered.",
+    "user_sim_context": "You are seeking warranty assistance for defective TrailStep Running Shoes from order ORD-6032. If the agent presents the warranty outcome in accordance with policy and asks for confirmation, you should agree to proceed. The warranty is active, and the policy dictates whether repair or replacement applies.",
     "known_info": [
-      "You bought TrailStep Running Shoes in order ORD-6032.",
-      "The shoes are malfunctioning."
+      "You purchased TrailStep Running Shoes in order ORD-6032.",
+      "The product is defective."
     ],
     "unknown_info": [
-      "You do not know the claim count or the exact warranty resolution."
+      "You do not know the claim count or the specific warranty resolution."
     ],
     "task_rules": [
-      "Agree to proceed after a valid warranty preview. Do not request a return unless the agent indicates the warranty is not applicable."
+      "After a valid warranty preview, confirm to proceed. Do not request a return unless the agent informs you that warranty coverage is not available."
     ]
   },
   "task_type": "warranty_claim",

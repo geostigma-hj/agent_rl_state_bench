@@ -23,9 +23,9 @@
   ],
   "user_id": "cust_004",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "The SoundMax Wireless Headphones from order ORD-7208 is cheaper now, so I should get a refund for the price difference. I believe it's $45.",
+  "opening_message": "I noticed the price of the SoundMax Wireless Headphones from my order ORD-7208 has dropped. I'd like a price adjustment, and I believe I should get $45 back.",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for SoundMax Wireless Headphones in order ORD-7208. You think the drop is $45, but accept correction to $30 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
+    "user_sim_context": "You want a price-match refund for the SoundMax Wireless Headphones in order ORD-7208. You think the difference is $45, but you're open to correction to $30 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [
       "You bought SoundMax Wireless Headphones in order ORD-7208.",
       "The current product price is $219."

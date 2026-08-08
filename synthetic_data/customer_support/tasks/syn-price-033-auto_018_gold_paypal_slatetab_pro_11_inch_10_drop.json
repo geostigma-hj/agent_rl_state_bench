@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-033-auto_018_gold_paypal_slatetab_pro_11_inch_10_drop",
-  "task_summary": "Customer requests a price-match adjustment for SlateTab Pro 11-inch in ORD-7208. The correct outcome is a $10 price-match refund while keeping the order and item active.",
+  "task_summary": "Customer requests a price-match refund for SlateTab Pro 11-inch in order ORD-7208. The correct outcome is a $10 price-match refund while keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-033-auto_018_gold_paypal_slatetab_pro_11_inch_10_drop_must_lookup_product_price",
@@ -23,9 +23,9 @@
   ],
   "user_id": "cust_003",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "The SlateTab Pro 11-inch from order ORD-7208 is now cheaper, so I think I should get $10 back.",
+  "opening_message": "I noticed the SlateTab Pro 11-inch from order ORD-7208 has dropped in price, so I'd like to get a price adjustment of $5 back.",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for SlateTab Pro 11-inch in order ORD-7208. You believe the price drop is $10, but are open to correction if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
+    "user_sim_context": "You want a price-match refund for SlateTab Pro 11-inch in order ORD-7208. You think the drop is $5, but accept correction to $10 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [
       "You bought SlateTab Pro 11-inch in order ORD-7208.",
       "The current product price is $589."

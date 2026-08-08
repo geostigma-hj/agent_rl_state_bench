@@ -35,8 +35,20 @@
   "expected_state_diff": {
     "created": {},
     "modified": {
+      "orders": {
+        "ORD-6003": {
+          "status": {
+            "old": "processing",
+            "new": "cancelled"
+          }
+        }
+      },
       "order_items": {
         "ITEM-9020": {
+          "refund_method": {
+            "old": null,
+            "new": "paypal"
+          },
           "item_status": {
             "old": "confirmed",
             "new": "cancelled"
@@ -44,13 +56,13 @@
           "refund_amount": {
             "old": null,
             "new": 249
-          },
-          "refund_method": {
-            "old": null,
-            "new": "paypal"
           }
         },
         "ITEM-9021": {
+          "refund_method": {
+            "old": null,
+            "new": "paypal"
+          },
           "item_status": {
             "old": "confirmed",
             "new": "cancelled"
@@ -58,18 +70,6 @@
           "refund_amount": {
             "old": null,
             "new": 45
-          },
-          "refund_method": {
-            "old": null,
-            "new": "paypal"
-          }
-        }
-      },
-      "orders": {
-        "ORD-6003": {
-          "status": {
-            "old": "processing",
-            "new": "cancelled"
           }
         }
       }
@@ -82,7 +82,10 @@
     "judge_model": "step-3.7-flash",
     "deterministic_check_passed": true,
     "issues": [],
-    "ambiguities": [],
+    "ambiguities": [
+      "The exact content of the cancellation policy retrieved by get_policies is not defined in the environment, though the task only requires that the agent review it, not that specific policy text be matched.",
+      "The shipping_status is 'processing' with a tracking number assigned but no delivery date; this is consistent with pre-shipment but relies on the tool interpreting 'processing' as not-yet-shipped."
+    ],
     "manual_adjudication": null
   },
   "language_rewriter_model": "deepseek-v4-flash"

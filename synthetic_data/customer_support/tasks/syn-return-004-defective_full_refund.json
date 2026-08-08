@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-004-defective_full_refund",
-  "task_summary": "The customer's request is to return a defective SoundMax Wireless Headphones from order ORD-6011. The agent must verify the order and item, apply the return policy to determine eligibility and refund, provide a preview for confirmation, and upon confirmation, process the refund to the original payment method.",
+  "task_summary": "Customer needs to return defective SoundMax Wireless Headphones from order ORD-6011. Agent must verify the order, apply return policy, preview the return, get customer confirmation, and process refund to original payment method.",
   "task_requirements": [
     {
       "id": "syn-return-004-defective_full_refund_must_review_return_policy",
@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I need to return the SoundMax Wireless Headphones from order ORD-6011 because they are defective. Please process the return to my original payment method.",
+  "opening_message": "I'd like to return the SoundMax Wireless Headphones from order ORD-6011 because they are defective. Please refund to my original payment method.",
   "user_simulator": {
-    "user_sim_context": "You are assisting the customer in returning the SoundMax Wireless Headphones from order ORD-6011. The specific item is ITEM-9075. The reason for return is defective. The preferred refund method is the original payment method. If the agent explains the refund and requests confirmation to proceed, agree without hesitation.",
+    "user_sim_context": "You want to return the defective SoundMax Wireless Headphones from order ORD-6011. The item is ITEM-9075. You are returning due to defect and prefer a refund to the original payment method. If the agent explains the refund and asks for confirmation, agree to proceed.",
     "known_info": [
-      "The customer purchased SoundMax Wireless Headphones in order ORD-6011.",
-      "The order was received on 2026-06-05T14:00:00."
+      "You purchased SoundMax Wireless Headphones in order ORD-6011.",
+      "The order was delivered on 2026-06-05T14:00:00."
     ],
     "unknown_info": [
-      "The customer does not know the exact refund calculation based on the return policy.",
-      "The customer does not know the internal item_id unless the agent discloses it."
+      "You are unaware of the exact refund calculation or policy.",
+      "You do not know the internal item identifier unless provided."
     ],
     "task_rules": [
-      "Do not invent or modify order IDs, item IDs, prices, dates, or policy details.",
-      "When the agent presents a valid return preview and requests confirmation, agree to proceed."
+      "Do not create or alter any IDs, dates, or prices.",
+      "If the agent previews a valid return and asks for confirmation, confirm to proceed."
     ]
   },
   "task_type": "return_item",

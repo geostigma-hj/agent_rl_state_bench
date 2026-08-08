@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-039-auto_024_silver_gift_card_trailstep_running_shoes_50_drop",
-  "task_summary": "Customer requests a price-match refund for TrailStep Running Shoes in order ORD-7208. The correct outcome is a $50 price-match refund while keeping the order and item active.",
+  "task_summary": "Customer requests a price-match refund for TrailStep Running Shoes in ORD-7208. The correct outcome is a $50 price-match refund while keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-039-auto_024_silver_gift_card_trailstep_running_shoes_50_drop_must_lookup_product_price",
@@ -23,9 +23,9 @@
   ],
   "user_id": "cust_004",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed the price of the TrailStep Running Shoes from order ORD-7208 has dropped. I believe I should get $45 back as a price adjustment.",
+  "opening_message": "I noticed that the TrailStep Running Shoes in my order ORD-7208 have dropped in price, so I'd like to get a price adjustment. I believe the difference is $45.",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for TrailStep Running Shoes in order ORD-7208. You think the drop is $45, but accept correction to $50 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
+    "user_sim_context": "You want a price-match refund for the TrailStep Running Shoes in order ORD-7208. You think the drop is $45, but you are open to correction to $50 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should remain active.",
     "known_info": [
       "You bought TrailStep Running Shoes in order ORD-7208.",
       "The current product price is $79."

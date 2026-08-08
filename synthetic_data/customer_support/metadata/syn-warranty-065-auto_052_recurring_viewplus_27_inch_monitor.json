@@ -1,0 +1,98 @@
+{
+  "task_id": "syn-warranty-065-auto_052_recurring_viewplus_27_inch_monitor",
+  "source_seed": "30-warranty_manufacturer",
+  "generator_version": "warranty_v0.1",
+  "task_family": "warranty",
+  "mutation_level": "state",
+  "difficulty": "medium",
+  "changed_factors": [
+    "recurring_defect"
+  ],
+  "requires_confirmation": true,
+  "is_compound": false,
+  "gold_tool_plan": [
+    {
+      "tool": "get_warranty_status",
+      "params": {
+        "item_id": "ITEM-9215"
+      }
+    },
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "warranty"
+      }
+    },
+    {
+      "tool": "process_warranty_claim",
+      "params": {
+        "warranty_id": "WRT-4013",
+        "item_id": "ITEM-9215",
+        "issue_description": "Product is malfunctioning",
+        "confirm": false
+      }
+    },
+    {
+      "tool": "process_warranty_claim",
+      "params": {
+        "warranty_id": "WRT-4013",
+        "item_id": "ITEM-9215",
+        "issue_description": "Product is malfunctioning",
+        "confirm": true
+      }
+    }
+  ],
+  "expected_state_diff": {
+    "created": {
+      "order_items": {
+        "ITEM-9216": {
+          "item_id": "ITEM-9216",
+          "order_id": "ORD-6032",
+          "product_id": "PROD-2215",
+          "quantity": 1,
+          "unit_price": 499,
+          "item_status": "confirmed",
+          "return_reason": null,
+          "refund_amount": null,
+          "refund_method": null,
+          "restocking_fee": null,
+          "return_label_issued": false,
+          "replacement_item_id": null,
+          "goodwill_credit": 0,
+          "goodwill_credit_method": null,
+          "store_credit_only": false
+        }
+      }
+    },
+    "modified": {
+      "order_items": {
+        "ITEM-9215": {
+          "replacement_item_id": {
+            "old": null,
+            "new": "ITEM-9216"
+          }
+        }
+      },
+      "warranties": {
+        "WRT-4013": {
+          "status": {
+            "old": "active",
+            "new": "claimed"
+          },
+          "resolution": {
+            "old": null,
+            "new": "full_replacement"
+          },
+          "claim_count": {
+            "old": 2,
+            "new": 3
+          }
+        }
+      }
+    },
+    "deleted": {}
+  },
+  "language_rewritten": true,
+  "judge": null,
+  "language_rewriter_model": "deepseek-v4-flash"
+}

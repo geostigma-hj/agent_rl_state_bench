@@ -42,8 +42,20 @@
   "expected_state_diff": {
     "created": {},
     "modified": {
+      "orders": {
+        "ORD-6003": {
+          "status": {
+            "old": "shipped",
+            "new": "partially_cancelled"
+          }
+        }
+      },
       "order_items": {
         "ITEM-9020": {
+          "refund_method": {
+            "old": null,
+            "new": "credit_card"
+          },
           "item_status": {
             "old": "shipped",
             "new": "cancelled"
@@ -51,18 +63,6 @@
           "refund_amount": {
             "old": null,
             "new": 249
-          },
-          "refund_method": {
-            "old": null,
-            "new": "credit_card"
-          }
-        }
-      },
-      "orders": {
-        "ORD-6003": {
-          "status": {
-            "old": "shipped",
-            "new": "partially_cancelled"
           }
         }
       }
@@ -71,10 +71,12 @@
   },
   "language_rewritten": true,
   "judge": {
-    "decision": "ACCEPT",
+    "decision": "REVIEW",
     "judge_model": "step-3.7-flash",
     "deterministic_check_passed": true,
-    "issues": [],
+    "issues": [
+      "Judge call or JSON parsing failed: JSONDecodeError: Unterminated string starting at: line 6 column 21 (char 105)"
+    ],
     "ambiguities": [],
     "manual_adjudication": null
   },

@@ -1,0 +1,93 @@
+{
+  "task_id": "syn-exchange-049-auto_037_cheaper_15_instock",
+  "source_seed": "33-exchange_size_swap",
+  "generator_version": "exchange_v0.1",
+  "task_family": "exchange",
+  "mutation_level": "state",
+  "difficulty": "medium",
+  "changed_factors": [
+    "cheaper_item"
+  ],
+  "requires_confirmation": true,
+  "is_compound": false,
+  "gold_tool_plan": [
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "exchange"
+      }
+    },
+    {
+      "tool": "process_exchange",
+      "params": {
+        "item_id": "ITEM-9250",
+        "new_product_id": "PROD-2251",
+        "confirm": false
+      }
+    },
+    {
+      "tool": "process_exchange",
+      "params": {
+        "item_id": "ITEM-9250",
+        "new_product_id": "PROD-2251",
+        "confirm": true
+      }
+    }
+  ],
+  "expected_state_diff": {
+    "created": {
+      "order_items": {
+        "ITEM-9251": {
+          "item_id": "ITEM-9251",
+          "order_id": "ORD-6034",
+          "product_id": "PROD-2251",
+          "quantity": 1,
+          "unit_price": 15,
+          "item_status": "confirmed",
+          "return_reason": null,
+          "refund_amount": null,
+          "refund_method": null,
+          "restocking_fee": null,
+          "return_label_issued": false,
+          "replacement_item_id": null,
+          "goodwill_credit": 0,
+          "goodwill_credit_method": null,
+          "store_credit_only": false
+        }
+      }
+    },
+    "modified": {
+      "order_items": {
+        "ITEM-9250": {
+          "refund_amount": {
+            "old": null,
+            "new": 44
+          },
+          "item_status": {
+            "old": "delivered",
+            "new": "exchanged"
+          },
+          "replacement_item_id": {
+            "old": null,
+            "new": "ITEM-9251"
+          },
+          "refund_method": {
+            "old": null,
+            "new": "store_credit"
+          }
+        }
+      }
+    },
+    "deleted": {}
+  },
+  "language_rewritten": true,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "step-3.7-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  },
+  "language_rewriter_model": "deepseek-v4-flash"
+}

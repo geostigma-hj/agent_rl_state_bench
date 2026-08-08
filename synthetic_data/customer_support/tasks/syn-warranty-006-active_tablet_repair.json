@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-006-active_tablet_repair",
-  "task_summary": "Customer requests warranty service for SlateTab Pro 11-inch from ORD-6032. The agent must check warranty status, review warranty policy, confirm coverage, and then proceed with the appropriate resolution (repair or replacement) per policy. Since warranty is active, official policy dictates whether repair or replacement is offered.",
+  "task_summary": "Customer asks for warranty service on SlateTab Pro 11-inch from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
   "task_requirements": [
     {
       "id": "syn-warranty-006-active_tablet_repair_must_check_warranty_status",
@@ -23,20 +23,18 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "Hello, I'm having an issue with my SlateTab Pro 11-inch from order ORD-6032. It's malfunctioning. Could you let me know if I can get it replaced or repaired under warranty?",
+  "opening_message": "My SlateTab Pro 11-inch from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You want warranty assistance for your malfunctioning SlateTab Pro 11-inch purchased under order ORD-6032. When the agent confirms that the warranty is active and explains the policy-based resolution, agree to proceed. If the agent asks for confirmation before filing the claim, confirm. The warranty is active, so the official policy will determine whether repair or replacement is applicable.",
+    "user_sim_context": "You want warranty help for SlateTab Pro 11-inch from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
     "known_info": [
-      "You purchased a SlateTab Pro 11-inch under order ORD-6032.",
-      "The device is malfunctioning."
+      "You bought SlateTab Pro 11-inch in order ORD-6032.",
+      "The product is malfunctioning."
     ],
     "unknown_info": [
-      "You do not know the exact number of warranty claims you have made previously.",
-      "You do not know whether the resolution will be repair or replacement."
+      "You do not know the claim count or exact warranty resolution."
     ],
     "task_rules": [
-      "After receiving a valid warranty preview, confirm your agreement to proceed.",
-      "Do not request a return or replacement unless the agent indicates that warranty coverage is unavailable."
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
     ]
   },
   "task_type": "warranty_claim",

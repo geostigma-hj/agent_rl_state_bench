@@ -1,6 +1,6 @@
 {
   "task_id": "syn-cancel-008-paypal_pre_shipment_full",
-  "task_summary": "Customer requests full cancellation of order ORD-6003. The agent must handle it correctly by applying the cancellation policy, providing a preview, obtaining confirmation, and updating eligible items only.",
+  "task_summary": "Customer wants to cancel the full order in ORD-6003. Correct handling is to apply cancellation policy, preview, confirm, and update only the eligible items.",
   "task_requirements": [
     {
       "id": "syn-cancel-008-paypal_pre_shipment_full_must_review_cancellation_policy",
@@ -17,19 +17,19 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "Hi, I'd like to cancel my order ORD-6003 for the SoundMax Wireless Headphones and the 7-Port USB-C Hub. Please cancel the entire order.",
+  "opening_message": "I need to cancel order ORD-6003. I do not need the SoundMax Wireless Headphones and the 7-Port USB-C Hub anymore.",
   "user_simulator": {
-    "user_sim_context": "You want to cancel the entire order ORD-6003, which includes SoundMax Wireless Headphones and a 7-Port USB-C Hub. If the agent presents a valid cancellation preview, confirm that you wish to proceed.",
+    "user_sim_context": "You are the customer and want to cancel the entire order ORD-6003, which includes the SoundMax Wireless Headphones and the 7-Port USB-C Hub. If the agent provides a valid cancellation preview, confirm that you want to proceed.",
     "known_info": [
       "You placed order ORD-6003.",
-      "The order contains: SoundMax Wireless Headphones and 7-Port USB-C Hub."
+      "The order contains: SoundMax Wireless Headphones and a 7-Port USB-C Hub."
     ],
     "unknown_info": [
-      "You are unaware of any cancellation fee."
+      "You do not know whether a cancellation fee applies."
     ],
     "task_rules": [
-      "If the agent provides a valid cancellation preview and asks for confirmation, agree to proceed.",
-      "Do not request cancellation of items outside the stated scope."
+      "If the agent previews a valid cancellation and asks for confirmation, agree to proceed.",
+      "Do not ask to cancel items outside the stated scope."
     ]
   },
   "task_type": "cancel_order",

@@ -75,6 +75,21 @@ def _auto_exchange_variants() -> tuple[ExchangeVariant, ...]:
         (999, True),
         (1199, True),
         (1399, False),
+        (1599, True),
+        (1799, True),
+        (1999, False),
+        (15, True),
+        (19, True),
+        (22, False),
+        (33, True),
+        (47, True),
+        (53, False),
+        (63, True),
+        (74, True),
+        (88, False),
+        (104, True),
+        (154, True),
+        (229, False),
     ]
     variants: list[ExchangeVariant] = []
     seen = {variant.suffix for variant in BASE_EXCHANGE_VARIANTS}
@@ -95,7 +110,7 @@ def _auto_exchange_variants() -> tuple[ExchangeVariant, ...]:
             factors.append("large_price_difference")
             difficulty = "hard"
         variants.append(ExchangeVariant(suffix, difficulty, price, in_stock, factors))
-        if len(BASE_EXCHANGE_VARIANTS) + len(variants) >= 45:
+        if len(BASE_EXCHANGE_VARIANTS) + len(variants) >= 60:
             return tuple(variants)
     return tuple(variants)
 

@@ -36,8 +36,20 @@
   "expected_state_diff": {
     "created": {},
     "modified": {
+      "orders": {
+        "ORD-6003": {
+          "status": {
+            "old": "shipped",
+            "new": "cancelled"
+          }
+        }
+      },
       "order_items": {
         "ITEM-9020": {
+          "refund_method": {
+            "old": null,
+            "new": "debit_card"
+          },
           "item_status": {
             "old": "shipped",
             "new": "cancelled"
@@ -45,13 +57,13 @@
           "refund_amount": {
             "old": null,
             "new": 239
-          },
-          "refund_method": {
-            "old": null,
-            "new": "debit_card"
           }
         },
         "ITEM-9021": {
+          "refund_method": {
+            "old": null,
+            "new": "debit_card"
+          },
           "item_status": {
             "old": "shipped",
             "new": "cancelled"
@@ -59,18 +71,6 @@
           "refund_amount": {
             "old": null,
             "new": 35
-          },
-          "refund_method": {
-            "old": null,
-            "new": "debit_card"
-          }
-        }
-      },
-      "orders": {
-        "ORD-6003": {
-          "status": {
-            "old": "shipped",
-            "new": "cancelled"
           }
         }
       }
@@ -83,7 +83,9 @@
     "judge_model": "step-3.7-flash",
     "deterministic_check_passed": true,
     "issues": [],
-    "ambiguities": [],
+    "ambiguities": [
+      "The expected refund amounts ($239 and $35) imply a flat $10 intercept fee per item, but the product data shows restocking_fee_pct=15% which does not match this calculation. The fee structure must come from the cancellation policy (get_policies), which is not visible in the static environment data, creating a minor derivation gap for auditors."
+    ],
     "manual_adjudication": null
   },
   "language_rewriter_model": "deepseek-v4-flash"

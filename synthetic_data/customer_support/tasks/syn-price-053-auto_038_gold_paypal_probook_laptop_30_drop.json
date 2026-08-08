@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-053-auto_038_gold_paypal_probook_laptop_30_drop",
-  "task_summary": "Customer requests a price adjustment for the ProBook Laptop in order ORD-7208. The appropriate resolution is a $30 price-match refund, with the order and item remaining active.",
+  "task_summary": "Customer requests a price-match adjustment for ProBook Laptop in order ORD-7208. The correct outcome is a $30 price-match refund while keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-053-auto_038_gold_paypal_probook_laptop_30_drop_must_lookup_product_price",
@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_003",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "The ProBook Laptop from order ORD-7208 is now priced lower, so I believe I should receive a $45 refund.",
+  "opening_message": "I noticed the ProBook Laptop in order ORD-7208 dropped in price. I think I should get $45 back as a price adjustment.",
   "user_simulator": {
-    "user_sim_context": "Your goal is to get a price-match refund for the ProBook Laptop in order ORD-7208. You estimate the price drop to be $45, but you will accept a correction to $30 if the agent verifies the product record. You must not agree to a return, cancellation, exchange, or replacement; the item should stay active.",
+    "user_sim_context": "You want a price-match refund for the ProBook Laptop in order ORD-7208. You believe the price drop is $45, but if the agent clarifies that the actual refund is $30 based on the product record, you will accept that. Do not agree to any return, cancellation, exchange, or replacement; the item must remain active.",
     "known_info": [
       "You purchased the ProBook Laptop in order ORD-7208.",
-      "The current price of the product is $769."
+      "The current price is $769."
     ],
     "unknown_info": [
-      "You do not know the exact internal price-matching process.",
-      "You are unaware of payment allocation details unless the agent explains them."
+      "The exact internal price-match process is not known to you.",
+      "Payment allocation details are unknown unless the agent explains them."
     ],
     "task_rules": [
-      "Keep the request limited to a price-match refund; do not ask to return, cancel, or exchange the item.",
-      "If the agent informs you of the policy-supported amount and keeps the order active, confirm the refund."
+      "Keep the request limited to a price-match refund; do not ask for a return, cancellation, exchange, or replacement.",
+      "If the agent states the correct refund amount and confirms the order stays active, confirm the refund."
     ]
   },
   "task_type": "price_match_refund",

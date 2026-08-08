@@ -23,7 +23,7 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "Hello, I'm contacting you about my Framed Wall Mirror from order ORD-6023. The package arrived completely crushed and the mirror is damaged. I'd like to request a refund for this item.",
+  "opening_message": "I received my Framed Wall Mirror from order ORD-6023, but it arrived damaged - the package was crushed. Can you help?",
   "user_simulator": {
     "user_sim_context": "You received Framed Wall Mirror from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [

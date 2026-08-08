@@ -1,0 +1,90 @@
+{
+  "task_id": "syn-warranty-055-auto_042_recurring_airpure_compact_purifier",
+  "task_summary": "Customer requests warranty service for an AirPure Compact Purifier from order ORD-6032. The agent must verify warranty eligibility, explain the applicable warranty policy, obtain customer confirmation, and then file the appropriate claim. Since the warranty is active, the official policy will determine whether repair or replacement is issued.",
+  "task_requirements": [
+    {
+      "id": "syn-warranty-055-auto_042_recurring_airpure_compact_purifier_must_check_warranty_status",
+      "kind": "must",
+      "requirement": "Agent must check warranty status for ITEM-9215.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-055-auto_042_recurring_airpure_compact_purifier_must_review_warranty_policy",
+      "kind": "must",
+      "requirement": "Agent must review warranty policy before filing a warranty claim.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-055-auto_042_recurring_airpure_compact_purifier_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a process_warranty_claim preview tool call for WRT-4013 with confirm false or omitted before making the confirm=true process_warranty_claim tool call.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_004",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "I have an AirPure Compact Purifier from order ORD-6032 that's broken. Can I get it fixed under warranty?",
+  "user_simulator": {
+    "user_sim_context": "You are seeking warranty assistance for your AirPure Compact Purifier from order ORD-6032. If the agent presents the warranty outcome as per policy and asks for confirmation, agree to move forward. As the warranty is active, the official policy will dictate the resolution.",
+    "known_info": [
+      "You purchased an AirPure Compact Purifier under order ORD-6032.",
+      "The device is malfunctioning."
+    ],
+    "unknown_info": [
+      "You are not aware of the claim count or the exact warranty decision."
+    ],
+    "task_rules": [
+      "Agree to proceed once a valid warranty preview is provided. Do not request a return unless the agent states the warranty is not applicable."
+    ]
+  },
+  "task_type": "warranty_claim",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9215",
+      "field": "replacement_item_id",
+      "expected_value": "ITEM-9216"
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "claim_count",
+      "expected_value": 3
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "resolution",
+      "expected_value": "full_replacement"
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "status",
+      "expected_value": "claimed"
+    },
+    {
+      "entity_type": "order_items",
+      "match_fields": {
+        "item_id": "ITEM-9216"
+      },
+      "expected_fields": {
+        "order_id": "ORD-6032",
+        "product_id": "PROD-2215",
+        "quantity": 1,
+        "unit_price": 159,
+        "item_status": "confirmed",
+        "return_reason": null,
+        "refund_amount": null,
+        "refund_method": null,
+        "restocking_fee": null,
+        "return_label_issued": false,
+        "replacement_item_id": null,
+        "goodwill_credit": 0,
+        "goodwill_credit_method": null,
+        "store_credit_only": false
+      }
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-warranty-055-auto_042_recurring_airpure_compact_purifier.json"
+}

@@ -1,0 +1,63 @@
+{
+  "task_id": "syn-cancel-055-auto_040_split_processing_item0",
+  "task_summary": "Customer wants to cancel only item ITEM-9020 from order ORD-6003 (containing SoundMax Wireless Headphones and a 7-Port USB-C Hub). The correct procedure is to handle the cancellation according to policy, provide a preview, obtain confirmation, and update only the eligible item.",
+  "task_requirements": [
+    {
+      "id": "syn-cancel-055-auto_040_split_processing_item0_must_review_cancellation_policy",
+      "kind": "must",
+      "requirement": "Agent must review the cancellation policy before using cancel_order.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-cancel-055-auto_040_split_processing_item0_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a cancel_order preview tool call for items ['ITEM-9020'] with confirm false or omitted before making the confirm=true cancel_order tool call.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_004",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "I'd like to cancel the SoundMax Wireless Headphones from order ORD-6003, but keep the remaining items.",
+  "user_simulator": {
+    "user_sim_context": "You want to cancel only the item 'ITEM-9020' from order ORD-6003. That order includes SoundMax Wireless Headphones and a 7-Port USB-C Hub. If the agent provides a valid cancellation preview and asks for confirmation, you will agree to proceed.",
+    "known_info": [
+      "You placed order ORD-6003.",
+      "The order contains: SoundMax Wireless Headphones and a 7-Port USB-C Hub."
+    ],
+    "unknown_info": [
+      "You are not aware if a cancellation fee will be charged."
+    ],
+    "task_rules": [
+      "If the agent previews a valid cancellation and asks for confirmation, agree to proceed.",
+      "Do not request cancellation of any items outside the specified scope."
+    ]
+  },
+  "task_type": "cancel_order",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9020",
+      "field": "item_status",
+      "expected_value": "cancelled"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9020",
+      "field": "refund_amount",
+      "expected_value": 249
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9020",
+      "field": "refund_method",
+      "expected_value": "split"
+    },
+    {
+      "entity_type": "orders",
+      "record_key": "ORD-6003",
+      "field": "status",
+      "expected_value": "partially_cancelled"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-cancel-055-auto_040_split_processing_item0.json"
+}

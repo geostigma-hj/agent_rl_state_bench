@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-006-gift_card_adjustment",
-  "task_summary": "Customer requests a price-match refund for Artisan Crystal Vase in order ORD-7208. The correct outcome is a $10 price-match refund while keeping the order and item active.",
+  "task_summary": "Customer requests a price-match adjustment for Artisan Crystal Vase in ORD-7208. The correct outcome is a $10 price-match refund while keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-006-gift_card_adjustment_must_lookup_product_price",
@@ -23,7 +23,7 @@
   ],
   "user_id": "cust_004",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "The Artisan Crystal Vase from order ORD-7208 is reduced in price, so I believe I'm entitled to a $10 refund under your price-match policy.",
+  "opening_message": "I noticed the Artisan Crystal Vase from my order ORD-7208 is now listed at a lower price. I'd like to get a $10 price adjustment refund.",
   "user_simulator": {
     "user_sim_context": "You want a price-match refund for Artisan Crystal Vase in order ORD-7208. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [

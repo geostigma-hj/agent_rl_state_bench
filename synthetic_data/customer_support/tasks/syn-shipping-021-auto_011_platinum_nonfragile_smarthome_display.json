@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-021-auto_011_platinum_nonfragile_smarthome_display",
-  "task_summary": "Customer reports SmartHome Display from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
+  "task_summary": "Customer reports that the SmartHome Display from order ORD-6023 arrived damaged due to crushed packaging. The appropriate handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and apply fragile goodwill credit if applicable.",
   "task_requirements": [
     {
       "id": "syn-shipping-021-auto_011_platinum_nonfragile_smarthome_display_must_review_shipping_policy",
@@ -23,19 +23,19 @@
   ],
   "user_id": "cust_001",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My SmartHome Display from order ORD-6023 arrived damaged. The package was crushed.",
+  "opening_message": "I received my SmartHome Display from order ORD-6023 and it arrived damaged. The package was crushed.",
   "user_simulator": {
-    "user_sim_context": "You received SmartHome Display from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
+    "user_sim_context": "You have received a SmartHome Display from order ORD-6023 that was damaged in transit. You want a refund to the original payment method. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [
-      "You bought SmartHome Display in order ORD-6023.",
-      "The item arrived damaged with crushed packaging."
+      "You purchased a SmartHome Display in order ORD-6023.",
+      "The item arrived damaged with the package crushed."
     ],
     "unknown_info": [
       "You do not know the internal item_id unless the agent tells you."
     ],
     "task_rules": [
       "Keep the issue scoped to shipping damage; do not ask for a changed-mind return, cancellation, warranty claim, or exchange.",
-      "Confirm after a valid damaged-in-transit return preview. If the item is fragile, expect the separate goodwill credit."
+      "After a valid damaged-in-transit return preview, if the item is fragile, expect the separate goodwill credit."
     ]
   },
   "task_type": "shipping_claim",

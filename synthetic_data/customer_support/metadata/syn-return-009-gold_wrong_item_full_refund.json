@@ -50,21 +50,9 @@
       },
       "order_items": {
         "ITEM-9075": {
-          "item_status": {
-            "old": "delivered",
-            "new": "returned"
-          },
           "return_reason": {
             "old": null,
             "new": "wrong_item"
-          },
-          "restocking_fee": {
-            "old": null,
-            "new": 0
-          },
-          "refund_amount": {
-            "old": null,
-            "new": 249
           },
           "refund_method": {
             "old": null,
@@ -73,6 +61,18 @@
           "return_label_issued": {
             "old": false,
             "new": true
+          },
+          "item_status": {
+            "old": "delivered",
+            "new": "returned"
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 249
+          },
+          "restocking_fee": {
+            "old": null,
+            "new": 0
           }
         }
       }
@@ -80,13 +80,6 @@
     "deleted": {}
   },
   "language_rewritten": true,
-  "judge": {
-    "decision": "ACCEPT",
-    "judge_model": "step-3.7-flash",
-    "deterministic_check_passed": true,
-    "issues": [],
-    "ambiguities": [],
-    "manual_adjudication": null
-  },
+  "judge": null,
   "language_rewriter_model": "deepseek-v4-flash"
 }

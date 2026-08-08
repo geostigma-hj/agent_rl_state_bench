@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-041-auto_026_gold_prime_changed_mind",
-  "task_summary": "Customer requests a return for SoundMax Wireless Headphones from order ORD-6011. Agent must apply return policy, preview the return, get customer confirmation, and process the correct refund to the original payment method.",
+  "task_summary": "Customer requests a return for the SoundMax Wireless Headphones from order ORD-6011. The agent must apply the return policy, preview the return, get customer confirmation, and process the correct refund to the original payment method.",
   "task_requirements": [
     {
       "id": "syn-return-041-auto_026_gold_prime_changed_mind_must_review_return_policy",
@@ -23,19 +23,19 @@
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to return the SoundMax Wireless Headphones I ordered (order ORD-6011). I opened the box but changed my mind. Could you please process a refund to my original payment method?",
+  "opening_message": "Hi, I'd like to return the SoundMax Wireless Headphones I ordered (order ORD-6011). I opened the box, but I've changed my mind and don't want them anymore. I'd like the refund to go back to my original payment method, please.",
   "user_simulator": {
-    "user_sim_context": "You need help returning SoundMax Wireless Headphones from order ORD-6011. The item ID is ITEM-9075. Your stated reason is 'changed mind'. Your preferred refund method is original payment. When the agent explains the refund and asks for confirmation, agree to proceed.",
+    "user_sim_context": "You want to return the SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is 'changed mind'. Your preferred refund method is original payment. When the agent shows the return preview and asks for confirmation, agree to proceed.",
     "known_info": [
-      "You purchased SoundMax Wireless Headphones in order ORD-6011.",
-      "Order received on 2026-06-08T14:00:00."
+      "You bought SoundMax Wireless Headphones in order ORD-6011.",
+      "You received the order on 2026-06-08T14:00:00."
     ],
     "unknown_info": [
-      "You don't know the exact return policy calculation.",
-      "You don't know the internal item ID unless the agent tells you."
+      "You are not aware of the exact return policy calculation.",
+      "You do not know the item_id unless the agent tells you."
     ],
     "task_rules": [
-      "Don't invent order IDs, item IDs, prices, dates, or policy details.",
+      "Do not invent order IDs, item IDs, prices, dates, or policy details.",
       "If the agent previews a valid return and asks for confirmation, agree to proceed."
     ]
   },

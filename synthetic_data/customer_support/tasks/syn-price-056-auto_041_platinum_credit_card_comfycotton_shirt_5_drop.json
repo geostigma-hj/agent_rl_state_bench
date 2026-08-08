@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_001",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed the ComfyCotton Shirt from my order ORD-7208 is now priced lower. I'd like a price adjustment to get $20 back.",
+  "opening_message": "Hey, I noticed the ComfyCotton Shirt from order ORD-7208 is now listed at a lower price. I think I should get $20 back as a price adjustment.",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for ComfyCotton Shirt in order ORD-7208. You think the drop is $20, but accept correction to $5 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
+    "user_sim_context": "You want a price-match refund for ComfyCotton Shirt in order ORD-7208. You initially think the price difference is $20, but you are open to correction if the agent verifies the current price. Do not allow a return, cancellation, exchange, or replacement; the item should remain active in the order.",
     "known_info": [
       "You bought ComfyCotton Shirt in order ORD-7208.",
       "The current product price is $54."
     ],
     "unknown_info": [
       "You do not know the exact internal price-match workflow.",
-      "You do not know payment allocation details unless the agent explains them."
+      "You do not know how the refund will be allocated to your payment method unless the agent explains."
     ],
     "task_rules": [
-      "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
-      "If the agent previews the policy-supported amount and keeps the order active, confirm the refund."
+      "Keep the request focused on a price-match refund; do not ask to return, cancel, or exchange the item.",
+      "If the agent confirms the policy-supported refund amount and keeps the order active, confirm the refund."
     ]
   },
   "task_type": "price_match_refund",

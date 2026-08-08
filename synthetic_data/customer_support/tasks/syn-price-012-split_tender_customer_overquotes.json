@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-012-split_tender_customer_overquotes",
-  "task_summary": "Customer requests a price adjustment for TechPhone Pro 16 in ORD-7208. The correct outcome is a $30 price-match refund while the order and item remain active.",
+  "task_summary": "Customer requests a price-match adjustment for TechPhone Pro 16 in ORD-7208. The correct outcome is a $30 price-match refund while keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-012-split_tender_customer_overquotes_must_lookup_product_price",
@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_001",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed the TechPhone Pro 16 from order ORD-7208 has dropped in price, so I believe I'm entitled to an $80 refund.",
+  "opening_message": "I bought the TechPhone Pro 16 in order ORD-7208 and I noticed the price has dropped. I think I should get $80 back.",
   "user_simulator": {
-    "user_sim_context": "You are seeking a price-match refund for the TechPhone Pro 16 in order ORD-7208. You assume the price difference is $80, but you are willing to accept a corrected amount of $30 if the agent verifies the product record. You do not want to return, cancel, exchange, or replace the item; it must remain active.",
+    "user_sim_context": "You want a price-match refund for TechPhone Pro 16 in order ORD-7208. You think the drop is $80, but accept correction to $30 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [
-      "You purchased the TechPhone Pro 16 in order ORD-7208.",
-      "The current price for the TechPhone Pro 16 is $769."
+      "You bought TechPhone Pro 16 in order ORD-7208.",
+      "The current product price is $769."
     ],
     "unknown_info": [
-      "You are not aware of the specific internal price-match policy.",
-      "You do not know how the refund will be allocated across payment methods unless explained."
+      "You do not know the exact internal price-match workflow.",
+      "You do not know payment allocation details unless the agent explains them."
     ],
     "task_rules": [
-      "Focus solely on requesting a price-match refund; avoid any mention of returning, canceling, or exchanging the item.",
-      "If the agent states the approved refund amount and confirms the order remains active, accept the refund."
+      "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
+      "If the agent previews the policy-supported amount and keeps the order active, confirm the refund."
     ]
   },
   "task_type": "price_match_refund",

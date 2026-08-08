@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-012-maxed_low_value_paid_repair",
-  "task_summary": "Customer requests warranty service for PowerBlend Mini Blender from order ORD-6032. Correct handling: verify warranty status, review policy, present the resolution, obtain confirmation, and proceed as per policy. Since warranty claims have reached the maximum, only a paid repair is possible.",
+  "task_summary": "Customer requests warranty service for PowerBlend Mini Blender purchased under order ORD-6032. Correct handling requires verifying warranty status, reviewing warranty policy, previewing the resolution, obtaining confirmation, and filing the appropriate claim. The warranty has reached its maximum claim count, so the policy permits only a paid repair.",
   "task_requirements": [
     {
       "id": "syn-warranty-012-maxed_low_value_paid_repair_must_check_warranty_status",
@@ -23,18 +23,18 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My PowerBlend Mini Blender from order ORD-6032 is malfunctioning. Can I get it repaired under warranty?",
+  "opening_message": "My PowerBlend Mini Blender from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You are seeking warranty assistance for your PowerBlend Mini Blender from order ORD-6032. If the agent explains that the warranty has been exhausted and the only option is paid repair, agree to proceed. You expect that policy applies.",
+    "user_sim_context": "You are seeking warranty assistance for your PowerBlend Mini Blender from order ORD-6032. If the agent explains the warranty outcome based on policy and asks for confirmation, you agree to proceed. Note that the warranty has been used up, so the policy allows only a paid repair.",
     "known_info": [
-      "You purchased PowerBlend Mini Blender in order ORD-6032.",
-      "The product is not functioning correctly."
+      "You purchased a PowerBlend Mini Blender under order ORD-6032.",
+      "The product is malfunctioning."
     ],
     "unknown_info": [
-      "You are unaware of the exact warranty claim count or policy details."
+      "You are unaware of the claim count or the exact warranty resolution."
     ],
     "task_rules": [
-      "Confirm after the agent presents the warranty resolution. Do not request a return unless the agent states warranty is not available."
+      "Confirm after a valid warranty preview. Do not request a return unless the agent states warranty is unavailable."
     ]
   },
   "task_type": "warranty_claim",

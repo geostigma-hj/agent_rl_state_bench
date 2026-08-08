@@ -23,9 +23,9 @@
   ],
   "user_id": "cust_001",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My Porcelain Dinner Set from order ORD-6023 arrived damaged. The package was crushed.",
+  "opening_message": "I got a Porcelain Dinner Set from order ORD-6023, but it arrived damaged. The package was crushed.",
   "user_simulator": {
-    "user_sim_context": "You received Porcelain Dinner Set from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
+    "user_sim_context": "You received a Porcelain Dinner Set from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [
       "You bought Porcelain Dinner Set in order ORD-6023.",
       "The item arrived damaged with crushed packaging."

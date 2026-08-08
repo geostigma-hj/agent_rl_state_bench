@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-036-auto_023_recent_expiry_brewmaster_espresso_machine",
-  "task_summary": "Customer requests warranty assistance for the BrewMaster Espresso Machine from order ORD-6032. Proper handling requires checking warranty status, reviewing policy, previewing the resolution, and confirming before filing a claim. Since the warranty expired less than 30 days ago, the policy allows a 50% discount on repair, provided the customer confirms after preview.",
+  "task_summary": "Customer seeks warranty assistance for a malfunctioning BrewMaster Espresso Machine from order ORD-6032. The correct process is to verify warranty status, review the warranty policy, present the preview, get confirmation, and then process the claim. Since the warranty expired less than 30 days ago, the policy allows a 50% discount on repairs after preview and confirmation, which should be offered.",
   "task_requirements": [
     {
       "id": "syn-warranty-036-auto_023_recent_expiry_brewmaster_espresso_machine_must_check_warranty_status",
@@ -23,18 +23,19 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My BrewMaster Espresso Machine from order ORD-6032 is malfunctioning. Can I get warranty service?",
+  "opening_message": "My BrewMaster Espresso Machine from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You want warranty help for your BrewMaster Espresso Machine from order ORD-6032. If the agent explains the warranty outcome per policy and asks for confirmation, agree to proceed. Since the warranty expired less than 30 days ago, the policy allows a 50% discount on repair after preview and your confirmation.",
+    "user_sim_context": "You are seeking warranty help for a malfunctioning BrewMaster Espresso Machine from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty expired less than 30 days ago, so the official policy allows a 50% discount on repairs after preview and confirmation. You should accept that outcome.",
     "known_info": [
-      "You bought the BrewMaster Espresso Machine in order ORD-6032.",
-      "The product is malfunctioning."
+      "You purchased a BrewMaster Espresso Machine in order ORD-6032.",
+      "The product is currently malfunctioning."
     ],
     "unknown_info": [
-      "You do not know the claim count or the exact warranty resolution."
+      "You do not know the claim count or the exact warranty resolution.",
+      "You are not aware that the warranty has expired but within 30 days."
     ],
     "task_rules": [
-      "Confirm after a valid warranty preview. Do not ask for a return unless the agent states the warranty is unavailable."
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
     ]
   },
   "task_type": "warranty_claim",

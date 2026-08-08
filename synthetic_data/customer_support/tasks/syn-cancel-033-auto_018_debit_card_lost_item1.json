@@ -17,7 +17,7 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to cancel only the 7-Port USB-C Hub from order ORD-6003.",
+  "opening_message": "I need to cancel just the 7-Port USB-C Hub from order ORD-6003.",
   "user_simulator": {
     "user_sim_context": "You want to cancel only item(s) ['ITEM-9021'] from order ORD-6003, which contains SoundMax Wireless Headphones, 7-Port USB-C Hub. If the agent explains a valid cancellation preview, confirm that you want to proceed.",
     "known_info": [

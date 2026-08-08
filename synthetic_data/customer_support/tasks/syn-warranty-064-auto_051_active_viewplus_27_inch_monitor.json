@@ -1,0 +1,62 @@
+{
+  "task_id": "syn-warranty-064-auto_051_active_viewplus_27_inch_monitor",
+  "task_summary": "Customer requests warranty service for a ViewPlus 27-inch Monitor purchased with order ORD-6032. The correct handling is to verify that the warranty is active, review the warranty policy, preview the resolution, obtain customer confirmation, and then file the claim according to policy. Since the warranty is active, the policy will determine whether repair or replacement is provided.",
+  "task_requirements": [
+    {
+      "id": "syn-warranty-064-auto_051_active_viewplus_27_inch_monitor_must_check_warranty_status",
+      "kind": "must",
+      "requirement": "Agent must check warranty status for ITEM-9215.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-064-auto_051_active_viewplus_27_inch_monitor_must_review_warranty_policy",
+      "kind": "must",
+      "requirement": "Agent must review warranty policy before filing a warranty claim.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-064-auto_051_active_viewplus_27_inch_monitor_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a process_warranty_claim preview tool call for WRT-4013 with confirm false or omitted before making the confirm=true process_warranty_claim tool call.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_004",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "My ViewPlus 27-inch Monitor from order ORD-6032 is broken. Can I get it fixed under warranty?",
+  "user_simulator": {
+    "user_sim_context": "You are seeking warranty assistance for your ViewPlus 27-inch Monitor from order ORD-6032. If the agent explains the policy-based outcome and asks for confirmation, you agree to proceed. Since the warranty is active, the policy will decide between repair and replacement.",
+    "known_info": [
+      "You purchased a ViewPlus 27-inch Monitor under order ORD-6032.",
+      "The product is malfunctioning."
+    ],
+    "unknown_info": [
+      "You do not know the claim count or the exact warranty resolution."
+    ],
+    "task_rules": [
+      "Confirm after a valid warranty preview. Do not request a return unless the agent states the warranty is not applicable."
+    ]
+  },
+  "task_type": "warranty_claim",
+  "state_requirements": [
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "claim_count",
+      "expected_value": 1
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "resolution",
+      "expected_value": "repair"
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "status",
+      "expected_value": "claimed"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-warranty-064-auto_051_active_viewplus_27_inch_monitor.json"
+}

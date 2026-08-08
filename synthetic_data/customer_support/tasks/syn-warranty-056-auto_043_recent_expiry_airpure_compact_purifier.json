@@ -1,0 +1,62 @@
+{
+  "task_id": "syn-warranty-056-auto_043_recent_expiry_airpure_compact_purifier",
+  "task_summary": "Customer requests warranty service for an AirPure Compact Purifier from order ORD-6032. The correct process is to verify warranty status, review the warranty policy, preview the outcome, confirm with the customer, and then file the policy-compliant claim. Since the warranty expired less than 30 days ago, the official policy allows a 50% off repair after preview and confirmation.",
+  "task_requirements": [
+    {
+      "id": "syn-warranty-056-auto_043_recent_expiry_airpure_compact_purifier_must_check_warranty_status",
+      "kind": "must",
+      "requirement": "Agent must check warranty status for ITEM-9215.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-056-auto_043_recent_expiry_airpure_compact_purifier_must_review_warranty_policy",
+      "kind": "must",
+      "requirement": "Agent must review warranty policy before filing a warranty claim.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-056-auto_043_recent_expiry_airpure_compact_purifier_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a process_warranty_claim preview tool call for WRT-4013 with confirm false or omitted before making the confirm=true process_warranty_claim tool call.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_004",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "My AirPure Compact Purifier from order ORD-6032 is malfunctioning. Can I use the warranty?",
+  "user_simulator": {
+    "user_sim_context": "You are seeking warranty assistance for your AirPure Compact Purifier from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. Despite the warranty having expired less than 30 days ago, the official policy allows a 50% off repair after preview and confirmation.",
+    "known_info": [
+      "You purchased an AirPure Compact Purifier in order ORD-6032.",
+      "The product is malfunctioning."
+    ],
+    "unknown_info": [
+      "You are not aware of the claim count or the exact warranty resolution."
+    ],
+    "task_rules": [
+      "Confirm after receiving a valid warranty preview. Do not request a return unless the agent states that the warranty is unavailable."
+    ]
+  },
+  "task_type": "warranty_claim",
+  "state_requirements": [
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "claim_count",
+      "expected_value": 1
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "resolution",
+      "expected_value": "discounted_repair"
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "status",
+      "expected_value": "claimed"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-warranty-056-auto_043_recent_expiry_airpure_compact_purifier.json"
+}

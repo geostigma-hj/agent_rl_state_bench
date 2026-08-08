@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-048-auto_033_silver_nopri_changed_mind_mislabel",
-  "task_summary": "Customer wants to return SoundMax Wireless Headphones from ORD-6011 due to dissatisfaction with the color/appearance. This is a changed-mind return, not a defect. The correct resolution is to apply the standard electronics restocking policy.",
+  "task_summary": "Customer requests return for SoundMax Wireless Headphones from ORD-6011 citing defect, but the issue is cosmetic. The correct resolution is a changed-mind return under standard electronics restocking policy.",
   "task_requirements": [
     {
       "id": "syn-return-048-auto_033_silver_nopri_changed_mind_mislabel_must_review_return_policy",
@@ -29,21 +29,21 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to return the SoundMax Wireless Headphones from order ORD-6011. I'm not satisfied with the color and appearance—it's not what I expected.",
+  "opening_message": "I'd like to return the SoundMax Wireless Headphones from order ORD-6011. They're defective: the color and look aren't what I expected.",
   "user_simulator": {
-    "user_sim_context": "You want to return the SoundMax Wireless Headphones from order ORD-6011. The item is ITEM-9075. Your stated reason is that you changed your mind about the color and look. You prefer a refund to the original payment method. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed. If asked what the issue is, explain that the headphones work fine but you are disappointed with the color and overall appearance.",
+    "user_sim_context": "You want to return SoundMax Wireless Headphones from order ORD-6011. The item is ITEM-9075. You stated the reason as defective. You prefer a refund to the original payment method. If the agent asks for confirmation after explaining the refund, confirm you want to proceed. If asked what is defective, explain the product works but you are disappointed with its color and appearance.",
     "known_info": [
       "You bought SoundMax Wireless Headphones in order ORD-6011.",
       "You received the order on 2026-06-05T14:00:00."
     ],
     "unknown_info": [
       "You do not know the exact return policy calculation.",
-      "You do not know the internal item_id unless the agent tells you."
+      "You do not know the internal item_id unless told."
     ],
     "task_rules": [
       "Do not invent order IDs, item IDs, prices, dates, or policy details.",
       "If the agent previews a valid return and asks for confirmation, agree to proceed.",
-      "When asked to clarify the issue, say the item functions correctly but does not match your aesthetic expectations."
+      "When asked to clarify the defect, say the item functions correctly but does not match your aesthetic expectations."
     ]
   },
   "task_type": "return_item",

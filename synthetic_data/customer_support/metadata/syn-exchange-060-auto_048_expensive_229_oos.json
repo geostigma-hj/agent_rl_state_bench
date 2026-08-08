@@ -1,0 +1,89 @@
+{
+  "task_id": "syn-exchange-060-auto_048_expensive_229_oos",
+  "source_seed": "33-exchange_size_swap",
+  "generator_version": "exchange_v0.1",
+  "task_family": "exchange",
+  "mutation_level": "state",
+  "difficulty": "hard",
+  "changed_factors": [
+    "out_of_stock",
+    "expensive_item",
+    "store_credit_fallback"
+  ],
+  "requires_confirmation": true,
+  "is_compound": false,
+  "gold_tool_plan": [
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "exchange"
+      }
+    },
+    {
+      "tool": "process_exchange",
+      "params": {
+        "item_id": "ITEM-9250",
+        "new_product_id": "PROD-2251",
+        "confirm": false
+      }
+    },
+    {
+      "tool": "process_exchange",
+      "params": {
+        "item_id": "ITEM-9250",
+        "new_product_id": "PROD-2251",
+        "confirm": true
+      }
+    }
+  ],
+  "expected_state_diff": {
+    "created": {},
+    "modified": {
+      "orders": {
+        "ORD-6034": {
+          "status": {
+            "old": "delivered",
+            "new": "fully_returned"
+          }
+        }
+      },
+      "order_items": {
+        "ITEM-9250": {
+          "refund_amount": {
+            "old": null,
+            "new": 59
+          },
+          "item_status": {
+            "old": "delivered",
+            "new": "returned"
+          },
+          "refund_method": {
+            "old": null,
+            "new": "store_credit"
+          },
+          "return_reason": {
+            "old": null,
+            "new": "changed_mind"
+          },
+          "restocking_fee": {
+            "old": null,
+            "new": 0
+          }
+        }
+      }
+    },
+    "deleted": {}
+  },
+  "language_rewritten": true,
+  "judge": {
+    "decision": "REVIEW",
+    "judge_model": "step-3.7-flash",
+    "deterministic_check_passed": true,
+    "issues": [
+      "Judge call or JSON parsing failed: APIStatusError: Error code: 402 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details', 'type': 'quota_exceeded'}}"
+    ],
+    "ambiguities": [],
+    "manual_adjudication": null
+  },
+  "language_rewriter_model": "deepseek-v4-flash"
+}

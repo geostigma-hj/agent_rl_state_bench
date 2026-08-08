@@ -1,6 +1,6 @@
 {
   "task_id": "syn-exchange-037-auto_025_expensive_499_instock",
-  "task_summary": "Customer wants to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in size Large. Correct handling is to apply the exchange policy, preview the exchange, confirm, and then apply the policy-defined payment or store-credit outcome. If the target item costs more, the customer pays the difference; if it costs less, the difference is given as store credit.",
+  "task_summary": "Customer requests exchange of Premium Cotton Shirt from ORD-6034 to Premium Cotton Shirt (Large). Correct process: apply exchange policy, preview the exchange, confirm, and handle any price difference as per policy—if target costs more, customer pays extra; if less, store credit issued.",
   "task_requirements": [
     {
       "id": "syn-exchange-037-auto_025_expensive_499_instock_must_review_exchange_policy",
@@ -17,18 +17,18 @@
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in size Large.",
+  "opening_message": "I'd like to exchange the Premium Cotton Shirt I ordered in ORD-6034 for a Premium Cotton Shirt in size Large.",
   "user_simulator": {
     "user_sim_context": "You want to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in size Large. If the agent previews a valid exchange and asks for confirmation, agree to proceed.",
     "known_info": [
-      "You bought a Premium Cotton Shirt in order ORD-6034.",
-      "You want a Premium Cotton Shirt in size Large instead."
+      "You purchased a Premium Cotton Shirt in order ORD-6034.",
+      "You want to exchange it for a Premium Cotton Shirt in size Large."
     ],
     "unknown_info": [
-      "You do not know the exchange price-difference policy."
+      "You are not aware of the exchange price-difference policy."
     ],
     "task_rules": [
-      "Do not ask for a different product. Confirm after a valid preview."
+      "Do not request a different product. Confirm after a valid preview."
     ]
   },
   "task_type": "exchange_item",

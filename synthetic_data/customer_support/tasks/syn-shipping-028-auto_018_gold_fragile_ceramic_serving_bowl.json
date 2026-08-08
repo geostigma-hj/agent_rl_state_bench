@@ -23,7 +23,7 @@
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I received my Ceramic Serving Bowl from order ORD-6023 today, but it arrived damaged. The box was crushed during delivery.",
+  "opening_message": "Hello, I received my Ceramic Serving Bowl from order ORD-6023 today, but it arrived damaged. The box was crushed in transit.",
   "user_simulator": {
     "user_sim_context": "You received Ceramic Serving Bowl from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [

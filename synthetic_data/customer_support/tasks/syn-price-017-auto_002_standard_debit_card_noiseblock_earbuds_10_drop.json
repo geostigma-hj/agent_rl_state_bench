@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-017-auto_002_standard_debit_card_noiseblock_earbuds_10_drop",
-  "task_summary": "Customer is requesting a price-match refund for the NoiseBlock Earbuds in order ORD-7208. The resolution is to issue a $10 price-match refund while keeping the order and item active.",
+  "task_summary": "Customer requests price match for the NoiseBlock Earbuds in ORD-7208. Agent should verify the product record and offer the correct $10 refund, keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-017-auto_002_standard_debit_card_noiseblock_earbuds_10_drop_must_lookup_product_price",
@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_002",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed that the NoiseBlock Earbuds from my order ORD-7208 are now priced lower, so I believe I'm entitled to a price adjustment of $25.",
+  "opening_message": "I noticed the NoiseBlock Earbuds (ORDER-ORD-7208) went down in price. I think I should get a $25 adjustment.",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for the NoiseBlock Earbuds in order ORD-7208. You think the price drop is $25, but you are willing to accept the correct amount if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should remain active.",
+    "user_sim_context": "You are requesting a price-match refund for NoiseBlock Earbuds in order ORD-7208. You believe the price difference is $25, but you are open to correction if the agent confirms the official product record. You do not want to return, cancel, exchange, or replace the item; it should remain active.",
     "known_info": [
-      "You purchased NoiseBlock Earbuds in order ORD-7208.",
-      "The current product price is $109."
+      "Purchased NoiseBlock Earbuds in order ORD-7208.",
+      "Current listed price for the product is $109."
     ],
     "unknown_info": [
-      "You are unaware of the exact internal price-match process.",
-      "You do not know how the refund will be allocated unless the agent explains."
+      "Exact internal price-match policy and process.",
+      "How the refund will be allocated to your payment unless the agent explains."
     ],
     "task_rules": [
-      "Keep the request limited to a price-match refund; do not ask for a return, cancellation, or exchange.",
-      "If the agent confirms the policy-supported refund amount and keeps the order active, confirm the refund."
+      "Focus only on a price-match refund, not return, cancellation, or exchange.",
+      "If the agent explains the policy-supported amount and confirms the order stays active, accept the refund."
     ]
   },
   "task_type": "price_match_refund",

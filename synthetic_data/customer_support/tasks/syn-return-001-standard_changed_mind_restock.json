@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-001-standard_changed_mind_restock",
-  "task_summary": "Customer requests a return for the SoundMax Wireless Headphones from order ORD-6011. The agent should check the return policy, preview the return details, obtain customer confirmation, and then process the refund to the original payment method.",
+  "task_summary": "Customer requests a return for the SoundMax Wireless Headphones (ITEM-9075) from order ORD-6011, citing a change of mind. The agent must verify eligibility under the return policy, preview the return with the refund amount, obtain the customer's confirmation, and process the refund to the original payment method.",
   "task_requirements": [
     {
       "id": "syn-return-001-standard_changed_mind_restock_must_review_return_policy",
@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_002",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to return the SoundMax Wireless Headphones from order ORD-6011. I've opened the box, but I've changed my mind and want a refund to my original payment method.",
+  "opening_message": "I'd like to return the SoundMax Wireless Headphones from order ORD-6011. I've opened the box but decided I don't want them anymore. Please refund the money to my original payment method.",
   "user_simulator": {
-    "user_sim_context": "You need to return the SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is 'changed mind', and you want the refund to go back to your original payment method. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed.",
+    "user_sim_context": "You want to return the SoundMax Wireless Headphones from order ORD-6011. The item is ITEM-9075. The reason is that you changed your mind. Your preferred refund method is the original payment. If the agent presents a preview and asks for confirmation, you agree to proceed.",
     "known_info": [
-      "You purchased the SoundMax Wireless Headphones as part of order ORD-6011.",
-      "The order was received on 2026-06-05T14:00:00."
+      "Purchased SoundMax Wireless Headphones in order ORD-6011.",
+      "Order received on 2026-06-05T14:00:00."
     ],
     "unknown_info": [
-      "You are unaware of the exact return policy calculations.",
-      "You do not know the internal item_id; the agent will provide it if needed."
+      "Exact return policy calculation details.",
+      "Internal item ID unless provided by the agent."
     ],
     "task_rules": [
       "Do not invent order IDs, item IDs, prices, dates, or policy details.",
-      "If the agent previews a valid return and asks for confirmation, agree to proceed."
+      "If a valid return preview is shown and the agent requests confirmation, agree to proceed."
     ]
   },
   "task_type": "return_item",

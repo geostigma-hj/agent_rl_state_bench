@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-038-auto_025_maxed_brewmaster_espresso_machine",
-  "task_summary": "Customer requests warranty service for BrewMaster Espresso Machine from order ORD-6032. The correct process is to verify warranty status, review the policy, preview the outcome, obtain confirmation, and file the appropriate claim. Since the warranty has reached its maximum claim count, the policy permits only paid repair.",
+  "task_summary": "Customer asks for warranty service on BrewMaster Espresso Machine from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty has reached its maximum claim count, so official policy allows paid repair only.",
   "task_requirements": [
     {
       "id": "syn-warranty-038-auto_025_maxed_brewmaster_espresso_machine_must_check_warranty_status",
@@ -23,19 +23,18 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My BrewMaster Espresso Machine (order ORD-6032) is malfunctioning. Can I use the warranty?",
+  "opening_message": "My BrewMaster Espresso Machine from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You need warranty assistance for a BrewMaster Espresso Machine from order ORD-6032. If the agent explains that the warranty has been exhausted and offers a paid repair per policy, agree to proceed. Do not ask for a return unless the agent indicates warranty coverage is unavailable.",
+    "user_sim_context": "You want warranty help for BrewMaster Espresso Machine from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty has reached its maximum claim count, so official policy allows paid repair only.",
     "known_info": [
-      "You bought a BrewMaster Espresso Machine in order ORD-6032.",
+      "You bought BrewMaster Espresso Machine in order ORD-6032.",
       "The product is malfunctioning."
     ],
     "unknown_info": [
-      "You do not know the claim count or the exact warranty resolution."
+      "You do not know the claim count or exact warranty resolution."
     ],
     "task_rules": [
-      "After a valid warranty preview, confirm the next step.",
-      "Do not request a return unless the agent states warranty is not available."
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
     ]
   },
   "task_type": "warranty_claim",

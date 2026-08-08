@@ -54,6 +54,9 @@ def _auto_warranty_variants() -> tuple[WarrantyVariant, ...]:
         (799, "ProBook Laptop"),
         (129, "TrailStep Running Shoes"),
         (119, "NoiseBlock Earbuds"),
+        (159, "AirPure Compact Purifier"),
+        (69, "FlexCharge Travel Dock"),
+        (499, "ViewPlus 27-inch Monitor"),
     ]
     scenarios = [
         ("active", "2026-12-31", 0, 3, ["active_warranty"]),
@@ -90,7 +93,7 @@ def _auto_warranty_variants() -> tuple[WarrantyVariant, ...]:
                 )
             )
             idx += 1
-            if len(BASE_WARRANTY_VARIANTS) + len(variants) >= 45:
+            if len(BASE_WARRANTY_VARIANTS) + len(variants) >= 65:
                 return tuple(variants)
     return tuple(variants)
 

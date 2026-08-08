@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-042-auto_027_standard_debit_card_deskhub_usb_c_adapter_15_drop",
-  "task_summary": "Customer requests a price-match adjustment for the DeskHub USB-C Adapter in order ORD-7208. The correct outcome is a $15 price-match refund while keeping the order and item active.",
+  "task_summary": "Customer requests a price-match adjustment for DeskHub USB-C Adapter in order ORD-7208. The correct outcome is a $15 price-match refund while keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-042-auto_027_standard_debit_card_deskhub_usb_c_adapter_15_drop_must_lookup_product_price",
@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_002",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed that the DeskHub USB-C Adapter from order ORD-7208 has dropped in price, so I believe I should receive a refund of $10.",
+  "opening_message": "I noticed that the DeskHub USB-C Adapter I bought in order ORD-7208 has dropped in price. I think I should get $10 back.",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for the DeskHub USB-C Adapter from order ORD-7208. You initially think the price difference is $10, but accept correction to $15 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should remain active.",
+    "user_sim_context": "You want a price-match refund for DeskHub USB-C Adapter in order ORD-7208. You initially believe the price drop is $10, but you are open to correction if the agent provides the exact amount. Do not allow a return, cancellation, exchange, or replacement; the item should remain active.",
     "known_info": [
-      "You bought a DeskHub USB-C Adapter in order ORD-7208.",
-      "The current price for this item is $30."
+      "You bought DeskHub USB-C Adapter in order ORD-7208.",
+      "The current product price is $30."
     ],
     "unknown_info": [
-      "You are not aware of the exact internal price-match process.",
-      "You do not know how the refund will be allocated unless the agent clarifies."
+      "You are not familiar with the internal price-match policy details.",
+      "You do not know how the refund will be allocated unless explained."
     ],
     "task_rules": [
-      "Keep the request limited to a price-match refund; do not ask to return, cancel, or exchange the item.",
-      "If the agent presents the policy-supported amount and keeps the order active, confirm the refund."
+      "Stick to requesting only a price-match refund; do not consider return, cancellation, or exchange.",
+      "If the agent confirms the correct refund amount and keeps the order active, accept the refund."
     ]
   },
   "task_type": "price_match_refund",

@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-045-auto_030_gold_prime_damaged_in_transit",
-  "task_summary": "Customer requests a return for the SoundMax Wireless Headphones from order ORD-6011. The agent must inform the customer of the return policy, provide a return preview, seek confirmation, and process the correct refund as per the policy.",
+  "task_summary": "Customer wants to return SoundMax Wireless Headphones from order ORD-6011. Agent must apply return policy, preview return, obtain confirmation, and process refund to original payment.",
   "task_requirements": [
     {
       "id": "syn-return-045-auto_030_gold_prime_damaged_in_transit_must_review_return_policy",
@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "Hi, I'd like to return the SoundMax Wireless Headphones I ordered (order ORD-6011). I opened them but they're not what I wanted, so I'd like a refund to my original payment method.",
+  "opening_message": "I would like to return the SoundMax Wireless Headphones from order ORD-6011. I opened the box, but I no longer want them. Please refund the amount to my original payment method.",
   "user_simulator": {
-    "user_sim_context": "You are seeking assistance to return the SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason for the return is that the item was damaged in transit. Your preferred refund method is the original payment method. If the agent explains the refund details and asks for confirmation, you will confirm to proceed.",
+    "user_sim_context": "You need help returning SoundMax Wireless Headphones from order ORD-6011. The item is ITEM-9075. Your stated reason is damaged in transit. Prefer refund to original payment. If agent asks for confirmation, confirm to proceed.",
     "known_info": [
-      "You purchased the SoundMax Wireless Headphones as part of order ORD-6011.",
-      "You received the order on 2026-06-06T14:00:00."
+      "You purchased SoundMax Wireless Headphones in order ORD-6011.",
+      "Order received on 2026-06-06T14:00:00."
     ],
     "unknown_info": [
-      "You do not know the exact return policy calculations.",
-      "You do not know the internal item ID unless the agent provides it."
+      "You don't know the return policy calculation.",
+      "You don't know the internal item ID until agent tells you."
     ],
     "task_rules": [
-      "Do not provide any order IDs, item IDs, prices, dates, or policy details that are not already known.",
-      "If the agent presents a valid return preview and seeks confirmation, agree to continue."
+      "Do not invent any order IDs, item IDs, prices, dates, or policy details.",
+      "If agent previews valid return and asks for confirmation, agree to proceed."
     ]
   },
   "task_type": "return_item",

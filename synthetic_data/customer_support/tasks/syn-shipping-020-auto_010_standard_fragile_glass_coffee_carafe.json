@@ -23,9 +23,9 @@
   ],
   "user_id": "cust_005",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'm reaching out because my Glass Coffee Carafe from order ORD-6023 showed up damaged—the box was crushed.",
+  "opening_message": "I received my order ORD-6023, but the Glass Coffee Carafe arrived damaged. The package was crushed.",
   "user_simulator": {
-    "user_sim_context": "Your Glass Coffee Carafe from order ORD-6023 arrived damaged in transit. You want a refund to the original payment method. If the item is fragile, you should also ask about a separate fragile-item goodwill credit.",
+    "user_sim_context": "You received Glass Coffee Carafe from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [
       "You bought Glass Coffee Carafe in order ORD-6023.",
       "The item arrived damaged with crushed packaging."

@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-036-auto_021_standard_nopri_changed_mind_grace",
-  "task_summary": "Customer wants to return SoundMax Wireless Headphones from ORD-6011 outside the full-refund window but within the store-credit period. Return is allowed, but refund must be issued as store credit.",
+  "task_summary": "Customer wants to return SoundMax Wireless Headphones from ORD-6011 outside the full-refund window but inside the store-credit grace period. The return is allowed, but the refund method must remain store credit.",
   "task_requirements": [
     {
       "id": "syn-return-036-auto_021_standard_nopri_changed_mind_grace_must_review_return_policy",
@@ -29,11 +29,11 @@
   ],
   "user_id": "cust_002",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to return the SoundMax Wireless Headphones I ordered in order ORD-6011. I know it's been a while, but I'd like my money back on my card.",
+  "opening_message": "I'd like to return the SoundMax Wireless Headphones from order ORD-6011. I know it's been a while, but I still want to return them and get my money back on my card.",
   "user_simulator": {
-    "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your reason is changed mind. Preferred refund method is store credit, but you'll push once for a card refund if the agent says store credit is required. If the agent asks for confirmation after explaining the refund, confirm you want to proceed.",
+    "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is changed mind. Your preferred refund method is store credit. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed. If the agent says the refund must be store credit, push once for a card refund, then accept the policy.",
     "known_info": [
-      "You purchased SoundMax Wireless Headphones in order ORD-6011.",
+      "You bought SoundMax Wireless Headphones in order ORD-6011.",
       "You received the order on 2026-05-20T14:00:00."
     ],
     "unknown_info": [

@@ -86,7 +86,7 @@ def _auto_cancel_variants() -> tuple[CancelVariant, ...]:
                 )
             )
             idx += 1
-            if len(BASE_CANCEL_VARIANTS) + len(variants) >= 45:
+            if len(BASE_CANCEL_VARIANTS) + len(variants) >= 60:
                 return tuple(variants)
     return tuple(variants)
 

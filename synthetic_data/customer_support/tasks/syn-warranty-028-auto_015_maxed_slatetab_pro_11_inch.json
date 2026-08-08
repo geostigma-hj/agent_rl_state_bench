@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-028-auto_015_maxed_slatetab_pro_11_inch",
-  "task_summary": "Customer asks for warranty service on SlateTab Pro 11-inch from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty has reached its maximum claim count, so official policy allows paid repair only.",
+  "task_summary": "Customer seeks warranty service for a malfunctioning SlateTab Pro 11-inch from order ORD-6032. The correct process is to verify the warranty status, review the warranty policy, present the warranty details to the customer, obtain confirmation, and then file the appropriate claim. However, the warranty has already reached its maximum claim count, so under official policy, only a paid repair is available.",
   "task_requirements": [
     {
       "id": "syn-warranty-028-auto_015_maxed_slatetab_pro_11_inch_must_check_warranty_status",
@@ -23,18 +23,18 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My SlateTab Pro 11-inch from order ORD-6032 is malfunctioning. Can I use the warranty?",
+  "opening_message": "I'm having issues with my SlateTab Pro 11-inch from order ORD-6032. Is it covered under warranty?",
   "user_simulator": {
-    "user_sim_context": "You want warranty help for SlateTab Pro 11-inch from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty has reached its maximum claim count, so official policy allows paid repair only.",
+    "user_sim_context": "You need assistance with warranty for your SlateTab Pro 11-inch from order ORD-6032. If the agent explains the warranty situation as per policy and asks you to confirm, you agree to proceed. The warranty has reached its claim limit, so the only option is a paid repair.",
     "known_info": [
-      "You bought SlateTab Pro 11-inch in order ORD-6032.",
-      "The product is malfunctioning."
+      "You purchased a SlateTab Pro 11-inch with order ORD-6032.",
+      "The device is malfunctioning."
     ],
     "unknown_info": [
-      "You do not know the claim count or exact warranty resolution."
+      "You are not aware of the claim count or the exact warranty resolution."
     ],
     "task_rules": [
-      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
+      "Agree to proceed after the agent provides the warranty details. Do not request a return unless the agent indicates warranty is unavailable."
     ]
   },
   "task_type": "warranty_claim",

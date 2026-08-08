@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-016-auto_006_platinum_fragile_glass_coffee_carafe",
-  "task_summary": "The customer says the Glass Coffee Carafe from ORD-6023 arrived damaged during shipping. We need to follow the shipping-damage process: explain the return and refund policy, refund the item, provide a return label, and if the item is fragile, also give the special goodwill credit.",
+  "task_summary": "Customer states that the Glass Coffee Carafe from ORD-6023 was damaged in transit. Proper handling is the shipping-damage path: review shipping and return policies, refund the original payment, issue a return label, and add fragile-item goodwill credit where applicable.",
   "task_requirements": [
     {
       "id": "syn-shipping-016-auto_006_platinum_fragile_glass_coffee_carafe_must_review_shipping_policy",
@@ -23,19 +23,19 @@
   ],
   "user_id": "cust_001",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My Glass Coffee Carafe from my order ORD-6023 arrived broken. The box was crushed when it got here.",
+  "opening_message": "The Glass Coffee Carafe from order ORD-6023 arrived broken; the package was crushed during delivery.",
   "user_simulator": {
-    "user_sim_context": "You got a Glass Coffee Carafe from order ORD-6023 that was damaged in transit. You are looking for a refund to the original payment method. If the item is fragile, you will ask if there is an extra goodwill credit for fragile items.",
+    "user_sim_context": "You received the Glass Coffee Carafe from order ORD-6023, and it was damaged during shipping. You want a refund to the original payment method. If the item is considered fragile, ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [
-      "You purchased a Glass Coffee Carafe in order ORD-6023.",
-      "The item arrived damaged and the packaging was crushed."
+      "You purchased the Glass Coffee Carafe in order ORD-6023.",
+      "The item arrived damaged, with the packaging crushed."
     ],
     "unknown_info": [
-      "You do not know the internal item_id unless the agent tells you."
+      "You do not know the internal item_id unless the agent provides it."
     ],
     "task_rules": [
-      "Keep the issue focused on shipping damage; do not request a return due to buyer's remorse, cancellation, warranty claim, or exchange.",
-      "After receiving a proper damaged-in-transit return preview, if the item is fragile, expect the separate goodwill credit."
+      "Keep the issue focused on shipping damage; do not ask for a changed-mind return, cancellation, warranty claim, or exchange.",
+      "Expect a return preview for valid damaged-in-transit. If fragile, look for the separate goodwill credit."
     ]
   },
   "task_type": "shipping_claim",

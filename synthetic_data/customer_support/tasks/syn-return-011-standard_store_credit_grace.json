@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-011-standard_store_credit_grace",
-  "task_summary": "Customer wants to return SoundMax Wireless Headphones from ORD-6011 outside the full-refund window but within the store-credit grace period. The return is allowed, but the refund must be issued as store credit.",
+  "task_summary": "The customer wants to return SoundMax Wireless Headphones (item ITEM-9075) from order ORD-6011, which is outside the full-refund period but within the store-credit grace period. The return is allowed, but the refund must be issued as store credit. The customer initially requests a card refund, but will accept store credit after the policy is explained.",
   "task_requirements": [
     {
       "id": "syn-return-011-standard_store_credit_grace_must_review_return_policy",
@@ -29,9 +29,9 @@
   ],
   "user_id": "cust_002",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to return the SoundMax Wireless Headphones from order ORD-6011. I know it's been a while, but I'd prefer a refund to my original card.",
+  "opening_message": "Hi, I'd like to return the SoundMax Wireless Headphones from order ORD-6011. I know it's been a while, but I'd prefer to get the money refunded to my card.",
   "user_simulator": {
-    "user_sim_context": "You need help returning the SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is changed mind. Your preferred refund method is store credit. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed. If the agent says the refund must be store credit, push once for a card refund, then accept the policy.",
+    "user_sim_context": "You need help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is changed mind. Your preferred refund method is store credit, but you'd ideally like a card refund. If the agent confirms the return after explaining the policy, agree to proceed. If the agent says the refund must be store credit, ask once if a card refund is possible, then accept store credit.",
     "known_info": [
       "You bought SoundMax Wireless Headphones in order ORD-6011.",
       "You received the order on 2026-05-20T14:00:00."

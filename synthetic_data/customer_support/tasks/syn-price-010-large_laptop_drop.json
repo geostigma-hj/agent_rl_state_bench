@@ -23,7 +23,7 @@
   ],
   "user_id": "cust_003",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed the ProBook Laptop from order ORD-7208 has dropped in price, so I'd like a price adjustment of $70.",
+  "opening_message": "I noticed the ProBook Laptop from my order ORD-7208 now has a lower price. I believe I should receive a $70 price adjustment.",
   "user_simulator": {
     "user_sim_context": "You want a price-match refund for ProBook Laptop in order ORD-7208. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [

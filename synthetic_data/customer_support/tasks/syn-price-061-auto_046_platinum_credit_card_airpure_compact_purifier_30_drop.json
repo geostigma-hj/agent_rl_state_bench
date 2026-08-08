@@ -1,0 +1,58 @@
+{
+  "task_id": "syn-price-061-auto_046_platinum_credit_card_airpure_compact_purifier_30_drop",
+  "task_summary": "The customer asks for a price adjustment for the AirPure Compact Purifier in order ORD-7208. The desired resolution is a $30 price-match refund, keeping the order and item active.",
+  "task_requirements": [
+    {
+      "id": "syn-price-061-auto_046_platinum_credit_card_airpure_compact_purifier_30_drop_must_lookup_product_price",
+      "kind": "must",
+      "requirement": "Agent must verify current price with get_product_details for PROD-4210.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-price-061-auto_046_platinum_credit_card_airpure_compact_purifier_30_drop_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must preview the $30 price-match refund before confirming it.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-price-061-auto_046_platinum_credit_card_airpure_compact_purifier_30_drop_must_not_return_cancel_exchange",
+      "kind": "must_not",
+      "requirement": "Agent must not return, cancel, or exchange the item.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_001",
+  "now": "2026-07-08T10:00:00",
+  "opening_message": "Hey, I noticed the AirPure Compact Purifier I ordered is now listed at a lower price. Can you help me with a price adjustment?",
+  "user_simulator": {
+    "user_sim_context": "You seek a price-match refund for the AirPure Compact Purifier in order ORD-7208. Do not agree to a return, cancellation, exchange, or replacement; the item must remain active.",
+    "known_info": [
+      "You purchased AirPure Compact Purifier in order ORD-7208.",
+      "The product is currently priced at $129."
+    ],
+    "unknown_info": [
+      "You are unaware of the detailed price-match procedure.",
+      "You do not know how the refund will be allocated across payments unless the agent explains."
+    ],
+    "task_rules": [
+      "Focus only on obtaining a price-match refund; avoid discussing returns, cancellations, or exchanges.",
+      "If the agent confirms the policy-compliant refund amount and keeps the order active, accept the refund."
+    ]
+  },
+  "task_type": "price_match_refund",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10209",
+      "field": "refund_amount",
+      "expected_value": 30
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10209",
+      "field": "refund_method",
+      "expected_value": "original_payment"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-price-061-auto_046_platinum_credit_card_airpure_compact_purifier_30_drop.json"
+}

@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-008-recurring_low_value_replacement",
-  "task_summary": "Customer requests warranty service for a defective PowerBlend Mini Blender from order ORD-6032. The appropriate handling is to verify warranty status, review the warranty policy, provide a clear preview, obtain confirmation, and file the claim according to policy. The warranty is active, so the official policy will dictate whether repair or replacement is due.",
+  "task_summary": "Customer asks for warranty service on PowerBlend Mini Blender from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
   "task_requirements": [
     {
       "id": "syn-warranty-008-recurring_low_value_replacement_must_check_warranty_status",
@@ -23,18 +23,18 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My PowerBlend Mini Blender from order ORD-6032 is not working properly. Is it covered under warranty?",
+  "opening_message": "My PowerBlend Mini Blender from order ORD-6032 is malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You need assistance with a warranty claim for your PowerBlend Mini Blender from order ORD-6032. If the agent explains the warranty outcome per policy and asks for your confirmation, agree to proceed. The warranty is active, so the policy determines whether repair or replacement is appropriate.",
+    "user_sim_context": "You want warranty help for PowerBlend Mini Blender from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty is active, so official policy determines whether repair or replacement is appropriate.",
     "known_info": [
-      "You purchased a PowerBlend Mini Blender in order ORD-6032.",
+      "You bought PowerBlend Mini Blender in order ORD-6032.",
       "The product is malfunctioning."
     ],
     "unknown_info": [
-      "You do not know the number of prior claims or the exact warranty resolution."
+      "You do not know the claim count or exact warranty resolution."
     ],
     "task_rules": [
-      "Confirm after a valid warranty preview. Do not request a return unless the agent indicates the warranty is not applicable."
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
     ]
   },
   "task_type": "warranty_claim",

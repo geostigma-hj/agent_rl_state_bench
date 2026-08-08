@@ -17,9 +17,9 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I need to cancel order ORD-6003. I no longer need the SoundMax Wireless Headphones and the 7-Port USB-C Hub.",
+  "opening_message": "I need to cancel order ORD-6003. I do not need the SoundMax Wireless Headphones or the 7-Port USB-C Hub anymore.",
   "user_simulator": {
-    "user_sim_context": "You want to cancel the full order from order ORD-6003, which contains SoundMax Wireless Headphones and a 7-Port USB-C Hub. If the agent explains a valid cancellation preview, confirm that you want to proceed.",
+    "user_sim_context": "You want to cancel the full order from order ORD-6003, which contains SoundMax Wireless Headphones and 7-Port USB-C Hub. If the agent explains a valid cancellation preview, confirm that you want to proceed.",
     "known_info": [
       "You placed order ORD-6003.",
       "The order contains: SoundMax Wireless Headphones, 7-Port USB-C Hub."

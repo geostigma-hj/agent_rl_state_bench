@@ -1,6 +1,6 @@
 {
   "task_id": "syn-exchange-019-auto_007_cheaper_57_instock",
-  "task_summary": "Customer wants to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in size Large. The correct handling is to apply the exchange policy: first preview the exchange, explain any price difference, then confirm with the customer. If the new item costs more, the customer pays the difference; if it costs less, the difference is refunded as store credit.",
+  "task_summary": "The customer requests an exchange of the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in size Large. Correct handling involves applying the exchange policy, previewing the exchange, and confirming. If the target item is more expensive, the customer pays the difference; if less expensive, the difference is issued as store credit.",
   "task_requirements": [
     {
       "id": "syn-exchange-019-auto_007_cheaper_57_instock_must_review_exchange_policy",
@@ -17,18 +17,18 @@
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in size Large.",
+  "opening_message": "I would like to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in size Large.",
   "user_simulator": {
-    "user_sim_context": "You want to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in size Large. If the agent provides a valid exchange preview and asks for confirmation, you should agree to proceed.",
+    "user_sim_context": "You want to exchange the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in size Large. If the agent previews a valid exchange and asks for confirmation, agree to proceed.",
     "known_info": [
-      "You purchased the Premium Cotton Shirt in order ORD-6034.",
-      "You want the Premium Cotton Shirt in size Large instead of your current size."
+      "You bought the Premium Cotton Shirt in order ORD-6034.",
+      "You want the Premium Cotton Shirt in size Large instead."
     ],
     "unknown_info": [
-      "You are not aware of the exchange price-difference policy (i.e., you don't know whether you'll pay or receive store credit)."
+      "You do not know the exchange price-difference policy."
     ],
     "task_rules": [
-      "Do not request a different product. Once a valid preview is given, confirm the exchange."
+      "Do not ask for a different product. Confirm after a valid preview."
     ]
   },
   "task_type": "exchange_item",

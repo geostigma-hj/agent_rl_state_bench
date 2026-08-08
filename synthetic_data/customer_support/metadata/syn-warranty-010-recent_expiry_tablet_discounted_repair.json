@@ -52,13 +52,13 @@
             "old": "expired",
             "new": "claimed"
           },
-          "claim_count": {
-            "old": 1,
-            "new": 2
-          },
           "resolution": {
             "old": null,
             "new": "discounted_repair"
+          },
+          "claim_count": {
+            "old": 1,
+            "new": 2
           }
         }
       }

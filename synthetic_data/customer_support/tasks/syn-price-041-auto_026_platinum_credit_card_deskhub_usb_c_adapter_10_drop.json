@@ -23,9 +23,9 @@
   ],
   "user_id": "cust_001",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "The DeskHub USB-C Adapter from order ORD-7208 is now cheaper, so I'd like a price match refund. I believe I should get $25 back.",
+  "opening_message": "I noticed the DeskHub USB-C Adapter from my order ORD-7208 is now priced lower. I believe I should receive a refund of $25 for the price difference.",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for DeskHub USB-C Adapter in order ORD-7208. You think the drop is $25, but you accept the agent's correction to $10 if they verify the product record. Do not allow a return, cancellation, exchange, or replacement; the item must remain active.",
+    "user_sim_context": "You want a price-match refund for DeskHub USB-C Adapter in order ORD-7208. You think the drop is $25, but accept correction to $10 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [
       "You bought DeskHub USB-C Adapter in order ORD-7208.",
       "The current product price is $35."

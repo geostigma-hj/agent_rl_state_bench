@@ -1,6 +1,6 @@
 {
   "task_id": "syn-return-026-auto_011_standard_nopri_changed_mind",
-  "task_summary": "Customer requests a return for the SoundMax Wireless Headphones from order ORD-6011. The agent must apply the return policy, preview the return, obtain customer confirmation, and process the correct refund to the original payment method.",
+  "task_summary": "Customer needs to return the SoundMax Wireless Headphones from order ORD-6011. The agent should follow the return policy, show a return preview, obtain confirmation, and process the correct refund.",
   "task_requirements": [
     {
       "id": "syn-return-026-auto_011_standard_nopri_changed_mind_must_review_return_policy",
@@ -23,9 +23,9 @@
   ],
   "user_id": "cust_002",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I would like to return the SoundMax Wireless Headphones from order ORD-6011. I opened it, but I don't need it anymore, and I'd like the refund to go back to my original payment method.",
+  "opening_message": "I'd like to return the SoundMax Wireless Headphones from order ORD-6011. I opened the box, but I've changed my mind and I want a refund to my original payment method.",
   "user_simulator": {
-    "user_sim_context": "You want help returning the SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is 'changed mind'. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed.",
+    "user_sim_context": "You need assistance returning the SoundMax Wireless Headphones from order ORD-6011. The item is ITEM-9075. Your stated reason is changed mind. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, you agree to proceed.",
     "known_info": [
       "You bought SoundMax Wireless Headphones in order ORD-6011.",
       "You received the order on 2026-06-05T14:00:00."

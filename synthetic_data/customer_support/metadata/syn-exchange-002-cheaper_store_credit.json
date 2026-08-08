@@ -60,14 +60,6 @@
     "modified": {
       "order_items": {
         "ITEM-9250": {
-          "replacement_item_id": {
-            "old": null,
-            "new": "ITEM-9251"
-          },
-          "refund_method": {
-            "old": null,
-            "new": "store_credit"
-          },
           "refund_amount": {
             "old": null,
             "new": 20
@@ -75,6 +67,14 @@
           "item_status": {
             "old": "delivered",
             "new": "exchanged"
+          },
+          "replacement_item_id": {
+            "old": null,
+            "new": "ITEM-9251"
+          },
+          "refund_method": {
+            "old": null,
+            "new": "store_credit"
           }
         }
       }
@@ -82,6 +82,13 @@
     "deleted": {}
   },
   "language_rewritten": true,
-  "judge": null,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "step-3.7-flash",
+    "deterministic_check_passed": true,
+    "issues": [],
+    "ambiguities": [],
+    "manual_adjudication": null
+  },
   "language_rewriter_model": "deepseek-v4-flash"
 }

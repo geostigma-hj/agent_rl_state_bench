@@ -23,9 +23,9 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to return the SoundMax Wireless Headphones from order ORD-6011. I opened the box, but I've changed my mind and would like a refund to my original payment method.",
+  "opening_message": "I would like to return the SoundMax Wireless Headphones from order ORD-6011. I opened it, but I don't want it anymore, and I want the refund to my original payment method.",
   "user_simulator": {
-    "user_sim_context": "You want to return SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is 'damaged in transit'. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed.",
+    "user_sim_context": "You want help returning SoundMax Wireless Headphones from order ORD-6011. The relevant item is ITEM-9075. Your stated reason is damaged in transit. Your preferred refund method is original payment. If the agent asks for confirmation after explaining the refund, confirm that you want to proceed.",
     "known_info": [
       "You bought SoundMax Wireless Headphones in order ORD-6011.",
       "You received the order on 2026-06-06T14:00:00."

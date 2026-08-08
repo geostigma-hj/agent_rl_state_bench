@@ -1,0 +1,58 @@
+{
+  "task_id": "syn-price-067-auto_052_standard_debit_card_flexcharge_travel_dock_20_drop",
+  "task_summary": "Customer requests a price-match refund for the FlexCharge Travel Dock in order ORD-7208. The correct outcome is to issue a $20 price-match refund while keeping the order and item active.",
+  "task_requirements": [
+    {
+      "id": "syn-price-067-auto_052_standard_debit_card_flexcharge_travel_dock_20_drop_must_lookup_product_price",
+      "kind": "must",
+      "requirement": "Agent must verify current price with get_product_details for PROD-4210.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-price-067-auto_052_standard_debit_card_flexcharge_travel_dock_20_drop_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must preview the $20 price-match refund before confirming it.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-price-067-auto_052_standard_debit_card_flexcharge_travel_dock_20_drop_must_not_return_cancel_exchange",
+      "kind": "must_not",
+      "requirement": "Agent must not return, cancel, or exchange the item.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_002",
+  "now": "2026-07-08T10:00:00",
+  "opening_message": "I noticed the price for the FlexCharge Travel Dock I ordered under ORD-7208 has dropped. Can I get a price match adjustment?",
+  "user_simulator": {
+    "user_sim_context": "You want to receive a price-match refund for the FlexCharge Travel Dock in order ORD-7208. You must not accept a return, cancellation, exchange, or replacement; the item should remain active.",
+    "known_info": [
+      "You purchased the FlexCharge Travel Dock in order ORD-7208.",
+      "The current price of the product is $49."
+    ],
+    "unknown_info": [
+      "You do not know the exact internal process for price matching.",
+      "You do not know how the refund will be allocated to your payment method unless the agent explains it."
+    ],
+    "task_rules": [
+      "Keep your request limited to a price-match refund; do not ask to return, cancel, or exchange the item.",
+      "If the agent confirms the policy-supported refund amount and assures the order remains active, confirm the refund."
+    ]
+  },
+  "task_type": "price_match_refund",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10209",
+      "field": "refund_amount",
+      "expected_value": 20
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10209",
+      "field": "refund_method",
+      "expected_value": "original_payment"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-price-067-auto_052_standard_debit_card_flexcharge_travel_dock_20_drop.json"
+}

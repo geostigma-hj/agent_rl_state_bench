@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-007-paypal_adjustment",
-  "task_summary": "Customer requests a price-match adjustment for the ComfyCotton Shirt in order ORD-7208. The correct outcome is a $10 price-match refund while keeping the order and item active.",
+  "task_summary": "Customer requests a price-match refund for the ComfyCotton Shirt in order ORD-7208. The correct outcome is a $10 price-match refund while keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-007-paypal_adjustment_must_lookup_product_price",
@@ -23,11 +23,11 @@
   ],
   "user_id": "cust_005",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed that the ComfyCotton Shirt from order ORD-7208 has dropped in price, so I believe I am entitled to a $10 refund.",
+  "opening_message": "I noticed the ComfyCotton Shirt from order ORD-7208 is now on sale for a lower price. I'd like to get a price adjustment for the difference.",
   "user_simulator": {
-    "user_sim_context": "You are requesting a price-match refund for the ComfyCotton Shirt in order ORD-7208. Ensure that no return, cancellation, exchange, or replacement is made; the item must remain active.",
+    "user_sim_context": "You want a price-match refund for the ComfyCotton Shirt in order ORD-7208. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [
-      "You purchased the ComfyCotton Shirt in order ORD-7208.",
+      "You bought ComfyCotton Shirt in order ORD-7208.",
       "The current product price is $49."
     ],
     "unknown_info": [
@@ -35,8 +35,8 @@
       "You do not know payment allocation details unless the agent explains them."
     ],
     "task_rules": [
-      "Keep the request focused on a price-match refund; do not ask to return, cancel, or exchange the item.",
-      "If the agent confirms the policy-supported refund amount and keeps the order active, agree to the refund."
+      "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
+      "If the agent previews the policy-supported amount and keeps the order active, confirm the refund."
     ]
   },
   "task_type": "price_match_refund",

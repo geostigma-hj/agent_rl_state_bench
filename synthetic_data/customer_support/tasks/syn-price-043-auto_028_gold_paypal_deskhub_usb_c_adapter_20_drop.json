@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-043-auto_028_gold_paypal_deskhub_usb_c_adapter_20_drop",
-  "task_summary": "Customer requests a price-match adjustment for DeskHub USB-C Adapter in ORD-7208. The correct outcome is a $20 price-match refund while keeping the order and item active.",
+  "task_summary": "Customer requests a price adjustment for the DeskHub USB-C Adapter in order ORD-7208. The expected resolution is a $20 price-match refund, with the order and item remaining active.",
   "task_requirements": [
     {
       "id": "syn-price-043-auto_028_gold_paypal_deskhub_usb_c_adapter_20_drop_must_lookup_product_price",
@@ -23,11 +23,11 @@
   ],
   "user_id": "cust_003",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed the DeskHub USB-C Adapter from my order ORD-7208 is now priced lower. Can I get a price adjustment?",
+  "opening_message": "I noticed the DeskHub USB-C Adapter from my order ORD-7208 now has a lower price. Can you adjust the price for me?",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for the DeskHub USB-C Adapter in order ORD-7208. Do not allow a return, cancellation, exchange, or replacement; the item should remain active.",
+    "user_sim_context": "You want a price-match refund for the DeskHub USB-C Adapter in order ORD-7208. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [
-      "You bought the DeskHub USB-C Adapter in order ORD-7208.",
+      "You purchased the DeskHub USB-C Adapter in order ORD-7208.",
       "The current product price is $25."
     ],
     "unknown_info": [

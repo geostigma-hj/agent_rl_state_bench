@@ -1,6 +1,6 @@
 {
   "task_id": "syn-exchange-030-auto_018_expensive_199_oos",
-  "task_summary": "Customer wants to exchange Premium Cotton Shirt from ORD-6034 for Premium Cotton Shirt (Large). Correct handling is to apply exchange policy, preview, confirm, and use the policy-defined payment or store-credit outcome. Because the requested item is out of stock, policy requires store credit for the original item amount and the exchange itself must not be completed; the unavailable target item's price does not create an extra charge.",
+  "task_summary": "Customer requests an exchange for the Premium Cotton Shirt (Large) from order ORD-6034. The correct process is to apply exchange policy: preview the exchange, confirm, then handle according to policy. Since the desired size is out of stock, the policy requires issuing store credit for the original amount, and the exchange must not be completed. No additional charge applies for the unavailable item.",
   "task_requirements": [
     {
       "id": "syn-exchange-030-auto_018_expensive_199_oos_must_review_exchange_policy",
@@ -17,18 +17,18 @@
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in Large.",
+  "opening_message": "I'd like to exchange the Premium Cotton Shirt from order ORD-6034 for the same shirt in Large size.",
   "user_simulator": {
-    "user_sim_context": "You want to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in Large. If the agent previews the out-of-stock store-credit fallback and asks for confirmation, agree to proceed.",
+    "user_sim_context": "You want to exchange the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in Large. If the agent shows the out-of-stock store-credit preview and asks for confirmation, agree to proceed.",
     "known_info": [
-      "You bought Premium Cotton Shirt in order ORD-6034.",
-      "You want Premium Cotton Shirt (Large) instead."
+      "You bought the Premium Cotton Shirt in order ORD-6034.",
+      "You want the same shirt in Large."
     ],
     "unknown_info": [
-      "You do not know the exchange price-difference policy."
+      "You are unaware of the exchange price-difference policy."
     ],
     "task_rules": [
-      "Do not ask for a different product. Confirm after a valid preview."
+      "Do not request a different item. Confirm once a valid preview is shown."
     ]
   },
   "task_type": "exchange_item",

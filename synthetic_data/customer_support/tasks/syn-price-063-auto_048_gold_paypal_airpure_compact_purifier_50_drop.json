@@ -1,0 +1,58 @@
+{
+  "task_id": "syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop",
+  "task_summary": "Customer requests a price-match adjustment for the AirPure Compact Purifier in order ORD-7208. The expected resolution is a $50 refund while keeping the order and item active.",
+  "task_requirements": [
+    {
+      "id": "syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop_must_lookup_product_price",
+      "kind": "must",
+      "requirement": "Agent must verify current price with get_product_details for PROD-4210.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must preview the $50 price-match refund before confirming it.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop_must_not_return_cancel_exchange",
+      "kind": "must_not",
+      "requirement": "Agent must not return, cancel, or exchange the item.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_003",
+  "now": "2026-07-08T10:00:00",
+  "opening_message": "I noticed the AirPure Compact Purifier from order ORD-7208 is now listed at a lower price, and I believe I'm entitled to a refund of the difference. Could you please process that?",
+  "user_simulator": {
+    "user_sim_context": "You are seeking a price-match refund for the AirPure Compact Purifier from order ORD-7208. Initially you think the difference is $45, but you are open to the accurate $50 amount once the agent confirms the current product price. You do not want to return, cancel, exchange, or replace the item; it must remain active.",
+    "known_info": [
+      "You purchased an AirPure Compact Purifier in order ORD-7208.",
+      "The current product price is $109."
+    ],
+    "unknown_info": [
+      "You are unaware of the specific internal price-match process.",
+      "You do not know how the refund is allocated across payment methods unless the agent explains."
+    ],
+    "task_rules": [
+      "Focus solely on obtaining a price-match refund; do not propose returning, canceling, or exchanging the item.",
+      "If the agent confirms the policy-backed refund amount and ensures the order/item remains active, accept the refund."
+    ]
+  },
+  "task_type": "price_match_refund",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10209",
+      "field": "refund_amount",
+      "expected_value": 50
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10209",
+      "field": "refund_method",
+      "expected_value": "original_payment"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-price-063-auto_048_gold_paypal_airpure_compact_purifier_50_drop.json"
+}

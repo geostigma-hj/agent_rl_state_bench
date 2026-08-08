@@ -1,0 +1,87 @@
+{
+  "task_id": "syn-shipping-067-auto_057_standard_nonfragile_smart_fitness_band",
+  "task_summary": "Customer reports Smart Fitness Band from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
+  "task_requirements": [
+    {
+      "id": "syn-shipping-067-auto_057_standard_nonfragile_smart_fitness_band_must_review_shipping_policy",
+      "kind": "must",
+      "requirement": "Agent must review the shipping policy before resolving the damaged-in-transit claim.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-shipping-067-auto_057_standard_nonfragile_smart_fitness_band_must_use_damaged_reason",
+      "kind": "must",
+      "requirement": "Agent must process item ITEM-9155 with reason damaged_in_transit, not changed_mind.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-shipping-067-auto_057_standard_nonfragile_smart_fitness_band_must_not_issue_fragile_goodwill",
+      "kind": "must_not",
+      "requirement": "Agent must not issue a fragile-item goodwill credit for a non-fragile product.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_002",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "My Smart Fitness Band from order ORD-6023 arrived damaged. The package was crushed.",
+  "user_simulator": {
+    "user_sim_context": "You received Smart Fitness Band from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
+    "known_info": [
+      "You bought Smart Fitness Band in order ORD-6023.",
+      "The item arrived damaged with crushed packaging."
+    ],
+    "unknown_info": [
+      "You do not know the internal item_id unless the agent tells you."
+    ],
+    "task_rules": [
+      "Keep the issue scoped to shipping damage; do not ask for a changed-mind return, cancellation, warranty claim, or exchange.",
+      "Confirm after a valid damaged-in-transit return preview. If the item is fragile, expect the separate goodwill credit."
+    ]
+  },
+  "task_type": "shipping_claim",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "item_status",
+      "expected_value": "returned"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "refund_amount",
+      "expected_value": 89
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "refund_method",
+      "expected_value": "original_payment"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "restocking_fee",
+      "expected_value": 0
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "return_label_issued",
+      "expected_value": true
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "return_reason",
+      "expected_value": "damaged_in_transit"
+    },
+    {
+      "entity_type": "orders",
+      "record_key": "ORD-6023",
+      "field": "status",
+      "expected_value": "fully_returned"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-shipping-067-auto_057_standard_nonfragile_smart_fitness_band.json"
+}

@@ -59,6 +59,9 @@ def _auto_price_match_variants() -> tuple[PriceMatchVariant, ...]:
         ("BrewMaster Espresso Machine", 349),
         ("ProBook Laptop", 799),
         ("ComfyCotton Shirt", 59),
+        ("AirPure Compact Purifier", 159),
+        ("FlexCharge Travel Dock", 69),
+        ("ViewPlus 27-inch Monitor", 499),
     ]
     customers = [
         ("cust_001", "platinum"),
@@ -112,7 +115,7 @@ def _auto_price_match_variants() -> tuple[PriceMatchVariant, ...]:
                 )
             )
             idx += 1
-            if len(BASE_PRICE_MATCH_VARIANTS) + len(variants) >= 60:
+            if len(BASE_PRICE_MATCH_VARIANTS) + len(variants) >= 75:
                 return tuple(variants)
     return tuple(variants)
 

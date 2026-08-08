@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-013-maxed_headphones_paid_repair",
-  "task_summary": "Customer requests warranty service for SoundMax Wireless Headphones purchased under order ORD-6032. The correct process involves checking warranty eligibility, reviewing the warranty policy, presenting the relevant warranty details to the customer, obtaining confirmation, and filing a claim according to policy. In this case, the warranty's maximum claim count has been reached, so the only official option is a paid repair.",
+  "task_summary": "Customer asks for warranty service on SoundMax Wireless Headphones from ORD-6032. Correct handling is to check warranty status, review warranty policy, preview, confirm, and file the policy-correct claim. The warranty has reached its maximum claim count, so official policy allows paid repair only.",
   "task_requirements": [
     {
       "id": "syn-warranty-013-maxed_headphones_paid_repair_must_check_warranty_status",
@@ -23,18 +23,18 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "Hi, I bought SoundMax Wireless Headphones with order ORD-6032, and they're malfunctioning. Can I get warranty service?",
+  "opening_message": "My SoundMax Wireless Headphones from order ORD-6032 are malfunctioning. Can I use the warranty?",
   "user_simulator": {
-    "user_sim_context": "You are seeking warranty assistance for SoundMax Wireless Headphones from order ORD-6032. If the agent explains that the warranty has been exhausted and that a paid repair is the only option under policy, you should agree to proceed with that. The warranty has reached its maximum claim count, so only paid repair is allowed.",
+    "user_sim_context": "You want warranty help for SoundMax Wireless Headphones from order ORD-6032. If the agent explains the warranty outcome under policy and asks for confirmation, agree to proceed. The warranty has reached its maximum claim count, so official policy allows paid repair only.",
     "known_info": [
-      "You purchased SoundMax Wireless Headphones in order ORD-6032.",
+      "You bought SoundMax Wireless Headphones in order ORD-6032.",
       "The product is malfunctioning."
     ],
     "unknown_info": [
-      "You do not know the warranty claim count or the exact warranty resolution."
+      "You do not know the claim count or exact warranty resolution."
     ],
     "task_rules": [
-      "Confirm after the agent presents the warranty outcome clearly. Do not ask for a return or a replacement unless the agent says warranty service is unavailable."
+      "Confirm after a valid warranty preview. Do not ask for a return unless the agent says warranty is unavailable."
     ]
   },
   "task_type": "warranty_claim",

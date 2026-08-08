@@ -1,6 +1,6 @@
 {
   "task_id": "syn-exchange-012-near_same_price_payment",
-  "task_summary": "Customer wants to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in Large. Correct handling is to apply exchange policy, preview, confirm, and use the policy-defined payment or store-credit outcome. If the target item costs more, the customer pays the difference; if it costs less, the difference is store credit.",
+  "task_summary": "Customer wants to exchange Premium Cotton Shirt from order ORD-6034 for Premium Cotton Shirt (Large). Correct handling is to apply exchange policy, preview, confirm, and use the policy-defined payment or store-credit outcome. If the target item costs more, the customer pays the difference; if it costs less, the difference is store credit.",
   "task_requirements": [
     {
       "id": "syn-exchange-012-near_same_price_payment_must_review_exchange_policy",
@@ -17,12 +17,12 @@
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'd like to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in Large.",
+  "opening_message": "I need to exchange the Premium Cotton Shirt from order ORD-6034 for the same shirt in size Large.",
   "user_simulator": {
-    "user_sim_context": "You want to exchange the Premium Cotton Shirt from order ORD-6034 for a Premium Cotton Shirt in Large. If the agent previews a valid exchange and asks for confirmation, agree to proceed.",
+    "user_sim_context": "You want to exchange the Premium Cotton Shirt from order ORD-6034 for the Premium Cotton Shirt in size Large. If the agent previews a valid exchange and asks for confirmation, agree to proceed.",
     "known_info": [
       "You bought a Premium Cotton Shirt in order ORD-6034.",
-      "You want a Premium Cotton Shirt in Large instead."
+      "You want the same shirt in size Large instead."
     ],
     "unknown_info": [
       "You do not know the exchange price-difference policy."

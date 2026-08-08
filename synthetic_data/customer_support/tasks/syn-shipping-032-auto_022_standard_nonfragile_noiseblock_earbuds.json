@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-032-auto_022_standard_nonfragile_noiseblock_earbuds",
-  "task_summary": "Customer reports NoiseBlock Earbuds from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, refund the item, issue a return label, and include fragile goodwill only when applicable.",
+  "task_summary": "Customer reports that the NoiseBlock Earbuds from order ORD-6023 arrived damaged due to shipping. The correct handling involves the shipping-damage path: review the shipping and return policy, issue a refund to the original payment method, provide a return label for the damaged item, and include a separate fragile-item goodwill credit only if the item is deemed fragile. The final outcome should be a refund and a return label for the damaged earbuds.",
   "task_requirements": [
     {
       "id": "syn-shipping-032-auto_022_standard_nonfragile_noiseblock_earbuds_must_review_shipping_policy",
@@ -25,7 +25,7 @@
   "now": "2026-06-12T10:00:00",
   "opening_message": "My NoiseBlock Earbuds from order ORD-6023 arrived damaged. The package was crushed.",
   "user_simulator": {
-    "user_sim_context": "You received NoiseBlock Earbuds from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
+    "user_sim_context": "You received NoiseBlock Earbuds from order ORD-6023, but they arrived damaged with crushed packaging. You want a refund to your original payment method. If the item is considered fragile, you should ask whether a separate fragile-item goodwill credit applies.",
     "known_info": [
       "You bought NoiseBlock Earbuds in order ORD-6023.",
       "The item arrived damaged with crushed packaging."

@@ -23,11 +23,11 @@
   ],
   "user_id": "cust_005",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed the DeskHub USB-C Adapter from order ORD-7208 is now listed at a lower price. I believe I should get a refund of $25 for the price difference.",
+  "opening_message": "I noticed the DeskHub USB-C Adapter I ordered in ORD-7208 has dropped in price. I believe I'm entitled to a refund of $25.",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for the DeskHub USB-C Adapter in order ORD-7208. You think the drop is $25, but accept correction to $30 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
+    "user_sim_context": "You want a price-match refund for the DeskHub USB-C Adapter in order ORD-7208. You think the price difference is $25, but you will accept a correction to $30 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item must remain active.",
     "known_info": [
-      "You bought DeskHub USB-C Adapter in order ORD-7208.",
+      "You purchased the DeskHub USB-C Adapter in order ORD-7208.",
       "The current product price is $15."
     ],
     "unknown_info": [
@@ -35,8 +35,8 @@
       "You do not know payment allocation details unless the agent explains them."
     ],
     "task_rules": [
-      "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
-      "If the agent previews the policy-supported amount and keeps the order active, confirm the refund."
+      "Keep the request limited to a price-match refund; do not ask to return, cancel, or exchange the item.",
+      "If the agent states the policy-supported amount and keeps the order active, confirm the refund."
     ]
   },
   "task_type": "price_match_refund",

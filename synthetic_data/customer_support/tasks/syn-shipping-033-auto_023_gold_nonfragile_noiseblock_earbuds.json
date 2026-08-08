@@ -1,6 +1,6 @@
 {
   "task_id": "syn-shipping-033-auto_023_gold_nonfragile_noiseblock_earbuds",
-  "task_summary": "Customer reports NoiseBlock Earbuds from ORD-6023 arrived damaged in transit. Correct handling is the shipping-damage path: review shipping and return policy, issue a refund to original payment, provide a return label, and add fragile goodwill credit if applicable.",
+  "task_summary": "Customer reports that NoiseBlock Earbuds from order ORD-6023 were damaged in transit due to crushed packaging. Proper procedure: acknowledge the shipping damage, review refund and return policy, process a full refund to original payment, provide a prepaid return label, and if the item is fragile, also include a separate goodwill credit.",
   "task_requirements": [
     {
       "id": "syn-shipping-033-auto_023_gold_nonfragile_noiseblock_earbuds_must_review_shipping_policy",
@@ -23,19 +23,19 @@
   ],
   "user_id": "cust_003",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "My NoiseBlock Earbuds from order ORD-6023 arrived with the packaging crushed, and the product is damaged.",
+  "opening_message": "I received my NoiseBlock Earbuds from order ORD-6023, but the packaging was crushed and they arrived damaged.",
   "user_simulator": {
-    "user_sim_context": "You received NoiseBlock Earbuds from order ORD-6023 damaged in transit. You want a refund to original payment. If the item is fragile, ask whether a separate fragile-item goodwill credit applies.",
+    "user_sim_context": "You ordered NoiseBlock Earbuds under order ORD-6023, and they arrived damaged because the package was crushed. You want a full refund to your original payment method. If the item is fragile, you expect to also receive a separate fragile-item goodwill credit.",
     "known_info": [
-      "You bought NoiseBlock Earbuds in order ORD-6023.",
-      "The item arrived damaged with crushed packaging."
+      "You ordered NoiseBlock Earbuds in order ORD-6023.",
+      "The item was damaged during shipping, with the package crushed."
     ],
     "unknown_info": [
       "You do not know the internal item_id unless the agent tells you."
     ],
     "task_rules": [
-      "Keep the issue scoped to shipping damage; do not ask for a changed-mind return, cancellation, warranty claim, or exchange.",
-      "Confirm after a valid damaged-in-transit return preview. If the item is fragile, expect the separate goodwill credit."
+      "Stay focused on shipping damage; do not ask for a return due to changed mind, cancellation, warranty claim, or exchange.",
+      "If the agent previews a valid damaged-in-transit return, confirm. If the item is fragile, expect the separate goodwill credit."
     ]
   },
   "task_type": "shipping_claim",

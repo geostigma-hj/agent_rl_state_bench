@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-003-gold_small_drop",
-  "task_summary": "Customer requests a price adjustment for the PowerBlend Mini Blender in order ORD-7208. The correct resolution is a $10 price-match refund while retaining the order and item as active.",
+  "task_summary": "Customer requests a price adjustment for the PowerBlend Mini Blender in order ORD-7208. The correct resolution is to issue a $10 refund, with the order and item remaining active.",
   "task_requirements": [
     {
       "id": "syn-price-003-gold_small_drop_must_lookup_product_price",
@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_003",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "The PowerBlend Mini Blender I ordered (ORD-7208) is now listed for $79, so I believe I should receive a $10 price adjustment.",
+  "opening_message": "I noticed the PowerBlend Mini Blender in my order ORD-7208 is currently selling for less than what I paid. I believe I'm entitled to a $10 price adjustment.",
   "user_simulator": {
-    "user_sim_context": "You want a price adjustment refund for the PowerBlend Mini Blender in order ORD-7208. Do not accept a return, cancellation, exchange, or replacement; the item must remain active.",
+    "user_sim_context": "You are seeking a price-match refund for the PowerBlend Mini Blender in order ORD-7208. Do not allow return, cancellation, exchange, or replacement; the order must remain active.",
     "known_info": [
-      "You purchased a PowerBlend Mini Blender in order ORD-7208.",
-      "The current product price is $79."
+      "You purchased the PowerBlend Mini Blender in order ORD-7208.",
+      "The current price of the product is $79."
     ],
     "unknown_info": [
-      "You are unaware of the specific internal price adjustment process.",
-      "You do not know how the refund will be allocated unless the agent explains."
+      "You are unaware of the specific internal price-matching procedure.",
+      "You do not know payment allocation details unless the agent explains them."
     ],
     "task_rules": [
-      "Keep the request focused on a price adjustment refund; do not ask for a return, cancellation, or exchange.",
-      "If the agent confirms the policy-supported amount and keeps the order active, you should confirm the refund."
+      "Keep the request limited to a price-match refund; do not request a return, cancellation, or exchange.",
+      "If the agent confirms the policy-supported amount and keeps the order active, confirm the refund."
     ]
   },
   "task_type": "price_match_refund",

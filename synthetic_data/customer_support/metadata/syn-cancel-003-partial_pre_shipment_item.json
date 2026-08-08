@@ -41,8 +41,20 @@
   "expected_state_diff": {
     "created": {},
     "modified": {
+      "orders": {
+        "ORD-6003": {
+          "status": {
+            "old": "processing",
+            "new": "partially_cancelled"
+          }
+        }
+      },
       "order_items": {
         "ITEM-9021": {
+          "refund_method": {
+            "old": null,
+            "new": "credit_card"
+          },
           "item_status": {
             "old": "confirmed",
             "new": "cancelled"
@@ -50,18 +62,6 @@
           "refund_amount": {
             "old": null,
             "new": 45
-          },
-          "refund_method": {
-            "old": null,
-            "new": "credit_card"
-          }
-        }
-      },
-      "orders": {
-        "ORD-6003": {
-          "status": {
-            "old": "processing",
-            "new": "partially_cancelled"
           }
         }
       }

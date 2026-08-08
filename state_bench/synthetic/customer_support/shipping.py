@@ -54,6 +54,9 @@ def _auto_shipping_variants() -> tuple[ShippingDamageVariant, ...]:
         ("Kitchen Knife Set", 139, False),
         ("Crystal Wine Decanter", 159, True),
         ("Laptop Sleeve", 49, False),
+        ("Porcelain Tea Set", 99, True),
+        ("Smart Fitness Band", 89, False),
+        ("Glass Pendant Light", 179, True),
     ]
     customers = [
         ("cust_001", "platinum"),
@@ -91,7 +94,7 @@ def _auto_shipping_variants() -> tuple[ShippingDamageVariant, ...]:
                 )
             )
             idx += 1
-            if len(BASE_SHIPPING_VARIANTS) + len(variants) >= 50:
+            if len(BASE_SHIPPING_VARIANTS) + len(variants) >= 75:
                 return tuple(variants)
     return tuple(variants)
 

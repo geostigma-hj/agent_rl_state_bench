@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_001",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "I noticed that the TrailStep Running Shoes from my order ORD-7208 are now priced lower. I believe I'm entitled to a $20 refund for the price difference.",
+  "opening_message": "I bought the TrailStep Running Shoes in order ORD-7208 and now the price has dropped. I think I should get a refund of $20.",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for TrailStep Running Shoes in order ORD-7208. You think the drop is $20, but accept correction to $25 if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
+    "user_sim_context": "You want a price-match refund for TrailStep Running Shoes in order ORD-7208. You believe the price difference is $20, but you are open to correction to $25 once the agent verifies the product record. Do not agree to return, cancel, exchange, or replace the item; the order must remain active.",
     "known_info": [
       "You bought TrailStep Running Shoes in order ORD-7208.",
       "The current product price is $104."
     ],
     "unknown_info": [
-      "You do not know the exact internal price-match workflow.",
+      "You are not aware of the exact internal price-match procedure.",
       "You do not know payment allocation details unless the agent explains them."
     ],
     "task_rules": [
-      "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
-      "If the agent previews the policy-supported amount and keeps the order active, confirm the refund."
+      "Focus the conversation on obtaining a price-match refund; do not request a return, cancellation, exchange, or replacement.",
+      "If the agent states the correct refund amount and ensures the order stays active, confirm the refund."
     ]
   },
   "task_type": "price_match_refund",

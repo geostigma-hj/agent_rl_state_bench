@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-024-auto_009_silver_gift_card_powerblend_mini_blender_5_drop",
-  "task_summary": "Customer requests a price-match adjustment for PowerBlend Mini Blender in ORD-7208. The correct outcome is a $5 price-match refund while keeping the order and item active.",
+  "task_summary": "Customer requests a price-match adjustment for the PowerBlend Mini Blender in order ORD-7208. The correct outcome is a $5 price-match refund while keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-024-auto_009_silver_gift_card_powerblend_mini_blender_5_drop_must_lookup_product_price",
@@ -23,11 +23,11 @@
   ],
   "user_id": "cust_004",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "The PowerBlend Mini Blender from order ORD-7208 is now on sale for less than what I paid. I believe I should get a price adjustment.",
+  "opening_message": "The PowerBlend Mini Blender from order ORD-7208 is now listed at $84, which is $1 less than what I paid. I believe I'm due a price-match refund.",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for PowerBlend Mini Blender in order ORD-7208. You think the price drop is $1, but you are open to the correct amount if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
+    "user_sim_context": "You want a price-match refund for the PowerBlend Mini Blender from order ORD-7208. You initially think the difference is $1, but if the agent verifies the product record and corrects it to $5, you accept the correction. Do not allow a return, cancellation, exchange, or replacement; the item should remain active.",
     "known_info": [
-      "You bought PowerBlend Mini Blender in order ORD-7208.",
+      "You bought the PowerBlend Mini Blender in order ORD-7208.",
       "The current product price is $84."
     ],
     "unknown_info": [

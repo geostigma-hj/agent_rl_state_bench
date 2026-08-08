@@ -1,6 +1,6 @@
 {
   "task_id": "syn-warranty-025-auto_012_recurring_slatetab_pro_11_inch",
-  "task_summary": "Customer seeks warranty service for a malfunctioning SlateTab Pro 11-inch from order ORD-6032. The correct process is to verify warranty status, review policy, preview the resolution, obtain confirmation, and file the claim per policy. Warranty is active, so official policy dictates repair or replacement.",
+  "task_summary": "Customer requests warranty service for SlateTab Pro 11-inch from order ORD-6032. The warranty is active, so the agent should provide a warranty preview and explain the official policy's outcome (repair or replacement), then confirm and proceed with the claim.",
   "task_requirements": [
     {
       "id": "syn-warranty-025-auto_012_recurring_slatetab_pro_11_inch_must_check_warranty_status",
@@ -23,18 +23,18 @@
   ],
   "user_id": "cust_004",
   "now": "2026-06-12T10:00:00",
-  "opening_message": "I'm having trouble with my SlateTab Pro 11-inch from order ORD-6032. Can I get warranty service?",
+  "opening_message": "I'm having trouble with my SlateTab Pro 11-inch from order ORD-6032. Is it covered under warranty?",
   "user_simulator": {
-    "user_sim_context": "You need warranty assistance for a SlateTab Pro 11-inch from order ORD-6032. When the agent explains the warranty outcome according to policy and seeks your confirmation, agree to proceed. The warranty is active, so the policy determines whether repair or replacement is applied.",
+    "user_sim_context": "You are seeking warranty assistance for your SlateTab Pro 11-inch from order ORD-6032. If the agent explains the warranty outcome per policy and requests confirmation, you will agree. The warranty is active, so the policy will determine whether a repair or replacement is applicable.",
     "known_info": [
-      "You purchased SlateTab Pro 11-inch with order ORD-6032.",
-      "The product is malfunctioning."
+      "You purchased a SlateTab Pro 11-inch in order ORD-6032.",
+      "The device is malfunctioning."
     ],
     "unknown_info": [
-      "You are unaware of the claim count and the exact warranty resolution."
+      "You do not know the number of claims or the exact warranty resolution."
     ],
     "task_rules": [
-      "Confirm only after the agent provides a valid warranty preview. Do not request a return unless the agent states the warranty is not applicable."
+      "Once you receive a valid warranty preview, confirm. Do not ask for a return unless the agent indicates the warranty is not applicable."
     ]
   },
   "task_type": "warranty_claim",

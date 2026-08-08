@@ -1,6 +1,6 @@
 {
   "task_id": "syn-price-032-auto_017_standard_debit_card_slatetab_pro_11_inch_5_drop",
-  "task_summary": "Customer requests a price-match adjustment for SlateTab Pro 11-inch in order ORD-7208. The correct outcome is a $5 price-match refund while keeping the order and item active.",
+  "task_summary": "Customer requests a price-match adjustment for SlateTab Pro 11-inch in ORD-7208. The correct outcome is a $5 price-match refund while keeping the order and item active.",
   "task_requirements": [
     {
       "id": "syn-price-032-auto_017_standard_debit_card_slatetab_pro_11_inch_5_drop_must_lookup_product_price",
@@ -23,20 +23,20 @@
   ],
   "user_id": "cust_002",
   "now": "2026-07-08T10:00:00",
-  "opening_message": "Hello, I noticed that the SlateTab Pro 11-inch from my order ORD-7208 has a lower price now. I would like to request a price-match refund for the difference.",
+  "opening_message": "Hi, I bought a SlateTab Pro 11-inch with order ORD-7208, and I noticed the price has dropped. I'd like a price-match refund of $20, please.",
   "user_simulator": {
-    "user_sim_context": "You want a price-match refund for SlateTab Pro 11-inch in order ORD-7208. You believe the price drop is $20, but you are open to the correct amount if the agent verifies the product record. Do not allow a return, cancellation, exchange, or replacement; the item should remain active.",
+    "user_sim_context": "You want a price-match refund for SlateTab Pro 11-inch in order ORD-7208. You think the drop is $20, but you are open to correction if the agent verifies the price difference. Do not allow a return, cancellation, exchange, or replacement; the item should stay active.",
     "known_info": [
-      "You purchased the SlateTab Pro 11-inch in order ORD-7208.",
-      "The current price of the product is $594."
+      "You bought SlateTab Pro 11-inch in order ORD-7208.",
+      "The current product price is $594."
     ],
     "unknown_info": [
-      "You do not know the exact internal price-match workflow.",
-      "You do not know payment allocation details unless the agent explains them."
+      "You do not know the exact internal price-match policy or how the refund amount is calculated.",
+      "You do not know how the refund will be applied unless the agent explains."
     ],
     "task_rules": [
-      "Keep the request limited to a price-match refund; do not ask to return, cancel, or exchange the item.",
-      "If the agent provides the policy-supported refund amount and confirms the order remains active, accept the refund."
+      "Keep the request scoped to a price-match refund; do not ask to return, cancel, or exchange the item.",
+      "If the agent confirms the price difference is actually $5 and processes the refund, accept that amount and confirm."
     ]
   },
   "task_type": "price_match_refund",

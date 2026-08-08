@@ -1,0 +1,121 @@
+{
+  "task_id": "syn-shipping-075-auto_065_standard_fragile_glass_pendant_light",
+  "source_seed": "21-shipping_damaged_fragile",
+  "generator_version": "shipping_v0.1",
+  "task_family": "shipping",
+  "mutation_level": "state",
+  "difficulty": "medium",
+  "changed_factors": [
+    "fragile_goodwill"
+  ],
+  "requires_confirmation": true,
+  "is_compound": true,
+  "gold_tool_plan": [
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "shipping"
+      }
+    },
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "return"
+      }
+    },
+    {
+      "tool": "process_return",
+      "params": {
+        "item_id": "ITEM-9155",
+        "reason": "damaged_in_transit",
+        "confirm": false
+      }
+    },
+    {
+      "tool": "process_return",
+      "params": {
+        "item_id": "ITEM-9155",
+        "reason": "damaged_in_transit",
+        "confirm": true,
+        "amount": 179
+      }
+    },
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "refund"
+      }
+    },
+    {
+      "tool": "process_refund",
+      "params": {
+        "item_id": "ITEM-9155",
+        "amount": 10,
+        "refund_method": "original_payment",
+        "confirm": false
+      }
+    },
+    {
+      "tool": "process_refund",
+      "params": {
+        "item_id": "ITEM-9155",
+        "amount": 10,
+        "refund_method": "original_payment",
+        "confirm": true
+      }
+    }
+  ],
+  "expected_state_diff": {
+    "created": {},
+    "modified": {
+      "orders": {
+        "ORD-6023": {
+          "status": {
+            "old": "delivered",
+            "new": "fully_returned"
+          }
+        }
+      },
+      "order_items": {
+        "ITEM-9155": {
+          "item_status": {
+            "old": "delivered",
+            "new": "returned"
+          },
+          "return_reason": {
+            "old": null,
+            "new": "damaged_in_transit"
+          },
+          "return_label_issued": {
+            "old": false,
+            "new": true
+          },
+          "goodwill_credit": {
+            "old": 0,
+            "new": 10
+          },
+          "goodwill_credit_method": {
+            "old": null,
+            "new": "original_payment"
+          },
+          "restocking_fee": {
+            "old": null,
+            "new": 0
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 179
+          },
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
+          }
+        }
+      }
+    },
+    "deleted": {}
+  },
+  "language_rewritten": true,
+  "judge": null,
+  "language_rewriter_model": "deepseek-v4-flash"
+}

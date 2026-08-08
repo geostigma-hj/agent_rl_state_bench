@@ -1,0 +1,62 @@
+{
+  "task_id": "syn-warranty-054-auto_041_active_airpure_compact_purifier",
+  "task_summary": "Customer requests warranty service for the AirPure Compact Purifier from order ORD-6032. Correct handling is to verify warranty coverage, review warranty policy, preview the resolution, obtain confirmation, and file a claim per policy. The warranty is valid, so official policy dictates whether repair or replacement applies.",
+  "task_requirements": [
+    {
+      "id": "syn-warranty-054-auto_041_active_airpure_compact_purifier_must_check_warranty_status",
+      "kind": "must",
+      "requirement": "Agent must check warranty status for ITEM-9215.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-054-auto_041_active_airpure_compact_purifier_must_review_warranty_policy",
+      "kind": "must",
+      "requirement": "Agent must review warranty policy before filing a warranty claim.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-warranty-054-auto_041_active_airpure_compact_purifier_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must make a process_warranty_claim preview tool call for WRT-4013 with confirm false or omitted before making the confirm=true process_warranty_claim tool call.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_004",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "My AirPure Compact Purifier from order ORD-6032 is not working properly. Can I make a warranty claim?",
+  "user_simulator": {
+    "user_sim_context": "You seek warranty assistance for your AirPure Compact Purifier from order ORD-6032. If the agent explains the policy-based outcome and asks for confirmation, approve it. The warranty is active, so the official policy determines if repair or replacement is warranted.",
+    "known_info": [
+      "You purchased AirPure Compact Purifier under order ORD-6032.",
+      "The product is malfunctioning."
+    ],
+    "unknown_info": [
+      "You are unaware of the claim count or the exact warranty resolution."
+    ],
+    "task_rules": [
+      "Agree to proceed after a valid warranty preview. Do not request a return unless the agent states the warranty is invalid."
+    ]
+  },
+  "task_type": "warranty_claim",
+  "state_requirements": [
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "claim_count",
+      "expected_value": 1
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "resolution",
+      "expected_value": "repair"
+    },
+    {
+      "entity_type": "warranties",
+      "record_key": "WRT-4013",
+      "field": "status",
+      "expected_value": "claimed"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-warranty-054-auto_041_active_airpure_compact_purifier.json"
+}
