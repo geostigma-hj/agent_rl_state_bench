@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is clear, internally consistent, and executable. The $70 refund amount is correctly derived from the price difference ($799 original - $729 current), matches the customer's claim, aligns with state requirements, and is supported by the gold tool plan. All mandatory requirements (price verification, preview before confirm, no return/cancel/exchange) are consistently enforced across task requirements, user simulator, and gold tool plan.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

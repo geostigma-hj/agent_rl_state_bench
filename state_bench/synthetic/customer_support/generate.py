@@ -9,10 +9,12 @@ from pathlib import Path
 from state_bench.synthetic.customer_support.cancel import generate_cancel_tasks
 from state_bench.synthetic.customer_support.checker import check_task_files
 from state_bench.synthetic.customer_support.exchange import generate_exchange_tasks
+from state_bench.synthetic.customer_support.price_match import generate_price_match_tasks
 from state_bench.synthetic.customer_support.return_refund import generate_return_refund_tasks
+from state_bench.synthetic.customer_support.shipping import generate_shipping_tasks
 from state_bench.synthetic.customer_support.warranty import generate_warranty_tasks
 
-FAMILIES = ("return_refund", "cancel", "exchange", "warranty")
+FAMILIES = ("return_refund", "cancel", "exchange", "warranty", "price_match", "shipping")
 
 
 def main() -> None:
@@ -42,6 +44,10 @@ def main() -> None:
             records.extend(generate_exchange_tasks(output_root=args.output_root, limit=args.limit, rewrite=args.rewrite))
         elif family == "warranty":
             records.extend(generate_warranty_tasks(output_root=args.output_root, limit=args.limit, rewrite=args.rewrite))
+        elif family == "price_match":
+            records.extend(generate_price_match_tasks(output_root=args.output_root, limit=args.limit, rewrite=args.rewrite))
+        elif family == "shipping":
+            records.extend(generate_shipping_tasks(output_root=args.output_root, limit=args.limit, rewrite=args.rewrite))
 
     results = []
     for record in records:

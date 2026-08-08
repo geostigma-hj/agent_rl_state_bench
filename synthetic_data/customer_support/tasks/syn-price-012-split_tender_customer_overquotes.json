@@ -1,0 +1,58 @@
+{
+  "task_id": "syn-price-012-split_tender_customer_overquotes",
+  "task_summary": "Customer requests a price-match refund for the TechPhone Pro 16 in order ORD-7208. The correct outcome is issuing a $30 price-match refund while keeping the order and item active.",
+  "task_requirements": [
+    {
+      "id": "syn-price-012-split_tender_customer_overquotes_must_lookup_product_price",
+      "kind": "must",
+      "requirement": "Agent must verify current price with get_product_details for PROD-4210.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-price-012-split_tender_customer_overquotes_must_preview_before_confirm",
+      "kind": "must",
+      "requirement": "Agent must preview the $30 price-match refund before confirming it.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-price-012-split_tender_customer_overquotes_must_not_return_cancel_exchange",
+      "kind": "must_not",
+      "requirement": "Agent must not return, cancel, or exchange the item.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_001",
+  "now": "2026-07-08T10:00:00",
+  "opening_message": "I noticed the TechPhone Pro 16 from my order ORD-7208 now has a lower price, so I'd like a price adjustment and expect an $80 refund.",
+  "user_simulator": {
+    "user_sim_context": "You want a price-match refund for the TechPhone Pro 16 in order ORD-7208. You believe the price drop is $80, but if the agent confirms the record shows $30, you accept that. Do not allow a return, cancellation, exchange, or replacement; the item must stay active.",
+    "known_info": [
+      "You purchased the TechPhone Pro 16 in order ORD-7208.",
+      "The current product price is $769."
+    ],
+    "unknown_info": [
+      "You do not know the exact internal price-match procedures.",
+      "You do not know how the refund will be allocated unless the agent explains."
+    ],
+    "task_rules": [
+      "Keep the request limited to a price-match refund; do not ask for a return, cancellation, or exchange.",
+      "If the agent explains the policy-supported refund amount and keeps the order active, confirm the refund."
+    ]
+  },
+  "task_type": "price_match_refund",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10209",
+      "field": "refund_amount",
+      "expected_value": 30
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-10209",
+      "field": "refund_method",
+      "expected_value": "original_payment"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-price-012-split_tender_customer_overquotes.json"
+}

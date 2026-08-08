@@ -1,0 +1,98 @@
+{
+  "task_id": "syn-shipping-007-nonfragile_adapter_refund",
+  "source_seed": "21-shipping_damaged_fragile",
+  "generator_version": "shipping_v0.1",
+  "task_family": "shipping",
+  "mutation_level": "state",
+  "difficulty": "easy",
+  "changed_factors": [
+    "low_value_item"
+  ],
+  "requires_confirmation": true,
+  "is_compound": false,
+  "gold_tool_plan": [
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "shipping"
+      }
+    },
+    {
+      "tool": "get_policies",
+      "params": {
+        "topic": "return"
+      }
+    },
+    {
+      "tool": "process_return",
+      "params": {
+        "item_id": "ITEM-9155",
+        "reason": "damaged_in_transit",
+        "confirm": false
+      }
+    },
+    {
+      "tool": "process_return",
+      "params": {
+        "item_id": "ITEM-9155",
+        "reason": "damaged_in_transit",
+        "confirm": true,
+        "amount": 45
+      }
+    }
+  ],
+  "expected_state_diff": {
+    "created": {},
+    "modified": {
+      "order_items": {
+        "ITEM-9155": {
+          "refund_method": {
+            "old": null,
+            "new": "original_payment"
+          },
+          "restocking_fee": {
+            "old": null,
+            "new": 0
+          },
+          "return_reason": {
+            "old": null,
+            "new": "damaged_in_transit"
+          },
+          "refund_amount": {
+            "old": null,
+            "new": 45
+          },
+          "item_status": {
+            "old": "delivered",
+            "new": "returned"
+          },
+          "return_label_issued": {
+            "old": false,
+            "new": true
+          }
+        }
+      },
+      "orders": {
+        "ORD-6023": {
+          "status": {
+            "old": "delivered",
+            "new": "fully_returned"
+          }
+        }
+      }
+    },
+    "deleted": {}
+  },
+  "language_rewritten": true,
+  "judge": {
+    "decision": "ACCEPT",
+    "judge_model": "step-3.7-flash",
+    "deterministic_check_passed": true,
+    "issues": [
+      "Product category/subcategory mismatch: PROD-2155 is categorized as 'kitchen'/'vase' but is named 'DeskHub USB-C Adapter' (an electronics accessory). This is a data quality issue but does not affect task execution since fragility is determined by the is_fragile flag."
+    ],
+    "ambiguities": [],
+    "manual_adjudication": null
+  },
+  "language_rewriter_model": "deepseek-v4-flash"
+}

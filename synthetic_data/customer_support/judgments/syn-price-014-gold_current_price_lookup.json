@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is clear, executable, and internally consistent. The price difference ($349 - $319 = $30) aligns with the required refund amount, and the gold tool plan satisfies all task requirements including product price lookup, preview before confirm, and avoiding return/cancel/exchange actions.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

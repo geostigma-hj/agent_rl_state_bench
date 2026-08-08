@@ -1,0 +1,99 @@
+{
+  "task_id": "syn-shipping-001-fragile_vase_refund_goodwill",
+  "task_summary": "Customer reports that the Artisan Crystal Vase from order ORD-6023 arrived damaged due to shipping. The proper resolution is the shipping-damage process: review shipping and return policies, issue a refund to the original payment method, provide a return label, and apply a separate fragile-item goodwill credit if the item qualifies as fragile.",
+  "task_requirements": [
+    {
+      "id": "syn-shipping-001-fragile_vase_refund_goodwill_must_review_shipping_policy",
+      "kind": "must",
+      "requirement": "Agent must review the shipping policy before resolving the damaged-in-transit claim.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-shipping-001-fragile_vase_refund_goodwill_must_use_damaged_reason",
+      "kind": "must",
+      "requirement": "Agent must process item ITEM-9155 with reason damaged_in_transit, not changed_mind.",
+      "evidence": "tool_calls"
+    },
+    {
+      "id": "syn-shipping-001-fragile_vase_refund_goodwill_must_issue_fragile_goodwill",
+      "kind": "must",
+      "requirement": "Agent must issue the separate $10 fragile-item goodwill credit to original payment.",
+      "evidence": "tool_calls"
+    }
+  ],
+  "user_id": "cust_003",
+  "now": "2026-06-12T10:00:00",
+  "opening_message": "Hi, my order ORD-6023 with the Artisan Crystal Vase arrived damaged. The box was crushed, and the vase is broken.",
+  "user_simulator": {
+    "user_sim_context": "You received the Artisan Crystal Vase from order ORD-6023 and it was damaged during transit. You are seeking a full refund to the original payment method. If the item is classified as fragile, you expect an additional goodwill credit specifically for fragile items.",
+    "known_info": [
+      "You purchased the Artisan Crystal Vase in order ORD-6023.",
+      "The item arrived damaged, and the packaging was crushed."
+    ],
+    "unknown_info": [
+      "You are unaware of the internal item ID unless provided by the agent."
+    ],
+    "task_rules": [
+      "Focus solely on the shipping damage issue; do not request a changed-mind return, cancellation, warranty claim, or exchange.",
+      "After receiving a valid damaged-in-transit return preview, confirm the refund. If the item is fragile, expect the additional goodwill credit."
+    ]
+  },
+  "task_type": "shipping_claim",
+  "state_requirements": [
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "goodwill_credit",
+      "expected_value": 10
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "goodwill_credit_method",
+      "expected_value": "original_payment"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "item_status",
+      "expected_value": "returned"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "refund_amount",
+      "expected_value": 109
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "refund_method",
+      "expected_value": "original_payment"
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "restocking_fee",
+      "expected_value": 0
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "return_label_issued",
+      "expected_value": true
+    },
+    {
+      "entity_type": "order_items",
+      "record_key": "ITEM-9155",
+      "field": "return_reason",
+      "expected_value": "damaged_in_transit"
+    },
+    {
+      "entity_type": "orders",
+      "record_key": "ORD-6023",
+      "field": "status",
+      "expected_value": "fully_returned"
+    }
+  ],
+  "task_env_path": "synthetic_data/customer_support/task_envs/syn-shipping-001-fragile_vase_refund_goodwill.json"
+}

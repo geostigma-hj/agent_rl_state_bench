@@ -1,0 +1,10 @@
+{
+  "decision": "ACCEPT",
+  "confidence": 0.95,
+  "issues": [],
+  "ambiguities": [],
+  "recommendation": "Task is well-formed and consistent. The gold tool plan correctly addresses all requirements: reviews shipping/return policies, processes the damaged_in_transit return for ITEM-9155 with $89 refund to original payment, and issues the $10 fragile-item goodwill credit to original payment. Environment data supports all preconditions (item is fragile, order shipping_status is damaged, within return window). Customer's explicit request for original payment method overrides their account default of store_credit.",
+  "judge_model": "step-3.7-flash",
+  "deterministic_check_passed": true,
+  "manual_adjudication": null
+}

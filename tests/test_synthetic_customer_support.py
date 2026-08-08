@@ -4,7 +4,9 @@ from pathlib import Path
 from state_bench.synthetic.customer_support.cancel import generate_cancel_tasks
 from state_bench.synthetic.customer_support.checker import check_task_files
 from state_bench.synthetic.customer_support.exchange import generate_exchange_tasks
+from state_bench.synthetic.customer_support.price_match import generate_price_match_tasks
 from state_bench.synthetic.customer_support.return_refund import generate_return_refund_tasks
+from state_bench.synthetic.customer_support.shipping import generate_shipping_tasks
 from state_bench.synthetic.customer_support.warranty import generate_warranty_tasks
 
 
@@ -37,6 +39,8 @@ def test_core_family_generators_emit_checkable_tasks(tmp_path: Path) -> None:
     generators = {
         "cancel": generate_cancel_tasks,
         "exchange": generate_exchange_tasks,
+        "price_match": generate_price_match_tasks,
+        "shipping": generate_shipping_tasks,
         "warranty": generate_warranty_tasks,
     }
     for family, generator in generators.items():
