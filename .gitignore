@@ -69,6 +69,7 @@ migration_validation_outputs/
 _RESULTS.md
 RESULTS*.md
 checkpoints/
+/checkpoints
 data/
 outputs*/
 logs/

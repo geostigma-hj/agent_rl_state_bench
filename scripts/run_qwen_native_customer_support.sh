@@ -48,6 +48,8 @@ if (( ${#missing[@]} )); then
 fi
 
 split="${SPLIT:-test}"
+tasks_dir="${TASKS_DIR:-}"
+score_split="${SCORE_SPLIT:-$([[ -n "${TASKS:-}" ]] && printf all || printf %s "$split")}"
 task_limit="${TASK_LIMIT:-}"
 num_runs="${NUM_RUNS:-1}"
 num_runs_idx_start="${NUM_RUNS_IDX_START:-1}"
@@ -81,6 +83,10 @@ args=(
   --output-dir "$output_dir"
 )
 
+if [[ -n "$tasks_dir" ]]; then
+  args+=(--tasks-dir "$tasks_dir")
+fi
+
 if [[ -n "${TASKS:-}" ]]; then
   args+=(--tasks "$TASKS")
 fi
@@ -94,7 +100,7 @@ fi
 score_args=(
   -m state_bench.scripts.compute_metrics
   --domain customer_support
-  --split "$split"
+  --split "$score_split"
   --results-dir "$output_dir"
   --num-runs "$num_runs"
   --num-runs-idx-start "$num_runs_idx_start"

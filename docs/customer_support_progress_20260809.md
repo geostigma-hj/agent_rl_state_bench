@@ -271,3 +271,23 @@ LoRA 产物说明：
 2. 不再只按验证 loss 选择 SFT checkpoint；需要结合官方 harness 任务成功率，或建立 held-out task validation set。
 3. 分析 LoRA step100 的失败轨迹，按 tool error 类型和任务类别定位问题，重点看 shipping、price match、exchange、compound。
 4. RL 从 LoRA step100 初始化，先跑小规模 sanity run，再启动全数据训练。
+
+## RL Rollout 配置修正
+
+首次 20-step GRPO sanity 发现 step1 开始 response length 即异常偏长，后续 step20 全部打满 8192。排查后确认主要不是 8K 总预算本身，而是 RL agent loop 在追加 simulator user message 时重复传入 `tools=self.tool_schemas`，触发 Qwen chat template 每轮重新注入完整工具 schema，导致 rollout response side 被多次工具说明污染。
+
+已修正：
+
+- 工具 schema 只在初始 prompt 注入，后续 user delta 不再重复传 tools。
+- Rollout sampling 显式对齐 Qwen generation config：temperature 0.7、top_p 0.8、top_k 20。
+- 增加单 assistant turn cap：`STATE_BENCH_RL_AGENT_TURN_MAX_TOKENS=1024`，整条 rollout 仍可保留 `MAX_RESPONSE_LENGTH=8192`。
+- 暂时关闭 redundant-call penalty，避免当前阶段混入 efficiency reward；下一轮 RL reward 先保留 final state / process / tool 三类。
+
+1-step sanity 对比：
+
+| 配置 | response length mean | max | clip ratio | output char mean | 工具 schema 重复 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 旧 loop + 对齐 sampling/turn cap，但仍重复 tools | 6308.9 | 8192 | 0.25 | 25195 | 3-9 次/轨迹 |
+| 修复 tools 重复后 | 1643.3 | 2130 | 0.125 | 6008.6 | 0 |
+
+结论：旧 20-step GRPO 结果不能作为策略质量判断依据，主要用于证明训练链路可运行。后续 RL 需要基于修复后的 rollout loop 重新从 LoRA step100 做 sanity run。

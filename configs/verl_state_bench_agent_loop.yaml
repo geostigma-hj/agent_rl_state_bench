@@ -1,0 +1,2 @@
+- name: state_bench_customer_support
+  _target_: state_bench.rl.verl_agent_loop.StateBenchCustomerSupportAgentLoop

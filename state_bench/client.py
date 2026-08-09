@@ -32,7 +32,6 @@ from typing import Any
 
 import httpx
 import yaml
-from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 from openai import APIStatusError, AuthenticationError, BadRequestError, OpenAI
 from tenacity import (
     RetryCallState,
@@ -40,6 +39,12 @@ from tenacity import (
     retry_if_exception,
     stop_after_attempt,
 )
+
+try:
+    from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+except ImportError:  # pragma: no cover - exercised in lean training environments.
+    DefaultAzureCredential = None
+    get_bearer_token_provider = None
 
 from state_bench.paths import CONFIGS_DIR
 
@@ -319,6 +324,11 @@ def _build_azure_openai_client(endpoint: str, api_key_var: str = "AZURE_OPENAI_A
             api_key=cli_token_provider,
         )
 
+    if DefaultAzureCredential is None or get_bearer_token_provider is None:
+        raise ImportError(
+            "azure.identity is required for Azure OpenAI authentication without an API key or CLI token. "
+            "Install azure-identity or configure an API key / OpenAI-compatible provider."
+        )
     credential = DefaultAzureCredential()
     token_provider = get_bearer_token_provider(credential, "https://ai.azure.com/.default")
     return OpenAI(
