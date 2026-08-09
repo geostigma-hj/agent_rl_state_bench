@@ -212,9 +212,33 @@ Current comparison on official customer_support test50:
 
 Immediate observation: LoRA is clearly better than both base and full-parameter SFT in this low-data regime, even though the validation loss had not converged. The main residual issue is still tool-call precision and process compliance: the LoRA model passes more tasks but also produces many tool errors on hard multi-step cases.
 
+## LoRA Continuation To 200 Steps
+
+The LoRA run was continued beyond step 100 to test whether the still-decreasing validation loss translated into better official harness performance.
+
+Implementation note: the SFT script originally relied on verl's default `trainer.total_epochs=4`, which stopped a `TOTAL_TRAINING_STEPS=200` continuation at epoch 4 before reaching step 200. The script now exposes `TOTAL_EPOCHS`; the continuation was rerun with `TOTAL_EPOCHS=6` and resumed from `global_step_150`.
+
+Continuation validation loss:
+
+- Step 100: 0.4501.
+- Step 125: 0.4383.
+- Step 150: 0.4316.
+- Step 175: 0.4353.
+- Step 200: 0.4318.
+
+Official harness test50 results:
+
+| Checkpoint | Val loss | Pass@1 | Passed | Tool calls | Tool errors | Mean turns | Output |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| LoRA step100 | 0.4501 | 46% | 23/50 | 547 | 151 | 5.5 | `outputs/customer_support_qwen3_4b_sft_lora_r16_step100_main8192_lr1e4_12k_mtok1024_native_test_20260809_1343` |
+| LoRA step150 | 0.4316 | 38% | 19/50 | 501 | 112 | 5.1 | `outputs/customer_support_qwen3_4b_sft_lora_r16_step150_main8192_lr1e4_12k_mtok1024_native_test_20260809_1437` |
+| LoRA step200 | 0.4318 | 36% | 18/50 | 442 | 89 | 5.2 | `outputs/customer_support_qwen3_4b_sft_lora_r16_step200_main8192_lr1e4_12k_mtok1024_native_test_20260809_1449` |
+
+Conclusion: validation loss is misleading for this benchmark after step 100. Continued SFT reduces tool errors, but it also reduces task success. The likely failure mode is behavior overfitting / policy drift away from useful exploratory tool use. The best current cold-start checkpoint remains LoRA `global_step_100`, not step150 or step200.
+
 ## Next Steps
 
-1. Use LoRA SFT as the current cold-start direction instead of the full-parameter SFT checkpoint.
-2. Consider extending LoRA training to 150/200 steps or selecting by downstream validation tasks, because validation loss had not plateaued at step 100.
-3. Inspect failed LoRA trajectories by tool error type and task category, especially shipping, price match, exchange, and compound tasks.
-4. For RL, initialize from the best LoRA SFT policy unless a short continuation run gives a better official-harness signal.
+1. Use LoRA `global_step_100` as the current cold-start policy.
+2. Do not select SFT checkpoints by validation loss alone; use official-harness task success or a held-out task validation set.
+3. Inspect failed LoRA step100 trajectories by tool error type and task category, especially shipping, price match, exchange, and compound tasks.
+4. For RL, initialize from LoRA step100 and use short RL sanity runs before launching full-data training.
