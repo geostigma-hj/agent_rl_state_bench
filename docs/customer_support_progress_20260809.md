@@ -63,6 +63,8 @@ V4 Flash teacher rollouts were collected with the official harness:
 
 The first SFT conversion was discarded because assistant final text and tool calls were packed into the same assistant message. The clean conversion now stores assistant tool-call messages separately from final natural-language responses and drops null-expanded tool arguments from parquet readback.
 
+Reproducibility note: the active local verl checkout at `/home/hj/shixi/verl` was also patched in `verl/utils/dataset/multiturn_sft_dataset.py` to drop null-expanded nested tool-call arguments after reading parquet. That checkout is outside this repository, so future runs need either the same local patch or an equivalent upstream/data-loader fix.
+
 Clean SFT data:
 
 - Main split used for cold start: `data/sft/customer_support_v4_flash_teacher_round123_targeted_toolsplit_clean_main8192`
