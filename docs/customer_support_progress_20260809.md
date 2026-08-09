@@ -1,26 +1,26 @@
-# Customer Support Agent RL Progress
+# Customer Support Agent RL 进展记录
 
-Date: 2026-08-09
+日期：2026-08-09
 
-## Baseline Decision
+## 基线决策
 
-- Final project agent model for local training/eval: `Qwen3-4B-Instruct-2507`.
-- Primary teacher/simulator provider for synthetic data and SFT trajectory generation: DeepSeek V4 Flash.
-- Simulator temperature: `0.2`.
-- Main agent decoding for baselines follows provider/model defaults unless explicitly testing thinking variants.
+- 本项目用于本地训练和评测的主 Agent 模型：`Qwen3-4B-Instruct-2507`。
+- 合成数据和 SFT 轨迹采样的主要 Teacher/Simulator：DeepSeek V4 Flash。
+- Simulator 温度：`0.2`。
+- 主 Agent 的 baseline 解码参数默认遵循模型/服务端默认设置，除非明确测试 thinking 变体。
 
-## Baseline Results on Official Train Split
+## 官方 Train Split 基线结果
 
-- `Qwen3-4B-Instruct-2507` without thinking is the selected local model; thinking was slower and not worth the latency for this project stage.
-- DeepSeek V4 Flash and Pro were evaluated with the official STATE-Bench harness.
-- The final model choice is based on the observed latency/quality tradeoff: use Qwen3-4B-Instruct-2507 for the trainable agent, not DeepSeek Pro/Flash as the trainable target.
+- 当前选定本地模型为不开 thinking 的 `Qwen3-4B-Instruct-2507`；thinking 虽然可能改变表现，但延迟过高，不适合作为当前阶段默认配置。
+- DeepSeek V4 Flash 和 Pro 均已使用官方 STATE-Bench harness 评测。
+- 最终模型选择基于延迟和质量权衡：可训练目标使用 `Qwen3-4B-Instruct-2507`，不把 DeepSeek Pro/Flash 作为训练目标模型。
 
-Detailed raw outputs remain under `outputs/`.
+详细原始输出保留在 `outputs/`。
 
-## Synthetic Data Status
+## 合成数据状态
 
-- Synthetic customer_support tasks: 590.
-- Task type distribution:
+- 合成 customer_support 任务数：590。
+- 任务类型分布：
   - `cancel_order`: 60
   - `compound`: 60
   - `edge_case`: 60
@@ -29,216 +29,216 @@ Detailed raw outputs remain under `outputs/`.
   - `return_item`: 65
   - `shipping_claim`: 110
   - `warranty_claim`: 65
-- Full manual audit: 590/590 PASS.
-- V4 Flash judge: 590/590 ACCEPT.
-- Deterministic checker: 590/590 passed, 0 failed, 120 warnings.
-- Pattern residue check: 0 remaining issues.
-- Repair log: 854 field/text-level repairs.
+- 全量人工审查：590/590 PASS。
+- V4 Flash judge：590/590 ACCEPT。
+- 确定性 checker：590/590 通过，0 失败，120 warnings。
+- 模板残留检查：0 个剩余问题。
+- 修复日志：854 处字段/文本级修复。
 
-Important audit artifacts:
+重要审查产物：
 
 - `synthetic_data/customer_support/full_manual_audit/summary.json`
 - `synthetic_data/customer_support/full_manual_audit/full_audit_report.md`
 - `synthetic_data/customer_support/full_manual_audit/repair_log.json`
 - `synthetic_data/customer_support/full_manual_audit/reviews/`
 
-## Metric Readiness
+## 指标字段完备性
 
-The constructed data keeps the fields needed by official STATE-Bench evaluation:
+构造数据保留了官方 STATE-Bench 评测所需字段：
 
-- State metrics: `tasks/*.json::state_requirements` plus rollout `state_diff`.
-- Process/trajectory metrics: `tasks/*.json::task_requirements` plus rollout `conversation` and `tool_calls`.
-- Tool/write metrics: rollout `conversation.tool_calls`; customer_support write tools are declared in domain config.
+- 状态指标：`tasks/*.json::state_requirements` 加 rollout 里的 `state_diff`。
+- 流程/轨迹指标：`tasks/*.json::task_requirements` 加 rollout 里的 `conversation` 和 `tool_calls`。
+- 工具/写操作指标：rollout 里的 `conversation.tool_calls`；customer_support 的写工具在 domain config 中声明。
 
-For 120 template-derived compound/edge tasks, `metadata.gold_tool_plan` and `metadata.expected_state_diff` are null. This does not affect official evaluation because scoring uses task requirements and rollout diffs, not those metadata helper fields.
+有 120 条模板派生的 compound/edge 任务中，`metadata.gold_tool_plan` 和 `metadata.expected_state_diff` 为 null。这不影响官方评测，因为官方 scoring 使用的是 task requirements 和 rollout diff，而不是这些 metadata 辅助字段。
 
-## Teacher Rollouts And SFT Data
+## Teacher Rollout 与 SFT 数据
 
-V4 Flash teacher rollouts were collected with the official harness:
+已用官方 harness 采集 V4 Flash teacher rollout：
 
-- Round 1: 441/590 accepted.
-- Round 2: 438/590 accepted.
-- Round 3 targeted retry on failed-both tasks: 21 accepted.
-- SFT trajectories after merge: 900 accepted trajectories.
+- Round 1：441/590 accepted。
+- Round 2：438/590 accepted。
+- Round 3：对前两轮均失败的任务做 targeted retry，新增 21 条 accepted。
+- 合并后 SFT 轨迹数：900 条 accepted trajectories。
 
-The first SFT conversion was discarded because assistant final text and tool calls were packed into the same assistant message. The clean conversion now stores assistant tool-call messages separately from final natural-language responses and drops null-expanded tool arguments from parquet readback.
+第一版 SFT 转换已废弃，原因是 assistant 最终回复文本和 tool call 被打包进同一条 assistant message。清洗后的转换现在会把 assistant tool-call message 和最终自然语言回复分开保存，并在 parquet 读回后丢弃 null-expanded 的 tool arguments。
 
-Reproducibility note: the active local verl checkout at `/home/hj/shixi/verl` was also patched in `verl/utils/dataset/multiturn_sft_dataset.py` to drop null-expanded nested tool-call arguments after reading parquet. That checkout is outside this repository, so future runs need either the same local patch or an equivalent upstream/data-loader fix.
+可复现性说明：当前本地 verl checkout `/home/hj/shixi/verl` 额外 patch 了 `verl/utils/dataset/multiturn_sft_dataset.py`，用于读取 parquet 后清理 null-expanded 的嵌套 tool-call arguments。该 checkout 不在本仓库内，后续复现需要保留同样本地 patch，或使用等价的上游/data-loader 修复。
 
-Clean SFT data:
+清洗后的 SFT 数据：
 
-- Main split used for cold start: `data/sft/customer_support_v4_flash_teacher_round123_targeted_toolsplit_clean_main8192`
-- Train/val rows: 849/45.
-- Long-tail over 8192 tokens after cleaning: 6 train rows, 0 val rows.
+- 冷启动主 split：`data/sft/customer_support_v4_flash_teacher_round123_targeted_toolsplit_clean_main8192`
+- Train/val 行数：849/45。
+- 清洗后超过 8192 tokens 的长尾：train 6 条，val 0 条。
 
-## Cold-Start SFT
+## 冷启动 SFT
 
-Full-parameter SFT was run on `/mnt/models/Qwen3-4B-Instruct-2507` with verl FSDP, not LoRA:
+先做过一次 full-parameter SFT，基座为 `/mnt/models/Qwen3-4B-Instruct-2507`，训练框架为 verl FSDP，不是 LoRA：
 
-- GPUs: 6 x RTX 4090.
-- Max sequence length: 8192.
-- Train batch size: 24.
-- Learning rate: `1e-5`.
-- Total steps: 100.
-- Save/eval interval: 25 steps.
-- Attention: `flash_attention_2`.
-- Checkpoint save contents: model and extra state only.
+- GPU：6 x RTX 4090。
+- 最大序列长度：8192。
+- Train batch size：24。
+- 学习率：`1e-5`。
+- 总 step：100。
+- 保存/验证间隔：25 step。
+- Attention：`flash_attention_2`。
+- checkpoint 保存内容：model 和 extra state。
 
-Validation loss:
+验证 loss：
 
-- Step 25: 0.4191.
-- Step 50: 0.3944.
-- Step 75: 0.3990.
-- Step 100: 0.4163.
+- Step 25：0.4191。
+- Step 50：0.3944。
+- Step 75：0.3990。
+- Step 100：0.4163。
 
-Step 50 was selected for evaluation because it had the lowest validation loss. The merged HF checkpoint is:
+Step 50 的验证 loss 最低，因此用于评测。合并后的 HF checkpoint：
 
 `checkpoints/customer_support/qwen3_4b_sft_cold_start_round123_toolsplit_clean_main8192_full_flash_lr1e5_sp2_b24/global_step_50_hf_merged`
 
-Training artifacts:
+训练产物：
 
-- Log: `logs/sft/qwen3_4b_instruct_2507_v4_flash_teacher_round123_toolsplit_clean_main8192_full_flash_lr1e5_sp2_b24_20260809_062924.log`
-- Metrics CSV: `logs/sft/qwen3_4b_instruct_2507_v4_flash_teacher_round123_toolsplit_clean_main8192_full_flash_lr1e5_sp2_b24_20260809_062924_metrics.csv`
+- Log：`logs/sft/qwen3_4b_instruct_2507_v4_flash_teacher_round123_toolsplit_clean_main8192_full_flash_lr1e5_sp2_b24_20260809_062924.log`
+- Metrics CSV：`logs/sft/qwen3_4b_instruct_2507_v4_flash_teacher_round123_toolsplit_clean_main8192_full_flash_lr1e5_sp2_b24_20260809_062924_metrics.csv`
 
-## SFT Test Evaluation
+## Full SFT 测试集评测
 
-The step 50 checkpoint was evaluated on the official STATE-Bench customer_support test split with the official harness:
+Step 50 checkpoint 已用官方 STATE-Bench customer_support test split 和官方 harness 评测：
 
-- Agent: `OpenAICompatibleToolCallingAgent`
-- Agent model label: `Qwen3-4B-SFT-clean-step50`
-- Local serving: vLLM, 5 endpoints on GPUs 0-4.
-- vLLM context: 12288 tokens.
-- Agent max completion cap: 1024 tokens for the main run.
-- Overflow rerun: task `72-challenge_bulk_plus_shipping_clawback` used max completion cap 256 to fit the 12288-token local vLLM context.
-- Simulator/Judge: DeepSeek V4 Flash through `STATE_BENCH_EVAL_PROVIDER=deepseek`.
-- Simulator temperature: `0.2`.
-- Main agent temperature: provider/default local serving behavior; no explicit temperature override.
-- UX scoring: skipped.
+- Agent：`OpenAICompatibleToolCallingAgent`
+- Agent model label：`Qwen3-4B-SFT-clean-step50`
+- 本地服务：vLLM，GPU 0-4 上 5 个 endpoint。
+- vLLM context：12288 tokens。
+- 主跑 Agent max completion cap：1024 tokens。
+- Overflow 补跑：任务 `72-challenge_bulk_plus_shipping_clawback` 使用 max completion cap 256，以适配本地 vLLM 的 12288-token context。
+- Simulator/Judge：通过 `STATE_BENCH_EVAL_PROVIDER=deepseek` 使用 DeepSeek V4 Flash。
+- Simulator 温度：`0.2`。
+- 主 Agent 温度：本地服务/模型默认行为，未显式覆盖。
+- UX scoring：跳过。
 
-Result on 50/50 test tasks:
+50/50 test 任务结果：
 
-- `task_completion_pass@1`: 24%.
-- Passed tasks: 12/50.
-- Failed tasks: 38/50.
-- Total tool calls: 503.
-- Tool errors: 112.
+- `task_completion_pass@1`：24%。
+- 通过任务：12/50。
+- 失败任务：38/50。
+- 总工具调用：503。
+- Tool errors：112。
 
-Result path:
+结果路径：
 
 `outputs/customer_support_qwen3_4b_sft_clean_step50_main8192_lr1e5_12k_mtok1024_native_test_20260809_1239`
 
-Category pass-rate estimate from task names:
+按任务名粗略估算的类别通过率：
 
-- `cancel_order`: 1/2.
-- `edge_case`: 3/3.
-- `exchange_item`: 1/7.
-- `price_match_refund`: 0/6.
-- `return_item`: 2/8.
-- `shipping_claim`: 3/14.
-- `warranty_claim`: 1/3.
-- Other challenge tasks: 1/7.
+- `cancel_order`：1/2。
+- `edge_case`：3/3。
+- `exchange_item`：1/7。
+- `price_match_refund`：0/6。
+- `return_item`：2/8。
+- `shipping_claim`：3/14。
+- `warranty_claim`：1/3。
+- 其他 challenge 任务：1/7。
 
-Immediate observation: SFT produced working tool calls, but quality is still low on test. The biggest visible issue is excessive or invalid tool use, with 112 tool errors across 50 tasks. Price-match, exchange, compound, and multi-action challenge cases are the most obvious weak areas for targeted data/RL.
+直接观察：full SFT 能产生可工作的 tool calls，但测试集质量较低。最明显的问题是工具调用过多或非法，50 条任务里有 112 个 tool errors。Price match、exchange、compound、多动作 challenge 是后续数据/RL 最需要针对的弱项。
 
-## LoRA SFT Ablation
+## LoRA SFT 消融
 
-A LoRA SFT run was added because the full-parameter SFT result was worse than the base model on the official test split.
+由于 full-parameter SFT 在官方 test split 上低于 base，因此追加了 LoRA SFT 实验。
 
-Training configuration:
+训练配置：
 
-- Base model: `/mnt/models/Qwen3-4B-Instruct-2507`.
-- Data: `data/sft/customer_support_v4_flash_teacher_round123_targeted_toolsplit_clean_main8192`.
-- Train/val rows: 849/45.
-- GPUs: 5 x RTX 4090, one model shard per rank during verl FSDP training.
-- LoRA rank/alpha: `r=16`, `alpha=32`.
-- Max sequence length: 8192.
-- Train batch size: 20.
-- Learning rate: `1e-4`.
-- Total steps: 100, approximately 2.3 epochs over the 849-row training split.
-- Save/eval interval: 25 steps.
+- Base model：`/mnt/models/Qwen3-4B-Instruct-2507`。
+- 数据：`data/sft/customer_support_v4_flash_teacher_round123_targeted_toolsplit_clean_main8192`。
+- Train/val 行数：849/45。
+- GPU：5 x RTX 4090，verl FSDP 训练时每个 rank 一个模型 shard。
+- LoRA rank/alpha：`r=16`，`alpha=32`。
+- 最大序列长度：8192。
+- Train batch size：20。
+- 学习率：`1e-4`。
+- 总 step：100，约等于在 849 条训练样本上跑 2.3 个 epoch。
+- 保存/验证间隔：25 step。
 
-Validation loss:
+验证 loss：
 
-- Step 25: 0.5781.
-- Step 50: 0.5065.
-- Step 75: 0.4687.
-- Step 100: 0.4501.
+- Step 25：0.5781。
+- Step 50：0.5065。
+- Step 75：0.4687。
+- Step 100：0.4501。
 
-The validation curve was still decreasing at step 100, so the LoRA run had not clearly converged. Step 100 was evaluated first to get a fast downstream signal.
+Step 100 时验证 loss 仍在下降，因此 LoRA 训练从 loss 看还没有明确收敛。为了快速获得下游信号，先评测 step100。
 
-LoRA artifact notes:
+LoRA 产物说明：
 
-- verl's FSDP merger produced a full HF model plus a separate `lora_adapter` directory.
-- For vLLM evaluation, the adapter was explicitly merged into the base weights with PEFT `merge_and_unload` to avoid accidentally serving the unadapted base model.
-- Merged inference checkpoint: `checkpoints/customer_support/qwen3_4b_sft_lora_r16_a32_round123_toolsplit_clean_main8192_lr1e4_b20/global_step_100_hf_lora_merged`.
+- verl 的 FSDP merger 会产出完整 HF model 加单独的 `lora_adapter` 目录。
+- 为避免 vLLM 评测时误 serve 未加载 adapter 的 base model，评测前使用 PEFT `merge_and_unload` 将 adapter 显式合入主权重。
+- 合并后的推理 checkpoint：`checkpoints/customer_support/qwen3_4b_sft_lora_r16_a32_round123_toolsplit_clean_main8192_lr1e4_b20/global_step_100_hf_lora_merged`。
 
-Official harness test50 result:
+官方 harness test50 结果：
 
-- Output: `outputs/customer_support_qwen3_4b_sft_lora_r16_step100_main8192_lr1e4_12k_mtok1024_native_test_20260809_1343`.
-- Agent model label: `Qwen3-4B-SFT-LoRA-r16-step100`.
-- Local serving: vLLM, 5 endpoints on GPUs 0-4.
-- vLLM context: 12288 tokens.
-- Agent max completion cap: 1024 tokens for the main run.
-- Overflow rerun: tasks `41-hard_two_lost_shipments_threshold_split` and `71-hard_exchange_late_compensation_destination_choice` used max completion cap 256 to fit the 12288-token local vLLM context.
-- Simulator/Judge: DeepSeek V4 Flash.
-- Simulator temperature: `0.2`.
-- UX scoring: skipped.
+- 输出：`outputs/customer_support_qwen3_4b_sft_lora_r16_step100_main8192_lr1e4_12k_mtok1024_native_test_20260809_1343`。
+- Agent model label：`Qwen3-4B-SFT-LoRA-r16-step100`。
+- 本地服务：vLLM，GPU 0-4 上 5 个 endpoint。
+- vLLM context：12288 tokens。
+- 主跑 Agent max completion cap：1024 tokens。
+- Overflow 补跑：任务 `41-hard_two_lost_shipments_threshold_split` 和 `71-hard_exchange_late_compensation_destination_choice` 使用 max completion cap 256，以适配本地 vLLM 的 12288-token context。
+- Simulator/Judge：DeepSeek V4 Flash。
+- Simulator 温度：`0.2`。
+- UX scoring：跳过。
 
-Result on 50/50 test tasks:
+50/50 test 任务结果：
 
-- `task_completion_pass@1`: 46%.
-- Passed tasks: 23/50.
-- Failed tasks: 27/50.
-- Total tool calls: 547.
-- Tool errors: 151.
-- Mean turns: 5.5.
+- `task_completion_pass@1`：46%。
+- 通过任务：23/50。
+- 失败任务：27/50。
+- 总工具调用：547。
+- Tool errors：151。
+- 平均 turns：5.5。
 
-Category pass-rate estimate from task names:
+按任务名粗略估算的类别通过率：
 
-- `cancel_order`: 2/4.
-- `edge_case`: 3/3.
-- `exchange_item`: 3/7.
-- `price_match_refund`: 1/5.
-- `return_item`: 5/8.
-- `shipping_claim`: 3/12.
-- `warranty_claim`: 2/3.
-- Other challenge tasks: 4/8.
+- `cancel_order`：2/4。
+- `edge_case`：3/3。
+- `exchange_item`：3/7。
+- `price_match_refund`：1/5。
+- `return_item`：5/8。
+- `shipping_claim`：3/12。
+- `warranty_claim`：2/3。
+- 其他 challenge 任务：4/8。
 
-Current comparison on official customer_support test50:
+当前官方 customer_support test50 对比：
 
-- Base Qwen3-4B-Instruct-2507: 30%.
-- Full-parameter SFT step50: 24%.
-- LoRA SFT step100: 46%.
+- Base Qwen3-4B-Instruct-2507：30%。
+- Full-parameter SFT step50：24%。
+- LoRA SFT step100：46%。
 
-Immediate observation: LoRA is clearly better than both base and full-parameter SFT in this low-data regime, even though the validation loss had not converged. The main residual issue is still tool-call precision and process compliance: the LoRA model passes more tasks but also produces many tool errors on hard multi-step cases.
+直接观察：在当前小数据 regime 下，LoRA 明显优于 base 和 full-parameter SFT，即使验证 loss 还没有收敛。主要残留问题仍是工具调用精度和流程合规：LoRA 通过任务更多，但在 hard multi-step cases 上仍产生大量 tool errors。
 
-## LoRA Continuation To 200 Steps
+## LoRA 继续训练到 200 Step
 
-The LoRA run was continued beyond step 100 to test whether the still-decreasing validation loss translated into better official harness performance.
+为了验证“验证 loss 继续下降”是否能转化为官方 harness 性能提升，将 LoRA 从 step100 继续训练到 step200。
 
-Implementation note: the SFT script originally relied on verl's default `trainer.total_epochs=4`, which stopped a `TOTAL_TRAINING_STEPS=200` continuation at epoch 4 before reaching step 200. The script now exposes `TOTAL_EPOCHS`; the continuation was rerun with `TOTAL_EPOCHS=6` and resumed from `global_step_150`.
+实现说明：SFT 脚本原本依赖 verl 默认 `trainer.total_epochs=4`，导致 `TOTAL_TRAINING_STEPS=200` 的续训会在 epoch 4 结束时提前停止，无法到达 step200。脚本现在暴露 `TOTAL_EPOCHS`；续训使用 `TOTAL_EPOCHS=6`，并从 `global_step_150` resume 后跑到 step200。
 
-Continuation validation loss:
+续训验证 loss：
 
-- Step 100: 0.4501.
-- Step 125: 0.4383.
-- Step 150: 0.4316.
-- Step 175: 0.4353.
-- Step 200: 0.4318.
+- Step 100：0.4501。
+- Step 125：0.4383。
+- Step 150：0.4316。
+- Step 175：0.4353。
+- Step 200：0.4318。
 
-Official harness test50 results:
+官方 harness test50 结果：
 
-| Checkpoint | Val loss | Pass@1 | Passed | Tool calls | Tool errors | Mean turns | Output |
+| Checkpoint | Val loss | Pass@1 | 通过数 | 工具调用 | Tool errors | 平均 turns | 输出目录 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | LoRA step100 | 0.4501 | 46% | 23/50 | 547 | 151 | 5.5 | `outputs/customer_support_qwen3_4b_sft_lora_r16_step100_main8192_lr1e4_12k_mtok1024_native_test_20260809_1343` |
 | LoRA step150 | 0.4316 | 38% | 19/50 | 501 | 112 | 5.1 | `outputs/customer_support_qwen3_4b_sft_lora_r16_step150_main8192_lr1e4_12k_mtok1024_native_test_20260809_1437` |
 | LoRA step200 | 0.4318 | 36% | 18/50 | 442 | 89 | 5.2 | `outputs/customer_support_qwen3_4b_sft_lora_r16_step200_main8192_lr1e4_12k_mtok1024_native_test_20260809_1449` |
 
-Conclusion: validation loss is misleading for this benchmark after step 100. Continued SFT reduces tool errors, but it also reduces task success. The likely failure mode is behavior overfitting / policy drift away from useful exploratory tool use. The best current cold-start checkpoint remains LoRA `global_step_100`, not step150 or step200.
+结论：step100 之后，验证 loss 对该 benchmark 的指示性变差。继续 SFT 会减少 tool errors，但任务完成率同步下降。可能的失败模式是行为过拟合或 policy drift，模型变得更保守/更偏离有用的探索式工具调用。当前最佳 cold-start checkpoint 仍是 LoRA `global_step_100`，不是 step150 或 step200。
 
-## Next Steps
+## 下一步
 
-1. Use LoRA `global_step_100` as the current cold-start policy.
-2. Do not select SFT checkpoints by validation loss alone; use official-harness task success or a held-out task validation set.
-3. Inspect failed LoRA step100 trajectories by tool error type and task category, especially shipping, price match, exchange, and compound tasks.
-4. For RL, initialize from LoRA step100 and use short RL sanity runs before launching full-data training.
+1. 使用 LoRA `global_step_100` 作为当前 cold-start policy。
+2. 不再只按验证 loss 选择 SFT checkpoint；需要结合官方 harness 任务成功率，或建立 held-out task validation set。
+3. 分析 LoRA step100 的失败轨迹，按 tool error 类型和任务类别定位问题，重点看 shipping、price match、exchange、compound。
+4. RL 从 LoRA step100 初始化，先跑小规模 sanity run，再启动全数据训练。
