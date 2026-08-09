@@ -212,6 +212,35 @@ LoRA 产物说明：
 
 直接观察：在当前小数据 regime 下，LoRA 明显优于 base 和 full-parameter SFT，即使验证 loss 还没有收敛。主要残留问题仍是工具调用精度和流程合规：LoRA 通过任务更多，但在 hard multi-step cases 上仍产生大量 tool errors。
 
+## 4 次重复稳定性评测
+
+为了降低单次采样的偶然性，对官方 test50 复用已有 run1，并追加 run2-run4，统计 4 次重复结果。这里的 `pass^4` 采用官方 harness 口径，即同一 task 在 4 次 run 中全部成功才记为通过。
+
+评测设置：
+
+- Split：官方 `test`，50 条任务。
+- Simulator/Judge：DeepSeek V4 Flash。
+- Simulator 温度：`0.2`。
+- Agent：本地 vLLM 原生 tool-calling。
+- Agent sampling：使用模型默认 generation config。
+- 主跑 Agent max completion cap：1024 tokens；极少数上下文超限样本用 256 tokens 单独补跑。
+
+结果：
+
+| 模型 | Run1 | Run2 | Run3 | Run4 | 4-run 平均 Pass@1 | Pass^4 | Pass-any^4 | 输出目录 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| Base Qwen3-4B-Instruct-2507 | 15/50 | 17/50 | 16/50 | 14/50 | 31.0% | 8% | 64% | `outputs/customer_support_qwen3_4b_instruct_2507_native_tools_test50_deepseek_v4_flash` |
+| LoRA step100 | 23/50 | 23/50 | 16/50 | 21/50 | 41.5% | 22% | 62% | `outputs/customer_support_qwen3_4b_sft_lora_r16_step100_main8192_lr1e4_12k_mtok1024_native_test_20260809_1343` |
+
+落盘文件：
+
+- Base 官方指标：`outputs/customer_support_qwen3_4b_instruct_2507_native_tools_test50_deepseek_v4_flash/metrics_pass4.json`。
+- Base 手工汇总：`outputs/customer_support_qwen3_4b_instruct_2507_native_tools_test50_deepseek_v4_flash/manual_pass4_summary.json`。
+- LoRA 官方指标：`outputs/customer_support_qwen3_4b_sft_lora_r16_step100_main8192_lr1e4_12k_mtok1024_native_test_20260809_1343/metrics_pass4.json`。
+- LoRA 手工汇总：`outputs/customer_support_qwen3_4b_sft_lora_r16_step100_main8192_lr1e4_12k_mtok1024_native_test_20260809_1343/manual_pass4_summary.json`。
+
+结论：重复评测后，LoRA step100 仍显著优于未 SFT 的 base。单轮 LoRA run3 掉到 32%，说明 test50 单次 run 的方差确实不小；但 4-run 平均仍从 base 的 31.0% 提升到 41.5%，严格 `pass^4` 从 8% 提升到 22%。这比单次 46% vs 30% 更稳健，支持继续把 LoRA step100 作为 cold-start policy。
+
 ## LoRA 继续训练到 200 Step
 
 为了验证“验证 loss 继续下降”是否能转化为官方 harness 性能提升，将 LoRA 从 step100 继续训练到 step200。

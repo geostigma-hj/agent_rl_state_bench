@@ -50,6 +50,7 @@ fi
 split="${SPLIT:-test}"
 task_limit="${TASK_LIMIT:-}"
 num_runs="${NUM_RUNS:-1}"
+num_runs_idx_start="${NUM_RUNS_IDX_START:-1}"
 num_workers="${NUM_WORKERS:-7}"
 model_label="${MODEL_LABEL:-${OPENAI_COMPAT_AGENT_MODEL//\//_}}"
 output_dir="${OUTPUT_DIR:-outputs/customer_support_${model_label}_native_${split}}"
@@ -75,6 +76,7 @@ args=(
   --agent-client-class OpenAICompatibleToolClient
   --agent-model-name "$OPENAI_COMPAT_AGENT_MODEL"
   --num-runs "$num_runs"
+  --num-runs-idx-start "$num_runs_idx_start"
   --num-workers "$num_workers"
   --output-dir "$output_dir"
 )
@@ -95,6 +97,7 @@ score_args=(
   --split "$split"
   --results-dir "$output_dir"
   --num-runs "$num_runs"
+  --num-runs-idx-start "$num_runs_idx_start"
   --save-filepath "$output_dir/metrics.json"
 )
 
