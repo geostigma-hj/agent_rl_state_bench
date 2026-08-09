@@ -1,0 +1,3542 @@
+{
+  "rollout_dirs": [
+    "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1",
+    "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2",
+    "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3"
+  ],
+  "train_count": 855,
+  "val_count": 45,
+  "accepted_count": 900,
+  "rejected_count": 392,
+  "rejected": [
+    {
+      "task_id": "syn-cancel-045-auto_030_gift_card_lost_full",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-cancel-045-auto_030_gift_card_lost_full.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-compound-002-hard_damaged_scale_wrong_shirt_choice_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-002-hard_damaged_scale_wrong_shirt_choice_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 7,
+      "tool_calls": 16
+    },
+    {
+      "task_id": "syn-compound-003-hard_missing_accessory_plus_signed_laptop_denial",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-003-hard_missing_accessory_plus_signed_laptop_denial.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-compound-004-challenge_damaged_plus_wrong",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-004-challenge_damaged_plus_wrong.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 4,
+      "tool_calls": 15
+    },
+    {
+      "task_id": "syn-compound-009-challenge_promo_bulk_repeat",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-009-challenge_promo_bulk_repeat.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-compound-010-false_damage_return_cancel_pending_jar",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-010-false_damage_return_cancel_pending_jar.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-compound-013-challenge_gold_repeat_restock_shipping",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-013-challenge_gold_repeat_restock_shipping.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 8,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-compound-014-spare_compound_cancel_plus_shipping_claim",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-014-spare_compound_cancel_plus_shipping_claim.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 6,
+      "tool_calls": 12
+    },
+    {
+      "task_id": "syn-compound-015-hard_damaged_scale_wrong_shirt_choice_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-015-hard_damaged_scale_wrong_shirt_choice_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 16
+    },
+    {
+      "task_id": "syn-compound-016-hard_missing_accessory_plus_signed_laptop_denial",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-016-hard_missing_accessory_plus_signed_laptop_denial.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-compound-017-challenge_damaged_plus_wrong",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-017-challenge_damaged_plus_wrong.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 5,
+      "tool_calls": 15
+    },
+    {
+      "task_id": "syn-compound-022-challenge_promo_bulk_repeat",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-022-challenge_promo_bulk_repeat.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-compound-024-high_value_lost_hold_dependent_sleeve",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-024-high_value_lost_hold_dependent_sleeve.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 1,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-compound-026-challenge_gold_repeat_restock_shipping",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-026-challenge_gold_repeat_restock_shipping.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 4,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-compound-027-spare_compound_cancel_plus_shipping_claim",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-027-spare_compound_cancel_plus_shipping_claim.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 5,
+      "tool_calls": 10
+    },
+    {
+      "task_id": "syn-compound-028-hard_damaged_scale_wrong_shirt_choice_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-028-hard_damaged_scale_wrong_shirt_choice_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 16
+    },
+    {
+      "task_id": "syn-compound-029-hard_missing_accessory_plus_signed_laptop_denial",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-029-hard_missing_accessory_plus_signed_laptop_denial.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-compound-030-challenge_damaged_plus_wrong",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-030-challenge_damaged_plus_wrong.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 5,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-compound-035-challenge_promo_bulk_repeat",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-035-challenge_promo_bulk_repeat.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 8,
+      "tool_calls": 14
+    },
+    {
+      "task_id": "syn-compound-038-challenge_return_shipping_plus_repeat",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-038-challenge_return_shipping_plus_repeat.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 6,
+      "tool_calls": 14
+    },
+    {
+      "task_id": "syn-compound-039-challenge_gold_repeat_restock_shipping",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-039-challenge_gold_repeat_restock_shipping.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 5,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-compound-040-spare_compound_cancel_plus_shipping_claim",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-040-spare_compound_cancel_plus_shipping_claim.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 8,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-compound-041-hard_damaged_scale_wrong_shirt_choice_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-041-hard_damaged_scale_wrong_shirt_choice_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 17
+    },
+    {
+      "task_id": "syn-compound-042-hard_missing_accessory_plus_signed_laptop_denial",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-042-hard_missing_accessory_plus_signed_laptop_denial.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-compound-043-challenge_damaged_plus_wrong",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-043-challenge_damaged_plus_wrong.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 13
+    },
+    {
+      "task_id": "syn-compound-048-challenge_promo_bulk_repeat",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-048-challenge_promo_bulk_repeat.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 5,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-compound-050-high_value_lost_hold_dependent_sleeve",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-050-high_value_lost_hold_dependent_sleeve.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-compound-052-challenge_gold_repeat_restock_shipping",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-052-challenge_gold_repeat_restock_shipping.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 4,
+      "tool_calls": 12
+    },
+    {
+      "task_id": "syn-compound-053-spare_compound_cancel_plus_shipping_claim",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-053-spare_compound_cancel_plus_shipping_claim.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 10,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-compound-054-hard_damaged_scale_wrong_shirt_choice_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-054-hard_damaged_scale_wrong_shirt_choice_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 16
+    },
+    {
+      "task_id": "syn-compound-055-hard_missing_accessory_plus_signed_laptop_denial",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-055-hard_missing_accessory_plus_signed_laptop_denial.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-compound-056-challenge_damaged_plus_wrong",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-056-challenge_damaged_plus_wrong.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 7,
+      "tool_calls": 15
+    },
+    {
+      "task_id": "syn-edge-001-hard_edge_wrong_customer_order_privacy",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-001-hard_edge_wrong_customer_order_privacy.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "syn-edge-006-hard_edge_cancel_delivered_subscription_confusion",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-006-hard_edge_cancel_delivered_subscription_confusion.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 4,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-edge-008-hard_partner_order_privacy_no_return",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-008-hard_partner_order_privacy_no_return.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "syn-edge-011-hard_privacy_apartment_notice_no_disclosure",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-011-hard_privacy_apartment_notice_no_disclosure.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "syn-edge-015-hard_edge_unclear_small_item_reference",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-015-hard_edge_unclear_small_item_reference.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-edge-020-hard_partner_order_privacy_no_return",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-020-hard_partner_order_privacy_no_return.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "syn-edge-021-edge_signature_conflict",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-021-edge_signature_conflict.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 9,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-edge-023-hard_privacy_apartment_notice_no_disclosure",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-023-hard_privacy_apartment_notice_no_disclosure.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "syn-edge-025-hard_edge_wrong_customer_order_privacy",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-025-hard_edge_wrong_customer_order_privacy.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "syn-edge-030-hard_edge_cancel_delivered_subscription_confusion",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-030-hard_edge_cancel_delivered_subscription_confusion.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-edge-031-false_keep_item_refund_small_appliance",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-031-false_keep_item_refund_small_appliance.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 1,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-edge-032-hard_partner_order_privacy_no_return",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-032-hard_partner_order_privacy_no_return.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "syn-edge-033-edge_signature_conflict",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-033-edge_signature_conflict.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 4,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-edge-035-hard_privacy_apartment_notice_no_disclosure",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-035-hard_privacy_apartment_notice_no_disclosure.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "syn-edge-037-hard_edge_wrong_customer_order_privacy",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-037-hard_edge_wrong_customer_order_privacy.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "syn-edge-042-hard_edge_cancel_delivered_subscription_confusion",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-042-hard_edge_cancel_delivered_subscription_confusion.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-edge-044-hard_partner_order_privacy_no_return",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-044-hard_partner_order_privacy_no_return.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "syn-edge-047-hard_privacy_apartment_notice_no_disclosure",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-047-hard_privacy_apartment_notice_no_disclosure.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "syn-edge-049-hard_edge_wrong_customer_order_privacy",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-049-hard_edge_wrong_customer_order_privacy.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "syn-edge-051-hard_edge_unclear_small_item_reference",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-051-hard_edge_unclear_small_item_reference.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-edge-054-hard_edge_cancel_delivered_subscription_confusion",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-054-hard_edge_cancel_delivered_subscription_confusion.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 4,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-edge-056-hard_partner_order_privacy_no_return",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-056-hard_partner_order_privacy_no_return.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "syn-edge-059-hard_privacy_apartment_notice_no_disclosure",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-059-hard_privacy_apartment_notice_no_disclosure.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "syn-exchange-016-auto_004_cheaper_45_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-exchange-016-auto_004_cheaper_45_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-exchange-021-auto_009_expensive_65_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-exchange-021-auto_009_expensive_65_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 12
+    },
+    {
+      "task_id": "syn-exchange-036-auto_024_expensive_449_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-exchange-036-auto_024_expensive_449_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-exchange-042-auto_030_expensive_899_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-exchange-042-auto_030_expensive_899_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 12
+    },
+    {
+      "task_id": "syn-exchange-045-auto_033_expensive_1399_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-exchange-045-auto_033_expensive_1399_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-exchange-048-auto_036_expensive_1999_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-exchange-048-auto_036_expensive_1999_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 16
+    },
+    {
+      "task_id": "syn-exchange-049-auto_037_cheaper_15_instock",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-exchange-049-auto_037_cheaper_15_instock.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-exchange-054-auto_042_cheaper_53_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-exchange-054-auto_042_cheaper_53_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 14
+    },
+    {
+      "task_id": "syn-exchange-069-auto_057_expensive_849_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-exchange-069-auto_057_expensive_849_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 15
+    },
+    {
+      "task_id": "syn-exchange-078-auto_066_expensive_2699_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-exchange-078-auto_066_expensive_2699_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 13
+    },
+    {
+      "task_id": "syn-price-002-customer_overquotes_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-002-customer_overquotes_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-020-auto_005_standard_split_noiseblock_earbuds_25_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-020-auto_005_standard_split_noiseblock_earbuds_25_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-025-auto_010_standard_split_powerblend_mini_blender_10_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-025-auto_010_standard_split_powerblend_mini_blender_10_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-027-auto_012_standard_debit_card_soundmax_wireless_headphones_20_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-027-auto_012_standard_debit_card_soundmax_wireless_headphones_20_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-030-auto_015_standard_split_soundmax_wireless_headphones_40_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-030-auto_015_standard_split_soundmax_wireless_headphones_40_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 5,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-price-031-auto_016_platinum_credit_card_slatetab_pro_11_inch_50_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-031-auto_016_platinum_credit_card_slatetab_pro_11_inch_50_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-037-auto_022_standard_debit_card_trailstep_running_shoes_30_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-037-auto_022_standard_debit_card_trailstep_running_shoes_30_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "syn-price-050-auto_035_standard_split_brewmaster_espresso_machine_15_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-050-auto_035_standard_split_brewmaster_espresso_machine_15_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-054-auto_039_silver_gift_card_probook_laptop_40_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-054-auto_039_silver_gift_card_probook_laptop_40_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-055-auto_040_standard_split_probook_laptop_50_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-055-auto_040_standard_split_probook_laptop_50_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "syn-price-057-auto_042_standard_debit_card_comfycotton_shirt_10_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-057-auto_042_standard_debit_card_comfycotton_shirt_10_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-062-auto_047_standard_debit_card_airpure_compact_purifier_40_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-062-auto_047_standard_debit_card_airpure_compact_purifier_40_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-065-auto_050_standard_split_airpure_compact_purifier_10_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-065-auto_050_standard_split_airpure_compact_purifier_10_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-068-auto_053_gold_paypal_flexcharge_travel_dock_25_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-068-auto_053_gold_paypal_flexcharge_travel_dock_25_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-070-auto_055_standard_split_flexcharge_travel_dock_40_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-070-auto_055_standard_split_flexcharge_travel_dock_40_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 15,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-075-auto_060_standard_split_viewplus_27_inch_monitor_20_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-075-auto_060_standard_split_viewplus_27_inch_monitor_20_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 1,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-077-auto_062_standard_debit_card_soundmax_studio_headphones_30_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-077-auto_062_standard_debit_card_soundmax_studio_headphones_30_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 1,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-078-auto_063_gold_paypal_soundmax_studio_headphones_40_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-078-auto_063_gold_paypal_soundmax_studio_headphones_40_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 1,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-080-auto_065_standard_split_soundmax_studio_headphones_5_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-080-auto_065_standard_split_soundmax_studio_headphones_5_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-084-auto_069_silver_gift_card_chefcore_stand_mixer_25_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-084-auto_069_silver_gift_card_chefcore_stand_mixer_25_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-086-auto_071_platinum_credit_card_urbanlite_carry_on_suitcase_40_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-price-086-auto_071_platinum_credit_card_urbanlite_carry_on_suitcase_40_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "syn-return-040-auto_025_gold_prime_changed_mind_mislabel",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-return-040-auto_025_gold_prime_changed_mind_mislabel.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-001-fragile_vase_refund_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-001-fragile_vase_refund_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-002-fragile_lamp_refund_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-002-fragile_lamp_refund_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-003-fragile_glassware_refund_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-003-fragile_glassware_refund_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-shipping-008-fragile_espresso_part_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-008-fragile_espresso_part_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-010-fragile_frame_refund_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-010-fragile_frame_refund_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-011-auto_001_platinum_fragile_porcelain_dinner_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-011-auto_001_platinum_fragile_porcelain_dinner_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-012-auto_002_standard_fragile_porcelain_dinner_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-012-auto_002_standard_fragile_porcelain_dinner_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-013-auto_003_gold_fragile_porcelain_dinner_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-013-auto_003_gold_fragile_porcelain_dinner_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-014-auto_004_silver_fragile_porcelain_dinner_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-014-auto_004_silver_fragile_porcelain_dinner_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-016-auto_006_platinum_fragile_glass_coffee_carafe",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-016-auto_006_platinum_fragile_glass_coffee_carafe.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-017-auto_007_standard_fragile_glass_coffee_carafe",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-017-auto_007_standard_fragile_glass_coffee_carafe.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-018-auto_008_gold_fragile_glass_coffee_carafe",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-018-auto_008_gold_fragile_glass_coffee_carafe.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-019-auto_009_silver_fragile_glass_coffee_carafe",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-019-auto_009_silver_fragile_glass_coffee_carafe.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-020-auto_010_standard_fragile_glass_coffee_carafe",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-020-auto_010_standard_fragile_glass_coffee_carafe.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-024-auto_014_silver_nonfragile_smarthome_display",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-024-auto_014_silver_nonfragile_smarthome_display.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-026-auto_016_platinum_fragile_ceramic_serving_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-026-auto_016_platinum_fragile_ceramic_serving_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-027-auto_017_standard_fragile_ceramic_serving_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-027-auto_017_standard_fragile_ceramic_serving_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "syn-shipping-028-auto_018_gold_fragile_ceramic_serving_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-028-auto_018_gold_fragile_ceramic_serving_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-029-auto_019_silver_fragile_ceramic_serving_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-029-auto_019_silver_fragile_ceramic_serving_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-030-auto_020_standard_fragile_ceramic_serving_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-030-auto_020_standard_fragile_ceramic_serving_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-040-auto_030_standard_nonfragile_travel_backpack",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-040-auto_030_standard_nonfragile_travel_backpack.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 4,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-shipping-041-auto_031_platinum_fragile_framed_wall_mirror",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-041-auto_031_platinum_fragile_framed_wall_mirror.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-042-auto_032_standard_fragile_framed_wall_mirror",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-042-auto_032_standard_fragile_framed_wall_mirror.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-043-auto_033_gold_fragile_framed_wall_mirror",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-043-auto_033_gold_fragile_framed_wall_mirror.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-044-auto_034_silver_fragile_framed_wall_mirror",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-044-auto_034_silver_fragile_framed_wall_mirror.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 10
+    },
+    {
+      "task_id": "syn-shipping-045-auto_035_standard_fragile_framed_wall_mirror",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-045-auto_035_standard_fragile_framed_wall_mirror.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-051-auto_041_platinum_fragile_crystal_wine_decanter",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-051-auto_041_platinum_fragile_crystal_wine_decanter.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-shipping-052-auto_042_standard_fragile_crystal_wine_decanter",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-052-auto_042_standard_fragile_crystal_wine_decanter.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-053-auto_043_gold_fragile_crystal_wine_decanter",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-053-auto_043_gold_fragile_crystal_wine_decanter.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-054-auto_044_silver_fragile_crystal_wine_decanter",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-054-auto_044_silver_fragile_crystal_wine_decanter.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-055-auto_045_standard_fragile_crystal_wine_decanter",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-055-auto_045_standard_fragile_crystal_wine_decanter.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-061-auto_051_platinum_fragile_porcelain_tea_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-061-auto_051_platinum_fragile_porcelain_tea_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-062-auto_052_standard_fragile_porcelain_tea_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-062-auto_052_standard_fragile_porcelain_tea_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-063-auto_053_gold_fragile_porcelain_tea_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-063-auto_053_gold_fragile_porcelain_tea_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-064-auto_054_silver_fragile_porcelain_tea_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-064-auto_054_silver_fragile_porcelain_tea_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-065-auto_055_standard_fragile_porcelain_tea_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-065-auto_055_standard_fragile_porcelain_tea_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-069-auto_059_silver_nonfragile_smart_fitness_band",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-069-auto_059_silver_nonfragile_smart_fitness_band.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-070-auto_060_standard_nonfragile_smart_fitness_band",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-070-auto_060_standard_nonfragile_smart_fitness_band.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-shipping-071-auto_061_platinum_fragile_glass_pendant_light",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-071-auto_061_platinum_fragile_glass_pendant_light.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-072-auto_062_standard_fragile_glass_pendant_light",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-072-auto_062_standard_fragile_glass_pendant_light.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-073-auto_063_gold_fragile_glass_pendant_light",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-073-auto_063_gold_fragile_glass_pendant_light.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-074-auto_064_silver_fragile_glass_pendant_light",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-074-auto_064_silver_fragile_glass_pendant_light.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-075-auto_065_standard_fragile_glass_pendant_light",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-075-auto_065_standard_fragile_glass_pendant_light.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-shipping-076-auto_066_platinum_fragile_marble_cheese_board",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-076-auto_066_platinum_fragile_marble_cheese_board.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-077-auto_067_standard_fragile_marble_cheese_board",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-077-auto_067_standard_fragile_marble_cheese_board.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-078-auto_068_gold_fragile_marble_cheese_board",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-078-auto_068_gold_fragile_marble_cheese_board.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-079-auto_069_silver_fragile_marble_cheese_board",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-079-auto_069_silver_fragile_marble_cheese_board.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-080-auto_070_standard_fragile_marble_cheese_board",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-080-auto_070_standard_fragile_marble_cheese_board.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-shipping-081-auto_071_platinum_nonfragile_wireless_charging_pad",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-081-auto_071_platinum_nonfragile_wireless_charging_pad.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-shipping-086-auto_076_platinum_fragile_ceramic_planter_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-086-auto_076_platinum_fragile_ceramic_planter_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-087-auto_077_standard_fragile_ceramic_planter_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-087-auto_077_standard_fragile_ceramic_planter_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-089-auto_079_silver_fragile_ceramic_planter_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-089-auto_079_silver_fragile_ceramic_planter_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-090-auto_080_standard_fragile_ceramic_planter_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-090-auto_080_standard_fragile_ceramic_planter_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-096-auto_086_platinum_fragile_glass_food_storage_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-096-auto_086_platinum_fragile_glass_food_storage_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-098-auto_088_gold_fragile_glass_food_storage_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-098-auto_088_gold_fragile_glass_food_storage_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-099-auto_089_silver_fragile_glass_food_storage_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-099-auto_089_silver_fragile_glass_food_storage_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-100-auto_090_standard_fragile_glass_food_storage_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-100-auto_090_standard_fragile_glass_food_storage_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-106-auto_096_platinum_fragile_tabletop_fire_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-106-auto_096_platinum_fragile_tabletop_fire_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-107-auto_097_standard_fragile_tabletop_fire_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-107-auto_097_standard_fragile_tabletop_fire_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-108-auto_098_gold_fragile_tabletop_fire_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-108-auto_098_gold_fragile_tabletop_fire_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-109-auto_099_silver_fragile_tabletop_fire_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-109-auto_099_silver_fragile_tabletop_fire_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-110-auto_100_standard_fragile_tabletop_fire_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-shipping-110-auto_100_standard_fragile_tabletop_fire_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-compound-001-spare_compound_cancel_plus_shipping_claim",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-001-spare_compound_cancel_plus_shipping_claim.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 6,
+      "tool_calls": 10
+    },
+    {
+      "task_id": "syn-compound-002-hard_damaged_scale_wrong_shirt_choice_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-002-hard_damaged_scale_wrong_shirt_choice_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 4,
+      "tool_calls": 22
+    },
+    {
+      "task_id": "syn-compound-003-hard_missing_accessory_plus_signed_laptop_denial",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-003-hard_missing_accessory_plus_signed_laptop_denial.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-compound-004-challenge_damaged_plus_wrong",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-004-challenge_damaged_plus_wrong.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 10
+    },
+    {
+      "task_id": "syn-compound-005-challenge_bulk_clawback",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-005-challenge_bulk_clawback.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 9,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-compound-009-challenge_promo_bulk_repeat",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-009-challenge_promo_bulk_repeat.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 5,
+      "tool_calls": 14
+    },
+    {
+      "task_id": "syn-compound-013-challenge_gold_repeat_restock_shipping",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-013-challenge_gold_repeat_restock_shipping.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 8,
+      "tool_calls": 13
+    },
+    {
+      "task_id": "syn-compound-016-hard_missing_accessory_plus_signed_laptop_denial",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-016-hard_missing_accessory_plus_signed_laptop_denial.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-compound-017-challenge_damaged_plus_wrong",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-017-challenge_damaged_plus_wrong.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 5,
+      "tool_calls": 15
+    },
+    {
+      "task_id": "syn-compound-022-challenge_promo_bulk_repeat",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-022-challenge_promo_bulk_repeat.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 5,
+      "tool_calls": 12
+    },
+    {
+      "task_id": "syn-compound-026-challenge_gold_repeat_restock_shipping",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-026-challenge_gold_repeat_restock_shipping.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-compound-028-hard_damaged_scale_wrong_shirt_choice_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-028-hard_damaged_scale_wrong_shirt_choice_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 4,
+      "tool_calls": 23
+    },
+    {
+      "task_id": "syn-compound-029-hard_missing_accessory_plus_signed_laptop_denial",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-029-hard_missing_accessory_plus_signed_laptop_denial.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-compound-030-challenge_damaged_plus_wrong",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-030-challenge_damaged_plus_wrong.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 6,
+      "tool_calls": 12
+    },
+    {
+      "task_id": "syn-compound-032-challenge_defective_plus_clawback",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-032-challenge_defective_plus_clawback.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-compound-035-challenge_promo_bulk_repeat",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-035-challenge_promo_bulk_repeat.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-compound-038-challenge_return_shipping_plus_repeat",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-038-challenge_return_shipping_plus_repeat.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-compound-039-challenge_gold_repeat_restock_shipping",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-039-challenge_gold_repeat_restock_shipping.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 15,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-compound-040-spare_compound_cancel_plus_shipping_claim",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-040-spare_compound_cancel_plus_shipping_claim.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 12
+    },
+    {
+      "task_id": "syn-compound-041-hard_damaged_scale_wrong_shirt_choice_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-041-hard_damaged_scale_wrong_shirt_choice_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 17
+    },
+    {
+      "task_id": "syn-compound-042-hard_missing_accessory_plus_signed_laptop_denial",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-042-hard_missing_accessory_plus_signed_laptop_denial.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-compound-043-challenge_damaged_plus_wrong",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-043-challenge_damaged_plus_wrong.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-compound-045-challenge_defective_plus_clawback",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-045-challenge_defective_plus_clawback.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-compound-048-challenge_promo_bulk_repeat",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-048-challenge_promo_bulk_repeat.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 14
+    },
+    {
+      "task_id": "syn-compound-052-challenge_gold_repeat_restock_shipping",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-052-challenge_gold_repeat_restock_shipping.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-compound-053-spare_compound_cancel_plus_shipping_claim",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-053-spare_compound_cancel_plus_shipping_claim.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 12
+    },
+    {
+      "task_id": "syn-compound-054-hard_damaged_scale_wrong_shirt_choice_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-054-hard_damaged_scale_wrong_shirt_choice_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 6,
+      "tool_calls": 15
+    },
+    {
+      "task_id": "syn-compound-055-hard_missing_accessory_plus_signed_laptop_denial",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-055-hard_missing_accessory_plus_signed_laptop_denial.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-compound-056-challenge_damaged_plus_wrong",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-056-challenge_damaged_plus_wrong.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 5,
+      "tool_calls": 19
+    },
+    {
+      "task_id": "syn-edge-001-hard_edge_wrong_customer_order_privacy",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-001-hard_edge_wrong_customer_order_privacy.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "syn-edge-006-hard_edge_cancel_delivered_subscription_confusion",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-006-hard_edge_cancel_delivered_subscription_confusion.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-edge-008-hard_partner_order_privacy_no_return",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-008-hard_partner_order_privacy_no_return.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "syn-edge-011-hard_privacy_apartment_notice_no_disclosure",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-011-hard_privacy_apartment_notice_no_disclosure.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "syn-edge-018-hard_edge_cancel_delivered_subscription_confusion",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-018-hard_edge_cancel_delivered_subscription_confusion.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-edge-020-hard_partner_order_privacy_no_return",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-020-hard_partner_order_privacy_no_return.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "syn-edge-023-hard_privacy_apartment_notice_no_disclosure",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-023-hard_privacy_apartment_notice_no_disclosure.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "syn-edge-025-hard_edge_wrong_customer_order_privacy",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-025-hard_edge_wrong_customer_order_privacy.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "syn-edge-030-hard_edge_cancel_delivered_subscription_confusion",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-030-hard_edge_cancel_delivered_subscription_confusion.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-edge-032-hard_partner_order_privacy_no_return",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-032-hard_partner_order_privacy_no_return.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 10
+    },
+    {
+      "task_id": "syn-edge-035-hard_privacy_apartment_notice_no_disclosure",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-035-hard_privacy_apartment_notice_no_disclosure.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "syn-edge-037-hard_edge_wrong_customer_order_privacy",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-037-hard_edge_wrong_customer_order_privacy.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "syn-edge-039-hard_edge_unclear_small_item_reference",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-039-hard_edge_unclear_small_item_reference.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-edge-042-hard_edge_cancel_delivered_subscription_confusion",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-042-hard_edge_cancel_delivered_subscription_confusion.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-edge-044-hard_partner_order_privacy_no_return",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-044-hard_partner_order_privacy_no_return.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-edge-047-hard_privacy_apartment_notice_no_disclosure",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-047-hard_privacy_apartment_notice_no_disclosure.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "syn-edge-049-hard_edge_wrong_customer_order_privacy",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-049-hard_edge_wrong_customer_order_privacy.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "syn-edge-054-hard_edge_cancel_delivered_subscription_confusion",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-054-hard_edge_cancel_delivered_subscription_confusion.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 4,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-edge-056-hard_partner_order_privacy_no_return",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-056-hard_partner_order_privacy_no_return.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-edge-059-hard_privacy_apartment_notice_no_disclosure",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-059-hard_privacy_apartment_notice_no_disclosure.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "syn-exchange-004-out_of_stock_store_credit",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-004-out_of_stock_store_credit.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-exchange-009-budget_out_of_stock_store_credit",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-009-budget_out_of_stock_store_credit.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 16
+    },
+    {
+      "task_id": "syn-exchange-013-auto_001_cheaper_29_instock",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-013-auto_001_cheaper_29_instock.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-exchange-016-auto_004_cheaper_45_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-016-auto_004_cheaper_45_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-exchange-021-auto_009_expensive_65_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-021-auto_009_expensive_65_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-exchange-032-auto_020_expensive_249_instock",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-032-auto_020_expensive_249_instock.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 4,
+      "tool_calls": 15
+    },
+    {
+      "task_id": "syn-exchange-039-auto_027_expensive_599_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-039-auto_027_expensive_599_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-exchange-042-auto_030_expensive_899_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-042-auto_030_expensive_899_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 5,
+      "tool_calls": 12
+    },
+    {
+      "task_id": "syn-exchange-048-auto_036_expensive_1999_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-048-auto_036_expensive_1999_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-exchange-051-auto_039_cheaper_22_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-051-auto_039_cheaper_22_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-exchange-054-auto_042_cheaper_53_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-054-auto_042_cheaper_53_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 15
+    },
+    {
+      "task_id": "syn-exchange-057-auto_045_expensive_88_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-057-auto_045_expensive_88_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-exchange-063-auto_051_expensive_379_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-063-auto_051_expensive_379_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-exchange-066-auto_054_expensive_529_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-066-auto_054_expensive_529_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 14
+    },
+    {
+      "task_id": "syn-exchange-069-auto_057_expensive_849_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-069-auto_057_expensive_849_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-exchange-072-auto_060_expensive_1249_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-072-auto_060_expensive_1249_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-exchange-075-auto_063_expensive_1899_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-075-auto_063_expensive_1899_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 10
+    },
+    {
+      "task_id": "syn-exchange-078-auto_066_expensive_2699_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-exchange-078-auto_066_expensive_2699_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 5,
+      "tool_calls": 18
+    },
+    {
+      "task_id": "syn-price-005-split_tender_adjustment",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-005-split_tender_adjustment.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-006-gift_card_adjustment",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-006-gift_card_adjustment.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-007-paypal_adjustment",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-007-paypal_adjustment.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-008-customer_underquotes_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-008-customer_underquotes_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-price-020-auto_005_standard_split_noiseblock_earbuds_25_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-020-auto_005_standard_split_noiseblock_earbuds_25_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-026-auto_011_platinum_credit_card_soundmax_wireless_headphones_15_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-026-auto_011_platinum_credit_card_soundmax_wireless_headphones_15_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-030-auto_015_standard_split_soundmax_wireless_headphones_40_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-030-auto_015_standard_split_soundmax_wireless_headphones_40_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 5,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-031-auto_016_platinum_credit_card_slatetab_pro_11_inch_50_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-031-auto_016_platinum_credit_card_slatetab_pro_11_inch_50_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-032-auto_017_standard_debit_card_slatetab_pro_11_inch_5_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-032-auto_017_standard_debit_card_slatetab_pro_11_inch_5_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-037-auto_022_standard_debit_card_trailstep_running_shoes_30_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-037-auto_022_standard_debit_card_trailstep_running_shoes_30_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-042-auto_027_standard_debit_card_deskhub_usb_c_adapter_15_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-042-auto_027_standard_debit_card_deskhub_usb_c_adapter_15_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-043-auto_028_gold_paypal_deskhub_usb_c_adapter_20_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-043-auto_028_gold_paypal_deskhub_usb_c_adapter_20_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-054-auto_039_silver_gift_card_probook_laptop_40_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-054-auto_039_silver_gift_card_probook_laptop_40_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-057-auto_042_standard_debit_card_comfycotton_shirt_10_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-057-auto_042_standard_debit_card_comfycotton_shirt_10_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-060-auto_045_standard_split_comfycotton_shirt_25_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-060-auto_045_standard_split_comfycotton_shirt_25_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 1,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-price-064-auto_049_silver_gift_card_airpure_compact_purifier_5_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-064-auto_049_silver_gift_card_airpure_compact_purifier_5_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-070-auto_055_standard_split_flexcharge_travel_dock_40_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-070-auto_055_standard_split_flexcharge_travel_dock_40_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 4,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-082-auto_067_standard_debit_card_chefcore_stand_mixer_15_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-082-auto_067_standard_debit_card_chefcore_stand_mixer_15_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-090-auto_075_standard_split_urbanlite_carry_on_suitcase_15_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-090-auto_075_standard_split_urbanlite_carry_on_suitcase_15_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-001-fragile_vase_refund_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-001-fragile_vase_refund_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-002-fragile_lamp_refund_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-002-fragile_lamp_refund_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-003-fragile_glassware_refund_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-003-fragile_glassware_refund_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-006-fragile_blender_refund_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-006-fragile_blender_refund_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-008-fragile_espresso_part_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-008-fragile_espresso_part_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-010-fragile_frame_refund_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-010-fragile_frame_refund_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 5,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-shipping-011-auto_001_platinum_fragile_porcelain_dinner_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-011-auto_001_platinum_fragile_porcelain_dinner_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-012-auto_002_standard_fragile_porcelain_dinner_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-012-auto_002_standard_fragile_porcelain_dinner_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-013-auto_003_gold_fragile_porcelain_dinner_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-013-auto_003_gold_fragile_porcelain_dinner_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-014-auto_004_silver_fragile_porcelain_dinner_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-014-auto_004_silver_fragile_porcelain_dinner_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-015-auto_005_standard_fragile_porcelain_dinner_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-015-auto_005_standard_fragile_porcelain_dinner_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-016-auto_006_platinum_fragile_glass_coffee_carafe",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-016-auto_006_platinum_fragile_glass_coffee_carafe.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-017-auto_007_standard_fragile_glass_coffee_carafe",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-017-auto_007_standard_fragile_glass_coffee_carafe.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-018-auto_008_gold_fragile_glass_coffee_carafe",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-018-auto_008_gold_fragile_glass_coffee_carafe.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-020-auto_010_standard_fragile_glass_coffee_carafe",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-020-auto_010_standard_fragile_glass_coffee_carafe.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-026-auto_016_platinum_fragile_ceramic_serving_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-026-auto_016_platinum_fragile_ceramic_serving_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-027-auto_017_standard_fragile_ceramic_serving_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-027-auto_017_standard_fragile_ceramic_serving_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-028-auto_018_gold_fragile_ceramic_serving_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-028-auto_018_gold_fragile_ceramic_serving_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 10
+    },
+    {
+      "task_id": "syn-shipping-029-auto_019_silver_fragile_ceramic_serving_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-029-auto_019_silver_fragile_ceramic_serving_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-030-auto_020_standard_fragile_ceramic_serving_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-030-auto_020_standard_fragile_ceramic_serving_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-034-auto_024_silver_nonfragile_noiseblock_earbuds",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-034-auto_024_silver_nonfragile_noiseblock_earbuds.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 10
+    },
+    {
+      "task_id": "syn-shipping-041-auto_031_platinum_fragile_framed_wall_mirror",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-041-auto_031_platinum_fragile_framed_wall_mirror.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-042-auto_032_standard_fragile_framed_wall_mirror",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-042-auto_032_standard_fragile_framed_wall_mirror.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-043-auto_033_gold_fragile_framed_wall_mirror",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-043-auto_033_gold_fragile_framed_wall_mirror.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-044-auto_034_silver_fragile_framed_wall_mirror",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-044-auto_034_silver_fragile_framed_wall_mirror.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-045-auto_035_standard_fragile_framed_wall_mirror",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-045-auto_035_standard_fragile_framed_wall_mirror.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-047-auto_037_standard_nonfragile_kitchen_knife_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-047-auto_037_standard_nonfragile_kitchen_knife_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-048-auto_038_gold_nonfragile_kitchen_knife_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-048-auto_038_gold_nonfragile_kitchen_knife_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-shipping-051-auto_041_platinum_fragile_crystal_wine_decanter",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-051-auto_041_platinum_fragile_crystal_wine_decanter.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-052-auto_042_standard_fragile_crystal_wine_decanter",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-052-auto_042_standard_fragile_crystal_wine_decanter.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-054-auto_044_silver_fragile_crystal_wine_decanter",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-054-auto_044_silver_fragile_crystal_wine_decanter.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 6,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-shipping-055-auto_045_standard_fragile_crystal_wine_decanter",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-055-auto_045_standard_fragile_crystal_wine_decanter.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-shipping-061-auto_051_platinum_fragile_porcelain_tea_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-061-auto_051_platinum_fragile_porcelain_tea_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-062-auto_052_standard_fragile_porcelain_tea_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-062-auto_052_standard_fragile_porcelain_tea_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-063-auto_053_gold_fragile_porcelain_tea_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-063-auto_053_gold_fragile_porcelain_tea_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-shipping-064-auto_054_silver_fragile_porcelain_tea_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-064-auto_054_silver_fragile_porcelain_tea_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-065-auto_055_standard_fragile_porcelain_tea_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-065-auto_055_standard_fragile_porcelain_tea_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-071-auto_061_platinum_fragile_glass_pendant_light",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-071-auto_061_platinum_fragile_glass_pendant_light.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-072-auto_062_standard_fragile_glass_pendant_light",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-072-auto_062_standard_fragile_glass_pendant_light.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 10
+    },
+    {
+      "task_id": "syn-shipping-073-auto_063_gold_fragile_glass_pendant_light",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-073-auto_063_gold_fragile_glass_pendant_light.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-074-auto_064_silver_fragile_glass_pendant_light",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-074-auto_064_silver_fragile_glass_pendant_light.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-075-auto_065_standard_fragile_glass_pendant_light",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-075-auto_065_standard_fragile_glass_pendant_light.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-076-auto_066_platinum_fragile_marble_cheese_board",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-076-auto_066_platinum_fragile_marble_cheese_board.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-077-auto_067_standard_fragile_marble_cheese_board",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-077-auto_067_standard_fragile_marble_cheese_board.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-shipping-078-auto_068_gold_fragile_marble_cheese_board",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-078-auto_068_gold_fragile_marble_cheese_board.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-shipping-079-auto_069_silver_fragile_marble_cheese_board",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-079-auto_069_silver_fragile_marble_cheese_board.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-080-auto_070_standard_fragile_marble_cheese_board",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-080-auto_070_standard_fragile_marble_cheese_board.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-085-auto_075_standard_nonfragile_wireless_charging_pad",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-085-auto_075_standard_nonfragile_wireless_charging_pad.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-086-auto_076_platinum_fragile_ceramic_planter_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-086-auto_076_platinum_fragile_ceramic_planter_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-shipping-087-auto_077_standard_fragile_ceramic_planter_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-087-auto_077_standard_fragile_ceramic_planter_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-088-auto_078_gold_fragile_ceramic_planter_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-088-auto_078_gold_fragile_ceramic_planter_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-shipping-089-auto_079_silver_fragile_ceramic_planter_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-089-auto_079_silver_fragile_ceramic_planter_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-090-auto_080_standard_fragile_ceramic_planter_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-090-auto_080_standard_fragile_ceramic_planter_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-096-auto_086_platinum_fragile_glass_food_storage_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-096-auto_086_platinum_fragile_glass_food_storage_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-097-auto_087_standard_fragile_glass_food_storage_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-097-auto_087_standard_fragile_glass_food_storage_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-shipping-098-auto_088_gold_fragile_glass_food_storage_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-098-auto_088_gold_fragile_glass_food_storage_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-099-auto_089_silver_fragile_glass_food_storage_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-099-auto_089_silver_fragile_glass_food_storage_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-100-auto_090_standard_fragile_glass_food_storage_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-100-auto_090_standard_fragile_glass_food_storage_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-103-auto_093_gold_nonfragile_canvas_weekender_bag",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-103-auto_093_gold_nonfragile_canvas_weekender_bag.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-shipping-105-auto_095_standard_nonfragile_canvas_weekender_bag",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-105-auto_095_standard_nonfragile_canvas_weekender_bag.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 4,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-shipping-106-auto_096_platinum_fragile_tabletop_fire_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-106-auto_096_platinum_fragile_tabletop_fire_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-107-auto_097_standard_fragile_tabletop_fire_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-107-auto_097_standard_fragile_tabletop_fire_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-108-auto_098_gold_fragile_tabletop_fire_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-108-auto_098_gold_fragile_tabletop_fire_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-109-auto_099_silver_fragile_tabletop_fire_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-109-auto_099_silver_fragile_tabletop_fire_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-110-auto_100_standard_fragile_tabletop_fire_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-shipping-110-auto_100_standard_fragile_tabletop_fire_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-warranty-005-maxed_paid_repair",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-warranty-005-maxed_paid_repair.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-compound-002-hard_damaged_scale_wrong_shirt_choice_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-002-hard_damaged_scale_wrong_shirt_choice_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 13
+    },
+    {
+      "task_id": "syn-compound-003-hard_missing_accessory_plus_signed_laptop_denial",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-003-hard_missing_accessory_plus_signed_laptop_denial.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-compound-004-challenge_damaged_plus_wrong",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-004-challenge_damaged_plus_wrong.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 15
+    },
+    {
+      "task_id": "syn-compound-009-challenge_promo_bulk_repeat",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-009-challenge_promo_bulk_repeat.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-compound-013-challenge_gold_repeat_restock_shipping",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-013-challenge_gold_repeat_restock_shipping.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 6,
+      "tool_calls": 17
+    },
+    {
+      "task_id": "syn-compound-016-hard_missing_accessory_plus_signed_laptop_denial",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-016-hard_missing_accessory_plus_signed_laptop_denial.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 10
+    },
+    {
+      "task_id": "syn-compound-017-challenge_damaged_plus_wrong",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-017-challenge_damaged_plus_wrong.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 11
+    },
+    {
+      "task_id": "syn-compound-022-challenge_promo_bulk_repeat",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-022-challenge_promo_bulk_repeat.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-compound-026-challenge_gold_repeat_restock_shipping",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-026-challenge_gold_repeat_restock_shipping.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 8,
+      "tool_calls": 12
+    },
+    {
+      "task_id": "syn-compound-028-hard_damaged_scale_wrong_shirt_choice_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-028-hard_damaged_scale_wrong_shirt_choice_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 16
+    },
+    {
+      "task_id": "syn-compound-029-hard_missing_accessory_plus_signed_laptop_denial",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-029-hard_missing_accessory_plus_signed_laptop_denial.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 10
+    },
+    {
+      "task_id": "syn-compound-035-challenge_promo_bulk_repeat",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-035-challenge_promo_bulk_repeat.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 13
+    },
+    {
+      "task_id": "syn-compound-038-challenge_return_shipping_plus_repeat",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-038-challenge_return_shipping_plus_repeat.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-compound-039-challenge_gold_repeat_restock_shipping",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-039-challenge_gold_repeat_restock_shipping.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 5,
+      "tool_calls": 12
+    },
+    {
+      "task_id": "syn-compound-040-spare_compound_cancel_plus_shipping_claim",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-040-spare_compound_cancel_plus_shipping_claim.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 13,
+      "tool_calls": 15
+    },
+    {
+      "task_id": "syn-compound-041-hard_damaged_scale_wrong_shirt_choice_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-041-hard_damaged_scale_wrong_shirt_choice_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 6,
+      "tool_calls": 19
+    },
+    {
+      "task_id": "syn-compound-042-hard_missing_accessory_plus_signed_laptop_denial",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-042-hard_missing_accessory_plus_signed_laptop_denial.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-compound-043-challenge_damaged_plus_wrong",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-043-challenge_damaged_plus_wrong.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 14
+    },
+    {
+      "task_id": "syn-compound-052-challenge_gold_repeat_restock_shipping",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-052-challenge_gold_repeat_restock_shipping.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 6,
+      "tool_calls": 13
+    },
+    {
+      "task_id": "syn-compound-053-spare_compound_cancel_plus_shipping_claim",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-053-spare_compound_cancel_plus_shipping_claim.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 5,
+      "tool_calls": 10
+    },
+    {
+      "task_id": "syn-compound-054-hard_damaged_scale_wrong_shirt_choice_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-054-hard_damaged_scale_wrong_shirt_choice_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 17
+    },
+    {
+      "task_id": "syn-compound-055-hard_missing_accessory_plus_signed_laptop_denial",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-055-hard_missing_accessory_plus_signed_laptop_denial.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-compound-056-challenge_damaged_plus_wrong",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-056-challenge_damaged_plus_wrong.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 14
+    },
+    {
+      "task_id": "syn-edge-006-hard_edge_cancel_delivered_subscription_confusion",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-edge-006-hard_edge_cancel_delivered_subscription_confusion.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-edge-008-hard_partner_order_privacy_no_return",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-edge-008-hard_partner_order_privacy_no_return.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "syn-edge-011-hard_privacy_apartment_notice_no_disclosure",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-edge-011-hard_privacy_apartment_notice_no_disclosure.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "syn-edge-020-hard_partner_order_privacy_no_return",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-edge-020-hard_partner_order_privacy_no_return.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "syn-edge-023-hard_privacy_apartment_notice_no_disclosure",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-edge-023-hard_privacy_apartment_notice_no_disclosure.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "syn-edge-030-hard_edge_cancel_delivered_subscription_confusion",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-edge-030-hard_edge_cancel_delivered_subscription_confusion.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 4,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-edge-035-hard_privacy_apartment_notice_no_disclosure",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-edge-035-hard_privacy_apartment_notice_no_disclosure.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "syn-edge-037-hard_edge_wrong_customer_order_privacy",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-edge-037-hard_edge_wrong_customer_order_privacy.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-edge-042-hard_edge_cancel_delivered_subscription_confusion",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-edge-042-hard_edge_cancel_delivered_subscription_confusion.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-edge-044-hard_partner_order_privacy_no_return",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-edge-044-hard_partner_order_privacy_no_return.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-edge-047-hard_privacy_apartment_notice_no_disclosure",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-edge-047-hard_privacy_apartment_notice_no_disclosure.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "syn-edge-054-hard_edge_cancel_delivered_subscription_confusion",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-edge-054-hard_edge_cancel_delivered_subscription_confusion.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-edge-056-hard_partner_order_privacy_no_return",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-edge-056-hard_partner_order_privacy_no_return.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-edge-059-hard_privacy_apartment_notice_no_disclosure",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-edge-059-hard_privacy_apartment_notice_no_disclosure.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "syn-exchange-016-auto_004_cheaper_45_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-exchange-016-auto_004_cheaper_45_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-exchange-078-auto_066_expensive_2699_oos",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-exchange-078-auto_066_expensive_2699_oos.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 14
+    },
+    {
+      "task_id": "syn-price-020-auto_005_standard_split_noiseblock_earbuds_25_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-price-020-auto_005_standard_split_noiseblock_earbuds_25_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-price-057-auto_042_standard_debit_card_comfycotton_shirt_10_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-price-057-auto_042_standard_debit_card_comfycotton_shirt_10_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 1,
+      "task_requirements_met": 0,
+      "turns": 1,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-price-070-auto_055_standard_split_flexcharge_travel_dock_40_drop",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-price-070-auto_055_standard_split_flexcharge_travel_dock_40_drop.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 1,
+      "turns": 2,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-002-fragile_lamp_refund_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-002-fragile_lamp_refund_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-003-fragile_glassware_refund_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-003-fragile_glassware_refund_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "syn-shipping-008-fragile_espresso_part_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-008-fragile_espresso_part_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-010-fragile_frame_refund_goodwill",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-010-fragile_frame_refund_goodwill.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-011-auto_001_platinum_fragile_porcelain_dinner_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-011-auto_001_platinum_fragile_porcelain_dinner_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-012-auto_002_standard_fragile_porcelain_dinner_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-012-auto_002_standard_fragile_porcelain_dinner_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-013-auto_003_gold_fragile_porcelain_dinner_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-013-auto_003_gold_fragile_porcelain_dinner_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-014-auto_004_silver_fragile_porcelain_dinner_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-014-auto_004_silver_fragile_porcelain_dinner_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-016-auto_006_platinum_fragile_glass_coffee_carafe",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-016-auto_006_platinum_fragile_glass_coffee_carafe.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-017-auto_007_standard_fragile_glass_coffee_carafe",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-017-auto_007_standard_fragile_glass_coffee_carafe.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 6,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-020-auto_010_standard_fragile_glass_coffee_carafe",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-020-auto_010_standard_fragile_glass_coffee_carafe.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-026-auto_016_platinum_fragile_ceramic_serving_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-026-auto_016_platinum_fragile_ceramic_serving_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-027-auto_017_standard_fragile_ceramic_serving_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-027-auto_017_standard_fragile_ceramic_serving_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-028-auto_018_gold_fragile_ceramic_serving_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-028-auto_018_gold_fragile_ceramic_serving_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-029-auto_019_silver_fragile_ceramic_serving_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-029-auto_019_silver_fragile_ceramic_serving_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-042-auto_032_standard_fragile_framed_wall_mirror",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-042-auto_032_standard_fragile_framed_wall_mirror.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-043-auto_033_gold_fragile_framed_wall_mirror",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-043-auto_033_gold_fragile_framed_wall_mirror.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-044-auto_034_silver_fragile_framed_wall_mirror",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-044-auto_034_silver_fragile_framed_wall_mirror.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-045-auto_035_standard_fragile_framed_wall_mirror",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-045-auto_035_standard_fragile_framed_wall_mirror.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-051-auto_041_platinum_fragile_crystal_wine_decanter",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-051-auto_041_platinum_fragile_crystal_wine_decanter.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-052-auto_042_standard_fragile_crystal_wine_decanter",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-052-auto_042_standard_fragile_crystal_wine_decanter.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-054-auto_044_silver_fragile_crystal_wine_decanter",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-054-auto_044_silver_fragile_crystal_wine_decanter.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-055-auto_045_standard_fragile_crystal_wine_decanter",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-055-auto_045_standard_fragile_crystal_wine_decanter.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-061-auto_051_platinum_fragile_porcelain_tea_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-061-auto_051_platinum_fragile_porcelain_tea_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 2,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-062-auto_052_standard_fragile_porcelain_tea_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-062-auto_052_standard_fragile_porcelain_tea_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-063-auto_053_gold_fragile_porcelain_tea_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-063-auto_053_gold_fragile_porcelain_tea_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-064-auto_054_silver_fragile_porcelain_tea_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-064-auto_054_silver_fragile_porcelain_tea_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-065-auto_055_standard_fragile_porcelain_tea_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-065-auto_055_standard_fragile_porcelain_tea_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-071-auto_061_platinum_fragile_glass_pendant_light",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-071-auto_061_platinum_fragile_glass_pendant_light.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-072-auto_062_standard_fragile_glass_pendant_light",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-072-auto_062_standard_fragile_glass_pendant_light.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-073-auto_063_gold_fragile_glass_pendant_light",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-073-auto_063_gold_fragile_glass_pendant_light.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-074-auto_064_silver_fragile_glass_pendant_light",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-074-auto_064_silver_fragile_glass_pendant_light.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 4,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-076-auto_066_platinum_fragile_marble_cheese_board",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-076-auto_066_platinum_fragile_marble_cheese_board.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-077-auto_067_standard_fragile_marble_cheese_board",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-077-auto_067_standard_fragile_marble_cheese_board.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 10
+    },
+    {
+      "task_id": "syn-shipping-078-auto_068_gold_fragile_marble_cheese_board",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-078-auto_068_gold_fragile_marble_cheese_board.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-shipping-079-auto_069_silver_fragile_marble_cheese_board",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-079-auto_069_silver_fragile_marble_cheese_board.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-080-auto_070_standard_fragile_marble_cheese_board",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-080-auto_070_standard_fragile_marble_cheese_board.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-shipping-086-auto_076_platinum_fragile_ceramic_planter_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-086-auto_076_platinum_fragile_ceramic_planter_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-shipping-087-auto_077_standard_fragile_ceramic_planter_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-087-auto_077_standard_fragile_ceramic_planter_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-089-auto_079_silver_fragile_ceramic_planter_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-089-auto_079_silver_fragile_ceramic_planter_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-090-auto_080_standard_fragile_ceramic_planter_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-090-auto_080_standard_fragile_ceramic_planter_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-096-auto_086_platinum_fragile_glass_food_storage_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-096-auto_086_platinum_fragile_glass_food_storage_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-shipping-098-auto_088_gold_fragile_glass_food_storage_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-098-auto_088_gold_fragile_glass_food_storage_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "syn-shipping-100-auto_090_standard_fragile_glass_food_storage_set",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-100-auto_090_standard_fragile_glass_food_storage_set.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-106-auto_096_platinum_fragile_tabletop_fire_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-106-auto_096_platinum_fragile_tabletop_fire_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-107-auto_097_standard_fragile_tabletop_fire_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-107-auto_097_standard_fragile_tabletop_fire_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "syn-shipping-108-auto_098_gold_fragile_tabletop_fire_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-108-auto_098_gold_fragile_tabletop_fire_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 7
+    },
+    {
+      "task_id": "syn-shipping-109-auto_099_silver_fragile_tabletop_fire_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-109-auto_099_silver_fragile_tabletop_fire_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 8
+    },
+    {
+      "task_id": "syn-shipping-110-auto_100_standard_fragile_tabletop_fire_bowl",
+      "path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-shipping-110-auto_100_standard_fragile_tabletop_fire_bowl.json",
+      "task_completion_pass": 0,
+      "state_requirements_met": 0,
+      "task_requirements_met": 0,
+      "turns": 3,
+      "tool_calls": 6
+    }
+  ],
+  "include_tools": true
+}

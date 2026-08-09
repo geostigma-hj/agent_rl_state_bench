@@ -70,7 +70,6 @@ _RESULTS.md
 RESULTS*.md
 checkpoints/
 /checkpoints
-data/
 outputs*/
 logs/
 ztmp/

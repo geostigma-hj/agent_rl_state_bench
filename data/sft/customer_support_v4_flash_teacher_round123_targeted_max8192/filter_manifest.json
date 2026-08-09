@@ -1,0 +1,153 @@
+{
+  "max_length": 8192,
+  "splits": {
+    "train": {
+      "input": 855,
+      "kept": 833,
+      "dropped": 22,
+      "max_input_length": 18727
+    },
+    "val": {
+      "input": 45,
+      "kept": 45,
+      "dropped": 0,
+      "max_input_length": 7961
+    }
+  },
+  "dropped": [
+    {
+      "split": "train",
+      "task_id": "syn-compound-024-high_value_lost_hold_dependent_sleeve",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-024-high_value_lost_hold_dependent_sleeve.json",
+      "length": 8659
+    },
+    {
+      "split": "train",
+      "task_id": "syn-price-061-auto_046_platinum_credit_card_airpure_compact_purifier_30_drop",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-price-061-auto_046_platinum_credit_card_airpure_compact_purifier_30_drop.json",
+      "length": 8563
+    },
+    {
+      "split": "train",
+      "task_id": "syn-compound-033-challenge_seasonal_plus_bulk_clawback",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-033-challenge_seasonal_plus_bulk_clawback.json",
+      "length": 8289
+    },
+    {
+      "split": "train",
+      "task_id": "syn-compound-020-challenge_seasonal_plus_bulk_clawback",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-020-challenge_seasonal_plus_bulk_clawback.json",
+      "length": 9114
+    },
+    {
+      "split": "train",
+      "task_id": "syn-edge-004-hard_edge_invalid_product_no_order",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-004-hard_edge_invalid_product_no_order.json",
+      "length": 8929
+    },
+    {
+      "split": "train",
+      "task_id": "syn-compound-011-high_value_lost_hold_dependent_sleeve",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-011-high_value_lost_hold_dependent_sleeve.json",
+      "length": 9326
+    },
+    {
+      "split": "train",
+      "task_id": "syn-exchange-060-auto_048_expensive_229_oos",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-exchange-060-auto_048_expensive_229_oos.json",
+      "length": 8649
+    },
+    {
+      "split": "train",
+      "task_id": "syn-exchange-051-auto_039_cheaper_22_oos",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-exchange-051-auto_039_cheaper_22_oos.json",
+      "length": 8595
+    },
+    {
+      "split": "train",
+      "task_id": "syn-compound-031-challenge_bulk_clawback",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-031-challenge_bulk_clawback.json",
+      "length": 8882
+    },
+    {
+      "split": "train",
+      "task_id": "syn-compound-059-challenge_seasonal_plus_bulk_clawback",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-059-challenge_seasonal_plus_bulk_clawback.json",
+      "length": 8325
+    },
+    {
+      "split": "train",
+      "task_id": "syn-compound-015-hard_damaged_scale_wrong_shirt_choice_goodwill",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-015-hard_damaged_scale_wrong_shirt_choice_goodwill.json",
+      "length": 8911
+    },
+    {
+      "split": "train",
+      "task_id": "syn-exchange-066-auto_054_expensive_529_oos",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-exchange-066-auto_054_expensive_529_oos.json",
+      "length": 9113
+    },
+    {
+      "split": "train",
+      "task_id": "syn-edge-052-hard_edge_invalid_product_no_order",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-edge-052-hard_edge_invalid_product_no_order.json",
+      "length": 11667
+    },
+    {
+      "split": "train",
+      "task_id": "syn-compound-023-false_damage_return_cancel_pending_jar",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-023-false_damage_return_cancel_pending_jar.json",
+      "length": 10147
+    },
+    {
+      "split": "train",
+      "task_id": "syn-compound-047-challenge_bulk_plus_shipping_clawback",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-047-challenge_bulk_plus_shipping_clawback.json",
+      "length": 8445
+    },
+    {
+      "split": "train",
+      "task_id": "syn-compound-060-challenge_bulk_plus_shipping_clawback",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-060-challenge_bulk_plus_shipping_clawback.json",
+      "length": 8304
+    },
+    {
+      "split": "train",
+      "task_id": "syn-compound-005-challenge_bulk_clawback",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-005-challenge_bulk_clawback.json",
+      "length": 8295
+    },
+    {
+      "split": "train",
+      "task_id": "syn-compound-030-challenge_damaged_plus_wrong",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round3_targeted_noscore_20260809/run3/syn-compound-030-challenge_damaged_plus_wrong.json",
+      "length": 9757
+    },
+    {
+      "split": "train",
+      "task_id": "syn-warranty-037-auto_024_old_expiry_brewmaster_espresso_machine",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-warranty-037-auto_024_old_expiry_brewmaster_espresso_machine.json",
+      "length": 9052
+    },
+    {
+      "split": "train",
+      "task_id": "syn-compound-008-challenge_bulk_plus_shipping_clawback",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-compound-008-challenge_bulk_plus_shipping_clawback.json",
+      "length": 8254
+    },
+    {
+      "split": "train",
+      "task_id": "syn-compound-007-challenge_seasonal_plus_bulk_clawback",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round12_noscore_20260809/run2/syn-compound-007-challenge_seasonal_plus_bulk_clawback.json",
+      "length": 8951
+    },
+    {
+      "split": "train",
+      "task_id": "syn-edge-028-hard_edge_invalid_product_no_order",
+      "trajectory_path": "outputs/customer_support_deepseek_v4_flash_teacher_synthetic590_round1_noscore_20260809_035147/run1/syn-edge-028-hard_edge_invalid_product_no_order.json",
+      "length": 18727
+    }
+  ],
+  "kept_total": 878,
+  "dropped_total": 22
+}
