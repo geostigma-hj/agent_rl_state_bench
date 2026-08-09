@@ -140,8 +140,81 @@ Category pass-rate estimate from task names:
 
 Immediate observation: SFT produced working tool calls, but quality is still low on test. The biggest visible issue is excessive or invalid tool use, with 112 tool errors across 50 tasks. Price-match, exchange, compound, and multi-action challenge cases are the most obvious weak areas for targeted data/RL.
 
+## LoRA SFT Ablation
+
+A LoRA SFT run was added because the full-parameter SFT result was worse than the base model on the official test split.
+
+Training configuration:
+
+- Base model: `/mnt/models/Qwen3-4B-Instruct-2507`.
+- Data: `data/sft/customer_support_v4_flash_teacher_round123_targeted_toolsplit_clean_main8192`.
+- Train/val rows: 849/45.
+- GPUs: 5 x RTX 4090, one model shard per rank during verl FSDP training.
+- LoRA rank/alpha: `r=16`, `alpha=32`.
+- Max sequence length: 8192.
+- Train batch size: 20.
+- Learning rate: `1e-4`.
+- Total steps: 100, approximately 2.3 epochs over the 849-row training split.
+- Save/eval interval: 25 steps.
+
+Validation loss:
+
+- Step 25: 0.5781.
+- Step 50: 0.5065.
+- Step 75: 0.4687.
+- Step 100: 0.4501.
+
+The validation curve was still decreasing at step 100, so the LoRA run had not clearly converged. Step 100 was evaluated first to get a fast downstream signal.
+
+LoRA artifact notes:
+
+- verl's FSDP merger produced a full HF model plus a separate `lora_adapter` directory.
+- For vLLM evaluation, the adapter was explicitly merged into the base weights with PEFT `merge_and_unload` to avoid accidentally serving the unadapted base model.
+- Merged inference checkpoint: `checkpoints/customer_support/qwen3_4b_sft_lora_r16_a32_round123_toolsplit_clean_main8192_lr1e4_b20/global_step_100_hf_lora_merged`.
+
+Official harness test50 result:
+
+- Output: `outputs/customer_support_qwen3_4b_sft_lora_r16_step100_main8192_lr1e4_12k_mtok1024_native_test_20260809_1343`.
+- Agent model label: `Qwen3-4B-SFT-LoRA-r16-step100`.
+- Local serving: vLLM, 5 endpoints on GPUs 0-4.
+- vLLM context: 12288 tokens.
+- Agent max completion cap: 1024 tokens for the main run.
+- Overflow rerun: tasks `41-hard_two_lost_shipments_threshold_split` and `71-hard_exchange_late_compensation_destination_choice` used max completion cap 256 to fit the 12288-token local vLLM context.
+- Simulator/Judge: DeepSeek V4 Flash.
+- Simulator temperature: `0.2`.
+- UX scoring: skipped.
+
+Result on 50/50 test tasks:
+
+- `task_completion_pass@1`: 46%.
+- Passed tasks: 23/50.
+- Failed tasks: 27/50.
+- Total tool calls: 547.
+- Tool errors: 151.
+- Mean turns: 5.5.
+
+Category pass-rate estimate from task names:
+
+- `cancel_order`: 2/4.
+- `edge_case`: 3/3.
+- `exchange_item`: 3/7.
+- `price_match_refund`: 1/5.
+- `return_item`: 5/8.
+- `shipping_claim`: 3/12.
+- `warranty_claim`: 2/3.
+- Other challenge tasks: 4/8.
+
+Current comparison on official customer_support test50:
+
+- Base Qwen3-4B-Instruct-2507: 30%.
+- Full-parameter SFT step50: 24%.
+- LoRA SFT step100: 46%.
+
+Immediate observation: LoRA is clearly better than both base and full-parameter SFT in this low-data regime, even though the validation loss had not converged. The main residual issue is still tool-call precision and process compliance: the LoRA model passes more tasks but also produces many tool errors on hard multi-step cases.
+
 ## Next Steps
 
-1. Inspect failed SFT test trajectories by tool error type and task category.
-2. Decide whether to do a short targeted SFT continuation on hard categories or move directly into RL.
-3. For RL, reuse the clean SFT checkpoint as the cold-start policy and keep official STATE-Bench harness semantics.
+1. Use LoRA SFT as the current cold-start direction instead of the full-parameter SFT checkpoint.
+2. Consider extending LoRA training to 150/200 steps or selecting by downstream validation tasks, because validation loss had not plateaued at step 100.
+3. Inspect failed LoRA trajectories by tool error type and task category, especially shipping, price match, exchange, and compound tasks.
+4. For RL, initialize from the best LoRA SFT policy unless a short continuation run gives a better official-harness signal.
